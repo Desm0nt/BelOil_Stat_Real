@@ -13,11 +13,14 @@ namespace WindowsFormsApp1
         /// <summary>
         /// Главная точка входа для приложения.
         /// </summary>
+        /// 
+        public static bool relog = false;
         [STAThread]
         static void Main()
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+           
             string uName = Environment.UserName;
             bool result = dbOps.ExistCheck(uName);
             if (result == true)

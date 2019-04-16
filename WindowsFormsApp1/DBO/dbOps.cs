@@ -169,7 +169,8 @@ namespace WindowsFormsApp1.DBO
                         {
                             while (dr2.Read())
                             {
-                                NormList.Add(new NormTable { Id = Int32.Parse(dr["id"].ToString()), Id_org = Int32.Parse(dr["id_org"].ToString()), Id_prod = Int32.Parse(dr["id_prod"].ToString()), Code = Int32.Parse(dr["code"].ToString()), name = dr["name"].ToString(), fuel = !String.IsNullOrWhiteSpace(dr["fuel"].ToString()) ? Int32.Parse(dr["fuel"].ToString()) : 0, type = Int32.Parse(dr["type"].ToString()), val_plan = float.Parse(dr2["value_plan"].ToString()), val_fact = float.Parse(dr2["value_fact"].ToString()) });
+                                string[] rowopt = !String.IsNullOrWhiteSpace(dr["row_options"].ToString())?dr["row_options"].ToString().Split(','): new string[] { };
+                                NormList.Add(new NormTable { Id = Int32.Parse(dr["id"].ToString()), Id_org = Int32.Parse(dr["id_org"].ToString()), Id_prod = Int32.Parse(dr["id_prod"].ToString()), Code = Int32.Parse(dr["code"].ToString()), name = dr["name"].ToString(), fuel = !String.IsNullOrWhiteSpace(dr["fuel"].ToString()) ? Int32.Parse(dr["fuel"].ToString()) : 0, type = Int32.Parse(dr["type"].ToString()), row_options = rowopt, val_plan = float.Parse(dr2["value_plan"].ToString()), val_fact = float.Parse(dr2["value_fact"].ToString()) });
                             }
                         }
                         myConnection2.Close();

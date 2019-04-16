@@ -49,7 +49,15 @@ namespace WindowsFormsApp1
         // метод, выполняемый при закрытии основной формы
         void reportsForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            Application.Exit();
+            if (Program.relog == false)
+            {
+                Application.Exit();
+            }
+            else
+            {
+                this.Show();
+                Program.relog = false;
+            }
         }
     }
 }

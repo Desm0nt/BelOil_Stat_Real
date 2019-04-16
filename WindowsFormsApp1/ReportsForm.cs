@@ -17,11 +17,14 @@ namespace WindowsFormsApp1
     public partial class ReportsForm : Form
     {
         public int year;
+        public List<NormTable> actualList = new List<NormTable>();
+        public List<NormTable> oldList = new List<NormTable>();
         public ReportsForm()
         {
             InitializeComponent();
             year = dateTimePicker1.Value.Year;
             MakeTable1per();
+            MakeTable12tek();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -47,10 +50,13 @@ namespace WindowsFormsApp1
             int report_id = dbOps.GetReportId(CurrentData.UserData.Id_org, dateTimePicker1.Value.Year, dateTimePicker1.Value.Month);
             var NormList = dbOps.GetNormList(CurrentData.UserData.Id_org, report_id);
             var NormListSum = MakeListSum(dateTimePicker1.Value.Year, dateTimePicker1.Value.Month);
+            actualList = NormListSum;
             var OldNormListSum = MakeListSum(dateTimePicker1.Value.Year-1, dateTimePicker1.Value.Month);
+            oldList = OldNormListSum;
+
+            #region топливо
             int fuelrow = 15;
             int counter = 0;
-
             foreach (var a in NormList)
             {
                 if (a.type == 1)
@@ -112,23 +118,25 @@ namespace WindowsFormsApp1
                     tmp++;
                 }
             }
-            worksheet1["G" + (fuelrow -1)] = String.Format("=ROUND(SUM(G{0}:G{1}), 3)", fuelrow, fuelrow + counter - 1);
-            worksheet1["F" + (fuelrow - 1)] = String.Format("=ROUND(SUM(F{0}:F{1}), 3)", fuelrow, fuelrow + counter - 1);
-            worksheet1["H" + (fuelrow - 1)] = String.Format("=ROUND(SUM(H{0}:H{1}), 3)", fuelrow, fuelrow + counter - 1);
-            worksheet1["I" + (fuelrow - 1)] = String.Format("=ROUND(SUM(I{0}:I{1}), 3)", fuelrow, fuelrow + counter - 1);
-            worksheet1["J" + (fuelrow - 1)] = String.Format("=ROUND(SUM(J{0}:J{1}), 3)", fuelrow, fuelrow + counter - 1);
-            worksheet1["K" + (fuelrow - 1)] = String.Format("=ROUND(SUM(K{0}:K{1}), 3)", fuelrow, fuelrow + counter - 1);
+            var cell = worksheet1.Cells["G" + fuelrow];
+            worksheet1["F" + (fuelrow - 1)] = cell.Data != null ? String.Format("=ROUND(SUM(F{0}:F{1}), 3)", fuelrow, fuelrow + counter - 1) : "0";
+            worksheet1["H" + (fuelrow - 1)] = cell.Data != null ? String.Format("=ROUND(SUM(H{0}:H{1}), 3)", fuelrow, fuelrow + counter - 1) : "0";
+            worksheet1["I" + (fuelrow - 1)] = cell.Data != null ? String.Format("=ROUND(SUM(I{0}:I{1}), 3)", fuelrow, fuelrow + counter - 1) : "0";
+            worksheet1["J" + (fuelrow - 1)] = cell.Data != null ? String.Format("=ROUND(SUM(J{0}:J{1}), 3)", fuelrow, fuelrow + counter - 1) : "0";
+            worksheet1["K" + (fuelrow - 1)] = cell.Data != null ? String.Format("=ROUND(SUM(K{0}:K{1}), 3)", fuelrow, fuelrow + counter - 1) : "0";
             worksheet1["L" + (fuelrow - 1)] = String.Format("=ROUND(IF(I{0}>0, K{0}/I{0}, 0), 3)", fuelrow - 1);
             worksheet1["M" + (fuelrow - 1)] = String.Format("=ROUND(IF(G{0}>0, K{0}/G{0}, 0), 3)", fuelrow - 1);
-            worksheet1["N" + (fuelrow - 1)] = String.Format("=ROUND(SUM(N{0}:N{1}), 3)", fuelrow, fuelrow + counter - 1);
-            worksheet1["O" + (fuelrow - 1)] = String.Format("=ROUND(SUM(O{0}:O{1}), 3)", fuelrow, fuelrow + counter - 1);
-            worksheet1["P" + (fuelrow - 1)] = String.Format("=ROUND(SUM(P{0}:P{1}), 3)", fuelrow, fuelrow + counter - 1);
-            worksheet1["Q" + (fuelrow - 1)] = String.Format("=ROUND(SUM(Q{0}:Q{1}), 3)", fuelrow, fuelrow + counter - 1);
-            worksheet1["R" + (fuelrow - 1)] = String.Format("=ROUND(SUM(R{0}:R{1}), 3)", fuelrow, fuelrow + counter - 1);
-            worksheet1["S" + (fuelrow - 1)] = String.Format("=ROUND(SUM(S{0}:S{1}), 3)", fuelrow, fuelrow + counter - 1);
-            worksheet1["T" + (fuelrow - 1)] = String.Format("=ROUND(IF(Q{0}>0, S{0}/Q{0}, 0), 3)", fuelrow-1);
+            worksheet1["N" + (fuelrow - 1)] = cell.Data != null ? String.Format("=ROUND(SUM(N{0}:N{1}), 3)", fuelrow, fuelrow + counter - 1) : "0";
+            worksheet1["O" + (fuelrow - 1)] = cell.Data != null ? String.Format("=ROUND(SUM(O{0}:O{1}), 3)", fuelrow, fuelrow + counter - 1) : "0";
+            worksheet1["P" + (fuelrow - 1)] = cell.Data != null ? String.Format("=ROUND(SUM(P{0}:P{1}), 3)", fuelrow, fuelrow + counter - 1) : "0";
+            worksheet1["Q" + (fuelrow - 1)] = cell.Data != null ? String.Format("=ROUND(SUM(Q{0}:Q{1}), 3)", fuelrow, fuelrow + counter - 1) : "0";
+            worksheet1["R" + (fuelrow - 1)] = cell.Data != null ? String.Format("=ROUND(SUM(R{0}:R{1}), 3)", fuelrow, fuelrow + counter - 1) : "0";
+            worksheet1["S" + (fuelrow - 1)] = cell.Data != null ? String.Format("=ROUND(SUM(S{0}:S{1}), 3)", fuelrow, fuelrow + counter - 1) : "0";
+            worksheet1["T" + (fuelrow - 1)] = String.Format("=ROUND(IF(Q{0}>0, S{0}/Q{0}, 0), 3)", fuelrow - 1);
             worksheet1["U" + (fuelrow - 1)] = String.Format("=ROUND(IF(O{0}>0, S{0}/O{0}, 0), 3)", fuelrow - 1);
+#endregion
 
+            #region тепло
             int heatrow = counter>0?fuelrow + counter + 1: fuelrow + counter + 2;
             counter = 0;
             foreach (var a in NormList)
@@ -208,7 +216,9 @@ namespace WindowsFormsApp1
             worksheet1["S" + (heatrow - 1)] = String.Format("=ROUND(SUM(S{0}:S{1}), 3)", heatrow, heatrow + counter - 1);
             worksheet1["T" + (heatrow - 1)] = String.Format("=ROUND(IF(P{0}>0, R{0}/P{0}, 0), 3)", heatrow - 1);
             worksheet1["U" + (heatrow - 1)] = String.Format("=ROUND(IF(N{0}>0, R{0}/N{0}, 0), 3)", heatrow - 1);
+            #endregion
 
+            #region электроэнергия
             int elrow = counter > 0 ? heatrow + counter + 1 : heatrow + counter + 2;
             counter = 0;
             foreach (var a in NormList)
@@ -289,7 +299,9 @@ namespace WindowsFormsApp1
             worksheet1["S" + (elrow - 1)] = String.Format("=ROUND(SUM(S{0}:S{1}), 3)", elrow, elrow + counter - 1);
             worksheet1["T" + (elrow - 1)] = String.Format("=ROUND(IF(P{0}>0, R{0}/P{0}, 0), 3)", elrow - 1);
             worksheet1["U" + (elrow - 1)] = String.Format("=ROUND(IF(N{0}>0, R{0}/N{0}, 0), 3)", elrow - 1);
+            #endregion
 
+            #region суммы
             worksheet1["F" + (elrow + counter)] = String.Format("=ROUND(SUM(F{0},F{1},F{2}), 3)", fuelrow - 1, heatrow - 1, elrow - 1);
             worksheet1["F" + (elrow + counter + 1)] = String.Format("=F{0}", fuelrow - 1);
             worksheet1["F" + (elrow + counter + 2)] = String.Format("=F{0}", heatrow - 1);
@@ -354,6 +366,8 @@ namespace WindowsFormsApp1
             worksheet1["U" + (elrow + counter + 1)] = String.Format("=ROUND(IF(N{0}>0, R{0}/N{0}, 0), 3)", (elrow + counter + 1));
             worksheet1["U" + (elrow + counter + 2)] = String.Format("=ROUND(IF(N{0}>0, R{0}/N{0}, 0), 3)", (elrow + counter + 2));
             worksheet1["U" + (elrow + counter + 3)] = String.Format("=ROUND(IF(N{0}>0, R{0}/N{0}, 0), 3)", (elrow + counter + 3));
+            #endregion
+
             #region style
             var grid = this.reoGridControl1;
             var sheet = grid.CurrentWorksheet;
@@ -394,12 +408,151 @@ namespace WindowsFormsApp1
                 Color = System.Drawing.ColorTranslator.FromHtml("#000000"),
                 Style = BorderLineStyle.BoldSolid,
             });
-            for (int i = 0; i <= 36; i++)
+            for (int i = 0; i <= 66; i++)
             {
                 worksheet1.AutoFitRowHeight(i, true);
             }
             #endregion
         }
+
+        void MakeTable12tek()
+        {
+            reoGridControl2.Load("12tek_s.xlsx");
+            var worksheet2 = reoGridControl2.CurrentWorksheet;
+            worksheet2.SetScale(0.92f);
+            reoGridControl2.CurrentWorksheet.EnableSettings(WorksheetSettings.Edit_AutoExpandColumnWidth);
+            worksheet2.SelectionStyle = WorksheetSelectionStyle.None;
+            worksheet2.SetSettings(WorksheetSettings.Behavior_MouseWheelToZoom, false);
+
+            #region топливо
+            float actSum = 0;
+            float actSum_ut = 0;
+            float actSum_111 = 0;
+            float actSum_112 = 0;
+            float oldSum = 0;
+            float oldSum_111 = 0;
+            float oldSum_112 = 0;
+            float oldSum_ut = 0;
+            foreach (var a in actualList)
+            {
+                if (a.type == 1)
+                {
+                    var Fuel = dbOps.GetFuelData(a.fuel);
+                    actSum += a.val_fact;
+                    actSum_ut += a.val_fact * Fuel.B_y;
+                    var Normo = oldList.FirstOrDefault(x => x.Id == a.Id);
+                    oldSum += Normo != null ? Normo.val_fact : 0;
+                    oldSum_ut += Normo != null ? Normo.val_fact * Fuel.B_y : 0;
+                    if (a.row_options.Count() == 2)
+                    {
+                        actSum_111 += a.val_fact * Fuel.B_y;
+                        actSum_112 += a.val_fact * Fuel.B_y;
+                        oldSum_111 += Normo != null ? Normo.val_fact * Fuel.B_y : 0; ;
+                        oldSum_112 += Normo != null ? Normo.val_fact * Fuel.B_y : 0; ;
+                    }
+                    else if (a.row_options.Count()==1 && a.row_options[0] == "111")
+                    {
+                        actSum_111 += a.val_fact * Fuel.B_y;
+                        oldSum_111 += Normo != null ? Normo.val_fact * Fuel.B_y : 0; ;
+                    }
+                    else if (a.row_options.Count() == 1 && a.row_options[0] == "112")
+                    {
+                        actSum_112 += a.val_fact * Fuel.B_y;
+                        oldSum_112 += Normo != null ? Normo.val_fact * Fuel.B_y : 0; ;
+                    }
+                }
+            }
+            worksheet2["C12"] = actSum_ut;
+            worksheet2["H12"] = oldSum_ut;
+            worksheet2["C13"] = actSum_111;
+            worksheet2["H13"] = oldSum_111;
+            worksheet2["C14"] = actSum_112;
+            worksheet2["H14"] = oldSum_112;
+            #endregion
+
+            #region тепло
+            float actSum2 = 0;
+            float actSum2_111 = 0;
+            oldSum = 0;
+            oldSum_111 = 0;
+            foreach (var a in actualList)
+            {
+                if (a.type == 2)
+                {
+                    actSum2 += a.val_fact;
+                    var Normo = oldList.FirstOrDefault(x => x.Id == a.Id);
+                    oldSum += Normo != null ? Normo.val_fact : 0;
+                    if (a.row_options.Count() == 2)
+                    {
+                        actSum2_111 += a.val_fact;
+                        oldSum_111 += Normo != null ? Normo.val_fact: 0;
+                    }
+                    else if (a.row_options.Count() == 1 && a.row_options[0] == "111")
+                    {
+                        actSum2_111 += a.val_fact;
+                        oldSum_111 += Normo != null ? Normo.val_fact : 0;
+                    }
+                    else if (a.row_options.Count() == 1 && a.row_options[0] == "112")
+                    {
+                        actSum2_111 += a.val_fact;
+                        oldSum_111 += Normo != null ? Normo.val_fact : 0; ;
+                    }
+                }
+            }
+            worksheet2["F12"] = actSum2;
+            worksheet2["K12"] = oldSum;
+            worksheet2["F13"] = actSum2_111;
+            worksheet2["K13"] = oldSum_111;
+            #endregion
+
+            #region электричество
+            actSum = 0;
+            actSum_111 = 0;
+            actSum_112 = 0;
+            oldSum = 0;
+            oldSum_111 = 0;
+            oldSum_112 = 0;
+            foreach (var a in actualList)
+            {
+                if (a.type == 3)
+                {
+                    actSum += a.val_fact;
+                    var Normo = oldList.FirstOrDefault(x => x.Id == a.Id);
+                    oldSum += Normo != null ? Normo.val_fact : 0;
+                    if (a.row_options.Count() == 2)
+                    {
+                        actSum_111 += a.val_fact;
+                        oldSum_111 += Normo != null ? Normo.val_fact : 0;
+                        actSum_112 += a.val_fact;
+                        oldSum_112 += Normo != null ? Normo.val_fact : 0;
+                    }
+                    else if (a.row_options.Count() == 1 && a.row_options[0] == "111")
+                    {
+                        actSum_111 += a.val_fact;
+                        oldSum_111 += Normo != null ? Normo.val_fact : 0;
+                    }
+                    else if (a.row_options.Count() == 1 && a.row_options[0] == "112")
+                    {
+                        actSum_112 += a.val_fact;
+                        oldSum_112 += Normo != null ? Normo.val_fact : 0;
+                    }
+                }
+            }
+            worksheet2["G12"] = actSum_ut;
+            worksheet2["L12"] = oldSum_ut;
+            worksheet2["G13"] = actSum_111;
+            worksheet2["L13"] = oldSum_111;
+            worksheet2["G14"] = actSum_112;
+            worksheet2["L14"] = oldSum_112;
+            #endregion
+
+
+            for (int i = 0; i <= 66; i++)
+            {
+                worksheet2.AutoFitRowHeight(i, true);
+            }
+        }
+
 
         private List<NormTable> MakeListSum(int year, int month)
         {
@@ -428,6 +581,7 @@ namespace WindowsFormsApp1
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
         {
             MakeTable1per();
+            MakeTable12tek();
         }
 
         private void dateTimePicker1_DropDown(object sender, EventArgs e)
@@ -439,6 +593,17 @@ namespace WindowsFormsApp1
         {
             dateTimePicker1.ValueChanged += dateTimePicker1_ValueChanged;
             dateTimePicker1_ValueChanged(sender, e);
+        }
+
+        private void закрытьПрограммуToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void сменитьПользователяToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Program.relog = true;
+            this.Close();
         }
     }
 }
