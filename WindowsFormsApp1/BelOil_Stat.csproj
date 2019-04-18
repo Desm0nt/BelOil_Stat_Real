@@ -61,6 +61,9 @@
     <Compile Include="DataTables\FactorTable.cs" />
     <Compile Include="DataTables\FuelTable.cs" />
     <Compile Include="DataTables\NormTable.cs" />
+    <Compile Include="DataTables\SendedTable.cs" />
+    <Compile Include="DataTables\RecievedTable.cs" />
+    <Compile Include="DataTables\SourceTable.cs" />
     <Compile Include="DataTables\UserTable.cs" />
     <Compile Include="DBO\dbOps.cs" />
     <Compile Include="LoginForm.cs">

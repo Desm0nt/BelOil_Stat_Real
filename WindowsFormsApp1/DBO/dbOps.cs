@@ -185,6 +185,151 @@ namespace WindowsFormsApp1.DBO
             return NormList;
         }
 
+        public static List<RecievedTable> GetRecievedList(int id_owner, int id_rep)
+        {
+            List<RecievedTable> RecievedList = new List<RecievedTable>();
+            try
+            {
+                SqlConnection myConnection = new SqlConnection(cnStr);
+                SqlConnection myConnection2 = new SqlConnection(cnStr);
+                myConnection.Open();
+
+                string query = "SELECT * FROM [NewRecievedOrgList] where id_owner = @id_owner";
+                SqlCommand command = new SqlCommand(query, myConnection);
+                command.Parameters.AddWithValue("@id_owner", id_owner);
+                using (SqlDataReader dr = command.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        myConnection2.Open();
+                        string query2 = "SELECT * FROM [NewRecievedOrg] WHERE [id_recieved] = @id_recieved AND [id_rep] = @id_rep";
+                        SqlCommand command2 = new SqlCommand(query2, myConnection2);
+                        command2.Parameters.AddWithValue("@id_recieved", Int32.Parse(dr["id"].ToString()));
+                        command2.Parameters.AddWithValue("@id_rep", id_rep);
+                        var a = Int32.Parse(dr["id"].ToString());
+                        using (SqlDataReader dr2 = command2.ExecuteReader())
+                        {
+                            while (dr2.Read())
+                            {
+
+                                //тут баги
+                                RecievedList.Add(new RecievedTable { Id = Int32.Parse(dr["id"].ToString()), Id_owner = Int32.Parse(dr["id_owner"].ToString()), Id_org = Int32.Parse(dr["id_org"].ToString()), org_name = GetCompanyName(Int32.Parse(dr["id_org"].ToString())), res_type = Int32.Parse(dr["res_type"].ToString()), value = float.Parse(dr2["value"].ToString()) });
+                            }
+                        }
+                        myConnection2.Close();
+                    }
+                }
+                myConnection.Close();
+            }
+            catch (Exception Ex)
+            {
+                MessageBox.Show("Ошибка получения данных организации: " + Ex.Message);
+            }
+            return RecievedList;
+        }
+
+        public static List<SendedTable> GetSendedList(int id_owner, int id_rep)
+        {
+            List<SendedTable> SendedList = new List<SendedTable>();
+            try
+            {
+                SqlConnection myConnection = new SqlConnection(cnStr);
+                SqlConnection myConnection2 = new SqlConnection(cnStr);
+                myConnection.Open();
+
+                string query = "SELECT * FROM [NewSendedOrgList] where id_owner = @id_owner";
+                SqlCommand command = new SqlCommand(query, myConnection);
+                command.Parameters.AddWithValue("@id_owner", id_owner);
+                using (SqlDataReader dr = command.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        myConnection2.Open();
+                        string query2 = "SELECT * FROM [NewSendedOrg] WHERE [id_sended] = @id_sended AND [id_rep] = @id_rep";
+                        SqlCommand command2 = new SqlCommand(query2, myConnection2);
+                        command2.Parameters.AddWithValue("@id_sended", Int32.Parse(dr["id"].ToString()));
+                        command2.Parameters.AddWithValue("@id_rep", id_rep);
+                        var a = Int32.Parse(dr["id"].ToString());
+                        using (SqlDataReader dr2 = command2.ExecuteReader())
+                        {
+                            while (dr2.Read())
+                            {
+
+                                //тут баги
+                                SendedList.Add(new SendedTable { Id = Int32.Parse(dr["id"].ToString()), Id_owner = Int32.Parse(dr["id_owner"].ToString()), Id_org = Int32.Parse(dr["id_org"].ToString()), org_name = GetCompanyName(Int32.Parse(dr["id_org"].ToString())), res_type = Int32.Parse(dr["res_type"].ToString()), value = float.Parse(dr2["value"].ToString()) });
+                            }
+                        }
+                        myConnection2.Close();
+                    }
+                }
+                myConnection.Close();
+            }
+            catch (Exception Ex)
+            {
+                MessageBox.Show("Ошибка получения данных организации: " + Ex.Message);
+            }
+            return SendedList;
+        }
+
+        public static List<SourceTable> GetSourceList(int id_org, int id_rep)
+        {
+            List<SourceTable> SourceList = new List<SourceTable>();
+            try
+            {
+                SqlConnection myConnection = new SqlConnection(cnStr);
+                SqlConnection myConnection2 = new SqlConnection(cnStr);
+                myConnection.Open();
+
+                string query = "SELECT * FROM [NewOrgSoucesList] where id_org = @id_org";
+                SqlCommand command = new SqlCommand(query, myConnection);
+                command.Parameters.AddWithValue("@id_org", id_org);
+                using (SqlDataReader dr = command.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        myConnection2.Open();
+                        string query2 = "SELECT * FROM [NewOrgSouces] WHERE [id_src] = @id_src AND [id_rep] = @id_rep";
+                        SqlCommand command2 = new SqlCommand(query2, myConnection2);
+                        command2.Parameters.AddWithValue("@id_src", Int32.Parse(dr["id"].ToString()));
+                        command2.Parameters.AddWithValue("@id_rep", id_rep);
+                        var a = Int32.Parse(dr["id"].ToString());
+                        using (SqlDataReader dr2 = command2.ExecuteReader())
+                        {
+                            while (dr2.Read())
+                            {
+                                int fuel_id = Int32.Parse(dr["id_fuel"].ToString());
+                                int fuel_type = 0;
+                                if (fuel_id > 5000)
+                                    fuel_type = 5000;
+                                else if (fuel_id > 4000 && fuel_id < 5000)
+                                    fuel_type = 4000;
+                                else if (fuel_id > 3100 && fuel_id < 4000)
+                                    fuel_type = 3100;
+                                else if (fuel_id > 2200 && fuel_id < 3100)
+                                    fuel_type = 2200;
+                                else if (fuel_id > 2100 && fuel_id < 2200)
+                                    fuel_type = 2100;
+                                else if (fuel_id > 1200 && fuel_id < 2100)
+                                    fuel_type = 1200;
+                                else
+                                    fuel_type = 1100;
+                                //тут баги
+                                SourceList.Add(new SourceTable { Id = Int32.Parse(dr["id"].ToString()), Id_object = Int32.Parse(dr["id_object"].ToString()), Id_fuel = Int32.Parse(dr["id_fuel"].ToString()), Fuel_group = fuel_type, Res_type = Int32.Parse(dr["res_type"].ToString()), Value = float.Parse(dr2["value"].ToString()) });
+                            }
+                        }
+                        myConnection2.Close();
+                    }
+                }
+                myConnection.Close();
+            }
+            catch (Exception Ex)
+            {
+                MessageBox.Show("Ошибка получения данных организации: " + Ex.Message);
+            }
+            return SourceList;
+        }
+
+
         public static NormTable GetOneNorm(int id_org, int id_rep, int id_norm)
         {
             NormTable Norm = new NormTable();
@@ -283,8 +428,6 @@ namespace WindowsFormsApp1.DBO
             }
             return Factor;
         }
-
-
 
         public static int GetReportId(int id_org, int year, int month)
         {

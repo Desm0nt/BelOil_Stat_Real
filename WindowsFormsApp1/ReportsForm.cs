@@ -42,7 +42,7 @@ namespace WindowsFormsApp1
             worksheet1.SetSettings(WorksheetSettings.Behavior_MouseWheelToZoom, false);
 
             worksheet1["B2"] = dbOps.GetCompanyName(CurrentData.UserData.Id_org);
-            worksheet1["F3"] = String.Format("Данные за {0} месяц {1} года", dateTimePicker1.Value.ToString("MMMM"), year);
+            worksheet1["F3"] = String.Format("Данные за {0} месяц {1} года", dateTimePicker1.Value.ToString("MMMM"), dateTimePicker1.Value.ToString("yyyy"));
             worksheet1["P5"] = CurrentData.UserData.Post;
             worksheet1["S6"] = CurrentData.UserData.Name;
             worksheet1["P7"] = DateTime.Now.ToString("dd.MM.yyyy");
@@ -506,46 +506,214 @@ namespace WindowsFormsApp1
             #endregion
 
             #region электричество
-            actSum = 0;
-            actSum_111 = 0;
-            actSum_112 = 0;
-            oldSum = 0;
-            oldSum_111 = 0;
-            oldSum_112 = 0;
+            float actSum3 = 0;
+            float actSum3_111 = 0;
+            float actSum3_112 = 0;
+            float oldSum3 = 0;
+            float oldSum3_111 = 0;
+            float oldSum3_112 = 0;
             foreach (var a in actualList)
             {
                 if (a.type == 3)
                 {
-                    actSum += a.val_fact;
+                    actSum3 += a.val_fact;
                     var Normo = oldList.FirstOrDefault(x => x.Id == a.Id);
-                    oldSum += Normo != null ? Normo.val_fact : 0;
+                    oldSum3 += Normo != null ? Normo.val_fact : 0;
                     if (a.row_options.Count() == 2)
                     {
-                        actSum_111 += a.val_fact;
-                        oldSum_111 += Normo != null ? Normo.val_fact : 0;
-                        actSum_112 += a.val_fact;
-                        oldSum_112 += Normo != null ? Normo.val_fact : 0;
+                        actSum3_111 += a.val_fact;
+                        oldSum3_111 += Normo != null ? Normo.val_fact : 0;
+                        actSum3_112 += a.val_fact;
+                        oldSum3_112 += Normo != null ? Normo.val_fact : 0;
                     }
                     else if (a.row_options.Count() == 1 && a.row_options[0] == "111")
                     {
-                        actSum_111 += a.val_fact;
-                        oldSum_111 += Normo != null ? Normo.val_fact : 0;
+                        actSum3_111 += a.val_fact;
+                        oldSum3_111 += Normo != null ? Normo.val_fact : 0;
                     }
                     else if (a.row_options.Count() == 1 && a.row_options[0] == "112")
                     {
-                        actSum_112 += a.val_fact;
-                        oldSum_112 += Normo != null ? Normo.val_fact : 0;
+                        actSum3_112 += a.val_fact;
+                        oldSum3_112 += Normo != null ? Normo.val_fact : 0;
                     }
                 }
             }
-            worksheet2["G12"] = actSum_ut;
-            worksheet2["L12"] = oldSum_ut;
-            worksheet2["G13"] = actSum_111;
-            worksheet2["L13"] = oldSum_111;
-            worksheet2["G14"] = actSum_112;
-            worksheet2["L14"] = oldSum_112;
+            worksheet2["G12"] = actSum3;
+            worksheet2["L12"] = oldSum3;
+            worksheet2["G13"] = actSum3_111;
+            worksheet2["L13"] = oldSum3_111;
+            worksheet2["G14"] = actSum3_112;
+            worksheet2["L14"] = oldSum3_112;
             #endregion
 
+            var RecievedListSum = MakeRecListSum(dateTimePicker1.Value.Year, dateTimePicker1.Value.Month);
+            var OldRecievedListSum = MakeRecListSum(dateTimePicker1.Value.Year-1, dateTimePicker1.Value.Month);
+
+            #region тепло получено
+            float tRecSum = 0;
+            float tOldRecSum = 0;
+            foreach (var a in RecievedListSum)
+            {
+                if (a.res_type == 2)
+                {
+                    tRecSum += a.value;
+                    var Normo = OldRecievedListSum.FirstOrDefault(x => x.Id == a.Id);
+                    tOldRecSum += Normo != null ? Normo.value : 0;
+                }
+            }
+            worksheet2["F21"] = tRecSum;
+            worksheet2["K21"] = tOldRecSum;
+            #endregion
+
+            #region электричество получено
+            float eRecSum = 0;
+            float eOldRecSum = 0;
+            foreach (var a in RecievedListSum)
+            {
+                if (a.res_type == 3)
+                {
+                    eRecSum += a.value;
+                    var Normo = OldRecievedListSum.FirstOrDefault(x => x.Id == a.Id);
+                    eOldRecSum += Normo != null ? Normo.value : 0;
+                }
+            }
+            worksheet2["G21"] = eRecSum;
+            worksheet2["L21"] = eOldRecSum;
+            #endregion
+
+            var SendedListSum = MakeSendListSum(dateTimePicker1.Value.Year, dateTimePicker1.Value.Month);
+            var OldSendedListSum = MakeSendListSum(dateTimePicker1.Value.Year - 1, dateTimePicker1.Value.Month);
+
+            #region тепло отдано
+            float tSendSum = 0;
+            float tOldSendSum = 0;
+            foreach (var a in SendedListSum)
+            {
+                if (a.res_type == 2)
+                {
+                    tSendSum += a.value;
+                    var Normo = OldSendedListSum.FirstOrDefault(x => x.Id == a.Id);
+                    tOldSendSum += Normo != null ? Normo.value : 0;
+                }
+            }
+            worksheet2["F16"] = tSendSum;
+            worksheet2["K16"] = tOldSendSum;
+            #endregion
+
+            #region электричество отдано
+            float eSendSum = 0;
+            float eOldSendSum = 0;
+            foreach (var a in SendedListSum)
+            {
+                if (a.res_type == 3)
+                {
+                    eSendSum += a.value;
+                    var Normo = OldSendedListSum.FirstOrDefault(x => x.Id == a.Id);
+                    eOldSendSum += Normo != null ? Normo.value : 0;
+                }
+            }
+            worksheet2["G16"] = eSendSum;
+            worksheet2["L16"] = eOldSendSum;
+            #endregion
+
+            var SourceSum = MakeSourceSum(dateTimePicker1.Value.Year, dateTimePicker1.Value.Month);
+            var OldSourceSum = MakeSourceSum(dateTimePicker1.Value.Year - 1, dateTimePicker1.Value.Month);
+
+            #region получено собственного тепла
+            float tSourceSum = 0;
+            float tOldSourceSum = 0;
+            foreach (var a in SourceSum)
+            {
+                if (a.Res_type == 2)
+                {
+                    tSourceSum += a.Value;
+                    var Normo = OldSourceSum.FirstOrDefault(x => x.Id == a.Id);
+                    tOldSourceSum += Normo != null ? Normo.Value : 0;
+                }
+            }
+            worksheet2["F18"] = tSourceSum;
+            worksheet2["K18"] = tOldSourceSum;
+            #endregion
+
+            #region получено собственного тепла от ВЭР
+            float tvSourceSum = 0;
+            float tvOldSourceSum = 0;
+            foreach (var a in SourceSum)
+            {
+                if (a.Res_type == 2 && a.Fuel_group == 4000)
+                {
+                    tvSourceSum += a.Value;
+                    var Normo = OldSourceSum.FirstOrDefault(x => x.Id == a.Id);
+                    tvOldSourceSum += Normo != null ? Normo.Value : 0;
+                }
+            }
+            worksheet2["F19"] = tvSourceSum;
+            worksheet2["K19"] = tvOldSourceSum;
+            #endregion
+
+            #region получено собственного тепла от солнца
+            float tsSourceSum = 0;
+            float tsOldSourceSum = 0;
+            foreach (var a in SourceSum)
+            {
+                if (a.Res_type == 2 && a.Fuel_group==5000)
+                {
+                    tsSourceSum += a.Value;
+                    var Normo = OldSourceSum.FirstOrDefault(x => x.Id == a.Id);
+                    tsOldSourceSum += Normo != null ? Normo.Value : 0;
+                }
+            }
+            worksheet2["F20"] = tsSourceSum;
+            worksheet2["K20"] = tsOldSourceSum;
+            #endregion
+
+            #region получено собственного электричества
+            float eSourceSum = 0;
+            float eOldSourceSum = 0;
+            foreach (var a in SourceSum)
+            {
+                if (a.Res_type == 3)
+                {
+                    eSourceSum += a.Value;
+                    var Normo = OldSourceSum.FirstOrDefault(x => x.Id == a.Id);
+                    eOldSourceSum += Normo != null ? Normo.Value : 0;
+                }
+            }
+            worksheet2["G18"] = eSourceSum;
+            worksheet2["L18"] = eOldSourceSum;
+            #endregion
+
+            #region получено собственного электричества от ВЭР
+            float evSourceSum = 0;
+            float evOldSourceSum = 0;
+            foreach (var a in SourceSum)
+            {
+                if (a.Res_type == 3 && a.Fuel_group == 4000)
+                {
+                    evSourceSum += a.Value;
+                    var Normo = OldSourceSum.FirstOrDefault(x => x.Id == a.Id);
+                    evOldSourceSum += Normo != null ? Normo.Value : 0;
+                }
+            }
+            worksheet2["G19"] = evSourceSum;
+            worksheet2["L19"] = evOldSourceSum;
+            #endregion
+
+            #region получено собственного электричества от солнца
+            float esSourceSum = 0;
+            float esOldSourceSum = 0;
+            foreach (var a in SourceSum)
+            {
+                if (a.Res_type == 3 && a.Fuel_group == 5000)
+                {
+                    esSourceSum += a.Value;
+                    var Normo = OldSourceSum.FirstOrDefault(x => x.Id == a.Id);
+                    esOldSourceSum += Normo != null ? Normo.Value : 0;
+                }
+            }
+            worksheet2["G20"] = esSourceSum;
+            worksheet2["L20"] = esOldSourceSum;
+            #endregion
 
             for (int i = 0; i <= 66; i++)
             {
@@ -577,6 +745,76 @@ namespace WindowsFormsApp1
             }
             return NormList;
         }
+
+        private List<RecievedTable> MakeRecListSum(int year, int month)
+        {
+            int report_id = dbOps.GetReportId(CurrentData.UserData.Id_org, year, 1);
+            var RecievedList = dbOps.GetRecievedList(CurrentData.UserData.Id_org, report_id);
+
+            if (month > 1)
+            {
+                for (int i = 2; i <= month; i++)
+                {
+                    report_id = dbOps.GetReportId(CurrentData.UserData.Id_org, year, i);
+                    var tmplist = dbOps.GetRecievedList(CurrentData.UserData.Id_org, report_id);
+                    if (tmplist.Count != 0)
+                    {
+                        for (int j = 0; j < RecievedList.Count; j++)
+                        {
+                            RecievedList[j].value += tmplist[j].value;
+                        }
+                    }
+                }
+            }
+            return RecievedList;
+        }
+
+        private List<SendedTable> MakeSendListSum(int year, int month)
+        {
+            int report_id = dbOps.GetReportId(CurrentData.UserData.Id_org, year, 1);
+            var SendedList = dbOps.GetSendedList(CurrentData.UserData.Id_org, report_id);
+
+            if (month > 1)
+            {
+                for (int i = 2; i <= month; i++)
+                {
+                    report_id = dbOps.GetReportId(CurrentData.UserData.Id_org, year, i);
+                    var tmplist = dbOps.GetSendedList(CurrentData.UserData.Id_org, report_id);
+                    if (tmplist.Count != 0)
+                    {
+                        for (int j = 0; j < SendedList.Count; j++)
+                        {
+                            SendedList[j].value += tmplist[j].value;
+                        }
+                    }
+                }
+            }
+            return SendedList;
+        }
+
+        private List<SourceTable> MakeSourceSum(int year, int month)
+        {
+            int report_id = dbOps.GetReportId(CurrentData.UserData.Id_org, year, 1);
+            var SourceList = dbOps.GetSourceList(CurrentData.UserData.Id_org, report_id);
+
+            if (month > 1)
+            {
+                for (int i = 2; i <= month; i++)
+                {
+                    report_id = dbOps.GetReportId(CurrentData.UserData.Id_org, year, i);
+                    var tmplist = dbOps.GetSourceList(CurrentData.UserData.Id_org, report_id);
+                    if (tmplist.Count != 0)
+                    {
+                        for (int j = 0; j < SourceList.Count; j++)
+                        {
+                            SourceList[j].Value += tmplist[j].Value;
+                        }
+                    }
+                }
+            }
+            return SourceList;
+        }
+
 
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
         {
