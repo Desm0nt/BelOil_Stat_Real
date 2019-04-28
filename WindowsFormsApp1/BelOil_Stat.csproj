@@ -63,6 +63,7 @@
     <Compile Include="DataTables\NormTable.cs" />
     <Compile Include="DataTables\SendedTable.cs" />
     <Compile Include="DataTables\RecievedTable.cs" />
+    <Compile Include="DataTables\FTradeTable.cs" />
     <Compile Include="DataTables\SourceTable.cs" />
     <Compile Include="DataTables\UserTable.cs" />
     <Compile Include="DBO\dbOps.cs" />

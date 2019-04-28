@@ -85,9 +85,9 @@ namespace WindowsFormsApp1
                     worksheet1[fuelrow-1 + tmp, 7] = String.Format("=ROUND({0}, 3)", a.val_plan);                    
                     worksheet1[fuelrow-1 + tmp, 9] = String.Format("=ROUND({0}, 3)", a.val_fact);
                     var Fuel = dbOps.GetFuelData(a.fuel);
-                    worksheet1[fuelrow - 1 + tmp, 8] = String.Format("=ROUND(H{0} * {1}, 3)", fuelrow + tmp, Fuel.B_y);
-                    worksheet1[fuelrow - 1 + tmp, 10] = String.Format("=ROUND(J{0} * {1}, 3)", fuelrow + tmp, Fuel.B_y);
-                    worksheet1["E" + (fuelrow + tmp)] = dbOps.GetProdUnit(a.Id_prod);
+                    worksheet1[fuelrow - 1 + tmp, 8] = String.Format("=ROUND(H{0} * {1}, 3)", fuelrow + tmp, Math.Round(Fuel.B_y, 1));
+                    worksheet1[fuelrow - 1 + tmp, 10] = String.Format("=ROUND(J{0} * {1}, 3)", fuelrow + tmp, Math.Round(Fuel.B_y,1));
+                    worksheet1["E" + (fuelrow + tmp)] = String.Format("=E{0}", fuelrow - 1); //dbOps.GetProdUnit(a.Id_prod); 
                     worksheet1["L" + (fuelrow + tmp)] = String.Format("=ROUND(IF(H{0}>0, J{0}/H{0}, 0), 3)", fuelrow + tmp);
                     worksheet1["M" + (fuelrow + tmp)] = String.Format("=ROUND(IF(F{0}>0, J{0}/F{0}, 0), 3)", fuelrow + tmp);
                     tmp++;
@@ -100,21 +100,21 @@ namespace WindowsFormsApp1
                 {
                     worksheet1[fuelrow - 1 + tmp, 2] = a.name;
                     worksheet1[fuelrow - 1 + tmp, 3] = a.Code;
-                    worksheet1["P" + (fuelrow + tmp)] = String.Format("=ROUND({0}, 3)", a.val_plan);
-                    worksheet1["R" + (fuelrow + tmp)] = String.Format("=ROUND({0}, 3)", a.val_fact);
+                    worksheet1["P" + (fuelrow + tmp)] = String.Format("=ROUND({0}, 3)", Math.Round(a.val_plan,1));
+                    worksheet1["R" + (fuelrow + tmp)] = String.Format("=ROUND({0}, 3)", Math.Round(a.val_fact,1));
                     var Fuel = dbOps.GetFuelData(a.fuel);
-                    worksheet1["Q" + (fuelrow + tmp)] = String.Format("=ROUND(P{0} * {1}, 3)", fuelrow + tmp, Fuel.B_y);
-                    worksheet1["S" + (fuelrow + tmp)] = String.Format("=ROUND(R{0} * {1}, 3)", fuelrow + tmp, Fuel.B_y);
-                    worksheet1["E" + (fuelrow + tmp)] = dbOps.GetProdUnit(a.Id_prod);
+                    worksheet1["Q" + (fuelrow + tmp)] = String.Format("=ROUND(P{0} * {1}, 3)", fuelrow + tmp, Math.Round(Fuel.B_y,1));
+                    worksheet1["S" + (fuelrow + tmp)] = String.Format("=ROUND(R{0} * {1}, 3)", fuelrow + tmp, Math.Round(Fuel.B_y,1));
+                    worksheet1["E" + (fuelrow + tmp)] = String.Format("=E{0}", fuelrow - 1);
                     worksheet1["T" + (fuelrow + tmp)] = String.Format("=ROUND(IF(P{0}>0, R{0}/P{0}, 0), 3)", fuelrow + tmp);
                     worksheet1["U" + (fuelrow + tmp)] = String.Format("=ROUND(IF(N{0}>0, R{0}/N{0}, 0), 3)", fuelrow + tmp);
                     var Normo = OldNormListSum.FirstOrDefault(x => x.Id == a.Id);
-                    worksheet1["N" + (fuelrow + tmp)] = Normo !=null? String.Format("=ROUND({0}, 3)", Normo.val_fact) : String.Format("=ROUND({0}, 3)", 0);
-                    worksheet1["O" + (fuelrow + tmp)] = String.Format("=ROUND(N{0} * {1}, 3)", fuelrow + tmp, Fuel.B_y);
+                    worksheet1["N" + (fuelrow + tmp)] = Normo !=null? String.Format("=ROUND({0}, 3)", Math.Round(Normo.val_fact,1)) : String.Format("=ROUND({0}, 3)", 0);
+                    worksheet1["O" + (fuelrow + tmp)] = String.Format("=ROUND(N{0} * {1}, 3)", fuelrow + tmp, Math.Round(Fuel.B_y,1));
                     int oldreport = dbOps.GetReportId(CurrentData.UserData.Id_org, dateTimePicker1.Value.Year - 1, dateTimePicker1.Value.Month);
                     var Norm = dbOps.GetOneNorm(CurrentData.UserData.Id_org, oldreport, a.Id);
-                    worksheet1["F" + (fuelrow + tmp)] = String.Format("=ROUND({0}, 3)", Norm.val_fact);
-                    worksheet1["G" + (fuelrow + tmp)] = String.Format("=ROUND(F{0} * {1}, 3)", fuelrow + tmp, Fuel.B_y);
+                    worksheet1["F" + (fuelrow + tmp)] = String.Format("=ROUND({0}, 3)", Math.Round(Norm.val_fact,1));
+                    worksheet1["G" + (fuelrow + tmp)] = String.Format("=ROUND(F{0} * {1}, 3)", fuelrow + tmp, Math.Round(Fuel.B_y,1));
                     tmp++;
                 }
             }
@@ -169,7 +169,7 @@ namespace WindowsFormsApp1
                     var Factor = dbOps.GetFactorData(a.type);
                     worksheet1[heatrow - 1 + tmp, 8] = String.Format("=ROUND(H{0} * {1}, 3)", heatrow + tmp, Factor.value);
                     worksheet1[heatrow - 1 + tmp, 10] = String.Format("=ROUND(J{0} * {1}, 3)", heatrow + tmp, Factor.value);
-                    worksheet1["E" + (heatrow + tmp)] = dbOps.GetProdUnit(a.Id_prod);
+                    worksheet1["E" + (heatrow + tmp)] = String.Format("=E{0}", heatrow - 1);
                     worksheet1["L" + (heatrow + tmp)] = String.Format("=ROUND(IF(H{0}>0, J{0}/H{0}, 0), 3)", heatrow + tmp);
                     worksheet1["M" + (heatrow + tmp)] = String.Format("=ROUND(IF(F{0}>0, J{0}/F{0}, 0), 3)", heatrow + tmp);
                     tmp++;
@@ -187,7 +187,7 @@ namespace WindowsFormsApp1
                     var Factor = dbOps.GetFactorData(a.type);
                     worksheet1["Q" + (heatrow + tmp)] = String.Format("=ROUND(P{0} * {1}, 3)", heatrow + tmp, Factor.value);
                     worksheet1["S" + (heatrow + tmp)] = String.Format("=ROUND(R{0} * {1}, 3)", heatrow + tmp, Factor.value);
-                    worksheet1["E" + (heatrow + tmp)] = dbOps.GetProdUnit(a.Id_prod);
+                    worksheet1["E" + (heatrow + tmp)] = String.Format("=E{0}", heatrow - 1);
                     worksheet1["T" + (heatrow + tmp)] = String.Format("=ROUND(IF(P{0}>0, R{0}/P{0}, 0), 3)", heatrow + tmp);
                     worksheet1["U" + (heatrow + tmp)] = String.Format("=ROUND(IF(N{0}>0, R{0}/N{0}, 0), 3)", heatrow + tmp);
                     var Normo = OldNormListSum.FirstOrDefault(x => x.Id == a.Id);
@@ -251,7 +251,7 @@ namespace WindowsFormsApp1
                     var Factor = dbOps.GetFactorData(a.type);
                     worksheet1[elrow - 1 + tmp, 8] = String.Format("=ROUND(H{0} * {1}, 3)", elrow + tmp, Factor.value);
                     worksheet1[elrow - 1 + tmp, 10] = String.Format("=ROUND(J{0} * {1}, 3)", elrow + tmp, Factor.value);
-                    worksheet1["E" + (elrow + tmp)] = dbOps.GetProdUnit(a.Id_prod);
+                    worksheet1["E" + (elrow + tmp)] = String.Format("=E{0}", elrow - 1);
                     worksheet1["L" + (elrow + tmp)] = String.Format("=ROUND(IF(H{0}>0, J{0}/H{0}, 0), 3)", elrow + tmp);
                     worksheet1["M" + (elrow + tmp)] = String.Format("=ROUND(IF(F{0}>0, J{0}/F{0}, 0), 3)", elrow + tmp);
                     tmp++;
@@ -269,7 +269,7 @@ namespace WindowsFormsApp1
                     var Factor = dbOps.GetFactorData(a.type);
                     worksheet1["Q" + (elrow + tmp)] = String.Format("=ROUND(P{0} * {1}, 3)", elrow + tmp, Factor.value);
                     worksheet1["S" + (elrow + tmp)] = String.Format("=ROUND(R{0} * {1}, 3)", elrow + tmp, Factor.value);
-                    worksheet1["E" + (elrow + tmp)] = dbOps.GetProdUnit(a.Id_prod);
+                    worksheet1["E" + (elrow + tmp)] = String.Format("=E{0}", elrow - 1);
                     worksheet1["T" + (elrow + tmp)] = String.Format("=ROUND(IF(P{0}>0, R{0}/P{0}, 0), 3)", elrow + tmp);
                     worksheet1["U" + (elrow + tmp)] = String.Format("=ROUND(IF(N{0}>0, R{0}/N{0}, 0), 3)", elrow + tmp);
                     var Normo = OldNormListSum.FirstOrDefault(x => x.Id == a.Id);
@@ -468,6 +468,146 @@ namespace WindowsFormsApp1
             worksheet2["H13"] = oldSum_111;
             worksheet2["C14"] = actSum_112;
             worksheet2["H14"] = oldSum_112;
+            #endregion
+
+            var TFuelListSum = MakeTFuelSum(dateTimePicker1.Value.Year, dateTimePicker1.Value.Month);
+            var OldTFuelListSum = MakeTFuelSum(dateTimePicker1.Value.Year - 1, dateTimePicker1.Value.Month);
+
+            #region тепло продано всего
+            float TFuelSum = 0;
+            float OldTFuelSum = 0;
+            foreach (var a in TFuelListSum)
+            {
+                    TFuelSum += a.Value;
+                    var Normo = OldTFuelListSum.FirstOrDefault(x => x.Id == a.Id);
+                    OldTFuelSum += Normo != null ? Normo.Value : 0;
+            }
+            worksheet2["C17"] = TFuelSum;
+            worksheet2["H17"] = OldTFuelSum;
+            #endregion
+
+            #region тепло продано местное
+            float mTFuelSum = 0;
+            float mOldTFuelSum = 0;
+            foreach (var a in TFuelListSum)
+            {
+                if (a.Fuel_group >= 2100 && a.Fuel_group <= 4000)
+                {
+                    mTFuelSum += a.Value;
+                    var Normo = OldTFuelListSum.FirstOrDefault(x => x.Id == a.Id);
+                    mOldTFuelSum += Normo != null ? Normo.Value : 0;
+                }
+            }
+            worksheet2["D17"] = mTFuelSum;
+            worksheet2["I17"] = mOldTFuelSum;
+            #endregion
+
+            #region тепло продано местное
+            float vTFuelSum = 0;
+            float vOldTFuelSum = 0;
+            foreach (var a in TFuelListSum)
+            {
+                if ((a.Fuel_group >= 2200 && a.Fuel_group <= 3100) || (a.Fuel_group >= 3100 && a.Fuel_group <= 4000))
+                {
+                    vTFuelSum += a.Value;
+                    var Normo = OldTFuelListSum.FirstOrDefault(x => x.Id == a.Id);
+                    vOldTFuelSum += Normo != null ? Normo.Value : 0;
+                }
+            }
+            worksheet2["E17"] = vTFuelSum;
+            worksheet2["J17"] = vOldTFuelSum;
+            #endregion
+
+            #region топливо местное
+            float mestn_actSum = 0;
+            float mestn_actSum_ut = 0;
+            float mestn_actSum_111 = 0;
+            float mestn_actSum_112 = 0;
+            float mestn_oldSum = 0;
+            float mestn_oldSum_111 = 0;
+            float mestn_oldSum_112 = 0;
+            float mestn_oldSum_ut = 0;
+            foreach (var a in actualList)
+            {
+                if (a.type == 1 && (a.fuel > 2100 && a.fuel < 4000))
+                {
+                    var Fuel = dbOps.GetFuelData(a.fuel);
+                    mestn_actSum += a.val_fact;
+                    mestn_actSum_ut += a.val_fact * Fuel.B_y;
+                    var Normo = oldList.FirstOrDefault(x => x.Id == a.Id);
+                    mestn_oldSum += Normo != null ? Normo.val_fact : 0;
+                    mestn_oldSum_ut += Normo != null ? Normo.val_fact * Fuel.B_y : 0;
+                    if (a.row_options.Count() == 2)
+                    {
+                        mestn_actSum_111 += a.val_fact * Fuel.B_y;
+                        mestn_actSum_112 += a.val_fact * Fuel.B_y;
+                        mestn_oldSum_111 += Normo != null ? Normo.val_fact * Fuel.B_y : 0; ;
+                        mestn_oldSum_112 += Normo != null ? Normo.val_fact * Fuel.B_y : 0; ;
+                    }
+                    else if (a.row_options.Count() == 1 && a.row_options[0] == "111")
+                    {
+                        mestn_actSum_111 += a.val_fact * Fuel.B_y;
+                        mestn_oldSum_111 += Normo != null ? Normo.val_fact * Fuel.B_y : 0; ;
+                    }
+                    else if (a.row_options.Count() == 1 && a.row_options[0] == "112")
+                    {
+                        mestn_actSum_112 += a.val_fact * Fuel.B_y;
+                        mestn_oldSum_112 += Normo != null ? Normo.val_fact * Fuel.B_y : 0; ;
+                    }
+                }
+            }
+            worksheet2["D12"] = mestn_actSum_ut;
+            worksheet2["I12"] = mestn_oldSum_ut;
+            worksheet2["D13"] = mestn_actSum_111;
+            worksheet2["I13"] = mestn_oldSum_111;
+            worksheet2["D14"] = mestn_actSum_112;
+            worksheet2["I14"] = mestn_oldSum_112;
+            #endregion
+
+            #region топливо отходы
+            float oth_actSum = 0;
+            float oth_actSum_ut = 0;
+            float oth_actSum_111 = 0;
+            float oth_actSum_112 = 0;
+            float oth_oldSum = 0;
+            float oth_oldSum_111 = 0;
+            float oth_oldSum_112 = 0;
+            float oth_oldSum_ut = 0;
+            foreach (var a in actualList)
+            {
+                if (a.type == 1 && ((a.fuel > 2200 && a.fuel < 3100) || (a.fuel > 3100 && a.fuel < 4000)))
+                {
+                    var Fuel = dbOps.GetFuelData(a.fuel);
+                    oth_actSum += a.val_fact;
+                    oth_actSum_ut += a.val_fact * Fuel.B_y;
+                    var Normo = oldList.FirstOrDefault(x => x.Id == a.Id);
+                    oth_oldSum += Normo != null ? Normo.val_fact : 0;
+                    oth_oldSum_ut += Normo != null ? Normo.val_fact * Fuel.B_y : 0;
+                    if (a.row_options.Count() == 2)
+                    {
+                        oth_actSum_111 += a.val_fact * Fuel.B_y;
+                        oth_actSum_112 += a.val_fact * Fuel.B_y;
+                        oth_oldSum_111 += Normo != null ? Normo.val_fact * Fuel.B_y : 0; ;
+                        oth_oldSum_112 += Normo != null ? Normo.val_fact * Fuel.B_y : 0; ;
+                    }
+                    else if (a.row_options.Count() == 1 && a.row_options[0] == "111")
+                    {
+                        oth_actSum_111 += a.val_fact * Fuel.B_y;
+                        oth_oldSum_111 += Normo != null ? Normo.val_fact * Fuel.B_y : 0; ;
+                    }
+                    else if (a.row_options.Count() == 1 && a.row_options[0] == "112")
+                    {
+                        oth_actSum_112 += a.val_fact * Fuel.B_y;
+                        oth_oldSum_112 += Normo != null ? Normo.val_fact * Fuel.B_y : 0; ;
+                    }
+                }
+            }
+            worksheet2["E12"] = oth_actSum_ut;
+            worksheet2["J12"] = oth_oldSum_ut;
+            worksheet2["E13"] = oth_actSum_111;
+            worksheet2["J13"] = oth_oldSum_111;
+            worksheet2["E14"] = oth_actSum_112;
+            worksheet2["J14"] = oth_oldSum_112;
             #endregion
 
             #region тепло
@@ -715,6 +855,14 @@ namespace WindowsFormsApp1
             worksheet2["L20"] = esOldSourceSum;
             #endregion
 
+            worksheet2["F30"] = "=SUM(ROUND(C12, 0), ROUND(((F12-F18)*0,143), 0), ROUND(((G12-G18)*0,123), 0))";
+            worksheet2["H30"] = "=SUM(ROUND(H12, 0), ROUND(((K12-K18)*0,143), 0), ROUND(((L12-L18)*0,123), 0))";
+
+            worksheet2["F15"] = 0;
+            worksheet2["G15"] = 0;
+            worksheet2["K15"] = 0;
+            worksheet2["L15"] = 0;
+
             for (int i = 0; i <= 66; i++)
             {
                 worksheet2.AutoFitRowHeight(i, true);
@@ -813,6 +961,29 @@ namespace WindowsFormsApp1
                 }
             }
             return SourceList;
+        }
+
+        private List<FTradeTable> MakeTFuelSum(int year, int month)
+        {
+            int report_id = dbOps.GetReportId(CurrentData.UserData.Id_org, year, 1);
+            var TFuelList = dbOps.GetFTradeList(CurrentData.UserData.Id_org, report_id);
+
+            if (month > 1)
+            {
+                for (int i = 2; i <= month; i++)
+                {
+                    report_id = dbOps.GetReportId(CurrentData.UserData.Id_org, year, i);
+                    var tmplist = dbOps.GetFTradeList(CurrentData.UserData.Id_org, report_id);
+                    if (tmplist.Count != 0)
+                    {
+                        for (int j = 0; j < TFuelList.Count; j++)
+                        {
+                            TFuelList[j].Value += tmplist[j].Value;
+                        }
+                    }
+                }
+            }
+            return TFuelList;
         }
 
 

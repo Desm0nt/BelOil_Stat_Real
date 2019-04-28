@@ -329,6 +329,66 @@ namespace WindowsFormsApp1.DBO
             return SourceList;
         }
 
+        public static List<FTradeTable> GetFTradeList(int id_org, int id_rep)
+        {
+            List<FTradeTable> FTradeList = new List<FTradeTable>();
+            try
+            {
+                SqlConnection myConnection = new SqlConnection(cnStr);
+                SqlConnection myConnection2 = new SqlConnection(cnStr);
+                myConnection.Open();
+
+                string query = "SELECT * FROM [NewOrgFuels] where id_org = @id_org and trade = @trade";
+                bool trade = true;
+                SqlCommand command = new SqlCommand(query, myConnection);
+                command.Parameters.AddWithValue("@id_org", id_org);
+                command.Parameters.AddWithValue("@trade", trade);
+                using (SqlDataReader dr = command.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        myConnection2.Open();
+                        string query2 = "SELECT * FROM [NewFuelsTrade] WHERE [id_fuel] = @id_tfuel AND [id_rep] = @id_rep";
+                        SqlCommand command2 = new SqlCommand(query2, myConnection2);
+                        command2.Parameters.AddWithValue("@id_tfuel", Int32.Parse(dr["id"].ToString()));
+                        command2.Parameters.AddWithValue("@id_rep", id_rep);
+                        var a = Int32.Parse(dr["id"].ToString());
+                        using (SqlDataReader dr2 = command2.ExecuteReader())
+                        {
+                            while (dr2.Read())
+                            {
+                                int fuel_id = Int32.Parse(dr["id_fuel"].ToString());
+                                int fuel_type = 0;
+                                if (fuel_id > 5000)
+                                    fuel_type = 5000;
+                                else if (fuel_id > 4000 && fuel_id < 5000)
+                                    fuel_type = 4000;
+                                else if (fuel_id > 3100 && fuel_id < 4000)
+                                    fuel_type = 3100;
+                                else if (fuel_id > 2200 && fuel_id < 3100)
+                                    fuel_type = 2200;
+                                else if (fuel_id > 2100 && fuel_id < 2200)
+                                    fuel_type = 2100;
+                                else if (fuel_id > 1200 && fuel_id < 2100)
+                                    fuel_type = 1200;
+                                else
+                                    fuel_type = 1100;
+                                //тут баги
+                                FTradeList.Add(new FTradeTable { Id = Int32.Parse(dr["id"].ToString()), Id_fuel = Int32.Parse(dr["id_fuel"].ToString()), Fuel_group = fuel_type, Id_org = Int32.Parse(dr["id_org"].ToString()),  Value = float.Parse(dr2["value"].ToString()) });
+                            }
+                        }
+                        myConnection2.Close();
+                    }
+                }
+                myConnection.Close();
+            }
+            catch (Exception Ex)
+            {
+                MessageBox.Show("Ошибка получения данных торговли топливом: " + Ex.Message);
+            }
+            return FTradeList;
+        }
+
 
         public static NormTable GetOneNorm(int id_org, int id_rep, int id_norm)
         {
