@@ -855,6 +855,25 @@ namespace WindowsFormsApp1
             worksheet2["L20"] = esOldSourceSum;
             #endregion
 
+            var TradesSum = MakeTradeSum(dateTimePicker1.Value.Year, dateTimePicker1.Value.Month);
+            foreach (var a in TradesSum)
+            {
+                if (a.type == 2)
+                    worksheet2["F17"] = a.value;
+                else if (a.type == 3)
+                    worksheet2["G17"] = a.value;
+            }
+            var OldTradesSum = MakeTradeSum(dateTimePicker1.Value.Year - 1, dateTimePicker1.Value.Month);
+            foreach (var a in OldTradesSum)
+            {
+                if (a.type == 2)
+                    worksheet2["K17"] = a.value;
+                else if (a.type == 3)
+                    worksheet2["L17"] = a.value;
+            }
+
+
+
             worksheet2["F30"] = "=SUM(ROUND(C12, 0), ROUND(((F12-F18)*0,143), 0), ROUND(((G12-G18)*0,123), 0))";
             worksheet2["H30"] = "=SUM(ROUND(H12, 0), ROUND(((K12-K18)*0,143), 0), ROUND(((L12-L18)*0,123), 0))";
 
@@ -984,6 +1003,29 @@ namespace WindowsFormsApp1
                 }
             }
             return TFuelList;
+        }
+
+        private List<TradeTable> MakeTradeSum(int year, int month)
+        {
+            int report_id = dbOps.GetReportId(CurrentData.UserData.Id_org, year, 1);
+            var TradeList = dbOps.GetTrades(report_id);
+
+            if (month > 1)
+            {
+                for (int i = 2; i <= month; i++)
+                {
+                    report_id = dbOps.GetReportId(CurrentData.UserData.Id_org, year, i);
+                    var tmplist = dbOps.GetTrades(report_id);
+                    if (tmplist.Count != 0)
+                    {
+                        for (int j = 0; j < TradeList.Count; j++)
+                        {
+                            TradeList[j].value += tmplist[j].value;
+                        }
+                    }
+                }
+            }
+            return TradeList;
         }
 
 

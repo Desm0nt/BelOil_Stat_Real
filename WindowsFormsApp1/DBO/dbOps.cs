@@ -143,6 +143,34 @@ namespace WindowsFormsApp1.DBO
             return unit;
         }
 
+        public static List<TradeTable> GetTrades(int id_rep)
+        {
+            List<TradeTable> trades = new List<TradeTable>();
+            try
+            {
+                SqlConnection myConnection = new SqlConnection(cnStr);
+                myConnection.Open();
+
+                string query = "SELECT * FROM [NewTrade] where id_rep = @id_rep";
+                SqlCommand command = new SqlCommand(query, myConnection);
+                command.Parameters.AddWithValue("@id_rep", id_rep);
+
+                using (SqlDataReader dr = command.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        trades.Add(new TradeTable { type = Int32.Parse(dr["type"].ToString()), value = float.Parse(dr["value"].ToString()) });
+                    }
+                }
+                myConnection.Close();
+            }
+            catch (Exception Ex)
+            {
+                MessageBox.Show("Ошибка получения данных организации: " + Ex.Message);
+            }
+            return trades;
+        }
+
         public static List<NormTable> GetNormList(int id_org, int id_rep)
         {
             List<NormTable> NormList = new List<NormTable>();
