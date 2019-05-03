@@ -82,11 +82,14 @@ namespace WindowsFormsApp1
                 {
                     worksheet1[fuelrow-1 + tmp, 2] = a.name;
                     worksheet1[fuelrow-1 + tmp, 3] = a.Code;
-                    worksheet1[fuelrow-1 + tmp, 7] = String.Format("=ROUND({0}, 3)", a.val_plan);                    
-                    worksheet1[fuelrow-1 + tmp, 9] = String.Format("=ROUND({0}, 3)", a.val_fact);
+                    worksheet1[fuelrow-1 + tmp, 7] = String.Format("=ROUND({0}, 3)", Math.Round(a.val_plan,1));                    
+                    worksheet1[fuelrow-1 + tmp, 9] = String.Format("=ROUND({0}, 3)", Math.Round(a.val_fact,1));
                     var Fuel = dbOps.GetFuelData(a.fuel);
-                    worksheet1[fuelrow - 1 + tmp, 8] = String.Format("=ROUND(H{0} * {1}, 3)", fuelrow + tmp, Math.Round(Fuel.B_y, 1));
-                    worksheet1[fuelrow - 1 + tmp, 10] = String.Format("=ROUND(J{0} * {1}, 3)", fuelrow + tmp, Math.Round(Fuel.B_y,1));
+                    var z1 = worksheet1.Cells["H" + (fuelrow + tmp)].Data;
+                    worksheet1[fuelrow - 1 + tmp, 8] = String.Format("{0}", Math.Round(float.Parse(worksheet1.Cells["H" + (fuelrow + tmp)].Data.ToString()) * Fuel.B_y, 1));
+                    //worksheet1[fuelrow - 1 + tmp, 8] = String.Format("=ROUND(H{0} * {1}, 3)", fuelrow + tmp, Fuel.B_y);
+                    //worksheet1[fuelrow - 1 + tmp, 10] = String.Format("=ROUND(J{0} * {1}, 3)", fuelrow + tmp, Fuel.B_y);
+                    worksheet1[fuelrow - 1 + tmp, 10] = String.Format("{0}", Math.Round(float.Parse(worksheet1.Cells["J" + (fuelrow + tmp)].Data.ToString()) * Fuel.B_y, 1));
                     worksheet1["E" + (fuelrow + tmp)] = String.Format("=E{0}", fuelrow - 1); //dbOps.GetProdUnit(a.Id_prod); 
                     worksheet1["L" + (fuelrow + tmp)] = String.Format("=ROUND(IF(H{0}>0, J{0}/H{0}, 0), 3)", fuelrow + tmp);
                     worksheet1["M" + (fuelrow + tmp)] = String.Format("=ROUND(IF(F{0}>0, J{0}/F{0}, 0), 3)", fuelrow + tmp);
@@ -103,18 +106,20 @@ namespace WindowsFormsApp1
                     worksheet1["P" + (fuelrow + tmp)] = String.Format("=ROUND({0}, 3)", Math.Round(a.val_plan,1));
                     worksheet1["R" + (fuelrow + tmp)] = String.Format("=ROUND({0}, 3)", Math.Round(a.val_fact,1));
                     var Fuel = dbOps.GetFuelData(a.fuel);
-                    worksheet1["Q" + (fuelrow + tmp)] = String.Format("=ROUND(P{0} * {1}, 3)", fuelrow + tmp, Math.Round(Fuel.B_y,1));
-                    worksheet1["S" + (fuelrow + tmp)] = String.Format("=ROUND(R{0} * {1}, 3)", fuelrow + tmp, Math.Round(Fuel.B_y,1));
+                    worksheet1["Q" + (fuelrow + tmp)] = String.Format("{0}", Math.Round(float.Parse(worksheet1.Cells["P" + (fuelrow + tmp)].Data.ToString()) * Fuel.B_y, 1));
+                    //worksheet1["Q" + (fuelrow + tmp)] = String.Format("=ROUND(P{0} * {1}, 3)", fuelrow + tmp, Fuel.B_y);
+                    //worksheet1["S" + (fuelrow + tmp)] = String.Format("=ROUND(R{0} * {1}, 3)", fuelrow + tmp, Fuel.B_y);
+                    worksheet1["S" + (fuelrow + tmp)] = String.Format("{0}", Math.Round(float.Parse(worksheet1.Cells["R" + (fuelrow + tmp)].Data.ToString()) * Fuel.B_y, 1));
                     worksheet1["E" + (fuelrow + tmp)] = String.Format("=E{0}", fuelrow - 1);
                     worksheet1["T" + (fuelrow + tmp)] = String.Format("=ROUND(IF(P{0}>0, R{0}/P{0}, 0), 3)", fuelrow + tmp);
                     worksheet1["U" + (fuelrow + tmp)] = String.Format("=ROUND(IF(N{0}>0, R{0}/N{0}, 0), 3)", fuelrow + tmp);
                     var Normo = OldNormListSum.FirstOrDefault(x => x.Id == a.Id);
                     worksheet1["N" + (fuelrow + tmp)] = Normo !=null? String.Format("=ROUND({0}, 3)", Math.Round(Normo.val_fact,1)) : String.Format("=ROUND({0}, 3)", 0);
-                    worksheet1["O" + (fuelrow + tmp)] = String.Format("=ROUND(N{0} * {1}, 3)", fuelrow + tmp, Math.Round(Fuel.B_y,1));
+                    worksheet1["O" + (fuelrow + tmp)] = String.Format("=ROUND(N{0} * {1}, 3)", fuelrow + tmp, Fuel.B_y);
                     int oldreport = dbOps.GetReportId(CurrentData.UserData.Id_org, dateTimePicker1.Value.Year - 1, dateTimePicker1.Value.Month);
                     var Norm = dbOps.GetOneNorm(CurrentData.UserData.Id_org, oldreport, a.Id);
                     worksheet1["F" + (fuelrow + tmp)] = String.Format("=ROUND({0}, 3)", Math.Round(Norm.val_fact,1));
-                    worksheet1["G" + (fuelrow + tmp)] = String.Format("=ROUND(F{0} * {1}, 3)", fuelrow + tmp, Math.Round(Fuel.B_y,1));
+                    worksheet1["G" + (fuelrow + tmp)] = String.Format("=ROUND(F{0} * {1}, 3)", fuelrow + tmp, Fuel.B_y);
                     tmp++;
                 }
             }
@@ -164,11 +169,13 @@ namespace WindowsFormsApp1
                 {
                     worksheet1[heatrow - 1 + tmp, 2] = a.name;
                     worksheet1[heatrow - 1 + tmp, 3] = a.Code;
-                    worksheet1[heatrow - 1 + tmp, 7] = String.Format("=ROUND({0}, 3)", a.val_plan);
-                    worksheet1[heatrow - 1 + tmp, 9] = String.Format("=ROUND({0}, 3)", a.val_fact);
+                    worksheet1[heatrow - 1 + tmp, 7] = String.Format("=ROUND({0}, 3)", Math.Round(a.val_plan,1));
+                    worksheet1[heatrow - 1 + tmp, 9] = String.Format("=ROUND({0}, 3)", Math.Round(a.val_fact,1));
                     var Factor = dbOps.GetFactorData(a.type);
-                    worksheet1[heatrow - 1 + tmp, 8] = String.Format("=ROUND(H{0} * {1}, 3)", heatrow + tmp, Factor.value);
-                    worksheet1[heatrow - 1 + tmp, 10] = String.Format("=ROUND(J{0} * {1}, 3)", heatrow + tmp, Factor.value);
+                    worksheet1[heatrow - 1 + tmp, 8] = String.Format("{0}", Math.Round(float.Parse(worksheet1.Cells["H" + (heatrow + tmp)].Data.ToString()) * Factor.value, 1));
+                    //worksheet1[heatrow - 1 + tmp, 8] = String.Format("=ROUND(H{0} * {1}, 3)", heatrow + tmp, Factor.value);
+                    //worksheet1[heatrow - 1 + tmp, 10] = String.Format("=ROUND(J{0} * {1}, 3)", heatrow + tmp, Factor.value);
+                    worksheet1[heatrow - 1 + tmp, 10] = String.Format("{0}", Math.Round(float.Parse(worksheet1.Cells["J" + (heatrow + tmp)].Data.ToString()) * Factor.value, 1));
                     worksheet1["E" + (heatrow + tmp)] = String.Format("=E{0}", heatrow - 1);
                     worksheet1["L" + (heatrow + tmp)] = String.Format("=ROUND(IF(H{0}>0, J{0}/H{0}, 0), 3)", heatrow + tmp);
                     worksheet1["M" + (heatrow + tmp)] = String.Format("=ROUND(IF(F{0}>0, J{0}/F{0}, 0), 3)", heatrow + tmp);
@@ -182,20 +189,22 @@ namespace WindowsFormsApp1
                 {
                     worksheet1[heatrow - 1 + tmp, 2] = a.name;
                     worksheet1[heatrow - 1 + tmp, 3] = a.Code;
-                    worksheet1["P" + (heatrow + tmp)] = String.Format("=ROUND({0}, 3)", a.val_plan);
-                    worksheet1["R" + (heatrow + tmp)] = String.Format("=ROUND({0}, 3)", a.val_fact);
+                    worksheet1["P" + (heatrow + tmp)] = String.Format("=ROUND({0}, 3)", Math.Round(a.val_plan,1));
+                    worksheet1["R" + (heatrow + tmp)] = String.Format("=ROUND({0}, 3)", Math.Round(a.val_fact,1));
                     var Factor = dbOps.GetFactorData(a.type);
-                    worksheet1["Q" + (heatrow + tmp)] = String.Format("=ROUND(P{0} * {1}, 3)", heatrow + tmp, Factor.value);
-                    worksheet1["S" + (heatrow + tmp)] = String.Format("=ROUND(R{0} * {1}, 3)", heatrow + tmp, Factor.value);
+                    //worksheet1["Q" + (heatrow + tmp)] = String.Format("=ROUND(P{0} * {1}, 3)", heatrow + tmp, Factor.value);
+                    worksheet1["Q" + (heatrow + tmp)] = String.Format("{0}", Math.Round(float.Parse(worksheet1.Cells["P" + (heatrow + tmp)].Data.ToString()) * Factor.value, 1));
+                    //worksheet1["S" + (heatrow + tmp)] = String.Format("=ROUND(R{0} * {1}, 3)", heatrow + tmp, Factor.value);
+                    worksheet1["S" + (heatrow + tmp)] = String.Format("{0}", Math.Round(float.Parse(worksheet1.Cells["R" + (heatrow + tmp)].Data.ToString()) * Factor.value, 1));
                     worksheet1["E" + (heatrow + tmp)] = String.Format("=E{0}", heatrow - 1);
                     worksheet1["T" + (heatrow + tmp)] = String.Format("=ROUND(IF(P{0}>0, R{0}/P{0}, 0), 3)", heatrow + tmp);
                     worksheet1["U" + (heatrow + tmp)] = String.Format("=ROUND(IF(N{0}>0, R{0}/N{0}, 0), 3)", heatrow + tmp);
                     var Normo = OldNormListSum.FirstOrDefault(x => x.Id == a.Id);
-                    worksheet1["N" + (heatrow + tmp)] = Normo != null ? String.Format("=ROUND({0}, 3)", Normo.val_fact) : String.Format("=ROUND({0}, 3)", 0);
+                    worksheet1["N" + (heatrow + tmp)] = Normo != null ? String.Format("=ROUND({0}, 3)", Math.Round(Normo.val_fact,1)) : String.Format("=ROUND({0}, 3)", 0);
                     worksheet1["O" + (heatrow + tmp)] = String.Format("=ROUND(N{0} * {1}, 3)", heatrow + tmp, Factor.value);
                     int oldreport = dbOps.GetReportId(CurrentData.UserData.Id_org, dateTimePicker1.Value.Year - 1, dateTimePicker1.Value.Month);
                     var Norm = dbOps.GetOneNorm(CurrentData.UserData.Id_org, oldreport, a.Id);
-                    worksheet1["F" + (heatrow + tmp)] = String.Format("=ROUND({0}, 3)", Norm.val_fact);
+                    worksheet1["F" + (heatrow + tmp)] = String.Format("=ROUND({0}, 3)", Math.Round(Norm.val_fact,1));
                     worksheet1["G" + (heatrow + tmp)] = String.Format("=ROUND(F{0} * {1}, 3)", heatrow + tmp, Factor.value);
                     tmp++;
                 }
@@ -246,11 +255,13 @@ namespace WindowsFormsApp1
                 {
                     worksheet1[elrow - 1 + tmp, 2] = a.name;
                     worksheet1[elrow - 1 + tmp, 3] = a.Code;
-                    worksheet1[elrow - 1 + tmp, 7] = String.Format("=ROUND({0}, 3)", a.val_plan);
-                    worksheet1[elrow - 1 + tmp, 9] = String.Format("=ROUND({0}, 3)", a.val_fact);
+                    worksheet1[elrow - 1 + tmp, 7] = String.Format("=ROUND({0}, 3)", Math.Round(a.val_plan,1));
+                    worksheet1[elrow - 1 + tmp, 9] = String.Format("=ROUND({0}, 3)", Math.Round(a.val_fact,1));
                     var Factor = dbOps.GetFactorData(a.type);
-                    worksheet1[elrow - 1 + tmp, 8] = String.Format("=ROUND(H{0} * {1}, 3)", elrow + tmp, Factor.value);
-                    worksheet1[elrow - 1 + tmp, 10] = String.Format("=ROUND(J{0} * {1}, 3)", elrow + tmp, Factor.value);
+                    worksheet1[elrow - 1 + tmp, 8] = String.Format("{0}", Math.Round(float.Parse(worksheet1.Cells["H" + (elrow + tmp)].Data.ToString()) * Factor.value, 1));
+                    //worksheet1[elrow - 1 + tmp, 8] = String.Format("=ROUND(H{0} * {1}, 3)", elrow + tmp, Factor.value);
+                    //worksheet1[elrow - 1 + tmp, 10] = String.Format("=ROUND(J{0} * {1}, 3)", elrow + tmp, Factor.value);
+                    worksheet1[elrow - 1 + tmp, 10] = String.Format("{0}", Math.Round(float.Parse(worksheet1.Cells["J" + (elrow + tmp)].Data.ToString()) * Factor.value, 1));
                     worksheet1["E" + (elrow + tmp)] = String.Format("=E{0}", elrow - 1);
                     worksheet1["L" + (elrow + tmp)] = String.Format("=ROUND(IF(H{0}>0, J{0}/H{0}, 0), 3)", elrow + tmp);
                     worksheet1["M" + (elrow + tmp)] = String.Format("=ROUND(IF(F{0}>0, J{0}/F{0}, 0), 3)", elrow + tmp);
@@ -264,20 +275,22 @@ namespace WindowsFormsApp1
                 {
                     worksheet1[elrow - 1 + tmp, 2] = a.name;
                     worksheet1[elrow - 1 + tmp, 3] = a.Code;
-                    worksheet1["P" + (elrow + tmp)] = String.Format("=ROUND({0}, 3)", a.val_plan);
-                    worksheet1["R" + (elrow + tmp)] = String.Format("=ROUND({0}, 3)", a.val_fact);
+                    worksheet1["P" + (elrow + tmp)] = String.Format("=ROUND({0}, 3)", Math.Round(a.val_plan,1));
+                    worksheet1["R" + (elrow + tmp)] = String.Format("=ROUND({0}, 3)", Math.Round(a.val_fact,1));
                     var Factor = dbOps.GetFactorData(a.type);
-                    worksheet1["Q" + (elrow + tmp)] = String.Format("=ROUND(P{0} * {1}, 3)", elrow + tmp, Factor.value);
-                    worksheet1["S" + (elrow + tmp)] = String.Format("=ROUND(R{0} * {1}, 3)", elrow + tmp, Factor.value);
+//                    worksheet1["Q" + (elrow + tmp)] = String.Format("=ROUND(P{0} * {1}, 3)", elrow + tmp, Factor.value);
+                    worksheet1["Q" + (elrow + tmp)] = String.Format("{0}", Math.Round(float.Parse(worksheet1.Cells["P" + (elrow + tmp)].Data.ToString()) * Factor.value, 1));
+                    //worksheet1["S" + (elrow + tmp)] = String.Format("=ROUND(R{0} * {1}, 3)", elrow + tmp, Factor.value);
+                    worksheet1["S" + (elrow + tmp)] = String.Format("{0}", Math.Round(float.Parse(worksheet1.Cells["R" + (elrow + tmp)].Data.ToString()) * Factor.value, 1));
                     worksheet1["E" + (elrow + tmp)] = String.Format("=E{0}", elrow - 1);
                     worksheet1["T" + (elrow + tmp)] = String.Format("=ROUND(IF(P{0}>0, R{0}/P{0}, 0), 3)", elrow + tmp);
                     worksheet1["U" + (elrow + tmp)] = String.Format("=ROUND(IF(N{0}>0, R{0}/N{0}, 0), 3)", elrow + tmp);
                     var Normo = OldNormListSum.FirstOrDefault(x => x.Id == a.Id);
-                    worksheet1["N" + (elrow + tmp)] = Normo != null ? String.Format("=ROUND({0}, 3)", Normo.val_fact) : String.Format("=ROUND({0}, 3)", 0);
+                    worksheet1["N" + (elrow + tmp)] = Normo != null ? String.Format("=ROUND({0}, 3)", Math.Round(Normo.val_fact,1)) : String.Format("=ROUND({0}, 3)", 0);
                     worksheet1["O" + (elrow + tmp)] = String.Format("=ROUND(N{0} * {1}, 3)", elrow + tmp, Factor.value);
                     int oldreport = dbOps.GetReportId(CurrentData.UserData.Id_org, dateTimePicker1.Value.Year - 1, dateTimePicker1.Value.Month);
                     var Norm = dbOps.GetOneNorm(CurrentData.UserData.Id_org, oldreport, a.Id);
-                    worksheet1["F" + (elrow + tmp)] = String.Format("=ROUND({0}, 3)", Norm.val_fact);
+                    worksheet1["F" + (elrow + tmp)] = String.Format("=ROUND({0}, 3)", Math.Round(Norm.val_fact,1));
                     worksheet1["G" + (elrow + tmp)] = String.Format("=ROUND(F{0} * {1}, 3)", elrow + tmp, Factor.value);
                     tmp++;
                 }
@@ -368,6 +381,8 @@ namespace WindowsFormsApp1
             worksheet1["U" + (elrow + counter + 3)] = String.Format("=ROUND(IF(N{0}>0, R{0}/N{0}, 0), 3)", (elrow + counter + 3));
             #endregion
 
+            var a1 = worksheet1.Cells["U" + (elrow + counter + 3)].Data;
+
             #region style
             var grid = this.reoGridControl1;
             var sheet = grid.CurrentWorksheet;
@@ -375,8 +390,7 @@ namespace WindowsFormsApp1
             {
                 Flag = PlainStyleFlag.FontSize | PlainStyleFlag.FontName,
                 FontSize = 8,
-                FontName = "Times New Roman",
-                
+                FontName = "Times New Roman",                
             });
             sheet.SetRangeDataFormat("L" + (fuelrow - 1) + ":L" + (elrow + counter + 4), CellDataFormatFlag.Percent);
             sheet.SetRangeDataFormat("M" + (fuelrow - 1) + ":M" + (elrow + counter + 4), CellDataFormatFlag.Percent);
