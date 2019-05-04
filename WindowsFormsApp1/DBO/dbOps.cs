@@ -198,7 +198,7 @@ namespace WindowsFormsApp1.DBO
                             while (dr2.Read())
                             {
                                 string[] rowopt = !String.IsNullOrWhiteSpace(dr["row_options"].ToString())?dr["row_options"].ToString().Split(','): new string[] { };
-                                NormList.Add(new NormTable { Id = Int32.Parse(dr["id"].ToString()), Id_org = Int32.Parse(dr["id_org"].ToString()), Id_prod = Int32.Parse(dr["id_prod"].ToString()), Code = Int32.Parse(dr["code"].ToString()), name = dr["name"].ToString(), fuel = !String.IsNullOrWhiteSpace(dr["fuel"].ToString()) ? Int32.Parse(dr["fuel"].ToString()) : 0, type = Int32.Parse(dr["type"].ToString()), row_options = rowopt, val_plan = float.Parse(dr2["value_plan"].ToString()), val_fact = float.Parse(dr2["value_fact"].ToString()) });
+                                NormList.Add(new NormTable { Id = Int32.Parse(dr["id"].ToString()), Id_org = Int32.Parse(dr["id_org"].ToString()), Id_prod = Int32.Parse(dr["id_prod"].ToString()), Code = Int32.Parse(dr["code"].ToString()), name = dr["name"].ToString(), fuel = !String.IsNullOrWhiteSpace(dr["fuel"].ToString()) ? Int32.Parse(dr["fuel"].ToString()) : 0, type = Int32.Parse(dr["type"].ToString()), row_options = rowopt, val_plan = float.Parse(dr2["value_plan"].ToString()), val_fact = float.Parse(dr2["value_fact"].ToString()), val_fact_ut = 0, val_plan_ut =0 });
                             }
                         }
                         myConnection2.Close();
@@ -417,7 +417,6 @@ namespace WindowsFormsApp1.DBO
             return FTradeList;
         }
 
-
         public static NormTable GetOneNorm(int id_org, int id_rep, int id_norm)
         {
             NormTable Norm = new NormTable();
@@ -446,7 +445,7 @@ namespace WindowsFormsApp1.DBO
                         {
                             while (dr2.Read())
                             {
-                                Norm=new NormTable { Id = Int32.Parse(dr["id"].ToString()), Id_org = Int32.Parse(dr["id_org"].ToString()), Id_prod = Int32.Parse(dr["id_prod"].ToString()), Code = Int32.Parse(dr["code"].ToString()), name = dr["name"].ToString(), fuel = !String.IsNullOrWhiteSpace(dr["fuel"].ToString()) ? Int32.Parse(dr["fuel"].ToString()) : 0, type = Int32.Parse(dr["type"].ToString()), val_plan = float.Parse(dr2["value_plan"].ToString()), val_fact = float.Parse(dr2["value_fact"].ToString()) };
+                                Norm=new NormTable { Id = Int32.Parse(dr["id"].ToString()), Id_org = Int32.Parse(dr["id_org"].ToString()), Id_prod = Int32.Parse(dr["id_prod"].ToString()), Code = Int32.Parse(dr["code"].ToString()), name = dr["name"].ToString(), fuel = !String.IsNullOrWhiteSpace(dr["fuel"].ToString()) ? Int32.Parse(dr["fuel"].ToString()) : 0, type = Int32.Parse(dr["type"].ToString()), val_plan = float.Parse(dr2["value_plan"].ToString()), val_fact = float.Parse(dr2["value_fact"].ToString()), val_fact_ut = 0, val_plan_ut = 0 };
                             }
                         }
                         myConnection2.Close();
@@ -461,7 +460,7 @@ namespace WindowsFormsApp1.DBO
             return Norm;
         }
 
-        public static FuelTable GetFuelData(int? fuel_id)
+        public static FuelTable GetFuelData(int? fuel_id, int year, int month)
         {
             FuelTable Fuel = new FuelTable();
             try
@@ -469,15 +468,34 @@ namespace WindowsFormsApp1.DBO
                 SqlConnection myConnection = new SqlConnection(cnStr);
                 myConnection.Open();
 
-                string query = "SELECT * FROM [NewFuels] where fuel_id = @fuel_id";
+                string query = "SELECT COUNT(*)  FROM [NewFuels] where fuel_id = @fuel_id and year = @year and month = @month";
                 SqlCommand command = new SqlCommand(query, myConnection);
                 command.Parameters.AddWithValue("@fuel_id", fuel_id);
+                command.Parameters.AddWithValue("@year", year);
+                command.Parameters.AddWithValue("@month", month);
+
+                int RecordExist = (int)command.ExecuteScalar();
+                if (RecordExist > 0) {
+                    query = "SELECT * FROM [NewFuels] where fuel_id = @fuel_id and year = @year and month = @month";
+                    command = new SqlCommand(query, myConnection);
+                    command.Parameters.AddWithValue("@fuel_id", fuel_id);
+                    command.Parameters.AddWithValue("@year", year);
+                    command.Parameters.AddWithValue("@month", month);
+                }
+                else
+                {
+                    query = "SELECT * FROM [NewFuels] WHERE id = (SELECT MAX(time_id) FROM [NewFuels])";
+                    command = new SqlCommand(query, myConnection);
+                    command.Parameters.AddWithValue("@fuel_id", fuel_id);
+                    command.Parameters.AddWithValue("@year", year);
+                    command.Parameters.AddWithValue("@month", month);
+                }
 
                 using (SqlDataReader dr = command.ExecuteReader())
                 {
                     while (dr.Read())
                     {
-                        Fuel = new FuelTable {fuel_id = Int32.Parse(dr["fuel_id"].ToString()), fuel_group = Int32.Parse(dr["group_id"].ToString()), name = dr["name"].ToString(), Qn=Int32.Parse(dr["Qn"].ToString()), B_y= float.Parse(dr["B_y"].ToString()), unit = dr["unit"].ToString() };
+                        Fuel = new FuelTable {fuel_id = Int32.Parse(dr["fuel_id"].ToString()), fuel_group = Int32.Parse(dr["group_id"].ToString()), name = dr["name"].ToString(), Qn=Int32.Parse(dr["Qn"].ToString()), B_y= float.Parse(dr["B_y"].ToString()), unit = dr["unit"].ToString(), year = Int32.Parse(dr["year"].ToString()), month = Int32.Parse(dr["month"].ToString()), time_id = Int32.Parse(dr["time_id"].ToString()) };
                     }
                 }
                 myConnection.Close();

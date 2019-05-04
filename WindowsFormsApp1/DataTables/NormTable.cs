@@ -18,5 +18,7 @@ namespace WindowsFormsApp1.DataTables
         public string[] row_options { get; set; }
         public float val_plan { get; set; }
         public float val_fact { get; set; }
+        public float val_plan_ut { get; set; }
+        public float val_fact_ut { get; set; }
     }
 }

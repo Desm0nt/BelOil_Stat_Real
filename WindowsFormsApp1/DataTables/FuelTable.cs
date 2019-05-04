@@ -14,5 +14,8 @@ namespace WindowsFormsApp1.DataTables
         public int Qn { get; set; }
         public float B_y { get; set; }
         public string unit { get; set; }
+        public int year { get; set; }
+        public int month { get; set; }
+        public int time_id { get; set; }
     }
 }

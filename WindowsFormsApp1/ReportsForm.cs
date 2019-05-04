@@ -84,7 +84,7 @@ namespace WindowsFormsApp1
                     worksheet1[fuelrow-1 + tmp, 3] = a.Code;
                     worksheet1[fuelrow-1 + tmp, 7] = String.Format("=ROUND({0}, 3)", Math.Round(a.val_plan,1));                    
                     worksheet1[fuelrow-1 + tmp, 9] = String.Format("=ROUND({0}, 3)", Math.Round(a.val_fact,1));
-                    var Fuel = dbOps.GetFuelData(a.fuel);
+                    var Fuel = dbOps.GetFuelData(a.fuel, dateTimePicker1.Value.Year, dateTimePicker1.Value.Month);
                     var z1 = worksheet1.Cells["H" + (fuelrow + tmp)].Data;
                     worksheet1[fuelrow - 1 + tmp, 8] = String.Format("{0}", Math.Round(float.Parse(worksheet1.Cells["H" + (fuelrow + tmp)].Data.ToString()) * Fuel.B_y, 1));
                     //worksheet1[fuelrow - 1 + tmp, 8] = String.Format("=ROUND(H{0} * {1}, 3)", fuelrow + tmp, Fuel.B_y);
@@ -105,26 +105,27 @@ namespace WindowsFormsApp1
                     worksheet1[fuelrow - 1 + tmp, 3] = a.Code;
                     worksheet1["P" + (fuelrow + tmp)] = String.Format("=ROUND({0}, 3)", Math.Round(a.val_plan,1));
                     worksheet1["R" + (fuelrow + tmp)] = String.Format("=ROUND({0}, 3)", Math.Round(a.val_fact,1));
-                    var Fuel = dbOps.GetFuelData(a.fuel);
-                    worksheet1["Q" + (fuelrow + tmp)] = String.Format("{0}", Math.Round(float.Parse(worksheet1.Cells["P" + (fuelrow + tmp)].Data.ToString()) * Fuel.B_y, 1));
-                    //worksheet1["Q" + (fuelrow + tmp)] = String.Format("=ROUND(P{0} * {1}, 3)", fuelrow + tmp, Fuel.B_y);
-                    //worksheet1["S" + (fuelrow + tmp)] = String.Format("=ROUND(R{0} * {1}, 3)", fuelrow + tmp, Fuel.B_y);
-                    worksheet1["S" + (fuelrow + tmp)] = String.Format("{0}", Math.Round(float.Parse(worksheet1.Cells["R" + (fuelrow + tmp)].Data.ToString()) * Fuel.B_y, 1));
+                    var Fuel = dbOps.GetFuelData(a.fuel, dateTimePicker1.Value.Year, dateTimePicker1.Value.Month);
+                    //worksheet1["Q" + (fuelrow + tmp)] = String.Format("{0}", Math.Round(float.Parse(worksheet1.Cells["P" + (fuelrow + tmp)].Data.ToString()) * Fuel.B_y, 1));
+                    worksheet1["Q" + (fuelrow + tmp)] = String.Format("=ROUND({0}, 3)", Math.Round(a.val_plan_ut,1));
+                    worksheet1["S" + (fuelrow + tmp)] = String.Format("=ROUND({0}, 3)", Math.Round(a.val_fact_ut,1));
+                    //worksheet1["S" + (fuelrow + tmp)] = String.Format("{0}", Math.Round(float.Parse(worksheet1.Cells["R" + (fuelrow + tmp)].Data.ToString()) * Fuel.B_y, 1));
                     worksheet1["E" + (fuelrow + tmp)] = String.Format("=E{0}", fuelrow - 1);
                     worksheet1["T" + (fuelrow + tmp)] = String.Format("=ROUND(IF(P{0}>0, R{0}/P{0}, 0), 3)", fuelrow + tmp);
                     worksheet1["U" + (fuelrow + tmp)] = String.Format("=ROUND(IF(N{0}>0, R{0}/N{0}, 0), 3)", fuelrow + tmp);
                     var Normo = OldNormListSum.FirstOrDefault(x => x.Id == a.Id);
                     worksheet1["N" + (fuelrow + tmp)] = Normo !=null? String.Format("=ROUND({0}, 3)", Math.Round(Normo.val_fact,1)) : String.Format("=ROUND({0}, 3)", 0);
-                    worksheet1["O" + (fuelrow + tmp)] = String.Format("=ROUND(N{0} * {1}, 3)", fuelrow + tmp, Fuel.B_y);
+                    worksheet1["O" + (fuelrow + tmp)] = Normo != null ? String.Format("=ROUND({0}, 3)", Math.Round(Normo.val_fact_ut, 1)) : String.Format("=ROUND({0}, 3)", 0);
                     int oldreport = dbOps.GetReportId(CurrentData.UserData.Id_org, dateTimePicker1.Value.Year - 1, dateTimePicker1.Value.Month);
                     var Norm = dbOps.GetOneNorm(CurrentData.UserData.Id_org, oldreport, a.Id);
                     worksheet1["F" + (fuelrow + tmp)] = String.Format("=ROUND({0}, 3)", Math.Round(Norm.val_fact,1));
-                    worksheet1["G" + (fuelrow + tmp)] = String.Format("=ROUND(F{0} * {1}, 3)", fuelrow + tmp, Fuel.B_y);
+                    worksheet1["G" + (fuelrow + tmp)] = String.Format("{0}", Math.Round(Math.Round(Norm.val_fact, 1) * Fuel.B_y, 1));
                     tmp++;
                 }
             }
             var cell = worksheet1.Cells["G" + fuelrow];
             worksheet1["F" + (fuelrow - 1)] = cell.Data != null ? String.Format("=ROUND(SUM(F{0}:F{1}), 3)", fuelrow, fuelrow + counter - 1) : "0";
+            worksheet1["G" + (fuelrow - 1)] = cell.Data != null ? String.Format("=ROUND(SUM(G{0}:G{1}), 3)", fuelrow, fuelrow + counter - 1) : "0";
             worksheet1["H" + (fuelrow - 1)] = cell.Data != null ? String.Format("=ROUND(SUM(H{0}:H{1}), 3)", fuelrow, fuelrow + counter - 1) : "0";
             worksheet1["I" + (fuelrow - 1)] = cell.Data != null ? String.Format("=ROUND(SUM(I{0}:I{1}), 3)", fuelrow, fuelrow + counter - 1) : "0";
             worksheet1["J" + (fuelrow - 1)] = cell.Data != null ? String.Format("=ROUND(SUM(J{0}:J{1}), 3)", fuelrow, fuelrow + counter - 1) : "0";
@@ -193,19 +194,21 @@ namespace WindowsFormsApp1
                     worksheet1["R" + (heatrow + tmp)] = String.Format("=ROUND({0}, 3)", Math.Round(a.val_fact,1));
                     var Factor = dbOps.GetFactorData(a.type);
                     //worksheet1["Q" + (heatrow + tmp)] = String.Format("=ROUND(P{0} * {1}, 3)", heatrow + tmp, Factor.value);
-                    worksheet1["Q" + (heatrow + tmp)] = String.Format("{0}", Math.Round(float.Parse(worksheet1.Cells["P" + (heatrow + tmp)].Data.ToString()) * Factor.value, 1));
+                    //worksheet1["Q" + (heatrow + tmp)] = String.Format("{0}", Math.Round(float.Parse(worksheet1.Cells["P" + (heatrow + tmp)].Data.ToString()) * Factor.value, 1));
                     //worksheet1["S" + (heatrow + tmp)] = String.Format("=ROUND(R{0} * {1}, 3)", heatrow + tmp, Factor.value);
-                    worksheet1["S" + (heatrow + tmp)] = String.Format("{0}", Math.Round(float.Parse(worksheet1.Cells["R" + (heatrow + tmp)].Data.ToString()) * Factor.value, 1));
+                    //worksheet1["S" + (heatrow + tmp)] = String.Format("{0}", Math.Round(float.Parse(worksheet1.Cells["R" + (heatrow + tmp)].Data.ToString()) * Factor.value, 1));
+                    worksheet1["Q" + (heatrow + tmp)] = String.Format("=ROUND({0}, 3)", Math.Round(a.val_plan_ut, 1));
+                    worksheet1["S" + (heatrow + tmp)] = String.Format("=ROUND({0}, 3)", Math.Round(a.val_fact_ut, 1));
                     worksheet1["E" + (heatrow + tmp)] = String.Format("=E{0}", heatrow - 1);
                     worksheet1["T" + (heatrow + tmp)] = String.Format("=ROUND(IF(P{0}>0, R{0}/P{0}, 0), 3)", heatrow + tmp);
                     worksheet1["U" + (heatrow + tmp)] = String.Format("=ROUND(IF(N{0}>0, R{0}/N{0}, 0), 3)", heatrow + tmp);
                     var Normo = OldNormListSum.FirstOrDefault(x => x.Id == a.Id);
-                    worksheet1["N" + (heatrow + tmp)] = Normo != null ? String.Format("=ROUND({0}, 3)", Math.Round(Normo.val_fact,1)) : String.Format("=ROUND({0}, 3)", 0);
-                    worksheet1["O" + (heatrow + tmp)] = String.Format("=ROUND(N{0} * {1}, 3)", heatrow + tmp, Factor.value);
+                    worksheet1["N" + (heatrow + tmp)] = Normo != null ? String.Format("=ROUND({0}, 3)", Math.Round(Normo.val_fact, 1)) : String.Format("=ROUND({0}, 3)", 0);
+                    worksheet1["O" + (heatrow + tmp)] = Normo != null ? String.Format("=ROUND({0}, 3)", Math.Round(Normo.val_fact_ut, 1)) : String.Format("=ROUND({0}, 3)", 0);
                     int oldreport = dbOps.GetReportId(CurrentData.UserData.Id_org, dateTimePicker1.Value.Year - 1, dateTimePicker1.Value.Month);
                     var Norm = dbOps.GetOneNorm(CurrentData.UserData.Id_org, oldreport, a.Id);
                     worksheet1["F" + (heatrow + tmp)] = String.Format("=ROUND({0}, 3)", Math.Round(Norm.val_fact,1));
-                    worksheet1["G" + (heatrow + tmp)] = String.Format("=ROUND(F{0} * {1}, 3)", heatrow + tmp, Factor.value);
+                    worksheet1["G" + (heatrow + tmp)] = String.Format("{0}", Math.Round(Math.Round(Norm.val_fact, 1) * Factor.value, 1));
                     tmp++;
                 }
             }
@@ -278,20 +281,22 @@ namespace WindowsFormsApp1
                     worksheet1["P" + (elrow + tmp)] = String.Format("=ROUND({0}, 3)", Math.Round(a.val_plan,1));
                     worksheet1["R" + (elrow + tmp)] = String.Format("=ROUND({0}, 3)", Math.Round(a.val_fact,1));
                     var Factor = dbOps.GetFactorData(a.type);
-//                    worksheet1["Q" + (elrow + tmp)] = String.Format("=ROUND(P{0} * {1}, 3)", elrow + tmp, Factor.value);
-                    worksheet1["Q" + (elrow + tmp)] = String.Format("{0}", Math.Round(float.Parse(worksheet1.Cells["P" + (elrow + tmp)].Data.ToString()) * Factor.value, 1));
+                    //worksheet1["Q" + (elrow + tmp)] = String.Format("=ROUND(P{0} * {1}, 3)", elrow + tmp, Factor.value);
+                    //worksheet1["Q" + (elrow + tmp)] = String.Format("{0}", Math.Round(float.Parse(worksheet1.Cells["P" + (elrow + tmp)].Data.ToString()) * Factor.value, 1));
                     //worksheet1["S" + (elrow + tmp)] = String.Format("=ROUND(R{0} * {1}, 3)", elrow + tmp, Factor.value);
-                    worksheet1["S" + (elrow + tmp)] = String.Format("{0}", Math.Round(float.Parse(worksheet1.Cells["R" + (elrow + tmp)].Data.ToString()) * Factor.value, 1));
+                    //worksheet1["S" + (elrow + tmp)] = String.Format("{0}", Math.Round(float.Parse(worksheet1.Cells["R" + (elrow + tmp)].Data.ToString()) * Factor.value, 1));
+                    worksheet1["Q" + (elrow + tmp)] = String.Format("=ROUND({0}, 3)", Math.Round(a.val_plan_ut, 1));
+                    worksheet1["S" + (elrow + tmp)] = String.Format("=ROUND({0}, 3)", Math.Round(a.val_fact_ut, 1));
                     worksheet1["E" + (elrow + tmp)] = String.Format("=E{0}", elrow - 1);
                     worksheet1["T" + (elrow + tmp)] = String.Format("=ROUND(IF(P{0}>0, R{0}/P{0}, 0), 3)", elrow + tmp);
                     worksheet1["U" + (elrow + tmp)] = String.Format("=ROUND(IF(N{0}>0, R{0}/N{0}, 0), 3)", elrow + tmp);
                     var Normo = OldNormListSum.FirstOrDefault(x => x.Id == a.Id);
                     worksheet1["N" + (elrow + tmp)] = Normo != null ? String.Format("=ROUND({0}, 3)", Math.Round(Normo.val_fact,1)) : String.Format("=ROUND({0}, 3)", 0);
-                    worksheet1["O" + (elrow + tmp)] = String.Format("=ROUND(N{0} * {1}, 3)", elrow + tmp, Factor.value);
+                    worksheet1["O" + (elrow + tmp)] = Normo != null ? String.Format("=ROUND({0}, 3)", Math.Round(Normo.val_fact_ut, 1)) : String.Format("=ROUND({0}, 3)", 0);
                     int oldreport = dbOps.GetReportId(CurrentData.UserData.Id_org, dateTimePicker1.Value.Year - 1, dateTimePicker1.Value.Month);
                     var Norm = dbOps.GetOneNorm(CurrentData.UserData.Id_org, oldreport, a.Id);
                     worksheet1["F" + (elrow + tmp)] = String.Format("=ROUND({0}, 3)", Math.Round(Norm.val_fact,1));
-                    worksheet1["G" + (elrow + tmp)] = String.Format("=ROUND(F{0} * {1}, 3)", elrow + tmp, Factor.value);
+                    worksheet1["G" + (elrow + tmp)] = String.Format("{0}", Math.Round(Math.Round(Norm.val_fact, 1) * Factor.value, 1));
                     tmp++;
                 }
             }
@@ -451,7 +456,7 @@ namespace WindowsFormsApp1
             {
                 if (a.type == 1)
                 {
-                    var Fuel = dbOps.GetFuelData(a.fuel);
+                    var Fuel = dbOps.GetFuelData(a.fuel, dateTimePicker1.Value.Year, dateTimePicker1.Value.Month);
                     actSum += Convert.ToSingle(Math.Round(a.val_fact, 1));
                     actSum_ut += Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(a.val_fact, 1)) * Fuel.B_y),1));
                     var Normo = oldList.FirstOrDefault(x => x.Id == a.Id);
@@ -545,7 +550,7 @@ namespace WindowsFormsApp1
             {
                 if (a.type == 1 && (a.fuel > 2100 && a.fuel < 4000))
                 {
-                    var Fuel = dbOps.GetFuelData(a.fuel);
+                    var Fuel = dbOps.GetFuelData(a.fuel, dateTimePicker1.Value.Year, dateTimePicker1.Value.Month);
                     mestn_actSum += Convert.ToSingle(Math.Round(a.val_fact, 1));
                     mestn_actSum_ut += Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(a.val_fact, 1)) * Fuel.B_y), 1));
                     var Normo = oldList.FirstOrDefault(x => x.Id == a.Id);
@@ -591,7 +596,7 @@ namespace WindowsFormsApp1
             {
                 if (a.type == 1 && ((a.fuel > 2200 && a.fuel < 3100) || (a.fuel > 3100 && a.fuel < 4000)))
                 {
-                    var Fuel = dbOps.GetFuelData(a.fuel);
+                    var Fuel = dbOps.GetFuelData(a.fuel, dateTimePicker1.Value.Year, dateTimePicker1.Value.Month);
                     oth_actSum += Convert.ToSingle(Math.Round(a.val_fact, 1));
                     oth_actSum_ut += Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(a.val_fact, 1)) * Fuel.B_y), 1));
                     var Normo = oldList.FirstOrDefault(x => x.Id == a.Id);
@@ -886,8 +891,6 @@ namespace WindowsFormsApp1
                     worksheet2["L17"] = Convert.ToSingle(Math.Round(a.value, 1));
             }
 
-
-
             worksheet2["F30"] = "=SUM(ROUND(C12, 0), ROUND(((F12-F18)*0,143), 0), ROUND(((G12-G18)*0,123), 0))";
             worksheet2["H30"] = "=SUM(ROUND(H12, 0), ROUND(((K12-K18)*0,143), 0), ROUND(((L12-L18)*0,123), 0))";
 
@@ -907,6 +910,27 @@ namespace WindowsFormsApp1
         {
             int report_id = dbOps.GetReportId(CurrentData.UserData.Id_org, year, 1);
             var NormList = dbOps.GetNormList(CurrentData.UserData.Id_org, report_id);
+            for (int i =0; i < NormList.Count; i++)
+            {
+                if (NormList[i].type == 1)
+                {
+                    var Fuel = dbOps.GetFuelData(NormList[i].fuel, year, 1);
+                    NormList[i].val_fact_ut = Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(NormList[i].val_fact, 1)) * Fuel.B_y), 1));
+                    NormList[i].val_plan_ut = Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(NormList[i].val_plan, 1)) * Fuel.B_y), 1));
+                }
+                if (NormList[i].type == 2)
+                {
+                    var Factor = dbOps.GetFactorData(NormList[i].type);
+                    NormList[i].val_fact_ut = Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(NormList[i].val_fact, 1)) * Factor.value), 1));
+                    NormList[i].val_plan_ut = Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(NormList[i].val_plan, 1)) * Factor.value), 1));
+                }
+                if (NormList[i].type == 3)
+                {
+                    var Factor = dbOps.GetFactorData(NormList[i].type);
+                    NormList[i].val_fact_ut = Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(NormList[i].val_fact, 1)) * Factor.value), 1));
+                    NormList[i].val_plan_ut = Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(NormList[i].val_plan, 1)) * Factor.value), 1));
+                }
+            }
 
             if (month > 1)
             {
@@ -914,12 +938,35 @@ namespace WindowsFormsApp1
                 {
                     report_id = dbOps.GetReportId(CurrentData.UserData.Id_org, year, i);
                     var tmplist = dbOps.GetNormList(CurrentData.UserData.Id_org, report_id);
+                    for (int j = 0; j < tmplist.Count; j++)
+                    {
+                        if (tmplist[j].type == 1)
+                        {
+                            var Fuel = dbOps.GetFuelData(tmplist[j].fuel, year, i);
+                            tmplist[j].val_fact_ut = Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(tmplist[j].val_fact, 1)) * Fuel.B_y), 1));
+                            tmplist[j].val_plan_ut = Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(tmplist[j].val_plan, 1)) * Fuel.B_y), 1));
+                        }
+                        if (tmplist[j].type == 2)
+                        {
+                            var Factor = dbOps.GetFactorData(tmplist[j].type);
+                            tmplist[j].val_fact_ut = Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(tmplist[j].val_fact, 1)) * Factor.value), 1));
+                            tmplist[j].val_plan_ut = Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(tmplist[j].val_plan, 1)) * Factor.value), 1));
+                        }
+                        if (tmplist[j].type == 3)
+                        {
+                            var Factor = dbOps.GetFactorData(tmplist[j].type);
+                            tmplist[j].val_fact_ut = Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(tmplist[j].val_fact, 1)) * Factor.value), 1));
+                            tmplist[j].val_plan_ut = Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(tmplist[j].val_plan, 1)) * Factor.value), 1));
+                        }
+                    }
                     if (tmplist.Count != 0)
                     {
                         for (int j = 0; j < NormList.Count; j++)
                         {
-                            NormList[j].val_plan += tmplist[j].val_plan;
-                            NormList[j].val_fact += tmplist[j].val_fact;
+                            NormList[j].val_plan += Convert.ToSingle(Math.Round(tmplist[j].val_plan, 1));
+                            NormList[j].val_fact += Convert.ToSingle(Math.Round(tmplist[j].val_fact, 1));
+                            NormList[j].val_plan_ut += Convert.ToSingle(Math.Round(tmplist[j].val_plan_ut, 1));
+                            NormList[j].val_fact_ut += Convert.ToSingle(Math.Round(tmplist[j].val_fact_ut, 1));
                         }
                     }
                 }
@@ -942,7 +989,7 @@ namespace WindowsFormsApp1
                     {
                         for (int j = 0; j < RecievedList.Count; j++)
                         {
-                            RecievedList[j].value += tmplist[j].value;
+                            RecievedList[j].value += Convert.ToSingle(Math.Round(tmplist[j].value, 1));
                         }
                     }
                 }
@@ -965,7 +1012,7 @@ namespace WindowsFormsApp1
                     {
                         for (int j = 0; j < SendedList.Count; j++)
                         {
-                            SendedList[j].value += tmplist[j].value;
+                            SendedList[j].value += Convert.ToSingle(Math.Round(tmplist[j].value, 1));
                         }
                     }
                 }
@@ -988,7 +1035,7 @@ namespace WindowsFormsApp1
                     {
                         for (int j = 0; j < SourceList.Count; j++)
                         {
-                            SourceList[j].Value += tmplist[j].Value;
+                            SourceList[j].Value += Convert.ToSingle(Math.Round(tmplist[j].Value, 1));
                         }
                     }
                 }
@@ -1011,7 +1058,7 @@ namespace WindowsFormsApp1
                     {
                         for (int j = 0; j < TFuelList.Count; j++)
                         {
-                            TFuelList[j].Value += tmplist[j].Value;
+                            TFuelList[j].Value += Convert.ToSingle(Math.Round(tmplist[j].Value, 1));
                         }
                     }
                 }
@@ -1034,7 +1081,7 @@ namespace WindowsFormsApp1
                     {
                         for (int j = 0; j < TradeList.Count; j++)
                         {
-                            TradeList[j].value += tmplist[j].value;
+                            TradeList[j].value += Convert.ToSingle(Math.Round(tmplist[j].value, 1));
                         }
                     }
                 }
