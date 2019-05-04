@@ -458,26 +458,41 @@ namespace WindowsFormsApp1
                 {
                     var Fuel = dbOps.GetFuelData(a.fuel, dateTimePicker1.Value.Year, dateTimePicker1.Value.Month);
                     actSum += Convert.ToSingle(Math.Round(a.val_fact, 1));
-                    actSum_ut += Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(a.val_fact, 1)) * Fuel.B_y),1));
-                    var Normo = oldList.FirstOrDefault(x => x.Id == a.Id);
-                    oldSum += Normo != null ? Convert.ToSingle(Math.Round(Normo.val_fact, 1)) : 0;
-                    oldSum_ut += Normo != null ? Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(Normo.val_fact,1)) * Fuel.B_y),1)) : 0;
+                    actSum_ut += Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(a.val_fact, 1)) * Fuel.B_y), 1));
                     if (a.row_options.Count() == 2)
                     {
                         actSum_111 += Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(a.val_fact, 1)) * Fuel.B_y), 1));
                         actSum_112 += Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(a.val_fact, 1)) * Fuel.B_y), 1));
-                        oldSum_111 += Normo != null ? Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(Normo.val_fact, 1)) * Fuel.B_y), 1)) : 0; ;
-                        oldSum_112 += Normo != null ? Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(Normo.val_fact, 1)) * Fuel.B_y), 1)) : 0; ;
                     }
-                    else if (a.row_options.Count()==1 && a.row_options[0] == "111")
+                    else if (a.row_options.Count() == 1 && a.row_options[0] == "111")
                     {
                         actSum_111 += Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(a.val_fact, 1)) * Fuel.B_y), 1));
-                        oldSum_111 += Normo != null ? Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(Normo.val_fact, 1)) * Fuel.B_y), 1)) : 0; ;
                     }
                     else if (a.row_options.Count() == 1 && a.row_options[0] == "112")
                     {
                         actSum_112 += Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(a.val_fact, 1)) * Fuel.B_y), 1));
-                        oldSum_112 += Normo != null ? Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(Normo.val_fact, 1)) * Fuel.B_y), 1)) : 0; ;
+                    }
+                }
+            }
+            foreach (var a in oldList)
+            {
+                if (a.type == 1)
+                {
+                    var Fuel = dbOps.GetFuelData(a.fuel, dateTimePicker1.Value.Year-1, dateTimePicker1.Value.Month);
+                    oldSum += Convert.ToSingle(Math.Round(a.val_fact, 1));
+                    oldSum_ut += Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(a.val_fact, 1)) * Fuel.B_y), 1));
+                    if (a.row_options.Count() == 2)
+                    {
+                        oldSum_111 += Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(a.val_fact, 1)) * Fuel.B_y), 1));
+                        oldSum_112 += Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(a.val_fact, 1)) * Fuel.B_y), 1));
+                    }
+                    else if (a.row_options.Count() == 1 && a.row_options[0] == "111")
+                    {
+                        oldSum_111 += Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(a.val_fact, 1)) * Fuel.B_y), 1));
+                    }
+                    else if (a.row_options.Count() == 1 && a.row_options[0] == "112")
+                    {
+                        oldSum_112 += Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(a.val_fact, 1)) * Fuel.B_y), 1));
                     }
                 }
             }
@@ -498,8 +513,10 @@ namespace WindowsFormsApp1
             foreach (var a in TFuelListSum)
             {
                     TFuelSum += Convert.ToSingle(Math.Round(a.Value, 1));
-                    var Normo = OldTFuelListSum.FirstOrDefault(x => x.Id == a.Id);
-                    OldTFuelSum += Normo != null ? Convert.ToSingle(Math.Round(Normo.Value, 1)) : 0;
+            }
+            foreach (var a in OldTFuelListSum)
+            {
+                OldTFuelSum += Convert.ToSingle(Math.Round(a.Value, 1));
             }
             worksheet2["C17"] = TFuelSum;
             worksheet2["H17"] = OldTFuelSum;
@@ -513,8 +530,13 @@ namespace WindowsFormsApp1
                 if (a.Fuel_group >= 2100 && a.Fuel_group <= 4000)
                 {
                     mTFuelSum += Convert.ToSingle(Math.Round(a.Value, 1));
-                    var Normo = OldTFuelListSum.FirstOrDefault(x => x.Id == a.Id);
-                    mOldTFuelSum += Normo != null ? Convert.ToSingle(Math.Round(Normo.Value, 1)) : 0;
+                }
+            }
+            foreach (var a in OldTFuelListSum)
+            {
+                if (a.Fuel_group >= 2100 && a.Fuel_group <= 4000)
+                {
+                    mOldTFuelSum += Convert.ToSingle(Math.Round(a.Value, 1));
                 }
             }
             worksheet2["D17"] = mTFuelSum;
@@ -529,8 +551,14 @@ namespace WindowsFormsApp1
                 if ((a.Fuel_group >= 2200 && a.Fuel_group <= 3100) || (a.Fuel_group >= 3100 && a.Fuel_group <= 4000))
                 {
                     vTFuelSum += Convert.ToSingle(Math.Round(a.Value, 1));
-                    var Normo = OldTFuelListSum.FirstOrDefault(x => x.Id == a.Id);
-                    vOldTFuelSum += Normo != null ? Convert.ToSingle(Math.Round(Normo.Value, 1)) : 0;
+
+                }
+            }
+            foreach (var a in OldTFuelListSum)
+            {
+                if ((a.Fuel_group >= 2200 && a.Fuel_group <= 3100) || (a.Fuel_group >= 3100 && a.Fuel_group <= 4000))
+                {
+                    vOldTFuelSum += Convert.ToSingle(Math.Round(a.Value, 1));
                 }
             }
             worksheet2["E17"] = vTFuelSum;
@@ -553,25 +581,41 @@ namespace WindowsFormsApp1
                     var Fuel = dbOps.GetFuelData(a.fuel, dateTimePicker1.Value.Year, dateTimePicker1.Value.Month);
                     mestn_actSum += Convert.ToSingle(Math.Round(a.val_fact, 1));
                     mestn_actSum_ut += Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(a.val_fact, 1)) * Fuel.B_y), 1));
-                    var Normo = oldList.FirstOrDefault(x => x.Id == a.Id);
-                    mestn_oldSum += Normo != null ? Convert.ToSingle(Math.Round(Normo.val_fact, 1)) : 0;
-                    mestn_oldSum_ut += Normo != null ? Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(Normo.val_fact, 1)) * Fuel.B_y), 1)) : 0;
                     if (a.row_options.Count() == 2)
                     {
                         mestn_actSum_111 += Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(a.val_fact, 1)) * Fuel.B_y), 1));
                         mestn_actSum_112 += Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(a.val_fact, 1)) * Fuel.B_y), 1));
-                        mestn_oldSum_111 += Normo != null ? Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(Normo.val_fact, 1)) * Fuel.B_y), 1)) : 0; ;
-                        mestn_oldSum_112 += Normo != null ? Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(Normo.val_fact, 1)) * Fuel.B_y), 1)) : 0; ;
+
                     }
                     else if (a.row_options.Count() == 1 && a.row_options[0] == "111")
                     {
                         mestn_actSum_111 += Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(a.val_fact, 1)) * Fuel.B_y), 1));
-                        mestn_oldSum_111 += Normo != null ? Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(Normo.val_fact, 1)) * Fuel.B_y), 1)) : 0; ;
                     }
                     else if (a.row_options.Count() == 1 && a.row_options[0] == "112")
                     {
                         mestn_actSum_112 += Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(a.val_fact, 1)) * Fuel.B_y), 1));
-                        mestn_oldSum_112 += Normo != null ? Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(Normo.val_fact, 1)) * Fuel.B_y), 1)) : 0; ;
+                    }
+                }
+            }
+            foreach (var a in oldList)
+            {
+                if (a.type == 1 && (a.fuel > 2100 && a.fuel < 4000))
+                {
+                    var Fuel = dbOps.GetFuelData(a.fuel, dateTimePicker1.Value.Year-1, dateTimePicker1.Value.Month);
+                    mestn_oldSum += Convert.ToSingle(Math.Round(a.val_fact, 1));
+                    mestn_oldSum_ut += Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(a.val_fact, 1)) * Fuel.B_y), 1));
+                    if (a.row_options.Count() == 2)
+                    {
+                        mestn_oldSum_111 += Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(a.val_fact, 1)) * Fuel.B_y), 1));
+                        mestn_oldSum_112 += Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(a.val_fact, 1)) * Fuel.B_y), 1));
+                    }
+                    else if (a.row_options.Count() == 1 && a.row_options[0] == "111")
+                    {
+                        mestn_oldSum_111 += Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(a.val_fact, 1)) * Fuel.B_y), 1));
+                    }
+                    else if (a.row_options.Count() == 1 && a.row_options[0] == "112")
+                    {
+                        mestn_oldSum_112 += Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(a.val_fact, 1)) * Fuel.B_y), 1));
                     }
                 }
             }
@@ -599,25 +643,40 @@ namespace WindowsFormsApp1
                     var Fuel = dbOps.GetFuelData(a.fuel, dateTimePicker1.Value.Year, dateTimePicker1.Value.Month);
                     oth_actSum += Convert.ToSingle(Math.Round(a.val_fact, 1));
                     oth_actSum_ut += Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(a.val_fact, 1)) * Fuel.B_y), 1));
-                    var Normo = oldList.FirstOrDefault(x => x.Id == a.Id);
-                    oth_oldSum += Normo != null ? Convert.ToSingle(Math.Round(Normo.val_fact, 1)) : 0;
-                    oth_oldSum_ut += Normo != null ? Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(Normo.val_fact, 1)) * Fuel.B_y), 1)) : 0;
                     if (a.row_options.Count() == 2)
                     {
                         oth_actSum_111 += Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(a.val_fact, 1)) * Fuel.B_y), 1));
                         oth_actSum_112 += Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(a.val_fact, 1)) * Fuel.B_y), 1));
-                        oth_oldSum_111 += Normo != null ? Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(Normo.val_fact, 1)) * Fuel.B_y), 1)) : 0; ;
-                        oth_oldSum_112 += Normo != null ? Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(Normo.val_fact, 1)) * Fuel.B_y), 1)) : 0; ;
                     }
                     else if (a.row_options.Count() == 1 && a.row_options[0] == "111")
                     {
                         oth_actSum_111 += Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(a.val_fact, 1)) * Fuel.B_y), 1));
-                        oth_oldSum_111 += Normo != null ? Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(Normo.val_fact, 1)) * Fuel.B_y), 1)) : 0;
                     }
                     else if (a.row_options.Count() == 1 && a.row_options[0] == "112")
                     {
                         oth_actSum_112 += Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(a.val_fact, 1)) * Fuel.B_y), 1));
-                        oth_oldSum_112 += Normo != null ? Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(Normo.val_fact, 1)) * Fuel.B_y), 1)) : 0;
+                    }
+                }
+            }
+            foreach (var a in oldList)
+            {
+                if (a.type == 1 && ((a.fuel > 2200 && a.fuel < 3100) || (a.fuel > 3100 && a.fuel < 4000)))
+                {
+                    var Fuel = dbOps.GetFuelData(a.fuel, dateTimePicker1.Value.Year-1, dateTimePicker1.Value.Month);
+                    oth_oldSum += Convert.ToSingle(Math.Round(a.val_fact, 1));
+                    oth_oldSum_ut += Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(a.val_fact, 1)) * Fuel.B_y), 1));
+                    if (a.row_options.Count() == 2)
+                    {
+                        oth_oldSum_111 += Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(a.val_fact, 1)) * Fuel.B_y), 1));
+                        oth_oldSum_112 += Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(a.val_fact, 1)) * Fuel.B_y), 1));
+                    }
+                    else if (a.row_options.Count() == 1 && a.row_options[0] == "111")
+                    {
+                        oth_oldSum_111 += Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(a.val_fact, 1)) * Fuel.B_y), 1));
+                    }
+                    else if (a.row_options.Count() == 1 && a.row_options[0] == "112")
+                    {
+                        oth_oldSum_112 += Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(a.val_fact, 1)) * Fuel.B_y), 1));
                     }
                 }
             }
@@ -639,22 +698,36 @@ namespace WindowsFormsApp1
                 if (a.type == 2)
                 {
                     actSum2 += Convert.ToSingle(Math.Round(a.val_fact, 1));
-                    var Normo = oldList.FirstOrDefault(x => x.Id == a.Id);
-                    oldSum += Normo != null ? Convert.ToSingle(Math.Round(Normo.val_fact, 1)) : 0;
                     if (a.row_options.Count() == 2)
                     {
                         actSum2_111 += Convert.ToSingle(Math.Round(a.val_fact, 1));
-                        oldSum_111 += Normo != null ? Convert.ToSingle(Math.Round(Normo.val_fact, 1)) : 0;
                     }
                     else if (a.row_options.Count() == 1 && a.row_options[0] == "111")
                     {
                         actSum2_111 += Convert.ToSingle(Math.Round(a.val_fact, 1));
-                        oldSum_111 += Normo != null ? Convert.ToSingle(Math.Round(Normo.val_fact, 1)) : 0;
                     }
                     else if (a.row_options.Count() == 1 && a.row_options[0] == "112")
                     {
                         actSum2_111 += Convert.ToSingle(Math.Round(a.val_fact, 1));
-                        oldSum_111 += Normo != null ? Convert.ToSingle(Math.Round(Normo.val_fact, 1)) : 0;
+                    }
+                }
+            }
+            foreach (var a in oldList)
+            {
+                if (a.type == 2)
+                {
+                    oldSum += Convert.ToSingle(Math.Round(a.val_fact, 1));
+                    if (a.row_options.Count() == 2)
+                    {
+                        oldSum_111 += Convert.ToSingle(Math.Round(a.val_fact, 1));
+                    }
+                    else if (a.row_options.Count() == 1 && a.row_options[0] == "111")
+                    {
+                        oldSum_111 += Convert.ToSingle(Math.Round(a.val_fact, 1));
+                    }
+                    else if (a.row_options.Count() == 1 && a.row_options[0] == "112")
+                    {
+                        oldSum_111 += Convert.ToSingle(Math.Round(a.val_fact, 1));
                     }
                 }
             }
@@ -676,24 +749,38 @@ namespace WindowsFormsApp1
                 if (a.type == 3)
                 {
                     actSum3 += Convert.ToSingle(Math.Round(a.val_fact, 1));
-                    var Normo = oldList.FirstOrDefault(x => x.Id == a.Id);
-                    oldSum3 += Normo != null ? Convert.ToSingle(Math.Round(Normo.val_fact, 1)) : 0;
                     if (a.row_options.Count() == 2)
                     {
                         actSum3_111 += Convert.ToSingle(Math.Round(a.val_fact, 1));
-                        oldSum3_111 += Normo != null ? Convert.ToSingle(Math.Round(Normo.val_fact, 1)) : 0;
                         actSum3_112 += Convert.ToSingle(Math.Round(a.val_fact, 1));
-                        oldSum3_112 += Normo != null ? Convert.ToSingle(Math.Round(Normo.val_fact, 1)) : 0;
                     }
                     else if (a.row_options.Count() == 1 && a.row_options[0] == "111")
                     {
                         actSum3_111 += Convert.ToSingle(Math.Round(a.val_fact, 1));
-                        oldSum3_111 += Normo != null ? Convert.ToSingle(Math.Round(Normo.val_fact, 1)) : 0;
                     }
                     else if (a.row_options.Count() == 1 && a.row_options[0] == "112")
                     {
                         actSum3_112 += Convert.ToSingle(Math.Round(a.val_fact, 1));
-                        oldSum3_112 += Normo != null ? Convert.ToSingle(Math.Round(Normo.val_fact, 1)) : 0;
+                    }
+                }
+            }
+            foreach (var a in oldList)
+            {
+                if (a.type == 3)
+                {
+                    oldSum3 += Convert.ToSingle(Math.Round(a.val_fact, 1));
+                    if (a.row_options.Count() == 2)
+                    {
+                        oldSum3_111 += Convert.ToSingle(Math.Round(a.val_fact, 1));
+                        oldSum3_112 += Convert.ToSingle(Math.Round(a.val_fact, 1));
+                    }
+                    else if (a.row_options.Count() == 1 && a.row_options[0] == "111")
+                    {
+                        oldSum3_111 += Convert.ToSingle(Math.Round(a.val_fact, 1));
+                    }
+                    else if (a.row_options.Count() == 1 && a.row_options[0] == "112")
+                    {
+                        oldSum3_112 += Convert.ToSingle(Math.Round(a.val_fact, 1));
                     }
                 }
             }
@@ -716,8 +803,13 @@ namespace WindowsFormsApp1
                 if (a.res_type == 2)
                 {
                     tRecSum += Convert.ToSingle(Math.Round(a.value, 1));
-                    var Normo = OldRecievedListSum.FirstOrDefault(x => x.Id == a.Id);
-                    tOldRecSum += Normo != null ? Convert.ToSingle(Math.Round(Normo.value, 1)) : 0;
+                }
+            }
+            foreach (var a in OldRecievedListSum)
+            {
+                if (a.res_type == 2)
+                {
+                    tOldRecSum += Convert.ToSingle(Math.Round(a.value, 1));
                 }
             }
             worksheet2["F21"] = tRecSum;
@@ -732,8 +824,13 @@ namespace WindowsFormsApp1
                 if (a.res_type == 3)
                 {
                     eRecSum += Convert.ToSingle(Math.Round(a.value, 1));
-                    var Normo = OldRecievedListSum.FirstOrDefault(x => x.Id == a.Id);
-                    eOldRecSum += Normo != null ? Convert.ToSingle(Math.Round(Normo.value, 1)) : 0;
+                }
+            }
+            foreach (var a in OldRecievedListSum)
+            {
+                if (a.res_type == 3)
+                {
+                    eOldRecSum += Convert.ToSingle(Math.Round(a.value, 1));
                 }
             }
             worksheet2["G21"] = eRecSum;
@@ -751,8 +848,13 @@ namespace WindowsFormsApp1
                 if (a.res_type == 2)
                 {
                     tSendSum += Convert.ToSingle(Math.Round(a.value, 1));
-                    var Normo = OldSendedListSum.FirstOrDefault(x => x.Id == a.Id);
-                    tOldSendSum += Normo != null ? Convert.ToSingle(Math.Round(Normo.value, 1)) : 0;
+                }
+            }
+            foreach (var a in OldSendedListSum)
+            {
+                if (a.res_type == 2)
+                {
+                    tOldSendSum += Convert.ToSingle(Math.Round(a.value, 1));
                 }
             }
             worksheet2["F16"] = tSendSum;
@@ -767,10 +869,16 @@ namespace WindowsFormsApp1
                 if (a.res_type == 3)
                 {
                     eSendSum += Convert.ToSingle(Math.Round(a.value, 1));
-                    var Normo = OldSendedListSum.FirstOrDefault(x => x.Id == a.Id);
-                    eOldSendSum += Normo != null ? Convert.ToSingle(Math.Round(Normo.value, 1)) : 0;
                 }
             }
+            foreach (var a in OldSendedListSum)
+            {
+                if (a.res_type == 3)
+                {
+                    eOldSendSum += Convert.ToSingle(Math.Round(a.value, 1));
+                }
+            }
+
             worksheet2["G16"] = eSendSum;
             worksheet2["L16"] = eOldSendSum;
             #endregion
@@ -786,8 +894,13 @@ namespace WindowsFormsApp1
                 if (a.Res_type == 2)
                 {
                     tSourceSum += Convert.ToSingle(Math.Round(a.Value, 1));
-                    var Normo = OldSourceSum.FirstOrDefault(x => x.Id == a.Id);
-                    tOldSourceSum += Normo != null ? Convert.ToSingle(Math.Round(Normo.Value, 1)) : 0;
+                }
+            }
+            foreach (var a in OldSourceSum)
+            {
+                if (a.Res_type == 2)
+                {
+                    tOldSourceSum += Convert.ToSingle(Math.Round(a.Value, 1));
                 }
             }
             worksheet2["F18"] = tSourceSum;
@@ -802,8 +915,13 @@ namespace WindowsFormsApp1
                 if (a.Res_type == 2 && a.Fuel_group == 4000)
                 {
                     tvSourceSum += Convert.ToSingle(Math.Round(a.Value, 1));
-                    var Normo = OldSourceSum.FirstOrDefault(x => x.Id == a.Id);
-                    tvOldSourceSum += Normo != null ? Convert.ToSingle(Math.Round(Normo.Value, 1)) : 0;
+                }
+            }
+            foreach (var a in OldSourceSum)
+            {
+                if (a.Res_type == 2 && a.Fuel_group == 4000)
+                {
+                    tvOldSourceSum += Convert.ToSingle(Math.Round(a.Value, 1));
                 }
             }
             worksheet2["F19"] = tvSourceSum;
@@ -818,8 +936,13 @@ namespace WindowsFormsApp1
                 if (a.Res_type == 2 && a.Fuel_group==5000)
                 {
                     tsSourceSum += Convert.ToSingle(Math.Round(a.Value, 1));
-                    var Normo = OldSourceSum.FirstOrDefault(x => x.Id == a.Id);
-                    tsOldSourceSum += Normo != null ? Convert.ToSingle(Math.Round(Normo.Value, 1)) : 0;
+                }
+            }
+            foreach (var a in OldSourceSum)
+            {
+                if (a.Res_type == 2 && a.Fuel_group == 5000)
+                {
+                    tsOldSourceSum += Convert.ToSingle(Math.Round(a.Value, 1));
                 }
             }
             worksheet2["F20"] = tsSourceSum;
@@ -834,8 +957,13 @@ namespace WindowsFormsApp1
                 if (a.Res_type == 3)
                 {
                     eSourceSum += Convert.ToSingle(Math.Round(a.Value, 1));
-                    var Normo = OldSourceSum.FirstOrDefault(x => x.Id == a.Id);
-                    eOldSourceSum += Normo != null ? Convert.ToSingle(Math.Round(Normo.Value, 1)) : 0;
+                }
+            }
+            foreach (var a in OldSourceSum)
+            {
+                if (a.Res_type == 3)
+                {
+                    eOldSourceSum += Convert.ToSingle(Math.Round(a.Value, 1));
                 }
             }
             worksheet2["G18"] = eSourceSum;
@@ -850,8 +978,13 @@ namespace WindowsFormsApp1
                 if (a.Res_type == 3 && a.Fuel_group == 4000)
                 {
                     evSourceSum += Convert.ToSingle(Math.Round(a.Value, 1));
-                    var Normo = OldSourceSum.FirstOrDefault(x => x.Id == a.Id);
-                    evOldSourceSum += Normo != null ? Convert.ToSingle(Math.Round(Normo.Value, 1)) : 0;
+                }
+            }
+            foreach (var a in SourceSum)
+            {
+                if (a.Res_type == 3 && a.Fuel_group == 4000)
+                {
+                    evOldSourceSum += Convert.ToSingle(Math.Round(a.Value, 1));
                 }
             }
             worksheet2["G19"] = evSourceSum;
@@ -866,8 +999,13 @@ namespace WindowsFormsApp1
                 if (a.Res_type == 3 && a.Fuel_group == 5000)
                 {
                     esSourceSum += Convert.ToSingle(Math.Round(a.Value, 1));
-                    var Normo = OldSourceSum.FirstOrDefault(x => x.Id == a.Id);
-                    esOldSourceSum += Normo != null ? Convert.ToSingle(Math.Round(Normo.Value, 1)) : 0;
+                }
+            }
+            foreach (var a in OldSourceSum)
+            {
+                if (a.Res_type == 3 && a.Fuel_group == 5000)
+                {
+                    esOldSourceSum += Convert.ToSingle(Math.Round(a.Value, 1));
                 }
             }
             worksheet2["G20"] = esSourceSum;
