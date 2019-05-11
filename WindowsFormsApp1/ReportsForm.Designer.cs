@@ -48,10 +48,13 @@
             this.списокТопливныхРеусурсовToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.списокСотрудниковToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label1 = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.reoGridControl3 = new unvell.ReoGrid.ReoGridControl();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.menuStrip1.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -103,7 +106,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1307, 613);
+            this.tabPage2.Size = new System.Drawing.Size(1282, 613);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "12-ТЭК";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -123,7 +126,7 @@
             this.reoGridControl2.SheetTabVisible = true;
             this.reoGridControl2.SheetTabWidth = 60;
             this.reoGridControl2.ShowScrollEndSpacing = true;
-            this.reoGridControl2.Size = new System.Drawing.Size(1301, 607);
+            this.reoGridControl2.Size = new System.Drawing.Size(1276, 607);
             this.reoGridControl2.TabIndex = 0;
             this.reoGridControl2.Text = "reoGridControl2";
             // 
@@ -184,14 +187,15 @@
             // сформировать1ПЭРToolStripMenuItem
             // 
             this.сформировать1ПЭРToolStripMenuItem.Name = "сформировать1ПЭРToolStripMenuItem";
-            this.сформировать1ПЭРToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
+            this.сформировать1ПЭРToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
             this.сформировать1ПЭРToolStripMenuItem.Text = "Сформировать 1-ПЭР";
             // 
             // сохранитьОтчетToolStripMenuItem
             // 
             this.сохранитьОтчетToolStripMenuItem.Name = "сохранитьОтчетToolStripMenuItem";
-            this.сохранитьОтчетToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
-            this.сохранитьОтчетToolStripMenuItem.Text = "Сохранить отчет";
+            this.сохранитьОтчетToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
+            this.сохранитьОтчетToolStripMenuItem.Text = "Сохранить отчет 12-ТЭК";
+            this.сохранитьОтчетToolStripMenuItem.Click += new System.EventHandler(this.сохранитьОтчетToolStripMenuItem_Click);
             // 
             // данныеToolStripMenuItem
             // 
@@ -244,11 +248,41 @@
             this.label1.TabIndex = 4;
             this.label1.Text = "Выбор периода:";
             // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.reoGridControl3);
+            this.panel1.Location = new System.Drawing.Point(1120, 13);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(200, 100);
+            this.panel1.TabIndex = 5;
+            this.panel1.Visible = false;
+            // 
+            // reoGridControl3
+            // 
+            this.reoGridControl3.BackColor = System.Drawing.Color.White;
+            this.reoGridControl3.ColumnHeaderContextMenuStrip = null;
+            this.reoGridControl3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.reoGridControl3.LeadHeaderContextMenuStrip = null;
+            this.reoGridControl3.Location = new System.Drawing.Point(0, 0);
+            this.reoGridControl3.Name = "reoGridControl3";
+            this.reoGridControl3.RowHeaderContextMenuStrip = null;
+            this.reoGridControl3.Script = null;
+            this.reoGridControl3.SheetTabContextMenuStrip = null;
+            this.reoGridControl3.SheetTabNewButtonVisible = true;
+            this.reoGridControl3.SheetTabVisible = true;
+            this.reoGridControl3.SheetTabWidth = 60;
+            this.reoGridControl3.ShowScrollEndSpacing = true;
+            this.reoGridControl3.Size = new System.Drawing.Size(200, 100);
+            this.reoGridControl3.TabIndex = 1;
+            this.reoGridControl3.Text = "reoGridControl3";
+            this.reoGridControl3.Visible = false;
+            // 
             // ReportsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1339, 684);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.tabControl1);
@@ -261,6 +295,7 @@
             this.tabPage2.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -288,5 +323,7 @@
         private System.Windows.Forms.ToolStripMenuItem списокТопливныхРеусурсовToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem списокСотрудниковToolStripMenuItem;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Panel panel1;
+        private unvell.ReoGrid.ReoGridControl reoGridControl3;
     }
 }
