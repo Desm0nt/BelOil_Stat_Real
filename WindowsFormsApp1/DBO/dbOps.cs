@@ -282,7 +282,6 @@ namespace WindowsFormsApp1.DBO
                         {
                             while (dr2.Read())
                             {
-
                                 //тут баги
                                 SendedList.Add(new SendedTable { Id = Int32.Parse(dr["id"].ToString()), Id_owner = Int32.Parse(dr["id_owner"].ToString()), Id_org = Int32.Parse(dr["id_org"].ToString()), org_name = GetCompanyName(Int32.Parse(dr["id_org"].ToString())), res_type = Int32.Parse(dr["res_type"].ToString()), value = float.Parse(dr2["value"].ToString()) });
                             }

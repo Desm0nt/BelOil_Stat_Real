@@ -26,6 +26,8 @@ namespace WindowsFormsApp1
             year = dateTimePicker1.Value.Year;
             MakeTable1per();
             MakeTable12tek();
+            MakeTable12tekHidden();
+            MakeTable12TekPril();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -795,7 +797,7 @@ namespace WindowsFormsApp1
 
             var RecievedListSum = MakeRecListSum(dateTimePicker1.Value.Year, dateTimePicker1.Value.Month);
             var OldRecievedListSum = MakeRecListSum(dateTimePicker1.Value.Year-1, dateTimePicker1.Value.Month);
-
+                
             #region тепло получено
             float tRecSum = 0;
             float tOldRecSum = 0;
@@ -1675,6 +1677,350 @@ namespace WindowsFormsApp1
             worksheet3.RowHeaders[13].Height = 34;
         }
 
+        void MakeTable12TekPril()
+        {
+            reoGridControl4.Load("12tekpril.xlsx");
+            var worksheet4 = reoGridControl4.CurrentWorksheet;
+            worksheet4.SetScale(0.92f);
+            reoGridControl4.CurrentWorksheet.EnableSettings(WorksheetSettings.Edit_AutoExpandColumnWidth);
+            worksheet4.SelectionStyle = WorksheetSelectionStyle.None;
+            worksheet4.SetSettings(WorksheetSettings.Behavior_MouseWheelToZoom, false);
+
+            int report_id = dbOps.GetReportId(CurrentData.UserData.Id_org, dateTimePicker1.Value.Year, dateTimePicker1.Value.Month);
+
+            #region строка 120
+            var SendedList = dbOps.GetSendedList(CurrentData.UserData.Id_org, report_id);
+            var SendedListSum = MakeSendListSum(dateTimePicker1.Value.Year, dateTimePicker1.Value.Month);
+            var OldSendedListSum = MakeSendListSum(dateTimePicker1.Value.Year - 1, dateTimePicker1.Value.Month);
+            List<WholeTable> WholeList = new List<WholeTable>();
+            List<WholeTable> WholeListSum = new List<WholeTable>();
+            List<WholeTable> WholeListSumOld = new List<WholeTable>();
+            foreach (var a in SendedList)
+            {
+                if (a.res_type == 2)
+                {
+                    string name = dbOps.GetCompanyName(a.Id_org);
+                    bool containsItem = WholeList.Any(item => item.org_name == name);
+                    if (!containsItem)
+                        WholeList.Add(new WholeTable { org_name = dbOps.GetCompanyName(a.Id_org), tvalue = a.value, evalue = 0 });
+                    else if (containsItem)
+                    {
+                        var aa = WholeList.Find(i => i.org_name == name);
+                        int idx = WholeList.IndexOf(aa);
+                        WholeList[idx].tvalue = a.value;
+                    }
+                }
+                if (a.res_type == 3)
+                {
+                    string name = dbOps.GetCompanyName(a.Id_org);
+                    bool containsItem = WholeList.Any(item => item.org_name == name);
+                    if (!containsItem)
+                        WholeList.Add(new WholeTable { org_name = dbOps.GetCompanyName(a.Id_org), tvalue = 0, evalue = a.value });
+                    else if (containsItem)
+                    {
+                        var aa = WholeList.Find(i => i.org_name == name);
+                        int idx = WholeList.IndexOf(aa);
+                        WholeList[idx].evalue = a.value;
+                    }                   
+                }
+            }
+            foreach (var a in SendedListSum)
+            {
+                if (a.res_type == 2)
+                {
+                    string name = dbOps.GetCompanyName(a.Id_org);
+                    bool containsItem = WholeListSum.Any(item => item.org_name == name);
+                    if (!containsItem)
+                        WholeListSum.Add(new WholeTable { org_name = dbOps.GetCompanyName(a.Id_org), tvalue = a.value, evalue = 0 });
+                    else if (containsItem)
+                    {
+                        var aa = WholeListSum.Find(i => i.org_name == name);
+                        int idx = WholeListSum.IndexOf(aa);
+                        WholeListSum[idx].tvalue = a.value;
+                    }
+                }
+                if (a.res_type == 3)
+                {
+                    string name = dbOps.GetCompanyName(a.Id_org);
+                    bool containsItem = WholeListSum.Any(item => item.org_name == name);
+                    if (!containsItem)
+                        WholeListSum.Add(new WholeTable { org_name = dbOps.GetCompanyName(a.Id_org), tvalue = 0, evalue = a.value });
+                    else if (containsItem)
+                    {
+                        var aa = WholeListSum.Find(i => i.org_name == name);
+                        int idx = WholeListSum.IndexOf(aa);
+                        WholeListSum[idx].evalue = a.value;
+                    }
+                }
+            }
+            foreach (var a in OldSendedListSum)
+            {
+                if (a.res_type == 2)
+                {
+                    string name = dbOps.GetCompanyName(a.Id_org);
+                    bool containsItem = WholeListSumOld.Any(item => item.org_name == name);
+                    if (!containsItem)
+                        WholeListSumOld.Add(new WholeTable { org_name = dbOps.GetCompanyName(a.Id_org), tvalue = a.value, evalue = 0 });
+                    else if (containsItem)
+                    {
+                        var aa = WholeListSumOld.Find(i => i.org_name == name);
+                        int idx = WholeListSumOld.IndexOf(aa);
+                        WholeListSumOld[idx].tvalue = a.value;
+                    }
+                }
+                if (a.res_type == 3)
+                {
+                    string name = dbOps.GetCompanyName(a.Id_org);
+                    bool containsItem = WholeListSumOld.Any(item => item.org_name == name);
+                    if (!containsItem)
+                        WholeListSumOld.Add(new WholeTable { org_name = dbOps.GetCompanyName(a.Id_org), tvalue = 0, evalue = a.value });
+                    else if (containsItem)
+                    {
+                        var aa = WholeListSumOld.Find(i => i.org_name == name);
+                        int idx = WholeListSumOld.IndexOf(aa);
+                        WholeListSumOld[idx].evalue = a.value;
+                    }
+                }
+            }
+
+            int row120 = 7;
+            int counter = WholeList.Count;
+            if (counter > 1)
+                worksheet4.InsertRows(row120, counter - 1);
+            else if (counter == 0)
+            {
+                counter = WholeListSumOld.Count;
+                if (counter > 1)
+                    worksheet4.InsertRows(row120, counter - 1);
+            }
+            int row130 = 7 + counter -1 + 10;
+            int row150 = 7 + counter -1+ 10 + 8;
+
+            var step = row120;
+            foreach (var a in WholeList)
+            {
+                worksheet4["E" + (step + 1)] = a.tvalue;
+                worksheet4["C" + (step + 1)] = a.evalue;
+                worksheet4["B" + (step + 1)] = a.org_name;
+                step++;
+            }
+
+            step = row120;
+            foreach (var a in WholeListSum)
+            {
+                worksheet4["F" + (step + 1)] = a.tvalue;
+                worksheet4["D" + (step + 1)] = a.evalue;
+                step++;
+            }
+
+            step = row120;
+            foreach (var a in WholeListSumOld)
+            {
+                worksheet4["H" + (step + 1)] = a.tvalue;
+                worksheet4["G" + (step + 1)] = a.evalue;
+                worksheet4["B" + (step + 1)] = a.org_name;
+                step++;
+            }
+            if (counter > 1)
+            {
+                worksheet4["C" + (7 + counter + 1)] = String.Format("=ROUND(SUM(C{0}:C{1}), 3)", row120 + 1, row120 + counter);
+                worksheet4["D" + (7 + counter + 1)] = String.Format("=ROUND(SUM(D{0}:D{1}), 3)", row120 + 1, row120 + counter);
+                worksheet4["E" + (7 + counter + 1)] = String.Format("=ROUND(SUM(E{0}:E{1}), 3)", row120 + 1, row120 + counter);
+                worksheet4["F" + (7 + counter + 1)] = String.Format("=ROUND(SUM(F{0}:F{1}), 3)", row120 + 1, row120 + counter);
+                worksheet4["G" + (7 + counter + 1)] = String.Format("=ROUND(SUM(G{0}:G{1}), 3)", row120 + 1, row120 + counter);
+                worksheet4["H" + (7 + counter + 1)] = String.Format("=ROUND(SUM(H{0}:H{1}), 3)", row120 + 1, row120 + counter);
+            }
+            else
+            {
+                worksheet4["C" + 9] = String.Format("=ROUND(C{0}, 3)", row120 + 1);
+                worksheet4["D" + 9] = String.Format("=ROUND(D{0}, 3)", row120 + 1);
+                worksheet4["E" + 9] = String.Format("=ROUND(E{0}, 3)", row120 + 1);
+                worksheet4["F" + 9] = String.Format("=ROUND(F{0}, 3)", row120 + 1);
+                worksheet4["G" + 9] = String.Format("=ROUND(G{0}, 3)", row120 + 1);
+                worksheet4["H" + 9] = String.Format("=ROUND(H{0}, 3)", row120 + 1);
+            }
+            #endregion
+
+            #region строка 130
+            var TradesSum = MakeTradeSum(dateTimePicker1.Value.Year, dateTimePicker1.Value.Month);
+            foreach (var a in TradesSum)
+            {
+                if (a.type == 2)
+                    worksheet4["F" + (row130 + 1)] = Convert.ToSingle(Math.Round(a.value, 1));
+                else if (a.type == 3)
+                    worksheet4["D" + (row130 + 1)] = Convert.ToSingle(Math.Round(a.value, 1));
+            }
+            var OldTradesSum = MakeTradeSum(dateTimePicker1.Value.Year - 1, dateTimePicker1.Value.Month);
+            foreach (var a in OldTradesSum)
+            {
+                if (a.type == 2)
+                    worksheet4["H" + (row130 + 1)] = Convert.ToSingle(Math.Round(a.value, 1));
+                else if (a.type == 3)
+                    worksheet4["G" + (row130 + 1)] = Convert.ToSingle(Math.Round(a.value, 1));
+            }
+            var TradeList = dbOps.GetTrades(report_id);
+            foreach (var a in TradeList)
+            {
+                if (a.type == 2)
+                    worksheet4["E" + (row130 + 1)] = Convert.ToSingle(Math.Round(a.value, 1));
+                else if (a.type == 3)
+                    worksheet4["C" + (row130 + 1)] = Convert.ToSingle(Math.Round(a.value, 1));
+            }
+            #endregion
+
+            var RecievedList = dbOps.GetRecievedList(CurrentData.UserData.Id_org, report_id);
+            var RecievedListSum = MakeRecListSum(dateTimePicker1.Value.Year, dateTimePicker1.Value.Month);
+            var OldRecievedListSum = MakeRecListSum(dateTimePicker1.Value.Year - 1, dateTimePicker1.Value.Month);
+            List<WholeTable> RWholeList = new List<WholeTable>();
+            List<WholeTable> RWholeListSum = new List<WholeTable>();
+            List<WholeTable> RWholeListSumOld = new List<WholeTable>();
+            foreach (var a in RecievedList)
+            {
+                if (a.res_type == 2)
+                {
+                    string name = dbOps.GetCompanyName(a.Id_org);
+                    bool containsItem = RWholeList.Any(item => item.org_name == name);
+                    if (!containsItem)
+                        RWholeList.Add(new WholeTable { org_name = dbOps.GetCompanyName(a.Id_org), tvalue = a.value, evalue = 0 });
+                    else if (containsItem)
+                    {
+                        var aa = RWholeList.Find(i => i.org_name == name);
+                        int idx = RWholeList.IndexOf(aa);
+                        RWholeList[idx].tvalue = a.value;
+                    }
+                }
+                if (a.res_type == 3)
+                {
+                    string name = dbOps.GetCompanyName(a.Id_org);
+                    bool containsItem = RWholeList.Any(item => item.org_name == name);
+                    if (!containsItem)
+                        RWholeList.Add(new WholeTable { org_name = dbOps.GetCompanyName(a.Id_org), tvalue = 0, evalue = a.value });
+                    else if (containsItem)
+                    {
+                        var aa = RWholeList.Find(i => i.org_name == name);
+                        int idx = RWholeList.IndexOf(aa);
+                        RWholeList[idx].evalue = a.value;
+                    }
+                }
+            }
+            foreach (var a in RecievedListSum)
+            {
+                if (a.res_type == 2)
+                {
+                    string name = dbOps.GetCompanyName(a.Id_org);
+                    bool containsItem = RWholeListSum.Any(item => item.org_name == name);
+                    if (!containsItem)
+                        RWholeListSum.Add(new WholeTable { org_name = dbOps.GetCompanyName(a.Id_org), tvalue = a.value, evalue = 0 });
+                    else if (containsItem)
+                    {
+                        var aa = RWholeListSum.Find(i => i.org_name == name);
+                        int idx = RWholeListSum.IndexOf(aa);
+                        RWholeListSum[idx].tvalue = a.value;
+                    }
+                }
+                if (a.res_type == 3)
+                {
+                    string name = dbOps.GetCompanyName(a.Id_org);
+                    bool containsItem = RWholeListSum.Any(item => item.org_name == name);
+                    if (!containsItem)
+                        RWholeListSum.Add(new WholeTable { org_name = dbOps.GetCompanyName(a.Id_org), tvalue = 0, evalue = a.value });
+                    else if (containsItem)
+                    {
+                        var aa = RWholeListSum.Find(i => i.org_name == name);
+                        int idx = RWholeListSum.IndexOf(aa);
+                        RWholeListSum[idx].evalue = a.value;
+                    }
+                }
+            }
+            foreach (var a in OldRecievedListSum)
+            {
+                if (a.res_type == 2)
+                {
+                    string name = dbOps.GetCompanyName(a.Id_org);
+                    bool containsItem = RWholeListSumOld.Any(item => item.org_name == name);
+                    if (!containsItem)
+                        RWholeListSumOld.Add(new WholeTable { org_name = dbOps.GetCompanyName(a.Id_org), tvalue = a.value, evalue = 0 });
+                    else if (containsItem)
+                    {
+                        var aa = RWholeListSumOld.Find(i => i.org_name == name);
+                        int idx = RWholeListSumOld.IndexOf(aa);
+                        RWholeListSumOld[idx].tvalue = a.value;
+                    }
+                }
+                if (a.res_type == 3)
+                {
+                    string name = dbOps.GetCompanyName(a.Id_org);
+                    bool containsItem = RWholeListSumOld.Any(item => item.org_name == name);
+                    if (!containsItem)
+                        RWholeListSumOld.Add(new WholeTable { org_name = dbOps.GetCompanyName(a.Id_org), tvalue = 0, evalue = a.value });
+                    else if (containsItem)
+                    {
+                        var aa = RWholeListSumOld.Find(i => i.org_name == name);
+                        int idx = RWholeListSumOld.IndexOf(aa);
+                        RWholeListSumOld[idx].evalue = a.value;
+                    }
+                }
+            }
+
+            int counter2 = RWholeList.Count;
+            if (counter2 > 1)
+                worksheet4.InsertRows(row150, counter2 - 1);
+            else if (counter2 == 0)
+            {
+                counter2 = RWholeListSumOld.Count;
+                if (counter2 > 1)
+                    worksheet4.InsertRows(row150, counter2 - 1);
+            }
+
+            var rstep = row150;
+            foreach (var a in RWholeList)
+            {
+                worksheet4["E" + (rstep + 1)] = Math.Round(a.tvalue,4);
+                worksheet4["C" + (rstep + 1)] = Math.Round(a.evalue,4);
+                worksheet4["B" + (rstep + 1)] = a.org_name;
+                rstep++;
+            }
+
+            rstep = row150;
+            foreach (var a in RWholeListSum)
+            {
+                worksheet4["F" + (rstep + 1)] = Math.Round(a.tvalue,4);
+                worksheet4["D" + (rstep + 1)] = Math.Round(a.evalue,4);
+                rstep++;
+            }
+
+            rstep = row150;
+            foreach (var a in RWholeListSumOld)
+            {
+                worksheet4["H" + (rstep + 1)] = Math.Round(a.tvalue, 4);
+                worksheet4["G" + (rstep + 1)] = Math.Round(a.evalue,4);
+                worksheet4["B" + (rstep + 1)] = a.org_name;
+                rstep++;
+            }
+            if (counter2 > 1)
+            {
+                worksheet4["C" + (row150 + counter2 + 1)] = String.Format("=ROUND(SUM(C{0}:C{1}), 3)", row150 + 1, row150 + counter2);
+                worksheet4["D" + (row150 + counter2 + 1)] = String.Format("=ROUND(SUM(D{0}:D{1}), 3)", row150 + 1, row150 + counter2);
+                worksheet4["E" + (row150 + counter2 + 1)] = String.Format("=ROUND(SUM(E{0}:E{1}), 3)", row150 + 1, row150 + counter2);
+                worksheet4["F" + (row150 + counter2 + 1)] = String.Format("=ROUND(SUM(F{0}:F{1}), 3)", row150 + 1, row150 + counter2);
+                worksheet4["G" + (row150 + counter2 + 1)] = String.Format("=ROUND(SUM(G{0}:G{1}), 3)", row150 + 1, row150 + counter2);
+                worksheet4["H" + (row150 + counter2 + 1)] = String.Format("=ROUND(SUM(H{0}:H{1}), 3)", row150 + 1, row150 + counter2);
+            }
+            else
+            {
+                worksheet4["C" + (row150 + 2)] = String.Format("=ROUND(C{0}, 3)", row150 + 1);
+                worksheet4["D" + (row150 + 2)] = String.Format("=ROUND(D{0}, 3)", row150 + 1);
+                worksheet4["E" + (row150 + 2)] = String.Format("=ROUND(E{0}, 3)", row150 + 1);
+                worksheet4["F" + (row150 + 2)] = String.Format("=ROUND(F{0}, 3)", row150 + 1);
+                worksheet4["G" + (row150 + 2)] = String.Format("=ROUND(G{0}, 3)", row150 + 1);
+                worksheet4["H" + (row150 + 2)] = String.Format("=ROUND(H{0}, 3)", row150 + 1);
+            }
+            for (int i = 0; i <= 66; i++)
+            {
+                worksheet4.AutoFitRowHeight(i, true);
+            }
+            worksheet4.ColumnHeaders[1].Width = 319;
+        }
 
         private List<NormTable> MakeListSum(int year, int month)
         {
@@ -1864,6 +2210,7 @@ namespace WindowsFormsApp1
             MakeTable1per();
             MakeTable12tek();
             MakeTable12tekHidden();
+            MakeTable12TekPril();
         }
 
         private void dateTimePicker1_DropDown(object sender, EventArgs e)
