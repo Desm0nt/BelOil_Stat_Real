@@ -35,6 +35,9 @@
             this.reoGridControl2 = new unvell.ReoGrid.ReoGridControl();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.reoGrid4 = new unvell.ReoGrid.ReoGridControl();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.button1 = new System.Windows.Forms.Button();
+            this.reoGridControl4 = new unvell.ReoGrid.ReoGridControl();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.менюToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -52,16 +55,13 @@
             this.label1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.reoGridControl3 = new unvell.ReoGrid.ReoGridControl();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.reoGridControl4 = new unvell.ReoGrid.ReoGridControl();
-            this.button1 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabPage3.SuspendLayout();
+            this.tabPage4.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
-            this.tabPage4.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -115,7 +115,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1300, 613);
+            this.tabPage2.Size = new System.Drawing.Size(1307, 613);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "12-ТЭК";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -135,7 +135,7 @@
             this.reoGridControl2.SheetTabVisible = true;
             this.reoGridControl2.SheetTabWidth = 60;
             this.reoGridControl2.ShowScrollEndSpacing = true;
-            this.reoGridControl2.Size = new System.Drawing.Size(1294, 607);
+            this.reoGridControl2.Size = new System.Drawing.Size(1301, 607);
             this.reoGridControl2.TabIndex = 0;
             this.reoGridControl2.Text = "reoGridControl2";
             // 
@@ -145,7 +145,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(1300, 613);
+            this.tabPage3.Size = new System.Drawing.Size(1307, 613);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Приложение к 12-ТЭК";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -165,9 +165,51 @@
             this.reoGrid4.SheetTabVisible = true;
             this.reoGrid4.SheetTabWidth = 60;
             this.reoGrid4.ShowScrollEndSpacing = true;
-            this.reoGrid4.Size = new System.Drawing.Size(1294, 607);
+            this.reoGrid4.Size = new System.Drawing.Size(1301, 607);
             this.reoGrid4.TabIndex = 1;
             this.reoGrid4.Text = "reoGridControl4";
+            // 
+            // tabPage4
+            // 
+            this.tabPage4.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPage4.Controls.Add(this.button1);
+            this.tabPage4.Controls.Add(this.reoGridControl4);
+            this.tabPage4.Location = new System.Drawing.Point(4, 22);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Size = new System.Drawing.Size(1307, 613);
+            this.tabPage4.TabIndex = 3;
+            this.tabPage4.Text = "4 нормы";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(4, 4);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 3;
+            this.button1.Text = "Сформировать";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            // 
+            // reoGridControl4
+            // 
+            this.reoGridControl4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.reoGridControl4.BackColor = System.Drawing.Color.White;
+            this.reoGridControl4.ColumnHeaderContextMenuStrip = null;
+            this.reoGridControl4.LeadHeaderContextMenuStrip = null;
+            this.reoGridControl4.Location = new System.Drawing.Point(3, 33);
+            this.reoGridControl4.Name = "reoGridControl4";
+            this.reoGridControl4.RowHeaderContextMenuStrip = null;
+            this.reoGridControl4.Script = null;
+            this.reoGridControl4.SheetTabContextMenuStrip = null;
+            this.reoGridControl4.SheetTabNewButtonVisible = true;
+            this.reoGridControl4.SheetTabVisible = true;
+            this.reoGridControl4.SheetTabWidth = 60;
+            this.reoGridControl4.ShowScrollEndSpacing = true;
+            this.reoGridControl4.Size = new System.Drawing.Size(1304, 577);
+            this.reoGridControl4.TabIndex = 2;
+            this.reoGridControl4.Text = "reoGridControl4";
             // 
             // dateTimePicker1
             // 
@@ -316,47 +358,6 @@
             this.reoGridControl3.Text = "reoGridControl3";
             this.reoGridControl3.Visible = false;
             // 
-            // tabPage4
-            // 
-            this.tabPage4.BackColor = System.Drawing.SystemColors.Control;
-            this.tabPage4.Controls.Add(this.button1);
-            this.tabPage4.Controls.Add(this.reoGridControl4);
-            this.tabPage4.Location = new System.Drawing.Point(4, 22);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Size = new System.Drawing.Size(1307, 613);
-            this.tabPage4.TabIndex = 3;
-            this.tabPage4.Text = "4 нормы";
-            // 
-            // reoGridControl4
-            // 
-            this.reoGridControl4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.reoGridControl4.BackColor = System.Drawing.Color.White;
-            this.reoGridControl4.ColumnHeaderContextMenuStrip = null;
-            this.reoGridControl4.LeadHeaderContextMenuStrip = null;
-            this.reoGridControl4.Location = new System.Drawing.Point(3, 33);
-            this.reoGridControl4.Name = "reoGridControl4";
-            this.reoGridControl4.RowHeaderContextMenuStrip = null;
-            this.reoGridControl4.Script = null;
-            this.reoGridControl4.SheetTabContextMenuStrip = null;
-            this.reoGridControl4.SheetTabNewButtonVisible = true;
-            this.reoGridControl4.SheetTabVisible = true;
-            this.reoGridControl4.SheetTabWidth = 60;
-            this.reoGridControl4.ShowScrollEndSpacing = true;
-            this.reoGridControl4.Size = new System.Drawing.Size(1304, 577);
-            this.reoGridControl4.TabIndex = 2;
-            this.reoGridControl4.Text = "reoGridControl4";
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(4, 4);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "Сформировать";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
-            // 
             // ReportsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -374,10 +375,10 @@
             this.tabPage1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
+            this.tabPage4.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.panel1.ResumeLayout(false);
-            this.tabPage4.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 

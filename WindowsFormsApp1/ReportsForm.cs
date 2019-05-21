@@ -2048,14 +2048,10 @@ namespace WindowsFormsApp1
             }
             if (counter > 1)
                 worksheet4.InsertRows(fuelrow, counter - 1);
-            worksheet4.SetRangeStyles("A1:A" + (fuelrow + counter-1), new WorksheetRangeStyle()
-            {
-                Flag = PlainStyleFlag.TextWrap | PlainStyleFlag.FontSize | PlainStyleFlag.FontName,
-                TextWrapMode = TextWrapMode.WordBreak,
-                FontName = "Times New Roman",
-                FontSize = 12,
-            });
             int tmp = 0;
+            double n9001sum = 0;
+            double f9001sum = 0;
+            double f9010sum = 0;
             foreach (var a in Norm4list)
             {
                 if (a.Norm_type == 1)
@@ -2067,12 +2063,212 @@ namespace WindowsFormsApp1
                     worksheet4["E" + (fuelrow + tmp)] = Math.Round(a.Norm, 2);
                     worksheet4["H" + (fuelrow + tmp)] = Math.Round(a.Value, 2);
                     worksheet4["F" + (fuelrow + tmp)] = Math.Round(Math.Round(a.Value, 2)/ Math.Round(a.Volume, 2) * 1000,1);
-                    worksheet4["G" + (fuelrow + tmp)] = Math.Round(Math.Round(a.Norm, 2) * Math.Round(a.Volume, 2) / 1000,1);
+                    if (Math.Round(a.Volume, 2) > 0)
+                        worksheet4["G" + (fuelrow + tmp)] = Math.Round(Math.Round(a.Norm, 2) * Math.Round(a.Volume, 2) / 1000,1);
+                    else
+                        worksheet4["G" + (fuelrow + tmp)] = Math.Round(Math.Round(a.Norm, 2), 1);
+                    if (a.Norm_code != 9010)
+                    {
+                        if (Math.Round(a.Volume, 2) > 0)
+                            n9001sum += Math.Round(Math.Round(a.Norm, 2) * Math.Round(a.Volume, 2) / 1000, 1);
+                        else
+                            n9001sum += Math.Round(Math.Round(a.Norm, 2), 1);
+                        f9001sum += Math.Round(a.Value, 2);
+                    }
+                    else if (a.Norm_code == 9010)
+                    {
+                        f9010sum += Math.Round(a.Value, 2);
+                    }
                     tmp++;
                 }
             }
+            worksheet4["G" + (fuelrow + tmp)] = n9001sum;
+            worksheet4["H" + (fuelrow + tmp)] = f9001sum;
+            worksheet4["H" + (fuelrow + tmp+1)] = f9010sum;
+            worksheet4["H" + (fuelrow + tmp + 2)] = f9010sum + f9001sum;
+            var cnt1 = counter;
             #endregion
+
+            #region тепло
             tmp = 0;
+            n9001sum = 0;
+            f9001sum = 0;
+            f9010sum = 0;
+            int heatrow = fuelrow + counter + 9;
+            counter = 0;
+            foreach (var a in Norm4list)
+            {
+                if (a.Norm_type == 2)
+                    counter++;
+            }
+            if (counter > 1)
+                worksheet4.InsertRows(heatrow, counter - 1);
+            foreach (var a in Norm4list)
+            {
+                if (a.Norm_type == 2)
+                {
+                    worksheet4["A" + (heatrow + tmp)] = a.Norm_name;
+                    worksheet4["B" + (heatrow + tmp)] = a.Norm_code;
+                    worksheet4["C" + (heatrow + tmp)] = dbOps.GetProdUnit(a.Id_prod);
+                    worksheet4["D" + (heatrow + tmp)] = Math.Round(a.Volume, 2);
+                    worksheet4["E" + (heatrow + tmp)] = Math.Round(a.Norm, 2);
+                    worksheet4["H" + (heatrow + tmp)] = Math.Round(a.Value, 2);
+                    worksheet4["F" + (heatrow + tmp)] = Math.Round(Math.Round(a.Value, 2) / Math.Round(a.Volume, 2) * 1000, 1);
+                    if (Math.Round(a.Volume, 2) > 0)
+                        worksheet4["G" + (heatrow + tmp)] = Math.Round(Math.Round(a.Norm, 2) * Math.Round(a.Volume, 2) / 1000, 1);
+                    else
+                        worksheet4["G" + (heatrow + tmp)] = Math.Round(Math.Round(a.Norm, 2), 1);
+                    if (a.Norm_code != 9010)
+                    {
+                        if (Math.Round(a.Volume, 2) > 0)
+                            n9001sum += Math.Round(Math.Round(a.Norm, 2) * Math.Round(a.Volume, 2) / 1000, 1);
+                        else
+                            n9001sum += Math.Round(Math.Round(a.Norm, 2), 1);
+                        f9001sum += Math.Round(a.Value, 2);
+                    }
+                    else if (a.Norm_code == 9010)
+                    {
+                        f9010sum += Math.Round(a.Value, 2);
+                    }
+                    tmp++;
+                }
+            }
+            worksheet4["G" + (heatrow + tmp)] = n9001sum;
+            worksheet4["H" + (heatrow + tmp)] = f9001sum;
+            worksheet4["H" + (heatrow + tmp + 1)] = f9010sum;
+            worksheet4["H" + (heatrow + tmp + 2)] = f9010sum + f9001sum;
+            var cnt2 = counter;
+            #endregion
+
+            #region Электричество
+            tmp = 0;
+            n9001sum = 0;
+            f9001sum = 0;
+            f9010sum = 0;
+            int elrow = heatrow + counter + 9;
+            counter = 0;
+            foreach (var a in Norm4list)
+            {
+                if (a.Norm_type == 3)
+                    counter++;
+            }
+            if (counter > 1)
+                worksheet4.InsertRows(elrow, counter - 1);
+            foreach (var a in Norm4list)
+            {
+                if (a.Norm_type == 3)
+                {
+                    worksheet4["A" + (elrow + tmp)] = a.Norm_name;
+                    worksheet4["B" + (elrow + tmp)] = a.Norm_code;
+                    worksheet4["C" + (elrow + tmp)] = dbOps.GetProdUnit(a.Id_prod);
+                    worksheet4["D" + (elrow + tmp)] = Math.Round(a.Volume, 2);
+                    worksheet4["E" + (elrow + tmp)] = Math.Round(a.Norm, 2);
+                    worksheet4["H" + (elrow + tmp)] = Math.Round(a.Value, 2);
+                    worksheet4["F" + (elrow + tmp)] = Math.Round(Math.Round(a.Value, 2) / Math.Round(a.Volume, 2) * 1000, 1);
+                    if (Math.Round(a.Volume, 2) > 0)
+                        worksheet4["G" + (elrow + tmp)] = Math.Round(Math.Round(a.Norm, 2) * Math.Round(a.Volume, 2) / 1000, 1);
+                    else
+                        worksheet4["G" + (elrow + tmp)] = Math.Round(Math.Round(a.Norm, 2), 1);
+                    if (a.Norm_code != 9010)
+                    {
+                        if (Math.Round(a.Volume, 2) > 0)
+                            n9001sum += Math.Round(Math.Round(a.Norm, 2) * Math.Round(a.Volume, 2) / 1000, 1);
+                        else
+                            n9001sum += Math.Round(Math.Round(a.Norm, 2), 1);
+                        f9001sum += Math.Round(a.Value, 2);
+                    }
+                    else if (a.Norm_code == 9010)
+                    {
+                        f9010sum += Math.Round(a.Value, 2);
+                    }
+                    tmp++;
+                }
+            }
+            worksheet4["G" + (elrow + tmp)] = n9001sum;
+            worksheet4["H" + (elrow + tmp)] = f9001sum;
+            worksheet4["H" + (elrow + tmp + 1)] = f9010sum;
+            worksheet4["H" + (elrow + tmp + 2)] = f9010sum + f9001sum;
+            var cnt3 = counter;
+            #endregion
+
+            #region style
+            worksheet4.SetRangeStyles("A22:H24", new WorksheetRangeStyle()
+            {
+                Flag = PlainStyleFlag.TextWrap | PlainStyleFlag.FontSize | PlainStyleFlag.FontName,
+                TextWrapMode = TextWrapMode.WordBreak,
+                FontName = "Times New Roman",
+                FontSize = 11,
+            });
+            worksheet4.SetRangeStyles("A" + (heatrow - 3) + ":H" + (heatrow - 1), new WorksheetRangeStyle()
+            {
+                Flag = PlainStyleFlag.TextWrap | PlainStyleFlag.FontSize | PlainStyleFlag.FontName,
+                TextWrapMode = TextWrapMode.WordBreak,
+                FontName = "Times New Roman",
+                FontSize = 11,
+            });
+            worksheet4.SetRangeStyles("A" + (elrow - 3) + ":H" + (elrow - 1), new WorksheetRangeStyle()
+            {
+                Flag = PlainStyleFlag.TextWrap | PlainStyleFlag.FontSize | PlainStyleFlag.FontName,
+                TextWrapMode = TextWrapMode.WordBreak,
+                FontName = "Times New Roman",
+                FontSize = 11,
+            });
+            worksheet4.SetRangeStyles("A25:H" + (fuelrow + cnt1-1), new WorksheetRangeStyle()
+            {
+                Flag = PlainStyleFlag.TextWrap | PlainStyleFlag.FontSize | PlainStyleFlag.FontName,
+                TextWrapMode = TextWrapMode.WordBreak,
+                FontName = "Times New Roman",
+                FontSize = 12,
+            });
+            worksheet4.SetRangeStyles("A" + heatrow + ":H" + (heatrow + cnt2-1), new WorksheetRangeStyle()
+            {
+                Flag = PlainStyleFlag.TextWrap | PlainStyleFlag.FontSize | PlainStyleFlag.FontName,
+                TextWrapMode = TextWrapMode.WordBreak,
+                FontName = "Times New Roman",
+                FontSize = 12,
+            });
+            worksheet4.SetRangeStyles("A" + elrow + ":H" + (elrow + cnt3 - 1), new WorksheetRangeStyle()
+            {
+                Flag = PlainStyleFlag.TextWrap | PlainStyleFlag.FontSize | PlainStyleFlag.FontName,
+                TextWrapMode = TextWrapMode.WordBreak,
+                FontName = "Times New Roman",
+                FontSize = 12,
+            });
+            worksheet4.SetRangeStyles("D25:H" + (fuelrow + cnt1-1), new WorksheetRangeStyle()
+            {
+                Flag = PlainStyleFlag.HorizontalAlign,
+                HAlign = ReoGridHorAlign.Right,
+            });
+            worksheet4.SetRangeStyles("D" + heatrow + ":H" + (heatrow + cnt2-1), new WorksheetRangeStyle()
+            {
+                Flag = PlainStyleFlag.HorizontalAlign,
+                HAlign = ReoGridHorAlign.Right,
+            });
+            worksheet4.SetRangeStyles("D" + elrow + ":H" + (elrow + cnt3 - 1), new WorksheetRangeStyle()
+            {
+                Flag = PlainStyleFlag.HorizontalAlign,
+                HAlign = ReoGridHorAlign.Right,
+            });
+            worksheet4.SetRangeStyles("B25:C" + (fuelrow + cnt1-1), new WorksheetRangeStyle()
+            {
+                Flag = PlainStyleFlag.HorizontalAlign,
+                HAlign = ReoGridHorAlign.Center,
+            });
+            worksheet4.SetRangeStyles("B" + heatrow + ":C" + (heatrow + cnt2-1), new WorksheetRangeStyle()
+            {
+                Flag = PlainStyleFlag.HorizontalAlign,
+                HAlign = ReoGridHorAlign.Center,
+            });
+            worksheet4.SetRangeStyles("B" + elrow + ":C" + (elrow + cnt3 - 1), new WorksheetRangeStyle()
+            {
+                Flag = PlainStyleFlag.HorizontalAlign,
+                HAlign = ReoGridHorAlign.Center,
+            });
+            for (int i = 0; i <= 166; i++)
+            {
+                worksheet4.AutoFitRowHeight(i, true);
+            }
+            #endregion
         }
 
         private int MakeQuater(int month)

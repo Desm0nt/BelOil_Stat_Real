@@ -598,7 +598,7 @@ namespace WindowsFormsApp1.DBO
                 {
                     while (dr.Read())
                     {
-                        OneNorm oneNomr = GetOneNormDescr(Int32.Parse(dr["id_norm"].ToString()));
+                        OneNorm oneNomr = GetOneNormDescr(Int32.Parse(dr["id_norm"].ToString()), Int32.Parse(dr["id_prod"].ToString()));
                         Norm4List.Add(new Norm4Table { Id_org = Int32.Parse(dr["id_org"].ToString()), Id_prod = Int32.Parse(dr["id_prod"].ToString()), Id_local = long.Parse(dr["id_local"].ToString()), Norm_name = oneNomr.name, Norm_code = oneNomr.Code, Norm_type = oneNomr.type, Fuel_name = !String.IsNullOrWhiteSpace(dr["fuelname"].ToString()) ? dr["fuelname"].ToString() : " ", Volume = float.Parse(dr["volume"].ToString()), Norm = float.Parse(dr["norm"].ToString()), Value = float.Parse(dr["value"].ToString()) });
                     }
                 }
@@ -611,13 +611,13 @@ namespace WindowsFormsApp1.DBO
             return Norm4List;
         }
 
-
-        public static OneNorm GetOneNormDescr(int id_norm)
+        public static OneNorm GetOneNormDescr(int id_norm, int id_prod)
         {
             OneNorm Norm = new OneNorm();
             try
             {
                 SqlConnection myConnection = new SqlConnection(cnStr);
+                SqlConnection myConnection2 = new SqlConnection(cnStr);
                 myConnection.Open();
 
                 string query = "SELECT * FROM [NewNorm] where id=@id_norm";
@@ -628,7 +628,23 @@ namespace WindowsFormsApp1.DBO
                 {
                     while (dr.Read())
                     {
-                                Norm = new OneNorm { Code = Int32.Parse(dr["code"].ToString()), name = dr["name"].ToString(), type = Int32.Parse(dr["type"].ToString()) };
+                        myConnection2.Open();
+                        string name1 = "";
+                        string query2 = "SELECT * FROM [NewProduct] where id=@id_prod";
+                        SqlCommand command2 = new SqlCommand(query2, myConnection2);
+                        command2.Parameters.AddWithValue("@id_prod", id_prod);
+                        using (SqlDataReader dr2 = command2.ExecuteReader())
+                        {
+                            while (dr2.Read())
+                            {
+                                if (dr["name"].ToString() == "Не заполнять")
+                                    name1 = dr2["name"].ToString();
+                                else 
+                                    name1 = dr["name"].ToString();
+                            }
+                        }
+                        myConnection2.Close();
+                        Norm = new OneNorm { Code = Int32.Parse(dr["code"].ToString()), name = name1, type = Int32.Parse(dr["type"].ToString()) };
                     }
                 }
                 myConnection.Close();
