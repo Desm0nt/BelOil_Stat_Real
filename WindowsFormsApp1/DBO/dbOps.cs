@@ -581,5 +581,64 @@ namespace WindowsFormsApp1.DBO
             return normid;
         }
 
+        public static List<Norm4Table> Get4Norm(int id_org, int year, int quater)
+        {
+            List<Norm4Table> Norm4List = new List<Norm4Table>();
+            try
+            {
+                SqlConnection myConnection = new SqlConnection(cnStr);
+                myConnection.Open();
+
+                string query = "SELECT * FROM [NewRepNormData] where id_org = @id_org and year = @year and quater = @quater";
+                SqlCommand command = new SqlCommand(query, myConnection);
+                command.Parameters.AddWithValue("@id_org", id_org);
+                command.Parameters.AddWithValue("@year", year);
+                command.Parameters.AddWithValue("@quater", quater);
+                using (SqlDataReader dr = command.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        OneNorm oneNomr = GetOneNormDescr(Int32.Parse(dr["id_norm"].ToString()));
+                        Norm4List.Add(new Norm4Table { Id_org = Int32.Parse(dr["id_org"].ToString()), Id_prod = Int32.Parse(dr["id_prod"].ToString()), Id_local = long.Parse(dr["id_local"].ToString()), Norm_name = oneNomr.name, Norm_code = oneNomr.Code, Norm_type = oneNomr.type, Fuel_name = !String.IsNullOrWhiteSpace(dr["fuelname"].ToString()) ? dr["fuelname"].ToString() : " ", Volume = float.Parse(dr["volume"].ToString()), Norm = float.Parse(dr["norm"].ToString()), Value = float.Parse(dr["value"].ToString()) });
+                    }
+                }
+                myConnection.Close();
+            }
+            catch (Exception Ex)
+            {
+                MessageBox.Show("Ошибка получения данных 4 нормы: " + Ex.Message);
+            }
+            return Norm4List;
+        }
+
+
+        public static OneNorm GetOneNormDescr(int id_norm)
+        {
+            OneNorm Norm = new OneNorm();
+            try
+            {
+                SqlConnection myConnection = new SqlConnection(cnStr);
+                myConnection.Open();
+
+                string query = "SELECT * FROM [NewNorm] where id=@id_norm";
+                SqlCommand command = new SqlCommand(query, myConnection);
+                command.Parameters.AddWithValue("@id_norm", id_norm);
+
+                using (SqlDataReader dr = command.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                                Norm = new OneNorm { Code = Int32.Parse(dr["code"].ToString()), name = dr["name"].ToString(), type = Int32.Parse(dr["type"].ToString()) };
+                    }
+                }
+                myConnection.Close();
+            }
+            catch (Exception Ex)
+            {
+                MessageBox.Show("Ошибка получения данных OneNorm: " + Ex.Message);
+            }
+            return Norm;
+        }
+
     }
 }

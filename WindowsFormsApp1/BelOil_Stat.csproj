@@ -59,6 +59,8 @@
     <Compile Include="DataTables\CompanyTable.cs" />
     <Compile Include="DataTables\CurrentData.cs" />
     <Compile Include="DataTables\FactorTable.cs" />
+    <Compile Include="DataTables\Norm4Table.cs" />
+    <Compile Include="DataTables\OneNorm.cs" />
     <Compile Include="DataTables\WholeTable.cs" />
     <Compile Include="DataTables\TradeTable.cs" />
     <Compile Include="DataTables\FuelTable.cs" />

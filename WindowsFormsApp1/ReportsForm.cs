@@ -645,7 +645,7 @@ namespace WindowsFormsApp1
                 {
                     var Fuel = dbOps.GetFuelData(a.fuel, dateTimePicker1.Value.Year, dateTimePicker1.Value.Month);
                     oth_actSum += Convert.ToSingle(Math.Round(a.val_fact, 1));
-                    oth_actSum_ut += Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(a.val_fact, 1)) * Fuel.B_y), 1));
+                    oth_actSum_ut += Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(a.val_fact_ut, 1))), 1));
                     if (a.row_options.Count() == 2)
                     {
                         oth_actSum_111 += Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(a.val_fact, 1)) * Fuel.B_y), 1));
@@ -667,7 +667,7 @@ namespace WindowsFormsApp1
                 {
                     var Fuel = dbOps.GetFuelData(a.fuel, dateTimePicker1.Value.Year-1, dateTimePicker1.Value.Month);
                     oth_oldSum += Convert.ToSingle(Math.Round(a.val_fact, 1));
-                    oth_oldSum_ut += Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(a.val_fact, 1)) * Fuel.B_y), 1));
+                    oth_oldSum_ut += Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(a.val_fact_ut, 1))), 1));
                     if (a.row_options.Count() == 2)
                     {
                         oth_oldSum_111 += Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(a.val_fact, 1)) * Fuel.B_y), 1));
@@ -1048,12 +1048,15 @@ namespace WindowsFormsApp1
 
         void MakeTable12tekHidden()
         {
-            reoGridControl3.Load("12tek.xlsx");
-            var worksheet3 = reoGridControl3.CurrentWorksheet;
+            reoGridControl3.Load("12tek_full.xlsx");
+            var worksheet3 = reoGridControl3.Worksheets[0];
             worksheet3.SetScale(0.92f);
             reoGridControl3.CurrentWorksheet.EnableSettings(WorksheetSettings.Edit_AutoExpandColumnWidth);
             worksheet3.SelectionStyle = WorksheetSelectionStyle.None;
             worksheet3.SetSettings(WorksheetSettings.Behavior_MouseWheelToZoom, false);
+            var dt = DateTime.Now.ToString("dd MMMM yyyy");
+            worksheet3["Y37"] = dt;
+
 
             #region топливо
             float actSum = 0;
@@ -1070,7 +1073,7 @@ namespace WindowsFormsApp1
                 {
                     var Fuel = dbOps.GetFuelData(a.fuel, dateTimePicker1.Value.Year, dateTimePicker1.Value.Month);
                     actSum += Convert.ToSingle(Math.Round(a.val_fact, 1));
-                    actSum_ut += Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(a.val_fact, 1)) * Fuel.B_y), 1));
+                    actSum_ut += Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(a.val_fact_ut, 1))), 1));
                     if (a.row_options.Count() == 2)
                     {
                         actSum_111 += Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(a.val_fact, 1)) * Fuel.B_y), 1));
@@ -1092,7 +1095,7 @@ namespace WindowsFormsApp1
                 {
                     var Fuel = dbOps.GetFuelData(a.fuel, dateTimePicker1.Value.Year - 1, dateTimePicker1.Value.Month);
                     oldSum += Convert.ToSingle(Math.Round(a.val_fact, 1));
-                    oldSum_ut += Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(a.val_fact, 1)) * Fuel.B_y), 1));
+                    oldSum_ut += Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(a.val_fact, 1))), 1));
                     if (a.row_options.Count() == 2)
                     {
                         oldSum_111 += Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(a.val_fact, 1)) * Fuel.B_y), 1));
@@ -1192,7 +1195,7 @@ namespace WindowsFormsApp1
                 {
                     var Fuel = dbOps.GetFuelData(a.fuel, dateTimePicker1.Value.Year, dateTimePicker1.Value.Month);
                     mestn_actSum += Convert.ToSingle(Math.Round(a.val_fact, 1));
-                    mestn_actSum_ut += Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(a.val_fact, 1)) * Fuel.B_y), 1));
+                    mestn_actSum_ut += Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(a.val_fact_ut, 1))), 1));
                     if (a.row_options.Count() == 2)
                     {
                         mestn_actSum_111 += Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(a.val_fact, 1)) * Fuel.B_y), 1));
@@ -1215,7 +1218,7 @@ namespace WindowsFormsApp1
                 {
                     var Fuel = dbOps.GetFuelData(a.fuel, dateTimePicker1.Value.Year - 1, dateTimePicker1.Value.Month);
                     mestn_oldSum += Convert.ToSingle(Math.Round(a.val_fact, 1));
-                    mestn_oldSum_ut += Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(a.val_fact, 1)) * Fuel.B_y), 1));
+                    mestn_oldSum_ut += Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(a.val_fact_ut, 1))), 1));
                     if (a.row_options.Count() == 2)
                     {
                         mestn_oldSum_111 += Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(a.val_fact, 1)) * Fuel.B_y), 1));
@@ -1254,7 +1257,7 @@ namespace WindowsFormsApp1
                 {
                     var Fuel = dbOps.GetFuelData(a.fuel, dateTimePicker1.Value.Year, dateTimePicker1.Value.Month);
                     oth_actSum += Convert.ToSingle(Math.Round(a.val_fact, 1));
-                    oth_actSum_ut += Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(a.val_fact, 1)) * Fuel.B_y), 1));
+                    oth_actSum_ut += Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(a.val_fact_ut, 1))), 1));
                     if (a.row_options.Count() == 2)
                     {
                         oth_actSum_111 += Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(a.val_fact, 1)) * Fuel.B_y), 1));
@@ -1276,7 +1279,7 @@ namespace WindowsFormsApp1
                 {
                     var Fuel = dbOps.GetFuelData(a.fuel, dateTimePicker1.Value.Year - 1, dateTimePicker1.Value.Month);
                     oth_oldSum += Convert.ToSingle(Math.Round(a.val_fact, 1));
-                    oth_oldSum_ut += Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(a.val_fact, 1)) * Fuel.B_y), 1));
+                    oth_oldSum_ut += Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(a.val_fact_ut, 1))), 1));
                     if (a.row_options.Count() == 2)
                     {
                         oth_oldSum_111 += Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(a.val_fact, 1)) * Fuel.B_y), 1));
@@ -1679,13 +1682,14 @@ namespace WindowsFormsApp1
 
         void MakeTable12TekPril()
         {
-            reoGridControl4.Load("12tekpril.xlsx");
-            var worksheet4 = reoGridControl4.CurrentWorksheet;
+            reoGrid4.Load("12tek_pril.xlsx");
+            var worksheet4 = reoGrid4.CurrentWorksheet;
             worksheet4.SetScale(0.92f);
-            reoGridControl4.CurrentWorksheet.EnableSettings(WorksheetSettings.Edit_AutoExpandColumnWidth);
+            reoGrid4.CurrentWorksheet.EnableSettings(WorksheetSettings.Edit_AutoExpandColumnWidth);
             worksheet4.SelectionStyle = WorksheetSelectionStyle.None;
             worksheet4.SetSettings(WorksheetSettings.Behavior_MouseWheelToZoom, false);
 
+            worksheet4["B1"] = String.Format("Приложение к отчету 12-тэк за январь - {0} {1} г", dateTimePicker1.Value.ToString("MMMM"), dateTimePicker1.Value.ToString("yyyy"));
             int report_id = dbOps.GetReportId(CurrentData.UserData.Id_org, dateTimePicker1.Value.Year, dateTimePicker1.Value.Month);
 
             #region строка 120
@@ -1799,8 +1803,8 @@ namespace WindowsFormsApp1
             var step = row120;
             foreach (var a in WholeList)
             {
-                worksheet4["E" + (step + 1)] = a.tvalue;
-                worksheet4["C" + (step + 1)] = a.evalue;
+                worksheet4["E" + (step + 1)] = Math.Round(a.tvalue,3);
+                worksheet4["C" + (step + 1)] = Math.Round(a.evalue,3);
                 worksheet4["B" + (step + 1)] = a.org_name;
                 step++;
             }
@@ -1808,16 +1812,16 @@ namespace WindowsFormsApp1
             step = row120;
             foreach (var a in WholeListSum)
             {
-                worksheet4["F" + (step + 1)] = a.tvalue;
-                worksheet4["D" + (step + 1)] = a.evalue;
+                worksheet4["F" + (step + 1)] = Math.Round(a.tvalue, 3);
+                worksheet4["D" + (step + 1)] = Math.Round(a.evalue, 3);
                 step++;
             }
 
             step = row120;
             foreach (var a in WholeListSumOld)
             {
-                worksheet4["H" + (step + 1)] = a.tvalue;
-                worksheet4["G" + (step + 1)] = a.evalue;
+                worksheet4["H" + (step + 1)] = Math.Round(a.tvalue, 3);
+                worksheet4["G" + (step + 1)] = Math.Round(a.evalue, 3);
                 worksheet4["B" + (step + 1)] = a.org_name;
                 step++;
             }
@@ -1846,25 +1850,25 @@ namespace WindowsFormsApp1
             foreach (var a in TradesSum)
             {
                 if (a.type == 2)
-                    worksheet4["F" + (row130 + 1)] = Convert.ToSingle(Math.Round(a.value, 1));
+                    worksheet4["F" + (row130 + 1)] = Convert.ToSingle(Math.Round(a.value, 2));
                 else if (a.type == 3)
-                    worksheet4["D" + (row130 + 1)] = Convert.ToSingle(Math.Round(a.value, 1));
+                    worksheet4["D" + (row130 + 1)] = Convert.ToSingle(Math.Round(a.value, 2));
             }
             var OldTradesSum = MakeTradeSum(dateTimePicker1.Value.Year - 1, dateTimePicker1.Value.Month);
             foreach (var a in OldTradesSum)
             {
                 if (a.type == 2)
-                    worksheet4["H" + (row130 + 1)] = Convert.ToSingle(Math.Round(a.value, 1));
+                    worksheet4["H" + (row130 + 1)] = Convert.ToSingle(Math.Round(a.value, 2));
                 else if (a.type == 3)
-                    worksheet4["G" + (row130 + 1)] = Convert.ToSingle(Math.Round(a.value, 1));
+                    worksheet4["G" + (row130 + 1)] = Convert.ToSingle(Math.Round(a.value, 2));
             }
             var TradeList = dbOps.GetTrades(report_id);
             foreach (var a in TradeList)
             {
                 if (a.type == 2)
-                    worksheet4["E" + (row130 + 1)] = Convert.ToSingle(Math.Round(a.value, 1));
+                    worksheet4["E" + (row130 + 1)] = Convert.ToSingle(Math.Round(a.value, 2));
                 else if (a.type == 3)
-                    worksheet4["C" + (row130 + 1)] = Convert.ToSingle(Math.Round(a.value, 1));
+                    worksheet4["C" + (row130 + 1)] = Convert.ToSingle(Math.Round(a.value, 2));
             }
             #endregion
 
@@ -1975,7 +1979,7 @@ namespace WindowsFormsApp1
             var rstep = row150;
             foreach (var a in RWholeList)
             {
-                worksheet4["E" + (rstep + 1)] = Math.Round(a.tvalue,4);
+                worksheet4["E" + (rstep + 1)] = Math.Round(a.tvalue,3);
                 worksheet4["C" + (rstep + 1)] = Math.Round(a.evalue,4);
                 worksheet4["B" + (rstep + 1)] = a.org_name;
                 rstep++;
@@ -1984,16 +1988,16 @@ namespace WindowsFormsApp1
             rstep = row150;
             foreach (var a in RWholeListSum)
             {
-                worksheet4["F" + (rstep + 1)] = Math.Round(a.tvalue,4);
-                worksheet4["D" + (rstep + 1)] = Math.Round(a.evalue,4);
+                worksheet4["F" + (rstep + 1)] = Math.Round(a.tvalue,3);
+                worksheet4["D" + (rstep + 1)] = Math.Round(a.evalue,3);
                 rstep++;
             }
 
             rstep = row150;
             foreach (var a in RWholeListSumOld)
             {
-                worksheet4["H" + (rstep + 1)] = Math.Round(a.tvalue, 4);
-                worksheet4["G" + (rstep + 1)] = Math.Round(a.evalue,4);
+                worksheet4["H" + (rstep + 1)] = Math.Round(a.tvalue, 3);
+                worksheet4["G" + (rstep + 1)] = Math.Round(a.evalue,3);
                 worksheet4["B" + (rstep + 1)] = a.org_name;
                 rstep++;
             }
@@ -2020,6 +2024,70 @@ namespace WindowsFormsApp1
                 worksheet4.AutoFitRowHeight(i, true);
             }
             worksheet4.ColumnHeaders[1].Width = 319;
+        }
+
+        void MakeTable4norm()
+        {
+            reoGridControl4.Load("4norm.xlsx");
+            var worksheet4 = reoGridControl4.CurrentWorksheet;
+            worksheet4.SetScale(0.92f);
+            reoGridControl4.CurrentWorksheet.EnableSettings(WorksheetSettings.Edit_AutoExpandColumnWidth);
+            worksheet4.SelectionStyle = WorksheetSelectionStyle.None;
+            worksheet4.SetSettings(WorksheetSettings.Behavior_MouseWheelToZoom, false);
+            int Norm4Year = dateTimePicker1.Value.Year;
+            int Norm4Quater = MakeQuater(dateTimePicker1.Value.Month);
+            var Norm4list = dbOps.Get4Norm(CurrentData.UserData.Id_org, Norm4Year, Norm4Quater);
+
+            #region топливо
+            int fuelrow = 25;
+            int counter = 0;
+            foreach (var a in Norm4list)
+            {
+                if (a.Norm_type == 1)
+                    counter++;
+            }
+            if (counter > 1)
+                worksheet4.InsertRows(fuelrow, counter - 1);
+            worksheet4.SetRangeStyles("A1:A" + (fuelrow + counter-1), new WorksheetRangeStyle()
+            {
+                Flag = PlainStyleFlag.TextWrap | PlainStyleFlag.FontSize | PlainStyleFlag.FontName,
+                TextWrapMode = TextWrapMode.WordBreak,
+                FontName = "Times New Roman",
+                FontSize = 12,
+            });
+            int tmp = 0;
+            foreach (var a in Norm4list)
+            {
+                if (a.Norm_type == 1)
+                {
+                    worksheet4["A" + (fuelrow + tmp)] = a.Norm_name + " (" + a.Fuel_name + ")";
+                    worksheet4["B" + (fuelrow + tmp)] = a.Norm_code;
+                    worksheet4["C" + (fuelrow + tmp)] = dbOps.GetProdUnit(a.Id_prod);
+                    worksheet4["D" + (fuelrow + tmp)] = Math.Round(a.Volume, 2);
+                    worksheet4["E" + (fuelrow + tmp)] = Math.Round(a.Norm, 2);
+                    worksheet4["H" + (fuelrow + tmp)] = Math.Round(a.Value, 2);
+                    worksheet4["F" + (fuelrow + tmp)] = Math.Round(Math.Round(a.Value, 2)/ Math.Round(a.Volume, 2) * 1000,1);
+                    worksheet4["G" + (fuelrow + tmp)] = Math.Round(Math.Round(a.Norm, 2) * Math.Round(a.Volume, 2) / 1000,1);
+                    tmp++;
+                }
+            }
+            #endregion
+            tmp = 0;
+        }
+
+        private int MakeQuater(int month)
+        {
+            int quater = 1;
+            if (month >= 1 && month <= 3)
+                quater = 1;
+            if (month >= 4 && month <= 6)
+                quater = 2;
+            if (month >= 7 && month <= 9)
+                quater = 3;
+            if (month >= 10 && month <= 12)
+                quater = 4;
+            return quater;
+
         }
 
         private List<NormTable> MakeListSum(int year, int month)
@@ -2237,8 +2305,17 @@ namespace WindowsFormsApp1
 
         private void сохранитьОтчетToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var worksheet3 = reoGridControl3.CurrentWorksheet;
-            worksheet3.Workbook.Save(Directory.GetCurrentDirectory() + "\\temp_report.xlsx", unvell.ReoGrid.IO.FileFormat.Excel2007);
+            var workbook = reoGridControl3;
+            workbook.Worksheets[1] = reoGrid4.CurrentWorksheet;
+            workbook.Worksheets[1].Name = "Приложение";
+            var name = dbOps.GetCompanyName(CurrentData.UserData.Id_org);
+            workbook.Save(Directory.GetCurrentDirectory() + "\\12_TEK_" + name.Replace("\"", " ") + "_" + dateTimePicker1.Value.ToString("yyyy") + "_" + dateTimePicker1.Value.ToString("MMMM") + ".xlsx", unvell.ReoGrid.IO.FileFormat.Excel2007);
+            //worksheet4.Workbook.Save(Directory.GetCurrentDirectory() + "\\12_TEK_Prilozhenie_" + name.Replace("\"", " ") + "_" + dateTimePicker1.Value.ToString("yyyy") + "_" + dateTimePicker1.Value.ToString("MMMM") + ".xlsx", unvell.ReoGrid.IO.FileFormat.Excel2007);
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            MakeTable4norm();
         }
     }
 }
