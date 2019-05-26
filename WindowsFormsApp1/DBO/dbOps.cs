@@ -115,6 +115,7 @@ namespace WindowsFormsApp1.DBO
             return name;
         }
 
+        #region main
         public static string GetProdUnit(int id_prod)
         {
             string unit = "";
@@ -654,6 +655,134 @@ namespace WindowsFormsApp1.DBO
                 MessageBox.Show("Ошибка получения данных OneNorm: " + Ex.Message);
             }
             return Norm;
+        }
+        #endregion
+
+        public static string GetObjName(int id_obj)
+        {
+            string name = "";
+            SqlConnection myConnection = new SqlConnection(cnStr);
+            myConnection.Open();
+
+            string query = "SELECT full_name FROM [NewObjects] WHERE [id] = @id_obj ";
+            SqlCommand command = new SqlCommand(query, myConnection);
+            command.Parameters.AddWithValue("@id_obj", id_obj);
+
+            using (SqlDataReader dr = command.ExecuteReader())
+            {
+                while (dr.Read())
+                {
+
+                    name = dr["full_name"].ToString();
+                }
+            }
+            myConnection.Close();
+            return name;
+        }
+        public static float GetSrcValue(int id_rep, int id_src)
+        {
+            float value = 0;
+            SqlConnection myConnection = new SqlConnection(cnStr);
+            myConnection.Open();
+
+            string query = "SELECT value FROM [NewOrgSouces] WHERE [id_src] = @id_src AND [id_rep] = @id_rep";
+            SqlCommand command = new SqlCommand(query, myConnection);
+            command.Parameters.AddWithValue("@id_src", id_src);
+            command.Parameters.AddWithValue("@id_rep", id_rep);
+
+            using (SqlDataReader dr = command.ExecuteReader())
+            {
+                while (dr.Read())
+                {
+
+                    value = float.Parse(dr["value"].ToString());
+                }
+            }
+            myConnection.Close();
+            return value;
+        }
+        public static float GetFuelFactValue(int id_org, int id_obj, int type, int fuel, int id_rep)
+        {
+            float value = 0;
+            int id = 0;
+            SqlConnection myConnection = new SqlConnection(cnStr);
+            myConnection.Open();
+
+            string query = "SELECT id FROM [NewNorm] WHERE [id_org] = @id_org AND [id_obj] = @id_obj AND [type] = @type AND [fuel] = @fuel";
+            SqlCommand command = new SqlCommand(query, myConnection);
+            command.Parameters.AddWithValue("@id_org", id_org);
+            command.Parameters.AddWithValue("@id_obj", id_obj);
+            command.Parameters.AddWithValue("@type", type);
+            command.Parameters.AddWithValue("@fuel", fuel);
+
+            using (SqlDataReader dr = command.ExecuteReader())
+            {
+                while (dr.Read())
+                {
+
+                    id = Int32.Parse(dr["id"].ToString());
+                }
+            }
+            query = "SELECT value_fact FROM [NewNormData] WHERE [id_norm] = @id_norm AND [id_rep] = @id_rep";
+            command = new SqlCommand(query, myConnection);
+            command.Parameters.AddWithValue("@id_norm", id);
+            command.Parameters.AddWithValue("@id_rep", id_rep);
+            using (SqlDataReader dr = command.ExecuteReader())
+            {
+                while (dr.Read())
+                {
+                    var a = dr["value_fact"].ToString();
+                    value = float.Parse(dr["value_fact"].ToString());
+                }
+            }
+            myConnection.Close();
+            return value;
+        }
+
+
+        public static List<SourceTable1tek> GetSourcesFor1tek(int id_org)
+        {
+            List<SourceTable1tek> SourceList = new List<SourceTable1tek>();
+            try
+            {
+                SqlConnection myConnection = new SqlConnection(cnStr);
+                SqlConnection myConnection2 = new SqlConnection(cnStr);
+                myConnection.Open();
+                string query = "SELECT * FROM [NewOrgSoucesList] where id_org = @id_org";
+                SqlCommand command = new SqlCommand(query, myConnection);
+                command.Parameters.AddWithValue("@id_org", id_org);
+                using (SqlDataReader dr = command.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        int fuel_id = Int32.Parse(dr["id_fuel"].ToString());
+                        int fuel_type = 0;
+                        if (fuel_id > 5000)
+                            fuel_type = 5000;
+                        else if (fuel_id > 4000 && fuel_id < 5000)
+                            fuel_type = 4000;
+                        else if (fuel_id > 3100 && fuel_id < 4000)
+                            fuel_type = 3100;
+                        else if (fuel_id > 2200 && fuel_id < 3100)
+                            fuel_type = 2200;
+                        else if (fuel_id > 2100 && fuel_id < 2200)
+                            fuel_type = 2100;
+                        else if (fuel_id > 1200 && fuel_id < 2100)
+                            fuel_type = 1200;
+                        else
+                            fuel_type = 1100;
+                        //тут баги
+                        string name = GetObjName(Int32.Parse(dr["id_object"].ToString()));
+                        SourceList.Add(new SourceTable1tek { Id = Int32.Parse(dr["id"].ToString()), Id_object = Int32.Parse(dr["id_object"].ToString()), Name_object=name, Id_fuel = Int32.Parse(dr["id_fuel"].ToString()), Fuel_group = fuel_type, Res_type = Int32.Parse(dr["res_type"].ToString()) });
+                    }
+                }
+                myConnection.Close();
+            }
+            catch (Exception Ex)
+            {
+                MessageBox.Show("Ошибка получения данных органerизации: " + Ex.Message);
+            }
+            return SourceList;
         }
 
     }

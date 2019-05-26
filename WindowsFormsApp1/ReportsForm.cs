@@ -2271,6 +2271,541 @@ namespace WindowsFormsApp1
             #endregion
         }
 
+        void MakeTable1tek()
+        {
+            reoGridControl5.Load("1tek.xlsx");
+            var worksheet4 = reoGridControl5.CurrentWorksheet;
+            worksheet4.SetScale(0.92f);
+            reoGridControl5.CurrentWorksheet.EnableSettings(WorksheetSettings.Edit_AutoExpandColumnWidth);
+            worksheet4.SelectionStyle = WorksheetSelectionStyle.None;
+            worksheet4.SetSettings(WorksheetSettings.Behavior_MouseWheelToZoom, false);
+            int Norm4Year = dateTimePicker1.Value.Year;
+            int Norm4Quater = MakeQuater(dateTimePicker1.Value.Month);
+
+            var Norm4list = MakeNorm4List(Norm4Year);
+            List<Norm4Table> OilList = new List<Norm4Table>();
+            List<Norm4Table> GasList = new List<Norm4Table>();
+
+            #region нефть 1 раздел
+            foreach (var a in Norm4list)
+            {
+                if (a.Norm_code == 4120)
+                    OilList.Add(a);
+            }
+            var tmp = 37;
+            float cnt = 0;
+            if (OilList.Count > 0)
+            {
+                worksheet4["B" + tmp] = "Транспортировка нефти";
+                worksheet4["J" + tmp] = "120";
+                worksheet4["K" + tmp] = dbOps.GetProdUnit(OilList[0].Id_prod);
+                float topl = 0;
+                float heat = 0;
+                float el = 0;
+                foreach (var a in OilList)
+                {
+                    if (a.Norm_type == 1)
+                    {
+                        topl += a.Value;
+                        cnt += a.Volume;
+                    }
+                    else if (a.Norm_type == 2)
+                    {
+                        heat += a.Value;
+                        cnt += a.Volume;
+                    }
+                    else if (a.Norm_type == 3)
+                    {
+                        el += a.Value;
+                        cnt += a.Volume;
+                    }
+                }
+                worksheet4["O" + tmp] = topl;
+                worksheet4["R" + tmp] = heat;
+                worksheet4["U" + tmp] = el;
+                worksheet4["L" + tmp] = cnt;                
+             
+                tmp++;
+            }
+            #endregion
+
+            #region газ 1 раздел
+            foreach (var a in Norm4list)
+            {
+                if (a.Norm_code == 4130)
+                    GasList.Add(a);
+            }
+
+            cnt = 0;
+            if (GasList.Count > 0)
+            {
+                worksheet4["B" + tmp] = "Транспортировка газа";
+                worksheet4["J" + tmp] = "130";
+                worksheet4["K" + tmp] = dbOps.GetProdUnit(GasList[0].Id_prod);
+                float topl = 0;
+                float heat = 0;
+                float el = 0;
+                foreach (var a in GasList)
+                {
+                    if (a.Norm_type == 1)
+                    {
+                        topl += a.Value;
+                        cnt += a.Volume;
+                    }
+                    else if (a.Norm_type == 2)
+                    {
+                        heat += a.Value;
+                        cnt += a.Volume;
+                    }
+                    else if (a.Norm_type == 3)
+                    {
+                        el += a.Value;
+                        cnt += a.Volume;
+                    }
+                }
+                worksheet4["O" + tmp] = topl;
+                worksheet4["R" + tmp] = heat;
+                worksheet4["U" + tmp] = el;
+                worksheet4["L" + tmp] = cnt;
+                tmp++;
+            }
+            #endregion
+
+            var list1 = dbOps.GetSourcesFor1tek(CurrentData.UserData.Id_org);
+            List<SourceTable1tek> list2 = new List<SourceTable1tek>();
+            foreach (var a in list1)
+            {
+                if (a.Fuel_group != 5000 && a.Fuel_group != 4000 && a.Id_fuel != 1201 && a.Id_object != 42 && a.Id_object != 53 && a.Id_object != 60)
+                    list2.Add(a);
+            }
+
+            List<Table1tekPart2> Table1Tek = new List<Table1tekPart2>();
+            foreach (var a in list2)
+            {
+                float fv = 0;
+                float hv = 0;
+                float ev = 0;
+                if (a.Name_object.Contains("Котельная"))
+                {
+                    for (int i = 1; i<= 12; i++)
+                    {
+                        int report_id = dbOps.GetReportId(CurrentData.UserData.Id_org, dateTimePicker1.Value.Year, i);
+                        if (a.Res_type == 2)
+                            hv += dbOps.GetSrcValue(report_id, a.Id);
+                        else if (a.Res_type == 3)
+                            ev += dbOps.GetSrcValue(report_id, a.Id);
+                        fv += dbOps.GetFuelFactValue(CurrentData.UserData.Id_org, a.Id_object, 1, a.Id_fuel, report_id);
+                    }
+                    Table1Tek.Add(new Table1tekPart2 { Id_obj = a.Id_object, Name_obj = a.Name_object, Id_fuel = a.Id_fuel, Fgroup = a.Fuel_group, Fvalue = fv, Hvalue = hv, Evalue = ev, Group = 5 });
+                }
+                else if (a.Name_object.Contains("ТЭЦ"))
+                {
+                    for (int i = 1; i <= 12; i++)
+                    {
+                        int report_id = dbOps.GetReportId(CurrentData.UserData.Id_org, dateTimePicker1.Value.Year, i);
+                        if (a.Res_type == 2)
+                            hv += dbOps.GetSrcValue(report_id, a.Id);
+                        else if (a.Res_type == 3)
+                            ev += dbOps.GetSrcValue(report_id, a.Id);
+                        fv += dbOps.GetFuelFactValue(CurrentData.UserData.Id_org, a.Id_object, 1, a.Id_fuel, report_id);
+                    }
+                    Table1Tek.Add(new Table1tekPart2 { Id_obj = a.Id_object, Name_obj = a.Name_object, Id_fuel = a.Id_fuel, Fgroup = a.Fuel_group, Fvalue = fv, Hvalue = hv, Evalue = ev, Group = 3 });
+                }
+                else if (a.Name_object.Contains("КГУ") || a.Name_object.Contains("КГТУ") || a.Name_object.Contains("МГТУ"))
+                {
+                    for (int i = 1; i <= 12; i++)
+                    {
+                        int report_id = dbOps.GetReportId(CurrentData.UserData.Id_org, dateTimePicker1.Value.Year, i);
+                        if (a.Res_type == 2)
+                            hv += dbOps.GetSrcValue(report_id, a.Id);
+                        else if (a.Res_type == 3)
+                            ev += dbOps.GetSrcValue(report_id, a.Id);
+                        fv += dbOps.GetFuelFactValue(CurrentData.UserData.Id_org, a.Id_object, 1, a.Id_fuel, report_id);
+                    }
+                    Table1Tek.Add(new Table1tekPart2 { Id_obj = a.Id_object, Name_obj = a.Name_object, Id_fuel = a.Id_fuel, Fgroup = a.Fuel_group, Fvalue = fv, Hvalue = hv, Evalue = ev, Group = 4 });
+                }
+            }
+
+            float drova = 0;
+            float toppech = 0;
+            float neftprod = 0;
+            float gasprir = 0;
+            float gaspoput = 0;
+            float drova_h = 0;
+            float toppech_h = 0;
+            float neftprod_h = 0;
+            float gasprir_h = 0;
+            float gaspoput_h = 0;
+            float drova_e = 0;
+            float toppech_e = 0;
+            float neftprod_e = 0;
+            float gasprir_e = 0;
+            float gaspoput_e = 0;
+            float sum = 0;
+            float sum_h = 0;
+            float sum_e = 0;
+
+            foreach (var a in Table1Tek)
+            {
+                if (a.Group == 5)
+                {
+                    if (a.Id_fuel == 2201)
+                    {
+                        drova += a.Fvalue;
+                        drova_h += a.Hvalue;
+                        drova_e += a.Evalue;
+                        sum += a.Fvalue;
+                        sum_h += a.Hvalue;
+                        sum_e += a.Evalue;
+                    }
+                    else if (a.Id_fuel == 1202)
+                    {
+                        toppech += a.Fvalue;
+                        toppech_h += a.Hvalue;
+                        toppech_e += a.Evalue;
+                        sum += a.Fvalue;
+                        sum_h += a.Hvalue;
+                        sum_e += a.Evalue;
+                    }
+                    else if (a.Id_fuel == 1203)
+                    {
+                        neftprod += a.Fvalue;
+                        neftprod_h += a.Hvalue;
+                        neftprod_e += a.Evalue;
+                        sum += a.Fvalue;
+                        sum_h += a.Hvalue;
+                        sum_e += a.Evalue;
+                    }
+                    else if (a.Fgroup == 1100)
+                    {
+                        gasprir += a.Fvalue;
+                        gasprir_h += a.Hvalue;
+                        gasprir_e += a.Evalue;
+                        sum += a.Fvalue;
+                        sum_h += a.Hvalue;
+                        sum_e += a.Evalue;
+                    }
+                    else if (a.Fgroup == 2100)
+                    {
+                        gaspoput += a.Fvalue;
+                        gaspoput_h += a.Hvalue;
+                        gaspoput_e += a.Evalue;
+                        sum += a.Fvalue;
+                        sum_h += a.Hvalue;
+                        sum_e += a.Evalue;
+                    }
+                }
+            }
+            if (drova != 0)
+            {
+                worksheet4["M80"] = drova;
+                worksheet4["M81"] = drova_h;
+            }
+            if (toppech != 0)
+            {
+                worksheet4["P80"] = toppech;
+                worksheet4["P81"] = toppech_h;
+            }
+            if (neftprod != 0)
+            {
+                worksheet4["Q80"] = neftprod;
+                worksheet4["Q81"] = neftprod_h;
+            }
+            if (gasprir != 0)
+            {
+                worksheet4["R80"] = gasprir;
+                worksheet4["R81"] = gasprir_h;
+            }
+            if (gaspoput != 0)
+            {
+                worksheet4["S80"] = gaspoput;
+                worksheet4["S81"] = gaspoput_h;
+            }
+            worksheet4["I80"] = sum;
+            worksheet4["I81"] = sum_h;
+
+            drova = 0;
+            toppech = 0;
+            neftprod = 0;
+            gasprir = 0;
+            gaspoput = 0;
+            drova_h = 0;
+            toppech_h = 0;
+            neftprod_h = 0;
+            gasprir_h = 0;
+            gaspoput_h = 0;
+            drova_e = 0;
+            toppech_e = 0;
+            neftprod_e = 0;
+            gasprir_e = 0;
+            gaspoput_e = 0;
+            sum = 0;
+            sum_h = 0;
+            sum_e = 0;
+            foreach (var a in Table1Tek)
+            {
+                if (a.Group == 3)
+                {
+                    if (a.Id_fuel == 2201)
+                    {
+                        drova += a.Fvalue;
+                        drova_h += a.Hvalue;
+                        drova_e += a.Evalue;
+                        sum += a.Fvalue;
+                        sum_h += a.Hvalue;
+                        sum_e += a.Evalue;
+                    }
+                    else if (a.Id_fuel == 1202)
+                    {
+                        toppech += a.Fvalue;
+                        toppech_h += a.Hvalue;
+                        toppech_e += a.Evalue;
+                        sum += a.Fvalue;
+                        sum_h += a.Hvalue;
+                        sum_e += a.Evalue;
+                    }
+                    else if (a.Id_fuel == 1203)
+                    {
+                        neftprod += a.Fvalue;
+                        neftprod_h += a.Hvalue;
+                        neftprod_e += a.Evalue;
+                        sum += a.Fvalue;
+                        sum_h += a.Hvalue;
+                        sum_e += a.Evalue;
+                    }
+                    else if (a.Fgroup == 1100)
+                    {
+                        gasprir += a.Fvalue;
+                        gasprir_h += a.Hvalue;
+                        gasprir_e += a.Evalue;
+                        sum += a.Fvalue;
+                        sum_h += a.Hvalue;
+                        sum_e += a.Evalue;
+                    }
+                    else if (a.Fgroup == 2100)
+                    {
+                        gaspoput += a.Fvalue;
+                        gaspoput_h += a.Hvalue;
+                        gaspoput_e += a.Evalue;
+                        sum += a.Fvalue;
+                        sum_h += a.Hvalue;
+                        sum_e += a.Evalue;
+                    }
+                }
+            }
+            if (drova != 0)
+            {
+                worksheet4["M73"] = drova;
+                worksheet4["M74"] = drova_e;
+                worksheet4["M75"] = drova_h;
+            }
+            if (toppech != 0)
+            {
+                worksheet4["P73"] = toppech;
+                worksheet4["P74"] = toppech_e;
+                worksheet4["P75"] = toppech_h;
+            }
+            if (neftprod != 0)
+            {
+                worksheet4["Q73"] = neftprod;
+                worksheet4["Q74"] = neftprod_e;
+                worksheet4["Q75"] = neftprod_h;
+            }
+            if (gasprir != 0)
+            {
+                worksheet4["R73"] = gasprir;
+                worksheet4["R74"] = gasprir_e;
+                worksheet4["R75"] = gasprir_h;
+            }
+            if (gaspoput != 0)
+            {
+                worksheet4["S73"] = gaspoput;
+                worksheet4["S74"] = gaspoput_e;
+                worksheet4["S75"] = gaspoput_h;
+            }
+            worksheet4["I73"] = sum;
+            worksheet4["I74"] = sum_e;
+            worksheet4["I75"] = sum_h;
+
+            drova = 0;
+            toppech = 0;
+            neftprod = 0;
+            gasprir = 0;
+            gaspoput = 0;
+            drova_h = 0;
+            toppech_h = 0;
+            neftprod_h = 0;
+            gasprir_h = 0;
+            gaspoput_h = 0;
+            drova_e = 0;
+            toppech_e = 0;
+            neftprod_e = 0;
+            gasprir_e = 0;
+            gaspoput_e = 0;
+            sum = 0;
+            sum_h = 0;
+            sum_e = 0;
+            foreach (var a in Table1Tek)
+            {
+                if (a.Group == 4)
+                {
+                    if (a.Id_fuel == 2201)
+                    {
+                        drova += a.Fvalue;
+                        drova_h += a.Hvalue;
+                        drova_e += a.Evalue;
+                        sum += a.Fvalue;
+                        sum_h += a.Hvalue;
+                        sum_e += a.Evalue;
+                    }
+                    else if (a.Id_fuel == 1202)
+                    {
+                        toppech += a.Fvalue;
+                        toppech_h += a.Hvalue;
+                        toppech_e += a.Evalue;
+                        sum += a.Fvalue;
+                        sum_h += a.Hvalue;
+                        sum_e += a.Evalue;
+                    }
+                    else if (a.Id_fuel == 1203)
+                    {
+                        neftprod += a.Fvalue;
+                        neftprod_h += a.Hvalue;
+                        neftprod_e += a.Evalue;
+                        sum += a.Fvalue;
+                        sum_h += a.Hvalue;
+                        sum_e += a.Evalue;
+                    }
+                    else if (a.Fgroup == 1100)
+                    {
+                        gasprir += a.Fvalue;
+                        gasprir_h += a.Hvalue;
+                        gasprir_e += a.Evalue;
+                        sum += a.Fvalue;
+                        sum_h += a.Hvalue;
+                        sum_e += a.Evalue;
+                    }
+                    else if (a.Fgroup == 2100)
+                    {
+                        gaspoput += a.Fvalue;
+                        gaspoput_h += a.Hvalue;
+                        gaspoput_e += a.Evalue;
+                        sum += a.Fvalue;
+                        sum_h += a.Hvalue;
+                        sum_e += a.Evalue;
+                    }
+                }
+            }
+            if (drova != 0)
+            {
+                worksheet4["M77"] = drova;
+                worksheet4["M78"] = drova_e;
+            }
+            if (toppech != 0)
+            {
+                worksheet4["P77"] = toppech;
+                worksheet4["P78"] = toppech_e;
+            }
+            if (neftprod != 0)
+            {
+                worksheet4["Q77"] = neftprod;
+                worksheet4["Q78"] = neftprod_e;
+            }
+            if (gasprir != 0)
+            {
+                worksheet4["R77"] = gasprir;
+                worksheet4["R78"] = gasprir_e;
+            }
+            if (gaspoput != 0)
+            {
+                worksheet4["S77"] = gaspoput;
+                worksheet4["S78"] = gaspoput_e;
+            }
+            worksheet4["I77"] = sum;
+            worksheet4["I78"] = sum_e;
+
+            var a2 = 1;
+            #region style
+            //worksheet4.SetRangeStyles("A22:H24", new WorksheetRangeStyle()
+            //{
+            //    Flag = PlainStyleFlag.TextWrap | PlainStyleFlag.FontSize | PlainStyleFlag.FontName,
+            //    TextWrapMode = TextWrapMode.WordBreak,
+            //    FontName = "Times New Roman",
+            //    FontSize = 11,
+            //});
+            //worksheet4.SetRangeStyles("A" + (heatrow - 3) + ":H" + (heatrow - 1), new WorksheetRangeStyle()
+            //{
+            //    Flag = PlainStyleFlag.TextWrap | PlainStyleFlag.FontSize | PlainStyleFlag.FontName,
+            //    TextWrapMode = TextWrapMode.WordBreak,
+            //    FontName = "Times New Roman",
+            //    FontSize = 11,
+            //});
+            //worksheet4.SetRangeStyles("A" + (elrow - 3) + ":H" + (elrow - 1), new WorksheetRangeStyle()
+            //{
+            //    Flag = PlainStyleFlag.TextWrap | PlainStyleFlag.FontSize | PlainStyleFlag.FontName,
+            //    TextWrapMode = TextWrapMode.WordBreak,
+            //    FontName = "Times New Roman",
+            //    FontSize = 11,
+            //});
+            //worksheet4.SetRangeStyles("A25:H" + (fuelrow + cnt1 - 1), new WorksheetRangeStyle()
+            //{
+            //    Flag = PlainStyleFlag.TextWrap | PlainStyleFlag.FontSize | PlainStyleFlag.FontName,
+            //    TextWrapMode = TextWrapMode.WordBreak,
+            //    FontName = "Times New Roman",
+            //    FontSize = 12,
+            //});
+            //worksheet4.SetRangeStyles("A" + heatrow + ":H" + (heatrow + cnt2 - 1), new WorksheetRangeStyle()
+            //{
+            //    Flag = PlainStyleFlag.TextWrap | PlainStyleFlag.FontSize | PlainStyleFlag.FontName,
+            //    TextWrapMode = TextWrapMode.WordBreak,
+            //    FontName = "Times New Roman",
+            //    FontSize = 12,
+            //});
+            //worksheet4.SetRangeStyles("A" + elrow + ":H" + (elrow + cnt3 - 1), new WorksheetRangeStyle()
+            //{
+            //    Flag = PlainStyleFlag.TextWrap | PlainStyleFlag.FontSize | PlainStyleFlag.FontName,
+            //    TextWrapMode = TextWrapMode.WordBreak,
+            //    FontName = "Times New Roman",
+            //    FontSize = 12,
+            //});
+            //worksheet4.SetRangeStyles("D25:H" + (fuelrow + cnt1 - 1), new WorksheetRangeStyle()
+            //{
+            //    Flag = PlainStyleFlag.HorizontalAlign,
+            //    HAlign = ReoGridHorAlign.Right,
+            //});
+            //worksheet4.SetRangeStyles("D" + heatrow + ":H" + (heatrow + cnt2 - 1), new WorksheetRangeStyle()
+            //{
+            //    Flag = PlainStyleFlag.HorizontalAlign,
+            //    HAlign = ReoGridHorAlign.Right,
+            //});
+            //worksheet4.SetRangeStyles("D" + elrow + ":H" + (elrow + cnt3 - 1), new WorksheetRangeStyle()
+            //{
+            //    Flag = PlainStyleFlag.HorizontalAlign,
+            //    HAlign = ReoGridHorAlign.Right,
+            //});
+            //worksheet4.SetRangeStyles("B25:C" + (fuelrow + cnt1 - 1), new WorksheetRangeStyle()
+            //{
+            //    Flag = PlainStyleFlag.HorizontalAlign,
+            //    HAlign = ReoGridHorAlign.Center,
+            //});
+            //worksheet4.SetRangeStyles("B" + heatrow + ":C" + (heatrow + cnt2 - 1), new WorksheetRangeStyle()
+            //{
+            //    Flag = PlainStyleFlag.HorizontalAlign,
+            //    HAlign = ReoGridHorAlign.Center,
+            //});
+            //worksheet4.SetRangeStyles("B" + elrow + ":C" + (elrow + cnt3 - 1), new WorksheetRangeStyle()
+            //{
+            //    Flag = PlainStyleFlag.HorizontalAlign,
+            //    HAlign = ReoGridHorAlign.Center,
+            //});
+            for (int i = 0; i <= 166; i++)
+            {
+                worksheet4.AutoFitRowHeight(i, true);
+            }
+            #endregion
+    }
+
+
         private int MakeQuater(int month)
         {
             int quater = 1;
@@ -2284,6 +2819,20 @@ namespace WindowsFormsApp1
                 quater = 4;
             return quater;
 
+        }
+
+        private List<Norm4Table> MakeNorm4List(int year)
+        {
+            var NormList = dbOps.Get4Norm(CurrentData.UserData.Id_org, year, 1);
+            for (int i = 2; i <= 4; i++)
+            {
+                var tmpList = dbOps.Get4Norm(CurrentData.UserData.Id_org, year, i);
+                foreach (var a in tmpList)
+                {
+                    NormList.Add(a);
+                }
+            }
+            return NormList;
         }
 
         private List<NormTable> MakeListSum(int year, int month)
@@ -2512,6 +3061,11 @@ namespace WindowsFormsApp1
         private void button1_Click_1(object sender, EventArgs e)
         {
             MakeTable4norm();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            MakeTable1tek();
         }
     }
 }

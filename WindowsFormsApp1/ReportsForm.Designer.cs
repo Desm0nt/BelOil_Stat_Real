@@ -28,16 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.reoGridControl1 = new unvell.ReoGrid.ReoGridControl();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.reoGridControl2 = new unvell.ReoGrid.ReoGridControl();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.reoGrid4 = new unvell.ReoGrid.ReoGridControl();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.button1 = new System.Windows.Forms.Button();
-            this.reoGridControl4 = new unvell.ReoGrid.ReoGridControl();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.менюToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -55,161 +45,28 @@
             this.label1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.reoGridControl3 = new unvell.ReoGrid.ReoGridControl();
-            this.tabControl1.SuspendLayout();
-            this.tabPage1.SuspendLayout();
-            this.tabPage2.SuspendLayout();
-            this.tabPage3.SuspendLayout();
-            this.tabPage4.SuspendLayout();
+            this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.reoGridControl5 = new unvell.ReoGrid.ReoGridControl();
+            this.button2 = new System.Windows.Forms.Button();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.reoGridControl4 = new unvell.ReoGrid.ReoGridControl();
+            this.button1 = new System.Windows.Forms.Button();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.reoGrid4 = new unvell.ReoGrid.ReoGridControl();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.reoGridControl2 = new unvell.ReoGrid.ReoGridControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.reoGridControl1 = new unvell.ReoGrid.ReoGridControl();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.tabPage6.SuspendLayout();
+            this.tabPage4.SuspendLayout();
+            this.tabPage3.SuspendLayout();
+            this.tabPage2.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.tabControl1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // tabControl1
-            // 
-            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Controls.Add(this.tabPage3);
-            this.tabControl1.Controls.Add(this.tabPage4);
-            this.tabControl1.Location = new System.Drawing.Point(12, 33);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1315, 639);
-            this.tabControl1.TabIndex = 0;
-            // 
-            // tabPage1
-            // 
-            this.tabPage1.Controls.Add(this.reoGridControl1);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1307, 613);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "1-ПЭР";
-            this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // reoGridControl1
-            // 
-            this.reoGridControl1.BackColor = System.Drawing.Color.White;
-            this.reoGridControl1.ColumnHeaderContextMenuStrip = null;
-            this.reoGridControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.reoGridControl1.LeadHeaderContextMenuStrip = null;
-            this.reoGridControl1.Location = new System.Drawing.Point(3, 3);
-            this.reoGridControl1.Name = "reoGridControl1";
-            this.reoGridControl1.RowHeaderContextMenuStrip = null;
-            this.reoGridControl1.Script = null;
-            this.reoGridControl1.SheetTabContextMenuStrip = null;
-            this.reoGridControl1.SheetTabNewButtonVisible = true;
-            this.reoGridControl1.SheetTabVisible = true;
-            this.reoGridControl1.SheetTabWidth = 60;
-            this.reoGridControl1.ShowScrollEndSpacing = true;
-            this.reoGridControl1.Size = new System.Drawing.Size(1301, 607);
-            this.reoGridControl1.TabIndex = 0;
-            this.reoGridControl1.Text = "reoGridControl1";
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.Controls.Add(this.reoGridControl2);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1307, 613);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "12-ТЭК";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // reoGridControl2
-            // 
-            this.reoGridControl2.BackColor = System.Drawing.Color.White;
-            this.reoGridControl2.ColumnHeaderContextMenuStrip = null;
-            this.reoGridControl2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.reoGridControl2.LeadHeaderContextMenuStrip = null;
-            this.reoGridControl2.Location = new System.Drawing.Point(3, 3);
-            this.reoGridControl2.Name = "reoGridControl2";
-            this.reoGridControl2.RowHeaderContextMenuStrip = null;
-            this.reoGridControl2.Script = null;
-            this.reoGridControl2.SheetTabContextMenuStrip = null;
-            this.reoGridControl2.SheetTabNewButtonVisible = true;
-            this.reoGridControl2.SheetTabVisible = true;
-            this.reoGridControl2.SheetTabWidth = 60;
-            this.reoGridControl2.ShowScrollEndSpacing = true;
-            this.reoGridControl2.Size = new System.Drawing.Size(1301, 607);
-            this.reoGridControl2.TabIndex = 0;
-            this.reoGridControl2.Text = "reoGridControl2";
-            // 
-            // tabPage3
-            // 
-            this.tabPage3.Controls.Add(this.reoGrid4);
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(1307, 613);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "Приложение к 12-ТЭК";
-            this.tabPage3.UseVisualStyleBackColor = true;
-            // 
-            // reoGrid4
-            // 
-            this.reoGrid4.BackColor = System.Drawing.Color.White;
-            this.reoGrid4.ColumnHeaderContextMenuStrip = null;
-            this.reoGrid4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.reoGrid4.LeadHeaderContextMenuStrip = null;
-            this.reoGrid4.Location = new System.Drawing.Point(3, 3);
-            this.reoGrid4.Name = "reoGrid4";
-            this.reoGrid4.RowHeaderContextMenuStrip = null;
-            this.reoGrid4.Script = null;
-            this.reoGrid4.SheetTabContextMenuStrip = null;
-            this.reoGrid4.SheetTabNewButtonVisible = true;
-            this.reoGrid4.SheetTabVisible = true;
-            this.reoGrid4.SheetTabWidth = 60;
-            this.reoGrid4.ShowScrollEndSpacing = true;
-            this.reoGrid4.Size = new System.Drawing.Size(1301, 607);
-            this.reoGrid4.TabIndex = 1;
-            this.reoGrid4.Text = "reoGridControl4";
-            // 
-            // tabPage4
-            // 
-            this.tabPage4.BackColor = System.Drawing.SystemColors.Control;
-            this.tabPage4.Controls.Add(this.button1);
-            this.tabPage4.Controls.Add(this.reoGridControl4);
-            this.tabPage4.Location = new System.Drawing.Point(4, 22);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Size = new System.Drawing.Size(1307, 613);
-            this.tabPage4.TabIndex = 3;
-            this.tabPage4.Text = "4 нормы";
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(4, 4);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "Сформировать";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
-            // 
-            // reoGridControl4
-            // 
-            this.reoGridControl4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.reoGridControl4.BackColor = System.Drawing.Color.White;
-            this.reoGridControl4.ColumnHeaderContextMenuStrip = null;
-            this.reoGridControl4.LeadHeaderContextMenuStrip = null;
-            this.reoGridControl4.Location = new System.Drawing.Point(3, 33);
-            this.reoGridControl4.Name = "reoGridControl4";
-            this.reoGridControl4.RowHeaderContextMenuStrip = null;
-            this.reoGridControl4.Script = null;
-            this.reoGridControl4.SheetTabContextMenuStrip = null;
-            this.reoGridControl4.SheetTabNewButtonVisible = true;
-            this.reoGridControl4.SheetTabVisible = true;
-            this.reoGridControl4.SheetTabWidth = 60;
-            this.reoGridControl4.ShowScrollEndSpacing = true;
-            this.reoGridControl4.Size = new System.Drawing.Size(1304, 577);
-            this.reoGridControl4.TabIndex = 2;
-            this.reoGridControl4.Text = "reoGridControl4";
             // 
             // dateTimePicker1
             // 
@@ -358,6 +215,196 @@
             this.reoGridControl3.Text = "reoGridControl3";
             this.reoGridControl3.Visible = false;
             // 
+            // tabPage6
+            // 
+            this.tabPage6.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPage6.Controls.Add(this.button2);
+            this.tabPage6.Controls.Add(this.reoGridControl5);
+            this.tabPage6.Location = new System.Drawing.Point(4, 22);
+            this.tabPage6.Name = "tabPage6";
+            this.tabPage6.Size = new System.Drawing.Size(1307, 613);
+            this.tabPage6.TabIndex = 5;
+            this.tabPage6.Text = "1-ТЭК";
+            // 
+            // reoGridControl5
+            // 
+            this.reoGridControl5.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.reoGridControl5.BackColor = System.Drawing.Color.White;
+            this.reoGridControl5.ColumnHeaderContextMenuStrip = null;
+            this.reoGridControl5.LeadHeaderContextMenuStrip = null;
+            this.reoGridControl5.Location = new System.Drawing.Point(3, 33);
+            this.reoGridControl5.Name = "reoGridControl5";
+            this.reoGridControl5.RowHeaderContextMenuStrip = null;
+            this.reoGridControl5.Script = null;
+            this.reoGridControl5.SheetTabContextMenuStrip = null;
+            this.reoGridControl5.SheetTabNewButtonVisible = true;
+            this.reoGridControl5.SheetTabVisible = true;
+            this.reoGridControl5.SheetTabWidth = 60;
+            this.reoGridControl5.ShowScrollEndSpacing = true;
+            this.reoGridControl5.Size = new System.Drawing.Size(1304, 577);
+            this.reoGridControl5.TabIndex = 2;
+            this.reoGridControl5.Text = "reoGridControl5";
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(4, 4);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(99, 23);
+            this.button2.TabIndex = 3;
+            this.button2.Text = "Сформировать";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // tabPage4
+            // 
+            this.tabPage4.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPage4.Controls.Add(this.button1);
+            this.tabPage4.Controls.Add(this.reoGridControl4);
+            this.tabPage4.Location = new System.Drawing.Point(4, 22);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Size = new System.Drawing.Size(1307, 613);
+            this.tabPage4.TabIndex = 3;
+            this.tabPage4.Text = "4-норма";
+            // 
+            // reoGridControl4
+            // 
+            this.reoGridControl4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.reoGridControl4.BackColor = System.Drawing.Color.White;
+            this.reoGridControl4.ColumnHeaderContextMenuStrip = null;
+            this.reoGridControl4.LeadHeaderContextMenuStrip = null;
+            this.reoGridControl4.Location = new System.Drawing.Point(3, 33);
+            this.reoGridControl4.Name = "reoGridControl4";
+            this.reoGridControl4.RowHeaderContextMenuStrip = null;
+            this.reoGridControl4.Script = null;
+            this.reoGridControl4.SheetTabContextMenuStrip = null;
+            this.reoGridControl4.SheetTabNewButtonVisible = true;
+            this.reoGridControl4.SheetTabVisible = true;
+            this.reoGridControl4.SheetTabWidth = 60;
+            this.reoGridControl4.ShowScrollEndSpacing = true;
+            this.reoGridControl4.Size = new System.Drawing.Size(1304, 577);
+            this.reoGridControl4.TabIndex = 2;
+            this.reoGridControl4.Text = "reoGridControl4";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(4, 4);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(103, 23);
+            this.button1.TabIndex = 3;
+            this.button1.Text = "Сформировать";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.reoGrid4);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(1307, 613);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Приложение к 12-ТЭК";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // reoGrid4
+            // 
+            this.reoGrid4.BackColor = System.Drawing.Color.White;
+            this.reoGrid4.ColumnHeaderContextMenuStrip = null;
+            this.reoGrid4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.reoGrid4.LeadHeaderContextMenuStrip = null;
+            this.reoGrid4.Location = new System.Drawing.Point(3, 3);
+            this.reoGrid4.Name = "reoGrid4";
+            this.reoGrid4.RowHeaderContextMenuStrip = null;
+            this.reoGrid4.Script = null;
+            this.reoGrid4.SheetTabContextMenuStrip = null;
+            this.reoGrid4.SheetTabNewButtonVisible = true;
+            this.reoGrid4.SheetTabVisible = true;
+            this.reoGrid4.SheetTabWidth = 60;
+            this.reoGrid4.ShowScrollEndSpacing = true;
+            this.reoGrid4.Size = new System.Drawing.Size(1301, 607);
+            this.reoGrid4.TabIndex = 1;
+            this.reoGrid4.Text = "reoGridControl4";
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.reoGridControl2);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(1307, 613);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "12-ТЭК";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // reoGridControl2
+            // 
+            this.reoGridControl2.BackColor = System.Drawing.Color.White;
+            this.reoGridControl2.ColumnHeaderContextMenuStrip = null;
+            this.reoGridControl2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.reoGridControl2.LeadHeaderContextMenuStrip = null;
+            this.reoGridControl2.Location = new System.Drawing.Point(3, 3);
+            this.reoGridControl2.Name = "reoGridControl2";
+            this.reoGridControl2.RowHeaderContextMenuStrip = null;
+            this.reoGridControl2.Script = null;
+            this.reoGridControl2.SheetTabContextMenuStrip = null;
+            this.reoGridControl2.SheetTabNewButtonVisible = true;
+            this.reoGridControl2.SheetTabVisible = true;
+            this.reoGridControl2.SheetTabWidth = 60;
+            this.reoGridControl2.ShowScrollEndSpacing = true;
+            this.reoGridControl2.Size = new System.Drawing.Size(1301, 607);
+            this.reoGridControl2.TabIndex = 0;
+            this.reoGridControl2.Text = "reoGridControl2";
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.reoGridControl1);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(1307, 613);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "1-ПЭР";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // reoGridControl1
+            // 
+            this.reoGridControl1.BackColor = System.Drawing.Color.White;
+            this.reoGridControl1.ColumnHeaderContextMenuStrip = null;
+            this.reoGridControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.reoGridControl1.LeadHeaderContextMenuStrip = null;
+            this.reoGridControl1.Location = new System.Drawing.Point(3, 3);
+            this.reoGridControl1.Name = "reoGridControl1";
+            this.reoGridControl1.RowHeaderContextMenuStrip = null;
+            this.reoGridControl1.Script = null;
+            this.reoGridControl1.SheetTabContextMenuStrip = null;
+            this.reoGridControl1.SheetTabNewButtonVisible = true;
+            this.reoGridControl1.SheetTabVisible = true;
+            this.reoGridControl1.SheetTabWidth = 60;
+            this.reoGridControl1.ShowScrollEndSpacing = true;
+            this.reoGridControl1.Size = new System.Drawing.Size(1301, 607);
+            this.reoGridControl1.TabIndex = 0;
+            this.reoGridControl1.Text = "reoGridControl1";
+            // 
+            // tabControl1
+            // 
+            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage3);
+            this.tabControl1.Controls.Add(this.tabPage4);
+            this.tabControl1.Controls.Add(this.tabPage6);
+            this.tabControl1.Location = new System.Drawing.Point(12, 33);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(1315, 639);
+            this.tabControl1.TabIndex = 0;
+            // 
             // ReportsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -371,26 +418,21 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "ReportsForm";
             this.Text = "Main1PerForm";
-            this.tabControl1.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
-            this.tabPage2.ResumeLayout(false);
-            this.tabPage3.ResumeLayout(false);
-            this.tabPage4.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.panel1.ResumeLayout(false);
+            this.tabPage6.ResumeLayout(false);
+            this.tabPage4.ResumeLayout(false);
+            this.tabPage3.ResumeLayout(false);
+            this.tabPage2.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.tabControl1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage2;
-        private unvell.ReoGrid.ReoGridControl reoGridControl1;
-        private unvell.ReoGrid.ReoGridControl reoGridControl2;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem менюToolStripMenuItem;
@@ -408,10 +450,18 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panel1;
         private unvell.ReoGrid.ReoGridControl reoGridControl3;
+        private System.Windows.Forms.TabPage tabPage6;
+        private System.Windows.Forms.Button button2;
+        public unvell.ReoGrid.ReoGridControl reoGridControl5;
+        private System.Windows.Forms.TabPage tabPage4;
+        private System.Windows.Forms.Button button1;
+        public unvell.ReoGrid.ReoGridControl reoGridControl4;
         private System.Windows.Forms.TabPage tabPage3;
         public unvell.ReoGrid.ReoGridControl reoGrid4;
-        private System.Windows.Forms.TabPage tabPage4;
-        public unvell.ReoGrid.ReoGridControl reoGridControl4;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TabPage tabPage2;
+        private unvell.ReoGrid.ReoGridControl reoGridControl2;
+        private System.Windows.Forms.TabPage tabPage1;
+        private unvell.ReoGrid.ReoGridControl reoGridControl1;
+        private System.Windows.Forms.TabControl tabControl1;
     }
 }
