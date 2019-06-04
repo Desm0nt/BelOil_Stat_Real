@@ -36,6 +36,7 @@
             this.отчетыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.сформировать1ПЭРToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.сохранитьОтчетToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.сохранитьОтчет1ТЭКToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.данныеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.данныеПредприятияToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.списокПродуктовToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -46,11 +47,11 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.reoGridControl3 = new unvell.ReoGrid.ReoGridControl();
             this.tabPage6 = new System.Windows.Forms.TabPage();
-            this.reoGridControl5 = new unvell.ReoGrid.ReoGridControl();
             this.button2 = new System.Windows.Forms.Button();
+            this.reoGridControl5 = new unvell.ReoGrid.ReoGridControl();
             this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.reoGridControl4 = new unvell.ReoGrid.ReoGridControl();
             this.button1 = new System.Windows.Forms.Button();
+            this.reoGridControl4 = new unvell.ReoGrid.ReoGridControl();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.reoGrid4 = new unvell.ReoGrid.ReoGridControl();
             this.tabPage2 = new System.Windows.Forms.TabPage();
@@ -58,6 +59,10 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.reoGridControl1 = new unvell.ReoGrid.ReoGridControl();
             this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.CompanyBox = new System.Windows.Forms.ComboBox();
+            this.button3 = new System.Windows.Forms.Button();
+            this.RUPButton = new System.Windows.Forms.Button();
+            this.POButton = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tabPage6.SuspendLayout();
@@ -117,7 +122,8 @@
             // 
             this.отчетыToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.сформировать1ПЭРToolStripMenuItem,
-            this.сохранитьОтчетToolStripMenuItem});
+            this.сохранитьОтчетToolStripMenuItem,
+            this.сохранитьОтчет1ТЭКToolStripMenuItem});
             this.отчетыToolStripMenuItem.Name = "отчетыToolStripMenuItem";
             this.отчетыToolStripMenuItem.Size = new System.Drawing.Size(60, 26);
             this.отчетыToolStripMenuItem.Text = "Отчеты";
@@ -134,6 +140,13 @@
             this.сохранитьОтчетToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
             this.сохранитьОтчетToolStripMenuItem.Text = "Сохранить отчет 12-ТЭК";
             this.сохранитьОтчетToolStripMenuItem.Click += new System.EventHandler(this.сохранитьОтчетToolStripMenuItem_Click);
+            // 
+            // сохранитьОтчет1ТЭКToolStripMenuItem
+            // 
+            this.сохранитьОтчет1ТЭКToolStripMenuItem.Name = "сохранитьОтчет1ТЭКToolStripMenuItem";
+            this.сохранитьОтчет1ТЭКToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
+            this.сохранитьОтчет1ТЭКToolStripMenuItem.Text = "Сохранить отчет 1-ТЭК";
+            this.сохранитьОтчет1ТЭКToolStripMenuItem.Click += new System.EventHandler(this.сохранитьОтчет1ТЭКToolStripMenuItem_Click);
             // 
             // данныеToolStripMenuItem
             // 
@@ -226,6 +239,16 @@
             this.tabPage6.TabIndex = 5;
             this.tabPage6.Text = "1-ТЭК";
             // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(4, 4);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(99, 23);
+            this.button2.TabIndex = 3;
+            this.button2.Text = "Сформировать";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // reoGridControl5
             // 
             this.reoGridControl5.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -247,16 +270,6 @@
             this.reoGridControl5.TabIndex = 2;
             this.reoGridControl5.Text = "reoGridControl5";
             // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(4, 4);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(99, 23);
-            this.button2.TabIndex = 3;
-            this.button2.Text = "Сформировать";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
             // tabPage4
             // 
             this.tabPage4.BackColor = System.Drawing.SystemColors.Control;
@@ -267,6 +280,16 @@
             this.tabPage4.Size = new System.Drawing.Size(1307, 613);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "4-норма";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(4, 4);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(103, 23);
+            this.button1.TabIndex = 3;
+            this.button1.Text = "Сформировать";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // reoGridControl4
             // 
@@ -288,16 +311,6 @@
             this.reoGridControl4.Size = new System.Drawing.Size(1304, 577);
             this.reoGridControl4.TabIndex = 2;
             this.reoGridControl4.Text = "reoGridControl4";
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(4, 4);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(103, 23);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "Сформировать";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // tabPage3
             // 
@@ -404,12 +417,61 @@
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(1315, 639);
             this.tabControl1.TabIndex = 0;
+            this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
+            // 
+            // CompanyBox
+            // 
+            this.CompanyBox.FormattingEnabled = true;
+            this.CompanyBox.Location = new System.Drawing.Point(548, 4);
+            this.CompanyBox.Name = "CompanyBox";
+            this.CompanyBox.Size = new System.Drawing.Size(185, 21);
+            this.CompanyBox.TabIndex = 6;
+            this.CompanyBox.Visible = false;
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(740, 3);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.TabIndex = 7;
+            this.button3.Text = "Выбрать";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Visible = false;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // RUPButton
+            // 
+            this.RUPButton.Enabled = false;
+            this.RUPButton.Location = new System.Drawing.Point(821, 3);
+            this.RUPButton.Name = "RUPButton";
+            this.RUPButton.Size = new System.Drawing.Size(75, 23);
+            this.RUPButton.TabIndex = 8;
+            this.RUPButton.Text = "РУП";
+            this.RUPButton.UseVisualStyleBackColor = true;
+            this.RUPButton.Visible = false;
+            this.RUPButton.Click += new System.EventHandler(this.RUPButton_Click);
+            // 
+            // POButton
+            // 
+            this.POButton.Enabled = false;
+            this.POButton.Location = new System.Drawing.Point(902, 3);
+            this.POButton.Name = "POButton";
+            this.POButton.Size = new System.Drawing.Size(75, 23);
+            this.POButton.TabIndex = 9;
+            this.POButton.Text = "ПО";
+            this.POButton.UseVisualStyleBackColor = true;
+            this.POButton.Visible = false;
+            this.POButton.Click += new System.EventHandler(this.POButton_Click);
             // 
             // ReportsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1339, 684);
+            this.Controls.Add(this.POButton);
+            this.Controls.Add(this.RUPButton);
+            this.Controls.Add(this.button3);
+            this.Controls.Add(this.CompanyBox);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dateTimePicker1);
@@ -463,5 +525,10 @@
         private System.Windows.Forms.TabPage tabPage1;
         private unvell.ReoGrid.ReoGridControl reoGridControl1;
         private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.ToolStripMenuItem сохранитьОтчет1ТЭКToolStripMenuItem;
+        private System.Windows.Forms.ComboBox CompanyBox;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button RUPButton;
+        private System.Windows.Forms.Button POButton;
     }
 }

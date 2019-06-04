@@ -114,6 +114,60 @@ namespace WindowsFormsApp1.DBO
             }
             return name;
         }
+        public static List<CompanyListTable> GetCompanyList()
+        {
+            List<CompanyListTable> CompanyList = new List<CompanyListTable>();
+            try
+            {
+                SqlConnection myConnection = new SqlConnection(cnStr);
+                myConnection.Open();
+
+                string query = "SELECT * FROM [NewOrg] where id > 100 and id < 300 and id != 200";
+                SqlCommand command = new SqlCommand(query, myConnection);
+                using (SqlDataReader dr = command.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        CompanyList.Add(new CompanyListTable { Id = Int32.Parse(dr["id"].ToString()), Name = dr["name"].ToString() });
+
+                    }
+                }
+                myConnection.Close();
+            }
+            catch (Exception Ex)
+            {
+                MessageBox.Show("Ошибка получения данных организации: " + Ex.Message);
+            }
+            return CompanyList;
+        }
+        public static List<int> GetCompanyIdList(int pid)
+        {
+            List<int> CompanyIdList = new List<int>();
+            try
+            {
+                SqlConnection myConnection = new SqlConnection(cnStr);
+                myConnection.Open();
+
+                string query = "SELECT * FROM [NewOrg] where pid = @pid";
+                SqlCommand command = new SqlCommand(query, myConnection);
+                command.Parameters.AddWithValue("@pid", pid);
+                using (SqlDataReader dr = command.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        CompanyIdList.Add(Int32.Parse(dr["id"].ToString()));
+
+                    }
+                }
+                myConnection.Close();
+            }
+            catch (Exception Ex)
+            {
+                MessageBox.Show("Ошибка получения данных организации: " + Ex.Message);
+            }
+            return CompanyIdList;
+        }
+
 
         #region main
         public static string GetProdUnit(int id_prod)

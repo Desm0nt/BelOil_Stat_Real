@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -20,6 +21,7 @@ namespace WindowsFormsApp1
         public int year;
         public List<NormTable> actualList = new List<NormTable>();
         public List<NormTable> oldList = new List<NormTable>();
+        public List<CompanyListTable> CompanyList = new List<CompanyListTable>();
         public ReportsForm()
         {
             InitializeComponent();
@@ -28,8 +30,42 @@ namespace WindowsFormsApp1
             MakeTable12tek();
             MakeTable12tekHidden();
             MakeTable12TekPril();
+            CompanyList = dbOps.GetCompanyList();
+            if (CurrentData.UserData.Id == 1)
+            {
+                CompanyBox.Visible = true;
+                button3.Visible = true;
+                CompanyBox.DataSource = CompanyList;
+                CompanyBox.DisplayMember = "Name";
+                CompanyBox.ValueMember = "Id";
+                RUPButton.Visible = true;
+                POButton.Visible = true;
+            }
+            tabControl1.SelectedIndexChanged += new EventHandler(tabControl1_SelectedIndexChanged);
         }
 
+        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (tabControl1.SelectedTab == tabControl1.TabPages["tabPage2"] || tabControl1.SelectedTab == tabControl1.TabPages["tabPage6"])
+            {
+                RUPButton.Enabled = true;
+                POButton.Enabled = true;
+            }
+            else
+            {
+                RUPButton.Enabled = false;
+                POButton.Enabled = false;
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            CurrentData.UserData.Id_org = Int32.Parse(CompanyBox.SelectedValue.ToString());
+            MakeTable1per();
+            MakeTable12tek();
+            MakeTable12tekHidden();
+            MakeTable12TekPril();
+        }
         private void button1_Click(object sender, EventArgs e)
         {
            // dbOps.GetCompanyData(CurrentData.UserData.Id_org);
@@ -1045,6 +1081,559 @@ namespace WindowsFormsApp1
                 worksheet2.AutoFitRowHeight(i, true);
             }
         }
+
+        void MakeTable12teSUM(bool flag)
+        {
+            reoGridControl2.Load("12tek_s.xlsx");
+            var worksheet2 = reoGridControl2.CurrentWorksheet;
+            worksheet2.SetScale(0.92f);
+            reoGridControl2.CurrentWorksheet.EnableSettings(WorksheetSettings.Edit_AutoExpandColumnWidth);
+            worksheet2.SelectionStyle = WorksheetSelectionStyle.None;
+            worksheet2.SetSettings(WorksheetSettings.Behavior_MouseWheelToZoom, false);
+            List<int> CompanyIdList = new List<int>();
+            if (flag == false)
+                CompanyIdList = dbOps.GetCompanyIdList(100);
+            else if (flag == true)
+            {
+                CompanyIdList = dbOps.GetCompanyIdList(100);
+                var list2 = dbOps.GetCompanyIdList(200);
+                foreach (var c in list2)
+                    CompanyIdList.Add(c);
+            }
+            var CurrentID = CurrentData.UserData.Id_org;
+
+            #region топливо, тепло и электричество
+            float actSum = 0;
+            float actSum_ut = 0;
+            float actSum_111 = 0;
+            float actSum_112 = 0;
+            float oldSum = 0;
+            float oldSum_111 = 0;
+            float oldSum_112 = 0;
+            float oldSum_ut = 0;
+
+            float actSum3 = 0;
+            float actSum3_111 = 0;
+            float actSum3_112 = 0;
+            float oldSum3 = 0;
+            float oldSum3_111 = 0;
+            float oldSum3_112 = 0;
+
+            float actSum2 = 0;
+            float actSum2_111 = 0;
+            float oldSum2 = 0;
+            float oldSum2_111 = 0;
+
+            float mestn_actSum = 0;
+            float mestn_actSum_ut = 0;
+            float mestn_actSum_111 = 0;
+            float mestn_actSum_112 = 0;
+            float mestn_oldSum = 0;
+            float mestn_oldSum_111 = 0;
+            float mestn_oldSum_112 = 0;
+            float mestn_oldSum_ut = 0;
+
+            float oth_actSum = 0;
+            float oth_actSum_ut = 0;
+            float oth_actSum_111 = 0;
+            float oth_actSum_112 = 0;
+            float oth_oldSum = 0;
+            float oth_oldSum_111 = 0;
+            float oth_oldSum_112 = 0;
+            float oth_oldSum_ut = 0;
+
+            foreach (var b in CompanyIdList)
+            {
+                CurrentData.UserData.Id_org = b;
+                var NormListSum = MakeListSum(dateTimePicker1.Value.Year, dateTimePicker1.Value.Month);
+                var actualList1 = NormListSum;
+                var OldNormListSum = MakeListSum(dateTimePicker1.Value.Year - 1, dateTimePicker1.Value.Month);
+                var oldList1 = OldNormListSum;
+
+                foreach (var a in actualList1)
+                {
+                    if (a.type == 1)
+                    {
+                        var Fuel = dbOps.GetFuelData(a.fuel, dateTimePicker1.Value.Year, dateTimePicker1.Value.Month);
+                        actSum += Convert.ToSingle(Math.Round(a.val_fact, 1));
+                        actSum_ut += Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(a.val_fact, 1)) * Fuel.B_y), 1));
+                        if (a.row_options.Count() == 2)
+                        {
+                            actSum_111 += Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(a.val_fact, 1)) * Fuel.B_y), 1));
+                            actSum_112 += Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(a.val_fact, 1)) * Fuel.B_y), 1));
+                        }
+                        else if (a.row_options.Count() == 1 && a.row_options[0] == "111")
+                        {
+                            actSum_111 += Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(a.val_fact, 1)) * Fuel.B_y), 1));
+                        }
+                        else if (a.row_options.Count() == 1 && a.row_options[0] == "112")
+                        {
+                            actSum_112 += Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(a.val_fact, 1)) * Fuel.B_y), 1));
+                        }
+
+                        if (a.fuel > 2100 && a.fuel < 4000)
+                        {
+                            mestn_actSum += Convert.ToSingle(Math.Round(a.val_fact, 1));
+                            mestn_actSum_ut += Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(a.val_fact, 1)) * Fuel.B_y), 1));
+                            if (a.row_options.Count() == 2)
+                            {
+                                mestn_actSum_111 += Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(a.val_fact, 1)) * Fuel.B_y), 1));
+                                mestn_actSum_112 += Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(a.val_fact, 1)) * Fuel.B_y), 1));
+
+                            }
+                            else if (a.row_options.Count() == 1 && a.row_options[0] == "111")
+                            {
+                                mestn_actSum_111 += Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(a.val_fact, 1)) * Fuel.B_y), 1));
+                            }
+                            else if (a.row_options.Count() == 1 && a.row_options[0] == "112")
+                            {
+                                mestn_actSum_112 += Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(a.val_fact, 1)) * Fuel.B_y), 1));
+                            }
+                        }
+                        if ((a.fuel > 2200 && a.fuel < 3100) || (a.fuel > 3100 && a.fuel < 4000))
+                        {
+                            oth_actSum += Convert.ToSingle(Math.Round(a.val_fact, 1));
+                            oth_actSum_ut += Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(a.val_fact_ut, 1))), 1));
+                            if (a.row_options.Count() == 2)
+                            {
+                                oth_actSum_111 += Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(a.val_fact, 1)) * Fuel.B_y), 1));
+                                oth_actSum_112 += Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(a.val_fact, 1)) * Fuel.B_y), 1));
+                            }
+                            else if (a.row_options.Count() == 1 && a.row_options[0] == "111")
+                            {
+                                oth_actSum_111 += Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(a.val_fact, 1)) * Fuel.B_y), 1));
+                            }
+                            else if (a.row_options.Count() == 1 && a.row_options[0] == "112")
+                            {
+                                oth_actSum_112 += Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(a.val_fact, 1)) * Fuel.B_y), 1));
+                            }
+                        }
+                    }
+                    else if (a.type == 2)
+                    {
+                        actSum2 += Convert.ToSingle(Math.Round(a.val_fact, 1));
+                        if (a.row_options.Count() == 2)
+                        {
+                            actSum2_111 += Convert.ToSingle(Math.Round(a.val_fact, 1));
+                        }
+                        else if (a.row_options.Count() == 1 && a.row_options[0] == "111")
+                        {
+                            actSum2_111 += Convert.ToSingle(Math.Round(a.val_fact, 1));
+                        }
+                        else if (a.row_options.Count() == 1 && a.row_options[0] == "112")
+                        {
+                            actSum2_111 += Convert.ToSingle(Math.Round(a.val_fact, 1));
+                        }
+                    }
+                    else if (a.type == 3)
+                    {
+                        actSum3 += Convert.ToSingle(Math.Round(a.val_fact, 1));
+                        if (a.row_options.Count() == 2)
+                        {
+                            actSum3_111 += Convert.ToSingle(Math.Round(a.val_fact, 1));
+                            actSum3_112 += Convert.ToSingle(Math.Round(a.val_fact, 1));
+                        }
+                        else if (a.row_options.Count() == 1 && a.row_options[0] == "111")
+                        {
+                            actSum3_111 += Convert.ToSingle(Math.Round(a.val_fact, 1));
+                        }
+                        else if (a.row_options.Count() == 1 && a.row_options[0] == "112")
+                        {
+                            actSum3_112 += Convert.ToSingle(Math.Round(a.val_fact, 1));
+                        }
+                    }
+
+                }
+                foreach (var a in oldList1)
+                {
+                    if (a.type == 1)
+                    {
+                        var Fuel = dbOps.GetFuelData(a.fuel, dateTimePicker1.Value.Year - 1, dateTimePicker1.Value.Month);
+                        oldSum += Convert.ToSingle(Math.Round(a.val_fact, 1));
+                        oldSum_ut += Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(a.val_fact, 1)) * Fuel.B_y), 1));
+                        if (a.row_options.Count() == 2)
+                        {
+                            oldSum_111 += Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(a.val_fact, 1)) * Fuel.B_y), 1));
+                            oldSum_112 += Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(a.val_fact, 1)) * Fuel.B_y), 1));
+                        }
+                        else if (a.row_options.Count() == 1 && a.row_options[0] == "111")
+                        {
+                            oldSum_111 += Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(a.val_fact, 1)) * Fuel.B_y), 1));
+                        }
+                        else if (a.row_options.Count() == 1 && a.row_options[0] == "112")
+                        {
+                            oldSum_112 += Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(a.val_fact, 1)) * Fuel.B_y), 1));
+                        }
+                        if (a.fuel > 2100 && a.fuel < 4000)
+                        {
+                            mestn_oldSum += Convert.ToSingle(Math.Round(a.val_fact, 1));
+                            mestn_oldSum_ut += Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(a.val_fact, 1)) * Fuel.B_y), 1));
+                            if (a.row_options.Count() == 2)
+                            {
+                                mestn_oldSum_111 += Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(a.val_fact, 1)) * Fuel.B_y), 1));
+                                mestn_oldSum_112 += Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(a.val_fact, 1)) * Fuel.B_y), 1));
+                            }
+                            else if (a.row_options.Count() == 1 && a.row_options[0] == "111")
+                            {
+                                mestn_oldSum_111 += Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(a.val_fact, 1)) * Fuel.B_y), 1));
+                            }
+                            else if (a.row_options.Count() == 1 && a.row_options[0] == "112")
+                            {
+                                mestn_oldSum_112 += Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(a.val_fact, 1)) * Fuel.B_y), 1));
+                            }
+                        }
+                        if ((a.fuel > 2200 && a.fuel < 3100) || (a.fuel > 3100 && a.fuel < 4000))
+                        {
+                            oth_oldSum += Convert.ToSingle(Math.Round(a.val_fact, 1));
+                            oth_oldSum_ut += Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(a.val_fact_ut, 1))), 1));
+                            if (a.row_options.Count() == 2)
+                            {
+                                oth_oldSum_111 += Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(a.val_fact, 1)) * Fuel.B_y), 1));
+                                oth_oldSum_112 += Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(a.val_fact, 1)) * Fuel.B_y), 1));
+                            }
+                            else if (a.row_options.Count() == 1 && a.row_options[0] == "111")
+                            {
+                                oth_oldSum_111 += Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(a.val_fact, 1)) * Fuel.B_y), 1));
+                            }
+                            else if (a.row_options.Count() == 1 && a.row_options[0] == "112")
+                            {
+                                oth_oldSum_112 += Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(a.val_fact, 1)) * Fuel.B_y), 1));
+                            }
+                        }
+                    }
+                    else if (a.type == 2)
+                    {
+                        oldSum2 += Convert.ToSingle(Math.Round(a.val_fact, 1));
+                        if (a.row_options.Count() == 2)
+                        {
+                            oldSum2_111 += Convert.ToSingle(Math.Round(a.val_fact, 1));
+                        }
+                        else if (a.row_options.Count() == 1 && a.row_options[0] == "111")
+                        {
+                            oldSum2_111 += Convert.ToSingle(Math.Round(a.val_fact, 1));
+                        }
+                        else if (a.row_options.Count() == 1 && a.row_options[0] == "112")
+                        {
+                            oldSum2_111 += Convert.ToSingle(Math.Round(a.val_fact, 1));
+                        }
+                    }
+                    else if (a.type == 3)
+                    {
+                        oldSum3 += Convert.ToSingle(Math.Round(a.val_fact, 1));
+                        if (a.row_options.Count() == 2)
+                        {
+                            oldSum3_111 += Convert.ToSingle(Math.Round(a.val_fact, 1));
+                            oldSum3_112 += Convert.ToSingle(Math.Round(a.val_fact, 1));
+                        }
+                        else if (a.row_options.Count() == 1 && a.row_options[0] == "111")
+                        {
+                            oldSum3_111 += Convert.ToSingle(Math.Round(a.val_fact, 1));
+                        }
+                        else if (a.row_options.Count() == 1 && a.row_options[0] == "112")
+                        {
+                            oldSum3_112 += Convert.ToSingle(Math.Round(a.val_fact, 1));
+                        }
+                    }
+                }
+            }
+            worksheet2["C12"] = actSum_ut;
+            worksheet2["H12"] = oldSum_ut;
+            worksheet2["C13"] = actSum_111;
+            worksheet2["H13"] = oldSum_111;
+            worksheet2["C14"] = actSum_112;
+            worksheet2["H14"] = oldSum_112;
+
+            worksheet2["G12"] = actSum3;
+            worksheet2["L12"] = oldSum3;
+            worksheet2["G13"] = actSum3_111;
+            worksheet2["L13"] = oldSum3_111;
+            worksheet2["G14"] = actSum3_112;
+            worksheet2["L14"] = oldSum3_112;
+
+            worksheet2["F12"] = actSum2;
+            worksheet2["K12"] = oldSum2;
+            worksheet2["F13"] = actSum2_111;
+            worksheet2["K13"] = oldSum2_111;
+
+            worksheet2["D12"] = mestn_actSum_ut;
+            worksheet2["I12"] = mestn_oldSum_ut;
+            worksheet2["D13"] = mestn_actSum_111;
+            worksheet2["I13"] = mestn_oldSum_111;
+            worksheet2["D14"] = mestn_actSum_112;
+            worksheet2["I14"] = mestn_oldSum_112;
+
+            worksheet2["E12"] = oth_actSum_ut;
+            worksheet2["J12"] = oth_oldSum_ut;
+            worksheet2["E13"] = oth_actSum_111;
+            worksheet2["J13"] = oth_oldSum_111;
+            worksheet2["E14"] = oth_actSum_112;
+            worksheet2["J14"] = oth_oldSum_112;
+            #endregion
+
+            #region тепло продано
+
+            float TFuelSum = 0;
+            float OldTFuelSum = 0;
+            float mTFuelSum = 0;
+            float mOldTFuelSum = 0;
+            float vTFuelSum = 0;
+            float vOldTFuelSum = 0;
+            foreach (var b in CompanyIdList)
+            {
+                CurrentData.UserData.Id_org = b;
+                var TFuelListSum = MakeTFuelSum(dateTimePicker1.Value.Year, dateTimePicker1.Value.Month);
+                var OldTFuelListSum = MakeTFuelSum(dateTimePicker1.Value.Year - 1, dateTimePicker1.Value.Month);
+                foreach (var a in TFuelListSum)
+                {
+                    TFuelSum += Convert.ToSingle(Math.Round(a.Value, 1));
+                    if (a.Fuel_group >= 2100 && a.Fuel_group <= 4000)
+                    {
+                        mTFuelSum += Convert.ToSingle(Math.Round(a.Value, 1));
+                    }
+                    if ((a.Fuel_group >= 2200 && a.Fuel_group <= 3100) || (a.Fuel_group >= 3100 && a.Fuel_group <= 4000))
+                    {
+                        vTFuelSum += Convert.ToSingle(Math.Round(a.Value, 1));
+
+                    }
+                }
+                foreach (var a in OldTFuelListSum)
+                {
+                    OldTFuelSum += Convert.ToSingle(Math.Round(a.Value, 1));
+                    if (a.Fuel_group >= 2100 && a.Fuel_group <= 4000)
+                    {
+                        mOldTFuelSum += Convert.ToSingle(Math.Round(a.Value, 1));
+                    }
+                    if ((a.Fuel_group >= 2200 && a.Fuel_group <= 3100) || (a.Fuel_group >= 3100 && a.Fuel_group <= 4000))
+                    {
+                        vOldTFuelSum += Convert.ToSingle(Math.Round(a.Value, 1));
+                    }
+                }
+
+            }        
+
+            worksheet2["C17"] = TFuelSum;
+            worksheet2["H17"] = OldTFuelSum;
+            worksheet2["D17"] = mTFuelSum;
+            worksheet2["I17"] = mOldTFuelSum;
+            worksheet2["E17"] = vTFuelSum;
+            worksheet2["J17"] = vOldTFuelSum;
+            #endregion
+
+            #region тепло и электричество получено
+
+            float tRecSum = 0;
+            float tOldRecSum = 0;
+            float eRecSum = 0;
+            float eOldRecSum = 0;
+            foreach (var b in CompanyIdList)
+            {
+                CurrentData.UserData.Id_org = b;
+                var RecievedListSum = MakeRecListSum(dateTimePicker1.Value.Year, dateTimePicker1.Value.Month);
+                var OldRecievedListSum = MakeRecListSum(dateTimePicker1.Value.Year - 1, dateTimePicker1.Value.Month);
+
+                foreach (var a in RecievedListSum)
+                {
+                    if (a.res_type == 2)
+                    {
+                        tRecSum += Convert.ToSingle(Math.Round(a.value, 1));
+                    }
+                    if (a.res_type == 3)
+                    {
+                        eRecSum += Convert.ToSingle(Math.Round(a.value, 1));
+                    }
+                }
+                foreach (var a in OldRecievedListSum)
+                {
+                    if (a.res_type == 2)
+                    {
+                        tOldRecSum += Convert.ToSingle(Math.Round(a.value, 1));
+                    }
+                    if (a.res_type == 3)
+                    {
+                        eOldRecSum += Convert.ToSingle(Math.Round(a.value, 1));
+                    }
+                }
+            }
+            worksheet2["F21"] = tRecSum;
+            worksheet2["K21"] = tOldRecSum;
+            worksheet2["G21"] = eRecSum;
+            worksheet2["L21"] = eOldRecSum;
+
+            #endregion
+
+            #region тепло и электричество отдано
+            float tSendSum = 0;
+            float tOldSendSum = 0;
+            float eSendSum = 0;
+            float eOldSendSum = 0;
+            foreach (var b in CompanyIdList)
+            {
+                CurrentData.UserData.Id_org = b;
+                var SendedListSum = MakeSendListSum(dateTimePicker1.Value.Year, dateTimePicker1.Value.Month);
+                var OldSendedListSum = MakeSendListSum(dateTimePicker1.Value.Year - 1, dateTimePicker1.Value.Month);
+
+                foreach (var a in SendedListSum)
+                {
+                    if (a.res_type == 2)
+                    {
+                        tSendSum += Convert.ToSingle(Math.Round(a.value, 1));
+                    }
+                    if (a.res_type == 3)
+                    {
+                        eSendSum += Convert.ToSingle(Math.Round(a.value, 1));
+                    }
+                }
+                foreach (var a in OldSendedListSum)
+                {
+                    if (a.res_type == 2)
+                    {
+                        tOldSendSum += Convert.ToSingle(Math.Round(a.value, 1));
+                    }
+                    if (a.res_type == 3)
+                    {
+                        eOldSendSum += Convert.ToSingle(Math.Round(a.value, 1));
+                    }
+                }
+            }
+            worksheet2["F16"] = tSendSum;
+            worksheet2["K16"] = tOldSendSum;
+            worksheet2["G16"] = eSendSum;
+            worksheet2["L16"] = eOldSendSum;
+            #endregion
+
+            #region получено собственного тепла и электричества
+            float tSourceSum = 0;
+            float tOldSourceSum = 0;
+            float tvSourceSum = 0;
+            float tvOldSourceSum = 0;
+            float tsSourceSum = 0;
+            float tsOldSourceSum = 0;
+            float eSourceSum = 0;
+            float eOldSourceSum = 0;
+            float evSourceSum = 0;
+            float evOldSourceSum = 0;
+            float esSourceSum = 0;
+            float esOldSourceSum = 0;
+            foreach (var b in CompanyIdList)
+            {
+                CurrentData.UserData.Id_org = b;
+                var SourceSum = MakeSourceSum(dateTimePicker1.Value.Year, dateTimePicker1.Value.Month);
+                var OldSourceSum = MakeSourceSum(dateTimePicker1.Value.Year - 1, dateTimePicker1.Value.Month);
+                foreach (var a in SourceSum)
+                {
+                    if (a.Res_type == 2)
+                    {
+                        tSourceSum += Convert.ToSingle(Math.Round(a.Value, 1));
+                    }
+                    if (a.Res_type == 2 && a.Fuel_group == 4000)
+                    {
+                        tvSourceSum += Convert.ToSingle(Math.Round(a.Value, 1));
+                    }
+                    if (a.Res_type == 2 && a.Fuel_group == 5000)
+                    {
+                        tsSourceSum += Convert.ToSingle(Math.Round(a.Value, 1));
+                    }
+                    if (a.Res_type == 3)
+                    {
+                        eSourceSum += Convert.ToSingle(Math.Round(a.Value, 1));
+                    }
+                    if (a.Res_type == 3 && a.Fuel_group == 4000)
+                    {
+                        evSourceSum += Convert.ToSingle(Math.Round(a.Value, 1));
+                    }
+                    if (a.Res_type == 3 && a.Fuel_group == 5000)
+                    {
+                        esSourceSum += Convert.ToSingle(Math.Round(a.Value, 1));
+                    }
+                }
+                foreach (var a in OldSourceSum)
+                {
+                    if (a.Res_type == 2)
+                    {
+                        tOldSourceSum += Convert.ToSingle(Math.Round(a.Value, 1));
+                    }
+                    if (a.Res_type == 2 && a.Fuel_group == 4000)
+                    {
+                        tvOldSourceSum += Convert.ToSingle(Math.Round(a.Value, 1));
+                    }
+                    if (a.Res_type == 2 && a.Fuel_group == 5000)
+                    {
+                        tsOldSourceSum += Convert.ToSingle(Math.Round(a.Value, 1));
+                    }
+                    if (a.Res_type == 3)
+                    {
+                        eOldSourceSum += Convert.ToSingle(Math.Round(a.Value, 1));
+                    }
+                    if (a.Res_type == 3 && a.Fuel_group == 4000)
+                    {
+                        evOldSourceSum += Convert.ToSingle(Math.Round(a.Value, 1));
+                    }
+                    if (a.Res_type == 3 && a.Fuel_group == 5000)
+                    {
+                        esOldSourceSum += Convert.ToSingle(Math.Round(a.Value, 1));
+                    }
+                }
+            }
+            worksheet2["F18"] = tSourceSum;
+            worksheet2["K18"] = tOldSourceSum;
+            worksheet2["F19"] = tvSourceSum;
+            worksheet2["K19"] = tvOldSourceSum;
+            worksheet2["F20"] = tsSourceSum;
+            worksheet2["K20"] = tsOldSourceSum;
+            worksheet2["G18"] = eSourceSum;
+            worksheet2["L18"] = eOldSourceSum;
+            worksheet2["G19"] = evSourceSum;
+            worksheet2["L19"] = evOldSourceSum;
+            worksheet2["G20"] = esSourceSum;
+            worksheet2["L20"] = esOldSourceSum;
+            #endregion
+
+            #region продано населению
+            float actTradeSumH = 0;
+            float oldTradeSumH = 0;
+            float actTradeSumE = 0;
+            float oldTradeSumE = 0;
+            foreach (var b in CompanyIdList)
+            {
+                CurrentData.UserData.Id_org = b;
+                var TradesSum = MakeTradeSum(dateTimePicker1.Value.Year, dateTimePicker1.Value.Month);
+                foreach (var a in TradesSum)
+                {
+                    if (a.type == 2)
+                        actTradeSumH += Convert.ToSingle(Math.Round(a.value, 1));
+                    else if (a.type == 3)
+                        actTradeSumE += Convert.ToSingle(Math.Round(a.value, 1));
+                }
+                var OldTradesSum = MakeTradeSum(dateTimePicker1.Value.Year - 1, dateTimePicker1.Value.Month);
+                foreach (var a in OldTradesSum)
+                {
+                    if (a.type == 2)
+                        oldTradeSumH += Convert.ToSingle(Math.Round(a.value, 1));
+                    else if (a.type == 3)
+                        oldTradeSumE += Convert.ToSingle(Math.Round(a.value, 1));
+                }
+            }
+            worksheet2["F17"] = actTradeSumH;
+            worksheet2["G17"] = oldTradeSumH;
+            worksheet2["K17"] = actTradeSumE;
+            worksheet2["L17"] = oldTradeSumE;
+
+            worksheet2["F30"] = "=SUM(ROUND(C12, 0), ROUND(((F12-F18)*0,143), 0), ROUND(((G12-G18)*0,123), 0))";
+            worksheet2["H30"] = "=SUM(ROUND(H12, 0), ROUND(((K12-K18)*0,143), 0), ROUND(((L12-L18)*0,123), 0))";
+
+            worksheet2["F15"] = 0;
+            worksheet2["G15"] = 0;
+            worksheet2["K15"] = 0;
+            worksheet2["L15"] = 0;
+            #endregion
+
+            for (int i = 0; i <= 66; i++)
+            {
+                worksheet2.AutoFitRowHeight(i, true);
+            }
+            CurrentData.UserData.Id_org = CurrentID;
+        }
+
 
         void MakeTable12tekHidden()
         {
@@ -2366,7 +2955,7 @@ namespace WindowsFormsApp1
                 worksheet4["O" + tmp] = topl;
                 worksheet4["R" + tmp] = heat;
                 worksheet4["U" + tmp] = el;
-                worksheet4["L" + tmp] = cnt;
+                worksheet4["L" + tmp] = cnt/1000;
                 tmp++;
             }
             #endregion
@@ -2521,8 +3110,8 @@ namespace WindowsFormsApp1
                 worksheet4["S80"] = gaspoput;
                 worksheet4["S81"] = gaspoput_h;
             }
-            worksheet4["I80"] = sum;
-            worksheet4["I81"] = sum_h;
+            worksheet4["I80"] = sum != 0 ? sum.ToString() : "x";
+            worksheet4["I81"] = sum_h != 0 ? sum_h.ToString() : "x";
 
             drova = 0;
             toppech = 0;
@@ -2623,9 +3212,9 @@ namespace WindowsFormsApp1
                 worksheet4["S74"] = gaspoput_e;
                 worksheet4["S75"] = gaspoput_h;
             }
-            worksheet4["I73"] = sum;
-            worksheet4["I74"] = sum_e;
-            worksheet4["I75"] = sum_h;
+            worksheet4["I73"] = sum != 0 ? sum.ToString() : "x";
+            worksheet4["I74"] = sum_e != 0 ? sum_e.ToString() : "x";
+            worksheet4["I75"] = sum_h != 0 ? sum_h.ToString() : "x";
 
             drova = 0;
             toppech = 0;
@@ -2721,8 +3310,9 @@ namespace WindowsFormsApp1
                 worksheet4["S77"] = gaspoput;
                 worksheet4["S78"] = gaspoput_e;
             }
-            worksheet4["I77"] = sum;
-            worksheet4["I78"] = sum_e;
+            
+            worksheet4["I77"] = sum != 0 ? sum.ToString() : "x";
+            worksheet4["I78"] = sum_e != 0 ? sum_e.ToString() : "x";
 
             var a2 = 1;
             #region style
@@ -2918,7 +3508,9 @@ namespace WindowsFormsApp1
                     {
                         for (int j = 0; j < RecievedList.Count; j++)
                         {
-                            RecievedList[j].value += Convert.ToSingle(Math.Round(tmplist[j].value, 1));
+                            int index = tmplist.FindIndex(a => a.Id == RecievedList[j].Id);
+                            if (index > 0)
+                                RecievedList[j].value += Convert.ToSingle(Math.Round(tmplist[index].value, 1));
                         }
                     }
                 }
@@ -2941,7 +3533,9 @@ namespace WindowsFormsApp1
                     {
                         for (int j = 0; j < SendedList.Count; j++)
                         {
-                            SendedList[j].value += Convert.ToSingle(Math.Round(tmplist[j].value, 1));
+                            int index = tmplist.FindIndex(a => a.Id == SendedList[j].Id);
+                            if (index > 0)
+                                SendedList[j].value += Convert.ToSingle(Math.Round(tmplist[index].value, 1));
                         }
                     }
                 }
@@ -3066,6 +3660,28 @@ namespace WindowsFormsApp1
         private void button2_Click(object sender, EventArgs e)
         {
             MakeTable1tek();
+        }
+
+        private void сохранитьОтчет1ТЭКToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            
+            var workbook = reoGridControl5;
+            var name = dbOps.GetCompanyName(CurrentData.UserData.Id_org);
+            workbook.Save(Directory.GetCurrentDirectory() + "\\1_TEK_" + name.Replace("\"", " ") + "_" + dateTimePicker1.Value.ToString("yyyy") + ".xlsx", unvell.ReoGrid.IO.FileFormat.Excel2007);
+            System.Windows.Forms.MessageBox.Show("Файл " + "1_TEK_" + name.Replace("\"", " ") + "_" + dateTimePicker1.Value.ToString("yyyy") + ".xlsx" + " успешно сохранен в папку программы");
+
+        }
+
+        private void RUPButton_Click(object sender, EventArgs e)
+        {
+            if (tabControl1.SelectedTab == tabControl1.TabPages["tabPage2"])
+                MakeTable12teSUM(false);
+        }
+
+        private void POButton_Click(object sender, EventArgs e)
+        {
+            if (tabControl1.SelectedTab == tabControl1.TabPages["tabPage2"])
+                MakeTable12teSUM(true);
         }
     }
 }
