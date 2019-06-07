@@ -4246,5 +4246,11 @@ namespace WindowsFormsApp1
             else if (tabControl1.SelectedTab == tabControl1.TabPages["tabPage6"])
                 MakeTable1tekSUM(true);
         }
+
+        private void мастерВвода1ПЭР12ТЭКToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var myForm = new ReportsCreateForm(dateTimePicker1.Value.Year, dateTimePicker1.Value.Month);
+            myForm.Show();
+        }
     }
 }

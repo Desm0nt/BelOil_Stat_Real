@@ -47,6 +47,371 @@ namespace WindowsFormsApp1.DBO
             return status;
         }
 
+        public static bool ExistReportCheck(int id_org, int year, int month)
+        {
+            bool status = false;
+            try
+            {
+                SqlConnection myConnection = new SqlConnection(cnStr);
+                myConnection.Open();
+
+                string query = "SELECT COUNT(*) FROM NewReport_1Per where id_org = @id_org and year = @year and month = @month";
+                SqlCommand command = new SqlCommand(query, myConnection);
+                command.Parameters.AddWithValue("@id_org", id_org);
+                command.Parameters.AddWithValue("@year", year);
+                command.Parameters.AddWithValue("@month", month);
+                var result = Convert.ToInt32(command.ExecuteScalar());
+                if (result == 1)
+                    status = true;
+
+                myConnection.Close();
+            }
+            catch (Exception Ex)
+            {
+                MessageBox.Show("Ошибка проверки наличия отчета: " + Ex.Message);
+            }
+            return status;
+        }
+        public static void AddNewReport(int id_org, int year, int month, int id_user)
+        {
+            try
+            {
+                SqlConnection myConnection = new SqlConnection(cnStr);
+                myConnection.Open();
+
+                string query = "INSERT INTO NewReport_1Per (id_org, month, year, id_user) VALUES (@id_org, @month, @year, @id_user)";
+                SqlCommand command = new SqlCommand(query, myConnection);
+                command.Parameters.AddWithValue("@id_org", id_org);
+                command.Parameters.AddWithValue("@year", year);
+                command.Parameters.AddWithValue("@month", month);
+                command.Parameters.AddWithValue("@id_user", id_user);
+                command.ExecuteNonQuery();
+                myConnection.Close();
+            }
+            catch (Exception Ex)
+            {
+                MessageBox.Show("Ошибка проверки наличия отчета: " + Ex.Message);
+            }
+        }
+        public static List<int> GetFuelsTradeId(int id_org, int trade)
+        {
+            List<int> trades = new List<int>();
+            try
+            {
+                SqlConnection myConnection = new SqlConnection(cnStr);
+                myConnection.Open();
+
+                string query = "SELECT * FROM [NewOrgFuels] where id_org = @id_org and trade = @trade";
+                SqlCommand command = new SqlCommand(query, myConnection);
+                command.Parameters.AddWithValue("@id_org", id_org);
+                command.Parameters.AddWithValue("@trade", trade);
+                using (SqlDataReader dr = command.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        trades.Add(Int32.Parse(dr["id"].ToString()));
+                    }
+                }
+                myConnection.Close();
+            }
+            catch (Exception Ex)
+            {
+                MessageBox.Show("Ошибка GetFuelsTradeId: " + Ex.Message);
+            }
+            return trades;
+        }
+        public static List<NormIdTypeTable> GetNormIdTypeList(int id_org)
+        {
+            List<NormIdTypeTable> NormList = new List<NormIdTypeTable>();
+            try
+            {
+                SqlConnection myConnection = new SqlConnection(cnStr);
+                myConnection.Open();
+                string query = "SELECT * FROM [NewNorm] where id_org = @id_org";
+                SqlCommand command = new SqlCommand(query, myConnection);
+                command.Parameters.AddWithValue("@id_org", id_org);
+                using (SqlDataReader dr = command.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        NormList.Add(new NormIdTypeTable { Id = Int32.Parse(dr["id"].ToString()), Name = dr["name"].ToString(), Type = Int32.Parse(dr["type"].ToString())});
+                    }
+                }
+                myConnection.Close();
+            }
+            catch (Exception Ex)
+            {
+                MessageBox.Show("Ошибка GetNormIdTypeList: " + Ex.Message);
+            }
+            return NormList;
+        }
+        public static List<SourceIdTable> GetSoucreIdList(int id_org)
+        {
+            List<SourceIdTable> SourceList = new List<SourceIdTable>();
+            try
+            {
+                SqlConnection myConnection = new SqlConnection(cnStr);
+                myConnection.Open();
+                string query = "SELECT * FROM [NewOrgSoucesList] where id_org = @id_org";
+                SqlCommand command = new SqlCommand(query, myConnection);
+                command.Parameters.AddWithValue("@id_org", id_org);
+                using (SqlDataReader dr = command.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        SourceList.Add(new SourceIdTable { Id = Int32.Parse(dr["id"].ToString()), Id_org = Int32.Parse(dr["id_org"].ToString()), Id_fuel = Int32.Parse(dr["id_fuel"].ToString()), Id_object = Int32.Parse(dr["id_object"].ToString()), Res_type = Int32.Parse(dr["res_type"].ToString()) });
+                    }
+                }
+                myConnection.Close();
+            }
+            catch (Exception Ex)
+            {
+                MessageBox.Show("Ошибка GetSoucreIdList: " + Ex.Message);
+            }
+            return SourceList;
+        }
+        public static List<RecievedIdTable> GetRecievedIdList(int id_org)
+        {
+            List<RecievedIdTable> SourceList = new List<RecievedIdTable>();
+            try
+            {
+                SqlConnection myConnection = new SqlConnection(cnStr);
+                myConnection.Open();
+                string query = "SELECT * FROM [NewRecievedOrgList] where id_org = @id_org";
+                SqlCommand command = new SqlCommand(query, myConnection);
+                command.Parameters.AddWithValue("@id_org", id_org);
+                using (SqlDataReader dr = command.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        SourceList.Add(new RecievedIdTable { Id = Int32.Parse(dr["id"].ToString()), Id_org = Int32.Parse(dr["id_org"].ToString()), Id_owner = Int32.Parse(dr["id_owner"].ToString()), Res_type = Int32.Parse(dr["res_type"].ToString()) });
+                    }
+                }
+                myConnection.Close();
+            }
+            catch (Exception Ex)
+            {
+                MessageBox.Show("Ошибка GetRecievedIdList: " + Ex.Message);
+            }
+            return SourceList;
+        }
+        public static List<SendedIdTable> GetSendedIdList(int id_org)
+        {
+            List<SendedIdTable> SourceList = new List<SendedIdTable>();
+            try
+            {
+                SqlConnection myConnection = new SqlConnection(cnStr);
+                myConnection.Open();
+                string query = "SELECT * FROM [NewSendedOrgList] where id_org = @id_org";
+                SqlCommand command = new SqlCommand(query, myConnection);
+                command.Parameters.AddWithValue("@id_org", id_org);
+                using (SqlDataReader dr = command.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        SourceList.Add(new SendedIdTable { Id = Int32.Parse(dr["id"].ToString()), Id_org = Int32.Parse(dr["id_org"].ToString()), Id_owner = Int32.Parse(dr["id_owner"].ToString()), Res_type = Int32.Parse(dr["res_type"].ToString()) });
+                    }
+                }
+                myConnection.Close();
+            }
+            catch (Exception Ex)
+            {
+                MessageBox.Show("Ошибка GetSendedIdList: " + Ex.Message);
+            }
+            return SourceList;
+        }
+        public static void AddFuelTrades(int id_fuel, int id_org, int id_rep, float value)
+        {
+            try
+            {
+                SqlConnection myConnection = new SqlConnection(cnStr);
+                myConnection.Open();
+
+                string query = "INSERT INTO NewFuelsTrade (id_fuel, id_org, id_rep, value) VALUES (@id_fuel, @id_org, @id_rep, @value)";
+                SqlCommand command = new SqlCommand(query, myConnection);
+                command.Parameters.AddWithValue("@id_fuel", id_fuel);
+                command.Parameters.AddWithValue("@id_org", id_org);
+                command.Parameters.AddWithValue("@id_rep", id_rep);
+                command.Parameters.AddWithValue("@value", value);
+                command.ExecuteNonQuery();
+                myConnection.Close();
+            }
+            catch (Exception Ex)
+            {
+                MessageBox.Show("Ошибка AddFuelTrades: " + Ex.Message);
+            }
+        }
+        public static void UpdateFuelTrades(int id, float value)
+        {
+            try
+            {
+                SqlConnection myConnection = new SqlConnection(cnStr);
+                myConnection.Open();
+
+                string query = "UPDATE NewFuelsTrade SET value = @value WHERE id = @id";
+                SqlCommand command = new SqlCommand(query, myConnection);
+                command.Parameters.AddWithValue("@id", id);
+                command.Parameters.AddWithValue("@value", value);
+                command.ExecuteNonQuery();
+                myConnection.Close();
+            }
+            catch (Exception Ex)
+            {
+                MessageBox.Show("Ошибка UpdateFuelTrades: " + Ex.Message);
+            }
+        }
+        public static void UpdateFuelNorm(int id, float val_plan, float val_fact)
+        {
+            try
+            {
+                SqlConnection myConnection = new SqlConnection(cnStr);
+                myConnection.Open();
+
+                string query = "UPDATE NewNormData SET val_plan = @val_plan, val_fact = @val_fact WHERE id = @id";
+                SqlCommand command = new SqlCommand(query, myConnection);
+                command.Parameters.AddWithValue("@id", id);
+                command.Parameters.AddWithValue("@val_plan", val_plan);
+                command.Parameters.AddWithValue("@val_fact", val_fact);
+                command.ExecuteNonQuery();
+                myConnection.Close();
+            }
+            catch (Exception Ex)
+            {
+                MessageBox.Show("Ошибка UpdateFuelNorm: " + Ex.Message);
+            }
+        }
+
+        public static void AddNormData(int id_norm, int id_rep, float value_plan, float value_fact)
+        {
+            try
+            {
+                SqlConnection myConnection = new SqlConnection(cnStr);
+                myConnection.Open();
+
+                string query = "INSERT INTO NewNormData (id_norm, id_rep, value_plan, value_fact) VALUES (@id_norm, @id_rep, @value_plan, @value_fact)";
+                SqlCommand command = new SqlCommand(query, myConnection);
+                command.Parameters.AddWithValue("@id_norm", id_norm);
+                command.Parameters.AddWithValue("@id_rep", id_rep);
+                command.Parameters.AddWithValue("@value_plan", value_plan);
+                command.Parameters.AddWithValue("@value_fact", value_fact);
+                command.ExecuteNonQuery();
+                myConnection.Close();
+            }
+            catch (Exception Ex)
+            {
+                MessageBox.Show("Ошибка AddNormData: " + Ex.Message);
+            }
+        }
+        public static void AddSource(int id_src, int id_org, int id_rep, float value)
+        {
+            try
+            {
+                SqlConnection myConnection = new SqlConnection(cnStr);
+                myConnection.Open();
+
+                string query = "INSERT INTO NewOrgSouces (id_src, id_org, id_rep, value) VALUES (@id_src, @id_org, @id_rep, @value)";
+                SqlCommand command = new SqlCommand(query, myConnection);
+                command.Parameters.AddWithValue("@id_src", id_src);
+                command.Parameters.AddWithValue("@id_org", id_org);
+                command.Parameters.AddWithValue("@id_rep", id_rep);
+                command.Parameters.AddWithValue("@value", value);
+                command.ExecuteNonQuery();
+                myConnection.Close();
+            }
+            catch (Exception Ex)
+            {
+                MessageBox.Show("Ошибка AddSource: " + Ex.Message);
+            }
+        }
+        public static void AddRecieved(int id_recieved, int id_org, int id_rep, float value)
+        {
+            try
+            {
+                SqlConnection myConnection = new SqlConnection(cnStr);
+                myConnection.Open();
+
+                string query = "INSERT INTO NewRecievedOrg (id_recieved, id_org, id_rep, value) VALUES (@id_recieved, @id_org, @id_rep, @value)";
+                SqlCommand command = new SqlCommand(query, myConnection);
+                command.Parameters.AddWithValue("@id_recieved", id_recieved);
+                command.Parameters.AddWithValue("@id_org", id_org);
+                command.Parameters.AddWithValue("@id_rep", id_rep);
+                command.Parameters.AddWithValue("@value", value);
+                command.ExecuteNonQuery();
+                myConnection.Close();
+            }
+            catch (Exception Ex)
+            {
+                MessageBox.Show("Ошибка AddRecieved: " + Ex.Message);
+            }
+        }
+        public static void AddSended(int id_sended, int id_org, int id_rep, float value)
+        {
+            try
+            {
+                SqlConnection myConnection = new SqlConnection(cnStr);
+                myConnection.Open();
+
+                string query = "INSERT INTO NewSendedOrg (id_sended, id_org, id_rep, value) VALUES (@id_sended, @id_org, @id_rep, @value)";
+                SqlCommand command = new SqlCommand(query, myConnection);
+                command.Parameters.AddWithValue("@id_sended", id_sended);
+                command.Parameters.AddWithValue("@id_org", id_org);
+                command.Parameters.AddWithValue("@id_rep", id_rep);
+                command.Parameters.AddWithValue("@value", value);
+                command.ExecuteNonQuery();
+                myConnection.Close();
+            }
+            catch (Exception Ex)
+            {
+                MessageBox.Show("Ошибка AddSended: " + Ex.Message);
+            }
+        }
+        public static string GetFuelNameById(int fuel_id, int year, int month)
+        {
+            string name = "";
+            try
+            {
+                SqlConnection myConnection = new SqlConnection(cnStr);
+                myConnection.Open();
+                string query = "SELECT COUNT(*)  FROM [NewFuels] where fuel_id = @fuel_id and year = @year and month = @month";
+                SqlCommand command = new SqlCommand(query, myConnection);
+                command.Parameters.AddWithValue("@fuel_id", fuel_id);
+                command.Parameters.AddWithValue("@year", year);
+                command.Parameters.AddWithValue("@month", month);
+
+                int RecordExist = (int)command.ExecuteScalar();
+                if (RecordExist > 0)
+                {
+                    query = "SELECT * FROM [NewFuels] where fuel_id = @fuel_id and year = @year and month = @month";
+                    command = new SqlCommand(query, myConnection);
+                    command.Parameters.AddWithValue("@fuel_id", fuel_id);
+                    command.Parameters.AddWithValue("@year", year);
+                    command.Parameters.AddWithValue("@month", month);
+                }
+                else
+                {
+                    query = "SELECT * FROM [NewFuels] WHERE fuel_id = @fuel_id AND time_id = (SELECT MAX(time_id) FROM [NewFuels])";
+                    command = new SqlCommand(query, myConnection);
+                    command.Parameters.AddWithValue("@fuel_id", fuel_id);
+                    command.Parameters.AddWithValue("@year", year);
+                    command.Parameters.AddWithValue("@month", month);
+                }
+                using (SqlDataReader dr = command.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                       name = dr["name"].ToString();
+                    }
+                }
+                myConnection.Close();
+            }
+            catch (Exception Ex)
+            {
+                MessageBox.Show("Ошибка GetFuelNameById: " + Ex.Message);
+            }
+            return name;
+        }
+
+
         /// <summary>
         /// Вход пользователя в систему
         /// </summary>
@@ -267,6 +632,56 @@ namespace WindowsFormsApp1.DBO
             }
             return NormList;
         }
+        public static List<NormInputTable> GetNormInputList(int id_org, int id_rep, int type, int year, int month)
+        {
+            List<NormInputTable> NormList = new List<NormInputTable>();
+            try
+            {
+                SqlConnection myConnection = new SqlConnection(cnStr);
+                SqlConnection myConnection2 = new SqlConnection(cnStr);
+                myConnection.Open();
+
+                string query = "SELECT * FROM [NewNorm] where id_org = @id_org and type = @type";
+                SqlCommand command = new SqlCommand(query, myConnection);
+                command.Parameters.AddWithValue("@id_org", id_org);
+                command.Parameters.AddWithValue("@type", type);
+                using (SqlDataReader dr = command.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        myConnection2.Open();
+                        string query2 = "SELECT * FROM [NewNormData] WHERE [id_norm] = @id_norm AND [id_rep] = @id_rep";
+                        SqlCommand command2 = new SqlCommand(query2, myConnection2);
+                        command2.Parameters.AddWithValue("@id_norm", Int32.Parse(dr["id"].ToString()));
+                        command2.Parameters.AddWithValue("@id_rep", id_rep);
+                        var a = Int32.Parse(dr["id"].ToString());
+                        using (SqlDataReader dr2 = command2.ExecuteReader())
+                        {
+                            while (dr2.Read())
+                            {
+                                string[] rowopt = !String.IsNullOrWhiteSpace(dr["row_options"].ToString()) ? dr["row_options"].ToString().Split(',') : new string[] { };
+                                if (!String.IsNullOrWhiteSpace(dr["fuel"].ToString()))
+                                {
+                                    var name = dbOps.GetFuelNameById(Int32.Parse(dr["fuel"].ToString()), year, month);
+                                    NormList.Add(new NormInputTable { Id = Int32.Parse(dr2["id"].ToString()), name = dr["name"].ToString() + " (" + name + ")", val_plan = float.Parse(dr2["value_plan"].ToString()), val_fact = float.Parse(dr2["value_fact"].ToString()) });
+
+                                }
+                                else
+                                    NormList.Add(new NormInputTable { Id = Int32.Parse(dr2["id"].ToString()), name = dr["name"].ToString(), val_plan = float.Parse(dr2["value_plan"].ToString()), val_fact = float.Parse(dr2["value_fact"].ToString()) });
+                            }
+                        }
+                        myConnection2.Close();
+                    }
+                }
+                myConnection.Close();
+            }
+            catch (Exception Ex)
+            {
+                MessageBox.Show("Ошибка GetNormInputList: " + Ex.Message);
+            }
+            return NormList;
+        }
+
 
         public static List<RecievedTable> GetRecievedList(int id_owner, int id_rep)
         {
@@ -470,6 +885,51 @@ namespace WindowsFormsApp1.DBO
             }
             return FTradeList;
         }
+        public static List<FTradeInputTable> GetFTradeInputList(int id_org, int id_rep, int year, int month)
+        {
+            List<FTradeInputTable> FTradeList = new List<FTradeInputTable>();
+            try
+            {
+                SqlConnection myConnection = new SqlConnection(cnStr);
+                SqlConnection myConnection2 = new SqlConnection(cnStr);
+                myConnection.Open();
+
+                string query = "SELECT * FROM [NewOrgFuels] where id_org = @id_org and trade = @trade";
+                bool trade = true;
+                SqlCommand command = new SqlCommand(query, myConnection);
+                command.Parameters.AddWithValue("@id_org", id_org);
+                command.Parameters.AddWithValue("@trade", trade);
+                using (SqlDataReader dr = command.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        myConnection2.Open();
+                        string query2 = "SELECT * FROM [NewFuelsTrade] WHERE [id_fuel] = @id_tfuel AND [id_rep] = @id_rep";
+                        SqlCommand command2 = new SqlCommand(query2, myConnection2);
+                        command2.Parameters.AddWithValue("@id_tfuel", Int32.Parse(dr["id"].ToString()));
+                        command2.Parameters.AddWithValue("@id_rep", id_rep);
+                        var a = Int32.Parse(dr["id"].ToString());
+                        using (SqlDataReader dr2 = command2.ExecuteReader())
+                        {
+                            while (dr2.Read())
+                            {
+                                //тут баги
+                                FTradeList.Add(new FTradeInputTable {Id = Int32.Parse(dr2["id"].ToString()), Id_fuel = Int32.Parse(dr["id"].ToString()), Fuel_name = dbOps.GetFuelNameById(Int32.Parse(dr["id_fuel"].ToString()), year, month), Value = float.Parse(dr2["value"].ToString()) });
+                            }
+                        }
+                        myConnection2.Close();
+                    }
+                }
+                myConnection.Close();
+            }
+            catch (Exception Ex)
+            {
+                MessageBox.Show("Ошибка получения данных торговли топливом: " + Ex.Message);
+            }
+            return FTradeList;
+        }
+
+
 
         public static NormTable GetOneNorm(int id_org, int id_rep, int id_norm)
         {
@@ -538,7 +998,7 @@ namespace WindowsFormsApp1.DBO
                 }
                 else
                 {
-                    query = "SELECT * FROM [NewFuels] WHERE id = (SELECT MAX(time_id) FROM [NewFuels])";
+                    query = "SELECT * FROM [NewFuels] WHERE fuel_id = @fuel_id and time_id = (SELECT MAX(time_id) FROM [NewFuels])";
                     command = new SqlCommand(query, myConnection);
                     command.Parameters.AddWithValue("@fuel_id", fuel_id);
                     command.Parameters.AddWithValue("@year", year);

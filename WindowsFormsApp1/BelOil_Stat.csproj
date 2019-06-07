@@ -60,8 +60,14 @@
     <Compile Include="DataTables\CompanyListTable.cs" />
     <Compile Include="DataTables\CurrentData.cs" />
     <Compile Include="DataTables\FactorTable.cs" />
+    <Compile Include="DataTables\FTradeInputTable.cs" />
     <Compile Include="DataTables\Norm4Table.cs" />
+    <Compile Include="DataTables\NormIdTypeTable.cs" />
+    <Compile Include="DataTables\NormInputTable.cs" />
     <Compile Include="DataTables\OneNorm.cs" />
+    <Compile Include="DataTables\SendedIdTable.cs" />
+    <Compile Include="DataTables\RecievedIdTable.cs" />
+    <Compile Include="DataTables\SourceIdTable.cs" />
     <Compile Include="DataTables\Table1tekPart2.cs" />
     <Compile Include="DataTables\SourceTable1tek.cs" />
     <Compile Include="DataTables\WholeTable.cs" />
@@ -106,6 +112,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="ReportsCreateForm.resx">
+      <DependentUpon>ReportsCreateForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ReportsForm.resx">
       <DependentUpon>ReportsForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -121,7 +130,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

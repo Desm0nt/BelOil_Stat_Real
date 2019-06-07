@@ -63,6 +63,7 @@
             this.button3 = new System.Windows.Forms.Button();
             this.RUPButton = new System.Windows.Forms.Button();
             this.POButton = new System.Windows.Forms.Button();
+            this.мастерВвода1ПЭР12ТЭКToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tabPage6.SuspendLayout();
@@ -99,6 +100,7 @@
             // 
             this.менюToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.сменитьПользователяToolStripMenuItem,
+            this.мастерВвода1ПЭР12ТЭКToolStripMenuItem,
             this.закрытьПрограммуToolStripMenuItem});
             this.менюToolStripMenuItem.Name = "менюToolStripMenuItem";
             this.менюToolStripMenuItem.Size = new System.Drawing.Size(53, 26);
@@ -107,14 +109,14 @@
             // сменитьПользователяToolStripMenuItem
             // 
             this.сменитьПользователяToolStripMenuItem.Name = "сменитьПользователяToolStripMenuItem";
-            this.сменитьПользователяToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
+            this.сменитьПользователяToolStripMenuItem.Size = new System.Drawing.Size(229, 22);
             this.сменитьПользователяToolStripMenuItem.Text = "Сменить пользователя";
             this.сменитьПользователяToolStripMenuItem.Click += new System.EventHandler(this.сменитьПользователяToolStripMenuItem_Click);
             // 
             // закрытьПрограммуToolStripMenuItem
             // 
             this.закрытьПрограммуToolStripMenuItem.Name = "закрытьПрограммуToolStripMenuItem";
-            this.закрытьПрограммуToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
+            this.закрытьПрограммуToolStripMenuItem.Size = new System.Drawing.Size(229, 22);
             this.закрытьПрограммуToolStripMenuItem.Text = "Закрыть программу";
             this.закрытьПрограммуToolStripMenuItem.Click += new System.EventHandler(this.закрытьПрограммуToolStripMenuItem_Click);
             // 
@@ -463,6 +465,13 @@
             this.POButton.Visible = false;
             this.POButton.Click += new System.EventHandler(this.POButton_Click);
             // 
+            // мастерВвода1ПЭР12ТЭКToolStripMenuItem
+            // 
+            this.мастерВвода1ПЭР12ТЭКToolStripMenuItem.Name = "мастерВвода1ПЭР12ТЭКToolStripMenuItem";
+            this.мастерВвода1ПЭР12ТЭКToolStripMenuItem.Size = new System.Drawing.Size(229, 22);
+            this.мастерВвода1ПЭР12ТЭКToolStripMenuItem.Text = "Мастер ввода 1-ПЭР/12-ТЭК";
+            this.мастерВвода1ПЭР12ТЭКToolStripMenuItem.Click += new System.EventHandler(this.мастерВвода1ПЭР12ТЭКToolStripMenuItem_Click);
+            // 
             // ReportsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -530,5 +539,6 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button RUPButton;
         private System.Windows.Forms.Button POButton;
+        private System.Windows.Forms.ToolStripMenuItem мастерВвода1ПЭР12ТЭКToolStripMenuItem;
     }
 }
