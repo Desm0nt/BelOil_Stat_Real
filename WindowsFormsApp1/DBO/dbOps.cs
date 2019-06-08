@@ -170,16 +170,16 @@ namespace WindowsFormsApp1.DBO
             }
             return SourceList;
         }
-        public static List<RecievedIdTable> GetRecievedIdList(int id_org)
+        public static List<RecievedIdTable> GetRecievedIdList(int id_owner)
         {
             List<RecievedIdTable> SourceList = new List<RecievedIdTable>();
             try
             {
                 SqlConnection myConnection = new SqlConnection(cnStr);
                 myConnection.Open();
-                string query = "SELECT * FROM [NewRecievedOrgList] where id_org = @id_org";
+                string query = "SELECT * FROM [NewRecievedOrgList] where id_owner = @id_owner";
                 SqlCommand command = new SqlCommand(query, myConnection);
-                command.Parameters.AddWithValue("@id_org", id_org);
+                command.Parameters.AddWithValue("@id_owner", id_owner);
                 using (SqlDataReader dr = command.ExecuteReader())
                 {
                     while (dr.Read())
@@ -195,16 +195,16 @@ namespace WindowsFormsApp1.DBO
             }
             return SourceList;
         }
-        public static List<SendedIdTable> GetSendedIdList(int id_org)
+        public static List<SendedIdTable> GetSendedIdList(int id_owner)
         {
             List<SendedIdTable> SourceList = new List<SendedIdTable>();
             try
             {
                 SqlConnection myConnection = new SqlConnection(cnStr);
                 myConnection.Open();
-                string query = "SELECT * FROM [NewSendedOrgList] where id_org = @id_org";
+                string query = "SELECT * FROM [NewSendedOrgList] where id_owner = @id_owner";
                 SqlCommand command = new SqlCommand(query, myConnection);
-                command.Parameters.AddWithValue("@id_org", id_org);
+                command.Parameters.AddWithValue("@id_owner", id_owner);
                 using (SqlDataReader dr = command.ExecuteReader())
                 {
                     while (dr.Read())
@@ -267,7 +267,7 @@ namespace WindowsFormsApp1.DBO
                 SqlConnection myConnection = new SqlConnection(cnStr);
                 myConnection.Open();
 
-                string query = "UPDATE NewNormData SET val_plan = @val_plan, val_fact = @val_fact WHERE id = @id";
+                string query = "UPDATE NewNormData SET value_plan = @val_plan, value_fact = @val_fact WHERE id = @id";
                 SqlCommand command = new SqlCommand(query, myConnection);
                 command.Parameters.AddWithValue("@id", id);
                 command.Parameters.AddWithValue("@val_plan", val_plan);
@@ -280,6 +280,64 @@ namespace WindowsFormsApp1.DBO
                 MessageBox.Show("Ошибка UpdateFuelNorm: " + Ex.Message);
             }
         }
+        public static void UpdateSource(int id, float value)
+        {
+            try
+            {
+                SqlConnection myConnection = new SqlConnection(cnStr);
+                myConnection.Open();
+
+                string query = "UPDATE NewOrgSouces SET value = @value WHERE id = @id";
+                SqlCommand command = new SqlCommand(query, myConnection);
+                command.Parameters.AddWithValue("@id", id);
+                command.Parameters.AddWithValue("@value", value);
+                command.ExecuteNonQuery();
+                myConnection.Close();
+            }
+            catch (Exception Ex)
+            {
+                MessageBox.Show("Ошибка UpdateSource: " + Ex.Message);
+            }
+        }
+        public static void UpdateRecieved(int id, float value)
+        {
+            try
+            {
+                SqlConnection myConnection = new SqlConnection(cnStr);
+                myConnection.Open();
+
+                string query = "UPDATE NewRecievedOrg SET value = @value WHERE id = @id";
+                SqlCommand command = new SqlCommand(query, myConnection);
+                command.Parameters.AddWithValue("@id", id);
+                command.Parameters.AddWithValue("@value", value);
+                command.ExecuteNonQuery();
+                myConnection.Close();
+            }
+            catch (Exception Ex)
+            {
+                MessageBox.Show("Ошибка UpdateRecieved: " + Ex.Message);
+            }
+        }
+        public static void UpdateSended(int id, float value)
+        {
+            try
+            {
+                SqlConnection myConnection = new SqlConnection(cnStr);
+                myConnection.Open();
+
+                string query = "UPDATE NewSendedOrg SET value = @value WHERE id = @id";
+                SqlCommand command = new SqlCommand(query, myConnection);
+                command.Parameters.AddWithValue("@id", id);
+                command.Parameters.AddWithValue("@value", value);
+                command.ExecuteNonQuery();
+                myConnection.Close();
+            }
+            catch (Exception Ex)
+            {
+                MessageBox.Show("Ошибка UpdateSended: " + Ex.Message);
+            }
+        }
+
 
         public static void AddNormData(int id_norm, int id_rep, float value_plan, float value_fact)
         {
@@ -725,6 +783,50 @@ namespace WindowsFormsApp1.DBO
             }
             return RecievedList;
         }
+        public static List<RecievedInputTable> GetRecievedInputList(int id_owner, int id_rep, int res_type)
+        {
+            List<RecievedInputTable> RecievedList = new List<RecievedInputTable>();
+            try
+            {
+                SqlConnection myConnection = new SqlConnection(cnStr);
+                SqlConnection myConnection2 = new SqlConnection(cnStr);
+                myConnection.Open();
+
+                string query = "SELECT * FROM [NewRecievedOrgList] where id_owner = @id_owner and res_type= @res_type";
+                SqlCommand command = new SqlCommand(query, myConnection);
+                command.Parameters.AddWithValue("@id_owner", id_owner);
+                command.Parameters.AddWithValue("@res_type", res_type);
+                using (SqlDataReader dr = command.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        myConnection2.Open();
+                        string query2 = "SELECT * FROM [NewRecievedOrg] WHERE [id_recieved] = @id_recieved AND [id_rep] = @id_rep";
+                        SqlCommand command2 = new SqlCommand(query2, myConnection2);
+                        command2.Parameters.AddWithValue("@id_recieved", Int32.Parse(dr["id"].ToString()));
+                        command2.Parameters.AddWithValue("@id_rep", id_rep);
+                        var a = Int32.Parse(dr["id"].ToString());
+                        using (SqlDataReader dr2 = command2.ExecuteReader())
+                        {
+                            while (dr2.Read())
+                            {
+
+                                //тут баги
+                                RecievedList.Add(new RecievedInputTable { Id = Int32.Parse(dr2["id"].ToString()), org_name = GetCompanyName(Int32.Parse(dr["id_org"].ToString())), value = float.Parse(dr2["value"].ToString()) });
+                            }
+                        }
+                        myConnection2.Close();
+                    }
+                }
+                myConnection.Close();
+            }
+            catch (Exception Ex)
+            {
+                MessageBox.Show("Ошибка GetRecievedInputList: " + Ex.Message);
+            }
+            return RecievedList;
+        }
+
 
         public static List<SendedTable> GetSendedList(int id_owner, int id_rep)
         {
@@ -767,6 +869,49 @@ namespace WindowsFormsApp1.DBO
             }
             return SendedList;
         }
+        public static List<SendedInputTable> GetSendedInputList(int id_owner, int id_rep, int res_type)
+        {
+            List<SendedInputTable> SendedList = new List<SendedInputTable>();
+            try
+            {
+                SqlConnection myConnection = new SqlConnection(cnStr);
+                SqlConnection myConnection2 = new SqlConnection(cnStr);
+                myConnection.Open();
+
+                string query = "SELECT * FROM [NewSendedOrgList] where id_owner = @id_owner and res_type = @res_type";
+                SqlCommand command = new SqlCommand(query, myConnection);
+                command.Parameters.AddWithValue("@id_owner", id_owner);
+                command.Parameters.AddWithValue("@res_type", res_type);
+                using (SqlDataReader dr = command.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        myConnection2.Open();
+                        string query2 = "SELECT * FROM [NewSendedOrg] WHERE [id_sended] = @id_sended AND [id_rep] = @id_rep";
+                        SqlCommand command2 = new SqlCommand(query2, myConnection2);
+                        command2.Parameters.AddWithValue("@id_sended", Int32.Parse(dr["id"].ToString()));
+                        command2.Parameters.AddWithValue("@id_rep", id_rep);
+                        var a = Int32.Parse(dr["id"].ToString());
+                        using (SqlDataReader dr2 = command2.ExecuteReader())
+                        {
+                            while (dr2.Read())
+                            {
+                                //тут баги
+                                SendedList.Add(new SendedInputTable { Id = Int32.Parse(dr["id"].ToString()), org_name = GetCompanyName(Int32.Parse(dr["id_org"].ToString())), value = float.Parse(dr2["value"].ToString()) });
+                            }
+                        }
+                        myConnection2.Close();
+                    }
+                }
+                myConnection.Close();
+            }
+            catch (Exception Ex)
+            {
+                MessageBox.Show("Ошибка GetSendedInputList: " + Ex.Message);
+            }
+            return SendedList;
+        }
+
 
         public static List<SourceTable> GetSourceList(int id_org, int id_rep)
         {
@@ -822,6 +967,48 @@ namespace WindowsFormsApp1.DBO
             catch (Exception Ex)
             {
                 MessageBox.Show("Ошибка получения данных организации: " + Ex.Message);
+            }
+            return SourceList;
+        }
+        public static List<SourceInputTable> GetSourceInputList(int id_org, int id_rep, int res_type)
+        {
+            List<SourceInputTable> SourceList = new List<SourceInputTable>();
+            try
+            {
+                SqlConnection myConnection = new SqlConnection(cnStr);
+                SqlConnection myConnection2 = new SqlConnection(cnStr);
+                myConnection.Open();
+
+                string query = "SELECT * FROM [NewOrgSoucesList] where id_org = @id_org and res_type=@res_type";
+                SqlCommand command = new SqlCommand(query, myConnection);
+                command.Parameters.AddWithValue("@id_org", id_org);
+                command.Parameters.AddWithValue("@res_type", res_type);
+                using (SqlDataReader dr = command.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        myConnection2.Open();
+                        string query2 = "SELECT * FROM [NewOrgSouces] WHERE [id_src] = @id_src AND [id_rep] = @id_rep";
+                        SqlCommand command2 = new SqlCommand(query2, myConnection2);
+                        command2.Parameters.AddWithValue("@id_src", Int32.Parse(dr["id"].ToString()));
+                        command2.Parameters.AddWithValue("@id_rep", id_rep);
+                        var a = Int32.Parse(dr["id"].ToString());
+                        using (SqlDataReader dr2 = command2.ExecuteReader())
+                        {
+                            while (dr2.Read())
+                            {
+                                //тут баги
+                                SourceList.Add(new SourceInputTable { Id = Int32.Parse(dr2["id"].ToString()), ObjName = GetObjName(Int32.Parse(dr["id_object"].ToString())), Value = float.Parse(dr2["value"].ToString()) });
+                            }
+                        }
+                        myConnection2.Close();
+                    }
+                }
+                myConnection.Close();
+            }
+            catch (Exception Ex)
+            {
+                MessageBox.Show("Ошибка GetSourceInputList: " + Ex.Message);
             }
             return SourceList;
         }
@@ -924,7 +1111,7 @@ namespace WindowsFormsApp1.DBO
             }
             catch (Exception Ex)
             {
-                MessageBox.Show("Ошибка получения данных торговли топливом: " + Ex.Message);
+                MessageBox.Show("Ошибка GetFTradeInputList: " + Ex.Message);
             }
             return FTradeList;
         }

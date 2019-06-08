@@ -65,9 +65,12 @@
     <Compile Include="DataTables\NormIdTypeTable.cs" />
     <Compile Include="DataTables\NormInputTable.cs" />
     <Compile Include="DataTables\OneNorm.cs" />
+    <Compile Include="DataTables\RecievedInputTable.cs" />
     <Compile Include="DataTables\SendedIdTable.cs" />
     <Compile Include="DataTables\RecievedIdTable.cs" />
+    <Compile Include="DataTables\SendedInputTable.cs" />
     <Compile Include="DataTables\SourceIdTable.cs" />
+    <Compile Include="DataTables\SourceInputTable.cs" />
     <Compile Include="DataTables\Table1tekPart2.cs" />
     <Compile Include="DataTables\SourceTable1tek.cs" />
     <Compile Include="DataTables\WholeTable.cs" />

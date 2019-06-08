@@ -64,8 +64,11 @@ namespace WindowsFormsApp1
             List<FTradeInputTable> tradelist = dbOps.GetFTradeInputList(CurrentData.UserData.Id_org, curRepid, year, month);
             dataGridView1.DataSource = tradelist;
             dataGridView1.Columns[0].ReadOnly = true;
+            dataGridView1.Columns[1].HeaderText  = "Код топлива";
             dataGridView1.Columns[1].ReadOnly = true;
+            dataGridView1.Columns[2].HeaderText  = "Наименование";
             dataGridView1.Columns[2].ReadOnly = true;
+            dataGridView1.Columns[3].HeaderText  = "Значение";
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -77,6 +80,11 @@ namespace WindowsFormsApp1
             }
             List<NormInputTable> NormToplist = dbOps.GetNormInputList(CurrentData.UserData.Id_org, curRepid, 1, year, month);
             dataGridView2.DataSource = NormToplist;
+            dataGridView2.Columns[0].ReadOnly = true;
+            dataGridView2.Columns[1].HeaderText  = "Наименование";
+            dataGridView2.Columns[1].ReadOnly = true;
+            dataGridView2.Columns[2].HeaderText  = "План.";
+            dataGridView2.Columns[3].HeaderText  = "Факт.";
             panel1.Visible = false;
             panel2.Visible = true;
         }
@@ -88,8 +96,145 @@ namespace WindowsFormsApp1
             {
                 dbOps.UpdateFuelNorm(a.Id, a.val_plan, a.val_fact);
             }
+            List<SourceInputTable> SourceInputList = dbOps.GetSourceInputList(CurrentData.UserData.Id_org, curRepid, 2);
+            dataGridView3.DataSource = SourceInputList;
+            dataGridView3.Columns[0].ReadOnly = true;
+            dataGridView3.Columns[1].HeaderText  = "Наименование";
+            dataGridView3.Columns[1].ReadOnly = true;
+            dataGridView3.Columns[2].HeaderText  = "Значение";
             panel2.Visible = false;
             panel3.Visible = true;
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            List<SourceInputTable> SourceInputList = dataGridView3.DataSource as List<SourceInputTable>;
+            foreach (var a in SourceInputList)
+            {
+                dbOps.UpdateSource(a.Id, a.Value);
+            }
+            List<RecievedInputTable> RecievedInputList = dbOps.GetRecievedInputList(CurrentData.UserData.Id_org, curRepid, 2);
+            dataGridView4.DataSource = RecievedInputList;
+            dataGridView4.Columns[0].ReadOnly = true;
+            dataGridView4.Columns[1].HeaderText  = "Наименование организации";
+            dataGridView4.Columns[1].ReadOnly = true;
+            dataGridView4.Columns[2].HeaderText  = "Значение";
+            panel3.Visible = false;
+            panel4.Visible = true;
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            List<RecievedInputTable> RecievedInputList = dataGridView4.DataSource as List<RecievedInputTable>;
+            foreach (var a in RecievedInputList)
+            {
+                dbOps.UpdateRecieved(a.Id, a.value);
+            }
+            List<SendedInputTable> SendedInputList = dbOps.GetSendedInputList(CurrentData.UserData.Id_org, curRepid, 2);
+            dataGridView5.DataSource = SendedInputList;
+            dataGridView5.Columns[0].ReadOnly = true;
+            dataGridView5.Columns[1].HeaderText  = "Наименование организации";
+            dataGridView5.Columns[1].ReadOnly = true;
+            dataGridView5.Columns[2].HeaderText  = "Значение";
+            panel4.Visible = false;
+            panel5.Visible = true;
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            List<SendedInputTable> SendedInputList = dataGridView5.DataSource as List<SendedInputTable>;
+            foreach (var a in SendedInputList)
+            {
+                dbOps.UpdateSended(a.Id, a.value);
+            }
+            List<NormInputTable> NormHeatlist = dbOps.GetNormInputList(CurrentData.UserData.Id_org, curRepid, 2, year, month);
+            dataGridView6.DataSource = NormHeatlist;
+            dataGridView6.Columns[0].ReadOnly = true;
+            dataGridView6.Columns[1].HeaderText  = "Наименование";
+            dataGridView6.Columns[1].ReadOnly = true;
+            dataGridView6.Columns[2].HeaderText  = "План.";
+            dataGridView6.Columns[3].HeaderText  = "Факт.";
+            panel5.Visible = false;
+            panel6.Visible = true;
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            List<NormInputTable> NormHeatlist = dataGridView6.DataSource as List<NormInputTable>;
+            foreach (var a in NormHeatlist)
+            {
+                dbOps.UpdateFuelNorm(a.Id, a.val_plan, a.val_fact);
+            }
+            List<SourceInputTable> SourceInputList = dbOps.GetSourceInputList(CurrentData.UserData.Id_org, curRepid, 3);
+            dataGridView7.DataSource = SourceInputList;
+            dataGridView7.Columns[0].ReadOnly = true;
+            dataGridView7.Columns[1].HeaderText  = "Наименование";
+            dataGridView7.Columns[1].ReadOnly = true;
+            dataGridView7.Columns[2].HeaderText  = "Значение";
+            panel6.Visible = false;
+            panel7.Visible = true;
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            List<SourceInputTable> SourceInputList = dataGridView7.DataSource as List<SourceInputTable>;
+            foreach (var a in SourceInputList)
+            {
+                dbOps.UpdateSource(a.Id, a.Value);
+            }
+            List<RecievedInputTable> RecievedInputList = dbOps.GetRecievedInputList(CurrentData.UserData.Id_org, curRepid, 3);
+            dataGridView8.DataSource = RecievedInputList;
+            dataGridView8.Columns[0].ReadOnly = true;
+            dataGridView8.Columns[1].HeaderText  = "Наименование организации";
+            dataGridView8.Columns[1].ReadOnly = true;
+            dataGridView8.Columns[2].HeaderText  = "Значение";
+            panel7.Visible = false;
+            panel8.Visible = true;
+
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            List<RecievedInputTable> RecievedInputList = dataGridView8.DataSource as List<RecievedInputTable>;
+            foreach (var a in RecievedInputList)
+            {
+                dbOps.UpdateRecieved(a.Id, a.value);
+            }
+            List<SendedInputTable> SendedInputList = dbOps.GetSendedInputList(CurrentData.UserData.Id_org, curRepid, 3);
+            dataGridView9.DataSource = SendedInputList;
+            dataGridView9.Columns[0].ReadOnly = true;
+            dataGridView9.Columns[1].HeaderText  = "Наименование организации";
+            dataGridView9.Columns[1].ReadOnly = true;
+            dataGridView9.Columns[2].HeaderText  = "Значение";
+            panel8.Visible = false;
+            panel9.Visible = true;
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            List<SendedInputTable> SendedInputList = dataGridView9.DataSource as List<SendedInputTable>;
+            foreach (var a in SendedInputList)
+            {
+                dbOps.UpdateSended(a.Id, a.value);
+            }
+            List<NormInputTable> NormEllist = dbOps.GetNormInputList(CurrentData.UserData.Id_org, curRepid, 3, year, month);
+            dataGridView10.DataSource = NormEllist;
+            dataGridView10.Columns[0].ReadOnly = true;
+            dataGridView10.Columns[1].HeaderText  = "Наименование";
+            dataGridView10.Columns[1].ReadOnly = true;
+            dataGridView10.Columns[2].HeaderText  = "План.";
+            dataGridView10.Columns[3].HeaderText  = "Факт.";
+            panel9.Visible = false;
+            panel10.Visible = true;
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            List<NormInputTable> NormEllist = dataGridView10.DataSource as List<NormInputTable>;
+            foreach (var a in NormEllist)
+            {
+                dbOps.UpdateFuelNorm(a.Id, a.val_plan, a.val_fact);
+            }
         }
     }
 }

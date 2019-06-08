@@ -3314,7 +3314,7 @@ namespace WindowsFormsApp1
             worksheet4["I77"] = sum != 0 ? sum.ToString() : "x";
             worksheet4["I78"] = sum_e != 0 ? sum_e.ToString() : "x";
 
-            var a2 = 1;
+            //var a2 = 1;
             #region style
             //worksheet4.SetRangeStyles("A22:H24", new WorksheetRangeStyle()
             //{
@@ -3872,7 +3872,7 @@ namespace WindowsFormsApp1
             worksheet4["I77"] = sum != 0 ? sum.ToString() : "x";
             worksheet4["I78"] = sum_e != 0 ? sum_e.ToString() : "x";
 
-            var a2 = 1;
+            //var a2 = 1;
 
             CurrentData.UserData.Id_org = CurrentID;
             #region style
