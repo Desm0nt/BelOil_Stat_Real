@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WindowsFormsApp1.DataTables;
@@ -16,10 +17,22 @@ namespace WindowsFormsApp1
     {
         bool checkreport;
         int curRepid, year, month;
+        
 
         public ReportsCreateForm(int year1, int month1)
         {
             InitializeComponent();
+            //Thread.CurrentThread.CurrentCulture = System.Globalization.CultureInfo.InvariantCulture;
+            this.dataGridView1.EditingControlShowing += new DataGridViewEditingControlShowingEventHandler(EditingControlShowing);
+            this.dataGridView2.EditingControlShowing += new DataGridViewEditingControlShowingEventHandler(EditingControlShowing1);
+            this.dataGridView6.EditingControlShowing += new DataGridViewEditingControlShowingEventHandler(EditingControlShowing1);
+            this.dataGridView10.EditingControlShowing += new DataGridViewEditingControlShowingEventHandler(EditingControlShowing1);
+            this.dataGridView3.EditingControlShowing += new DataGridViewEditingControlShowingEventHandler(EditingControlShowing2);
+            this.dataGridView4.EditingControlShowing += new DataGridViewEditingControlShowingEventHandler(EditingControlShowing2);
+            this.dataGridView5.EditingControlShowing += new DataGridViewEditingControlShowingEventHandler(EditingControlShowing2);
+            this.dataGridView7.EditingControlShowing += new DataGridViewEditingControlShowingEventHandler(EditingControlShowing2);
+            this.dataGridView8.EditingControlShowing += new DataGridViewEditingControlShowingEventHandler(EditingControlShowing2);
+            this.dataGridView9.EditingControlShowing += new DataGridViewEditingControlShowingEventHandler(EditingControlShowing2);
             curRepid = 0;
             year = year1;
             month = month1;
@@ -234,6 +247,57 @@ namespace WindowsFormsApp1
             foreach (var a in NormEllist)
             {
                 dbOps.UpdateFuelNorm(a.Id, a.val_plan, a.val_fact);
+            }
+            this.Close();
+        }
+
+        void EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
+        {
+            DataGridView dataGridView = (DataGridView)sender;
+            if (dataGridView.CurrentCell.ColumnIndex == 3)
+            {
+                TextBox tb = e.Control as TextBox;
+                tb.KeyPress -= new KeyPressEventHandler(tb_KeyPress);
+                tb.KeyPress += new KeyPressEventHandler(tb_KeyPress);
+            }
+        }
+        void EditingControlShowing1(object sender, DataGridViewEditingControlShowingEventArgs e)
+        {
+            DataGridView dataGridView = (DataGridView)sender;
+            if (dataGridView.CurrentCell.ColumnIndex == 2 || dataGridView.CurrentCell.ColumnIndex == 3)
+            {
+                TextBox tb = e.Control as TextBox;
+                tb.KeyPress -= new KeyPressEventHandler(tb_KeyPress);
+                tb.KeyPress += new KeyPressEventHandler(tb_KeyPress);
+            }
+        }
+        void EditingControlShowing2(object sender, DataGridViewEditingControlShowingEventArgs e)
+        {
+            DataGridView dataGridView = (DataGridView)sender;
+            if (dataGridView.CurrentCell.ColumnIndex == 2 || dataGridView.CurrentCell.ColumnIndex == 3)
+            {
+                TextBox tb = e.Control as TextBox;
+                tb.KeyPress -= new KeyPressEventHandler(tb_KeyPress);
+                tb.KeyPress += new KeyPressEventHandler(tb_KeyPress);
+            }
+        }
+
+        void tb_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            string Text = ((TextBox)sender).Text;
+            // filter the decimal point
+            if (!char.IsControl(e.KeyChar)
+                && !char.IsDigit(e.KeyChar)
+                && e.KeyChar != '.' && e.KeyChar != ',')
+            {
+                e.Handled = true;
+            }
+            if (e.KeyChar == '.') e.KeyChar = ',';
+            // only allow one decimal point
+            if (e.KeyChar == ','
+                && (sender as TextBox).Text.IndexOf(',') > -1)
+            {                
+                e.Handled = true;
             }
         }
     }

@@ -7,6 +7,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using unvell.ReoGrid;
@@ -25,6 +26,7 @@ namespace WindowsFormsApp1
         public ReportsForm()
         {
             InitializeComponent();
+            //Thread.CurrentThread.CurrentCulture = System.Globalization.CultureInfo.InvariantCulture;
             year = dateTimePicker1.Value.Year;
             MakeTable1per();
             MakeTable12tek();
@@ -119,16 +121,19 @@ namespace WindowsFormsApp1
             {
                 if (a.type == 1)
                 {
-                    worksheet1[fuelrow-1 + tmp, 2] = a.name;
-                    worksheet1[fuelrow-1 + tmp, 3] = a.Code;
-                    worksheet1[fuelrow-1 + tmp, 7] = String.Format("=ROUND({0}, 3)", Math.Round(a.val_plan,1));                    
-                    worksheet1[fuelrow-1 + tmp, 9] = String.Format("=ROUND({0}, 3)", Math.Round(a.val_fact,1));
+                    worksheet1["C" + (fuelrow + tmp)] = a.name;
+                    worksheet1["D" + (fuelrow + tmp)] = a.Code;
+                    worksheet1["H" + (fuelrow + tmp)] = String.Format("=ROUND({0}, 3)", Math.Round(a.val_plan,1));                    
+                    worksheet1["J" + (fuelrow + tmp)] = String.Format("=ROUND({0}, 3)", Math.Round(a.val_fact,1));
+                    var zz1 = String.Format("=ROUND({0}, 3)", Math.Round(a.val_plan, 1));
+                    var zz2 = String.Format("=ROUND({0}, 3)", Math.Round(a.val_fact, 1));
                     var Fuel = dbOps.GetFuelData(a.fuel, dateTimePicker1.Value.Year, dateTimePicker1.Value.Month);
                     var z1 = worksheet1.Cells["H" + (fuelrow + tmp)].Data;
+                    var z2 = worksheet1.Cells["J" + (fuelrow + tmp)].Data;
                     worksheet1[fuelrow - 1 + tmp, 8] = String.Format("{0}", Math.Round(float.Parse(worksheet1.Cells["H" + (fuelrow + tmp)].Data.ToString()) * Fuel.B_y, 1));
                     //worksheet1[fuelrow - 1 + tmp, 8] = String.Format("=ROUND(H{0} * {1}, 3)", fuelrow + tmp, Fuel.B_y);
                     //worksheet1[fuelrow - 1 + tmp, 10] = String.Format("=ROUND(J{0} * {1}, 3)", fuelrow + tmp, Fuel.B_y);
-                    worksheet1[fuelrow - 1 + tmp, 10] = String.Format("{0}", Math.Round(float.Parse(worksheet1.Cells["J" + (fuelrow + tmp)].Data.ToString()) * Fuel.B_y, 1));
+                    worksheet1["K" + (fuelrow + tmp)] = String.Format("{0}", Math.Round(float.Parse(worksheet1.Cells["J" + (fuelrow + tmp)].Data.ToString()) * Fuel.B_y, 1));
                     worksheet1["E" + (fuelrow + tmp)] = String.Format("=E{0}", fuelrow - 1); //dbOps.GetProdUnit(a.Id_prod); 
                     worksheet1["L" + (fuelrow + tmp)] = String.Format("=ROUND(IF(H{0}>0, J{0}/H{0}, 0), 3)", fuelrow + tmp);
                     worksheet1["M" + (fuelrow + tmp)] = String.Format("=ROUND(IF(F{0}>0, J{0}/F{0}, 0), 3)", fuelrow + tmp);
@@ -207,10 +212,10 @@ namespace WindowsFormsApp1
             {
                 if (a.type == 2)
                 {
-                    worksheet1[heatrow - 1 + tmp, 2] = a.name;
-                    worksheet1[heatrow - 1 + tmp, 3] = a.Code;
-                    worksheet1[heatrow - 1 + tmp, 7] = String.Format("=ROUND({0}, 3)", Math.Round(a.val_plan,1));
-                    worksheet1[heatrow - 1 + tmp, 9] = String.Format("=ROUND({0}, 3)", Math.Round(a.val_fact,1));
+                    worksheet1["C" + (heatrow + tmp)] = a.name;
+                    worksheet1["D" + (heatrow + tmp)] = a.Code;
+                    worksheet1["H" + (heatrow + tmp)] = String.Format("=ROUND({0}, 3)", Math.Round(a.val_plan, 1));
+                    worksheet1["J" + (heatrow + tmp)] = String.Format("=ROUND({0}, 3)", Math.Round(a.val_fact, 1));
                     var Factor = dbOps.GetFactorData(a.type);
                     worksheet1[heatrow - 1 + tmp, 8] = String.Format("{0}", Math.Round(float.Parse(worksheet1.Cells["H" + (heatrow + tmp)].Data.ToString()) * Factor.value, 1));
                     //worksheet1[heatrow - 1 + tmp, 8] = String.Format("=ROUND(H{0} * {1}, 3)", heatrow + tmp, Factor.value);
@@ -295,10 +300,10 @@ namespace WindowsFormsApp1
             {
                 if (a.type == 3)
                 {
-                    worksheet1[elrow - 1 + tmp, 2] = a.name;
-                    worksheet1[elrow - 1 + tmp, 3] = a.Code;
-                    worksheet1[elrow - 1 + tmp, 7] = String.Format("=ROUND({0}, 3)", Math.Round(a.val_plan,1));
-                    worksheet1[elrow - 1 + tmp, 9] = String.Format("=ROUND({0}, 3)", Math.Round(a.val_fact,1));
+                    worksheet1["C" + (elrow + tmp)] = a.name;
+                    worksheet1["D" + (elrow + tmp)] = a.Code;
+                    worksheet1["H" + (elrow + tmp)] = String.Format("=ROUND({0}, 3)", Math.Round(a.val_plan, 1));
+                    worksheet1["J" + (elrow + tmp)] = String.Format("=ROUND({0}, 3)", Math.Round(a.val_fact, 1));
                     var Factor = dbOps.GetFactorData(a.type);
                     worksheet1[elrow - 1 + tmp, 8] = String.Format("{0}", Math.Round(float.Parse(worksheet1.Cells["H" + (elrow + tmp)].Data.ToString()) * Factor.value, 1));
                     //worksheet1[elrow - 1 + tmp, 8] = String.Format("=ROUND(H{0} * {1}, 3)", elrow + tmp, Factor.value);
@@ -4250,7 +4255,16 @@ namespace WindowsFormsApp1
         private void мастерВвода1ПЭР12ТЭКToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var myForm = new ReportsCreateForm(dateTimePicker1.Value.Year, dateTimePicker1.Value.Month);
+            myForm.FormClosed += new FormClosedEventHandler(myForm_FormClosed);
             myForm.Show();
         }
+        private void myForm_FormClosed(object sender, EventArgs e)
+        {
+            MakeTable1per();
+            MakeTable12tek();
+            MakeTable12tekHidden();
+            MakeTable12TekPril();
+        }
+
     }
 }
