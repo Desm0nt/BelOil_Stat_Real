@@ -63,7 +63,7 @@
             this.button3 = new System.Windows.Forms.Button();
             this.RUPButton = new System.Windows.Forms.Button();
             this.POButton = new System.Windows.Forms.Button();
-            this.мастерВвода1ПЭР12ТЭКToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.мастерВвода4Нормы1ТЭКToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tabPage6.SuspendLayout();
@@ -100,7 +100,6 @@
             // 
             this.менюToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.сменитьПользователяToolStripMenuItem,
-            this.мастерВвода1ПЭР12ТЭКToolStripMenuItem,
             this.закрытьПрограммуToolStripMenuItem});
             this.менюToolStripMenuItem.Name = "менюToolStripMenuItem";
             this.менюToolStripMenuItem.Size = new System.Drawing.Size(53, 26);
@@ -109,7 +108,7 @@
             // сменитьПользователяToolStripMenuItem
             // 
             this.сменитьПользователяToolStripMenuItem.Name = "сменитьПользователяToolStripMenuItem";
-            this.сменитьПользователяToolStripMenuItem.Size = new System.Drawing.Size(229, 22);
+            this.сменитьПользователяToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
             this.сменитьПользователяToolStripMenuItem.Text = "Сменить пользователя";
             this.сменитьПользователяToolStripMenuItem.Click += new System.EventHandler(this.сменитьПользователяToolStripMenuItem_Click);
             // 
@@ -124,6 +123,7 @@
             // 
             this.отчетыToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.сформировать1ПЭРToolStripMenuItem,
+            this.мастерВвода4Нормы1ТЭКToolStripMenuItem,
             this.сохранитьОтчетToolStripMenuItem,
             this.сохранитьОтчет1ТЭКToolStripMenuItem});
             this.отчетыToolStripMenuItem.Name = "отчетыToolStripMenuItem";
@@ -133,8 +133,9 @@
             // сформировать1ПЭРToolStripMenuItem
             // 
             this.сформировать1ПЭРToolStripMenuItem.Name = "сформировать1ПЭРToolStripMenuItem";
-            this.сформировать1ПЭРToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
-            this.сформировать1ПЭРToolStripMenuItem.Text = "Сформировать 1-ПЭР";
+            this.сформировать1ПЭРToolStripMenuItem.Size = new System.Drawing.Size(229, 22);
+            this.сформировать1ПЭРToolStripMenuItem.Text = "Мастер ввода 1-ПЭР/12-ТЭК";
+            this.сформировать1ПЭРToolStripMenuItem.Click += new System.EventHandler(this.сформировать1ПЭРToolStripMenuItem_Click);
             // 
             // сохранитьОтчетToolStripMenuItem
             // 
@@ -465,12 +466,12 @@
             this.POButton.Visible = false;
             this.POButton.Click += new System.EventHandler(this.POButton_Click);
             // 
-            // мастерВвода1ПЭР12ТЭКToolStripMenuItem
+            // мастерВвода4Нормы1ТЭКToolStripMenuItem
             // 
-            this.мастерВвода1ПЭР12ТЭКToolStripMenuItem.Name = "мастерВвода1ПЭР12ТЭКToolStripMenuItem";
-            this.мастерВвода1ПЭР12ТЭКToolStripMenuItem.Size = new System.Drawing.Size(229, 22);
-            this.мастерВвода1ПЭР12ТЭКToolStripMenuItem.Text = "Мастер ввода 1-ПЭР/12-ТЭК";
-            this.мастерВвода1ПЭР12ТЭКToolStripMenuItem.Click += new System.EventHandler(this.мастерВвода1ПЭР12ТЭКToolStripMenuItem_Click);
+            this.мастерВвода4Нормы1ТЭКToolStripMenuItem.Name = "мастерВвода4Нормы1ТЭКToolStripMenuItem";
+            this.мастерВвода4Нормы1ТЭКToolStripMenuItem.Size = new System.Drawing.Size(241, 22);
+            this.мастерВвода4Нормы1ТЭКToolStripMenuItem.Text = "Мастер ввода 4-Нормы/1-ТЭК";
+            this.мастерВвода4Нормы1ТЭКToolStripMenuItem.Click += new System.EventHandler(this.мастерВвода4Нормы1ТЭКToolStripMenuItem_Click);
             // 
             // ReportsForm
             // 
@@ -539,6 +540,6 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button RUPButton;
         private System.Windows.Forms.Button POButton;
-        private System.Windows.Forms.ToolStripMenuItem мастерВвода1ПЭР12ТЭКToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem мастерВвода4Нормы1ТЭКToolStripMenuItem;
     }
 }

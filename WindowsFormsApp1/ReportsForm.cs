@@ -60,18 +60,6 @@ namespace WindowsFormsApp1
             }
         }
 
-        private void button3_Click(object sender, EventArgs e)
-        {
-            CurrentData.UserData.Id_org = Int32.Parse(CompanyBox.SelectedValue.ToString());
-            MakeTable1per();
-            MakeTable12tek();
-            MakeTable12tekHidden();
-            MakeTable12TekPril();
-        }
-        private void button1_Click(object sender, EventArgs e)
-        {
-           // dbOps.GetCompanyData(CurrentData.UserData.Id_org);
-        }
 
         void MakeTable1per()
         {
@@ -3972,7 +3960,6 @@ namespace WindowsFormsApp1
             if (month >= 10 && month <= 12)
                 quater = 4;
             return quater;
-
         }
 
         private List<Norm4Table> MakeNorm4List(int year)
@@ -4252,7 +4239,20 @@ namespace WindowsFormsApp1
                 MakeTable1tekSUM(true);
         }
 
-        private void мастерВвода1ПЭР12ТЭКToolStripMenuItem_Click(object sender, EventArgs e)
+        private void button3_Click(object sender, EventArgs e)
+        {
+            CurrentData.UserData.Id_org = Int32.Parse(CompanyBox.SelectedValue.ToString());
+            MakeTable1per();
+            MakeTable12tek();
+            MakeTable12tekHidden();
+            MakeTable12TekPril();
+        }
+        private void button1_Click(object sender, EventArgs e)
+        {
+            // dbOps.GetCompanyData(CurrentData.UserData.Id_org);
+        }
+
+        private void сформировать1ПЭРToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var myForm = new ReportsCreateForm(dateTimePicker1.Value.Year, dateTimePicker1.Value.Month);
             myForm.FormClosed += new FormClosedEventHandler(myForm_FormClosed);
@@ -4266,5 +4266,11 @@ namespace WindowsFormsApp1
             MakeTable12TekPril();
         }
 
+        private void мастерВвода4Нормы1ТЭКToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var myForm = new NormReportCreateForm(dateTimePicker1.Value.Year, dateTimePicker1.Value.Month, MakeQuater(dateTimePicker1.Value.Month));
+            myForm.FormClosed += new FormClosedEventHandler(myForm_FormClosed);
+            myForm.Show();
+        }
     }
 }

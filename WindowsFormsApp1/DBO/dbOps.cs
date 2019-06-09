@@ -338,7 +338,6 @@ namespace WindowsFormsApp1.DBO
             }
         }
 
-
         public static void AddNormData(int id_norm, int id_rep, float value_plan, float value_fact)
         {
             try
@@ -468,6 +467,130 @@ namespace WindowsFormsApp1.DBO
             }
             return name;
         }
+
+        public static bool Exist4NormQuaterCheck(int id_org, int year, int quater)
+        {
+            bool status = false;
+            try
+            {
+                SqlConnection myConnection = new SqlConnection(cnStr);
+                myConnection.Open();
+
+                string query = "SELECT COUNT(*) FROM NewRepNormData where id_org = @id_org and year = @year and quater = @quater";
+                SqlCommand command = new SqlCommand(query, myConnection);
+                command.Parameters.AddWithValue("@id_org", id_org);
+                command.Parameters.AddWithValue("@year", year);
+                command.Parameters.AddWithValue("@quater", quater);
+                var result = Convert.ToInt32(command.ExecuteScalar());
+                if (result > 0)
+                    status = true;
+
+                myConnection.Close();
+            }
+            catch (Exception Ex)
+            {
+                MessageBox.Show("Ошибка Exist4NormQuaterCheck: " + Ex.Message);
+            }
+            return status;
+        }
+        public static void Add4Norm(int year, int quater, int id_org, int id_prod, long id_local, int id_norm, float value, float volume, float norm, int fuel, string fuelname, int id_obj)
+        {
+            try
+            {
+                SqlConnection myConnection = new SqlConnection(cnStr);
+                myConnection.Open();
+
+                string query = "INSERT INTO NewRepNormData (year, quater, id_org, id_prod, id_local, id_norm, value, volume, norm, fuel, fuelname, id_obj) VALUES (@year, @quater, @id_org, @id_prod, @id_local, @id_norm, @value, @volume, @norm, @fuel, @fuelname, @id_obj)";
+                SqlCommand command = new SqlCommand(query, myConnection);
+                command.Parameters.AddWithValue("@year", year);
+                command.Parameters.AddWithValue("@quater", quater);
+                command.Parameters.AddWithValue("@id_org", id_org);
+                command.Parameters.AddWithValue("@id_prod", id_prod);
+                command.Parameters.AddWithValue("@id_local", id_local);
+                command.Parameters.AddWithValue("@id_norm", id_norm);
+                command.Parameters.AddWithValue("@value", value);
+                command.Parameters.AddWithValue("@volume", volume);
+                command.Parameters.AddWithValue("@norm", norm);
+                command.Parameters.AddWithValue("@fuel", fuel);
+                command.Parameters.AddWithValue("@fuelname", fuelname);
+                command.Parameters.AddWithValue("@id_obj", id_obj);
+                command.ExecuteNonQuery();
+                myConnection.Close();
+            }
+            catch (Exception Ex)
+            {
+                MessageBox.Show("Ошибка Add4Norm: " + Ex.Message);
+            }
+        }
+        public static void Add4Norm(int year, int quater, int id_org, int id_prod, long id_local, int id_norm, float value, float volume, float norm, int id_obj)
+        {
+            try
+            {
+                SqlConnection myConnection = new SqlConnection(cnStr);
+                myConnection.Open();
+
+                string query = "INSERT INTO NewRepNormData (year, quater, id_org, id_prod, id_local, id_norm, value, volume, norm, id_obj) VALUES (@year, @quater, @id_org, @id_prod, @id_local, @id_norm, @value, @volume, @norm, @id_obj)";
+                SqlCommand command = new SqlCommand(query, myConnection);
+                command.Parameters.AddWithValue("@year", year);
+                command.Parameters.AddWithValue("@quater", quater);
+                command.Parameters.AddWithValue("@id_org", id_org);
+                command.Parameters.AddWithValue("@id_prod", id_prod);
+                command.Parameters.AddWithValue("@id_local", id_local);
+                command.Parameters.AddWithValue("@id_norm", id_norm);
+                command.Parameters.AddWithValue("@value", value);
+                command.Parameters.AddWithValue("@volume", volume);
+                command.Parameters.AddWithValue("@norm", norm);
+                command.Parameters.AddWithValue("@id_obj", id_obj);
+                command.ExecuteNonQuery();
+                myConnection.Close();
+            }
+            catch (Exception Ex)
+            {
+                MessageBox.Show("Ошибка Add4Norm: " + Ex.Message);
+            }
+        }
+
+        public static void Update4Norm_norm(int id, float norm)
+        {
+            try
+            {
+                SqlConnection myConnection = new SqlConnection(cnStr);
+                myConnection.Open();
+
+                string query = "UPDATE NewRepNormData SET norm = @norm WHERE id = @id";
+                SqlCommand command = new SqlCommand(query, myConnection);
+                command.Parameters.AddWithValue("@id", id);
+                command.Parameters.AddWithValue("@norm", norm);
+                command.ExecuteNonQuery();
+                myConnection.Close();
+            }
+            catch (Exception Ex)
+            {
+                MessageBox.Show("Ошибка Update4Norm_norm: " + Ex.Message);
+            }
+        }
+        public static void Update4Norm_value_volume(int id, float value, float volume)
+        {
+            try
+            {
+                SqlConnection myConnection = new SqlConnection(cnStr);
+                myConnection.Open();
+
+                string query = "UPDATE NewRepNormData SET value = @value, volume = @volume WHERE id = @id";
+                SqlCommand command = new SqlCommand(query, myConnection);
+                command.Parameters.AddWithValue("@id", id);
+                command.Parameters.AddWithValue("@value", value);
+                command.Parameters.AddWithValue("@volume", volume);
+                command.ExecuteNonQuery();
+                myConnection.Close();
+            }
+            catch (Exception Ex)
+            {
+                MessageBox.Show("Ошибка Update4Norm_value_volume: " + Ex.Message);
+            }
+        }
+
+
 
 
         /// <summary>
@@ -1308,9 +1431,211 @@ namespace WindowsFormsApp1.DBO
             }
             catch (Exception Ex)
             {
-                MessageBox.Show("Ошибка получения данных 4 нормы: " + Ex.Message);
+                MessageBox.Show("Ошибка Get4Norm: " + Ex.Message);
             }
             return Norm4List;
+        }
+        public static List<Norm4InputTable> Get4NormInput(int id_org, int year, int month, int quater)
+        {
+            List<Norm4InputTable> Norm4List = new List<Norm4InputTable>();
+            try
+            {
+                SqlConnection myConnection = new SqlConnection(cnStr);
+                myConnection.Open();
+
+                string query = "SELECT * FROM [NewNorm] where id_org = @id_org";
+                SqlCommand command = new SqlCommand(query, myConnection);
+                command.Parameters.AddWithValue("@id_org", id_org);
+                using (SqlDataReader dr = command.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        Norm4List.Add(new Norm4InputTable { Id_org = Int32.Parse(dr["id_org"].ToString()), Id_prod = Int32.Parse(dr["id_prod"].ToString()), Id_local = long.Parse(dr["id_local"].ToString()), Id_norm = Int32.Parse(dr["id"].ToString()), Fuel = !String.IsNullOrWhiteSpace(dr["fuel"].ToString()) ? Int32.Parse(dr["fuel"].ToString()) : 0, Fuel_name = !String.IsNullOrWhiteSpace(dr["fuel"].ToString()) ? GetFuelNameById(Int32.Parse(dr["fuel"].ToString()), year, month) : " ", Id_obj = Int32.Parse(dr["id_obj"].ToString()) });
+                    }
+                }
+                myConnection.Close();
+            }
+            catch (Exception Ex)
+            {
+                MessageBox.Show("Ошибка Get4NormInput: " + Ex.Message);
+            }
+            return Norm4List;
+        }
+        public static List<Norm4InputQuater> Get4NormQuater(int id_org, int year, int month, int quater)
+        {
+            List<Norm4InputQuater> Norm4List = new List<Norm4InputQuater>();
+            try
+            {
+                SqlConnection myConnection = new SqlConnection(cnStr);
+                SqlConnection myConnection2 = new SqlConnection(cnStr);
+                myConnection.Open();
+
+                string query = "SELECT * FROM [NewNorm] where id_org = @id_org";
+                SqlCommand command = new SqlCommand(query, myConnection);
+                command.Parameters.AddWithValue("@id_org", id_org);
+                using (SqlDataReader dr = command.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        myConnection2.Open();
+                        string query2 = "SELECT * FROM [NewRepNormData] WHERE [id_norm] = @id_norm AND [quater] = @quater AND year = @year";
+                        SqlCommand command2 = new SqlCommand(query2, myConnection2);
+                        command2.Parameters.AddWithValue("@id_norm", Int32.Parse(dr["id"].ToString()));
+                        command2.Parameters.AddWithValue("@quater", quater);
+                        command2.Parameters.AddWithValue("@year", year);
+                        using (SqlDataReader dr2 = command2.ExecuteReader())
+                        {
+                            while (dr2.Read())
+                            {
+                                OneNorm oneNomr = GetOneNormDescr(Int32.Parse(dr["id"].ToString()), Int32.Parse(dr["id_prod"].ToString()));
+                                Norm4List.Add(new Norm4InputQuater { Id = Int32.Parse(dr2["id"].ToString()), Id_norm = Int32.Parse(dr["id"].ToString()), Norm_name = oneNomr.name, norm = float.Parse(dr2["norm"].ToString()), value = float.Parse(dr2["value"].ToString()), volume = float.Parse(dr2["volume"].ToString()) });
+                            }
+                        }
+                        myConnection2.Close();
+                    }
+                }
+                myConnection.Close();
+            }
+            catch (Exception Ex)
+            {
+                MessageBox.Show("Ошибка Get4NormQuater: " + Ex.Message);
+            }
+            return Norm4List;
+        }
+        public static List<Norm4InputQuater> Get4NormQuaterType(int id_org, int year, int month, int quater, int type)
+        {
+            List<Norm4InputQuater> Norm4List = new List<Norm4InputQuater>();
+            try
+            {
+                SqlConnection myConnection = new SqlConnection(cnStr);
+                SqlConnection myConnection2 = new SqlConnection(cnStr);
+                myConnection.Open();
+
+                string query = "SELECT * FROM [NewNorm] where id_org = @id_org and type = @type";
+                SqlCommand command = new SqlCommand(query, myConnection);
+                command.Parameters.AddWithValue("@id_org", id_org);
+                command.Parameters.AddWithValue("@type", type);
+                using (SqlDataReader dr = command.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        myConnection2.Open();
+                        string query2 = "SELECT * FROM [NewRepNormData] WHERE [id_norm] = @id_norm AND [quater] = @quater AND year = @year";
+                        SqlCommand command2 = new SqlCommand(query2, myConnection2);
+                        command2.Parameters.AddWithValue("@id_norm", Int32.Parse(dr["id"].ToString()));
+                        command2.Parameters.AddWithValue("@quater", quater);
+                        command2.Parameters.AddWithValue("@year", year);
+                        using (SqlDataReader dr2 = command2.ExecuteReader())
+                        {
+                            while (dr2.Read())
+                            {
+                                OneNorm oneNomr = GetOneNormDescr(Int32.Parse(dr["id"].ToString()), Int32.Parse(dr["id_prod"].ToString()));
+                                Norm4List.Add(new Norm4InputQuater { Id = Int32.Parse(dr2["id"].ToString()), Id_norm = Int32.Parse(dr["id"].ToString()), Norm_name = oneNomr.name, norm = float.Parse(dr2["norm"].ToString()), value = float.Parse(dr2["value"].ToString()), volume = float.Parse(dr2["volume"].ToString()) });
+                            }
+                        }
+                        myConnection2.Close();
+                    }
+                }
+                myConnection.Close();
+            }
+            catch (Exception Ex)
+            {
+                MessageBox.Show("Ошибка Get4NormQuaterType: " + Ex.Message);
+            }
+            return Norm4List;
+        }
+
+
+        public static List<int> GetRepIdList (int id_org, int year, int quater)
+        {
+            List<int> RepIdList = new List<int>();
+            List<int> MonthList = MakeUnQuater(quater);
+            try
+            {
+                SqlConnection myConnection = new SqlConnection(cnStr);
+                myConnection.Open();
+
+                string query = "SELECT * FROM [NewReport_1Per] where id_org = @id_org and year = @year and (month = @month1 or month = @month2 or month = @month3)";
+                SqlCommand command = new SqlCommand(query, myConnection);
+                command.Parameters.AddWithValue("@id_org", id_org);
+                command.Parameters.AddWithValue("@year", year);
+                command.Parameters.AddWithValue("@month1", MonthList[0]);
+                command.Parameters.AddWithValue("@month2", MonthList[1]);
+                command.Parameters.AddWithValue("@month3", MonthList[2]);
+                using (SqlDataReader dr = command.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        RepIdList.Add(Int32.Parse(dr["id"].ToString()));
+                    }
+                }
+                myConnection.Close();
+            }
+            catch (Exception Ex)
+            {
+                MessageBox.Show("Ошибка GetRepIdList: " + Ex.Message);
+            }
+            return RepIdList;
+        }
+        public static float GetNormSum(int id_org, int year, int quater, int id_norm)
+        {
+            float sum = 0;
+            List<int> RepIdList = GetRepIdList(id_org, year, quater);
+            SqlConnection myConnection = new SqlConnection(cnStr);
+            foreach (var a in RepIdList)
+            {
+                myConnection.Open();
+
+            string query = "SELECT * FROM [NewNormData] WHERE [id_rep] = @id_rep AND [id_norm] = @id_norm";
+            SqlCommand command = new SqlCommand(query, myConnection);
+
+                command.Parameters.AddWithValue("@id_rep", a);
+                command.Parameters.AddWithValue("@id_norm", id_norm);
+
+                using (SqlDataReader dr = command.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+
+                        sum += float.Parse(dr["value_fact"].ToString());
+                    }
+                }
+                myConnection.Close();
+            }
+
+            return sum;
+        }
+
+
+
+        private static List<int> MakeUnQuater(int quater)
+        {
+            List<int> months = new List<int>();
+            if (quater == 1)
+            {
+                months.Add(1);
+                months.Add(2);
+                months.Add(3);
+            }
+            if (quater == 2)
+            {
+                months.Add(4);
+                months.Add(5);
+                months.Add(6);
+            }
+            if (quater == 3)
+            {
+                months.Add(7);
+                months.Add(8);
+                months.Add(9);
+            }
+            if (quater == 4)
+            {
+                months.Add(10);
+                months.Add(11);
+                months.Add(12);
+            }
+            return months;
         }
 
         public static OneNorm GetOneNormDescr(int id_norm, int id_prod)
