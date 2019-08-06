@@ -19,6 +19,8 @@ namespace WindowsFormsApp1
         {
             InitializeComponent();
             this.dataGridView1.EditingControlShowing += new DataGridViewEditingControlShowingEventHandler(EditingControlShowing1);
+            this.dataGridView1_1.EditingControlShowing += new DataGridViewEditingControlShowingEventHandler(EditingControlShowing1);
+            this.dataGridView1_2.EditingControlShowing += new DataGridViewEditingControlShowingEventHandler(EditingControlShowing1);
             this.dataGridView2.EditingControlShowing += new DataGridViewEditingControlShowingEventHandler(EditingControlShowing);
             this.dataGridView3.EditingControlShowing += new DataGridViewEditingControlShowingEventHandler(EditingControlShowing);
             this.dataGridView4.EditingControlShowing += new DataGridViewEditingControlShowingEventHandler(EditingControlShowing);

@@ -19,6 +19,7 @@ namespace WindowsFormsApp1
         public LoginForm()
         {
             InitializeComponent();
+            this.AcceptButton = button1;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -58,6 +59,12 @@ namespace WindowsFormsApp1
                 this.Show();
                 Program.relog = false;
             }
+        }
+
+        private void tb_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                button1.PerformClick();
         }
     }
 }

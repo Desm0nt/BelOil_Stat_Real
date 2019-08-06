@@ -56,6 +56,7 @@
             // 
             this.textBox2.Location = new System.Drawing.Point(30, 86);
             this.textBox2.Name = "textBox2";
+            this.textBox2.PasswordChar = '*';
             this.textBox2.Size = new System.Drawing.Size(209, 20);
             this.textBox2.TabIndex = 2;
             // 
@@ -77,7 +78,7 @@
             this.label2.TabIndex = 4;
             this.label2.Text = "Пароль:";
             // 
-            // Form1
+            // LoginForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -87,7 +88,7 @@
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button1);
-            this.Name = "Form1";
+            this.Name = "LoginForm";
             this.Text = "Авторизация";
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -590,9 +590,6 @@ namespace WindowsFormsApp1.DBO
             }
         }
 
-
-
-
         /// <summary>
         /// Вход пользователя в систему
         /// </summary>
@@ -713,7 +710,6 @@ namespace WindowsFormsApp1.DBO
             }
             return CompanyIdList;
         }
-
 
         #region main
         public static string GetProdUnit(int id_prod)
@@ -863,7 +859,6 @@ namespace WindowsFormsApp1.DBO
             return NormList;
         }
 
-
         public static List<RecievedTable> GetRecievedList(int id_owner, int id_rep)
         {
             List<RecievedTable> RecievedList = new List<RecievedTable>();
@@ -950,7 +945,6 @@ namespace WindowsFormsApp1.DBO
             return RecievedList;
         }
 
-
         public static List<SendedTable> GetSendedList(int id_owner, int id_rep)
         {
             List<SendedTable> SendedList = new List<SendedTable>();
@@ -1034,7 +1028,6 @@ namespace WindowsFormsApp1.DBO
             }
             return SendedList;
         }
-
 
         public static List<SourceTable> GetSourceList(int id_org, int id_rep)
         {
@@ -1238,8 +1231,6 @@ namespace WindowsFormsApp1.DBO
             }
             return FTradeList;
         }
-
-
 
         public static NormTable GetOneNorm(int id_org, int id_rep, int id_norm)
         {
@@ -1606,8 +1597,6 @@ namespace WindowsFormsApp1.DBO
             return sum;
         }
 
-
-
         private static List<int> MakeUnQuater(int quater)
         {
             List<int> months = new List<int>();
@@ -1764,7 +1753,6 @@ namespace WindowsFormsApp1.DBO
             myConnection.Close();
             return value;
         }
-
 
         public static List<SourceTable1tek> GetSourcesFor1tek(int id_org)
         {
