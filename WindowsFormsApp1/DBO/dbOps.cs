@@ -845,7 +845,7 @@ namespace WindowsFormsApp1.DBO
                                     //NormList.Add(new NormInputTable { Id = Int32.Parse(dr2["id"].ToString()), name = dr["name"].ToString() + " (" + name + ")", val_plan = float.Parse(dr2["value_plan"].ToString()), val_fact = float.Parse(dr2["value_fact"].ToString()) });
                                     NormList.Add(new NormTable
                                     {
-                                        Id = Int32.Parse(dr["id"].ToString()),
+                                        Id = Int32.Parse(dr2["id"].ToString()),
                                         Id_org = Int32.Parse(dr["id_org"].ToString()),
                                         Id_prod = Int32.Parse(dr["id_prod"].ToString()),
                                         Code = Int32.Parse(dr["code"].ToString()),
@@ -862,11 +862,11 @@ namespace WindowsFormsApp1.DBO
                                 else
                                     NormList.Add(new NormTable
                                     {
-                                        Id = Int32.Parse(dr["id"].ToString()),
+                                        Id = Int32.Parse(dr2["id"].ToString()),
                                         Id_org = Int32.Parse(dr["id_org"].ToString()),
                                         Id_prod = Int32.Parse(dr["id_prod"].ToString()),
                                         Code = Int32.Parse(dr["code"].ToString()),
-                                        name = dr["name"].ToString() + " (" + name + ")",
+                                        name = dr["name"].ToString(),
                                         fuel = !String.IsNullOrWhiteSpace(dr["fuel"].ToString()) ? Int32.Parse(dr["fuel"].ToString()) : 0,
                                         type = Int32.Parse(dr["type"].ToString()),
                                         row_options = rowopt,
@@ -1250,7 +1250,7 @@ namespace WindowsFormsApp1.DBO
                                 var Fuel = dbOps.GetFuelData(Int32.Parse(dr["id_fuel"].ToString()), year, month);
                                 var Fsum = MakeTInputFuelSum(year, month, Int32.Parse(dr["id"].ToString()));
                                 FTradeList.Add(new FTradeInputTable { Id = Int32.Parse(dr2["id"].ToString()), Id_fuel = Int32.Parse(dr["id"].ToString()), Fuel_name = dbOps.GetFuelNameById(Int32.Parse(dr["id_fuel"].ToString()), year, month), Value = float.Parse(dr2["value"].ToString()),
-                                    Value_tyt = 0f, Value_year_tyt = 0f, B_y = (float)Math.Round(Fuel.B_y, 3), Value_year = Fsum, Ed_izm = Fuel.unit });
+                                    Value_tyt = 0f, Value_year_tyt = 0f, B_y = (float)Math.Round(Fuel.B_y, 3), Value_year = Fsum, Value_year_back = Fsum, Ed_izm = Fuel.unit });
                             }
                         }
                         myConnection2.Close();

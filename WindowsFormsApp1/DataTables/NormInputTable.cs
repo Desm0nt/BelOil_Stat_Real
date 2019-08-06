@@ -23,5 +23,7 @@ namespace WindowsFormsApp1.DataTables
         public float val_fact_sum { get; set; }
         public float val_fact_plan_sum { get; set; }
         public float val_fact_factold_sum { get; set; }
+        public float val_plan_sum_back { get; set; }
+        public float val_fact_sum_back { get; set; }
     }
 }

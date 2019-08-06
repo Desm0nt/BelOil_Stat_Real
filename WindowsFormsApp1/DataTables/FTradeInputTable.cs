@@ -17,5 +17,6 @@ namespace WindowsFormsApp1.DataTables
         public float Value_tyt { get; set; }
         public float Value_year { get; set; }
         public float Value_year_tyt { get; set; }
+        public float Value_year_back { get; set; }
     }
 }

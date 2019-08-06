@@ -24,6 +24,7 @@ namespace WindowsFormsApp1
             InitializeComponent();
             tabControl1.SelectedIndex = 0;
             currentTubIndex = 0;
+            treeView1.ExpandAll();
             //Thread.CurrentThread.CurrentCulture = System.Globalization.CultureInfo.InvariantCulture;
             this.dataGridView1.EditingControlShowing += new DataGridViewEditingControlShowingEventHandler(EditingControlShowing);
             this.dataGridView2.EditingControlShowing += new DataGridViewEditingControlShowingEventHandler(EditingControlShowing1);
@@ -81,10 +82,79 @@ namespace WindowsFormsApp1
             if (!String.IsNullOrWhiteSpace(row.Cells[5].Value.ToString()))
             {
                 row.Cells[6].Value = Math.Round(((float)row.Cells[5].Value * (float)row.Cells[4].Value), 1);
-                row.Cells[7].Value = (float)row.Cells[7].Value + (float)row.Cells[5].Value;
+                row.Cells[7].Value = (float)row.Cells[9].Value + (float)row.Cells[5].Value;
             }
             row.Cells[8].Value = Math.Round(((float)row.Cells[7].Value * (float)row.Cells[4].Value), 1);
         }
+        private void dataGridView2_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            DataGridView dataGridView = (DataGridView)sender;
+            var row = dataGridView.Rows[e.RowIndex];
+            if (!String.IsNullOrWhiteSpace(row.Cells[6].Value.ToString()))
+                row.Cells[11].Value = (float)row.Cells[15].Value + (float)row.Cells[6].Value;
+            if (!String.IsNullOrWhiteSpace(row.Cells[7].Value.ToString()))
+                row.Cells[12].Value = (float)row.Cells[16].Value + (float)row.Cells[7].Value;
+            if (!String.IsNullOrWhiteSpace(row.Cells[6].Value.ToString()) && !String.IsNullOrWhiteSpace(row.Cells[7].Value.ToString()))
+            {
+                row.Cells[8].Value = Math.Round(((float)row.Cells[7].Value / (float)row.Cells[6].Value) * 100, 1);
+                row.Cells[9].Value = Math.Round(((float)row.Cells[7].Value / (float)row.Cells[4].Value) * 100, 1);
+                row.Cells[13].Value = Math.Round(((float)row.Cells[12].Value / (float)row.Cells[11].Value) * 100, 1);
+                row.Cells[14].Value = Math.Round(((float)row.Cells[12].Value / (float)row.Cells[10].Value) * 100, 1);
+            }
+        }
+
+        private List<NormTable> MakeListSum(int yearr, int monthh, int type)
+        {
+            int report_id = dbOps.GetReportId(CurrentData.UserData.Id_org, yearr, 1);
+            var NormList = dbOps.GetNormInputList(CurrentData.UserData.Id_org, report_id, type, yearr, monthh);
+            foreach (var a in NormList)
+            {
+                a.val_fact = 0;
+                a.val_plan = 0;
+            }
+
+            if (monthh > 1)
+            {
+                for (int i = 1; i < monthh; i++)
+                {
+                    report_id = dbOps.GetReportId(CurrentData.UserData.Id_org, yearr, i);
+                    var tmplist = dbOps.GetNormInputList(CurrentData.UserData.Id_org, report_id, type, yearr, i);
+                    if (tmplist.Count != 0)
+                    {
+                        for (int j = 0; j < NormList.Count; j++)
+                        {
+                            NormList[j].val_plan += Convert.ToSingle(Math.Round(tmplist[j].val_plan, 1));
+                            NormList[j].val_fact += Convert.ToSingle(Math.Round(tmplist[j].val_fact, 1));
+                        }
+                    }
+                }
+            }
+            return NormList;
+        }
+        private List<NormTable> MakeListOldSum(int yearr, int monthh, int type)
+        {
+            int report_id = dbOps.GetReportId(CurrentData.UserData.Id_org, yearr, 1);
+            var NormList = dbOps.GetNormInputList(CurrentData.UserData.Id_org, report_id, type, yearr, monthh);
+
+            if (monthh > 1)
+            {
+                for (int i = 2; i <= monthh; i++)
+                {
+                    report_id = dbOps.GetReportId(CurrentData.UserData.Id_org, yearr, i);
+                    var tmplist = dbOps.GetNormInputList(CurrentData.UserData.Id_org, report_id, type, yearr, i);
+                    if (tmplist.Count != 0)
+                    {
+                        for (int j = 0; j < NormList.Count; j++)
+                        {
+                            NormList[j].val_plan += Convert.ToSingle(Math.Round(tmplist[j].val_plan, 1));
+                            NormList[j].val_fact += Convert.ToSingle(Math.Round(tmplist[j].val_fact, 1));
+                        }
+                    }
+                }
+            }
+            return NormList;
+        }
+
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -159,6 +229,10 @@ namespace WindowsFormsApp1
                     {
                         dbOps.UpdateFuelNorm(a.Id, a.val_plan, a.val_fact);
                     }
+                    button10.Enabled = false;
+                    button10.Visible = false;
+                    button6.Enabled = true;
+                    button6.Visible = true;
                     break;
                 default:
                     break;
@@ -186,24 +260,101 @@ namespace WindowsFormsApp1
                     dataGridView1.Columns[7].ReadOnly = true;
                     dataGridView1.Columns[8].HeaderText = "С начала года, т.у.т";
                     dataGridView1.Columns[8].ReadOnly = true;
+                    dataGridView1.Columns[9].Visible = false;
+                    dataGridView1.Columns[9].ReadOnly = true;
                     foreach (DataGridViewRow row in dataGridView1.Rows)
                     {
                         if (!String.IsNullOrWhiteSpace(row.Cells[5].Value.ToString()))
                         {
                             row.Cells[6].Value = Math.Round(((float)row.Cells[5].Value * (float)row.Cells[4].Value), 1);
-                            row.Cells[7].Value = (float)row.Cells[7].Value + (float)row.Cells[5].Value;
+                            row.Cells[7].Value = (float)row.Cells[9].Value + (float)row.Cells[5].Value;
                         }
                         row.Cells[8].Value = Math.Round(((float)row.Cells[7].Value * (float)row.Cells[4].Value), 1);
                     }
                     break;
                 case 2:
-                    List<NormInputTable> NormToplist = dbOps.GetNormInputList(CurrentData.UserData.Id_org, curRepid, 1, year, month);
-                    dataGridView2.DataSource = NormToplist;
+                    List<NormTable> NormToplist = dbOps.GetNormInputList(CurrentData.UserData.Id_org, curRepid, 1, year, month);
+                    List<NormTable> NormToplistSum = MakeListSum(year, month, 1);
+                    List<NormTable> NormToplistOld = dbOps.GetNormInputList(CurrentData.UserData.Id_org, dbOps.GetReportId(CurrentData.UserData.Id_org, (year - 1), month), 1, (year-1), month);
+                    List<NormTable> NormToplistOldSum = MakeListOldSum((year-1), month, 1);
+                    List<NormInputTable> NormToplist1 = new List<NormInputTable>();
+                    for (int i = 0; i < NormToplist.Count; i++)
+                    {
+                        var Fuel = dbOps.GetFuelData(NormToplist[i].fuel, year, month);
+                            NormToplist1.Add(new NormInputTable
+                            {
+                                Id = NormToplist[i].Id,
+                                Code = NormToplist[i].Code,
+                                name = NormToplist[i].name,
+                                Ed_izm = Fuel.unit,
+                                val_fact_old = 0,
+                                By = (float)Math.Round(Fuel.B_y, 3),
+                                val_plan = (float)Math.Round(NormToplist[i].val_plan, 1),
+                                val_fact = (float)Math.Round(NormToplist[i].val_fact, 1),
+                                val_fact_plan = 0,
+                                val_fact_factold = 0,
+                                val_fact_old_sum = 0,
+                                val_plan_sum = (float)Math.Round(NormToplistSum[i].val_plan, 1) + (float)Math.Round(NormToplist[i].val_plan, 1),
+                                val_fact_sum = (float)Math.Round(NormToplistSum[i].val_fact, 1) + (float)Math.Round(NormToplist[i].val_fact, 1),
+                                val_fact_plan_sum = (float)Math.Round((((float)Math.Round(NormToplistSum[i].val_fact, 1) + (float)Math.Round(NormToplist[i].val_fact, 1)) / ((float)Math.Round(NormToplistSum[i].val_plan, 1) + (float)Math.Round(NormToplist[i].val_plan, 1))) * 100, 1),
+                                val_fact_factold_sum = 0,
+                                val_plan_sum_back = (float)Math.Round(NormToplistSum[i].val_plan, 1),
+                                val_fact_sum_back = (float)Math.Round(NormToplistSum[i].val_fact, 1)
+                            });
+                    }
+                    foreach (var a in NormToplist1)
+                    {
+                        int index = NormToplistOld.FindIndex(b => b.name == a.name);
+                        if (!String.IsNullOrWhiteSpace(index.ToString()) && index >= 0)
+                        {
+                            a.val_fact_old = (float)Math.Round(NormToplistOld[index].val_fact, 1);
+                            a.val_fact_old_sum = (float)Math.Round(NormToplistOldSum[index].val_fact, 1);
+                            a.val_fact_factold_sum = (float)Math.Round(((a.val_fact_sum + a.val_fact) / (float)Math.Round(NormToplistOldSum[index].val_fact, 1)) * 100, 1);
+                        }
+                    }
+                    dataGridView2.DataSource = NormToplist1;
                     dataGridView2.Columns[0].ReadOnly = true;
-                    dataGridView2.Columns[1].HeaderText = "Наименование";
+                    dataGridView2.Columns[0].Visible = false;
+                    dataGridView2.Columns[1].HeaderText = " # ";
                     dataGridView2.Columns[1].ReadOnly = true;
-                    dataGridView2.Columns[2].HeaderText = "План.";
-                    dataGridView2.Columns[3].HeaderText = "Факт.";
+                    dataGridView2.Columns[2].HeaderText = "Наименование";
+                    dataGridView2.Columns[2].ReadOnly = true;
+                    dataGridView2.Columns[3].HeaderText = "Ед. изм.";
+                    dataGridView2.Columns[3].ReadOnly = true;
+                    dataGridView2.Columns[4].HeaderText = "Ф, " + (year-1);
+                    dataGridView2.Columns[4].ReadOnly = true;
+                    dataGridView2.Columns[5].HeaderText = "Ву";
+                    dataGridView2.Columns[5].ReadOnly = true;
+                    dataGridView2.Columns[6].HeaderText = "План";
+                    dataGridView2.Columns[7].HeaderText = "Факт";
+                    dataGridView2.Columns[8].HeaderText = "Ф/П, %";
+                    dataGridView2.Columns[8].ReadOnly = true;
+                    dataGridView2.Columns[9].HeaderText = "Ф/Ф("+ (year - 1) + "), %";
+                    dataGridView2.Columns[9].ReadOnly = true;
+                    dataGridView2.Columns[10].HeaderText = "С начала года Ф, " + (year - 1);
+                    dataGridView2.Columns[10].ReadOnly = true;
+                    dataGridView2.Columns[11].HeaderText = "С начала года, План";
+                    dataGridView2.Columns[11].ReadOnly = true;
+                    dataGridView2.Columns[12].HeaderText = "С начала года, Факт";
+                    dataGridView2.Columns[12].ReadOnly = true;
+                    dataGridView2.Columns[13].HeaderText = "С начала года Ф/П, %";
+                    dataGridView2.Columns[13].ReadOnly = true;
+                    dataGridView2.Columns[14].HeaderText = "С начала года Ф/Ф(" + (year - 1) + "), %";
+                    dataGridView2.Columns[14].ReadOnly = true;
+                    dataGridView2.Columns[15].Visible = false;
+                    dataGridView2.Columns[16].Visible = false;
+                    foreach (DataGridViewRow row in dataGridView2.Rows)
+                    {
+                        if (!String.IsNullOrWhiteSpace(row.Cells[6].Value.ToString()))
+                            row.Cells[11].Value = (float)row.Cells[15].Value + (float)row.Cells[6].Value;
+                        if (!String.IsNullOrWhiteSpace(row.Cells[7].Value.ToString()))
+                            row.Cells[12].Value = (float)row.Cells[16].Value + (float)row.Cells[7].Value;
+                        if (!String.IsNullOrWhiteSpace(row.Cells[6].Value.ToString()) && !String.IsNullOrWhiteSpace(row.Cells[7].Value.ToString()))
+                        {
+                            row.Cells[8].Value = Math.Round(((float)row.Cells[7].Value / (float)row.Cells[6].Value) * 100, 1);
+                            row.Cells[9].Value = Math.Round(((float)row.Cells[7].Value / (float)row.Cells[4].Value) * 100, 1);
+                        }
+                    }
                     break;
                 case 3:
                     List<SourceInputTable> SourceInputList = dbOps.GetSourceInputList(CurrentData.UserData.Id_org, curRepid, 2);
@@ -230,13 +381,89 @@ namespace WindowsFormsApp1
                     dataGridView5.Columns[2].HeaderText = "Значение";
                     break;
                 case 6:
-                    List<NormInputTable> NormHeatlist = dbOps.GetNormInputList(CurrentData.UserData.Id_org, curRepid, 2, year, month);
-                    dataGridView6.DataSource = NormHeatlist;
+                    List<NormTable> NormHeatlist = dbOps.GetNormInputList(CurrentData.UserData.Id_org, curRepid, 2, year, month);
+                    List<NormTable> NormHeatlistSum = MakeListSum(year, month, 2);
+                    List<NormTable> NormHeatlistOld = dbOps.GetNormInputList(CurrentData.UserData.Id_org, dbOps.GetReportId(CurrentData.UserData.Id_org, (year - 1), month), 2, (year - 1), month);
+                    List<NormTable> NormHeatlistOldSum = MakeListOldSum((year - 1), month, 2);
+                    List<NormInputTable> NormHeatlist1 = new List<NormInputTable>();
+                    for (int i = 0; i < NormHeatlist.Count; i++)
+                    {
+                        var Factor = dbOps.GetFactorData(2);
+                        var Fuel = dbOps.GetFuelData(NormHeatlist[i].fuel, year, month);
+                        NormHeatlist1.Add(new NormInputTable
+                        {
+                            Id = NormHeatlist[i].Id,
+                            Code = NormHeatlist[i].Code,
+                            name = NormHeatlist[i].name,
+                            Ed_izm = Fuel.unit,
+                            val_fact_old = 0,
+                            By = (float)Math.Round(Factor.value, 3),
+                            val_plan = (float)Math.Round(NormHeatlist[i].val_plan, 1),
+                            val_fact = (float)Math.Round(NormHeatlist[i].val_fact, 1),
+                            val_fact_plan = 0,
+                            val_fact_factold = 0,
+                            val_fact_old_sum = 0,
+                            val_plan_sum = (float)Math.Round(NormHeatlistSum[i].val_plan, 1) + (float)Math.Round(NormHeatlist[i].val_plan, 1),
+                            val_fact_sum = (float)Math.Round(NormHeatlistSum[i].val_fact, 1) + (float)Math.Round(NormHeatlist[i].val_fact, 1),
+                            val_fact_plan_sum = (float)Math.Round((((float)Math.Round(NormHeatlistSum[i].val_fact, 1) + (float)Math.Round(NormHeatlist[i].val_fact, 1)) / ((float)Math.Round(NormHeatlistSum[i].val_plan, 1) + (float)Math.Round(NormHeatlist[i].val_plan, 1))) * 100, 1),
+                            val_fact_factold_sum = 0,
+                            val_plan_sum_back = (float)Math.Round(NormHeatlistSum[i].val_plan, 1),
+                            val_fact_sum_back = (float)Math.Round(NormHeatlistSum[i].val_fact, 1)
+                        });
+                    }
+                    foreach (var a in NormHeatlist1)
+                    {
+                        int index = NormHeatlistOld.FindIndex(b => b.name == a.name);
+                        if (!String.IsNullOrWhiteSpace(index.ToString()) && index >=0)
+                        {
+                            a.val_fact_old = (float)Math.Round(NormHeatlistOld[index].val_fact, 1);
+                            a.val_fact_old_sum = (float)Math.Round(NormHeatlistOldSum[index].val_fact, 1);
+                            a.val_fact_factold_sum = (float)Math.Round(((a.val_fact_sum + a.val_fact) / (float)Math.Round(NormHeatlistOldSum[index].val_fact, 1)) * 100, 1);
+                        }
+                    }
+                    dataGridView6.DataSource = NormHeatlist1;
                     dataGridView6.Columns[0].ReadOnly = true;
-                    dataGridView6.Columns[1].HeaderText = "Наименование";
+                    dataGridView6.Columns[0].Visible = false;
+                    dataGridView6.Columns[1].HeaderText = " # ";
                     dataGridView6.Columns[1].ReadOnly = true;
-                    dataGridView6.Columns[2].HeaderText = "План.";
-                    dataGridView6.Columns[3].HeaderText = "Факт.";
+                    dataGridView6.Columns[2].HeaderText = "Наименование";
+                    dataGridView6.Columns[2].ReadOnly = true;
+                    dataGridView6.Columns[3].HeaderText = "Ед. изм.";
+                    dataGridView6.Columns[3].ReadOnly = true;
+                    dataGridView6.Columns[4].HeaderText = "Ф, " + (year - 1);
+                    dataGridView6.Columns[4].ReadOnly = true;
+                    dataGridView6.Columns[5].HeaderText = "Ву";
+                    dataGridView6.Columns[5].ReadOnly = true;
+                    dataGridView6.Columns[6].HeaderText = "План";
+                    dataGridView6.Columns[7].HeaderText = "Факт";
+                    dataGridView6.Columns[8].HeaderText = "Ф/П, %";
+                    dataGridView6.Columns[8].ReadOnly = true;
+                    dataGridView6.Columns[9].HeaderText = "Ф/Ф(" + (year - 1) + "), %";
+                    dataGridView6.Columns[9].ReadOnly = true;
+                    dataGridView6.Columns[10].HeaderText = "С начала года Ф, " + (year - 1);
+                    dataGridView6.Columns[10].ReadOnly = true;
+                    dataGridView6.Columns[11].HeaderText = "С начала года, План";
+                    dataGridView6.Columns[11].ReadOnly = true;
+                    dataGridView6.Columns[12].HeaderText = "С начала года, Факт";
+                    dataGridView6.Columns[12].ReadOnly = true;
+                    dataGridView6.Columns[13].HeaderText = "С начала года Ф/П, %";
+                    dataGridView6.Columns[13].ReadOnly = true;
+                    dataGridView6.Columns[14].HeaderText = "С начала года Ф/Ф(" + (year - 1) + "), %";
+                    dataGridView6.Columns[14].ReadOnly = true;
+                    dataGridView6.Columns[15].Visible = false;
+                    dataGridView6.Columns[16].Visible = false;
+                    foreach (DataGridViewRow row in dataGridView6.Rows)
+                    {
+                        if (!String.IsNullOrWhiteSpace(row.Cells[6].Value.ToString()))
+                            row.Cells[11].Value = (float)row.Cells[15].Value + (float)row.Cells[6].Value;
+                        if (!String.IsNullOrWhiteSpace(row.Cells[7].Value.ToString()))
+                            row.Cells[12].Value = (float)row.Cells[16].Value + (float)row.Cells[7].Value;
+                        if (!String.IsNullOrWhiteSpace(row.Cells[6].Value.ToString()) && !String.IsNullOrWhiteSpace(row.Cells[7].Value.ToString()))
+                        {
+                            row.Cells[8].Value = Math.Round(((float)row.Cells[7].Value / (float)row.Cells[6].Value) * 100, 1);
+                            row.Cells[9].Value = Math.Round(((float)row.Cells[7].Value / (float)row.Cells[4].Value) * 100, 1);
+                        }
+                    }
                     break;
                 case 7:
                     List<SourceInputTable> SourceInputList1 = dbOps.GetSourceInputList(CurrentData.UserData.Id_org, curRepid, 3);
@@ -263,13 +490,93 @@ namespace WindowsFormsApp1
                     dataGridView9.Columns[2].HeaderText = "Значение";
                     break;
                 case 10:
-                    List<NormInputTable> NormEllist = dbOps.GetNormInputList(CurrentData.UserData.Id_org, curRepid, 3, year, month);
-                    dataGridView10.DataSource = NormEllist;
+                    button10.Enabled = true;
+                    button10.Visible = true;
+                    button6.Enabled = false;
+                    button6.Visible = false;
+                    List<NormTable> NormEllist = dbOps.GetNormInputList(CurrentData.UserData.Id_org, curRepid, 3, year, month);
+                    List<NormTable> NormEllistSum = MakeListSum(year, month, 3);
+                    List<NormTable> NormEllistOld = dbOps.GetNormInputList(CurrentData.UserData.Id_org, dbOps.GetReportId(CurrentData.UserData.Id_org, (year - 1), month), 3, (year - 1), month);
+                    List<NormTable> NormEllistOldSum = MakeListOldSum((year - 1), month, 3);
+                    List<NormInputTable> NormEllist1 = new List<NormInputTable>();
+                    for (int i = 0; i < NormEllist.Count; i++)
+                    {
+                        var Factor = dbOps.GetFactorData(3);
+                        var Fuel = dbOps.GetFuelData(NormEllist[i].fuel, year, month);
+                        NormEllist1.Add(new NormInputTable
+                        {
+                            Id = NormEllist[i].Id,
+                            Code = NormEllist[i].Code,
+                            name = NormEllist[i].name,
+                            Ed_izm = Fuel.unit,
+                            val_fact_old = 0,
+                            By = (float)Math.Round(Factor.value, 3),
+                            val_plan = (float)Math.Round(NormEllist[i].val_plan, 1),
+                            val_fact = (float)Math.Round(NormEllist[i].val_fact, 1),
+                            val_fact_plan = 0,
+                            val_fact_factold = 0,
+                            val_fact_old_sum = 0,
+                            val_plan_sum = (float)Math.Round(NormEllistSum[i].val_plan, 1) + (float)Math.Round(NormEllist[i].val_plan, 1),
+                            val_fact_sum = (float)Math.Round(NormEllistSum[i].val_fact, 1) + (float)Math.Round(NormEllist[i].val_fact, 1),
+                            val_fact_plan_sum = (float)Math.Round((((float)Math.Round(NormEllistSum[i].val_fact, 1) + (float)Math.Round(NormEllist[i].val_fact, 1)) / ((float)Math.Round(NormEllistSum[i].val_plan, 1) + (float)Math.Round(NormEllist[i].val_plan, 1))) * 100, 1),
+                            val_fact_factold_sum = 0,
+                            val_plan_sum_back = (float)Math.Round(NormEllistSum[i].val_plan, 1),
+                            val_fact_sum_back = (float)Math.Round(NormEllistSum[i].val_fact, 1)
+                        });
+                    }
+                    foreach (var a in NormEllist1)
+                    {
+                        int index = NormEllistOld.FindIndex(b => b.name == a.name);
+                        if (!String.IsNullOrWhiteSpace(index.ToString()) && index >= 0)
+                        {
+                            a.val_fact_old = (float)Math.Round(NormEllistOld[index].val_fact, 1);
+                            a.val_fact_old_sum = (float)Math.Round(NormEllistOldSum[index].val_fact, 1);
+                            a.val_fact_factold_sum = (float)Math.Round(((a.val_fact_sum + a.val_fact) / (float)Math.Round(NormEllistOldSum[index].val_fact, 1)) * 100, 1);
+                        }
+                    }
+                    dataGridView10.DataSource = NormEllist1;
                     dataGridView10.Columns[0].ReadOnly = true;
-                    dataGridView10.Columns[1].HeaderText = "Наименование";
+                    dataGridView10.Columns[0].Visible = false;
+                    dataGridView10.Columns[1].HeaderText = " # ";
                     dataGridView10.Columns[1].ReadOnly = true;
-                    dataGridView10.Columns[2].HeaderText = "План.";
-                    dataGridView10.Columns[3].HeaderText = "Факт.";
+                    dataGridView10.Columns[2].HeaderText = "Наименование";
+                    dataGridView10.Columns[2].ReadOnly = true;
+                    dataGridView10.Columns[3].HeaderText = "Ед. изм.";
+                    dataGridView10.Columns[3].ReadOnly = true;
+                    dataGridView10.Columns[4].HeaderText = "Ф, " + (year - 1);
+                    dataGridView10.Columns[4].ReadOnly = true;
+                    dataGridView10.Columns[5].HeaderText = "Ву";
+                    dataGridView10.Columns[5].ReadOnly = true;
+                    dataGridView10.Columns[6].HeaderText = "План";
+                    dataGridView10.Columns[7].HeaderText = "Факт";
+                    dataGridView10.Columns[8].HeaderText = "Ф/П, %";
+                    dataGridView10.Columns[8].ReadOnly = true;
+                    dataGridView10.Columns[9].HeaderText = "Ф/Ф(" + (year - 1) + "), %";
+                    dataGridView10.Columns[9].ReadOnly = true;
+                    dataGridView10.Columns[10].HeaderText = "С начала года Ф, " + (year - 1);
+                    dataGridView10.Columns[10].ReadOnly = true;
+                    dataGridView10.Columns[11].HeaderText = "С начала года, План";
+                    dataGridView10.Columns[11].ReadOnly = true;
+                    dataGridView10.Columns[12].HeaderText = "С начала года, Факт";
+                    dataGridView10.Columns[12].ReadOnly = true;
+                    dataGridView10.Columns[13].HeaderText = "С начала года Ф/П, %";
+                    dataGridView10.Columns[13].ReadOnly = true;
+                    dataGridView10.Columns[14].HeaderText = "С начала года Ф/Ф(" + (year - 1) + "), %";
+                    dataGridView10.Columns[14].ReadOnly = true;
+                    dataGridView10.Columns[15].Visible = false;
+                    dataGridView10.Columns[16].Visible = false;
+                    foreach (DataGridViewRow row in dataGridView10.Rows)
+                    {
+                        if (!String.IsNullOrWhiteSpace(row.Cells[6].Value.ToString()))
+                            row.Cells[11].Value = (float)row.Cells[15].Value + (float)row.Cells[6].Value;
+                        if (!String.IsNullOrWhiteSpace(row.Cells[7].Value.ToString()))
+                            row.Cells[12].Value = (float)row.Cells[16].Value + (float)row.Cells[7].Value;
+                        if (!String.IsNullOrWhiteSpace(row.Cells[6].Value.ToString()) && !String.IsNullOrWhiteSpace(row.Cells[7].Value.ToString()))
+                        {
+                            row.Cells[8].Value = Math.Round(((float)row.Cells[7].Value / (float)row.Cells[6].Value) * 100, 1);
+                            row.Cells[9].Value = Math.Round(((float)row.Cells[7].Value / (float)row.Cells[4].Value) * 100, 1);
+                        }
+                    }
                     break;
                 default:
                     Console.WriteLine("default");
@@ -308,10 +615,21 @@ namespace WindowsFormsApp1
             }
         }
 
+        private void ReportsCreateForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            tabControl1.SelectedIndex = 0;
+        }
+
+        private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            if (Int32.Parse(e.Node.Tag.ToString()) != -1)
+                tabControl1.SelectedIndex = Int32.Parse(e.Node.Tag.ToString());
+        }
+
         void EditingControlShowing1(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
             DataGridView dataGridView = (DataGridView)sender;
-            if (dataGridView.CurrentCell.ColumnIndex == 2 || dataGridView.CurrentCell.ColumnIndex == 3)
+            if (dataGridView.CurrentCell.ColumnIndex == 6 || dataGridView.CurrentCell.ColumnIndex == 7)
             {
                 TextBox tb = e.Control as TextBox;
                 tb.KeyPress -= new KeyPressEventHandler(tb_KeyPress);
