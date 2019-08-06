@@ -4140,6 +4140,10 @@ namespace WindowsFormsApp1
             return TFuelList;
         }
 
+
+
+
+
         private List<TradeTable> MakeTradeSum(int year, int month)
         {
             int report_id = dbOps.GetReportId(CurrentData.UserData.Id_org, year, 1);

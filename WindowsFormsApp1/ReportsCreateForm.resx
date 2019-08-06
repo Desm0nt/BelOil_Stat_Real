@@ -117,4 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="label12.Text" xml:space="preserve">
+    <value>Этот мастер позволяет ввести данные отчетов 1-пэр и 12-тэк в пошаговом режиме
+Следуйте последовательно по страницам мастера при помощи кнопок управления внизу формы и заполняйте необходимые поля и таблицы
+</value>
+  </data>
 </root>

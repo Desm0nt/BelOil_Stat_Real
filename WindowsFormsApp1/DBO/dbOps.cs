@@ -795,7 +795,9 @@ namespace WindowsFormsApp1.DBO
                             while (dr2.Read())
                             {
                                 string[] rowopt = !String.IsNullOrWhiteSpace(dr["row_options"].ToString())?dr["row_options"].ToString().Split(','): new string[] { };
-                                NormList.Add(new NormTable { Id = Int32.Parse(dr["id"].ToString()), Id_org = Int32.Parse(dr["id_org"].ToString()), Id_prod = Int32.Parse(dr["id_prod"].ToString()), Code = Int32.Parse(dr["code"].ToString()), name = dr["name"].ToString(), fuel = !String.IsNullOrWhiteSpace(dr["fuel"].ToString()) ? Int32.Parse(dr["fuel"].ToString()) : 0, type = Int32.Parse(dr["type"].ToString()), row_options = rowopt, val_plan = float.Parse(dr2["value_plan"].ToString()), val_fact = float.Parse(dr2["value_fact"].ToString()), val_fact_ut = 0, val_plan_ut =0 });
+                                NormList.Add(new NormTable { Id = Int32.Parse(dr["id"].ToString()), Id_org = Int32.Parse(dr["id_org"].ToString()), Id_prod = Int32.Parse(dr["id_prod"].ToString()), Code = Int32.Parse(dr["code"].ToString()),
+                                    name = dr["name"].ToString(), fuel = !String.IsNullOrWhiteSpace(dr["fuel"].ToString()) ? Int32.Parse(dr["fuel"].ToString()) : 0, type = Int32.Parse(dr["type"].ToString()), row_options = rowopt,
+                                    val_plan = float.Parse(dr2["value_plan"].ToString()), val_fact = float.Parse(dr2["value_fact"].ToString()), val_fact_ut = 0, val_plan_ut =0 });
                             }
                         }
                         myConnection2.Close();
@@ -809,9 +811,9 @@ namespace WindowsFormsApp1.DBO
             }
             return NormList;
         }
-        public static List<NormInputTable> GetNormInputList(int id_org, int id_rep, int type, int year, int month)
+        public static List<NormTable> GetNormInputList(int id_org, int id_rep, int type, int year, int month)
         {
-            List<NormInputTable> NormList = new List<NormInputTable>();
+            List<NormTable> NormList = new List<NormTable>();
             try
             {
                 SqlConnection myConnection = new SqlConnection(cnStr);
@@ -840,11 +842,39 @@ namespace WindowsFormsApp1.DBO
                                 if (!String.IsNullOrWhiteSpace(dr["fuel"].ToString()))
                                 {
                                     var name = dbOps.GetFuelNameById(Int32.Parse(dr["fuel"].ToString()), year, month);
-                                    NormList.Add(new NormInputTable { Id = Int32.Parse(dr2["id"].ToString()), name = dr["name"].ToString() + " (" + name + ")", val_plan = float.Parse(dr2["value_plan"].ToString()), val_fact = float.Parse(dr2["value_fact"].ToString()) });
-
+                                    //NormList.Add(new NormInputTable { Id = Int32.Parse(dr2["id"].ToString()), name = dr["name"].ToString() + " (" + name + ")", val_plan = float.Parse(dr2["value_plan"].ToString()), val_fact = float.Parse(dr2["value_fact"].ToString()) });
+                                    NormList.Add(new NormTable
+                                    {
+                                        Id = Int32.Parse(dr["id"].ToString()),
+                                        Id_org = Int32.Parse(dr["id_org"].ToString()),
+                                        Id_prod = Int32.Parse(dr["id_prod"].ToString()),
+                                        Code = Int32.Parse(dr["code"].ToString()),
+                                        name = dr["name"].ToString() + " (" + name + ")",
+                                        fuel = !String.IsNullOrWhiteSpace(dr["fuel"].ToString()) ? Int32.Parse(dr["fuel"].ToString()) : 0,
+                                        type = Int32.Parse(dr["type"].ToString()),
+                                        row_options = rowopt,
+                                        val_plan = float.Parse(dr2["value_plan"].ToString()),
+                                        val_fact = float.Parse(dr2["value_fact"].ToString()),
+                                        val_fact_ut = 0,
+                                        val_plan_ut = 0
+                                    });
                                 }
                                 else
-                                    NormList.Add(new NormInputTable { Id = Int32.Parse(dr2["id"].ToString()), name = dr["name"].ToString(), val_plan = float.Parse(dr2["value_plan"].ToString()), val_fact = float.Parse(dr2["value_fact"].ToString()) });
+                                    NormList.Add(new NormTable
+                                    {
+                                        Id = Int32.Parse(dr["id"].ToString()),
+                                        Id_org = Int32.Parse(dr["id_org"].ToString()),
+                                        Id_prod = Int32.Parse(dr["id_prod"].ToString()),
+                                        Code = Int32.Parse(dr["code"].ToString()),
+                                        name = dr["name"].ToString() + " (" + name + ")",
+                                        fuel = !String.IsNullOrWhiteSpace(dr["fuel"].ToString()) ? Int32.Parse(dr["fuel"].ToString()) : 0,
+                                        type = Int32.Parse(dr["type"].ToString()),
+                                        row_options = rowopt,
+                                        val_plan = float.Parse(dr2["value_plan"].ToString()),
+                                        val_fact = float.Parse(dr2["value_fact"].ToString()),
+                                        val_fact_ut = 0,
+                                        val_plan_ut = 0
+                                    });
                             }
                         }
                         myConnection2.Close();
@@ -1217,7 +1247,10 @@ namespace WindowsFormsApp1.DBO
                             while (dr2.Read())
                             {
                                 //тут баги
-                                FTradeList.Add(new FTradeInputTable {Id = Int32.Parse(dr2["id"].ToString()), Id_fuel = Int32.Parse(dr["id"].ToString()), Fuel_name = dbOps.GetFuelNameById(Int32.Parse(dr["id_fuel"].ToString()), year, month), Value = float.Parse(dr2["value"].ToString()) });
+                                var Fuel = dbOps.GetFuelData(Int32.Parse(dr["id_fuel"].ToString()), year, month);
+                                var Fsum = MakeTInputFuelSum(year, month, Int32.Parse(dr["id"].ToString()));
+                                FTradeList.Add(new FTradeInputTable { Id = Int32.Parse(dr2["id"].ToString()), Id_fuel = Int32.Parse(dr["id"].ToString()), Fuel_name = dbOps.GetFuelNameById(Int32.Parse(dr["id_fuel"].ToString()), year, month), Value = float.Parse(dr2["value"].ToString()),
+                                    Value_tyt = 0f, Value_year_tyt = 0f, B_y = (float)Math.Round(Fuel.B_y, 3), Value_year = Fsum, Ed_izm = Fuel.unit });
                             }
                         }
                         myConnection2.Close();
@@ -1230,6 +1263,43 @@ namespace WindowsFormsApp1.DBO
                 MessageBox.Show("Ошибка GetFTradeInputList: " + Ex.Message);
             }
             return FTradeList;
+        }
+        public static float GetInputMonthFuelValue(int report_id, int fuel_id)
+        {
+            float val = 0;
+            SqlConnection myConnection = new SqlConnection(cnStr);
+            myConnection.Open();
+
+            string query = "SELECT * FROM [NewFuelsTrade] WHERE [id_fuel] = @fuel_id AND [id_rep] = @report_id";
+            SqlCommand command = new SqlCommand(query, myConnection);
+            command.Parameters.AddWithValue("@fuel_id", fuel_id);
+            command.Parameters.AddWithValue("@report_id", report_id);
+            using (SqlDataReader dr = command.ExecuteReader())
+            {
+                while (dr.Read())
+                {
+                    //тут баги
+                    val = float.Parse(dr["value"].ToString());
+                }
+            }
+
+            return val;
+        }
+        public static float MakeTInputFuelSum(int year, int month, int fuel_id)
+        {
+            int report_id = dbOps.GetReportId(CurrentData.UserData.Id_org, year, 1);
+            float yearFVal = 0;
+
+            if (month > 1)
+            {
+                for (int i = 1; i < month; i++)
+                {
+                    report_id = dbOps.GetReportId(CurrentData.UserData.Id_org, year, i);
+                    var tmplist = dbOps.GetFTradeList(CurrentData.UserData.Id_org, report_id);
+                    yearFVal += dbOps.GetInputMonthFuelValue(report_id, fuel_id);
+                }
+            }
+            return yearFVal;
         }
 
         public static NormTable GetOneNorm(int id_org, int id_rep, int id_norm)
