@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -24,6 +25,7 @@ namespace WindowsFormsApp1
             InitializeComponent();
             tabControl1.SelectedIndex = 0;
             currentTubIndex = 0;
+            label14.Text = "Данные за " + CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(month1) + " " + year1;
             treeView1.ExpandAll();
             //Thread.CurrentThread.CurrentCulture = System.Globalization.CultureInfo.InvariantCulture;
             this.dataGridView1.EditingControlShowing += new DataGridViewEditingControlShowingEventHandler(EditingControlShowing);

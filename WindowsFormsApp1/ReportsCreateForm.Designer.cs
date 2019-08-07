@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ReportsCreateForm));
             System.Windows.Forms.TreeNode treeNode15 = new System.Windows.Forms.TreeNode("Состояние");
             System.Windows.Forms.TreeNode treeNode16 = new System.Windows.Forms.TreeNode("Отпущено населению");
             System.Windows.Forms.TreeNode treeNode17 = new System.Windows.Forms.TreeNode("1-пэр (потребление)");
@@ -53,6 +52,7 @@
             treeNode25,
             treeNode26,
             treeNode27});
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ReportsCreateForm));
             this.panel1 = new System.Windows.Forms.Panel();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
@@ -103,6 +103,9 @@
             this.tabPage11 = new System.Windows.Forms.TabPage();
             this.button16 = new System.Windows.Forms.Button();
             this.treeView1 = new System.Windows.Forms.TreeView();
+            this.label13 = new System.Windows.Forms.Label();
+            this.panel13 = new System.Windows.Forms.Panel();
+            this.label14 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel2.SuspendLayout();
@@ -125,6 +128,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView10)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.panel12.SuspendLayout();
             this.panel11.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabPage3.SuspendLayout();
@@ -204,9 +208,10 @@
             // label2
             // 
             this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label2.Location = new System.Drawing.Point(5, 3);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(87, 13);
+            this.label2.Size = new System.Drawing.Size(112, 16);
             this.label2.TabIndex = 1;
             this.label2.Text = "Расход топлива";
             // 
@@ -539,6 +544,9 @@
             this.panel12.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel12.BackColor = System.Drawing.SystemColors.Control;
+            this.panel12.Controls.Add(this.label14);
+            this.panel12.Controls.Add(this.panel13);
+            this.panel12.Controls.Add(this.label13);
             this.panel12.Location = new System.Drawing.Point(3, 55);
             this.panel12.Name = "panel12";
             this.panel12.Size = new System.Drawing.Size(921, 436);
@@ -562,11 +570,10 @@
             this.label12.AutoSize = true;
             this.label12.Location = new System.Drawing.Point(13, 20);
             this.label12.Name = "label12";
-            this.label12.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.label12.Size = new System.Drawing.Size(727, 26);
             this.label12.TabIndex = 1;
             this.label12.Text = resources.GetString("label12.Text");
-            this.label12.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            this.label12.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
             // 
             // label11
             // 
@@ -769,6 +776,35 @@
             this.treeView1.TabIndex = 9;
             this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
             // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label13.Location = new System.Drawing.Point(32, 125);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(808, 288);
+            this.label13.TabIndex = 0;
+            this.label13.Text = resources.GetString("label13.Text");
+            // 
+            // panel13
+            // 
+            this.panel13.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.panel13.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel13.Location = new System.Drawing.Point(35, 75);
+            this.panel13.Name = "panel13";
+            this.panel13.Size = new System.Drawing.Size(408, 61);
+            this.panel13.TabIndex = 1;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label14.Location = new System.Drawing.Point(35, 44);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(86, 16);
+            this.label14.TabIndex = 2;
+            this.label14.Text = "Данные за";
+            // 
             // ReportsCreateForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -816,6 +852,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView10)).EndInit();
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
+            this.panel12.ResumeLayout(false);
+            this.panel12.PerformLayout();
             this.panel11.ResumeLayout(false);
             this.panel11.PerformLayout();
             this.tabPage2.ResumeLayout(false);
@@ -884,5 +922,8 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TreeView treeView1;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Panel panel13;
+        private System.Windows.Forms.Label label13;
     }
 }
