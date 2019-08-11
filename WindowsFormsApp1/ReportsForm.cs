@@ -1,4 +1,5 @@
 ﻿
+using ComponentFactory.Krypton.Toolkit;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,7 +18,7 @@ using WindowsFormsApp1.DBO;
 
 namespace WindowsFormsApp1
 {
-    public partial class ReportsForm : Form
+    public partial class ReportsForm : KryptonForm
     {
         public int year;
         public List<NormTable> actualList = new List<NormTable>();
@@ -4280,6 +4281,13 @@ namespace WindowsFormsApp1
         private void button4_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            var myForm = new ProductsListForm();
+            myForm.FormClosed += new FormClosedEventHandler(myForm_FormClosed);
+            myForm.Show();
         }
     }
 }

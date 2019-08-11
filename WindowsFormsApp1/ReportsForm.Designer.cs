@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.менюToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -48,10 +49,11 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.reoGridControl3 = new unvell.ReoGrid.ReoGridControl();
             this.tabPage6 = new System.Windows.Forms.TabPage();
-            this.button2 = new System.Windows.Forms.Button();
+            this.button2 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.reoGridControl5 = new unvell.ReoGrid.ReoGridControl();
             this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.button1 = new System.Windows.Forms.Button();
+            this.button4 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.button1 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.reoGridControl4 = new unvell.ReoGrid.ReoGridControl();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.reoGrid4 = new unvell.ReoGrid.ReoGridControl();
@@ -60,11 +62,12 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.reoGridControl1 = new unvell.ReoGrid.ReoGridControl();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.CompanyBox = new System.Windows.Forms.ComboBox();
-            this.button3 = new System.Windows.Forms.Button();
-            this.RUPButton = new System.Windows.Forms.Button();
-            this.POButton = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
+            this.CompanyBox = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
+            this.button3 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.RUPButton = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.POButton = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.button5 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.kryptonManager1 = new ComponentFactory.Krypton.Toolkit.KryptonManager(this.components);
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tabPage6.SuspendLayout();
@@ -73,13 +76,16 @@
             this.tabPage2.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.CompanyBox)).BeginInit();
             this.SuspendLayout();
             // 
             // dateTimePicker1
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(306, 4);
+            this.dateTimePicker1.CalendarFont = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.dateTimePicker1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.dateTimePicker1.Location = new System.Drawing.Point(331, 3);
             this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(200, 20);
+            this.dateTimePicker1.Size = new System.Drawing.Size(200, 23);
             this.dateTimePicker1.TabIndex = 2;
             this.dateTimePicker1.CloseUp += new System.EventHandler(this.dateTimePicker1_CloseUp);
             this.dateTimePicker1.DropDown += new System.EventHandler(this.dateTimePicker1_DropDown);
@@ -87,6 +93,7 @@
             // menuStrip1
             // 
             this.menuStrip1.AutoSize = false;
+            this.menuStrip1.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.менюToolStripMenuItem,
             this.отчетыToolStripMenuItem,
@@ -204,7 +211,8 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(212, 9);
+            this.label1.BackColor = System.Drawing.Color.FromArgb(255, 191, 219, 255);
+            this.label1.Location = new System.Drawing.Point(224, 9);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(88, 13);
             this.label1.TabIndex = 4;
@@ -254,10 +262,9 @@
             // 
             this.button2.Location = new System.Drawing.Point(4, 4);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(99, 23);
+            this.button2.Size = new System.Drawing.Size(127, 24);
             this.button2.TabIndex = 3;
-            this.button2.Text = "Сформировать";
-            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Values.Text = "Сформировать";
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // reoGridControl5
@@ -268,7 +275,7 @@
             this.reoGridControl5.BackColor = System.Drawing.Color.White;
             this.reoGridControl5.ColumnHeaderContextMenuStrip = null;
             this.reoGridControl5.LeadHeaderContextMenuStrip = null;
-            this.reoGridControl5.Location = new System.Drawing.Point(3, 33);
+            this.reoGridControl5.Location = new System.Drawing.Point(3, 34);
             this.reoGridControl5.Name = "reoGridControl5";
             this.reoGridControl5.RowHeaderContextMenuStrip = null;
             this.reoGridControl5.Script = null;
@@ -277,7 +284,7 @@
             this.reoGridControl5.SheetTabVisible = true;
             this.reoGridControl5.SheetTabWidth = 60;
             this.reoGridControl5.ShowScrollEndSpacing = true;
-            this.reoGridControl5.Size = new System.Drawing.Size(1304, 577);
+            this.reoGridControl5.Size = new System.Drawing.Size(1304, 576);
             this.reoGridControl5.TabIndex = 2;
             this.reoGridControl5.Text = "reoGridControl5";
             // 
@@ -293,14 +300,22 @@
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "4-норма";
             // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(114, 4);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(82, 24);
+            this.button4.TabIndex = 4;
+            this.button4.Values.Text = "Пересчитать";
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(4, 4);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(103, 23);
+            this.button1.Size = new System.Drawing.Size(103, 24);
             this.button1.TabIndex = 3;
-            this.button1.Text = "Сформировать";
-            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Values.Text = "Сформировать";
             this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // reoGridControl4
@@ -416,14 +431,12 @@
             // 
             // tabControl1
             // 
-            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Controls.Add(this.tabPage6);
+            this.tabControl1.Cursor = System.Windows.Forms.Cursors.Default;
             this.tabControl1.Location = new System.Drawing.Point(12, 33);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -433,6 +446,7 @@
             // 
             // CompanyBox
             // 
+            this.CompanyBox.DropDownWidth = 185;
             this.CompanyBox.FormattingEnabled = true;
             this.CompanyBox.Location = new System.Drawing.Point(548, 4);
             this.CompanyBox.Name = "CompanyBox";
@@ -444,10 +458,9 @@
             // 
             this.button3.Location = new System.Drawing.Point(740, 3);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.Size = new System.Drawing.Size(75, 24);
             this.button3.TabIndex = 7;
-            this.button3.Text = "Выбрать";
-            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Values.Text = "Выбрать";
             this.button3.Visible = false;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
@@ -456,10 +469,9 @@
             this.RUPButton.Enabled = false;
             this.RUPButton.Location = new System.Drawing.Point(821, 3);
             this.RUPButton.Name = "RUPButton";
-            this.RUPButton.Size = new System.Drawing.Size(75, 23);
+            this.RUPButton.Size = new System.Drawing.Size(75, 24);
             this.RUPButton.TabIndex = 8;
-            this.RUPButton.Text = "РУП";
-            this.RUPButton.UseVisualStyleBackColor = true;
+            this.RUPButton.Values.Text = "РУП";
             this.RUPButton.Visible = false;
             this.RUPButton.Click += new System.EventHandler(this.RUPButton_Click);
             // 
@@ -468,28 +480,32 @@
             this.POButton.Enabled = false;
             this.POButton.Location = new System.Drawing.Point(902, 3);
             this.POButton.Name = "POButton";
-            this.POButton.Size = new System.Drawing.Size(75, 23);
+            this.POButton.Size = new System.Drawing.Size(75, 24);
             this.POButton.TabIndex = 9;
-            this.POButton.Text = "ПО";
-            this.POButton.UseVisualStyleBackColor = true;
+            this.POButton.Values.Text = "ПО";
             this.POButton.Visible = false;
             this.POButton.Click += new System.EventHandler(this.POButton_Click);
             // 
-            // button4
+            // button5
             // 
-            this.button4.Location = new System.Drawing.Point(114, 4);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(82, 23);
-            this.button4.TabIndex = 4;
-            this.button4.Text = "Пересчитать";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
+            this.button5.Location = new System.Drawing.Point(984, 3);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(75, 24);
+            this.button5.TabIndex = 10;
+            this.button5.Values.Text = "button5";
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // kryptonManager1
+            // 
+            this.kryptonManager1.GlobalPaletteMode = ComponentFactory.Krypton.Toolkit.PaletteModeManager.Office2007Blue;
             // 
             // ReportsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(255, 191, 219, 255);
             this.ClientSize = new System.Drawing.Size(1339, 684);
+            this.Controls.Add(this.button5);
             this.Controls.Add(this.POButton);
             this.Controls.Add(this.RUPButton);
             this.Controls.Add(this.button3);
@@ -511,6 +527,7 @@
             this.tabPage2.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.CompanyBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -535,10 +552,10 @@
         private System.Windows.Forms.Panel panel1;
         private unvell.ReoGrid.ReoGridControl reoGridControl3;
         private System.Windows.Forms.TabPage tabPage6;
-        private System.Windows.Forms.Button button2;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton button2;
         public unvell.ReoGrid.ReoGridControl reoGridControl5;
         private System.Windows.Forms.TabPage tabPage4;
-        private System.Windows.Forms.Button button1;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton button1;
         public unvell.ReoGrid.ReoGridControl reoGridControl4;
         private System.Windows.Forms.TabPage tabPage3;
         public unvell.ReoGrid.ReoGridControl reoGrid4;
@@ -548,11 +565,13 @@
         private unvell.ReoGrid.ReoGridControl reoGridControl1;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.ToolStripMenuItem сохранитьОтчет1ТЭКToolStripMenuItem;
-        private System.Windows.Forms.ComboBox CompanyBox;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button RUPButton;
-        private System.Windows.Forms.Button POButton;
+        private ComponentFactory.Krypton.Toolkit.KryptonComboBox CompanyBox;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton button3;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton RUPButton;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton POButton;
         private System.Windows.Forms.ToolStripMenuItem мастерВвода4Нормы1ТЭКToolStripMenuItem;
-        private System.Windows.Forms.Button button4;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton button4;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton button5;
+        private ComponentFactory.Krypton.Toolkit.KryptonManager kryptonManager1;
     }
 }
