@@ -739,6 +739,35 @@ namespace WindowsFormsApp1.DBO
             }
             return unit;
         }
+        public static List<ProductTable> GetProdList()
+        {
+            List<ProductTable> productList = new List<ProductTable>();
+            try
+            {
+                SqlConnection myConnection = new SqlConnection(cnStr);
+                myConnection.Open();
+
+                string query = "SELECT * FROM [NewProduct] where pid > 0 and pid < 4";
+                SqlCommand command = new SqlCommand(query, myConnection);
+
+                using (SqlDataReader dr = command.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        productList.Add(new ProductTable { Id = Int32.Parse(dr["id"].ToString()) , Code = Int32.Parse(dr["code"].ToString()), Name = dr["name"].ToString(),
+                            Unit = dr["unit"].ToString(), nUnit = dr["norm_unit"].ToString(), s111 = Boolean.Parse(dr["f111"].ToString()), s112 = Boolean.Parse(dr["f112"].ToString()),
+                         type = Int32.Parse(dr["pid"].ToString())});
+                    }
+                }
+                myConnection.Close();
+            }
+            catch (Exception Ex)
+            {
+                MessageBox.Show("Ошибка GetProdList: " + Ex.Message);
+            }
+            return productList;
+        }
+
 
         public static List<TradeTable> GetTrades(int id_rep)
         {

@@ -103,6 +103,7 @@
     <Compile Include="DataTables\SourceInputTable.cs" />
     <Compile Include="DataTables\Table1tekPart2.cs" />
     <Compile Include="DataTables\SourceTable1tek.cs" />
+    <Compile Include="DataTables\ProductTable.cs" />
     <Compile Include="DataTables\WholeTable.cs" />
     <Compile Include="DataTables\TradeTable.cs" />
     <Compile Include="DataTables\FuelTable.cs" />
@@ -124,6 +125,18 @@
     </Compile>
     <Compile Include="NormReportCreateForm.Designer.cs">
       <DependentUpon>NormReportCreateForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Docking.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Docking.Designer.cs">
+      <DependentUpon>Docking.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OutlookGridTypeGroup.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="ReportsCreateForm.cs">
       <SubType>Form</SubType>
@@ -154,16 +167,14 @@
     <EmbeddedResource Include="NormReportCreateForm.resx">
       <DependentUpon>NormReportCreateForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Docking.resx">
+      <DependentUpon>Docking.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <EmbeddedResource Include="ReportsCreateForm.resx">
       <DependentUpon>ReportsCreateForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -192,8 +203,21 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <None Include="Resources\119-1193204_big-left-arrow-icon-blue-left-arrow-icon.png" />
+    <EmbeddedResource Include="Resources\007359-blue-jelly-icon-arrows-arrow-thick-right3.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\007359-blue-jelly-icon-arrows-arrow-thick-right22.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\save1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

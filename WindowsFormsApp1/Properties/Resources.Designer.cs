@@ -63,9 +63,29 @@ namespace WindowsFormsApp1.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap _119_1193204_big_left_arrow_icon_blue_left_arrow_icon {
+        internal static System.Drawing.Bitmap _007359_blue_jelly_icon_arrows_arrow_thick_right {
             get {
-                object obj = ResourceManager.GetObject("119-1193204_big-left-arrow-icon-blue-left-arrow-icon", resourceCulture);
+                object obj = ResourceManager.GetObject("007359-blue-jelly-icon-arrows-arrow-thick-right", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _007359_blue_jelly_icon_arrows_arrow_thick_right2 {
+            get {
+                object obj = ResourceManager.GetObject("007359-blue-jelly-icon-arrows-arrow-thick-right2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap save {
+            get {
+                object obj = ResourceManager.GetObject("save", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

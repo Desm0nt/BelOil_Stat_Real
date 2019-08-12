@@ -28,27 +28,28 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ReportsCreateForm));
             System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Состояние");
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Отпущено населению");
-            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("1-пэр (потребление)");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Отпущено населению", 4, 4);
+            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("1-пэр (потребление)", 4, 4);
             System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Топливо", new System.Windows.Forms.TreeNode[] {
             treeNode2,
             treeNode3});
-            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Выработка");
-            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Получено со стороны");
-            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Отпущено");
-            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("1-пэр (потребление)");
+            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Выработка", 4, 4);
+            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Получено со стороны", 4, 4);
+            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Отпущено", 4, 4);
+            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("1-пэр (потребление)", 4, 4);
             System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("Теплоэнергия", new System.Windows.Forms.TreeNode[] {
             treeNode5,
             treeNode6,
             treeNode7,
             treeNode8});
-            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("Генерация");
-            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("Получено со стороны");
-            System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("Отпущено");
-            System.Windows.Forms.TreeNode treeNode13 = new System.Windows.Forms.TreeNode("1-пэр (потребление)");
-            System.Windows.Forms.TreeNode treeNode14 = new System.Windows.Forms.TreeNode("Электроэнергия", new System.Windows.Forms.TreeNode[] {
+            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("Генерация", 4, 4);
+            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("Получено со стороны", 4, 4);
+            System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("Отпущено", 4, 4);
+            System.Windows.Forms.TreeNode treeNode13 = new System.Windows.Forms.TreeNode("1-пэр (потребление)", 4, 4);
+            System.Windows.Forms.TreeNode treeNode14 = new System.Windows.Forms.TreeNode("Электроэнергия", 3, 3, new System.Windows.Forms.TreeNode[] {
             treeNode10,
             treeNode11,
             treeNode12,
@@ -108,6 +109,7 @@
             this.panel14 = new System.Windows.Forms.Panel();
             this.panel15 = new System.Windows.Forms.Panel();
             this.button16 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.panel1)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -379,11 +381,11 @@
             // 
             this.button6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.button6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button6.Location = new System.Drawing.Point(846, 19);
+            this.button6.Location = new System.Drawing.Point(828, 19);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(76, 28);
             this.button6.TabIndex = 0;
-            this.button6.Values.Image = ((System.Drawing.Image)(resources.GetObject("button6.Values.Image")));
+            this.button6.Values.Image = global::WindowsFormsApp1.Properties.Resources._007359_blue_jelly_icon_arrows_arrow_thick_right;
             this.button6.Values.Text = " Далее";
             this.button6.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -395,7 +397,7 @@
             this.panel7.Location = new System.Drawing.Point(3, 3);
             this.panel7.Name = "panel7";
             this.panel7.PanelBackStyle = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ControlRibbon;
-            this.panel7.Size = new System.Drawing.Size(939, 512);
+            this.panel7.Size = new System.Drawing.Size(917, 512);
             this.panel7.TabIndex = 2;
             // 
             // dataGridView7
@@ -408,7 +410,7 @@
             this.dataGridView7.GridStyles.StyleBackground = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ContextMenuItemImageColumn;
             this.dataGridView7.Location = new System.Drawing.Point(6, 26);
             this.dataGridView7.Name = "dataGridView7";
-            this.dataGridView7.Size = new System.Drawing.Size(930, 483);
+            this.dataGridView7.Size = new System.Drawing.Size(908, 483);
             this.dataGridView7.TabIndex = 8;
             // 
             // label7
@@ -429,7 +431,7 @@
             this.panel8.Location = new System.Drawing.Point(3, 3);
             this.panel8.Name = "panel8";
             this.panel8.PanelBackStyle = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ControlRibbon;
-            this.panel8.Size = new System.Drawing.Size(939, 512);
+            this.panel8.Size = new System.Drawing.Size(917, 512);
             this.panel8.TabIndex = 2;
             // 
             // dataGridView8
@@ -442,7 +444,7 @@
             this.dataGridView8.GridStyles.StyleBackground = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ContextMenuItemImageColumn;
             this.dataGridView8.Location = new System.Drawing.Point(6, 26);
             this.dataGridView8.Name = "dataGridView8";
-            this.dataGridView8.Size = new System.Drawing.Size(930, 483);
+            this.dataGridView8.Size = new System.Drawing.Size(908, 483);
             this.dataGridView8.TabIndex = 9;
             // 
             // label8
@@ -463,7 +465,7 @@
             this.panel9.Location = new System.Drawing.Point(3, 3);
             this.panel9.Name = "panel9";
             this.panel9.PanelBackStyle = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ControlRibbon;
-            this.panel9.Size = new System.Drawing.Size(939, 512);
+            this.panel9.Size = new System.Drawing.Size(917, 512);
             this.panel9.TabIndex = 2;
             // 
             // dataGridView9
@@ -476,7 +478,7 @@
             this.dataGridView9.GridStyles.StyleBackground = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ContextMenuItemImageColumn;
             this.dataGridView9.Location = new System.Drawing.Point(6, 26);
             this.dataGridView9.Name = "dataGridView9";
-            this.dataGridView9.Size = new System.Drawing.Size(930, 483);
+            this.dataGridView9.Size = new System.Drawing.Size(908, 483);
             this.dataGridView9.TabIndex = 10;
             // 
             // label9
@@ -529,11 +531,11 @@
             this.button10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.button10.Enabled = false;
             this.button10.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button10.Location = new System.Drawing.Point(838, 19);
+            this.button10.Location = new System.Drawing.Point(820, 19);
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(97, 28);
             this.button10.TabIndex = 0;
-            this.button10.Values.Image = ((System.Drawing.Image)(resources.GetObject("button10.Values.Image")));
+            this.button10.Values.Image = global::WindowsFormsApp1.Properties.Resources.save;
             this.button10.Values.Text = "Закончить";
             this.button10.Visible = false;
             this.button10.Click += new System.EventHandler(this.button10_Click);
@@ -556,11 +558,11 @@
             this.tabControl1.Controls.Add(this.tabPage10);
             this.tabControl1.Controls.Add(this.tabPage11);
             this.tabControl1.ItemSize = new System.Drawing.Size(0, 1);
-            this.tabControl1.Location = new System.Drawing.Point(231, -5);
+            this.tabControl1.Location = new System.Drawing.Point(249, -5);
             this.tabControl1.Multiline = true;
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(955, 529);
+            this.tabControl1.Size = new System.Drawing.Size(937, 529);
             this.tabControl1.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tabControl1.TabIndex = 3;
             this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
@@ -573,7 +575,7 @@
             this.tabPage1.Controls.Add(this.panel12);
             this.tabPage1.Location = new System.Drawing.Point(4, 5);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Size = new System.Drawing.Size(947, 520);
+            this.tabPage1.Size = new System.Drawing.Size(929, 520);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Состояние";
             // 
@@ -588,13 +590,14 @@
             this.panel16.Location = new System.Drawing.Point(-1, -1);
             this.panel16.Margin = new System.Windows.Forms.Padding(0);
             this.panel16.Name = "panel16";
-            this.panel16.Size = new System.Drawing.Size(947, 67);
+            this.panel16.Size = new System.Drawing.Size(929, 67);
             this.panel16.TabIndex = 4;
             // 
             // label11
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label11.ForeColor = System.Drawing.Color.Navy;
             this.label11.Location = new System.Drawing.Point(24, 11);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(98, 13);
@@ -604,6 +607,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
+            this.label12.ForeColor = System.Drawing.Color.Navy;
             this.label12.Location = new System.Drawing.Point(32, 26);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(727, 26);
@@ -619,11 +623,11 @@
             this.panel12.Controls.Add(this.panel11);
             this.panel12.Controls.Add(this.label14);
             this.panel12.Controls.Add(this.label13);
-            this.panel12.Location = new System.Drawing.Point(0, 69);
+            this.panel12.Location = new System.Drawing.Point(1, 69);
             this.panel12.Name = "panel12";
             this.panel12.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Office2007Blue;
             this.panel12.PanelBackStyle = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ControlRibbon;
-            this.panel12.Size = new System.Drawing.Size(945, 440);
+            this.panel12.Size = new System.Drawing.Size(927, 440);
             this.panel12.TabIndex = 3;
             // 
             // panel11
@@ -650,10 +654,10 @@
             // 
             this.label13.AutoSize = true;
             this.label13.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(246)))), ((int)(((byte)(254)))));
-            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label13.Location = new System.Drawing.Point(32, 125);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(808, 272);
+            this.label13.Size = new System.Drawing.Size(725, 255);
             this.label13.TabIndex = 0;
             this.label13.Text = resources.GetString("label13.Text");
             // 
@@ -737,7 +741,7 @@
             this.tabPage8.Location = new System.Drawing.Point(4, 5);
             this.tabPage8.Name = "tabPage8";
             this.tabPage8.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage8.Size = new System.Drawing.Size(947, 520);
+            this.tabPage8.Size = new System.Drawing.Size(925, 520);
             this.tabPage8.TabIndex = 7;
             this.tabPage8.Text = "Эл выр";
             // 
@@ -749,7 +753,7 @@
             this.tabPage9.Location = new System.Drawing.Point(4, 5);
             this.tabPage9.Name = "tabPage9";
             this.tabPage9.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage9.Size = new System.Drawing.Size(947, 520);
+            this.tabPage9.Size = new System.Drawing.Size(925, 520);
             this.tabPage9.TabIndex = 8;
             this.tabPage9.Text = "Эл получ";
             // 
@@ -761,7 +765,7 @@
             this.tabPage10.Location = new System.Drawing.Point(4, 5);
             this.tabPage10.Name = "tabPage10";
             this.tabPage10.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage10.Size = new System.Drawing.Size(947, 520);
+            this.tabPage10.Size = new System.Drawing.Size(925, 520);
             this.tabPage10.TabIndex = 9;
             this.tabPage10.Text = "Эл отппущ";
             // 
@@ -782,51 +786,79 @@
             this.treeView1.BackColor = System.Drawing.SystemColors.Window;
             this.treeView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.treeView1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.treeView1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.treeView1.Indent = 24;
-            this.treeView1.ItemHeight = 30;
+            this.treeView1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.treeView1.ImageIndex = 0;
+            this.treeView1.ImageList = this.imageList1;
+            this.treeView1.Indent = 30;
+            this.treeView1.ItemHeight = 35;
             this.treeView1.Location = new System.Drawing.Point(0, 0);
             this.treeView1.Name = "treeView1";
             treeNode1.Name = "Состояние";
             treeNode1.Tag = "0";
             treeNode1.Text = "Состояние";
+            treeNode2.ImageIndex = 4;
             treeNode2.Name = "Отпущено населению";
+            treeNode2.SelectedImageIndex = 4;
             treeNode2.Tag = "1";
             treeNode2.Text = "Отпущено населению";
+            treeNode3.ImageIndex = 4;
             treeNode3.Name = "1-пэр (потребление)";
+            treeNode3.SelectedImageIndex = 4;
             treeNode3.Tag = "2";
             treeNode3.Text = "1-пэр (потребление)";
+            treeNode4.ImageKey = "1.png";
             treeNode4.Name = "Топливо";
+            treeNode4.SelectedImageKey = "1.png";
             treeNode4.Tag = "-1";
             treeNode4.Text = "Топливо";
+            treeNode5.ImageIndex = 4;
             treeNode5.Name = "Выработка";
+            treeNode5.SelectedImageIndex = 4;
             treeNode5.Tag = "3";
             treeNode5.Text = "Выработка";
+            treeNode6.ImageIndex = 4;
             treeNode6.Name = "Получено со стороны";
+            treeNode6.SelectedImageIndex = 4;
             treeNode6.Tag = "4";
             treeNode6.Text = "Получено со стороны";
+            treeNode7.ImageIndex = 4;
             treeNode7.Name = "Отпущено";
+            treeNode7.SelectedImageIndex = 4;
             treeNode7.Tag = "5";
             treeNode7.Text = "Отпущено";
+            treeNode8.ImageIndex = 4;
             treeNode8.Name = "1-пэр (потребление)";
+            treeNode8.SelectedImageIndex = 4;
             treeNode8.Tag = "6";
             treeNode8.Text = "1-пэр (потребление)";
+            treeNode9.ImageKey = "2.png";
             treeNode9.Name = "Теплоэнергия";
+            treeNode9.SelectedImageKey = "2.png";
             treeNode9.Tag = "-1";
             treeNode9.Text = "Теплоэнергия";
+            treeNode10.ImageIndex = 4;
             treeNode10.Name = "Генерация";
+            treeNode10.SelectedImageIndex = 4;
             treeNode10.Tag = "7";
             treeNode10.Text = "Генерация";
+            treeNode11.ImageIndex = 4;
             treeNode11.Name = "Получено со стороны";
+            treeNode11.SelectedImageIndex = 4;
             treeNode11.Tag = "8";
             treeNode11.Text = "Получено со стороны";
+            treeNode12.ImageIndex = 4;
             treeNode12.Name = "Отпущено";
+            treeNode12.SelectedImageIndex = 4;
             treeNode12.Tag = "9";
             treeNode12.Text = "Отпущено";
+            treeNode13.ImageIndex = 4;
             treeNode13.Name = "1-пэр (потребление)";
+            treeNode13.SelectedImageIndex = 4;
             treeNode13.Tag = "10";
             treeNode13.Text = "1-пэр (потребление)";
+            treeNode14.ImageIndex = 3;
             treeNode14.Name = "Электроэнергия";
+            treeNode14.SelectedImageIndex = 3;
             treeNode14.Tag = "-1";
             treeNode14.Text = "Электроэнергия";
             this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
@@ -834,7 +866,8 @@
             treeNode4,
             treeNode9,
             treeNode14});
-            this.treeView1.Size = new System.Drawing.Size(234, 432);
+            this.treeView1.SelectedImageIndex = 0;
+            this.treeView1.Size = new System.Drawing.Size(252, 509);
             this.treeView1.TabIndex = 9;
             this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
             // 
@@ -846,7 +879,7 @@
             this.panel14.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel14.Location = new System.Drawing.Point(0, 0);
             this.panel14.Name = "panel14";
-            this.panel14.Size = new System.Drawing.Size(236, 590);
+            this.panel14.Size = new System.Drawing.Size(254, 590);
             this.panel14.TabIndex = 11;
             // 
             // panel15
@@ -858,26 +891,35 @@
             this.panel15.Controls.Add(this.button10);
             this.panel15.Controls.Add(this.button6);
             this.panel15.Controls.Add(this.button16);
-            this.panel15.Location = new System.Drawing.Point(235, 519);
+            this.panel15.Location = new System.Drawing.Point(253, 519);
             this.panel15.Name = "panel15";
-            this.panel15.Size = new System.Drawing.Size(947, 71);
+            this.panel15.Size = new System.Drawing.Size(929, 71);
             this.panel15.TabIndex = 12;
             // 
             // button16
             // 
             this.button16.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.button16.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button16.Location = new System.Drawing.Point(755, 19);
+            this.button16.Location = new System.Drawing.Point(737, 19);
             this.button16.Name = "button16";
             this.button16.Size = new System.Drawing.Size(76, 28);
             this.button16.StateCommon.Back.Draw = ComponentFactory.Krypton.Toolkit.InheritBool.True;
-            this.button16.StateCommon.Back.Image = global::WindowsFormsApp1.Properties.Resources._119_1193204_big_left_arrow_icon_blue_left_arrow_icon;
             this.button16.TabIndex = 8;
             this.button16.UseMnemonic = false;
-            this.button16.Values.Image = ((System.Drawing.Image)(resources.GetObject("button16.Values.Image")));
+            this.button16.Values.Image = global::WindowsFormsApp1.Properties.Resources._007359_blue_jelly_icon_arrows_arrow_thick_right2;
             this.button16.Values.ImageTransparentColor = System.Drawing.Color.Transparent;
             this.button16.Values.Text = "  Назад";
             this.button16.Click += new System.EventHandler(this.button11_Click);
+            // 
+            // imageList1
+            // 
+            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList1.Images.SetKeyName(0, "startup_wizard.png");
+            this.imageList1.Images.SetKeyName(1, "1.png");
+            this.imageList1.Images.SetKeyName(2, "2.png");
+            this.imageList1.Images.SetKeyName(3, "3.png");
+            this.imageList1.Images.SetKeyName(4, "magician-hat-icon-magic-hat.png");
             // 
             // ReportsCreateForm
             // 
@@ -1013,5 +1055,6 @@
         private System.Windows.Forms.Panel panel16;
         private System.Windows.Forms.Panel panel11;
         private ComponentFactory.Krypton.Toolkit.KryptonButton button16;
+        private System.Windows.Forms.ImageList imageList1;
     }
 }

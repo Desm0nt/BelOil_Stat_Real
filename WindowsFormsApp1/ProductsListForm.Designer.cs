@@ -29,135 +29,163 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            JDHSoftware.Krypton.Toolkit.KryptonOutlookGrid.OutlookGridGroupCollection outlookGridGroupCollection1 = new JDHSoftware.Krypton.Toolkit.KryptonOutlookGrid.OutlookGridGroupCollection();
-            this.ribbonAppButtonExit = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
-            this.kryptonPanel = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
-            this.kryptonDockableWorkspace = new ComponentFactory.Krypton.Docking.KryptonDockableWorkspace();
-            this.imageListSmall = new System.Windows.Forms.ImageList(this.components);
+            JDHSoftware.Krypton.Toolkit.KryptonOutlookGrid.OutlookGridGroupCollection outlookGridGroupCollection2 = new JDHSoftware.Krypton.Toolkit.KryptonOutlookGrid.OutlookGridGroupCollection();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             this.kryptonManager = new ComponentFactory.Krypton.Toolkit.KryptonManager(this.components);
-            this.kryptonDockingManager = new ComponentFactory.Krypton.Docking.KryptonDockingManager();
             this.kryptonOutlookGrid1 = new JDHSoftware.Krypton.Toolkit.KryptonOutlookGrid.KryptonOutlookGrid();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel)).BeginInit();
-            this.kryptonPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonDockableWorkspace)).BeginInit();
+            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Code = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ed = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ed_norm = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.s111 = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewCheckBoxColumn();
+            this.s112 = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewCheckBoxColumn();
+            this.type = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.kryptonOutlookGridGroupBox1 = new JDHSoftware.Krypton.Toolkit.KryptonOutlookGrid.KryptonOutlookGridGroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonOutlookGrid1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // ribbonAppButtonExit
-            // 
-            this.ribbonAppButtonExit.Text = "E&xit";
-            this.ribbonAppButtonExit.Click += new System.EventHandler(this.ribbonAppButtonExit_Click);
-            // 
-            // kryptonPanel
-            // 
-            this.kryptonPanel.Controls.Add(this.kryptonDockableWorkspace);
-            this.kryptonPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.kryptonPanel.Location = new System.Drawing.Point(0, 0);
-            this.kryptonPanel.Name = "kryptonPanel";
-            this.kryptonPanel.Padding = new System.Windows.Forms.Padding(5);
-            this.kryptonPanel.PanelBackStyle = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ControlRibbon;
-            this.kryptonPanel.Size = new System.Drawing.Size(764, 662);
-            this.kryptonPanel.TabIndex = 1;
-            // 
-            // kryptonDockableWorkspace
-            // 
-            this.kryptonDockableWorkspace.AutoHiddenHost = false;
-            this.kryptonDockableWorkspace.CompactFlags = ((ComponentFactory.Krypton.Workspace.CompactFlags)(((ComponentFactory.Krypton.Workspace.CompactFlags.RemoveEmptyCells | ComponentFactory.Krypton.Workspace.CompactFlags.RemoveEmptySequences) 
-            | ComponentFactory.Krypton.Workspace.CompactFlags.PromoteLeafs)));
-            this.kryptonDockableWorkspace.ContainerBackStyle = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ControlRibbon;
-            this.kryptonDockableWorkspace.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.kryptonDockableWorkspace.Location = new System.Drawing.Point(5, 5);
-            this.kryptonDockableWorkspace.Name = "kryptonDockableWorkspace";
-            this.kryptonDockableWorkspace.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Office2007Blue;
-            // 
-            // 
-            // 
-            this.kryptonDockableWorkspace.Root.UniqueName = "D51970B3EA2C496AD51970B3EA2C496A";
-            this.kryptonDockableWorkspace.Root.WorkspaceControl = this.kryptonDockableWorkspace;
-            this.kryptonDockableWorkspace.ShowMaximizeButton = false;
-            this.kryptonDockableWorkspace.Size = new System.Drawing.Size(754, 652);
-            this.kryptonDockableWorkspace.TabIndex = 0;
-            this.kryptonDockableWorkspace.TabStop = true;
-            this.kryptonDockableWorkspace.WorkspaceCellAdding += new System.EventHandler<ComponentFactory.Krypton.Workspace.WorkspaceCellEventArgs>(this.kryptonDockableWorkspace_WorkspaceCellAdding);
-            // 
-            // imageListSmall
-            // 
-            this.imageListSmall.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
-            this.imageListSmall.ImageSize = new System.Drawing.Size(16, 16);
-            this.imageListSmall.TransparentColor = System.Drawing.Color.Transparent;
             // 
             // kryptonManager
             // 
             this.kryptonManager.GlobalPaletteMode = ComponentFactory.Krypton.Toolkit.PaletteModeManager.Office2007Blue;
             // 
-            // kryptonDockingManager
-            // 
-            this.kryptonDockingManager.DefaultCloseRequest = ComponentFactory.Krypton.Docking.DockingCloseRequest.RemovePageAndDispose;
-            // 
             // kryptonOutlookGrid1
             // 
             this.kryptonOutlookGrid1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column1,
-            this.Column2,
-            this.Column3});
-            this.kryptonOutlookGrid1.FillMode = JDHSoftware.Krypton.Toolkit.KryptonOutlookGrid.FillMode.GroupsOnly;
-            this.kryptonOutlookGrid1.GroupCollection = outlookGridGroupCollection1;
+            this.id,
+            this.Code,
+            this.Name,
+            this.ed,
+            this.ed_norm,
+            this.s111,
+            this.s112,
+            this.type});
+            this.kryptonOutlookGrid1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.kryptonOutlookGrid1.FillMode = JDHSoftware.Krypton.Toolkit.KryptonOutlookGrid.FillMode.GroupsAndNodes;
+            this.kryptonOutlookGrid1.GridStyles.Style = ComponentFactory.Krypton.Toolkit.DataGridViewStyle.Mixed;
+            this.kryptonOutlookGrid1.GridStyles.StyleBackground = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.InputControlRibbon;
+            this.kryptonOutlookGrid1.GroupCollection = outlookGridGroupCollection2;
+            this.kryptonOutlookGrid1.HideColumnOnGrouping = true;
             this.kryptonOutlookGrid1.Location = new System.Drawing.Point(0, 0);
             this.kryptonOutlookGrid1.Name = "kryptonOutlookGrid1";
             this.kryptonOutlookGrid1.PreviousSelectedGroupRow = -1;
             this.kryptonOutlookGrid1.ShowLines = false;
-            this.kryptonOutlookGrid1.Size = new System.Drawing.Size(240, 150);
-            this.kryptonOutlookGrid1.TabIndex = 2;
+            this.kryptonOutlookGrid1.Size = new System.Drawing.Size(810, 581);
+            this.kryptonOutlookGrid1.TabIndex = 0;
             // 
-            // Column1
+            // id
             // 
-            this.Column1.HeaderText = "Column1";
-            this.Column1.Name = "Column1";
+            this.id.HeaderText = "id";
+            this.id.Name = "id";
+            this.id.ReadOnly = true;
+            this.id.Width = 5;
             // 
-            // Column2
+            // Code
             // 
-            this.Column2.HeaderText = "Column2";
-            this.Column2.Name = "Column2";
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Code.DefaultCellStyle = dataGridViewCellStyle5;
+            this.Code.HeaderText = "#";
+            this.Code.Name = "Code";
+            this.Code.ReadOnly = true;
+            this.Code.Width = 70;
             // 
-            // Column3
+            // Name
             // 
-            this.Column3.HeaderText = "Column3";
-            this.Column3.Name = "Column3";
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Name.DefaultCellStyle = dataGridViewCellStyle6;
+            this.Name.HeaderText = "Наименование";
+            this.Name.Name = "Name";
+            this.Name.ReadOnly = true;
+            this.Name.Width = 300;
+            // 
+            // ed
+            // 
+            this.ed.HeaderText = "Ед. изм.";
+            this.ed.Name = "ed";
+            this.ed.ReadOnly = true;
+            this.ed.Width = 115;
+            // 
+            // ed_norm
+            // 
+            this.ed_norm.HeaderText = "Ед. изм. нормы";
+            this.ed_norm.Name = "ed_norm";
+            this.ed_norm.ReadOnly = true;
+            this.ed_norm.Width = 115;
+            // 
+            // s111
+            // 
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle7.NullValue = false;
+            this.s111.DefaultCellStyle = dataGridViewCellStyle7;
+            this.s111.FalseValue = null;
+            this.s111.HeaderText = "стр. 111";
+            this.s111.IndeterminateValue = null;
+            this.s111.Name = "s111";
+            this.s111.ReadOnly = true;
+            this.s111.TrueValue = null;
+            this.s111.Width = 50;
+            // 
+            // s112
+            // 
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle8.NullValue = false;
+            this.s112.DefaultCellStyle = dataGridViewCellStyle8;
+            this.s112.FalseValue = null;
+            this.s112.HeaderText = "стр. 112";
+            this.s112.IndeterminateValue = null;
+            this.s112.Name = "s112";
+            this.s112.ReadOnly = true;
+            this.s112.TrueValue = null;
+            this.s112.Width = 50;
+            // 
+            // type
+            // 
+            this.type.HeaderText = "Тип";
+            this.type.Name = "type";
+            this.type.ReadOnly = true;
+            this.type.Width = 50;
+            // 
+            // kryptonOutlookGridGroupBox1
+            // 
+            this.kryptonOutlookGridGroupBox1.AllowDrop = true;
+            this.kryptonOutlookGridGroupBox1.Location = new System.Drawing.Point(24, 535);
+            this.kryptonOutlookGridGroupBox1.Name = "kryptonOutlookGridGroupBox1";
+            this.kryptonOutlookGridGroupBox1.Size = new System.Drawing.Size(744, 46);
+            this.kryptonOutlookGridGroupBox1.TabIndex = 1;
+            this.kryptonOutlookGridGroupBox1.Visible = false;
             // 
             // ProductsListForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(764, 662);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(246)))), ((int)(((byte)(254)))));
+            this.ClientSize = new System.Drawing.Size(810, 581);
+            this.Controls.Add(this.kryptonOutlookGridGroupBox1);
             this.Controls.Add(this.kryptonOutlookGrid1);
-            this.Controls.Add(this.kryptonPanel);
-            this.Name = "ProductsListForm";
+            //this.Name = "ProductsListForm";
             this.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Office2007Blue;
             this.Text = "Standard Docking";
             this.Load += new System.EventHandler(this.ProductsListForm_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel)).EndInit();
-            this.kryptonPanel.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonDockableWorkspace)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonOutlookGrid1)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.ImageList imageListSmall;
-        private ComponentFactory.Krypton.Toolkit.KryptonPanel kryptonPanel;
         private ComponentFactory.Krypton.Toolkit.KryptonManager kryptonManager;
-        private ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem ribbonAppButtonExit;
-        private ComponentFactory.Krypton.Docking.KryptonDockingManager kryptonDockingManager;
-        private ComponentFactory.Krypton.Docking.KryptonDockableWorkspace kryptonDockableWorkspace;
         private JDHSoftware.Krypton.Toolkit.KryptonOutlookGrid.KryptonOutlookGrid kryptonOutlookGrid1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Code;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Name;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ed;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ed_norm;
+        private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewCheckBoxColumn s111;
+        private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewCheckBoxColumn s112;
+        private System.Windows.Forms.DataGridViewTextBoxColumn type;
+        private JDHSoftware.Krypton.Toolkit.KryptonOutlookGrid.KryptonOutlookGridGroupBox kryptonOutlookGridGroupBox1;
     }
 }
 
