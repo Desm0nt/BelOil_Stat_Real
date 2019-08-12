@@ -32,20 +32,39 @@ namespace WindowsFormsApp1
             productList = dbOps.GetProdList();
             kryptonOutlookGrid1.GroupBox = kryptonOutlookGridGroupBox1;
             kryptonOutlookGrid1.RegisterGroupBoxEvents();
+            DataGridViewColumn[] columnsToAdd = new DataGridViewColumn[8];
+            columnsToAdd[0] = kryptonOutlookGrid1.Columns[0];
+            columnsToAdd[1] = kryptonOutlookGrid1.Columns[1];
+            columnsToAdd[2] = kryptonOutlookGrid1.Columns[2];
+            columnsToAdd[3] = kryptonOutlookGrid1.Columns[3];
+            columnsToAdd[4] = kryptonOutlookGrid1.Columns[4];
+            columnsToAdd[5] = kryptonOutlookGrid1.Columns[5];
+            columnsToAdd[6] = kryptonOutlookGrid1.Columns[6];
+            columnsToAdd[7] = kryptonOutlookGrid1.Columns[7];
+            //kryptonOutlookGrid1.Columns.AddRange(columnsToAdd);
 
+            kryptonOutlookGrid1.AddInternalColumn(kryptonOutlookGrid1.Columns[0], new OutlookGridDefaultGroup(null), SortOrder.None, -1, -1);
+            kryptonOutlookGrid1.AddInternalColumn(kryptonOutlookGrid1.Columns[1], new OutlookGridDefaultGroup(null), SortOrder.None, -1, -1);
+            kryptonOutlookGrid1.AddInternalColumn(kryptonOutlookGrid1.Columns[2], new OutlookGridDefaultGroup(null), SortOrder.None, -1, -1);
+            kryptonOutlookGrid1.AddInternalColumn(kryptonOutlookGrid1.Columns[3], new OutlookGridDefaultGroup(null), SortOrder.None, -1, -1);
+            kryptonOutlookGrid1.AddInternalColumn(kryptonOutlookGrid1.Columns[4], new OutlookGridDefaultGroup(null), SortOrder.None, -1, -1);
+            kryptonOutlookGrid1.AddInternalColumn(kryptonOutlookGrid1.Columns[5], new OutlookGridDefaultGroup(null), SortOrder.None, -1, -1);
+            kryptonOutlookGrid1.AddInternalColumn(kryptonOutlookGrid1.Columns[6], new OutlookGridDefaultGroup(null), SortOrder.None, -1, -1);
             kryptonOutlookGrid1.AddInternalColumn(kryptonOutlookGrid1.Columns[7], new OutlookGridTypeGroup(null), SortOrder.Ascending, -1, -1);
             kryptonOutlookGrid1.Columns[0].Visible = false;
-            kryptonOutlookGrid1.Columns[7].Visible = false;
-            kryptonOutlookGrid1.Columns[7].SortMode = DataGridViewColumnSortMode.Programmatic;
-
-            ConditionalFormatting cond = new ConditionalFormatting();
-            cond.ColumnName = kryptonOutlookGrid1.Columns[7].ToString();
-            cond.FormatType = EnumConditionalFormatType.TwoColorsRange;
-            cond.FormatParams = new TwoColorsParams(Color.White, Color.FromArgb(255, 255, 58, 61));
-            kryptonOutlookGrid1.ConditionalFormatting.Add(cond);
+            //kryptonOutlookGrid1.Columns[7].Visible = false;
 
             kryptonOutlookGrid1.ShowLines = true;
             LoadData();
+
+            var aa = kryptonOutlookGrid1.GroupCollection.Count;
+            kryptonOutlookGrid1.GroupColumn(kryptonOutlookGrid1.Columns[7].Name, SortOrder.Ascending, new OutlookGridTypeGroup(null));
+            kryptonOutlookGrid1.Collapse(kryptonOutlookGrid1.Columns[7].Name);
+            //kryptonOutlookGrid1.SortColumn(kryptonOutlookGrid1.Columns[7], SortOrder.Ascending);
+            kryptonOutlookGrid1.Sort(kryptonOutlookGrid1.Columns[1], ListSortDirection.Ascending);
+            kryptonOutlookGrid1.RegisterGroupBoxEvents();
+
+
         }
 
         private void LoadData()
@@ -59,23 +78,11 @@ namespace WindowsFormsApp1
 
             foreach (var product in productList) //TODO for instead foreach for perfs...
             {
-
-                    row = new OutlookGridRow();
-                    row.CreateCells(kryptonOutlookGrid1, new object[] {
-                        product.Id,
-                        product.Code,
-                        product.Name,
-                        product.Unit,
-                        product.nUnit,
-                        product.s111,
-                        product.s112,
-                        product.type
-                    });
-                    l.Add(row);
-                    //((KryptonDataGridViewTreeTextCell)row.Cells[1]).UpdateStyle(); //Important : after added to the rows list
+                row = new OutlookGridRow();               
+                row.CreateCells(kryptonOutlookGrid1, new object[] { product.Id, product.Code, product.Name, product.Unit, product.nUnit, product.s111, product.s112, product.type });
+                l.Add(row);
+                //((KryptonDataGridViewTreeTextCell)row.Cells[1]).UpdateStyle();
             }
-
-
 
             kryptonOutlookGrid1.ResumeLayout();
             kryptonOutlookGrid1.AssignRows(l);
