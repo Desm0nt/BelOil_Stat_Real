@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.button1 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.textBox1 = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.textBox2 = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
@@ -39,17 +39,16 @@
             // 
             this.button1.Location = new System.Drawing.Point(164, 122);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(75, 24);
             this.button1.TabIndex = 0;
-            this.button1.Text = "Войти";
-            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Values.Text = "Войти";
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // textBox1
             // 
             this.textBox1.Location = new System.Drawing.Point(30, 40);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(209, 20);
+            this.textBox1.Size = new System.Drawing.Size(209, 23);
             this.textBox1.TabIndex = 1;
             // 
             // textBox2
@@ -57,7 +56,7 @@
             this.textBox2.Location = new System.Drawing.Point(30, 86);
             this.textBox2.Name = "textBox2";
             this.textBox2.PasswordChar = '*';
-            this.textBox2.Size = new System.Drawing.Size(209, 20);
+            this.textBox2.Size = new System.Drawing.Size(209, 23);
             this.textBox2.TabIndex = 2;
             // 
             // label1
@@ -82,6 +81,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(246)))), ((int)(((byte)(254)))));
             this.ClientSize = new System.Drawing.Size(281, 158);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -89,6 +89,7 @@
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button1);
             this.Name = "LoginForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Авторизация";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -97,9 +98,9 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton button1;
+        private ComponentFactory.Krypton.Toolkit.KryptonTextBox textBox1;
+        private ComponentFactory.Krypton.Toolkit.KryptonTextBox textBox2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
     }

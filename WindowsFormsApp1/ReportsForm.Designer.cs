@@ -68,6 +68,7 @@
             this.POButton = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.button5 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.kryptonManager1 = new ComponentFactory.Krypton.Toolkit.KryptonManager(this.components);
+            this.kryptonButton1 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tabPage6.SuspendLayout();
@@ -211,7 +212,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.Color.FromArgb(255, 191, 219, 255);
+            this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(219)))), ((int)(((byte)(255)))));
             this.label1.Location = new System.Drawing.Point(224, 9);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(88, 13);
@@ -249,7 +250,7 @@
             // 
             // tabPage6
             // 
-            this.tabPage6.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPage6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(246)))), ((int)(((byte)(254)))));
             this.tabPage6.Controls.Add(this.button2);
             this.tabPage6.Controls.Add(this.reoGridControl5);
             this.tabPage6.Location = new System.Drawing.Point(4, 22);
@@ -290,7 +291,7 @@
             // 
             // tabPage4
             // 
-            this.tabPage4.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPage4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(246)))), ((int)(((byte)(254)))));
             this.tabPage4.Controls.Add(this.button4);
             this.tabPage4.Controls.Add(this.button1);
             this.tabPage4.Controls.Add(this.reoGridControl4);
@@ -341,6 +342,7 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(246)))), ((int)(((byte)(254)))));
             this.tabPage3.Controls.Add(this.reoGrid4);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
@@ -348,7 +350,6 @@
             this.tabPage3.Size = new System.Drawing.Size(1307, 613);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Приложение к 12-ТЭК";
-            this.tabPage3.UseVisualStyleBackColor = true;
             // 
             // reoGrid4
             // 
@@ -371,6 +372,7 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(246)))), ((int)(((byte)(254)))));
             this.tabPage2.Controls.Add(this.reoGridControl2);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
@@ -378,7 +380,6 @@
             this.tabPage2.Size = new System.Drawing.Size(1307, 613);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "12-ТЭК";
-            this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // reoGridControl2
             // 
@@ -401,6 +402,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(246)))), ((int)(((byte)(254)))));
             this.tabPage1.Controls.Add(this.reoGridControl1);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
@@ -408,7 +410,6 @@
             this.tabPage1.Size = new System.Drawing.Size(1307, 613);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "1-ПЭР";
-            this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // reoGridControl1
             // 
@@ -431,6 +432,9 @@
             // 
             // tabControl1
             // 
+            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
@@ -499,12 +503,22 @@
             // 
             this.kryptonManager1.GlobalPaletteMode = ComponentFactory.Krypton.Toolkit.PaletteModeManager.Office2007Blue;
             // 
+            // kryptonButton1
+            // 
+            this.kryptonButton1.Location = new System.Drawing.Point(1065, 3);
+            this.kryptonButton1.Name = "kryptonButton1";
+            this.kryptonButton1.Size = new System.Drawing.Size(75, 24);
+            this.kryptonButton1.TabIndex = 11;
+            this.kryptonButton1.Values.Text = "kryptonButton1";
+            this.kryptonButton1.Click += new System.EventHandler(this.kryptonButton1_Click);
+            // 
             // ReportsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(255, 191, 219, 255);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(246)))), ((int)(((byte)(254)))));
             this.ClientSize = new System.Drawing.Size(1339, 684);
+            this.Controls.Add(this.kryptonButton1);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.POButton);
             this.Controls.Add(this.RUPButton);
@@ -573,5 +587,6 @@
         private ComponentFactory.Krypton.Toolkit.KryptonButton button4;
         private ComponentFactory.Krypton.Toolkit.KryptonButton button5;
         private ComponentFactory.Krypton.Toolkit.KryptonManager kryptonManager1;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton kryptonButton1;
     }
 }

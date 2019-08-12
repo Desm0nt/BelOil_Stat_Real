@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ComponentFactory.Krypton.Toolkit;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -14,7 +15,7 @@ using WindowsFormsApp1.DBO;
 
 namespace WindowsFormsApp1
 {
-    public partial class ReportsCreateForm : Form
+    public partial class ReportsCreateForm : KryptonForm
     {
         bool checkreport;
         int curRepid, year, month, currentTubIndex;
@@ -27,6 +28,7 @@ namespace WindowsFormsApp1
             currentTubIndex = 0;
             label14.Text = "Данные за " + CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(month1) + " " + year1;
             treeView1.ExpandAll();
+            tabControl1.Appearance = TabAppearance.Buttons;
             //Thread.CurrentThread.CurrentCulture = System.Globalization.CultureInfo.InvariantCulture;
             this.dataGridView1.EditingControlShowing += new DataGridViewEditingControlShowingEventHandler(EditingControlShowing);
             this.dataGridView2.EditingControlShowing += new DataGridViewEditingControlShowingEventHandler(EditingControlShowing1);

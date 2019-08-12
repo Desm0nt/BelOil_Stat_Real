@@ -11,14 +11,16 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using WindowsFormsApp1.DBO;
 using WindowsFormsApp1.DataTables;
+using ComponentFactory.Krypton.Toolkit;
 
 namespace WindowsFormsApp1
 {
-    public partial class LoginForm : Form
+    public partial class LoginForm : KryptonForm
     {
         public LoginForm()
         {
             InitializeComponent();
+            this.AcceptButton = button1;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -58,6 +60,12 @@ namespace WindowsFormsApp1
                 this.Show();
                 Program.relog = false;
             }
+        }
+
+        private void tb_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                button1.PerformClick();
         }
     }
 }

@@ -4289,5 +4289,12 @@ namespace WindowsFormsApp1
             myForm.FormClosed += new FormClosedEventHandler(myForm_FormClosed);
             myForm.Show();
         }
+
+        private void kryptonButton1_Click(object sender, EventArgs e)
+        {
+            var myForm = new AddUserForm();
+            myForm.FormClosed += new FormClosedEventHandler(myForm_FormClosed);
+            myForm.Show();
+        }
     }
 }
