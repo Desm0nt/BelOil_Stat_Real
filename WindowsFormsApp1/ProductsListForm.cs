@@ -44,25 +44,20 @@ namespace WindowsFormsApp1
             //kryptonOutlookGrid1.Columns.AddRange(columnsToAdd);
 
             kryptonOutlookGrid1.AddInternalColumn(kryptonOutlookGrid1.Columns[0], new OutlookGridDefaultGroup(null), SortOrder.None, -1, -1);
-            kryptonOutlookGrid1.AddInternalColumn(kryptonOutlookGrid1.Columns[1], new OutlookGridDefaultGroup(null), SortOrder.None, -1, -1);
+            kryptonOutlookGrid1.AddInternalColumn(kryptonOutlookGrid1.Columns[1], new OutlookGridDefaultGroup(null), SortOrder.Ascending, -1, 1);
             kryptonOutlookGrid1.AddInternalColumn(kryptonOutlookGrid1.Columns[2], new OutlookGridDefaultGroup(null), SortOrder.None, -1, -1);
             kryptonOutlookGrid1.AddInternalColumn(kryptonOutlookGrid1.Columns[3], new OutlookGridDefaultGroup(null), SortOrder.None, -1, -1);
             kryptonOutlookGrid1.AddInternalColumn(kryptonOutlookGrid1.Columns[4], new OutlookGridDefaultGroup(null), SortOrder.None, -1, -1);
             kryptonOutlookGrid1.AddInternalColumn(kryptonOutlookGrid1.Columns[5], new OutlookGridDefaultGroup(null), SortOrder.None, -1, -1);
             kryptonOutlookGrid1.AddInternalColumn(kryptonOutlookGrid1.Columns[6], new OutlookGridDefaultGroup(null), SortOrder.None, -1, -1);
-            kryptonOutlookGrid1.AddInternalColumn(kryptonOutlookGrid1.Columns[7], new OutlookGridTypeGroup(null), SortOrder.Ascending, -1, -1);
+            kryptonOutlookGrid1.AddInternalColumn(kryptonOutlookGrid1.Columns[7], new OutlookGridTypeGroup(null), SortOrder.Ascending, 1, -1);
             kryptonOutlookGrid1.Columns[0].Visible = false;
-            //kryptonOutlookGrid1.Columns[7].Visible = false;
+            kryptonOutlookGrid1.Columns[7].Visible = false;
 
             kryptonOutlookGrid1.ShowLines = true;
             LoadData();
 
-            var aa = kryptonOutlookGrid1.GroupCollection.Count;
-            kryptonOutlookGrid1.GroupColumn(kryptonOutlookGrid1.Columns[7].Name, SortOrder.Ascending, new OutlookGridTypeGroup(null));
             kryptonOutlookGrid1.Collapse(kryptonOutlookGrid1.Columns[7].Name);
-            //kryptonOutlookGrid1.SortColumn(kryptonOutlookGrid1.Columns[7], SortOrder.Ascending);
-            kryptonOutlookGrid1.Sort(kryptonOutlookGrid1.Columns[1], ListSortDirection.Ascending);
-            kryptonOutlookGrid1.RegisterGroupBoxEvents();
 
 
         }
@@ -111,6 +106,22 @@ namespace WindowsFormsApp1
                 {
                     c.Width = Math.Min(c.GetPreferredWidth(DataGridViewAutoSizeColumnMode.DisplayedCells, true), 250);
                 }
+            }
+        }
+
+        public class TypeConverter
+        {
+            public static string ProcessType(string FullQualifiedName)
+            {
+                //Translate types here to accomodate code changes, namespaces and version
+                //Select Case FullQualifiedName
+                //    Case "JDHSoftware.Krypton.Toolkit.KryptonOutlookGrid.OutlookGridAlphabeticGroup, JDHSoftware.Krypton.Toolkit, Version=1.2.0.0, Culture=neutral, PublicKeyToken=e12f297423986ef5",
+                //        "JDHSoftware.Krypton.Toolkit.KryptonOutlookGrid.OutlookGridAlphabeticGroup, JDHSoftware.Krypton.Toolkit, Version=1.2.0.0, Culture=neutral, PublicKeyToken=null"
+                //        'Change with new version or namespace or both !
+                //        FullQualifiedName = "TestMe, Version=1.2.0.0, Culture=neutral, PublicKeyToken=null"
+                //        Exit Select
+                //End Select
+                return FullQualifiedName;
             }
         }
 

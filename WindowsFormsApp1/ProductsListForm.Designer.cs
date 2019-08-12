@@ -76,7 +76,7 @@
             this.kryptonOutlookGrid1.Name = "kryptonOutlookGrid1";
             this.kryptonOutlookGrid1.PreviousSelectedGroupRow = -1;
             this.kryptonOutlookGrid1.ShowLines = false;
-            this.kryptonOutlookGrid1.Size = new System.Drawing.Size(836, 581);
+            this.kryptonOutlookGrid1.Size = new System.Drawing.Size(786, 581);
             this.kryptonOutlookGrid1.TabIndex = 0;
             // 
             // kryptonOutlookGridGroupBox1
@@ -178,7 +178,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(246)))), ((int)(((byte)(254)))));
-            this.ClientSize = new System.Drawing.Size(836, 581);
+            this.ClientSize = new System.Drawing.Size(786, 581);
             this.Controls.Add(this.kryptonOutlookGrid1);
             this.Controls.Add(this.kryptonOutlookGridGroupBox1);
             this.Name = "ProductsListForm";
