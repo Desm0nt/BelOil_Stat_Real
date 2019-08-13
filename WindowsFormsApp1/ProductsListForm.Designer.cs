@@ -36,7 +36,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.kryptonManager = new ComponentFactory.Krypton.Toolkit.KryptonManager(this.components);
             this.kryptonOutlookGrid1 = new JDHSoftware.Krypton.Toolkit.KryptonOutlookGrid.KryptonOutlookGrid();
-            this.kryptonOutlookGridGroupBox1 = new JDHSoftware.Krypton.Toolkit.KryptonOutlookGrid.KryptonOutlookGridGroupBox();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Code = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Names = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -45,6 +44,7 @@
             this.s111 = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewCheckBoxColumn();
             this.s112 = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewCheckBoxColumn();
             this.type = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.kryptonOutlookGridGroupBox1 = new JDHSoftware.Krypton.Toolkit.KryptonOutlookGrid.KryptonOutlookGridGroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonOutlookGrid1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -78,15 +78,8 @@
             this.kryptonOutlookGrid1.ShowLines = false;
             this.kryptonOutlookGrid1.Size = new System.Drawing.Size(786, 581);
             this.kryptonOutlookGrid1.TabIndex = 0;
-            // 
-            // kryptonOutlookGridGroupBox1
-            // 
-            this.kryptonOutlookGridGroupBox1.AllowDrop = true;
-            this.kryptonOutlookGridGroupBox1.Location = new System.Drawing.Point(24, 535);
-            this.kryptonOutlookGridGroupBox1.Name = "kryptonOutlookGridGroupBox1";
-            this.kryptonOutlookGridGroupBox1.Size = new System.Drawing.Size(744, 46);
-            this.kryptonOutlookGridGroupBox1.TabIndex = 1;
-            this.kryptonOutlookGridGroupBox1.Visible = false;
+            this.kryptonOutlookGrid1.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.kryptonOutlookGrid1_CellMouseDoubleClick);
+            this.kryptonOutlookGrid1.Resize += new System.EventHandler(this.kryptonOutlookGrid1_Resize);
             // 
             // id
             // 
@@ -173,6 +166,15 @@
             this.type.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
             this.type.Width = 50;
             // 
+            // kryptonOutlookGridGroupBox1
+            // 
+            this.kryptonOutlookGridGroupBox1.AllowDrop = true;
+            this.kryptonOutlookGridGroupBox1.Location = new System.Drawing.Point(24, 535);
+            this.kryptonOutlookGridGroupBox1.Name = "kryptonOutlookGridGroupBox1";
+            this.kryptonOutlookGridGroupBox1.Size = new System.Drawing.Size(744, 46);
+            this.kryptonOutlookGridGroupBox1.TabIndex = 1;
+            this.kryptonOutlookGridGroupBox1.Visible = false;
+            // 
             // ProductsListForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -181,6 +183,7 @@
             this.ClientSize = new System.Drawing.Size(786, 581);
             this.Controls.Add(this.kryptonOutlookGrid1);
             this.Controls.Add(this.kryptonOutlookGridGroupBox1);
+            this.MinimumSize = new System.Drawing.Size(802, 620);
             this.Name = "ProductsListForm";
             this.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Office2007Blue;
             this.Text = "Standard Docking";

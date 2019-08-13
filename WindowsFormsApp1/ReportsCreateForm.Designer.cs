@@ -55,6 +55,7 @@
             treeNode12,
             treeNode13});
             this.panel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.panel13 = new System.Windows.Forms.Panel();
             this.dataGridView1 = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
             this.label1 = new System.Windows.Forms.Label();
             this.panel2 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
@@ -106,12 +107,15 @@
             this.tabPage10 = new System.Windows.Forms.TabPage();
             this.tabPage11 = new System.Windows.Forms.TabPage();
             this.treeView1 = new System.Windows.Forms.TreeView();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.panel14 = new System.Windows.Forms.Panel();
             this.panel15 = new System.Windows.Forms.Panel();
             this.button16 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.panel17 = new System.Windows.Forms.Panel();
+            this.panel18 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.panel1)).BeginInit();
             this.panel1.SuspendLayout();
+            this.panel13.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panel2)).BeginInit();
             this.panel2.SuspendLayout();
@@ -157,19 +161,35 @@
             this.tabPage11.SuspendLayout();
             this.panel14.SuspendLayout();
             this.panel15.SuspendLayout();
+            this.panel17.SuspendLayout();
+            this.panel18.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.panel1.Controls.Add(this.dataGridView1);
+            this.panel1.Controls.Add(this.panel13);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
             this.panel1.PanelBackStyle = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ControlRibbon;
-            this.panel1.Size = new System.Drawing.Size(939, 512);
+            this.panel1.Size = new System.Drawing.Size(921, 512);
             this.panel1.TabIndex = 1;
+            // 
+            // panel13
+            // 
+            this.panel13.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel13.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(246)))), ((int)(((byte)(254)))));
+            this.panel13.Controls.Add(this.dataGridView1);
+            this.panel13.ForeColor = System.Drawing.SystemColors.ControlLight;
+            this.panel13.Location = new System.Drawing.Point(6, 26);
+            this.panel13.Name = "panel13";
+            this.panel13.Size = new System.Drawing.Size(912, 483);
+            this.panel13.TabIndex = 3;
+            this.panel13.Paint += new System.Windows.Forms.PaintEventHandler(this.panel_Paint);
             // 
             // dataGridView1
             // 
@@ -182,12 +202,12 @@
             this.dataGridView1.ColumnHeadersHeight = 21;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dataGridView1.GridStyles.Style = ComponentFactory.Krypton.Toolkit.DataGridViewStyle.Mixed;
-            this.dataGridView1.GridStyles.StyleBackground = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ContextMenuItemImageColumn;
-            this.dataGridView1.Location = new System.Drawing.Point(6, 26);
+            this.dataGridView1.GridStyles.StyleBackground = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ControlRibbon;
+            this.dataGridView1.Location = new System.Drawing.Point(1, 1);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Office2007Blue;
             this.dataGridView1.RowHeadersWidth = 42;
-            this.dataGridView1.Size = new System.Drawing.Size(930, 483);
+            this.dataGridView1.Size = new System.Drawing.Size(910, 481);
             this.dataGridView1.TabIndex = 2;
             this.dataGridView1.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellEndEdit);
             // 
@@ -204,13 +224,13 @@
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.dataGridView2);
+            this.panel2.Controls.Add(this.panel18);
             this.panel2.Controls.Add(this.label2);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(3, 3);
             this.panel2.Name = "panel2";
             this.panel2.PanelBackStyle = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ControlRibbon;
-            this.panel2.Size = new System.Drawing.Size(939, 512);
+            this.panel2.Size = new System.Drawing.Size(921, 512);
             this.panel2.TabIndex = 2;
             // 
             // dataGridView2
@@ -223,12 +243,13 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dataGridView2.GridStyles.Style = ComponentFactory.Krypton.Toolkit.DataGridViewStyle.Mixed;
-            this.dataGridView2.GridStyles.StyleBackground = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ContextMenuItemImageColumn;
-            this.dataGridView2.Location = new System.Drawing.Point(6, 26);
+            this.dataGridView2.GridStyles.StyleBackground = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ControlRibbon;
+            this.dataGridView2.Location = new System.Drawing.Point(1, 1);
             this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.Size = new System.Drawing.Size(930, 483);
+            this.dataGridView2.Size = new System.Drawing.Size(910, 481);
             this.dataGridView2.TabIndex = 3;
             this.dataGridView2.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellEndEdit);
+            this.dataGridView2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel_Paint);
             // 
             // label2
             // 
@@ -248,7 +269,7 @@
             this.panel3.Location = new System.Drawing.Point(3, 3);
             this.panel3.Name = "panel3";
             this.panel3.PanelBackStyle = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ControlRibbon;
-            this.panel3.Size = new System.Drawing.Size(939, 512);
+            this.panel3.Size = new System.Drawing.Size(921, 512);
             this.panel3.TabIndex = 2;
             // 
             // dataGridView3
@@ -261,7 +282,7 @@
             this.dataGridView3.GridStyles.StyleBackground = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ContextMenuItemImageColumn;
             this.dataGridView3.Location = new System.Drawing.Point(6, 26);
             this.dataGridView3.Name = "dataGridView3";
-            this.dataGridView3.Size = new System.Drawing.Size(930, 483);
+            this.dataGridView3.Size = new System.Drawing.Size(912, 483);
             this.dataGridView3.TabIndex = 4;
             // 
             // label3
@@ -282,7 +303,7 @@
             this.panel4.Location = new System.Drawing.Point(3, 3);
             this.panel4.Name = "panel4";
             this.panel4.PanelBackStyle = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ControlRibbon;
-            this.panel4.Size = new System.Drawing.Size(939, 512);
+            this.panel4.Size = new System.Drawing.Size(921, 512);
             this.panel4.TabIndex = 2;
             // 
             // dataGridView4
@@ -295,7 +316,7 @@
             this.dataGridView4.GridStyles.StyleBackground = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ContextMenuItemImageColumn;
             this.dataGridView4.Location = new System.Drawing.Point(6, 26);
             this.dataGridView4.Name = "dataGridView4";
-            this.dataGridView4.Size = new System.Drawing.Size(930, 483);
+            this.dataGridView4.Size = new System.Drawing.Size(912, 483);
             this.dataGridView4.TabIndex = 5;
             // 
             // label4
@@ -316,7 +337,7 @@
             this.panel5.Location = new System.Drawing.Point(3, 3);
             this.panel5.Name = "panel5";
             this.panel5.PanelBackStyle = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ControlRibbon;
-            this.panel5.Size = new System.Drawing.Size(939, 512);
+            this.panel5.Size = new System.Drawing.Size(921, 512);
             this.panel5.TabIndex = 2;
             // 
             // dataGridView5
@@ -329,7 +350,7 @@
             this.dataGridView5.GridStyles.StyleBackground = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ContextMenuItemImageColumn;
             this.dataGridView5.Location = new System.Drawing.Point(6, 26);
             this.dataGridView5.Name = "dataGridView5";
-            this.dataGridView5.Size = new System.Drawing.Size(930, 483);
+            this.dataGridView5.Size = new System.Drawing.Size(912, 483);
             this.dataGridView5.TabIndex = 6;
             // 
             // label5
@@ -350,7 +371,7 @@
             this.panel6.Location = new System.Drawing.Point(3, 3);
             this.panel6.Name = "panel6";
             this.panel6.PanelBackStyle = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ControlRibbon;
-            this.panel6.Size = new System.Drawing.Size(939, 512);
+            this.panel6.Size = new System.Drawing.Size(921, 512);
             this.panel6.TabIndex = 2;
             // 
             // dataGridView6
@@ -363,7 +384,7 @@
             this.dataGridView6.GridStyles.StyleBackground = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ContextMenuItemImageColumn;
             this.dataGridView6.Location = new System.Drawing.Point(6, 26);
             this.dataGridView6.Name = "dataGridView6";
-            this.dataGridView6.Size = new System.Drawing.Size(930, 483);
+            this.dataGridView6.Size = new System.Drawing.Size(912, 483);
             this.dataGridView6.TabIndex = 7;
             this.dataGridView6.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellEndEdit);
             // 
@@ -397,7 +418,7 @@
             this.panel7.Location = new System.Drawing.Point(3, 3);
             this.panel7.Name = "panel7";
             this.panel7.PanelBackStyle = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ControlRibbon;
-            this.panel7.Size = new System.Drawing.Size(917, 512);
+            this.panel7.Size = new System.Drawing.Size(921, 512);
             this.panel7.TabIndex = 2;
             // 
             // dataGridView7
@@ -410,7 +431,7 @@
             this.dataGridView7.GridStyles.StyleBackground = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ContextMenuItemImageColumn;
             this.dataGridView7.Location = new System.Drawing.Point(6, 26);
             this.dataGridView7.Name = "dataGridView7";
-            this.dataGridView7.Size = new System.Drawing.Size(908, 483);
+            this.dataGridView7.Size = new System.Drawing.Size(912, 483);
             this.dataGridView7.TabIndex = 8;
             // 
             // label7
@@ -431,7 +452,7 @@
             this.panel8.Location = new System.Drawing.Point(3, 3);
             this.panel8.Name = "panel8";
             this.panel8.PanelBackStyle = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ControlRibbon;
-            this.panel8.Size = new System.Drawing.Size(917, 512);
+            this.panel8.Size = new System.Drawing.Size(921, 512);
             this.panel8.TabIndex = 2;
             // 
             // dataGridView8
@@ -444,7 +465,7 @@
             this.dataGridView8.GridStyles.StyleBackground = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ContextMenuItemImageColumn;
             this.dataGridView8.Location = new System.Drawing.Point(6, 26);
             this.dataGridView8.Name = "dataGridView8";
-            this.dataGridView8.Size = new System.Drawing.Size(908, 483);
+            this.dataGridView8.Size = new System.Drawing.Size(912, 483);
             this.dataGridView8.TabIndex = 9;
             // 
             // label8
@@ -459,13 +480,13 @@
             // 
             // panel9
             // 
-            this.panel9.Controls.Add(this.dataGridView9);
+            this.panel9.Controls.Add(this.panel17);
             this.panel9.Controls.Add(this.label9);
             this.panel9.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel9.Location = new System.Drawing.Point(3, 3);
             this.panel9.Name = "panel9";
             this.panel9.PanelBackStyle = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ControlRibbon;
-            this.panel9.Size = new System.Drawing.Size(917, 512);
+            this.panel9.Size = new System.Drawing.Size(921, 512);
             this.panel9.TabIndex = 2;
             // 
             // dataGridView9
@@ -475,10 +496,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView9.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView9.GridStyles.Style = ComponentFactory.Krypton.Toolkit.DataGridViewStyle.Mixed;
-            this.dataGridView9.GridStyles.StyleBackground = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ContextMenuItemImageColumn;
-            this.dataGridView9.Location = new System.Drawing.Point(6, 26);
+            this.dataGridView9.GridStyles.StyleBackground = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ControlRibbon;
+            this.dataGridView9.Location = new System.Drawing.Point(1, 1);
             this.dataGridView9.Name = "dataGridView9";
-            this.dataGridView9.Size = new System.Drawing.Size(908, 483);
+            this.dataGridView9.Size = new System.Drawing.Size(910, 481);
             this.dataGridView9.TabIndex = 10;
             // 
             // label9
@@ -499,7 +520,7 @@
             this.panel10.Location = new System.Drawing.Point(3, 3);
             this.panel10.Name = "panel10";
             this.panel10.PanelBackStyle = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ControlRibbon;
-            this.panel10.Size = new System.Drawing.Size(939, 512);
+            this.panel10.Size = new System.Drawing.Size(921, 512);
             this.panel10.TabIndex = 2;
             // 
             // dataGridView10
@@ -512,7 +533,7 @@
             this.dataGridView10.GridStyles.StyleBackground = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ContextMenuItemImageColumn;
             this.dataGridView10.Location = new System.Drawing.Point(6, 26);
             this.dataGridView10.Name = "dataGridView10";
-            this.dataGridView10.Size = new System.Drawing.Size(930, 483);
+            this.dataGridView10.Size = new System.Drawing.Size(912, 483);
             this.dataGridView10.TabIndex = 11;
             this.dataGridView10.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellEndEdit);
             // 
@@ -669,7 +690,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 5);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(947, 520);
+            this.tabPage2.Size = new System.Drawing.Size(929, 520);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Топ отпущ";
             // 
@@ -681,7 +702,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 5);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(947, 520);
+            this.tabPage3.Size = new System.Drawing.Size(929, 520);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Топ потр";
             // 
@@ -693,7 +714,7 @@
             this.tabPage4.Location = new System.Drawing.Point(4, 5);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(947, 520);
+            this.tabPage4.Size = new System.Drawing.Size(929, 520);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Тепл выр";
             // 
@@ -705,7 +726,7 @@
             this.tabPage5.Location = new System.Drawing.Point(4, 5);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(947, 520);
+            this.tabPage5.Size = new System.Drawing.Size(929, 520);
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "Тепл получ";
             // 
@@ -717,7 +738,7 @@
             this.tabPage6.Location = new System.Drawing.Point(4, 5);
             this.tabPage6.Name = "tabPage6";
             this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage6.Size = new System.Drawing.Size(947, 520);
+            this.tabPage6.Size = new System.Drawing.Size(929, 520);
             this.tabPage6.TabIndex = 5;
             this.tabPage6.Text = "Тепл отп";
             // 
@@ -729,7 +750,7 @@
             this.tabPage7.Location = new System.Drawing.Point(4, 5);
             this.tabPage7.Name = "tabPage7";
             this.tabPage7.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage7.Size = new System.Drawing.Size(947, 520);
+            this.tabPage7.Size = new System.Drawing.Size(929, 520);
             this.tabPage7.TabIndex = 6;
             this.tabPage7.Text = "Тепл потр";
             // 
@@ -741,7 +762,7 @@
             this.tabPage8.Location = new System.Drawing.Point(4, 5);
             this.tabPage8.Name = "tabPage8";
             this.tabPage8.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage8.Size = new System.Drawing.Size(925, 520);
+            this.tabPage8.Size = new System.Drawing.Size(929, 520);
             this.tabPage8.TabIndex = 7;
             this.tabPage8.Text = "Эл выр";
             // 
@@ -753,7 +774,7 @@
             this.tabPage9.Location = new System.Drawing.Point(4, 5);
             this.tabPage9.Name = "tabPage9";
             this.tabPage9.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage9.Size = new System.Drawing.Size(925, 520);
+            this.tabPage9.Size = new System.Drawing.Size(929, 520);
             this.tabPage9.TabIndex = 8;
             this.tabPage9.Text = "Эл получ";
             // 
@@ -765,7 +786,7 @@
             this.tabPage10.Location = new System.Drawing.Point(4, 5);
             this.tabPage10.Name = "tabPage10";
             this.tabPage10.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage10.Size = new System.Drawing.Size(925, 520);
+            this.tabPage10.Size = new System.Drawing.Size(929, 520);
             this.tabPage10.TabIndex = 9;
             this.tabPage10.Text = "Эл отппущ";
             // 
@@ -777,13 +798,13 @@
             this.tabPage11.Location = new System.Drawing.Point(4, 5);
             this.tabPage11.Name = "tabPage11";
             this.tabPage11.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage11.Size = new System.Drawing.Size(947, 520);
+            this.tabPage11.Size = new System.Drawing.Size(929, 520);
             this.tabPage11.TabIndex = 10;
             this.tabPage11.Text = "Эл потреб";
             // 
             // treeView1
             // 
-            this.treeView1.BackColor = System.Drawing.SystemColors.Window;
+            this.treeView1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(254)))), ((int)(((byte)(255)))));
             this.treeView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.treeView1.Dock = System.Windows.Forms.DockStyle.Top;
             this.treeView1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -801,16 +822,19 @@
             treeNode2.SelectedImageIndex = 4;
             treeNode2.Tag = "1";
             treeNode2.Text = "Отпущено населению";
+            treeNode3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(255)))), ((int)(((byte)(245)))));
             treeNode3.ImageIndex = 4;
             treeNode3.Name = "1-пэр (потребление)";
             treeNode3.SelectedImageIndex = 4;
             treeNode3.Tag = "2";
             treeNode3.Text = "1-пэр (потребление)";
+            treeNode4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(255)))), ((int)(((byte)(245)))));
             treeNode4.ImageKey = "1.png";
             treeNode4.Name = "Топливо";
             treeNode4.SelectedImageKey = "1.png";
             treeNode4.Tag = "-1";
             treeNode4.Text = "Топливо";
+            treeNode5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(255)))), ((int)(((byte)(245)))));
             treeNode5.ImageIndex = 4;
             treeNode5.Name = "Выработка";
             treeNode5.SelectedImageIndex = 4;
@@ -821,6 +845,7 @@
             treeNode6.SelectedImageIndex = 4;
             treeNode6.Tag = "4";
             treeNode6.Text = "Получено со стороны";
+            treeNode7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(255)))), ((int)(((byte)(245)))));
             treeNode7.ImageIndex = 4;
             treeNode7.Name = "Отпущено";
             treeNode7.SelectedImageIndex = 4;
@@ -841,6 +866,7 @@
             treeNode10.SelectedImageIndex = 4;
             treeNode10.Tag = "7";
             treeNode10.Text = "Генерация";
+            treeNode11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(255)))), ((int)(((byte)(245)))));
             treeNode11.ImageIndex = 4;
             treeNode11.Name = "Получено со стороны";
             treeNode11.SelectedImageIndex = 4;
@@ -851,11 +877,13 @@
             treeNode12.SelectedImageIndex = 4;
             treeNode12.Tag = "9";
             treeNode12.Text = "Отпущено";
+            treeNode13.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(255)))), ((int)(((byte)(245)))));
             treeNode13.ImageIndex = 4;
             treeNode13.Name = "1-пэр (потребление)";
             treeNode13.SelectedImageIndex = 4;
             treeNode13.Tag = "10";
             treeNode13.Text = "1-пэр (потребление)";
+            treeNode14.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(255)))), ((int)(((byte)(245)))));
             treeNode14.ImageIndex = 3;
             treeNode14.Name = "Электроэнергия";
             treeNode14.SelectedImageIndex = 3;
@@ -870,6 +898,16 @@
             this.treeView1.Size = new System.Drawing.Size(252, 509);
             this.treeView1.TabIndex = 9;
             this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
+            // 
+            // imageList1
+            // 
+            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList1.Images.SetKeyName(0, "startup_wizard.png");
+            this.imageList1.Images.SetKeyName(1, "1.png");
+            this.imageList1.Images.SetKeyName(2, "2.png");
+            this.imageList1.Images.SetKeyName(3, "3.png");
+            this.imageList1.Images.SetKeyName(4, "magician-hat-icon-magic-hat.png");
             // 
             // panel14
             // 
@@ -911,15 +949,33 @@
             this.button16.Values.Text = "  Назад";
             this.button16.Click += new System.EventHandler(this.button11_Click);
             // 
-            // imageList1
+            // panel17
             // 
-            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
-            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageList1.Images.SetKeyName(0, "startup_wizard.png");
-            this.imageList1.Images.SetKeyName(1, "1.png");
-            this.imageList1.Images.SetKeyName(2, "2.png");
-            this.imageList1.Images.SetKeyName(3, "3.png");
-            this.imageList1.Images.SetKeyName(4, "magician-hat-icon-magic-hat.png");
+            this.panel17.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel17.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(246)))), ((int)(((byte)(254)))));
+            this.panel17.Controls.Add(this.dataGridView9);
+            this.panel17.ForeColor = System.Drawing.SystemColors.ControlLight;
+            this.panel17.Location = new System.Drawing.Point(6, 26);
+            this.panel17.Name = "panel17";
+            this.panel17.Size = new System.Drawing.Size(912, 483);
+            this.panel17.TabIndex = 11;
+            this.panel17.Paint += new System.Windows.Forms.PaintEventHandler(this.panel_Paint);
+            // 
+            // panel18
+            // 
+            this.panel18.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel18.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(246)))), ((int)(((byte)(254)))));
+            this.panel18.Controls.Add(this.dataGridView2);
+            this.panel18.ForeColor = System.Drawing.SystemColors.ControlLight;
+            this.panel18.Location = new System.Drawing.Point(6, 26);
+            this.panel18.Name = "panel18";
+            this.panel18.Size = new System.Drawing.Size(912, 483);
+            this.panel18.TabIndex = 4;
+            this.panel18.Paint += new System.Windows.Forms.PaintEventHandler(this.panel_Paint);
             // 
             // ReportsCreateForm
             // 
@@ -938,6 +994,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.panel1)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.panel13.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panel2)).EndInit();
             this.panel2.ResumeLayout(false);
@@ -994,6 +1051,8 @@
             this.tabPage11.ResumeLayout(false);
             this.panel14.ResumeLayout(false);
             this.panel15.ResumeLayout(false);
+            this.panel17.ResumeLayout(false);
+            this.panel18.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1056,5 +1115,8 @@
         private System.Windows.Forms.Panel panel11;
         private ComponentFactory.Krypton.Toolkit.KryptonButton button16;
         private System.Windows.Forms.ImageList imageList1;
+        private System.Windows.Forms.Panel panel13;
+        private System.Windows.Forms.Panel panel17;
+        private System.Windows.Forms.Panel panel18;
     }
 }

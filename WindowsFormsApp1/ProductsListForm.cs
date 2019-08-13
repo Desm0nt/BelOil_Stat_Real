@@ -96,7 +96,7 @@ namespace WindowsFormsApp1
 
             if (kryptonOutlookGrid1.Width > PreferredTotalWidth)
             {
-                kryptonOutlookGrid1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                kryptonOutlookGrid1.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                 kryptonOutlookGrid1.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.DisplayedCells);
             }
             else
@@ -125,5 +125,9 @@ namespace WindowsFormsApp1
             }
         }
 
+        private void kryptonOutlookGrid1_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+
+        }
     }
 }

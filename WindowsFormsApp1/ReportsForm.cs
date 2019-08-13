@@ -4283,16 +4283,17 @@ namespace WindowsFormsApp1
 
         }
 
-        private void button5_Click(object sender, EventArgs e)
-        {
-            var myForm = new ProductsListForm();
-            myForm.FormClosed += new FormClosedEventHandler(myForm_FormClosed);
-            myForm.Show();
-        }
 
         private void kryptonButton1_Click(object sender, EventArgs e)
         {
             var myForm = new AddUserForm();
+            myForm.FormClosed += new FormClosedEventHandler(myForm_FormClosed);
+            myForm.Show();
+        }
+
+        private void списокПродуктовToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var myForm = new ProductsListForm();
             myForm.FormClosed += new FormClosedEventHandler(myForm_FormClosed);
             myForm.Show();
         }
