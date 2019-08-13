@@ -69,7 +69,7 @@
             this.kryptonOutlookGrid1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonOutlookGrid1.FillMode = JDHSoftware.Krypton.Toolkit.KryptonOutlookGrid.FillMode.GroupsOnly;
             this.kryptonOutlookGrid1.GridStyles.Style = ComponentFactory.Krypton.Toolkit.DataGridViewStyle.Mixed;
-            this.kryptonOutlookGrid1.GridStyles.StyleBackground = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.InputControlRibbon;
+            this.kryptonOutlookGrid1.GridStyles.StyleBackground = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ContextMenuItemImage;
             this.kryptonOutlookGrid1.GroupCollection = outlookGridGroupCollection1;
             this.kryptonOutlookGrid1.HideColumnOnGrouping = true;
             this.kryptonOutlookGrid1.Location = new System.Drawing.Point(0, 0);
@@ -186,6 +186,7 @@
             this.MinimumSize = new System.Drawing.Size(802, 620);
             this.Name = "ProductsListForm";
             this.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Office2007Blue;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Standard Docking";
             this.Load += new System.EventHandler(this.ProductsListForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonOutlookGrid1)).EndInit();

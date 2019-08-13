@@ -127,7 +127,9 @@ namespace WindowsFormsApp1
 
         private void kryptonOutlookGrid1_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-
+            var myForm = new ProductAddForm();
+            //myForm.FormClosed += new FormClosedEventHandler(myForm_FormClosed);
+            myForm.Show();
         }
     }
 }

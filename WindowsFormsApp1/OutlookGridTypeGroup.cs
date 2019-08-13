@@ -2,6 +2,7 @@
 using JDHSoftware.Krypton.Toolkit.KryptonOutlookGrid;
 using System.Globalization;
 using System.Windows.Forms;
+using System.Drawing;
 
 namespace WindowsFormsApp1
 {
@@ -53,6 +54,22 @@ namespace WindowsFormsApp1
             }
         }
 
+        private Image GetFlag(decimal price)
+        {
+            //Icons from http://365icon.com/icon-styles/ethnic/classic2/
+
+            switch (price)
+            {
+                case 1:
+                    return Properties.Resources._1;
+                case 2:
+                    return Properties.Resources._2;
+                case 3:
+                    return Properties.Resources._3;            
+                default:
+                    return null;
+            }
+        }
 
         private string GetPriceString(int priceCode)
         {
