@@ -151,7 +151,7 @@
             this.kryptonButton1.Name = "kryptonButton1";
             this.kryptonButton1.Size = new System.Drawing.Size(118, 32);
             this.kryptonButton1.TabIndex = 17;
-            this.kryptonButton1.Values.Image = global::WindowsFormsApp1.Properties.Resources.ok1;
+            this.kryptonButton1.Values.Image = global::WindowsFormsApp1.Properties.Resources.ok;
             this.kryptonButton1.Values.Text = "&Ок";
             this.kryptonButton1.Click += new System.EventHandler(this.kryptonButton1_Click);
             // 

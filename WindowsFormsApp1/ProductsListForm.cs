@@ -74,7 +74,7 @@ namespace WindowsFormsApp1
             foreach (var product in productList) //TODO for instead foreach for perfs...
             {
                 row = new OutlookGridRow();               
-                row.CreateCells(kryptonOutlookGrid1, new object[] { product.Id, product.Code, product.Name, product.Unit, product.nUnit, product.s111, product.s112, product.type });
+                row.CreateCells(kryptonOutlookGrid1, new object[] { product.Id, product.Code, product.Name, product.Unit, product.nUnit, product.s111, product.s112, new TextAndImage(product.type.ToString(), GetFlag(product.type)) });
                 l.Add(row);
                 //((KryptonDataGridViewTreeTextCell)row.Cells[1]).UpdateStyle();
             }
@@ -122,6 +122,23 @@ namespace WindowsFormsApp1
                 //        Exit Select
                 //End Select
                 return FullQualifiedName;
+            }
+        }
+
+        private Image GetFlag(int type)
+        {
+            //Icons from http://365icon.com/icon-styles/ethnic/classic2/
+
+            switch (type)
+            {
+                case 1:
+                    return Properties.Resources._1;
+                case 2:
+                    return Properties.Resources._2;
+                case 3:
+                    return Properties.Resources._3;
+                default:
+                    return null;
             }
         }
 

@@ -36,6 +36,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.kryptonManager = new ComponentFactory.Krypton.Toolkit.KryptonManager(this.components);
             this.kryptonOutlookGrid1 = new JDHSoftware.Krypton.Toolkit.KryptonOutlookGrid.KryptonOutlookGrid();
+            this.kryptonOutlookGridGroupBox1 = new JDHSoftware.Krypton.Toolkit.KryptonOutlookGrid.KryptonOutlookGridGroupBox();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Code = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Names = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -43,8 +44,7 @@
             this.ed_norm = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.s111 = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewCheckBoxColumn();
             this.s112 = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewCheckBoxColumn();
-            this.type = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.kryptonOutlookGridGroupBox1 = new JDHSoftware.Krypton.Toolkit.KryptonOutlookGrid.KryptonOutlookGridGroupBox();
+            this.type = new JDHSoftware.Krypton.Toolkit.KryptonOutlookGrid.CustomColumns.KryptonDataGridViewTextAndImageColumn();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonOutlookGrid1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -80,6 +80,15 @@
             this.kryptonOutlookGrid1.TabIndex = 0;
             this.kryptonOutlookGrid1.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.kryptonOutlookGrid1_CellMouseDoubleClick);
             this.kryptonOutlookGrid1.Resize += new System.EventHandler(this.kryptonOutlookGrid1_Resize);
+            // 
+            // kryptonOutlookGridGroupBox1
+            // 
+            this.kryptonOutlookGridGroupBox1.AllowDrop = true;
+            this.kryptonOutlookGridGroupBox1.Location = new System.Drawing.Point(24, 535);
+            this.kryptonOutlookGridGroupBox1.Name = "kryptonOutlookGridGroupBox1";
+            this.kryptonOutlookGridGroupBox1.Size = new System.Drawing.Size(744, 46);
+            this.kryptonOutlookGridGroupBox1.TabIndex = 1;
+            this.kryptonOutlookGridGroupBox1.Visible = false;
             // 
             // id
             // 
@@ -166,15 +175,6 @@
             this.type.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
             this.type.Width = 50;
             // 
-            // kryptonOutlookGridGroupBox1
-            // 
-            this.kryptonOutlookGridGroupBox1.AllowDrop = true;
-            this.kryptonOutlookGridGroupBox1.Location = new System.Drawing.Point(24, 535);
-            this.kryptonOutlookGridGroupBox1.Name = "kryptonOutlookGridGroupBox1";
-            this.kryptonOutlookGridGroupBox1.Size = new System.Drawing.Size(744, 46);
-            this.kryptonOutlookGridGroupBox1.TabIndex = 1;
-            this.kryptonOutlookGridGroupBox1.Visible = false;
-            // 
             // ProductsListForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -205,7 +205,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ed_norm;
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewCheckBoxColumn s111;
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewCheckBoxColumn s112;
-        private System.Windows.Forms.DataGridViewTextBoxColumn type;
+        private JDHSoftware.Krypton.Toolkit.KryptonOutlookGrid.CustomColumns.KryptonDataGridViewTextAndImageColumn type;
     }
 }
 

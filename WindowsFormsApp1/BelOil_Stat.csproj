@@ -257,19 +257,22 @@
     <None Include="Resources\ok1.png" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\a1.png">
+    <EmbeddedResource Include="Resources\1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\a2.png">
+    <EmbeddedResource Include="Resources\2.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\a3.png">
+    <EmbeddedResource Include="Resources\3.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cancel2.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

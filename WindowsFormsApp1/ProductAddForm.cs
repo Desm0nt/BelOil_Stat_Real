@@ -32,6 +32,7 @@ namespace WindowsFormsApp1
 
         }
 
+
         protected override void OnLoad(EventArgs e)
         {
             var btn = new Button();
