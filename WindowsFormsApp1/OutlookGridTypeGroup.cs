@@ -1,8 +1,9 @@
 ﻿using System;
-using JDHSoftware.Krypton.Toolkit.KryptonOutlookGrid;
 using System.Globalization;
 using System.Windows.Forms;
 using System.Drawing;
+using KryptonOutlookGrid.Classes;
+using KryptonOutlookGrid.Interfaces;
 
 namespace WindowsFormsApp1
 {
@@ -61,9 +62,9 @@ namespace WindowsFormsApp1
                 case 1:
                     return "Топливо";
                 case 2:
-                    return "Теплоэнергия ";
+                    return "Тепловая энергия ";
                 case 3:
-                    return "Электроэнергия ";
+                    return "Электрическая энергия ";
                 default:
                     return "";
             }

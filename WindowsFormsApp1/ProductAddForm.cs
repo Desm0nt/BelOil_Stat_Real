@@ -22,6 +22,23 @@ namespace WindowsFormsApp1
             this.textBox1.Size = new System.Drawing.Size(74, 21);
         }
 
+        public ProductAddForm(DataTables.ProductTable table)
+        {
+            InitializeComponent();
+            var a = table;
+            this.textBox2.AutoSize = false;
+            this.textBox2.Size = new System.Drawing.Size(74, 21);
+            this.textBox1.AutoSize = false;
+            this.textBox1.Size = new System.Drawing.Size(74, 21);
+            kryptonNumericUpDown1.Value = table.Id;
+            kryptonNumericUpDown2.Value = table.Code;
+            kryptonTextBox2.Text = table.Name;
+            label6.Text = table.Unit;
+            label7.Text = table.nUnit;
+            kryptonCheckBox1.Checked = table.s111;
+            kryptonCheckBox2.Checked = table.s112;
+        }
+
         private void kryptonButton1_Click(object sender, EventArgs e)
         {
 
@@ -29,7 +46,7 @@ namespace WindowsFormsApp1
 
         private void kryptonButton2_Click(object sender, EventArgs e)
         {
-
+            this.Close();
         }
 
 

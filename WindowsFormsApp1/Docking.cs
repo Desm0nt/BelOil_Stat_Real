@@ -11,7 +11,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using ComponentFactory.Krypton.Workspace;
 using ComponentFactory.Krypton.Docking;
-using JDHSoftware.Krypton.Toolkit.KryptonOutlookGrid;
 
 namespace WindowsFormsApp1
 {
@@ -40,12 +39,12 @@ namespace WindowsFormsApp1
 
         private KryptonPage NewInput()
         {
-            return NewPage("Input ", 1, new KryptonOutlookGrid());
+            return NewPage("Input ", 1, new KryptonOutlookGrid.Classes.KryptonOutlookGrid());
         }
 
         private KryptonPage NewPropertyGrid()
         {
-            return NewPage("Properties ", 2, new KryptonOutlookGrid());
+            return NewPage("Properties ", 2, new KryptonOutlookGrid.Classes.KryptonOutlookGrid());
         }
 
         private KryptonPage NewPage(string name, int image, Control content)

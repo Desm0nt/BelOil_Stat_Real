@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WindowsFormsApp1.DataTables
 {
-    class ProductTable
+    public class ProductTable
     {
         public int Id { get; set; }
         public int Code { get; set; }

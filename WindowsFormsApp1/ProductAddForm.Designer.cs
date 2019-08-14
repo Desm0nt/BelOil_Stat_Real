@@ -46,10 +46,9 @@
             this.label8 = new System.Windows.Forms.Label();
             this.kryptonCheckBox1 = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             this.kryptonCheckBox3 = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
-            this.kryptonComboBox1 = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonComboBox1)).BeginInit();
+            this.label9 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -90,14 +89,26 @@
             // 
             // kryptonNumericUpDown1
             // 
+            this.kryptonNumericUpDown1.DecimalPlaces = 99;
             this.kryptonNumericUpDown1.Location = new System.Drawing.Point(27, 29);
+            this.kryptonNumericUpDown1.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
             this.kryptonNumericUpDown1.Name = "kryptonNumericUpDown1";
             this.kryptonNumericUpDown1.Size = new System.Drawing.Size(74, 22);
             this.kryptonNumericUpDown1.TabIndex = 4;
             // 
             // kryptonNumericUpDown2
             // 
+            this.kryptonNumericUpDown2.DecimalPlaces = 99;
             this.kryptonNumericUpDown2.Location = new System.Drawing.Point(27, 77);
+            this.kryptonNumericUpDown2.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
             this.kryptonNumericUpDown2.Name = "kryptonNumericUpDown2";
             this.kryptonNumericUpDown2.Size = new System.Drawing.Size(74, 22);
             this.kryptonNumericUpDown2.TabIndex = 5;
@@ -202,15 +213,6 @@
             this.kryptonCheckBox3.TabIndex = 21;
             this.kryptonCheckBox3.Values.Text = "Стандартный";
             // 
-            // kryptonComboBox1
-            // 
-            this.kryptonComboBox1.DropDownWidth = 121;
-            this.kryptonComboBox1.Location = new System.Drawing.Point(74, 135);
-            this.kryptonComboBox1.Name = "kryptonComboBox1";
-            this.kryptonComboBox1.Size = new System.Drawing.Size(121, 21);
-            this.kryptonComboBox1.TabIndex = 22;
-            this.kryptonComboBox1.Text = "kryptonComboBox1";
-            // 
             // textBox1
             // 
             this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
@@ -227,15 +229,23 @@
             this.textBox2.Size = new System.Drawing.Size(74, 13);
             this.textBox2.TabIndex = 24;
             // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(75, 141);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(0, 13);
+            this.label9.TabIndex = 25;
+            // 
             // ProductAddForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(246)))), ((int)(((byte)(254)))));
             this.ClientSize = new System.Drawing.Size(622, 215);
+            this.Controls.Add(this.label9);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.kryptonComboBox1);
             this.Controls.Add(this.kryptonCheckBox3);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.panel1);
@@ -262,7 +272,6 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Данные вида продукции (работы, услуги)";
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonComboBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -287,8 +296,8 @@
         private System.Windows.Forms.Label label8;
         private ComponentFactory.Krypton.Toolkit.KryptonCheckBox kryptonCheckBox1;
         private ComponentFactory.Krypton.Toolkit.KryptonCheckBox kryptonCheckBox3;
-        private ComponentFactory.Krypton.Toolkit.KryptonComboBox kryptonComboBox1;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.Label label9;
     }
 }

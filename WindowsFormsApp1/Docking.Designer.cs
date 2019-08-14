@@ -29,14 +29,14 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            JDHSoftware.Krypton.Toolkit.KryptonOutlookGrid.OutlookGridGroupCollection outlookGridGroupCollection1 = new JDHSoftware.Krypton.Toolkit.KryptonOutlookGrid.OutlookGridGroupCollection();
+            KryptonOutlookGrid.Classes.OutlookGridGroupCollection outlookGridGroupCollection1 = new KryptonOutlookGrid.Classes.OutlookGridGroupCollection();
             this.ribbonAppButtonExit = new ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem();
             this.kryptonPanel = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.kryptonDockableWorkspace = new ComponentFactory.Krypton.Docking.KryptonDockableWorkspace();
             this.imageListSmall = new System.Windows.Forms.ImageList(this.components);
             this.kryptonManager = new ComponentFactory.Krypton.Toolkit.KryptonManager(this.components);
             this.kryptonDockingManager = new ComponentFactory.Krypton.Docking.KryptonDockingManager();
-            this.kryptonOutlookGrid1 = new JDHSoftware.Krypton.Toolkit.KryptonOutlookGrid.KryptonOutlookGrid();
+            this.kryptonOutlookGrid1 = new KryptonOutlookGrid.Classes.KryptonOutlookGrid();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -103,7 +103,7 @@
             this.Column1,
             this.Column2,
             this.Column3});
-            this.kryptonOutlookGrid1.FillMode = JDHSoftware.Krypton.Toolkit.KryptonOutlookGrid.FillMode.GroupsOnly;
+            this.kryptonOutlookGrid1.FillMode = KryptonOutlookGrid.Classes.FillMode.GROUPSONLY;
             this.kryptonOutlookGrid1.GroupCollection = outlookGridGroupCollection1;
             this.kryptonOutlookGrid1.Location = new System.Drawing.Point(0, 0);
             this.kryptonOutlookGrid1.Name = "kryptonOutlookGrid1";
@@ -154,7 +154,7 @@
         private ComponentFactory.Krypton.Toolkit.KryptonContextMenuItem ribbonAppButtonExit;
         private ComponentFactory.Krypton.Docking.KryptonDockingManager kryptonDockingManager;
         private ComponentFactory.Krypton.Docking.KryptonDockableWorkspace kryptonDockableWorkspace;
-        private JDHSoftware.Krypton.Toolkit.KryptonOutlookGrid.KryptonOutlookGrid kryptonOutlookGrid1;
+        private KryptonOutlookGrid.Classes.KryptonOutlookGrid kryptonOutlookGrid1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
