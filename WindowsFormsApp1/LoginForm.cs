@@ -32,7 +32,7 @@ namespace WindowsFormsApp1
                     throw new Exception("Пользователь с таким именем не найден.");
                 bool loginRes = dbOps.Login(textBox1.Text, textBox2.Text);  // попытка входа с заданным логином и паролем
                 if (loginRes == false)
-                    MessageBox.Show("Не верный пароль.");
+                    KryptonMessageBox.Show("Не верный пароль.");
                 else
                 {
                     ReportsForm reportsForm = new ReportsForm();
@@ -43,7 +43,7 @@ namespace WindowsFormsApp1
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                KryptonMessageBox.Show(ex.Message);
             }
 
         }

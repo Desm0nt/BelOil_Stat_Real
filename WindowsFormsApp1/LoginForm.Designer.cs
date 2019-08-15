@@ -28,11 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.button1 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.textBox1 = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.textBox2 = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.kryptonManager1 = new ComponentFactory.Krypton.Toolkit.KryptonManager(this.components);
+            this.kryptonPalette1 = new ComponentFactory.Krypton.Toolkit.KryptonPalette(this.components);
             this.SuspendLayout();
             // 
             // button1
@@ -77,6 +80,15 @@
             this.label2.TabIndex = 4;
             this.label2.Text = "Пароль:";
             // 
+            // kryptonManager1
+            // 
+            this.kryptonManager1.GlobalPaletteMode = ComponentFactory.Krypton.Toolkit.PaletteModeManager.Office2007Blue;
+            // 
+            // kryptonPalette1
+            // 
+            this.kryptonPalette1.BasePaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Office2007Blue;
+            this.kryptonPalette1.CustomisedKryptonPaletteFilePath = null;
+            // 
             // LoginForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -89,6 +101,7 @@
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button1);
             this.Name = "LoginForm";
+            this.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Office2007Blue;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Авторизация";
             this.ResumeLayout(false);
@@ -103,6 +116,8 @@
         private ComponentFactory.Krypton.Toolkit.KryptonTextBox textBox2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
+        private ComponentFactory.Krypton.Toolkit.KryptonManager kryptonManager1;
+        private ComponentFactory.Krypton.Toolkit.KryptonPalette kryptonPalette1;
     }
 }
 

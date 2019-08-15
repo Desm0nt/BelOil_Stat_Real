@@ -161,32 +161,48 @@ namespace WindowsFormsApp1
         }
 
         private void kryptonOutlookGrid1_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
-        {      
-            KryptonDataGridView dataGridView = (KryptonDataGridView)sender;
-            if (dataGridView.Rows[e.RowIndex].Cells[1].Value != null)
+        {
+            KryptonOutlookGrid.Classes.KryptonOutlookGrid dataGridView = (KryptonOutlookGrid.Classes.KryptonOutlookGrid)sender;
+            if (e.RowIndex >= 0)
             {
-                DataTables.ProductTable table = new DataTables.ProductTable
+                if (dataGridView.Rows[e.RowIndex].Cells[1].Value != null)
                 {
-                    Id = Int32.Parse(dataGridView.Rows[e.RowIndex].Cells[0].Value.ToString()),
-                    Code = Int32.Parse(dataGridView.Rows[e.RowIndex].Cells[1].Value.ToString()),
-                    Name = dataGridView.Rows[e.RowIndex].Cells[2].Value.ToString(),
-                    Unit = dataGridView.Rows[e.RowIndex].Cells[3].Value.ToString(),
-                    nUnit = dataGridView.Rows[e.RowIndex].Cells[4].Value.ToString(),
-                    s111 = Boolean.Parse(dataGridView.Rows[e.RowIndex].Cells[5].Value.ToString()),
-                    s112 = Boolean.Parse(dataGridView.Rows[e.RowIndex].Cells[6].Value.ToString()),
-                    type = Int32.Parse(((TextAndImage)dataGridView.Rows[e.RowIndex].Cells[7].Value).Text)
-                };
-                var myForm = new ProductAddForm(table);
-                myForm.FormClosed += new FormClosedEventHandler(myForm_FormClosed);
-                myForm.Show();
+                    DataTables.ProductTable table = new DataTables.ProductTable
+                    {
+                        Id = Int32.Parse(dataGridView.Rows[e.RowIndex].Cells[0].Value.ToString()),
+                        Code = Int32.Parse(dataGridView.Rows[e.RowIndex].Cells[1].Value.ToString()),
+                        Name = dataGridView.Rows[e.RowIndex].Cells[2].Value.ToString(),
+                        Unit = dataGridView.Rows[e.RowIndex].Cells[3].Value.ToString(),
+                        nUnit = dataGridView.Rows[e.RowIndex].Cells[4].Value.ToString(),
+                        s111 = Boolean.Parse(dataGridView.Rows[e.RowIndex].Cells[5].Value.ToString()),
+                        s112 = Boolean.Parse(dataGridView.Rows[e.RowIndex].Cells[6].Value.ToString()),
+                        type = Int32.Parse(((TextAndImage)dataGridView.Rows[e.RowIndex].Cells[7].Value).Text)
+                    };
+                    var myForm = new ProductAddForm(table, this);
+                    //myForm.FormClosed += new FormClosedEventHandler(myForm_FormClosed);
+                    myForm.ShowDialog ();
+
+                    if (myForm.DialogResult == DialogResult.OK)
+                    {
+                        var productTable = myForm.productTable;
+                        dataGridView.Rows[e.RowIndex].Cells[0].Value = productTable.Id;
+                        dataGridView.Rows[e.RowIndex].Cells[1].Value = productTable.Code;
+                        dataGridView.Rows[e.RowIndex].Cells[2].Value = productTable.Name;
+                        dataGridView.Rows[e.RowIndex].Cells[3].Value = productTable.Unit;
+                        dataGridView.Rows[e.RowIndex].Cells[4].Value = productTable.nUnit;
+                        dataGridView.Rows[e.RowIndex].Cells[5].Value = productTable.s111;
+                        dataGridView.Rows[e.RowIndex].Cells[6].Value = productTable.s112;
+                    }
+                }
             }
         }
+
 
         private void addToolStripButton_Click(object sender, EventArgs e)
         {
             var myForm = new ProductAddForm();
             myForm.FormClosed += new FormClosedEventHandler(myForm_FormClosed);
-            myForm.Show();
+            myForm.ShowDialog();
         }
 
         private void editToolStripButton_Click(object sender, EventArgs e)
@@ -198,7 +214,7 @@ namespace WindowsFormsApp1
 
         private void kryptonOutlookGrid1_CellEnter(object sender, DataGridViewCellEventArgs e)
         {
-            KryptonDataGridView dataGridView = (KryptonDataGridView)sender;
+            KryptonOutlookGrid.Classes.KryptonOutlookGrid dataGridView = (KryptonOutlookGrid.Classes.KryptonOutlookGrid)sender;
             if (dataGridView.Rows[e.RowIndex].Cells[1].Value != null)
             {
                 label1.Text = "#" + dataGridView.Rows[e.RowIndex].Cells[0].Value.ToString() + " - " + dataGridView.Rows[e.RowIndex].Cells[2].Value.ToString();
@@ -222,6 +238,17 @@ namespace WindowsFormsApp1
                 }
                 label1.Text = typestr;
             }
+        }
+
+        private void removeToolStripButton_Click(object sender, EventArgs e)
+        {
+            var ind = kryptonOutlookGrid1.CurrentCell.RowIndex;
+            if (ind >= 0)
+            {
+                if (kryptonOutlookGrid1.Rows[ind].Cells[1].Value != null)
+                    dbOps.DeleteFromProd(Int32.Parse(kryptonOutlookGrid1.Rows[ind].Cells[0].Value.ToString()));
+            }
+            LoadData(true);
         }
     }
 }

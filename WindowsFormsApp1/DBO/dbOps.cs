@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using WindowsFormsApp1.DataTables;
 using System.Text.RegularExpressions;
+using ComponentFactory.Krypton.Toolkit;
 
 namespace WindowsFormsApp1.DBO
 {
@@ -42,7 +43,7 @@ namespace WindowsFormsApp1.DBO
             }
             catch (Exception Ex)
             {
-                MessageBox.Show("Ошибка проверки наличия пользователя: " + Ex.Message);
+                KryptonMessageBox.Show("Ошибка проверки наличия пользователя: " + Ex.Message);
             }
             return status;
         }
@@ -68,7 +69,7 @@ namespace WindowsFormsApp1.DBO
             }
             catch (Exception Ex)
             {
-                MessageBox.Show("Ошибка проверки наличия отчета: " + Ex.Message);
+                KryptonMessageBox.Show("Ошибка проверки наличия отчета: " + Ex.Message);
             }
             return status;
         }
@@ -90,7 +91,7 @@ namespace WindowsFormsApp1.DBO
             }
             catch (Exception Ex)
             {
-                MessageBox.Show("Ошибка проверки наличия отчета: " + Ex.Message);
+                KryptonMessageBox.Show("Ошибка проверки наличия отчета: " + Ex.Message);
             }
         }
         public static List<int> GetFuelsTradeId(int id_org, int trade)
@@ -116,7 +117,7 @@ namespace WindowsFormsApp1.DBO
             }
             catch (Exception Ex)
             {
-                MessageBox.Show("Ошибка GetFuelsTradeId: " + Ex.Message);
+                KryptonMessageBox.Show("Ошибка GetFuelsTradeId: " + Ex.Message);
             }
             return trades;
         }
@@ -141,7 +142,7 @@ namespace WindowsFormsApp1.DBO
             }
             catch (Exception Ex)
             {
-                MessageBox.Show("Ошибка GetNormIdTypeList: " + Ex.Message);
+                KryptonMessageBox.Show("Ошибка GetNormIdTypeList: " + Ex.Message);
             }
             return NormList;
         }
@@ -166,7 +167,7 @@ namespace WindowsFormsApp1.DBO
             }
             catch (Exception Ex)
             {
-                MessageBox.Show("Ошибка GetSoucreIdList: " + Ex.Message);
+                KryptonMessageBox.Show("Ошибка GetSoucreIdList: " + Ex.Message);
             }
             return SourceList;
         }
@@ -191,7 +192,7 @@ namespace WindowsFormsApp1.DBO
             }
             catch (Exception Ex)
             {
-                MessageBox.Show("Ошибка GetRecievedIdList: " + Ex.Message);
+                KryptonMessageBox.Show("Ошибка GetRecievedIdList: " + Ex.Message);
             }
             return SourceList;
         }
@@ -216,7 +217,7 @@ namespace WindowsFormsApp1.DBO
             }
             catch (Exception Ex)
             {
-                MessageBox.Show("Ошибка GetSendedIdList: " + Ex.Message);
+                KryptonMessageBox.Show("Ошибка GetSendedIdList: " + Ex.Message);
             }
             return SourceList;
         }
@@ -238,7 +239,7 @@ namespace WindowsFormsApp1.DBO
             }
             catch (Exception Ex)
             {
-                MessageBox.Show("Ошибка AddFuelTrades: " + Ex.Message);
+                KryptonMessageBox.Show("Ошибка AddFuelTrades: " + Ex.Message);
             }
         }
         public static void UpdateFuelTrades(int id, float value)
@@ -257,7 +258,7 @@ namespace WindowsFormsApp1.DBO
             }
             catch (Exception Ex)
             {
-                MessageBox.Show("Ошибка UpdateFuelTrades: " + Ex.Message);
+                KryptonMessageBox.Show("Ошибка UpdateFuelTrades: " + Ex.Message);
             }
         }
         public static void UpdateFuelNorm(int id, float val_plan, float val_fact)
@@ -277,7 +278,7 @@ namespace WindowsFormsApp1.DBO
             }
             catch (Exception Ex)
             {
-                MessageBox.Show("Ошибка UpdateFuelNorm: " + Ex.Message);
+                KryptonMessageBox.Show("Ошибка UpdateFuelNorm: " + Ex.Message);
             }
         }
         public static void UpdateSource(int id, float value)
@@ -296,7 +297,7 @@ namespace WindowsFormsApp1.DBO
             }
             catch (Exception Ex)
             {
-                MessageBox.Show("Ошибка UpdateSource: " + Ex.Message);
+                KryptonMessageBox.Show("Ошибка UpdateSource: " + Ex.Message);
             }
         }
         public static void UpdateRecieved(int id, float value)
@@ -315,7 +316,7 @@ namespace WindowsFormsApp1.DBO
             }
             catch (Exception Ex)
             {
-                MessageBox.Show("Ошибка UpdateRecieved: " + Ex.Message);
+                KryptonMessageBox.Show("Ошибка UpdateRecieved: " + Ex.Message);
             }
         }
         public static void UpdateSended(int id, float value)
@@ -334,7 +335,7 @@ namespace WindowsFormsApp1.DBO
             }
             catch (Exception Ex)
             {
-                MessageBox.Show("Ошибка UpdateSended: " + Ex.Message);
+                KryptonMessageBox.Show("Ошибка UpdateSended: " + Ex.Message);
             }
         }
 
@@ -356,7 +357,7 @@ namespace WindowsFormsApp1.DBO
             }
             catch (Exception Ex)
             {
-                MessageBox.Show("Ошибка AddNormData: " + Ex.Message);
+                KryptonMessageBox.Show("Ошибка AddNormData: " + Ex.Message);
             }
         }
         public static void AddSource(int id_src, int id_org, int id_rep, float value)
@@ -377,7 +378,7 @@ namespace WindowsFormsApp1.DBO
             }
             catch (Exception Ex)
             {
-                MessageBox.Show("Ошибка AddSource: " + Ex.Message);
+                KryptonMessageBox.Show("Ошибка AddSource: " + Ex.Message);
             }
         }
         public static void AddRecieved(int id_recieved, int id_org, int id_rep, float value)
@@ -398,7 +399,7 @@ namespace WindowsFormsApp1.DBO
             }
             catch (Exception Ex)
             {
-                MessageBox.Show("Ошибка AddRecieved: " + Ex.Message);
+                KryptonMessageBox.Show("Ошибка AddRecieved: " + Ex.Message);
             }
         }
         public static void AddSended(int id_sended, int id_org, int id_rep, float value)
@@ -419,7 +420,7 @@ namespace WindowsFormsApp1.DBO
             }
             catch (Exception Ex)
             {
-                MessageBox.Show("Ошибка AddSended: " + Ex.Message);
+                KryptonMessageBox.Show("Ошибка AddSended: " + Ex.Message);
             }
         }
         public static string GetFuelNameById(int fuel_id, int year, int month)
@@ -463,7 +464,7 @@ namespace WindowsFormsApp1.DBO
             }
             catch (Exception Ex)
             {
-                MessageBox.Show("Ошибка GetFuelNameById: " + Ex.Message);
+                KryptonMessageBox.Show("Ошибка GetFuelNameById: " + Ex.Message);
             }
             return name;
         }
@@ -489,7 +490,7 @@ namespace WindowsFormsApp1.DBO
             }
             catch (Exception Ex)
             {
-                MessageBox.Show("Ошибка Exist4NormQuaterCheck: " + Ex.Message);
+                KryptonMessageBox.Show("Ошибка Exist4NormQuaterCheck: " + Ex.Message);
             }
             return status;
         }
@@ -519,7 +520,7 @@ namespace WindowsFormsApp1.DBO
             }
             catch (Exception Ex)
             {
-                MessageBox.Show("Ошибка Add4Norm: " + Ex.Message);
+                KryptonMessageBox.Show("Ошибка Add4Norm: " + Ex.Message);
             }
         }
         public static void Add4Norm(int year, int quater, int id_org, int id_prod, long id_local, int id_norm, float value, float volume, float norm, int id_obj)
@@ -546,7 +547,7 @@ namespace WindowsFormsApp1.DBO
             }
             catch (Exception Ex)
             {
-                MessageBox.Show("Ошибка Add4Norm: " + Ex.Message);
+                KryptonMessageBox.Show("Ошибка Add4Norm: " + Ex.Message);
             }
         }
 
@@ -566,7 +567,7 @@ namespace WindowsFormsApp1.DBO
             }
             catch (Exception Ex)
             {
-                MessageBox.Show("Ошибка Update4Norm_norm: " + Ex.Message);
+                KryptonMessageBox.Show("Ошибка Update4Norm_norm: " + Ex.Message);
             }
         }
         public static void Update4Norm_value_volume(int id, float value, float volume)
@@ -586,7 +587,7 @@ namespace WindowsFormsApp1.DBO
             }
             catch (Exception Ex)
             {
-                MessageBox.Show("Ошибка Update4Norm_value_volume: " + Ex.Message);
+                KryptonMessageBox.Show("Ошибка Update4Norm_value_volume: " + Ex.Message);
             }
         }
 
@@ -621,7 +622,7 @@ namespace WindowsFormsApp1.DBO
             }
             catch (Exception Ex)
             {
-                MessageBox.Show("Ошибка логина: " + Ex.Message);
+                KryptonMessageBox.Show("Ошибка логина: " + Ex.Message);
             }
             return status;
         }
@@ -653,7 +654,7 @@ namespace WindowsFormsApp1.DBO
             }
             catch (Exception Ex)
             {
-                MessageBox.Show("Ошибка получения данных организации: " + Ex.Message);
+                KryptonMessageBox.Show("Ошибка получения данных организации: " + Ex.Message);
             }
             return name;
         }
@@ -679,7 +680,7 @@ namespace WindowsFormsApp1.DBO
             }
             catch (Exception Ex)
             {
-                MessageBox.Show("Ошибка получения данных организации: " + Ex.Message);
+                KryptonMessageBox.Show("Ошибка получения данных организации: " + Ex.Message);
             }
             return CompanyList;
         }
@@ -706,7 +707,7 @@ namespace WindowsFormsApp1.DBO
             }
             catch (Exception Ex)
             {
-                MessageBox.Show("Ошибка получения данных организации: " + Ex.Message);
+                KryptonMessageBox.Show("Ошибка получения данных организации: " + Ex.Message);
             }
             return CompanyIdList;
         }
@@ -735,7 +736,7 @@ namespace WindowsFormsApp1.DBO
             }
             catch (Exception Ex)
             {
-                MessageBox.Show("Ошибка получения данных организации: " + Ex.Message);
+                KryptonMessageBox.Show("Ошибка получения данных организации: " + Ex.Message);
             }
             return unit;
         }
@@ -763,11 +764,109 @@ namespace WindowsFormsApp1.DBO
             }
             catch (Exception Ex)
             {
-                MessageBox.Show("Ошибка GetProdList: " + Ex.Message);
+                KryptonMessageBox.Show("Ошибка GetProdList: " + Ex.Message);
             }
             return productList;
         }
+        public static List<int> GetProdIdList(int type)
+        {
+            List<int> productList = new List<int>();
+            try
+            {
+                SqlConnection myConnection = new SqlConnection(cnStr);
+                myConnection.Open();
 
+                string query = "SELECT id FROM [NewProduct] where pid = @type";
+                SqlCommand command = new SqlCommand(query, myConnection);
+                command.Parameters.AddWithValue("@type", type);
+
+                using (SqlDataReader dr = command.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        productList.Add(Int32.Parse(dr["id"].ToString()));
+                    }
+                }
+                myConnection.Close();
+            }
+            catch (Exception Ex)
+            {
+                KryptonMessageBox.Show("Ошибка GetProdList: " + Ex.Message);
+            }
+            return productList;
+        }
+        public static List<int> GetProdCodeList(int type)
+        {
+            List<int> productList = new List<int>();
+            try
+            {
+                SqlConnection myConnection = new SqlConnection(cnStr);
+                myConnection.Open();
+
+                string query = "SELECT code FROM [NewProduct] where pid = @type";
+                SqlCommand command = new SqlCommand(query, myConnection);
+                command.Parameters.AddWithValue("@type", type);
+
+                using (SqlDataReader dr = command.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        productList.Add(Int32.Parse(dr["code"].ToString()));
+                    }
+                }
+                myConnection.Close();
+            }
+            catch (Exception Ex)
+            {
+                KryptonMessageBox.Show("Ошибка GetProdList: " + Ex.Message);
+            }
+            return productList;
+        }
+        public static void DeleteFromProd(int id_prod)
+        {
+            try
+            {
+                SqlConnection myConnection = new SqlConnection(cnStr);
+                myConnection.Open();
+
+                string query = "DELETE FROM [NewProduct] where id = @id_prod";
+                SqlCommand command = new SqlCommand(query, myConnection);
+                command.Parameters.AddWithValue("@id_prod", id_prod);
+                command.ExecuteNonQuery();
+                myConnection.Close();
+            }
+            catch (Exception Ex)
+            {
+                KryptonMessageBox.Show("ОшибкаDeleteFromProd: " + Ex.Message);
+            }
+        }
+
+        public static void UpdateProdList(ProductTable productTable, int odlId)
+        {
+            try
+            {
+                SqlConnection myConnection = new SqlConnection(cnStr);
+                myConnection.Open();
+
+                string query = "UPDATE NewProduct SET id = @id, code=@code, pid=@pid, name=@name, unit=@unit, norm_unit=@norm_unit, f111=@f111, f112=@f112 WHERE id = @oldid";
+                SqlCommand command = new SqlCommand(query, myConnection);
+                command.Parameters.AddWithValue("@oldid", odlId);
+                command.Parameters.AddWithValue("@id", productTable.Id);
+                command.Parameters.AddWithValue("@code", productTable.Code);
+                command.Parameters.AddWithValue("@pid", productTable.type);
+                command.Parameters.AddWithValue("@name", productTable.Name);
+                command.Parameters.AddWithValue("@unit", productTable.Unit);
+                command.Parameters.AddWithValue("@norm_unit", productTable.nUnit);
+                command.Parameters.AddWithValue("@f111", productTable.s111);
+                command.Parameters.AddWithValue("@f112", productTable.s112);
+                command.ExecuteNonQuery();
+                myConnection.Close();
+            }
+            catch (Exception Ex)
+            {
+                KryptonMessageBox.Show("Ошибка UpdateProdList: " + Ex.Message);
+            }
+        }
 
         public static List<TradeTable> GetTrades(int id_rep)
         {
@@ -792,7 +891,7 @@ namespace WindowsFormsApp1.DBO
             }
             catch (Exception Ex)
             {
-                MessageBox.Show("Ошибка получения данных организации: " + Ex.Message);
+                KryptonMessageBox.Show("Ошибка получения данных организации: " + Ex.Message);
             }
             return trades;
         }
@@ -836,7 +935,7 @@ namespace WindowsFormsApp1.DBO
             }
             catch (Exception Ex)
             {
-                MessageBox.Show("Ошибка получения данных организации: " + Ex.Message);
+                KryptonMessageBox.Show("Ошибка получения данных организации: " + Ex.Message);
             }
             return NormList;
         }
@@ -913,7 +1012,7 @@ namespace WindowsFormsApp1.DBO
             }
             catch (Exception Ex)
             {
-                MessageBox.Show("Ошибка GetNormInputList: " + Ex.Message);
+                KryptonMessageBox.Show("Ошибка GetNormInputList: " + Ex.Message);
             }
             return NormList;
         }
@@ -956,7 +1055,7 @@ namespace WindowsFormsApp1.DBO
             }
             catch (Exception Ex)
             {
-                MessageBox.Show("Ошибка получения данных организации: " + Ex.Message);
+                KryptonMessageBox.Show("Ошибка получения данных организации: " + Ex.Message);
             }
             return RecievedList;
         }
@@ -999,7 +1098,7 @@ namespace WindowsFormsApp1.DBO
             }
             catch (Exception Ex)
             {
-                MessageBox.Show("Ошибка GetRecievedInputList: " + Ex.Message);
+                KryptonMessageBox.Show("Ошибка GetRecievedInputList: " + Ex.Message);
             }
             return RecievedList;
         }
@@ -1041,7 +1140,7 @@ namespace WindowsFormsApp1.DBO
             }
             catch (Exception Ex)
             {
-                MessageBox.Show("Ошибка получения данных организации: " + Ex.Message);
+                KryptonMessageBox.Show("Ошибка получения данных организации: " + Ex.Message);
             }
             return SendedList;
         }
@@ -1083,7 +1182,7 @@ namespace WindowsFormsApp1.DBO
             }
             catch (Exception Ex)
             {
-                MessageBox.Show("Ошибка GetSendedInputList: " + Ex.Message);
+                KryptonMessageBox.Show("Ошибка GetSendedInputList: " + Ex.Message);
             }
             return SendedList;
         }
@@ -1141,7 +1240,7 @@ namespace WindowsFormsApp1.DBO
             }
             catch (Exception Ex)
             {
-                MessageBox.Show("Ошибка получения данных организации: " + Ex.Message);
+                KryptonMessageBox.Show("Ошибка получения данных организации: " + Ex.Message);
             }
             return SourceList;
         }
@@ -1183,7 +1282,7 @@ namespace WindowsFormsApp1.DBO
             }
             catch (Exception Ex)
             {
-                MessageBox.Show("Ошибка GetSourceInputList: " + Ex.Message);
+                KryptonMessageBox.Show("Ошибка GetSourceInputList: " + Ex.Message);
             }
             return SourceList;
         }
@@ -1243,7 +1342,7 @@ namespace WindowsFormsApp1.DBO
             }
             catch (Exception Ex)
             {
-                MessageBox.Show("Ошибка получения данных торговли топливом: " + Ex.Message);
+                KryptonMessageBox.Show("Ошибка получения данных торговли топливом: " + Ex.Message);
             }
             return FTradeList;
         }
@@ -1289,7 +1388,7 @@ namespace WindowsFormsApp1.DBO
             }
             catch (Exception Ex)
             {
-                MessageBox.Show("Ошибка GetFTradeInputList: " + Ex.Message);
+                KryptonMessageBox.Show("Ошибка GetFTradeInputList: " + Ex.Message);
             }
             return FTradeList;
         }
@@ -1369,7 +1468,7 @@ namespace WindowsFormsApp1.DBO
             }
             catch (Exception Ex)
             {
-                MessageBox.Show("Ошибка получения данных организации: " + Ex.Message);
+                KryptonMessageBox.Show("Ошибка получения данных организации: " + Ex.Message);
             }
             return Norm;
         }
@@ -1416,7 +1515,7 @@ namespace WindowsFormsApp1.DBO
             }
             catch (Exception Ex)
             {
-                MessageBox.Show("Ошибка получения данных организации: " + Ex.Message);
+                KryptonMessageBox.Show("Ошибка получения данных организации: " + Ex.Message);
             }
             return Fuel;
         }
@@ -1444,7 +1543,7 @@ namespace WindowsFormsApp1.DBO
             }
             catch (Exception Ex)
             {
-                MessageBox.Show("Ошибка получения данных организации: " + Ex.Message);
+                KryptonMessageBox.Show("Ошибка получения данных организации: " + Ex.Message);
             }
             return Factor;
         }
@@ -1521,7 +1620,7 @@ namespace WindowsFormsApp1.DBO
             }
             catch (Exception Ex)
             {
-                MessageBox.Show("Ошибка Get4Norm: " + Ex.Message);
+                KryptonMessageBox.Show("Ошибка Get4Norm: " + Ex.Message);
             }
             return Norm4List;
         }
@@ -1547,7 +1646,7 @@ namespace WindowsFormsApp1.DBO
             }
             catch (Exception Ex)
             {
-                MessageBox.Show("Ошибка Get4NormInput: " + Ex.Message);
+                KryptonMessageBox.Show("Ошибка Get4NormInput: " + Ex.Message);
             }
             return Norm4List;
         }
@@ -1588,7 +1687,7 @@ namespace WindowsFormsApp1.DBO
             }
             catch (Exception Ex)
             {
-                MessageBox.Show("Ошибка Get4NormQuater: " + Ex.Message);
+                KryptonMessageBox.Show("Ошибка Get4NormQuater: " + Ex.Message);
             }
             return Norm4List;
         }
@@ -1630,7 +1729,7 @@ namespace WindowsFormsApp1.DBO
             }
             catch (Exception Ex)
             {
-                MessageBox.Show("Ошибка Get4NormQuaterType: " + Ex.Message);
+                KryptonMessageBox.Show("Ошибка Get4NormQuaterType: " + Ex.Message);
             }
             return Norm4List;
         }
@@ -1663,7 +1762,7 @@ namespace WindowsFormsApp1.DBO
             }
             catch (Exception Ex)
             {
-                MessageBox.Show("Ошибка GetRepIdList: " + Ex.Message);
+                KryptonMessageBox.Show("Ошибка GetRepIdList: " + Ex.Message);
             }
             return RepIdList;
         }
@@ -1766,7 +1865,7 @@ namespace WindowsFormsApp1.DBO
             }
             catch (Exception Ex)
             {
-                MessageBox.Show("Ошибка получения данных OneNorm: " + Ex.Message);
+                KryptonMessageBox.Show("Ошибка получения данных OneNorm: " + Ex.Message);
             }
             return Norm;
         }
@@ -1893,7 +1992,7 @@ namespace WindowsFormsApp1.DBO
             }
             catch (Exception Ex)
             {
-                MessageBox.Show("Ошибка получения данных органerизации: " + Ex.Message);
+                KryptonMessageBox.Show("Ошибка получения данных органerизации: " + Ex.Message);
             }
             return SourceList;
         }

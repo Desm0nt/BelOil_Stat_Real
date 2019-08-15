@@ -4224,7 +4224,7 @@ namespace WindowsFormsApp1
             var workbook = reoGridControl5;
             var name = dbOps.GetCompanyName(CurrentData.UserData.Id_org);
             workbook.Save(Directory.GetCurrentDirectory() + "\\1_TEK_" + name.Replace("\"", " ") + "_" + dateTimePicker1.Value.ToString("yyyy") + ".xlsx", unvell.ReoGrid.IO.FileFormat.Excel2007);
-            System.Windows.Forms.MessageBox.Show("Файл " + "1_TEK_" + name.Replace("\"", " ") + "_" + dateTimePicker1.Value.ToString("yyyy") + ".xlsx" + " успешно сохранен в папку программы");
+            ComponentFactory.Krypton.Toolkit.KryptonMessageBox.Show("Файл " + "1_TEK_" + name.Replace("\"", " ") + "_" + dateTimePicker1.Value.ToString("yyyy") + ".xlsx" + " успешно сохранен в папку программы");
 
         }
 

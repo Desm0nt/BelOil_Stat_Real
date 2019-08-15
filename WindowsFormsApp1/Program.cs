@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using WindowsFormsApp1.DBO;
 using WindowsFormsApp1.DataTables;
+using ComponentFactory.Krypton.Toolkit;
 
 namespace WindowsFormsApp1
 {
@@ -27,7 +28,7 @@ namespace WindowsFormsApp1
                 Application.Run(new LoginForm());
             else
                 Application.Run(new LoginForm());
-                MessageBox.Show("Пользователь не найден\nЗаменить на форму регистрации");
+                KryptonMessageBox.Show("Пользователь не найден\nЗаменить на форму регистрации");
         }
     }
 }
