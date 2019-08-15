@@ -162,6 +162,7 @@
     <Compile Include="DataTables\Table1tekPart2.cs" />
     <Compile Include="DataTables\SourceTable1tek.cs" />
     <Compile Include="DataTables\ProductTable.cs" />
+    <Compile Include="DataTables\PersonTable.cs" />
     <Compile Include="DataTables\WholeTable.cs" />
     <Compile Include="DataTables\TradeTable.cs" />
     <Compile Include="DataTables\FuelTable.cs" />

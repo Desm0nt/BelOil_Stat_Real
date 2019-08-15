@@ -19,7 +19,7 @@ namespace WindowsFormsApp1
 {
     public partial class PersonsListForm : KryptonForm
     {
-        List<DataTables.ProductTable> productList;
+        List<DataTables.PersonTable> personList;
         bool[] groustate = new bool[3];
 
         public PersonsListForm()
@@ -35,7 +35,7 @@ namespace WindowsFormsApp1
         private void LoadData(bool edit)
         {
 
-            productList = dbOps.GetProdList();
+            personList = dbOps.GetPersonList();
             //if (edit)
             //{
             //    for (int i = 0; i < kryptonOutlookGrid1.GroupCollection.Count; i++)
@@ -79,10 +79,24 @@ namespace WindowsFormsApp1
             //kryptonOutlookGrid1.ClearInternalRows();
             kryptonOutlookGrid1.FillMode = FillMode.GROUPSONLY;
 
-            foreach (var product in productList)
+            foreach (var person in personList)
             {
                 row = new OutlookGridRow();               
-                row.CreateCells(kryptonOutlookGrid1, new object[] { product.Id, product.Code, product.Name, product.Unit, product.nUnit, product.s111, product.s112, new TextAndImage(product.type.ToString(), GetFlag(product.type)) });
+                row.CreateCells(kryptonOutlookGrid1, new object[] {
+                    person.Id,
+                    person.Name,
+                    person.Surname,
+                    person.Otchestvo,
+                    new TextAndImage(GetPText(person.Type), GetPFlag(person.Type)),
+                    person.Post,
+                    person.Phone,
+                    person.WPhone,
+                    person.Email,
+                    new TextAndImage(person.Head, Properties.Resources._1),
+                    new TextAndImage(GetSText(person.Subhead), Properties.Resources._1),
+                    new TextAndImage(person.Orgs, Properties.Resources._1),
+                    person.Id_org,
+                });
                 l.Add(row);
             }
 
@@ -102,26 +116,26 @@ namespace WindowsFormsApp1
 
         private void kryptonOutlookGrid1_Resize(object sender, EventArgs e)
         {
-            int PreferredTotalWidth = 0;
-            //Calculate the total preferred width
-            foreach (DataGridViewColumn c in kryptonOutlookGrid1.Columns)
-            {
-                PreferredTotalWidth += Math.Min(c.GetPreferredWidth(DataGridViewAutoSizeColumnMode.DisplayedCells, true), 250);
-            }
+            //int PreferredTotalWidth = 0;
+            ////Calculate the total preferred width
+            //foreach (DataGridViewColumn c in kryptonOutlookGrid1.Columns)
+            //{
+            //    PreferredTotalWidth += Math.Min(c.GetPreferredWidth(DataGridViewAutoSizeColumnMode.DisplayedCells, true), 250);
+            //}
 
-            if (kryptonOutlookGrid1.Width > PreferredTotalWidth)
-            {
-                kryptonOutlookGrid1.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-                kryptonOutlookGrid1.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.DisplayedCells);
-            }
-            else
-            {
-                kryptonOutlookGrid1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
-                foreach (DataGridViewColumn c in kryptonOutlookGrid1.Columns)
-                {
-                    c.Width = Math.Min(c.GetPreferredWidth(DataGridViewAutoSizeColumnMode.DisplayedCells, true), 250);
-                }
-            }
+            //if (kryptonOutlookGrid1.Width > PreferredTotalWidth)
+            //{
+            //    kryptonOutlookGrid1.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            //    kryptonOutlookGrid1.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.DisplayedCells);
+            //}
+            //else
+            //{
+            //    kryptonOutlookGrid1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
+            //    foreach (DataGridViewColumn c in kryptonOutlookGrid1.Columns)
+            //    {
+            //        c.Width = Math.Min(c.GetPreferredWidth(DataGridViewAutoSizeColumnMode.DisplayedCells, true), 250);
+            //    }
+            //}
         }
 
         public class TypeConverter
@@ -162,93 +176,93 @@ namespace WindowsFormsApp1
 
         private void kryptonOutlookGrid1_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            KryptonOutlookGrid.Classes.KryptonOutlookGrid dataGridView = (KryptonOutlookGrid.Classes.KryptonOutlookGrid)sender;
-            if (e.RowIndex >= 0)
-            {
-                if (dataGridView.Rows[e.RowIndex].Cells[1].Value != null)
-                {
-                    DataTables.ProductTable table = new DataTables.ProductTable
-                    {
-                        Id = Int32.Parse(dataGridView.Rows[e.RowIndex].Cells[0].Value.ToString()),
-                        Code = Int32.Parse(dataGridView.Rows[e.RowIndex].Cells[1].Value.ToString()),
-                        Name = dataGridView.Rows[e.RowIndex].Cells[2].Value.ToString(),
-                        Unit = dataGridView.Rows[e.RowIndex].Cells[3].Value.ToString(),
-                        nUnit = dataGridView.Rows[e.RowIndex].Cells[4].Value.ToString(),
-                        s111 = Boolean.Parse(dataGridView.Rows[e.RowIndex].Cells[5].Value.ToString()),
-                        s112 = Boolean.Parse(dataGridView.Rows[e.RowIndex].Cells[6].Value.ToString()),
-                        type = Int32.Parse(((TextAndImage)dataGridView.Rows[e.RowIndex].Cells[7].Value).Text)
-                    };
-                    var myForm = new ProductAddForm(table, this);
-                    //myForm.FormClosed += new FormClosedEventHandler(myForm_FormClosed);
-                    myForm.ShowDialog ();
+            //KryptonOutlookGrid.Classes.KryptonOutlookGrid dataGridView = (KryptonOutlookGrid.Classes.KryptonOutlookGrid)sender;
+            //if (e.RowIndex >= 0)
+            //{
+            //    if (dataGridView.Rows[e.RowIndex].Cells[1].Value != null)
+            //    {
+            //        DataTables.ProductTable table = new DataTables.ProductTable
+            //        {
+            //            Id = Int32.Parse(dataGridView.Rows[e.RowIndex].Cells[0].Value.ToString()),
+            //            Code = Int32.Parse(dataGridView.Rows[e.RowIndex].Cells[1].Value.ToString()),
+            //            Name = dataGridView.Rows[e.RowIndex].Cells[2].Value.ToString(),
+            //            Unit = dataGridView.Rows[e.RowIndex].Cells[3].Value.ToString(),
+            //            nUnit = dataGridView.Rows[e.RowIndex].Cells[4].Value.ToString(),
+            //            s111 = Boolean.Parse(dataGridView.Rows[e.RowIndex].Cells[5].Value.ToString()),
+            //            s112 = Boolean.Parse(dataGridView.Rows[e.RowIndex].Cells[6].Value.ToString()),
+            //            type = Int32.Parse(((TextAndImage)dataGridView.Rows[e.RowIndex].Cells[7].Value).Text)
+            //        };
+            //        var myForm = new ProductAddForm(table, this);
+            //        //myForm.FormClosed += new FormClosedEventHandler(myForm_FormClosed);
+            //        myForm.ShowDialog ();
 
-                    if (myForm.DialogResult == DialogResult.OK)
-                    {
-                        var productTable = myForm.productTable;
-                        dataGridView.Rows[e.RowIndex].Cells[0].Value = productTable.Id;
-                        dataGridView.Rows[e.RowIndex].Cells[1].Value = productTable.Code;
-                        dataGridView.Rows[e.RowIndex].Cells[2].Value = productTable.Name;
-                        dataGridView.Rows[e.RowIndex].Cells[3].Value = productTable.Unit;
-                        dataGridView.Rows[e.RowIndex].Cells[4].Value = productTable.nUnit;
-                        dataGridView.Rows[e.RowIndex].Cells[5].Value = productTable.s111;
-                        dataGridView.Rows[e.RowIndex].Cells[6].Value = productTable.s112;
-                    }
-                }
-            }
+            //        if (myForm.DialogResult == DialogResult.OK)
+            //        {
+            //            var productTable = myForm.productTable;
+            //            dataGridView.Rows[e.RowIndex].Cells[0].Value = productTable.Id;
+            //            dataGridView.Rows[e.RowIndex].Cells[1].Value = productTable.Code;
+            //            dataGridView.Rows[e.RowIndex].Cells[2].Value = productTable.Name;
+            //            dataGridView.Rows[e.RowIndex].Cells[3].Value = productTable.Unit;
+            //            dataGridView.Rows[e.RowIndex].Cells[4].Value = productTable.nUnit;
+            //            dataGridView.Rows[e.RowIndex].Cells[5].Value = productTable.s111;
+            //            dataGridView.Rows[e.RowIndex].Cells[6].Value = productTable.s112;
+            //        }
+            //    }
+            //}
         }
 
 
         private void addToolStripButton_Click(object sender, EventArgs e)
         {
-            var myForm = new ProductAddForm();
-            myForm.FormClosed += new FormClosedEventHandler(myForm_FormClosed);
-            myForm.ShowDialog();
+            //var myForm = new ProductAddForm();
+            //myForm.FormClosed += new FormClosedEventHandler(myForm_FormClosed);
+            //myForm.ShowDialog();
         }
 
         private void editToolStripButton_Click(object sender, EventArgs e)
         {
-            var mouseEventArgs = new MouseEventArgs(MouseButtons.Left, 2, 0, 0, 1);
-            var dataGridViewCellMouseEventArgs = new DataGridViewCellMouseEventArgs(kryptonOutlookGrid1.CurrentCell.ColumnIndex, kryptonOutlookGrid1.CurrentCell.RowIndex, 0, 0, mouseEventArgs);
-            kryptonOutlookGrid1_CellMouseDoubleClick(kryptonOutlookGrid1, dataGridViewCellMouseEventArgs);
+            //var mouseEventArgs = new MouseEventArgs(MouseButtons.Left, 2, 0, 0, 1);
+            //var dataGridViewCellMouseEventArgs = new DataGridViewCellMouseEventArgs(kryptonOutlookGrid1.CurrentCell.ColumnIndex, kryptonOutlookGrid1.CurrentCell.RowIndex, 0, 0, mouseEventArgs);
+            //kryptonOutlookGrid1_CellMouseDoubleClick(kryptonOutlookGrid1, dataGridViewCellMouseEventArgs);
         }
 
         private void kryptonOutlookGrid1_CellEnter(object sender, DataGridViewCellEventArgs e)
         {
             KryptonOutlookGrid.Classes.KryptonOutlookGrid dataGridView = (KryptonOutlookGrid.Classes.KryptonOutlookGrid)sender;
-            if (dataGridView.Rows[e.RowIndex].Cells[1].Value != null)
-            {
-                label1.Text = "#" + dataGridView.Rows[e.RowIndex].Cells[0].Value.ToString() + " - " + dataGridView.Rows[e.RowIndex].Cells[2].Value.ToString();
-            }
-            else
-            {
-                string typestr = "Раздел: ";
-                switch (Int32.Parse(dataGridView.Rows[e.RowIndex].Cells[0].Value.ToString()))
-                {
-                    case 1:
-                        typestr += "топливо";
-                        break;
-                    case 2:
-                        typestr += "тепловая энергия";
-                        break;
-                    case 3:
-                        typestr += "электрическая энергия";
-                        break;
-                    default:
-                        break;
-                }
-                label1.Text = typestr;
-            }
+            //if (dataGridView.Rows[e.RowIndex].Cells[1].Value != null)
+            //{
+            //    label1.Text = "#" + dataGridView.Rows[e.RowIndex].Cells[0].Value.ToString() + " - " + dataGridView.Rows[e.RowIndex].Cells[2].Value.ToString();
+            //}
+            //else
+            //{
+            //    string typestr = "Раздел: ";
+            //    switch (Int32.Parse(dataGridView.Rows[e.RowIndex].Cells[0].Value.ToString()))
+            //    {
+            //        case 1:
+            //            typestr += "топливо";
+            //            break;
+            //        case 2:
+            //            typestr += "тепловая энергия";
+            //            break;
+            //        case 3:
+            //            typestr += "электрическая энергия";
+            //            break;
+            //        default:
+            //            break;
+            //    }
+            //    label1.Text = typestr;
+            //}
         }
 
         private void removeToolStripButton_Click(object sender, EventArgs e)
         {
-            var ind = kryptonOutlookGrid1.CurrentCell.RowIndex;
-            if (ind >= 0)
-            {
-                if (kryptonOutlookGrid1.Rows[ind].Cells[1].Value != null)
-                    dbOps.DeleteFromProd(Int32.Parse(kryptonOutlookGrid1.Rows[ind].Cells[0].Value.ToString()));
-            }
-            LoadData(true);
+            //var ind = kryptonOutlookGrid1.CurrentCell.RowIndex;
+            //if (ind >= 0)
+            //{
+            //    if (kryptonOutlookGrid1.Rows[ind].Cells[1].Value != null)
+            //        dbOps.DeleteFromProd(Int32.Parse(kryptonOutlookGrid1.Rows[ind].Cells[0].Value.ToString()));
+            //}
+            //LoadData(true);
         }
     }
 }

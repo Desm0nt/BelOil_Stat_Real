@@ -840,7 +840,6 @@ namespace WindowsFormsApp1.DBO
                 KryptonMessageBox.Show("ОшибкаDeleteFromProd: " + Ex.Message);
             }
         }
-
         public static void UpdateProdList(ProductTable productTable, int odlId)
         {
             try
@@ -867,6 +866,87 @@ namespace WindowsFormsApp1.DBO
                 KryptonMessageBox.Show("Ошибка UpdateProdList: " + Ex.Message);
             }
         }
+
+
+        /// <summary>
+        /// Человеки
+        /// </summary>
+        /// <returns></returns>
+        public static List<PersonTable> GetPersonList()
+        {
+            int hval = 0;
+            int impval = 0;
+            int orgpid = 0;
+            string orgname = "";
+            List<PersonTable> personList = new List<PersonTable>();
+            try
+            {
+                SqlConnection myConnection = new SqlConnection(cnStr);
+                myConnection.Open();
+
+                string query = "SELECT * FROM [NewPersons]";
+                SqlCommand command = new SqlCommand(query, myConnection);
+
+                using (SqlDataReader dr = command.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+
+                        SqlConnection myConnection2 = new SqlConnection(cnStr);
+                        myConnection2.Open();
+
+                        string query2 = "SELECT * FROM [NewOrg] where id=@id_org";
+                        SqlCommand command2 = new SqlCommand(query2, myConnection2);
+                        command2.Parameters.AddWithValue("@id_org", Int32.Parse(dr["id_org"].ToString()));
+                        using (SqlDataReader dr2 = command.ExecuteReader())
+                        {
+                            while (dr2.Read())
+                            {
+                                hval = Int32.Parse(dr2["head"].ToString());
+                                impval = Int32.Parse(dr2["implementer"].ToString());
+                                orgpid = Int32.Parse(dr2["pid"].ToString());
+                                orgname = dr2["name"].ToString();
+                            }
+                        }
+                        personList.Add(new PersonTable
+                        {
+                            Id = Int32.Parse(dr["id"].ToString()),
+                            Name = dr["name"].ToString(),
+                            Surname = dr["surname"].ToString(),
+                            Otchestvo = dr["patronymic"].ToString(),
+                            Type = GetType(hval, impval, Int32.Parse(dr["id"].ToString())),
+                            Post = dr["post"].ToString(),
+                            Phone = dr["phone"].ToString(),
+                            WPhone = dr["phone_work"].ToString(),
+                            Email = dr["email"].ToString(),
+                            Head = "ПО \"Белоруснефть\"",
+                            Subhead = (orgpid/100),
+                            Orgs = orgname,
+                            Id_org = Int32.Parse(dr["id_org"].ToString())
+                        });
+                    }
+                }
+                myConnection.Close();
+            }
+            catch (Exception Ex)
+            {
+                KryptonMessageBox.Show("Ошибка GetPersonList: " + Ex.Message);
+            }
+            return personList;
+        }
+
+        private static int GetType(int hv, int imp, int id)
+        {
+            int type = 0;
+            if (id == hv)
+                type = 1;
+            else if (id == imp)
+                type = 2;
+            else
+                type = 0;
+            return type;
+        }
+
 
         public static List<TradeTable> GetTrades(int id_rep)
         {
