@@ -48,7 +48,7 @@ namespace WindowsFormsApp1
 
             kryptonOutlookGrid1.GroupBox = kryptonOutlookGridGroupBox1;
             kryptonOutlookGrid1.RegisterGroupBoxEvents();
-            DataGridViewColumn[] columnsToAdd = new DataGridViewColumn[8];
+            DataGridViewColumn[] columnsToAdd = new DataGridViewColumn[13];
             columnsToAdd[0] = kryptonOutlookGrid1.Columns[0];
             columnsToAdd[1] = kryptonOutlookGrid1.Columns[1];
             columnsToAdd[2] = kryptonOutlookGrid1.Columns[2];
@@ -57,18 +57,30 @@ namespace WindowsFormsApp1
             columnsToAdd[5] = kryptonOutlookGrid1.Columns[5];
             columnsToAdd[6] = kryptonOutlookGrid1.Columns[6];
             columnsToAdd[7] = kryptonOutlookGrid1.Columns[7];
+            columnsToAdd[8] = kryptonOutlookGrid1.Columns[8];
+            columnsToAdd[9] = kryptonOutlookGrid1.Columns[9];
+            columnsToAdd[10] = kryptonOutlookGrid1.Columns[10];
+            columnsToAdd[11] = kryptonOutlookGrid1.Columns[11];
+            columnsToAdd[12] = kryptonOutlookGrid1.Columns[12];
+
             //kryptonOutlookGrid1.Columns.AddRange(columnsToAdd);
 
             kryptonOutlookGrid1.AddInternalColumn(kryptonOutlookGrid1.Columns[0], new OutlookGridDefaultGroup(null), SortOrder.None, -1, -1);
-            kryptonOutlookGrid1.AddInternalColumn(kryptonOutlookGrid1.Columns[1], new OutlookGridDefaultGroup(null), SortOrder.Ascending, -1, 1);
+            kryptonOutlookGrid1.AddInternalColumn(kryptonOutlookGrid1.Columns[1], new OutlookGridDefaultGroup(null), SortOrder.None, -1, -1);
             kryptonOutlookGrid1.AddInternalColumn(kryptonOutlookGrid1.Columns[2], new OutlookGridDefaultGroup(null), SortOrder.None, -1, -1);
             kryptonOutlookGrid1.AddInternalColumn(kryptonOutlookGrid1.Columns[3], new OutlookGridDefaultGroup(null), SortOrder.None, -1, -1);
             kryptonOutlookGrid1.AddInternalColumn(kryptonOutlookGrid1.Columns[4], new OutlookGridDefaultGroup(null), SortOrder.None, -1, -1);
             kryptonOutlookGrid1.AddInternalColumn(kryptonOutlookGrid1.Columns[5], new OutlookGridDefaultGroup(null), SortOrder.None, -1, -1);
             kryptonOutlookGrid1.AddInternalColumn(kryptonOutlookGrid1.Columns[6], new OutlookGridDefaultGroup(null), SortOrder.None, -1, -1);
-            kryptonOutlookGrid1.AddInternalColumn(kryptonOutlookGrid1.Columns[7], new OutlookGridTypeGroup(null), SortOrder.Ascending, 1, -1);
+            kryptonOutlookGrid1.AddInternalColumn(kryptonOutlookGrid1.Columns[7], new OutlookGridDefaultGroup(null), SortOrder.None, -1, -1);
+            kryptonOutlookGrid1.AddInternalColumn(kryptonOutlookGrid1.Columns[8], new OutlookGridDefaultGroup(null), SortOrder.None, -1, -1);
+            kryptonOutlookGrid1.AddInternalColumn(kryptonOutlookGrid1.Columns[9], new OutlookGridDefaultGroup(null), SortOrder.Ascending, 1, -1);
+            //kryptonOutlookGrid1.AddInternalColumn(kryptonOutlookGrid1.Columns[10], new OutlookGridTypeGroup(null), SortOrder.Ascending, -1, -1);
+            kryptonOutlookGrid1.AddInternalColumn(kryptonOutlookGrid1.Columns[10], new OutlookGridDefaultGroup(null), SortOrder.Ascending, -1, -1);
+            kryptonOutlookGrid1.AddInternalColumn(kryptonOutlookGrid1.Columns[11], new OutlookGridDefaultGroup(null), SortOrder.Ascending, 1, -1);
+            kryptonOutlookGrid1.AddInternalColumn(kryptonOutlookGrid1.Columns[12], new OutlookGridDefaultGroup(null), SortOrder.None, -1, -1);
             kryptonOutlookGrid1.Columns[0].Visible = false;
-            kryptonOutlookGrid1.Columns[7].Visible = false;
+            //kryptonOutlookGrid1.Columns[7].Visible = false;
 
             kryptonOutlookGrid1.ShowLines = true;
 
@@ -84,17 +96,17 @@ namespace WindowsFormsApp1
                 row = new OutlookGridRow();               
                 row.CreateCells(kryptonOutlookGrid1, new object[] {
                     person.Id,
+                    new TextAndImage(person.Surname, Properties.Resources.cbx2p_h0eqv),
                     person.Name,
-                    person.Surname,
                     person.Otchestvo,
                     new TextAndImage(GetPText(person.Type), GetPFlag(person.Type)),
                     person.Post,
                     person.Phone,
                     person.WPhone,
                     person.Email,
-                    new TextAndImage(person.Head, Properties.Resources._1),
-                    new TextAndImage(GetSText(person.Subhead), Properties.Resources._1),
-                    new TextAndImage(person.Orgs, Properties.Resources._1),
+                    new TextAndImage(person.Head, Properties.Resources.predpr),
+                    new TextAndImage(person.Subhead.ToString(), Properties.Resources.predpr),
+                    new TextAndImage(person.Orgs, Properties.Resources.predpr),
                     person.Id_org,
                 }); 
                 l.Add(row);
@@ -154,18 +166,44 @@ namespace WindowsFormsApp1
             }
         }
 
-        private Image GetFlag(int type)
+        private Image GetPFlag(int type)
+        {
+            switch (type)
+            {
+                case 0:
+                    return Properties.Resources.empty;
+                case 1:
+                    return Properties.Resources.rf;
+                case 2:
+                    return Properties.Resources.gf;
+                default:
+                    return null;
+            }
+        }
+        private string GetPText(int type)
+        {
+            switch (type)
+            {
+                case 0:
+                    return " - ";
+                case 1:
+                    return "рук.";
+                case 2:
+                    return "отв.";
+                default:
+                    return "";
+            }
+        }
+        private string GetSText(int type)
         {
             switch (type)
             {
                 case 1:
-                    return Properties.Resources._1;
+                    return "РУП ПО \"Белоруснефть\"";
                 case 2:
-                    return Properties.Resources._2;
-                case 3:
-                    return Properties.Resources._3;
+                    return "Дочерние предприятия";
                 default:
-                    return null;
+                    return "";
             }
         }
 

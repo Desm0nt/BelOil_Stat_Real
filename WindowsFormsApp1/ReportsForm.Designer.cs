@@ -205,6 +205,7 @@
             this.списокСотрудниковToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F7;
             this.списокСотрудниковToolStripMenuItem.Size = new System.Drawing.Size(315, 22);
             this.списокСотрудниковToolStripMenuItem.Text = "Сотрудники";
+            this.списокСотрудниковToolStripMenuItem.Click += new System.EventHandler(this.списокСотрудниковToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 

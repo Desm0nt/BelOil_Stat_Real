@@ -381,6 +381,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\cbx2p-h0eqv.png" />
+    <None Include="Resources\cbx2p-h0eqv1.png" />
+    <None Include="Resources\gf.png" />
+    <None Include="Resources\predpr.png" />
+    <None Include="Resources\rf.png" />
+    <None Include="Resources\empty.png" />
     <Content Include="Themes\Access 2007 Alt White Text.xml" />
     <Content Include="Themes\Access 2007 Alt.xml" />
     <Content Include="Themes\Access 2007 White Text.xml" />

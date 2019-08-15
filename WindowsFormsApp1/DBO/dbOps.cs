@@ -898,7 +898,7 @@ namespace WindowsFormsApp1.DBO
                         string query2 = "SELECT * FROM [NewOrg] where id=@id_org";
                         SqlCommand command2 = new SqlCommand(query2, myConnection2);
                         command2.Parameters.AddWithValue("@id_org", Int32.Parse(dr["id_org"].ToString()));
-                        using (SqlDataReader dr2 = command.ExecuteReader())
+                        using (SqlDataReader dr2 = command2.ExecuteReader())
                         {
                             while (dr2.Read())
                             {
@@ -908,6 +908,7 @@ namespace WindowsFormsApp1.DBO
                                 orgname = dr2["name"].ToString();
                             }
                         }
+                        myConnection2.Close();
                         personList.Add(new PersonTable
                         {
                             Id = Int32.Parse(dr["id"].ToString()),

@@ -106,6 +106,7 @@
             this.kryptonOutlookGrid1.MultiSelect = false;
             this.kryptonOutlookGrid1.Name = "kryptonOutlookGrid1";
             this.kryptonOutlookGrid1.PreviousSelectedGroupRow = -1;
+            this.kryptonOutlookGrid1.ShowLines = false;
             this.kryptonOutlookGrid1.Size = new System.Drawing.Size(1207, 505);
             this.kryptonOutlookGrid1.TabIndex = 0;
             this.kryptonOutlookGrid1.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.kryptonOutlookGrid1_CellEnter);
@@ -294,12 +295,12 @@
             // 
             // otchestvo
             // 
-            this.otchestvo.HeaderText = "Отчествно";
+            this.otchestvo.HeaderText = "Отчество";
             this.otchestvo.Name = "otchestvo";
             this.otchestvo.ReadOnly = true;
             this.otchestvo.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.otchestvo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.otchestvo.Width = 162;
+            this.otchestvo.Width = 158;
             // 
             // sign
             // 
