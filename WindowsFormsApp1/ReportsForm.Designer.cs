@@ -34,8 +34,14 @@
             this.менюToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.сменитьПользователяToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.закрытьПрограммуToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.отчетыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.сформировать1ПЭРToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.мастерВвода4Нормы1ТЭКToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.сохранитьОтчетToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.сохранитьОтчет1ТЭКToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.данныеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.списокТопливныхРеусурсовToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.списокПродуктовToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.списокСотрудниковToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.списокОбъектовToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -63,12 +69,6 @@
             this.RUPButton = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.POButton = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.kryptonManager1 = new ComponentFactory.Krypton.Toolkit.KryptonManager(this.components);
-            this.отчетыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.сформировать1ПЭРToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.мастерВвода4Нормы1ТЭКToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.сохранитьОтчетToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.сохранитьОтчет1ТЭКToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.списокПродуктовToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tabPage6.SuspendLayout();
@@ -129,6 +129,46 @@
             this.закрытьПрограммуToolStripMenuItem.Text = "Закрыть программу";
             this.закрытьПрограммуToolStripMenuItem.Click += new System.EventHandler(this.закрытьПрограммуToolStripMenuItem_Click);
             // 
+            // отчетыToolStripMenuItem
+            // 
+            this.отчетыToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.сформировать1ПЭРToolStripMenuItem,
+            this.мастерВвода4Нормы1ТЭКToolStripMenuItem,
+            this.сохранитьОтчетToolStripMenuItem,
+            this.сохранитьОтчет1ТЭКToolStripMenuItem});
+            this.отчетыToolStripMenuItem.Image = global::WindowsFormsApp1.Properties.Resources.rep;
+            this.отчетыToolStripMenuItem.Name = "отчетыToolStripMenuItem";
+            this.отчетыToolStripMenuItem.Size = new System.Drawing.Size(76, 24);
+            this.отчетыToolStripMenuItem.Text = "&Отчеты";
+            // 
+            // сформировать1ПЭРToolStripMenuItem
+            // 
+            this.сформировать1ПЭРToolStripMenuItem.Name = "сформировать1ПЭРToolStripMenuItem";
+            this.сформировать1ПЭРToolStripMenuItem.Size = new System.Drawing.Size(248, 22);
+            this.сформировать1ПЭРToolStripMenuItem.Text = "Мастер данных (12-тэк + 1-пэр)";
+            this.сформировать1ПЭРToolStripMenuItem.Click += new System.EventHandler(this.сформировать1ПЭРToolStripMenuItem_Click);
+            // 
+            // мастерВвода4Нормы1ТЭКToolStripMenuItem
+            // 
+            this.мастерВвода4Нормы1ТЭКToolStripMenuItem.Name = "мастерВвода4Нормы1ТЭКToolStripMenuItem";
+            this.мастерВвода4Нормы1ТЭКToolStripMenuItem.Size = new System.Drawing.Size(248, 22);
+            this.мастерВвода4Нормы1ТЭКToolStripMenuItem.Text = "Мастер ввода 4-Нормы/1-ТЭК";
+            this.мастерВвода4Нормы1ТЭКToolStripMenuItem.Click += new System.EventHandler(this.мастерВвода4Нормы1ТЭКToolStripMenuItem_Click);
+            // 
+            // сохранитьОтчетToolStripMenuItem
+            // 
+            this.сохранитьОтчетToolStripMenuItem.Name = "сохранитьОтчетToolStripMenuItem";
+            this.сохранитьОтчетToolStripMenuItem.Size = new System.Drawing.Size(248, 22);
+            this.сохранитьОтчетToolStripMenuItem.Text = "Сохранить отчет 12-ТЭК";
+            this.сохранитьОтчетToolStripMenuItem.Click += new System.EventHandler(this.сохранитьОтчетToolStripMenuItem_Click);
+            // 
+            // сохранитьОтчет1ТЭКToolStripMenuItem
+            // 
+            this.сохранитьОтчет1ТЭКToolStripMenuItem.Name = "сохранитьОтчет1ТЭКToolStripMenuItem";
+            this.сохранитьОтчет1ТЭКToolStripMenuItem.Size = new System.Drawing.Size(248, 22);
+            this.сохранитьОтчет1ТЭКToolStripMenuItem.Text = "Сохранить отчет 1-ТЭК";
+            this.сохранитьОтчет1ТЭКToolStripMenuItem.Click += new System.EventHandler(this.сохранитьОтчет1ТЭКToolStripMenuItem_Click);
+            // 
             // данныеToolStripMenuItem
             // 
             this.данныеToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -149,8 +189,18 @@
             this.списокТопливныхРеусурсовToolStripMenuItem.Size = new System.Drawing.Size(315, 22);
             this.списокТопливныхРеусурсовToolStripMenuItem.Text = "Список Топливо и отходы производства";
             // 
+            // списокПродуктовToolStripMenuItem
+            // 
+            this.списокПродуктовToolStripMenuItem.Image = global::WindowsFormsApp1.Properties.Resources.cbl76_u0ijo;
+            this.списокПродуктовToolStripMenuItem.Name = "списокПродуктовToolStripMenuItem";
+            this.списокПродуктовToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F4;
+            this.списокПродуктовToolStripMenuItem.Size = new System.Drawing.Size(315, 22);
+            this.списокПродуктовToolStripMenuItem.Text = "Виды продукции (работ, услуг)";
+            this.списокПродуктовToolStripMenuItem.Click += new System.EventHandler(this.списокПродуктовToolStripMenuItem_Click);
+            // 
             // списокСотрудниковToolStripMenuItem
             // 
+            this.списокСотрудниковToolStripMenuItem.Image = global::WindowsFormsApp1.Properties.Resources.cbx2p_h0eqv;
             this.списокСотрудниковToolStripMenuItem.Name = "списокСотрудниковToolStripMenuItem";
             this.списокСотрудниковToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F7;
             this.списокСотрудниковToolStripMenuItem.Size = new System.Drawing.Size(315, 22);
@@ -430,6 +480,7 @@
             this.CompanyBox.Location = new System.Drawing.Point(629, 3);
             this.CompanyBox.Name = "CompanyBox";
             this.CompanyBox.Size = new System.Drawing.Size(185, 21);
+            this.CompanyBox.StateCommon.ComboBox.Content.TextH = ComponentFactory.Krypton.Toolkit.PaletteRelativeAlign.Near;
             this.CompanyBox.TabIndex = 6;
             this.CompanyBox.Visible = false;
             // 
@@ -468,55 +519,6 @@
             // kryptonManager1
             // 
             this.kryptonManager1.GlobalPaletteMode = ComponentFactory.Krypton.Toolkit.PaletteModeManager.Office2007Blue;
-            // 
-            // отчетыToolStripMenuItem
-            // 
-            this.отчетыToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.сформировать1ПЭРToolStripMenuItem,
-            this.мастерВвода4Нормы1ТЭКToolStripMenuItem,
-            this.сохранитьОтчетToolStripMenuItem,
-            this.сохранитьОтчет1ТЭКToolStripMenuItem});
-            this.отчетыToolStripMenuItem.Image = global::WindowsFormsApp1.Properties.Resources.rep;
-            this.отчетыToolStripMenuItem.Name = "отчетыToolStripMenuItem";
-            this.отчетыToolStripMenuItem.Size = new System.Drawing.Size(76, 24);
-            this.отчетыToolStripMenuItem.Text = "&Отчеты";
-            // 
-            // сформировать1ПЭРToolStripMenuItem
-            // 
-            this.сформировать1ПЭРToolStripMenuItem.Name = "сформировать1ПЭРToolStripMenuItem";
-            this.сформировать1ПЭРToolStripMenuItem.Size = new System.Drawing.Size(248, 22);
-            this.сформировать1ПЭРToolStripMenuItem.Text = "Мастер данных (12-тэк + 1-пэр)";
-            this.сформировать1ПЭРToolStripMenuItem.Click += new System.EventHandler(this.сформировать1ПЭРToolStripMenuItem_Click);
-            // 
-            // мастерВвода4Нормы1ТЭКToolStripMenuItem
-            // 
-            this.мастерВвода4Нормы1ТЭКToolStripMenuItem.Name = "мастерВвода4Нормы1ТЭКToolStripMenuItem";
-            this.мастерВвода4Нормы1ТЭКToolStripMenuItem.Size = new System.Drawing.Size(248, 22);
-            this.мастерВвода4Нормы1ТЭКToolStripMenuItem.Text = "Мастер ввода 4-Нормы/1-ТЭК";
-            this.мастерВвода4Нормы1ТЭКToolStripMenuItem.Click += new System.EventHandler(this.мастерВвода4Нормы1ТЭКToolStripMenuItem_Click);
-            // 
-            // сохранитьОтчетToolStripMenuItem
-            // 
-            this.сохранитьОтчетToolStripMenuItem.Name = "сохранитьОтчетToolStripMenuItem";
-            this.сохранитьОтчетToolStripMenuItem.Size = new System.Drawing.Size(248, 22);
-            this.сохранитьОтчетToolStripMenuItem.Text = "Сохранить отчет 12-ТЭК";
-            this.сохранитьОтчетToolStripMenuItem.Click += new System.EventHandler(this.сохранитьОтчетToolStripMenuItem_Click);
-            // 
-            // сохранитьОтчет1ТЭКToolStripMenuItem
-            // 
-            this.сохранитьОтчет1ТЭКToolStripMenuItem.Name = "сохранитьОтчет1ТЭКToolStripMenuItem";
-            this.сохранитьОтчет1ТЭКToolStripMenuItem.Size = new System.Drawing.Size(248, 22);
-            this.сохранитьОтчет1ТЭКToolStripMenuItem.Text = "Сохранить отчет 1-ТЭК";
-            this.сохранитьОтчет1ТЭКToolStripMenuItem.Click += new System.EventHandler(this.сохранитьОтчет1ТЭКToolStripMenuItem_Click);
-            // 
-            // списокПродуктовToolStripMenuItem
-            // 
-            this.списокПродуктовToolStripMenuItem.Image = global::WindowsFormsApp1.Properties.Resources.cbl76_u0ijo;
-            this.списокПродуктовToolStripMenuItem.Name = "списокПродуктовToolStripMenuItem";
-            this.списокПродуктовToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F4;
-            this.списокПродуктовToolStripMenuItem.Size = new System.Drawing.Size(315, 22);
-            this.списокПродуктовToolStripMenuItem.Text = "Виды продукции (работ, услуг)";
-            this.списокПродуктовToolStripMenuItem.Click += new System.EventHandler(this.списокПродуктовToolStripMenuItem_Click);
             // 
             // ReportsForm
             // 
