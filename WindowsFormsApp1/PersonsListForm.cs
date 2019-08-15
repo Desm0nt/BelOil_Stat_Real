@@ -96,7 +96,7 @@ namespace WindowsFormsApp1
                     new TextAndImage(GetSText(person.Subhead), Properties.Resources._1),
                     new TextAndImage(person.Orgs, Properties.Resources._1),
                     person.Id_org,
-                });
+                }); 
                 l.Add(row);
             }
 
