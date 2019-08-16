@@ -191,7 +191,15 @@
     <Compile Include="Docking.Designer.cs">
       <DependentUpon>Docking.cs</DependentUpon>
     </Compile>
+    <Compile Include="OutlookGridPersonGroup2.cs" />
+    <Compile Include="OutlookGridPersonGroup.cs" />
     <Compile Include="OutlookGridTypeGroup.cs" />
+    <Compile Include="PersonAddForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PersonAddForm.Designer.cs">
+      <DependentUpon>PersonAddForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ProductAddForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -241,6 +249,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Docking.resx">
       <DependentUpon>Docking.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PersonAddForm.resx">
+      <DependentUpon>PersonAddForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ProductAddForm.resx">
       <DependentUpon>ProductAddForm.cs</DependentUpon>

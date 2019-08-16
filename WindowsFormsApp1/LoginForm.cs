@@ -67,5 +67,10 @@ namespace WindowsFormsApp1
             if (e.KeyCode == Keys.Enter)
                 button1.PerformClick();
         }
+
+        private void kryptonButton1_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

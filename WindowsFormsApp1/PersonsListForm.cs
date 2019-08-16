@@ -17,8 +17,15 @@ using KryptonOutlookGrid.CustomColumns;
 
 namespace WindowsFormsApp1
 {
+    public struct ListElement
+    {
+        public int Id;
+        public string Name;
+    }
+
     public partial class PersonsListForm : KryptonForm
     {
+        public static List<ListElement> elList;
         List<DataTables.PersonTable> personList;
         bool[] groustate = new bool[3];
 
@@ -36,6 +43,9 @@ namespace WindowsFormsApp1
         {
 
             personList = dbOps.GetPersonList();
+            elList = new List<ListElement>();
+            foreach (var a in personList)
+                elList.Add(new ListElement { Id = a.Id_org, Name = a.Orgs });
             //if (edit)
             //{
             //    for (int i = 0; i < kryptonOutlookGrid1.GroupCollection.Count; i++)
@@ -48,7 +58,7 @@ namespace WindowsFormsApp1
 
             kryptonOutlookGrid1.GroupBox = kryptonOutlookGridGroupBox1;
             kryptonOutlookGrid1.RegisterGroupBoxEvents();
-            DataGridViewColumn[] columnsToAdd = new DataGridViewColumn[13];
+            DataGridViewColumn[] columnsToAdd = new DataGridViewColumn[12];
             columnsToAdd[0] = kryptonOutlookGrid1.Columns[0];
             columnsToAdd[1] = kryptonOutlookGrid1.Columns[1];
             columnsToAdd[2] = kryptonOutlookGrid1.Columns[2];
@@ -61,7 +71,6 @@ namespace WindowsFormsApp1
             columnsToAdd[9] = kryptonOutlookGrid1.Columns[9];
             columnsToAdd[10] = kryptonOutlookGrid1.Columns[10];
             columnsToAdd[11] = kryptonOutlookGrid1.Columns[11];
-            columnsToAdd[12] = kryptonOutlookGrid1.Columns[12];
 
             //kryptonOutlookGrid1.Columns.AddRange(columnsToAdd);
 
@@ -75,14 +84,14 @@ namespace WindowsFormsApp1
             kryptonOutlookGrid1.AddInternalColumn(kryptonOutlookGrid1.Columns[7], new OutlookGridDefaultGroup(null), SortOrder.None, -1, -1);
             kryptonOutlookGrid1.AddInternalColumn(kryptonOutlookGrid1.Columns[8], new OutlookGridDefaultGroup(null), SortOrder.None, -1, -1);
             kryptonOutlookGrid1.AddInternalColumn(kryptonOutlookGrid1.Columns[9], new OutlookGridDefaultGroup(null), SortOrder.Ascending, 1, -1);
-            //kryptonOutlookGrid1.AddInternalColumn(kryptonOutlookGrid1.Columns[10], new OutlookGridTypeGroup(null), SortOrder.Ascending, -1, -1);
-            kryptonOutlookGrid1.AddInternalColumn(kryptonOutlookGrid1.Columns[10], new OutlookGridDefaultGroup(null), SortOrder.Ascending, -1, -1);
-            kryptonOutlookGrid1.AddInternalColumn(kryptonOutlookGrid1.Columns[11], new OutlookGridDefaultGroup(null), SortOrder.Ascending, 1, -1);
-            kryptonOutlookGrid1.AddInternalColumn(kryptonOutlookGrid1.Columns[12], new OutlookGridDefaultGroup(null), SortOrder.None, -1, -1);
+            kryptonOutlookGrid1.AddInternalColumn(kryptonOutlookGrid1.Columns[10], new OutlookGridPersonGroup(null), SortOrder.Ascending, 1, -1);
+            kryptonOutlookGrid1.AddInternalColumn(kryptonOutlookGrid1.Columns[11], new OutlookGridPersonGroup2(null), SortOrder.Ascending, 1, -1);
             kryptonOutlookGrid1.Columns[0].Visible = false;
-            //kryptonOutlookGrid1.Columns[7].Visible = false;
+           // kryptonOutlookGrid1.Columns[9].Visible = false;
+            kryptonOutlookGrid1.Columns[10].Visible = false;
+            kryptonOutlookGrid1.Columns[11].Visible = false;
 
-            kryptonOutlookGrid1.ShowLines = true;
+            kryptonOutlookGrid1.ShowLines = false;
 
             //Setup Rows
             OutlookGridRow row = new OutlookGridRow();
@@ -106,8 +115,7 @@ namespace WindowsFormsApp1
                     person.Email,
                     new TextAndImage(person.Head, Properties.Resources.predpr),
                     new TextAndImage(person.Subhead.ToString(), Properties.Resources.predpr),
-                    new TextAndImage(person.Orgs, Properties.Resources.predpr),
-                    person.Id_org,
+                    new TextAndImage(person.Id_org.ToString(), Properties.Resources.predpr),
                 }); 
                 l.Add(row);
             }
@@ -190,18 +198,6 @@ namespace WindowsFormsApp1
                     return "рук.";
                 case 2:
                     return "отв.";
-                default:
-                    return "";
-            }
-        }
-        private string GetSText(int type)
-        {
-            switch (type)
-            {
-                case 1:
-                    return "РУП ПО \"Белоруснефть\"";
-                case 2:
-                    return "Дочерние предприятия";
                 default:
                     return "";
             }
