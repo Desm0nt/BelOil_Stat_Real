@@ -935,6 +935,46 @@ namespace WindowsFormsApp1.DBO
             }
             return personList;
         }
+        public static int GetPersonLastID()
+        {
+            int lid = 0;
+            try
+            {
+                SqlConnection myConnection = new SqlConnection(cnStr);
+                myConnection.Open();
+
+                string query = "SELECT MAX(id) FROM [NewPersons]";
+                SqlCommand command = new SqlCommand(query, myConnection);
+                lid = Convert.ToInt32(command.ExecuteScalar()) + 1;
+                myConnection.Close();
+            }
+            catch (Exception Ex)
+            {
+                KryptonMessageBox.Show("Ошибка GetPersonLastID: " + Ex.Message);
+            }
+            return lid;
+        }
+        public static void DeleteFromPerson(int id_pers)
+        {
+            try
+            {
+                SqlConnection myConnection = new SqlConnection(cnStr);
+                myConnection.Open();
+
+                string query = "DELETE FROM [NewPersons] where id = @id_pers";
+                SqlCommand command = new SqlCommand(query, myConnection);
+                command.Parameters.AddWithValue("@id_pers", id_pers);
+                command.ExecuteNonQuery();
+                myConnection.Close();
+            }
+            catch (Exception Ex)
+            {
+                KryptonMessageBox.Show("DeleteFromPerson: " + Ex.Message);
+            }
+        }
+
+
+
 
         private static int GetType(int hv, int imp, int id)
         {

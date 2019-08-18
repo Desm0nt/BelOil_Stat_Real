@@ -109,7 +109,6 @@
             this.kryptonOutlookGrid1.TabIndex = 0;
             this.kryptonOutlookGrid1.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.kryptonOutlookGrid1_CellEnter);
             this.kryptonOutlookGrid1.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.kryptonOutlookGrid1_CellMouseDoubleClick);
-            this.kryptonOutlookGrid1.Resize += new System.EventHandler(this.kryptonOutlookGrid1_Resize);
             // 
             // kryptonOutlookGridGroupBox1
             // 

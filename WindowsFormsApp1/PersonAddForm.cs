@@ -17,7 +17,6 @@ namespace WindowsFormsApp1
         public static List<ListElement> elList;
         public PersonsListForm ParrentForm;
         bool edit = false;
-        bool idlock, codelock;
         public DataTables.PersonTable personTable;
         DataTables.PersonTable Table;
         List<int> idList, codeList;
@@ -54,6 +53,7 @@ namespace WindowsFormsApp1
             typeComboBox.Visible = true;
             label8.Visible = true;
             Table.Type = 1;
+            kryptonNumericUpDown2.Value = dbOps.GetPersonLastID();
         }
 
         public PersonAddForm(DataTables.PersonTable table, PersonsListForm parrentForm, List<ListElement> ElList)
@@ -82,7 +82,7 @@ namespace WindowsFormsApp1
             typeComboBox.Visible = false;
             label8.Visible = false;
             kryptonNumericUpDown2.Value = Table.Id;
-            var a = PersonsListForm.elList.FirstOrDefault(n => n.Id == Table.Id_org); ;
+            var a = PersonsListForm.elList.FirstOrDefault(n => n.Id == Table.Id_org);
             this.Text = "Данные сотрудника " + Table.Surname + " (" + a.Name + ")";
             fnameTextBox.Text = Table.Surname;
             nameTextBox.Text = Table.Name;
@@ -95,77 +95,46 @@ namespace WindowsFormsApp1
 
         private void OkButton1_Click(object sender, EventArgs e)
         {
-            //try
-            //{
-            //    if (kryptonNumericUpDown1.Value == 0 || kryptonNumericUpDown2.Value == 0 || String.IsNullOrWhiteSpace(fnameTextBox2.Text) 
-            //        || String.IsNullOrWhiteSpace(label6.Text) || String.IsNullOrWhiteSpace(label7.Text))
-            //        throw new Exception("Все поля должны быть заполнены!");
-            //    if (codelock)
-            //        throw new Exception("Данный код строки уже используется! Введите другой код строки.");
-            //    if (idlock)
-            //        throw new Exception("Данный id уже используется! Введите другой id.");
-            //    if (!edit)
-            //    {
-            //        Table.Id = (int)kryptonNumericUpDown2.Value;
-            //        Table.type = int.Parse(typeComboBox.SelectedValue.ToString());
-            //    }
-            //    personTable = new DataTables.personTable
-            //    {
-            //        Id = (int)this.kryptonNumericUpDown2.Value,
-            //        Code = (int)this.kryptonNumericUpDown1.Value,
-            //        Name = this.fnameTextBox2.Text,
-            //        Unit = this.label6.Text,
-            //        nUnit = this.label7.Text,
-            //        s111 = this.kryptonCheckBox1.Checked,
-            //        s112 = this.kryptonCheckBox2.Checked,
-            //        type = Table.type
-            //    };
-            //    if (edit)
-            //    {
-            //        this.DialogResult = DialogResult.OK;
-            //    }
-            //    dbOps.UpdateProdList(personTable, Table.Id);
-            //    this.Close();               
-            //}
-            //catch (Exception ex)
-            //{
-            //    KryptonMessageBox.Show("Ошибка: " + ex.Message);
-            //}
-        }
-
-        private void CheckNumInput()
-        {
-            //if (codeList.Contains((int)kryptonNumericUpDown1.Value) && (int)kryptonNumericUpDown1.Value!=Table.Code)
-            //{
-            //    warninglbl.Text = "Данный код строке уже имеется в базе";
-            //    codelock = true;
-            //}
-            //else if (idList.Contains((int)kryptonNumericUpDown2.Value) && (int)kryptonNumericUpDown2.Value != Table.Id)
-            //{
-            //    warninglbl.Text = "Данный id (#) уже имеется в базе";
-            //    idlock = true;
-            //}
-            //else
-            //{
-            //    warninglbl.Text = "";
-            //    codelock = false;
-            //    idlock = false;
-            //}
+            try
+            {
+                if (kryptonNumericUpDown2.Value == 0 || String.IsNullOrWhiteSpace(fnameTextBox.Text)
+                    || String.IsNullOrWhiteSpace(nameTextBox.Text) || String.IsNullOrWhiteSpace(otchTextBox.Text))
+                    throw new Exception("Все поля должны быть заполнены!");
+                if (!edit)
+                {
+                    Table.Id = (int)kryptonNumericUpDown2.Value;
+                    Table.Id_org = Int32.Parse(typeComboBox.SelectedValue.ToString());
+                }
+                var subh = PersonsListForm.elList.FirstOrDefault(n => n.Id == Table.Id_org);
+                personTable = new DataTables.PersonTable
+                {
+                    Id = Table.Id,
+                    Name = this.nameTextBox.Text,
+                    Surname = this.fnameTextBox.Text,
+                    Otchestvo = this.otchTextBox.Text,
+                    Post = this.label7.Text,
+                    WPhone = this.textBox2.Text,
+                    Phone = this.textBox3.Text,
+                    Email = this.textBox3.Text,
+                    Id_org = Table.Id_org,
+                    Subhead = subh.Group
+                };
+                if (edit)
+                {
+                    this.DialogResult = DialogResult.OK;
+                }
+                //dbOps.UpdateProdList(personTable, Table.Id);
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                KryptonMessageBox.Show("Ошибка: " + ex.Message);
+            }
         }
 
         private void AbortButton2_Click(object sender, EventArgs e)
         {
             this.Close();
-        }
-
-        private void btn_Click(object sender, EventArgs e)
-        {
-            KryptonMessageBox.Show("hello world");
-        }
-
-        private void btn2_Click(object sender, EventArgs e)
-        {
-            KryptonMessageBox.Show("hello world2");
         }
 
         #region шаманства отрисовки и обработки  
@@ -188,23 +157,7 @@ namespace WindowsFormsApp1
 
         private void typeComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            idList = dbOps.GetProdIdList(Int32.Parse(typeComboBox.SelectedValue.ToString()));
-            codeList = dbOps.GetProdCodeList(Int32.Parse(typeComboBox.SelectedValue.ToString()));
-            CheckNumInput();
-            Table.Type = Int32.Parse(typeComboBox.SelectedValue.ToString());
-            //kryptonNumericUpDown1_ValueChanged(this.kryptonNumericUpDown1, new EventArgs());
-        }
-
-
-        private void kryptonNumericUpDown1_ValueChanged(object sender, EventArgs e)
-        {
-            //string tmp = Convert.ToString(this.kryptonNumericUpDown1.Value);
-            //int length = tmp.Length;
-            //for (int i = length; i< 4; i++)
-            //    tmp = "0" + tmp;
-            //tmp = Convert.ToString(Table.type) + tmp;
-            //kryptonNumericUpDown2.Value = Decimal.Parse(tmp);
-            //CheckNumInput();
+            Table.Id_org = Int32.Parse(typeComboBox.SelectedValue.ToString());
         }
 
         private void panel_Paint(object sender, PaintEventArgs e)

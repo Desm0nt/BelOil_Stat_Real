@@ -21,6 +21,7 @@ namespace WindowsFormsApp1
     {
         public int Id;
         public string Name;
+        public int Group;
     }
 
     public partial class PersonsListForm : KryptonForm
@@ -45,7 +46,7 @@ namespace WindowsFormsApp1
             personList = dbOps.GetPersonList();
             elList = new List<ListElement>();
             foreach (var a in personList)
-                elList.Add(new ListElement { Id = a.Id_org, Name = a.Orgs });
+                elList.Add(new ListElement { Id = a.Id_org, Name = a.Orgs, Group = a.Subhead });
             //if (edit)
             //{
             //    for (int i = 0; i < kryptonOutlookGrid1.GroupCollection.Count; i++)
@@ -125,38 +126,8 @@ namespace WindowsFormsApp1
             kryptonOutlookGrid1.ForceRefreshGroupBox();
             kryptonOutlookGrid1.Fill();
 
-            //kryptonOutlookGrid1.Collapse(kryptonOutlookGrid1.Columns[7].Name);
-            //if (edit)
-            //{
-            //    for (int i = 0; i < kryptonOutlookGrid1.GroupCollection.Count; i++)
-            //        kryptonOutlookGrid1.GroupCollection[i].Collapsed = groustate[i];
-            //}
-
         }
 
-        private void kryptonOutlookGrid1_Resize(object sender, EventArgs e)
-        {
-            //int PreferredTotalWidth = 0;
-            ////Calculate the total preferred width
-            //foreach (DataGridViewColumn c in kryptonOutlookGrid1.Columns)
-            //{
-            //    PreferredTotalWidth += Math.Min(c.GetPreferredWidth(DataGridViewAutoSizeColumnMode.DisplayedCells, true), 250);
-            //}
-
-            //if (kryptonOutlookGrid1.Width > PreferredTotalWidth)
-            //{
-            //    kryptonOutlookGrid1.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            //    kryptonOutlookGrid1.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.DisplayedCells);
-            //}
-            //else
-            //{
-            //    kryptonOutlookGrid1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
-            //    foreach (DataGridViewColumn c in kryptonOutlookGrid1.Columns)
-            //    {
-            //        c.Width = Math.Min(c.GetPreferredWidth(DataGridViewAutoSizeColumnMode.DisplayedCells, true), 250);
-            //    }
-            //}
-        }
 
         public class TypeConverter
         {
@@ -235,14 +206,14 @@ namespace WindowsFormsApp1
                     {
                         var personTable = myForm.personTable;
                         dataGridView.Rows[e.RowIndex].Cells[0].Value = personTable.Id;
-                        dataGridView.Rows[e.RowIndex].Cells[1].Value = personTable.Surname;
+                        dataGridView.Rows[e.RowIndex].Cells[1].Value = new TextAndImage(personTable.Surname, Properties.Resources.cbx2p_h0eqv);
                         dataGridView.Rows[e.RowIndex].Cells[2].Value = personTable.Name;
                         dataGridView.Rows[e.RowIndex].Cells[3].Value = personTable.Otchestvo;
                         dataGridView.Rows[e.RowIndex].Cells[5].Value = personTable.Post;
                         dataGridView.Rows[e.RowIndex].Cells[6].Value = personTable.WPhone;
                         dataGridView.Rows[e.RowIndex].Cells[7].Value = personTable.Phone;
                         dataGridView.Rows[e.RowIndex].Cells[8].Value = personTable.Email;
-                        dataGridView.Rows[e.RowIndex].Cells[11].Value = personTable.Id_org;
+                        dataGridView.Rows[e.RowIndex].Cells[11].Value = new TextAndImage(personTable.Id_org.ToString(), Properties.Resources.predpr);
                     }
                 }
             }
@@ -258,9 +229,9 @@ namespace WindowsFormsApp1
 
         private void editToolStripButton_Click(object sender, EventArgs e)
         {
-            //var mouseEventArgs = new MouseEventArgs(MouseButtons.Left, 2, 0, 0, 1);
-            //var dataGridViewCellMouseEventArgs = new DataGridViewCellMouseEventArgs(kryptonOutlookGrid1.CurrentCell.ColumnIndex, kryptonOutlookGrid1.CurrentCell.RowIndex, 0, 0, mouseEventArgs);
-            //kryptonOutlookGrid1_CellMouseDoubleClick(kryptonOutlookGrid1, dataGridViewCellMouseEventArgs);
+            var mouseEventArgs = new MouseEventArgs(MouseButtons.Left, 2, 0, 0, 1);
+            var dataGridViewCellMouseEventArgs = new DataGridViewCellMouseEventArgs(kryptonOutlookGrid1.CurrentCell.ColumnIndex, kryptonOutlookGrid1.CurrentCell.RowIndex, 0, 0, mouseEventArgs);
+            kryptonOutlookGrid1_CellMouseDoubleClick(kryptonOutlookGrid1, dataGridViewCellMouseEventArgs);
         }
 
         private void kryptonOutlookGrid1_CellEnter(object sender, DataGridViewCellEventArgs e)
@@ -293,13 +264,13 @@ namespace WindowsFormsApp1
 
         private void removeToolStripButton_Click(object sender, EventArgs e)
         {
-            //var ind = kryptonOutlookGrid1.CurrentCell.RowIndex;
-            //if (ind >= 0)
-            //{
-            //    if (kryptonOutlookGrid1.Rows[ind].Cells[1].Value != null)
-            //        dbOps.DeleteFromProd(Int32.Parse(kryptonOutlookGrid1.Rows[ind].Cells[0].Value.ToString()));
-            //}
-            //LoadData(true);
+            var ind = kryptonOutlookGrid1.CurrentCell.RowIndex;
+            if (ind >= 0)
+            {
+                if (kryptonOutlookGrid1.Rows[ind].Cells[1].Value != null)
+                    dbOps.DeleteFromPerson(Int32.Parse(kryptonOutlookGrid1.Rows[ind].Cells[0].Value.ToString()));
+            }
+            LoadData(true);
         }
     }
 }
