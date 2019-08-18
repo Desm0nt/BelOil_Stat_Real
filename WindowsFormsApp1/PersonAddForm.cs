@@ -112,10 +112,10 @@ namespace WindowsFormsApp1
                     Name = this.nameTextBox.Text,
                     Surname = this.fnameTextBox.Text,
                     Otchestvo = this.otchTextBox.Text,
-                    Post = this.label7.Text,
+                    Post = this.postTextBox.Text,
                     WPhone = this.textBox2.Text,
                     Phone = this.textBox3.Text,
-                    Email = this.textBox3.Text,
+                    Email = this.textBox1.Text,
                     Id_org = Table.Id_org,
                     Subhead = subh.Group
                 };
@@ -123,7 +123,7 @@ namespace WindowsFormsApp1
                 {
                     this.DialogResult = DialogResult.OK;
                 }
-                //dbOps.UpdateProdList(personTable, Table.Id);
+                dbOps.UpdatePersonList(personTable);
                 this.Close();
             }
             catch (Exception ex)

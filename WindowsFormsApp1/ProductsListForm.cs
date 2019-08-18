@@ -19,7 +19,7 @@ namespace WindowsFormsApp1
 {
     public partial class ProductsListForm : KryptonForm
     {
-        List<DataTables.personTable> productList;
+        List<DataTables.ProductTable> productList;
         bool[] groustate = new bool[3];
 
         public ProductsListForm()
@@ -167,7 +167,7 @@ namespace WindowsFormsApp1
             {
                 if (dataGridView.Rows[e.RowIndex].Cells[1].Value != null)
                 {
-                    DataTables.personTable table = new DataTables.personTable
+                    DataTables.ProductTable table = new DataTables.ProductTable
                     {
                         Id = Int32.Parse(dataGridView.Rows[e.RowIndex].Cells[0].Value.ToString()),
                         Code = Int32.Parse(dataGridView.Rows[e.RowIndex].Cells[1].Value.ToString()),
@@ -184,14 +184,14 @@ namespace WindowsFormsApp1
 
                     if (myForm.DialogResult == DialogResult.OK)
                     {
-                        var personTable = myForm.personTable;
-                        dataGridView.Rows[e.RowIndex].Cells[0].Value = personTable.Id;
-                        dataGridView.Rows[e.RowIndex].Cells[1].Value = personTable.Code;
-                        dataGridView.Rows[e.RowIndex].Cells[2].Value = personTable.Name;
-                        dataGridView.Rows[e.RowIndex].Cells[3].Value = personTable.Unit;
-                        dataGridView.Rows[e.RowIndex].Cells[4].Value = personTable.nUnit;
-                        dataGridView.Rows[e.RowIndex].Cells[5].Value = personTable.s111;
-                        dataGridView.Rows[e.RowIndex].Cells[6].Value = personTable.s112;
+                        var productTable = myForm.productTable;
+                        dataGridView.Rows[e.RowIndex].Cells[0].Value = productTable.Id;
+                        dataGridView.Rows[e.RowIndex].Cells[1].Value = productTable.Code;
+                        dataGridView.Rows[e.RowIndex].Cells[2].Value = productTable.Name;
+                        dataGridView.Rows[e.RowIndex].Cells[3].Value = productTable.Unit;
+                        dataGridView.Rows[e.RowIndex].Cells[4].Value = productTable.nUnit;
+                        dataGridView.Rows[e.RowIndex].Cells[5].Value = productTable.s111;
+                        dataGridView.Rows[e.RowIndex].Cells[6].Value = productTable.s112;
                     }
                 }
             }

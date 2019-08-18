@@ -17,14 +17,14 @@ namespace WindowsFormsApp1
         public ProductsListForm ParrentForm;
         bool edit = false;
         bool idlock, codelock;
-        public DataTables.personTable personTable;
-        DataTables.personTable Table;
+        public DataTables.ProductTable productTable;
+        DataTables.ProductTable Table;
         List<int> idList, codeList;
 
         public ProductAddForm()
         {
             InitializeComponent();
-            Table = new DataTables.personTable();
+            Table = new DataTables.ProductTable();
             idList = dbOps.GetProdIdList(1);
             codeList = dbOps.GetProdCodeList(1);
             this.textBox2.AutoSize = false;
@@ -41,7 +41,7 @@ namespace WindowsFormsApp1
             Table.type = 1;
         }
 
-        public ProductAddForm(DataTables.personTable table, ProductsListForm parrentForm)
+        public ProductAddForm(DataTables.ProductTable table, ProductsListForm parrentForm)
         {
             edit = true;
             InitializeComponent();
@@ -92,7 +92,7 @@ namespace WindowsFormsApp1
                     Table.Id = (int)kryptonNumericUpDown2.Value;
                     Table.type = int.Parse(typeComboBox.SelectedValue.ToString());
                 }
-                personTable = new DataTables.personTable
+                productTable = new DataTables.ProductTable
                 {
                     Id = (int)this.kryptonNumericUpDown2.Value,
                     Code = (int)this.kryptonNumericUpDown1.Value,
@@ -107,7 +107,7 @@ namespace WindowsFormsApp1
                 {
                     this.DialogResult = DialogResult.OK;
                 }
-                dbOps.UpdateProdList(personTable, Table.Id);
+                dbOps.UpdateProdList(productTable, Table.Id);
                 this.Close();               
             }
             catch (Exception ex)
