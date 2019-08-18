@@ -740,9 +740,9 @@ namespace WindowsFormsApp1.DBO
             }
             return unit;
         }
-        public static List<ProductTable> GetProdList()
+        public static List<personTable> GetProdList()
         {
-            List<ProductTable> productList = new List<ProductTable>();
+            List<personTable> productList = new List<personTable>();
             try
             {
                 SqlConnection myConnection = new SqlConnection(cnStr);
@@ -755,7 +755,7 @@ namespace WindowsFormsApp1.DBO
                 {
                     while (dr.Read())
                     {
-                        productList.Add(new ProductTable { Id = Int32.Parse(dr["id"].ToString()) , Code = Int32.Parse(dr["code"].ToString()), Name = dr["name"].ToString(),
+                        productList.Add(new personTable { Id = Int32.Parse(dr["id"].ToString()) , Code = Int32.Parse(dr["code"].ToString()), Name = dr["name"].ToString(),
                             Unit = dr["unit"].ToString(), nUnit = dr["norm_unit"].ToString(), s111 = Boolean.Parse(dr["f111"].ToString()), s112 = Boolean.Parse(dr["f112"].ToString()),
                          type = Int32.Parse(dr["pid"].ToString())});
                     }
@@ -840,7 +840,7 @@ namespace WindowsFormsApp1.DBO
                 KryptonMessageBox.Show("ОшибкаDeleteFromProd: " + Ex.Message);
             }
         }
-        public static void UpdateProdList(ProductTable productTable, int odlId)
+        public static void UpdateProdList(personTable personTable, int odlId)
         {
             try
             {
@@ -850,14 +850,14 @@ namespace WindowsFormsApp1.DBO
                 string query = "UPDATE NewProduct SET id = @id, code=@code, pid=@pid, name=@name, unit=@unit, norm_unit=@norm_unit, f111=@f111, f112=@f112 WHERE id = @oldid";
                 SqlCommand command = new SqlCommand(query, myConnection);
                 command.Parameters.AddWithValue("@oldid", odlId);
-                command.Parameters.AddWithValue("@id", productTable.Id);
-                command.Parameters.AddWithValue("@code", productTable.Code);
-                command.Parameters.AddWithValue("@pid", productTable.type);
-                command.Parameters.AddWithValue("@name", productTable.Name);
-                command.Parameters.AddWithValue("@unit", productTable.Unit);
-                command.Parameters.AddWithValue("@norm_unit", productTable.nUnit);
-                command.Parameters.AddWithValue("@f111", productTable.s111);
-                command.Parameters.AddWithValue("@f112", productTable.s112);
+                command.Parameters.AddWithValue("@id", personTable.Id);
+                command.Parameters.AddWithValue("@code", personTable.Code);
+                command.Parameters.AddWithValue("@pid", personTable.type);
+                command.Parameters.AddWithValue("@name", personTable.Name);
+                command.Parameters.AddWithValue("@unit", personTable.Unit);
+                command.Parameters.AddWithValue("@norm_unit", personTable.nUnit);
+                command.Parameters.AddWithValue("@f111", personTable.s111);
+                command.Parameters.AddWithValue("@f112", personTable.s112);
                 command.ExecuteNonQuery();
                 myConnection.Close();
             }

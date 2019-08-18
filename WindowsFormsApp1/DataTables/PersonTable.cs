@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WindowsFormsApp1.DataTables
 {
-    class PersonTable
+    public class PersonTable
     {
         public int Id { get; set; }
         public string Name { get; set; }

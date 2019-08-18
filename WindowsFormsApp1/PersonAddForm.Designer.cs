@@ -48,6 +48,18 @@
             this.otchTextBox = new System.Windows.Forms.TextBox();
             this.postTextBox = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
+            this.kryptonPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label2
@@ -63,7 +75,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Enabled = false;
-            this.label3.Location = new System.Drawing.Point(325, 84);
+            this.label3.Location = new System.Drawing.Point(318, 84);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(14, 13);
             this.label3.TabIndex = 2;
@@ -73,7 +85,7 @@
             // 
             this.kryptonNumericUpDown2.DecimalPlaces = 99;
             this.kryptonNumericUpDown2.Enabled = false;
-            this.kryptonNumericUpDown2.Location = new System.Drawing.Point(344, 79);
+            this.kryptonNumericUpDown2.Location = new System.Drawing.Point(337, 79);
             this.kryptonNumericUpDown2.Maximum = new decimal(new int[] {
             1000000,
             0,
@@ -82,7 +94,6 @@
             this.kryptonNumericUpDown2.Name = "kryptonNumericUpDown2";
             this.kryptonNumericUpDown2.Size = new System.Drawing.Size(74, 22);
             this.kryptonNumericUpDown2.TabIndex = 5;
-            this.kryptonNumericUpDown2.ValueChanged += new System.EventHandler(this.kryptonNumericUpDown2_ValueChanged);
             // 
             // label6
             // 
@@ -105,7 +116,7 @@
             // kryptonButton1
             // 
             this.kryptonButton1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.kryptonButton1.Location = new System.Drawing.Point(208, 299);
+            this.kryptonButton1.Location = new System.Drawing.Point(208, 285);
             this.kryptonButton1.Name = "kryptonButton1";
             this.kryptonButton1.Size = new System.Drawing.Size(118, 32);
             this.kryptonButton1.TabIndex = 17;
@@ -117,7 +128,7 @@
             // 
             this.kryptonButton2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.kryptonButton2.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.kryptonButton2.Location = new System.Drawing.Point(345, 299);
+            this.kryptonButton2.Location = new System.Drawing.Point(345, 285);
             this.kryptonButton2.Name = "kryptonButton2";
             this.kryptonButton2.Size = new System.Drawing.Size(96, 32);
             this.kryptonButton2.TabIndex = 18;
@@ -129,19 +140,19 @@
             // 
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(203)))), ((int)(((byte)(239)))));
-            this.panel1.Location = new System.Drawing.Point(-4, 288);
+            this.panel1.Location = new System.Drawing.Point(-4, 272);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(459, 3);
+            this.panel1.Size = new System.Drawing.Size(475, 3);
             this.panel1.TabIndex = 19;
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(24, 134);
+            this.label8.Location = new System.Drawing.Point(164, 65);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(50, 13);
+            this.label8.Size = new System.Drawing.Size(74, 13);
             this.label8.TabIndex = 20;
-            this.label8.Text = "Раздел: ";
+            this.label8.Text = "Организация";
             // 
             // fnameTextBox
             // 
@@ -175,10 +186,11 @@
             // 
             this.typeComboBox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.typeComboBox.FormattingEnabled = true;
-            this.typeComboBox.Location = new System.Drawing.Point(85, 130);
+            this.typeComboBox.Location = new System.Drawing.Point(167, 82);
             this.typeComboBox.Name = "typeComboBox";
-            this.typeComboBox.Size = new System.Drawing.Size(121, 21);
+            this.typeComboBox.Size = new System.Drawing.Size(117, 21);
             this.typeComboBox.TabIndex = 27;
+            this.typeComboBox.Visible = false;
             this.typeComboBox.SelectedIndexChanged += new System.EventHandler(this.typeComboBox_SelectedIndexChanged);
             // 
             // label1
@@ -223,7 +235,7 @@
             this.postTextBox.Font = new System.Drawing.Font("Arial Unicode MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.postTextBox.Location = new System.Drawing.Point(22, 83);
             this.postTextBox.Name = "postTextBox";
-            this.postTextBox.Size = new System.Drawing.Size(262, 15);
+            this.postTextBox.Size = new System.Drawing.Size(117, 15);
             this.postTextBox.TabIndex = 34;
             // 
             // label11
@@ -235,12 +247,103 @@
             this.label11.TabIndex = 33;
             this.label11.Text = "Должность";
             // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.textBox3);
+            this.panel2.Controls.Add(this.label13);
+            this.panel2.Controls.Add(this.textBox2);
+            this.panel2.Controls.Add(this.label12);
+            this.panel2.Controls.Add(this.textBox1);
+            this.panel2.Controls.Add(this.kryptonPanel1);
+            this.panel2.Controls.Add(this.label5);
+            this.panel2.Location = new System.Drawing.Point(22, 119);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(406, 139);
+            this.panel2.TabIndex = 35;
+            this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel_Paint);
+            // 
+            // textBox3
+            // 
+            this.textBox3.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox3.Font = new System.Drawing.Font("Arial Unicode MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.textBox3.Location = new System.Drawing.Point(209, 107);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(164, 15);
+            this.textBox3.TabIndex = 41;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(206, 89);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(112, 13);
+            this.label13.TabIndex = 40;
+            this.label13.Text = "Мобильный телефон";
+            // 
+            // textBox2
+            // 
+            this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox2.Font = new System.Drawing.Font("Arial Unicode MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.textBox2.Location = new System.Drawing.Point(29, 107);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(164, 15);
+            this.textBox2.TabIndex = 39;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(26, 89);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(95, 13);
+            this.label12.TabIndex = 38;
+            this.label12.Text = "Рабочий телефон";
+            // 
+            // textBox1
+            // 
+            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox1.Font = new System.Drawing.Font("Arial Unicode MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.textBox1.Location = new System.Drawing.Point(29, 53);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(344, 15);
+            this.textBox1.TabIndex = 37;
+            // 
+            // kryptonPanel1
+            // 
+            this.kryptonPanel1.AutoSize = true;
+            this.kryptonPanel1.Controls.Add(this.label4);
+            this.kryptonPanel1.Location = new System.Drawing.Point(1, 1);
+            this.kryptonPanel1.Name = "kryptonPanel1";
+            this.kryptonPanel1.PanelBackStyle = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.SeparatorHighProfile;
+            this.kryptonPanel1.Size = new System.Drawing.Size(404, 21);
+            this.kryptonPanel1.TabIndex = 0;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.BackColor = System.Drawing.Color.Transparent;
+            this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(21)))), ((int)(((byte)(65)))), ((int)(((byte)(135)))));
+            this.label4.Location = new System.Drawing.Point(5, 5);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(56, 13);
+            this.label4.TabIndex = 0;
+            this.label4.Text = "Контакты";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(26, 35);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(34, 13);
+            this.label5.TabIndex = 36;
+            this.label5.Text = "e-mail";
+            // 
             // PersonAddForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(239)))), ((int)(((byte)(255)))));
-            this.ClientSize = new System.Drawing.Size(453, 339);
+            this.ClientSize = new System.Drawing.Size(453, 326);
+            this.Controls.Add(this.panel2);
             this.Controls.Add(this.postTextBox);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.otchTextBox);
@@ -260,14 +363,22 @@
             this.Controls.Add(this.kryptonNumericUpDown2);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(469, 365);
             this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(469, 365);
             this.Name = "PersonAddForm";
             this.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Office2007Blue;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Данные вида продукции (работы, услуги)";
+            this.Text = "Данные сотрудника";
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).EndInit();
+            this.kryptonPanel1.ResumeLayout(false);
+            this.kryptonPanel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -293,5 +404,14 @@
         private System.Windows.Forms.TextBox otchTextBox;
         private System.Windows.Forms.TextBox postTextBox;
         private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Panel panel2;
+        private ComponentFactory.Krypton.Toolkit.KryptonPanel kryptonPanel1;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label label5;
     }
 }

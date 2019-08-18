@@ -134,7 +134,9 @@
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(373, 214);
+            this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(373, 214);
             this.Name = "LoginForm";
             this.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Office2007Blue;

@@ -210,47 +210,50 @@ namespace WindowsFormsApp1
 
         private void kryptonOutlookGrid1_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            //KryptonOutlookGrid.Classes.KryptonOutlookGrid dataGridView = (KryptonOutlookGrid.Classes.KryptonOutlookGrid)sender;
-            //if (e.RowIndex >= 0)
-            //{
-            //    if (dataGridView.Rows[e.RowIndex].Cells[1].Value != null)
-            //    {
-            //        DataTables.ProductTable table = new DataTables.ProductTable
-            //        {
-            //            Id = Int32.Parse(dataGridView.Rows[e.RowIndex].Cells[0].Value.ToString()),
-            //            Code = Int32.Parse(dataGridView.Rows[e.RowIndex].Cells[1].Value.ToString()),
-            //            Name = dataGridView.Rows[e.RowIndex].Cells[2].Value.ToString(),
-            //            Unit = dataGridView.Rows[e.RowIndex].Cells[3].Value.ToString(),
-            //            nUnit = dataGridView.Rows[e.RowIndex].Cells[4].Value.ToString(),
-            //            s111 = Boolean.Parse(dataGridView.Rows[e.RowIndex].Cells[5].Value.ToString()),
-            //            s112 = Boolean.Parse(dataGridView.Rows[e.RowIndex].Cells[6].Value.ToString()),
-            //            type = Int32.Parse(((TextAndImage)dataGridView.Rows[e.RowIndex].Cells[7].Value).Text)
-            //        };
-            //        var myForm = new ProductAddForm(table, this);
-            //        //myForm.FormClosed += new FormClosedEventHandler(myForm_FormClosed);
-            //        myForm.ShowDialog ();
+            KryptonOutlookGrid.Classes.KryptonOutlookGrid dataGridView = (KryptonOutlookGrid.Classes.KryptonOutlookGrid)sender;
+            if (e.RowIndex >= 0)
+            {
+                if (dataGridView.Rows[e.RowIndex].Cells[1].Value != null)
+                {
+                    DataTables.PersonTable table = new DataTables.PersonTable
+                    {
+                        Id = Int32.Parse(dataGridView.Rows[e.RowIndex].Cells[0].Value.ToString()),
+                        Name = dataGridView.Rows[e.RowIndex].Cells[2].Value.ToString(),
+                        Surname = dataGridView.Rows[e.RowIndex].Cells[1].Value.ToString(),
+                        Otchestvo = dataGridView.Rows[e.RowIndex].Cells[3].Value.ToString(),
+                        Post = dataGridView.Rows[e.RowIndex].Cells[5].Value.ToString(),
+                        Email = dataGridView.Rows[e.RowIndex].Cells[8].Value.ToString(),
+                        WPhone = dataGridView.Rows[e.RowIndex].Cells[6].Value.ToString(),
+                        Phone = dataGridView.Rows[e.RowIndex].Cells[7].Value.ToString(),
+                        Id_org = Int32.Parse(dataGridView.Rows[e.RowIndex].Cells[11].Value.ToString())
+                    };
+                    var myForm = new PersonAddForm(table, this, elList);
+                    //myForm.FormClosed += new FormClosedEventHandler(myForm_FormClosed);
+                    myForm.ShowDialog();
 
-            //        if (myForm.DialogResult == DialogResult.OK)
-            //        {
-            //            var productTable = myForm.productTable;
-            //            dataGridView.Rows[e.RowIndex].Cells[0].Value = productTable.Id;
-            //            dataGridView.Rows[e.RowIndex].Cells[1].Value = productTable.Code;
-            //            dataGridView.Rows[e.RowIndex].Cells[2].Value = productTable.Name;
-            //            dataGridView.Rows[e.RowIndex].Cells[3].Value = productTable.Unit;
-            //            dataGridView.Rows[e.RowIndex].Cells[4].Value = productTable.nUnit;
-            //            dataGridView.Rows[e.RowIndex].Cells[5].Value = productTable.s111;
-            //            dataGridView.Rows[e.RowIndex].Cells[6].Value = productTable.s112;
-            //        }
-            //    }
-            //}
+                    if (myForm.DialogResult == DialogResult.OK)
+                    {
+                        var personTable = myForm.personTable;
+                        dataGridView.Rows[e.RowIndex].Cells[0].Value = personTable.Id;
+                        dataGridView.Rows[e.RowIndex].Cells[1].Value = personTable.Surname;
+                        dataGridView.Rows[e.RowIndex].Cells[2].Value = personTable.Name;
+                        dataGridView.Rows[e.RowIndex].Cells[3].Value = personTable.Otchestvo;
+                        dataGridView.Rows[e.RowIndex].Cells[5].Value = personTable.Post;
+                        dataGridView.Rows[e.RowIndex].Cells[6].Value = personTable.WPhone;
+                        dataGridView.Rows[e.RowIndex].Cells[7].Value = personTable.Phone;
+                        dataGridView.Rows[e.RowIndex].Cells[8].Value = personTable.Email;
+                        dataGridView.Rows[e.RowIndex].Cells[11].Value = personTable.Id_org;
+                    }
+                }
+            }
         }
 
 
         private void addToolStripButton_Click(object sender, EventArgs e)
         {
-            //var myForm = new ProductAddForm();
-            //myForm.FormClosed += new FormClosedEventHandler(myForm_FormClosed);
-            //myForm.ShowDialog();
+            var myForm = new PersonAddForm(elList);
+            myForm.FormClosed += new FormClosedEventHandler(myForm_FormClosed);
+            myForm.ShowDialog();
         }
 
         private void editToolStripButton_Click(object sender, EventArgs e)
