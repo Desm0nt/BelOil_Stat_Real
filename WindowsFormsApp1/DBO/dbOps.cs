@@ -48,6 +48,13 @@ namespace WindowsFormsApp1.DBO
             return status;
         }
 
+        /// <summary>
+        /// Проверка существования отчета
+        /// </summary>
+        /// <param name="id_org"></param>
+        /// <param name="year"></param>
+        /// <param name="month"></param>
+        /// <returns></returns>
         public static bool ExistReportCheck(int id_org, int year, int month)
         {
             bool status = false;
@@ -73,6 +80,14 @@ namespace WindowsFormsApp1.DBO
             }
             return status;
         }
+
+        /// <summary>
+        /// Добавление нового отчета
+        /// </summary>
+        /// <param name="id_org"></param>
+        /// <param name="year"></param>
+        /// <param name="month"></param>
+        /// <param name="id_user"></param>
         public static void AddNewReport(int id_org, int year, int month, int id_user)
         {
             try
@@ -94,33 +109,8 @@ namespace WindowsFormsApp1.DBO
                 KryptonMessageBox.Show("Ошибка проверки наличия отчета: " + Ex.Message);
             }
         }
-        public static List<int> GetFuelsTradeId(int id_org, int trade)
-        {
-            List<int> trades = new List<int>();
-            try
-            {
-                SqlConnection myConnection = new SqlConnection(cnStr);
-                myConnection.Open();
 
-                string query = "SELECT * FROM [NewOrgFuels] where id_org = @id_org and trade = @trade";
-                SqlCommand command = new SqlCommand(query, myConnection);
-                command.Parameters.AddWithValue("@id_org", id_org);
-                command.Parameters.AddWithValue("@trade", trade);
-                using (SqlDataReader dr = command.ExecuteReader())
-                {
-                    while (dr.Read())
-                    {
-                        trades.Add(Int32.Parse(dr["id"].ToString()));
-                    }
-                }
-                myConnection.Close();
-            }
-            catch (Exception Ex)
-            {
-                KryptonMessageBox.Show("Ошибка GetFuelsTradeId: " + Ex.Message);
-            }
-            return trades;
-        }
+        #region Долучение списков
         public static List<NormIdTypeTable> GetNormIdTypeList(int id_org)
         {
             List<NormIdTypeTable> NormList = new List<NormIdTypeTable>();
@@ -221,6 +211,35 @@ namespace WindowsFormsApp1.DBO
             }
             return SourceList;
         }
+        #endregion
+
+        public static List<int> GetFuelsTradeId(int id_org, int trade)
+        {
+            List<int> trades = new List<int>();
+            try
+            {
+                SqlConnection myConnection = new SqlConnection(cnStr);
+                myConnection.Open();
+
+                string query = "SELECT * FROM [NewOrgFuels] where id_org = @id_org and trade = @trade";
+                SqlCommand command = new SqlCommand(query, myConnection);
+                command.Parameters.AddWithValue("@id_org", id_org);
+                command.Parameters.AddWithValue("@trade", trade);
+                using (SqlDataReader dr = command.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        trades.Add(Int32.Parse(dr["id"].ToString()));
+                    }
+                }
+                myConnection.Close();
+            }
+            catch (Exception Ex)
+            {
+                KryptonMessageBox.Show("Ошибка GetFuelsTradeId: " + Ex.Message);
+            }
+            return trades;
+        }
         public static void AddFuelTrades(int id_fuel, int id_org, int id_rep, float value)
         {
             try
@@ -242,6 +261,8 @@ namespace WindowsFormsApp1.DBO
                 KryptonMessageBox.Show("Ошибка AddFuelTrades: " + Ex.Message);
             }
         }
+
+        #region Обновление данных
         public static void UpdateFuelTrades(int id, float value)
         {
             try
@@ -338,6 +359,7 @@ namespace WindowsFormsApp1.DBO
                 KryptonMessageBox.Show("Ошибка UpdateSended: " + Ex.Message);
             }
         }
+        #endregion
 
         public static void AddNormData(int id_norm, int id_rep, float value_plan, float value_fact)
         {
@@ -713,6 +735,12 @@ namespace WindowsFormsApp1.DBO
         }
 
         #region main
+
+        /// <summary>
+        /// продукты справочник
+        /// </summary>
+        /// <param name="id_prod"></param>
+        /// <returns></returns>
         public static string GetProdUnit(int id_prod)
         {
             string unit = "";
@@ -870,9 +898,9 @@ namespace WindowsFormsApp1.DBO
 
 
         /// <summary>
-        /// Человеки
+        /// Человеки справочник
         /// </summary>
-        /// <returns></returns>
+        /// <returns></returns> 
         public static List<PersonTable> GetPersonList()
         {
             int hval = 0;
@@ -999,6 +1027,32 @@ namespace WindowsFormsApp1.DBO
                 KryptonMessageBox.Show("Ошибка UpdateProdList: " + Ex.Message);
             }
         }
+        public static void AddNewPerson(PersonTable personTable)
+        {
+            try
+            {
+                SqlConnection myConnection = new SqlConnection(cnStr);
+                myConnection.Open();
+
+                string query = "INSERT INTO NewPersons (id, id_org, name, surname, patronymic, post, phone, phone_work, email) VALUES (@id, @id_org, @name, @surname, @patronymic, @post, @phone, @phone_work, @email)";
+                SqlCommand command = new SqlCommand(query, myConnection);
+                command.Parameters.AddWithValue("@id", personTable.Id);
+                command.Parameters.AddWithValue("@name", personTable.Name);
+                command.Parameters.AddWithValue("@surname", personTable.Surname);
+                command.Parameters.AddWithValue("@patronymic", personTable.Otchestvo);
+                command.Parameters.AddWithValue("@post", personTable.Post);
+                command.Parameters.AddWithValue("@phone", personTable.Phone);
+                command.Parameters.AddWithValue("@phone_work", personTable.WPhone);
+                command.Parameters.AddWithValue("@email", personTable.Email);
+                command.Parameters.AddWithValue("@id_org", personTable.Id_org);
+                command.ExecuteNonQuery();
+                myConnection.Close();
+            }
+            catch (Exception Ex)
+            {
+                KryptonMessageBox.Show("Ошибка AddNewPerson: " + Ex.Message);
+            }
+        }
 
 
 
@@ -1014,7 +1068,6 @@ namespace WindowsFormsApp1.DBO
                 type = 0;
             return type;
         }
-
 
         public static List<TradeTable> GetTrades(int id_rep)
         {

@@ -75,7 +75,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Enabled = false;
-            this.label3.Location = new System.Drawing.Point(318, 84);
+            this.label3.Location = new System.Drawing.Point(334, 86);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(14, 13);
             this.label3.TabIndex = 2;
@@ -85,7 +85,7 @@
             // 
             this.kryptonNumericUpDown2.DecimalPlaces = 99;
             this.kryptonNumericUpDown2.Enabled = false;
-            this.kryptonNumericUpDown2.Location = new System.Drawing.Point(337, 79);
+            this.kryptonNumericUpDown2.Location = new System.Drawing.Point(353, 81);
             this.kryptonNumericUpDown2.Maximum = new decimal(new int[] {
             1000000,
             0,
@@ -184,11 +184,11 @@
             // 
             // typeComboBox
             // 
-            this.typeComboBox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.typeComboBox.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.typeComboBox.FormattingEnabled = true;
             this.typeComboBox.Location = new System.Drawing.Point(167, 82);
             this.typeComboBox.Name = "typeComboBox";
-            this.typeComboBox.Size = new System.Drawing.Size(117, 21);
+            this.typeComboBox.Size = new System.Drawing.Size(161, 21);
             this.typeComboBox.TabIndex = 27;
             this.typeComboBox.Visible = false;
             this.typeComboBox.SelectedIndexChanged += new System.EventHandler(this.typeComboBox_SelectedIndexChanged);

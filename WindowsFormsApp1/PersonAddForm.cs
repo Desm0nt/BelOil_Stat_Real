@@ -1,12 +1,8 @@
 ﻿using ComponentFactory.Krypton.Toolkit;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using WindowsFormsApp1.DBO;
 
@@ -19,28 +15,25 @@ namespace WindowsFormsApp1
         bool edit = false;
         public DataTables.PersonTable personTable;
         DataTables.PersonTable Table;
-        List<int> idList, codeList;
 
         public PersonAddForm(List<ListElement> ElList)
         {
             InitializeComponent();
             Table = new DataTables.PersonTable();
-            idList = dbOps.GetProdIdList(1);
-            codeList = dbOps.GetProdCodeList(1);
             this.fnameTextBox.AutoSize = false;
-            this.fnameTextBox.Size = new System.Drawing.Size(117, 18);
+            this.fnameTextBox.Size = new Size(117, 18);
             this.nameTextBox.AutoSize = false;
-            this.nameTextBox.Size = new System.Drawing.Size(117, 18);
+            this.nameTextBox.Size = new Size(117, 18);
             this.otchTextBox.AutoSize = false;
-            this.otchTextBox.Size = new System.Drawing.Size(117, 18);
+            this.otchTextBox.Size = new Size(117, 18);
             this.postTextBox.AutoSize = false;
-            this.postTextBox.Size = new System.Drawing.Size(117, 18);
+            this.postTextBox.Size = new Size(117, 18);
             this.textBox1.AutoSize = false;
-            this.textBox1.Size = new System.Drawing.Size(344, 18);
+            this.textBox1.Size = new Size(344, 18);
             this.textBox2.AutoSize = false;
-            this.textBox2.Size = new System.Drawing.Size(164, 18);
+            this.textBox2.Size = new Size(164, 18);
             this.textBox3.AutoSize = false;
-            this.textBox3.Size = new System.Drawing.Size(164, 18);
+            this.textBox3.Size = new Size(164, 18);
             var items = new[] { new { Text = "Топливо", Value = "1" }, new { Text = "Тепловые ресурсы", Value = "2" }, new { Text = "Электрические ресурсы", Value = "3" } };
             var it2 = items.ToList();
             it2.Clear();
@@ -54,6 +47,8 @@ namespace WindowsFormsApp1
             label8.Visible = true;
             Table.Type = 1;
             kryptonNumericUpDown2.Value = dbOps.GetPersonLastID();
+            label3.Location = new Point(334, 86);
+            kryptonNumericUpDown2.Location = new Point(353, 81);
         }
 
         public PersonAddForm(DataTables.PersonTable table, PersonsListForm parrentForm, List<ListElement> ElList)
@@ -63,22 +58,20 @@ namespace WindowsFormsApp1
             this.ParrentForm = parrentForm;
             elList = ElList;
             Table = table;
-            idList = dbOps.GetProdIdList(Table.Type);
-            codeList = dbOps.GetProdCodeList(Table.Type);
             this.fnameTextBox.AutoSize = false;
-            this.fnameTextBox.Size = new System.Drawing.Size(117, 18);
+            this.fnameTextBox.Size = new Size(117, 18);
             this.nameTextBox.AutoSize = false;
-            this.nameTextBox.Size = new System.Drawing.Size(117, 18);
+            this.nameTextBox.Size = new Size(117, 18);
             this.otchTextBox.AutoSize = false;
-            this.otchTextBox.Size = new System.Drawing.Size(117, 18);
+            this.otchTextBox.Size = new Size(117, 18);
             this.postTextBox.AutoSize = false;
-            this.postTextBox.Size = new System.Drawing.Size(262, 18);
+            this.postTextBox.Size = new Size(262, 18);
             this.textBox1.AutoSize = false;
-            this.textBox1.Size = new System.Drawing.Size(344, 18);
+            this.textBox1.Size = new Size(344, 18);
             this.textBox2.AutoSize = false;
-            this.textBox2.Size = new System.Drawing.Size(164, 18);
+            this.textBox2.Size = new Size(164, 18);
             this.textBox3.AutoSize = false;
-            this.textBox3.Size = new System.Drawing.Size(164, 18);
+            this.textBox3.Size = new Size(164, 18);
             typeComboBox.Visible = false;
             label8.Visible = false;
             kryptonNumericUpDown2.Value = Table.Id;
@@ -91,6 +84,8 @@ namespace WindowsFormsApp1
             textBox1.Text = Table.Email;
             textBox2.Text = Table.WPhone;
             textBox3.Text = Table.Phone;
+            label3.Location = new Point(318, 86);
+            kryptonNumericUpDown2.Location = new Point(337, 81);
         }
 
         private void OkButton1_Click(object sender, EventArgs e)
@@ -122,8 +117,12 @@ namespace WindowsFormsApp1
                 if (edit)
                 {
                     this.DialogResult = DialogResult.OK;
+                    dbOps.UpdatePersonList(personTable);
                 }
-                dbOps.UpdatePersonList(personTable);
+                else
+                {
+                    dbOps.AddNewPerson(personTable);
+                }
                 this.Close();
             }
             catch (Exception ex)

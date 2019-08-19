@@ -106,8 +106,8 @@ namespace WindowsFormsApp1
                 if (edit)
                 {
                     this.DialogResult = DialogResult.OK;
+                    dbOps.UpdateProdList(productTable, Table.Id);
                 }
-                dbOps.UpdateProdList(productTable, Table.Id);
                 this.Close();               
             }
             catch (Exception ex)
