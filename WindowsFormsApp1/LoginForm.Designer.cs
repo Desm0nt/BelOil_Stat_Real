@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LoginForm));
             this.button1 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.textBox1 = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.textBox2 = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
@@ -134,6 +135,7 @@
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(373, 214);
             this.MinimizeBox = false;
