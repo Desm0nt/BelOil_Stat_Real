@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ReportsForm));
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.dateTimePicker1 = new ComponentFactory.Krypton.Toolkit.KryptonDateTimePicker();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.менюToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.сменитьПользователяToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -48,7 +48,6 @@
             this.списокОбъектовToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.профильОрганизацииToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.label1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.reoGridControl3 = new unvell.ReoGrid.ReoGridControl();
             this.tabPage6 = new System.Windows.Forms.TabPage();
@@ -64,12 +63,38 @@
             this.reoGridControl2 = new unvell.ReoGrid.ReoGridControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.reoGridControl1 = new unvell.ReoGrid.ReoGridControl();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.CompanyBox = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
-            this.button3 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.RUPButton = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.POButton = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
             this.kryptonManager1 = new ComponentFactory.Krypton.Toolkit.KryptonManager(this.components);
+            this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
+            this.toolStrip2 = new System.Windows.Forms.ToolStrip();
+            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
+            this.yearButton = new System.Windows.Forms.ToolStripDropDownButton();
+            this.year1Button = new System.Windows.Forms.ToolStripMenuItem();
+            this.year2Button = new System.Windows.Forms.ToolStripMenuItem();
+            this.year3Button = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
+            this.qButton = new System.Windows.Forms.ToolStripMenuItem();
+            this.q2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.iIIКварталToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.iVКварталToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripDropDownButton2 = new System.Windows.Forms.ToolStripDropDownButton();
+            this.toolStrip4 = new System.Windows.Forms.ToolStrip();
+            this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButton6 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton7 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton8 = new System.Windows.Forms.ToolStripButton();
+            this.toolStrip3 = new System.Windows.Forms.ToolStrip();
+            this.button3 = new System.Windows.Forms.ToolStripButton();
+            this.RUPButton = new System.Windows.Forms.ToolStripButton();
+            this.POButton = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tabPage6.SuspendLayout();
@@ -77,25 +102,36 @@
             this.tabPage3.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            this.tabControl1.SuspendLayout();
+            this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.CompanyBox)).BeginInit();
+            this.tabControl1.SuspendLayout();
+            this.toolStripContainer1.ContentPanel.SuspendLayout();
+            this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
+            this.toolStripContainer1.SuspendLayout();
+            this.toolStrip2.SuspendLayout();
+            this.toolStrip1.SuspendLayout();
+            this.toolStrip4.SuspendLayout();
+            this.toolStrip3.SuspendLayout();
             this.SuspendLayout();
             // 
             // dateTimePicker1
             // 
-            this.dateTimePicker1.CalendarFont = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.dateTimePicker1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.dateTimePicker1.Location = new System.Drawing.Point(412, 2);
+            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dateTimePicker1.Location = new System.Drawing.Point(127, 49);
             this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(200, 23);
+            this.dateTimePicker1.Size = new System.Drawing.Size(97, 21);
             this.dateTimePicker1.TabIndex = 2;
-            this.dateTimePicker1.CloseUp += new System.EventHandler(this.dateTimePicker1_CloseUp);
-            this.dateTimePicker1.DropDown += new System.EventHandler(this.dateTimePicker1_DropDown);
+            this.dateTimePicker1.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
+            this.dateTimePicker1.DropDown += new System.EventHandler<ComponentFactory.Krypton.Toolkit.DateTimePickerDropArgs>(this.dateTimePicker1_DropDown);
+            this.dateTimePicker1.CloseUp += new System.EventHandler<ComponentFactory.Krypton.Toolkit.DateTimePickerCloseArgs>(this.dateTimePicker1_CloseUp);
             // 
             // menuStrip1
             // 
             this.menuStrip1.AutoSize = false;
+            this.menuStrip1.Dock = System.Windows.Forms.DockStyle.None;
             this.menuStrip1.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.menuStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Visible;
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.менюToolStripMenuItem,
             this.отчетыToolStripMenuItem,
@@ -103,7 +139,7 @@
             this.cToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1339, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(1339, 24);
             this.menuStrip1.TabIndex = 3;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -113,7 +149,7 @@
             this.сменитьПользователяToolStripMenuItem,
             this.закрытьПрограммуToolStripMenuItem});
             this.менюToolStripMenuItem.Name = "менюToolStripMenuItem";
-            this.менюToolStripMenuItem.Size = new System.Drawing.Size(53, 24);
+            this.менюToolStripMenuItem.Size = new System.Drawing.Size(53, 20);
             this.менюToolStripMenuItem.Text = "&Меню";
             // 
             // сменитьПользователяToolStripMenuItem
@@ -139,7 +175,7 @@
             this.сохранитьОтчет1ТЭКToolStripMenuItem});
             this.отчетыToolStripMenuItem.Image = global::WindowsFormsApp1.Properties.Resources.rep;
             this.отчетыToolStripMenuItem.Name = "отчетыToolStripMenuItem";
-            this.отчетыToolStripMenuItem.Size = new System.Drawing.Size(76, 24);
+            this.отчетыToolStripMenuItem.Size = new System.Drawing.Size(76, 20);
             this.отчетыToolStripMenuItem.Text = "&Отчеты";
             // 
             // сформировать1ПЭРToolStripMenuItem
@@ -179,8 +215,8 @@
             this.toolStripSeparator1,
             this.списокОбъектовToolStripMenuItem});
             this.данныеToolStripMenuItem.Name = "данныеToolStripMenuItem";
-            this.данныеToolStripMenuItem.Size = new System.Drawing.Size(62, 24);
-            this.данныеToolStripMenuItem.Text = "&Данные";
+            this.данныеToolStripMenuItem.Size = new System.Drawing.Size(94, 20);
+            this.данныеToolStripMenuItem.Text = "&Справочники";
             // 
             // списокТопливныхРеусурсовToolStripMenuItem
             // 
@@ -226,7 +262,7 @@
             this.cToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.профильОрганизацииToolStripMenuItem});
             this.cToolStripMenuItem.Name = "cToolStripMenuItem";
-            this.cToolStripMenuItem.Size = new System.Drawing.Size(59, 24);
+            this.cToolStripMenuItem.Size = new System.Drawing.Size(59, 20);
             this.cToolStripMenuItem.Text = "&Сервис";
             // 
             // профильОрганизацииToolStripMenuItem
@@ -234,17 +270,6 @@
             this.профильОрганизацииToolStripMenuItem.Name = "профильОрганизацииToolStripMenuItem";
             this.профильОрганизацииToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
             this.профильОрганизацииToolStripMenuItem.Text = "Профиль организации";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(219)))), ((int)(((byte)(255)))));
-            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(21)))), ((int)(((byte)(65)))), ((int)(((byte)(135)))));
-            this.label1.Location = new System.Drawing.Point(313, 7);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(88, 13);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "Выбор периода:";
             // 
             // panel1
             // 
@@ -282,7 +307,7 @@
             this.tabPage6.Controls.Add(this.reoGridControl5);
             this.tabPage6.Location = new System.Drawing.Point(4, 22);
             this.tabPage6.Name = "tabPage6";
-            this.tabPage6.Size = new System.Drawing.Size(1307, 613);
+            this.tabPage6.Size = new System.Drawing.Size(1331, 559);
             this.tabPage6.TabIndex = 5;
             this.tabPage6.Text = "1-ТЭК";
             // 
@@ -312,7 +337,7 @@
             this.reoGridControl5.SheetTabVisible = true;
             this.reoGridControl5.SheetTabWidth = 60;
             this.reoGridControl5.ShowScrollEndSpacing = true;
-            this.reoGridControl5.Size = new System.Drawing.Size(1304, 576);
+            this.reoGridControl5.Size = new System.Drawing.Size(1328, 722);
             this.reoGridControl5.TabIndex = 2;
             this.reoGridControl5.Text = "reoGridControl5";
             // 
@@ -324,7 +349,7 @@
             this.tabPage4.Controls.Add(this.reoGridControl4);
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Size = new System.Drawing.Size(1307, 613);
+            this.tabPage4.Size = new System.Drawing.Size(1331, 559);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "4-норма";
             // 
@@ -363,7 +388,7 @@
             this.reoGridControl4.SheetTabVisible = true;
             this.reoGridControl4.SheetTabWidth = 60;
             this.reoGridControl4.ShowScrollEndSpacing = true;
-            this.reoGridControl4.Size = new System.Drawing.Size(1304, 577);
+            this.reoGridControl4.Size = new System.Drawing.Size(1328, 723);
             this.reoGridControl4.TabIndex = 2;
             this.reoGridControl4.Text = "reoGridControl4";
             // 
@@ -374,7 +399,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(1307, 613);
+            this.tabPage3.Size = new System.Drawing.Size(1331, 559);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Приложение к 12-ТЭК";
             // 
@@ -393,7 +418,7 @@
             this.reoGrid4.SheetTabVisible = true;
             this.reoGrid4.SheetTabWidth = 60;
             this.reoGrid4.ShowScrollEndSpacing = true;
-            this.reoGrid4.Size = new System.Drawing.Size(1301, 607);
+            this.reoGrid4.Size = new System.Drawing.Size(1325, 553);
             this.reoGrid4.TabIndex = 1;
             this.reoGrid4.Text = "reoGridControl4";
             // 
@@ -404,7 +429,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1307, 613);
+            this.tabPage2.Size = new System.Drawing.Size(1331, 559);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "12-ТЭК";
             // 
@@ -423,18 +448,20 @@
             this.reoGridControl2.SheetTabVisible = true;
             this.reoGridControl2.SheetTabWidth = 60;
             this.reoGridControl2.ShowScrollEndSpacing = true;
-            this.reoGridControl2.Size = new System.Drawing.Size(1301, 607);
+            this.reoGridControl2.Size = new System.Drawing.Size(1325, 553);
             this.reoGridControl2.TabIndex = 0;
             this.reoGridControl2.Text = "reoGridControl2";
             // 
             // tabPage1
             // 
             this.tabPage1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(246)))), ((int)(((byte)(254)))));
+            this.tabPage1.Controls.Add(this.dateTimePicker1);
             this.tabPage1.Controls.Add(this.reoGridControl1);
+            this.tabPage1.Controls.Add(this.panel2);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1307, 613);
+            this.tabPage1.Size = new System.Drawing.Size(1331, 559);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "1-ПЭР";
             // 
@@ -453,74 +480,332 @@
             this.reoGridControl1.SheetTabVisible = true;
             this.reoGridControl1.SheetTabWidth = 60;
             this.reoGridControl1.ShowScrollEndSpacing = true;
-            this.reoGridControl1.Size = new System.Drawing.Size(1301, 607);
+            this.reoGridControl1.Size = new System.Drawing.Size(1325, 553);
             this.reoGridControl1.TabIndex = 0;
             this.reoGridControl1.Text = "reoGridControl1";
             // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.Color.Transparent;
+            this.panel2.Controls.Add(this.CompanyBox);
+            this.panel2.Location = new System.Drawing.Point(183, 76);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(202, 22);
+            this.panel2.TabIndex = 11;
+            // 
+            // CompanyBox
+            // 
+            this.CompanyBox.DropDownWidth = 185;
+            this.CompanyBox.FormattingEnabled = true;
+            this.CompanyBox.Location = new System.Drawing.Point(1, 1);
+            this.CompanyBox.Name = "CompanyBox";
+            this.CompanyBox.Size = new System.Drawing.Size(185, 21);
+            this.CompanyBox.StateCommon.ComboBox.Content.TextH = ComponentFactory.Krypton.Toolkit.PaletteRelativeAlign.Near;
+            this.CompanyBox.TabIndex = 6;
+            // 
             // tabControl1
             // 
-            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Controls.Add(this.tabPage6);
             this.tabControl1.Cursor = System.Windows.Forms.Cursors.Default;
-            this.tabControl1.Location = new System.Drawing.Point(12, 33);
+            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1315, 639);
+            this.tabControl1.Size = new System.Drawing.Size(1339, 585);
             this.tabControl1.TabIndex = 0;
             this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
-            // 
-            // CompanyBox
-            // 
-            this.CompanyBox.DropDownWidth = 185;
-            this.CompanyBox.FormattingEnabled = true;
-            this.CompanyBox.Location = new System.Drawing.Point(629, 3);
-            this.CompanyBox.Name = "CompanyBox";
-            this.CompanyBox.Size = new System.Drawing.Size(185, 21);
-            this.CompanyBox.StateCommon.ComboBox.Content.TextH = ComponentFactory.Krypton.Toolkit.PaletteRelativeAlign.Near;
-            this.CompanyBox.TabIndex = 6;
-            this.CompanyBox.Visible = false;
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(824, 2);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 24);
-            this.button3.TabIndex = 7;
-            this.button3.Values.Text = "Выбрать";
-            this.button3.Visible = false;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
-            // 
-            // RUPButton
-            // 
-            this.RUPButton.Enabled = false;
-            this.RUPButton.Location = new System.Drawing.Point(905, 2);
-            this.RUPButton.Name = "RUPButton";
-            this.RUPButton.Size = new System.Drawing.Size(75, 24);
-            this.RUPButton.TabIndex = 8;
-            this.RUPButton.Values.Text = "РУП";
-            this.RUPButton.Visible = false;
-            this.RUPButton.Click += new System.EventHandler(this.RUPButton_Click);
-            // 
-            // POButton
-            // 
-            this.POButton.Enabled = false;
-            this.POButton.Location = new System.Drawing.Point(986, 2);
-            this.POButton.Name = "POButton";
-            this.POButton.Size = new System.Drawing.Size(75, 24);
-            this.POButton.TabIndex = 9;
-            this.POButton.Values.Text = "ПО";
-            this.POButton.Visible = false;
-            this.POButton.Click += new System.EventHandler(this.POButton_Click);
             // 
             // kryptonManager1
             // 
             this.kryptonManager1.GlobalPaletteMode = ComponentFactory.Krypton.Toolkit.PaletteModeManager.Office2007Blue;
+            // 
+            // toolStripContainer1
+            // 
+            // 
+            // toolStripContainer1.ContentPanel
+            // 
+            this.toolStripContainer1.ContentPanel.Controls.Add(this.tabControl1);
+            this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(1339, 585);
+            this.toolStripContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.toolStripContainer1.Location = new System.Drawing.Point(0, 0);
+            this.toolStripContainer1.Name = "toolStripContainer1";
+            this.toolStripContainer1.Size = new System.Drawing.Size(1339, 684);
+            this.toolStripContainer1.TabIndex = 10;
+            this.toolStripContainer1.Text = "toolStripContainer1";
+            // 
+            // toolStripContainer1.TopToolStripPanel
+            // 
+            this.toolStripContainer1.TopToolStripPanel.Controls.Add(this.menuStrip1);
+            this.toolStripContainer1.TopToolStripPanel.Controls.Add(this.toolStrip2);
+            this.toolStripContainer1.TopToolStripPanel.Controls.Add(this.toolStrip1);
+            this.toolStripContainer1.TopToolStripPanel.Controls.Add(this.toolStrip4);
+            this.toolStripContainer1.TopToolStripPanel.Controls.Add(this.toolStrip3);
+            // 
+            // toolStrip2
+            // 
+            this.toolStrip2.Dock = System.Windows.Forms.DockStyle.None;
+            this.toolStrip2.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripButton2,
+            this.toolStripButton3});
+            this.toolStrip2.Location = new System.Drawing.Point(3, 24);
+            this.toolStrip2.Name = "toolStrip2";
+            this.toolStrip2.Size = new System.Drawing.Size(58, 25);
+            this.toolStrip2.TabIndex = 5;
+            // 
+            // toolStripButton2
+            // 
+            this.toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton2.Enabled = false;
+            this.toolStripButton2.Image = global::WindowsFormsApp1.Properties.Resources.save;
+            this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton2.Name = "toolStripButton2";
+            this.toolStripButton2.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton2.Text = "toolStripButton2";
+            // 
+            // toolStripButton3
+            // 
+            this.toolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton3.Enabled = false;
+            this.toolStripButton3.Image = global::WindowsFormsApp1.Properties.Resources.excel;
+            this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton3.Name = "toolStripButton3";
+            this.toolStripButton3.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton3.Text = "toolStripButton3";
+            // 
+            // toolStrip1
+            // 
+            this.toolStrip1.Dock = System.Windows.Forms.DockStyle.None;
+            this.toolStrip1.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripLabel1,
+            this.yearButton,
+            this.toolStripDropDownButton1,
+            this.toolStripDropDownButton2});
+            this.toolStrip1.Location = new System.Drawing.Point(61, 24);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Size = new System.Drawing.Size(325, 25);
+            this.toolStrip1.TabIndex = 4;
+            // 
+            // toolStripLabel1
+            // 
+            this.toolStripLabel1.Name = "toolStripLabel1";
+            this.toolStripLabel1.Size = new System.Drawing.Size(96, 22);
+            this.toolStripLabel1.Text = "Выбор периода:";
+            // 
+            // yearButton
+            // 
+            this.yearButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.yearButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.year1Button,
+            this.year2Button,
+            this.year3Button});
+            this.yearButton.Image = ((System.Drawing.Image)(resources.GetObject("yearButton.Image")));
+            this.yearButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.yearButton.Name = "yearButton";
+            this.yearButton.Size = new System.Drawing.Size(48, 22);
+            this.yearButton.Text = "year1";
+            // 
+            // year1Button
+            // 
+            this.year1Button.Name = "year1Button";
+            this.year1Button.Size = new System.Drawing.Size(102, 22);
+            this.year1Button.Text = "year1";
+            this.year1Button.Click += new System.EventHandler(this.year1Button_Click);
+            // 
+            // year2Button
+            // 
+            this.year2Button.Name = "year2Button";
+            this.year2Button.Size = new System.Drawing.Size(102, 22);
+            this.year2Button.Text = "year2";
+            this.year2Button.Click += new System.EventHandler(this.year1Button_Click);
+            // 
+            // year3Button
+            // 
+            this.year3Button.Name = "year3Button";
+            this.year3Button.Size = new System.Drawing.Size(102, 22);
+            this.year3Button.Text = "year3";
+            this.year3Button.Click += new System.EventHandler(this.year1Button_Click);
+            // 
+            // toolStripDropDownButton1
+            // 
+            this.toolStripDropDownButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.qButton,
+            this.q2ToolStripMenuItem,
+            this.iIIКварталToolStripMenuItem,
+            this.iVКварталToolStripMenuItem});
+            this.toolStripDropDownButton1.Image = global::WindowsFormsApp1.Properties.Resources.ce1;
+            this.toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
+            this.toolStripDropDownButton1.Size = new System.Drawing.Size(66, 22);
+            this.toolStripDropDownButton1.Text = "Quart";
+            // 
+            // qButton
+            // 
+            this.qButton.Image = global::WindowsFormsApp1.Properties.Resources.cb1;
+            this.qButton.Name = "qButton";
+            this.qButton.Size = new System.Drawing.Size(180, 22);
+            this.qButton.Text = "I квартал";
+            this.qButton.Click += new System.EventHandler(this.qButton_Click);
+            // 
+            // q2ToolStripMenuItem
+            // 
+            this.q2ToolStripMenuItem.Image = global::WindowsFormsApp1.Properties.Resources.cg1;
+            this.q2ToolStripMenuItem.Name = "q2ToolStripMenuItem";
+            this.q2ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.q2ToolStripMenuItem.Text = "II квартал";
+            this.q2ToolStripMenuItem.Click += new System.EventHandler(this.qButton_Click);
+            // 
+            // iIIКварталToolStripMenuItem
+            // 
+            this.iIIКварталToolStripMenuItem.Image = global::WindowsFormsApp1.Properties.Resources.ce1;
+            this.iIIКварталToolStripMenuItem.Name = "iIIКварталToolStripMenuItem";
+            this.iIIКварталToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.iIIКварталToolStripMenuItem.Text = "III квартал";
+            this.iIIКварталToolStripMenuItem.Click += new System.EventHandler(this.qButton_Click);
+            // 
+            // iVКварталToolStripMenuItem
+            // 
+            this.iVКварталToolStripMenuItem.Image = global::WindowsFormsApp1.Properties.Resources.cp1;
+            this.iVКварталToolStripMenuItem.Name = "iVКварталToolStripMenuItem";
+            this.iVКварталToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.iVКварталToolStripMenuItem.Text = "IV квартал";
+            this.iVКварталToolStripMenuItem.Click += new System.EventHandler(this.qButton_Click);
+            // 
+            // toolStripDropDownButton2
+            // 
+            this.toolStripDropDownButton2.Image = global::WindowsFormsApp1.Properties.Resources.ce1;
+            this.toolStripDropDownButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripDropDownButton2.Name = "toolStripDropDownButton2";
+            this.toolStripDropDownButton2.Size = new System.Drawing.Size(72, 22);
+            this.toolStripDropDownButton2.Text = "Month";
+            // 
+            // toolStrip4
+            // 
+            this.toolStrip4.Dock = System.Windows.Forms.DockStyle.None;
+            this.toolStrip4.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.toolStrip4.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripButton4,
+            this.toolStripButton5,
+            this.toolStripSeparator2,
+            this.toolStripButton6,
+            this.toolStripButton7,
+            this.toolStripButton8});
+            this.toolStrip4.Location = new System.Drawing.Point(3, 49);
+            this.toolStrip4.Name = "toolStrip4";
+            this.toolStrip4.Size = new System.Drawing.Size(133, 25);
+            this.toolStrip4.TabIndex = 7;
+            // 
+            // toolStripButton4
+            // 
+            this.toolStripButton4.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton4.Image = global::WindowsFormsApp1.Properties.Resources.predpr;
+            this.toolStripButton4.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton4.Name = "toolStripButton4";
+            this.toolStripButton4.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton4.Text = "toolStripButton4";
+            // 
+            // toolStripButton5
+            // 
+            this.toolStripButton5.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton5.Image = global::WindowsFormsApp1.Properties.Resources.cbx2p_h0eqv1;
+            this.toolStripButton5.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton5.Name = "toolStripButton5";
+            this.toolStripButton5.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton5.Text = "toolStripButton5";
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+            // 
+            // toolStripButton6
+            // 
+            this.toolStripButton6.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton6.Image = global::WindowsFormsApp1.Properties.Resources.cb9pk_llwrs;
+            this.toolStripButton6.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton6.Name = "toolStripButton6";
+            this.toolStripButton6.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton6.Text = "toolStripButton6";
+            // 
+            // toolStripButton7
+            // 
+            this.toolStripButton7.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton7.Image = global::WindowsFormsApp1.Properties.Resources.cbl76_u0ijo;
+            this.toolStripButton7.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton7.Name = "toolStripButton7";
+            this.toolStripButton7.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton7.Text = "toolStripButton7";
+            // 
+            // toolStripButton8
+            // 
+            this.toolStripButton8.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton8.Image = global::WindowsFormsApp1.Properties.Resources.icoprod1;
+            this.toolStripButton8.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton8.Name = "toolStripButton8";
+            this.toolStripButton8.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton8.Text = "toolStripButton8";
+            // 
+            // toolStrip3
+            // 
+            this.toolStrip3.AutoSize = false;
+            this.toolStrip3.Dock = System.Windows.Forms.DockStyle.None;
+            this.toolStrip3.Enabled = false;
+            this.toolStrip3.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.toolStrip3.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.button3,
+            this.RUPButton,
+            this.POButton});
+            this.toolStrip3.Location = new System.Drawing.Point(3, 74);
+            this.toolStrip3.MinimumSize = new System.Drawing.Size(335, 25);
+            this.toolStrip3.Name = "toolStrip3";
+            this.toolStrip3.Size = new System.Drawing.Size(335, 25);
+            this.toolStrip3.TabIndex = 6;
+            // 
+            // button3
+            // 
+            this.button3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.button3.Image = ((System.Drawing.Image)(resources.GetObject("button3.Image")));
+            this.button3.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(58, 22);
+            this.button3.Text = "Выбрать";
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // RUPButton
+            // 
+            this.RUPButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.RUPButton.Enabled = false;
+            this.RUPButton.Image = ((System.Drawing.Image)(resources.GetObject("RUPButton.Image")));
+            this.RUPButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.RUPButton.Name = "RUPButton";
+            this.RUPButton.Size = new System.Drawing.Size(34, 22);
+            this.RUPButton.Text = "РУП";
+            this.RUPButton.Click += new System.EventHandler(this.RUPButton_Click);
+            // 
+            // POButton
+            // 
+            this.POButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.POButton.Enabled = false;
+            this.POButton.Image = ((System.Drawing.Image)(resources.GetObject("POButton.Image")));
+            this.POButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.POButton.Name = "POButton";
+            this.POButton.Size = new System.Drawing.Size(29, 22);
+            this.POButton.Text = "ПО";
+            this.POButton.Click += new System.EventHandler(this.POButton_Click);
+            // 
+            // toolStripButton1
+            // 
+            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
+            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton1.Name = "toolStripButton1";
+            this.toolStripButton1.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton1.Text = "toolStripButton1";
             // 
             // ReportsForm
             // 
@@ -528,15 +813,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(246)))), ((int)(((byte)(254)))));
             this.ClientSize = new System.Drawing.Size(1339, 684);
-            this.Controls.Add(this.POButton);
-            this.Controls.Add(this.RUPButton);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.CompanyBox);
+            this.Controls.Add(this.toolStripContainer1);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.dateTimePicker1);
-            this.Controls.Add(this.tabControl1);
-            this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "ReportsForm";
@@ -550,15 +828,28 @@
             this.tabPage3.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
-            this.tabControl1.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.CompanyBox)).EndInit();
+            this.tabControl1.ResumeLayout(false);
+            this.toolStripContainer1.ContentPanel.ResumeLayout(false);
+            this.toolStripContainer1.TopToolStripPanel.ResumeLayout(false);
+            this.toolStripContainer1.TopToolStripPanel.PerformLayout();
+            this.toolStripContainer1.ResumeLayout(false);
+            this.toolStripContainer1.PerformLayout();
+            this.toolStrip2.ResumeLayout(false);
+            this.toolStrip2.PerformLayout();
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
+            this.toolStrip4.ResumeLayout(false);
+            this.toolStrip4.PerformLayout();
+            this.toolStrip3.ResumeLayout(false);
+            this.toolStrip3.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private ComponentFactory.Krypton.Toolkit.KryptonDateTimePicker dateTimePicker1;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem менюToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem сменитьПользователяToolStripMenuItem;
@@ -571,7 +862,6 @@
         private System.Windows.Forms.ToolStripMenuItem списокОбъектовToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem списокТопливныхРеусурсовToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem списокСотрудниковToolStripMenuItem;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panel1;
         private unvell.ReoGrid.ReoGridControl reoGridControl3;
         private System.Windows.Forms.TabPage tabPage6;
@@ -589,14 +879,40 @@
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.ToolStripMenuItem сохранитьОтчет1ТЭКToolStripMenuItem;
         private ComponentFactory.Krypton.Toolkit.KryptonComboBox CompanyBox;
-        private ComponentFactory.Krypton.Toolkit.KryptonButton button3;
-        private ComponentFactory.Krypton.Toolkit.KryptonButton RUPButton;
-        private ComponentFactory.Krypton.Toolkit.KryptonButton POButton;
         private System.Windows.Forms.ToolStripMenuItem мастерВвода4Нормы1ТЭКToolStripMenuItem;
         private ComponentFactory.Krypton.Toolkit.KryptonButton button4;
         private ComponentFactory.Krypton.Toolkit.KryptonManager kryptonManager1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem cToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem профильОрганизацииToolStripMenuItem;
+        private System.Windows.Forms.ToolStripContainer toolStripContainer1;
+        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel1;
+        private System.Windows.Forms.ToolStripButton toolStripButton1;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.ToolStrip toolStrip2;
+        private System.Windows.Forms.ToolStripButton toolStripButton2;
+        private System.Windows.Forms.ToolStripButton toolStripButton3;
+        private System.Windows.Forms.ToolStrip toolStrip3;
+        private System.Windows.Forms.ToolStripButton button3;
+        private System.Windows.Forms.ToolStripButton RUPButton;
+        private System.Windows.Forms.ToolStripButton POButton;
+        private System.Windows.Forms.ToolStripDropDownButton yearButton;
+        private System.Windows.Forms.ToolStripMenuItem year1Button;
+        private System.Windows.Forms.ToolStripMenuItem year2Button;
+        private System.Windows.Forms.ToolStripMenuItem year3Button;
+        private System.Windows.Forms.ToolStrip toolStrip4;
+        private System.Windows.Forms.ToolStripButton toolStripButton4;
+        private System.Windows.Forms.ToolStripButton toolStripButton5;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripButton toolStripButton6;
+        private System.Windows.Forms.ToolStripButton toolStripButton7;
+        private System.Windows.Forms.ToolStripButton toolStripButton8;
+        private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton1;
+        private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton2;
+        private System.Windows.Forms.ToolStripMenuItem qButton;
+        private System.Windows.Forms.ToolStripMenuItem q2ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem iIIКварталToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem iVКварталToolStripMenuItem;
     }
 }

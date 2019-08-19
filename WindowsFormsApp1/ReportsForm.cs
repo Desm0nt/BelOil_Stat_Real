@@ -36,15 +36,20 @@ namespace WindowsFormsApp1
             CompanyList = dbOps.GetCompanyList();
             if (CurrentData.UserData.Id == 1)
             {
-                CompanyBox.Visible = true;
-                button3.Visible = true;
                 CompanyBox.DataSource = CompanyList;
                 CompanyBox.DisplayMember = "Name";
                 CompanyBox.ValueMember = "Id";
-                RUPButton.Visible = true;
-                POButton.Visible = true;
+                toolStrip3.Enabled = true;
             }
             tabControl1.SelectedIndexChanged += new EventHandler(tabControl1_SelectedIndexChanged);
+            toolStrip1.Items.Insert(1, new ToolStripControlHost(this.dateTimePicker1));
+            toolStrip3.Items.Insert(0, new ToolStripControlHost(this.CompanyBox));
+            toolStrip3.Location = new Point(355, 24);
+            yearButton.Text = DateTime.Now.Year.ToString();
+            year1Button.Text = DateTime.Now.Year.ToString();
+            year2Button.Text = (DateTime.Now.Year - 1).ToString();
+            year3Button.Text = (DateTime.Now.Year - 2).ToString();
+            toolStripDropDownButton1.Text = MakeQuaterText(DateTime.Now.Month);
         }
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
@@ -60,7 +65,6 @@ namespace WindowsFormsApp1
                 POButton.Enabled = false;
             }
         }
-
 
         void MakeTable1per()
         {
@@ -3962,6 +3966,19 @@ namespace WindowsFormsApp1
                 quater = 4;
             return quater;
         }
+        private string MakeQuaterText(int month)
+        {
+            string quater = "I квартал";
+            if (month >= 1 && month <= 3)
+                quater = "I квартал";
+            if (month >= 4 && month <= 6)
+                quater = "II квартал";
+            if (month >= 7 && month <= 9)
+                quater = "III квартал";
+            if (month >= 10 && month <= 12)
+                quater = "IV квартал";
+            return quater;
+        }
 
         private List<Norm4Table> MakeNorm4List(int year)
         {
@@ -4141,10 +4158,6 @@ namespace WindowsFormsApp1
             return TFuelList;
         }
 
-
-
-
-
         private List<TradeTable> MakeTradeSum(int year, int month)
         {
             int report_id = dbOps.GetReportId(CurrentData.UserData.Id_org, year, 1);
@@ -4176,12 +4189,12 @@ namespace WindowsFormsApp1
             MakeTable12TekPril();
         }
 
-        private void dateTimePicker1_DropDown(object sender, EventArgs e)
+        private void dateTimePicker1_DropDown(object sender, DateTimePickerDropArgs e)
         {
             dateTimePicker1.ValueChanged -= dateTimePicker1_ValueChanged;
         }
 
-        private void dateTimePicker1_CloseUp(object sender, EventArgs e)
+        private void dateTimePicker1_CloseUp(object sender, DateTimePickerCloseArgs e)
         {
             dateTimePicker1.ValueChanged += dateTimePicker1_ValueChanged;
             dateTimePicker1_ValueChanged(sender, e);
@@ -4303,6 +4316,37 @@ namespace WindowsFormsApp1
             var myForm = new PersonsListForm();
             myForm.FormClosed += new FormClosedEventHandler(myForm_FormClosed);
             myForm.Show();
+        }
+
+        private void year1Button_Click(object sender, EventArgs e)
+        {
+            ToolStripMenuItem but = (ToolStripMenuItem)sender;
+            yearButton.Text = but.Text;
+
+            this.dateTimePicker1.Value = new DateTime(Int32.Parse(but.Text), dateTimePicker1.Value.Month, dateTimePicker1.Value.Day);
+        }
+
+        private void qButton_Click(object sender, EventArgs e)
+        {
+            ToolStripMenuItem quart = (ToolStripMenuItem)sender;
+            switch (quart.Text)
+            {
+                case "I квартал":
+                    this.dateTimePicker1.Value = new DateTime(dateTimePicker1.Value.Year, 3, 1);
+                    break;
+                case "II квартал":
+                    this.dateTimePicker1.Value = new DateTime(dateTimePicker1.Value.Year, 6,1);
+                    break;
+                case "III квартал":
+                    this.dateTimePicker1.Value = new DateTime(dateTimePicker1.Value.Year, 9, 1);
+                    break;
+                case "IV квартал":
+                    this.dateTimePicker1.Value = new DateTime(dateTimePicker1.Value.Year, 12, 1);
+                    break;
+                default:
+                    break;
+            }
+            toolStripDropDownButton1.Text = quart.Text;
         }
     }
 }

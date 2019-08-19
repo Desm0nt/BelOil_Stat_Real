@@ -397,6 +397,15 @@
     <None Include="Resources\predpr.png" />
     <None Include="Resources\rf.png" />
     <None Include="Resources\empty.png" />
+    <None Include="Resources\excel.png" />
+    <None Include="Resources\cb.png" />
+    <None Include="Resources\ce.png" />
+    <None Include="Resources\cg.png" />
+    <None Include="Resources\cp.png" />
+    <None Include="Resources\cg1.png" />
+    <None Include="Resources\cb1.png" />
+    <None Include="Resources\ce1.png" />
+    <None Include="Resources\cp1.png" />
     <Content Include="Themes\Access 2007 Alt White Text.xml" />
     <Content Include="Themes\Access 2007 Alt.xml" />
     <Content Include="Themes\Access 2007 White Text.xml" />
