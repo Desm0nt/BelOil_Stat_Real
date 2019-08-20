@@ -42,14 +42,18 @@ namespace WindowsFormsApp1
                 toolStrip3.Enabled = true;
             }
             tabControl1.SelectedIndexChanged += new EventHandler(tabControl1_SelectedIndexChanged);
+            toolStrip2.Size = new Size(70, 25);
             toolStrip1.Items.Insert(1, new ToolStripControlHost(this.dateTimePicker1));
+            toolStrip1.Size = new Size(420, 25);
+            toolStrip1.Location = new Point(71, 24);
             toolStrip3.Items.Insert(0, new ToolStripControlHost(this.CompanyBox));
-            toolStrip3.Location = new Point(355, 24);
+            toolStrip3.Location = new Point(495, 24);
             yearButton.Text = DateTime.Now.Year.ToString();
             year1Button.Text = DateTime.Now.Year.ToString();
             year2Button.Text = (DateTime.Now.Year - 1).ToString();
             year3Button.Text = (DateTime.Now.Year - 2).ToString();
             toolStripDropDownButton1.Text = MakeQuaterText(DateTime.Now.Month);
+            MonthBut.Text = "&" + System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(DateTime.Now.Month);
         }
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
@@ -4347,6 +4351,15 @@ namespace WindowsFormsApp1
                     break;
             }
             toolStripDropDownButton1.Text = quart.Text;
+        }
+
+        private void monthSelectBut_Click(object sender, EventArgs e)
+        {
+            ToolStripMenuItem mont = (ToolStripMenuItem)sender;
+            int month = DateTime.ParseExact(mont.Text.TrimStart('&'), "MMMM", new System.Globalization.CultureInfo("ru-Ru")).Month;
+            this.dateTimePicker1.Value = new DateTime(dateTimePicker1.Value.Year, month, 1);
+            MonthBut.Text = mont.Text;
+            MonthBut.Image = mont.Image;
         }
     }
 }

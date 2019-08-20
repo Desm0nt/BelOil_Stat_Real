@@ -768,7 +768,7 @@ namespace WindowsFormsApp1.DBO
             }
             return unit;
         }
-        public static List<ProductTable> GetProdList()
+        public static List<ProductTable> GetProdList(string sample1, string sample2)
         {
             List<ProductTable> productList = new List<ProductTable>();
             try
@@ -776,8 +776,10 @@ namespace WindowsFormsApp1.DBO
                 SqlConnection myConnection = new SqlConnection(cnStr);
                 myConnection.Open();
 
-                string query = "SELECT * FROM [NewProduct] where pid > 0 and pid < 4";
+                string query = "SELECT * FROM [NewProduct] where pid > 0 and pid < 4 AND (name like @sample1 and code like @sample2)";
                 SqlCommand command = new SqlCommand(query, myConnection);
+                command.Parameters.AddWithValue("@sample1", "%" + sample1 + "%");
+                command.Parameters.AddWithValue("@sample2", "%" + sample2 + "%");
 
                 using (SqlDataReader dr = command.ExecuteReader())
                 {
@@ -820,7 +822,7 @@ namespace WindowsFormsApp1.DBO
             }
             catch (Exception Ex)
             {
-                KryptonMessageBox.Show("Ошибка GetProdList: " + Ex.Message);
+                KryptonMessageBox.Show("Ошибка GetProdIdList: " + Ex.Message);
             }
             return productList;
         }
@@ -847,7 +849,7 @@ namespace WindowsFormsApp1.DBO
             }
             catch (Exception Ex)
             {
-                KryptonMessageBox.Show("Ошибка GetProdList: " + Ex.Message);
+                KryptonMessageBox.Show("Ошибка GetProdCodeList: " + Ex.Message);
             }
             return productList;
         }

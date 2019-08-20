@@ -29,13 +29,13 @@ namespace WindowsFormsApp1
 
         private void ProductsListForm_Load(object sender, EventArgs e)
         {      
-            LoadData(false);       
+            LoadData();       
         }
 
-        private void LoadData(bool edit)
+        private void LoadData()
         {
 
-            productList = dbOps.GetProdList();
+            productList = dbOps.GetProdList(toolStripTextBox2.Text, toolStripTextBox1.Text);
             //if (edit)
             //{
             //    for (int i = 0; i < kryptonOutlookGrid1.GroupCollection.Count; i++)
@@ -157,7 +157,7 @@ namespace WindowsFormsApp1
 
         private void myForm_FormClosed(object sender, EventArgs e)
         {
-            LoadData(true);
+            LoadData();
         }
 
         private void kryptonOutlookGrid1_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -248,7 +248,19 @@ namespace WindowsFormsApp1
                 if (kryptonOutlookGrid1.Rows[ind].Cells[1].Value != null)
                     dbOps.DeleteFromProd(Int32.Parse(kryptonOutlookGrid1.Rows[ind].Cells[0].Value.ToString()));
             }
-            LoadData(true);
+            LoadData();
+        }
+
+        private void searchToolStripButton1_Click(object sender, EventArgs e)
+        {
+            LoadData();
+        }
+
+        private void resetToolStripButton2_Click(object sender, EventArgs e)
+        {
+            toolStripTextBox1.Text = "";
+            toolStripTextBox2.Text = "";
+            LoadData();
         }
     }
 }

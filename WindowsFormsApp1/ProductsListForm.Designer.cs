@@ -37,6 +37,14 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ProductsListForm));
             this.kryptonManager = new ComponentFactory.Krypton.Toolkit.KryptonManager(this.components);
             this.kryptonOutlookGrid1 = new KryptonOutlookGrid.Classes.KryptonOutlookGrid();
+            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Code = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Names = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ed = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ed_norm = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.s111 = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewCheckBoxColumn();
+            this.s112 = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewCheckBoxColumn();
+            this.type = new KryptonOutlookGrid.CustomColumns.KryptonDataGridViewTextAndImageColumn();
             this.kryptonOutlookGridGroupBox1 = new KryptonOutlookGrid.Controls.KryptonOutlookGridGroupBox();
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -54,14 +62,6 @@
             this.toolStripTextBox2 = new System.Windows.Forms.ToolStripTextBox();
             this.searchToolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.resetToolStripButton2 = new System.Windows.Forms.ToolStripButton();
-            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Code = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Names = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ed = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ed_norm = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.s111 = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewCheckBoxColumn();
-            this.s112 = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewCheckBoxColumn();
-            this.type = new KryptonOutlookGrid.CustomColumns.KryptonDataGridViewTextAndImageColumn();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonOutlookGrid1)).BeginInit();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
@@ -102,11 +102,99 @@
             this.kryptonOutlookGrid1.MultiSelect = false;
             this.kryptonOutlookGrid1.Name = "kryptonOutlookGrid1";
             this.kryptonOutlookGrid1.PreviousSelectedGroupRow = -1;
+            this.kryptonOutlookGrid1.ShowLines = false;
             this.kryptonOutlookGrid1.Size = new System.Drawing.Size(786, 505);
             this.kryptonOutlookGrid1.TabIndex = 0;
             this.kryptonOutlookGrid1.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.kryptonOutlookGrid1_CellEnter);
             this.kryptonOutlookGrid1.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.kryptonOutlookGrid1_CellMouseDoubleClick);
             this.kryptonOutlookGrid1.Resize += new System.EventHandler(this.kryptonOutlookGrid1_Resize);
+            // 
+            // id
+            // 
+            this.id.HeaderText = "id";
+            this.id.Name = "id";
+            this.id.ReadOnly = true;
+            this.id.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.id.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.id.Width = 5;
+            // 
+            // Code
+            // 
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Code.DefaultCellStyle = dataGridViewCellStyle1;
+            this.Code.HeaderText = "#";
+            this.Code.Name = "Code";
+            this.Code.ReadOnly = true;
+            this.Code.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Code.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.Code.Width = 70;
+            // 
+            // Names
+            // 
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.Names.DefaultCellStyle = dataGridViewCellStyle2;
+            this.Names.HeaderText = "Наименование";
+            this.Names.Name = "Names";
+            this.Names.ReadOnly = true;
+            this.Names.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Names.Width = 300;
+            // 
+            // ed
+            // 
+            this.ed.HeaderText = "Ед. изм.";
+            this.ed.Name = "ed";
+            this.ed.ReadOnly = true;
+            this.ed.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.ed.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.ed.Width = 115;
+            // 
+            // ed_norm
+            // 
+            this.ed_norm.HeaderText = "Ед. изм. нормы";
+            this.ed_norm.Name = "ed_norm";
+            this.ed_norm.ReadOnly = true;
+            this.ed_norm.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.ed_norm.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.ed_norm.Width = 115;
+            // 
+            // s111
+            // 
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.NullValue = false;
+            this.s111.DefaultCellStyle = dataGridViewCellStyle3;
+            this.s111.FalseValue = null;
+            this.s111.HeaderText = "стр. 111";
+            this.s111.IndeterminateValue = null;
+            this.s111.MinimumWidth = 70;
+            this.s111.Name = "s111";
+            this.s111.ReadOnly = true;
+            this.s111.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.s111.TrueValue = null;
+            this.s111.Width = 70;
+            // 
+            // s112
+            // 
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.NullValue = false;
+            this.s112.DefaultCellStyle = dataGridViewCellStyle4;
+            this.s112.FalseValue = null;
+            this.s112.HeaderText = "стр. 112";
+            this.s112.IndeterminateValue = null;
+            this.s112.MinimumWidth = 70;
+            this.s112.Name = "s112";
+            this.s112.ReadOnly = true;
+            this.s112.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.s112.TrueValue = null;
+            this.s112.Width = 70;
+            // 
+            // type
+            // 
+            this.type.HeaderText = "Тип";
+            this.type.Name = "type";
+            this.type.ReadOnly = true;
+            this.type.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.type.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.type.Width = 50;
             // 
             // kryptonOutlookGridGroupBox1
             // 
@@ -172,7 +260,7 @@
             this.toolStripSeparator1});
             this.toolStrip1.Location = new System.Drawing.Point(3, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(124, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(93, 25);
             this.toolStrip1.TabIndex = 0;
             // 
             // addToolStripButton
@@ -262,6 +350,7 @@
             this.searchToolStripButton1.Name = "searchToolStripButton1";
             this.searchToolStripButton1.Size = new System.Drawing.Size(23, 22);
             this.searchToolStripButton1.Text = "Отфильтровать";
+            this.searchToolStripButton1.Click += new System.EventHandler(this.searchToolStripButton1_Click);
             // 
             // resetToolStripButton2
             // 
@@ -271,93 +360,7 @@
             this.resetToolStripButton2.Name = "resetToolStripButton2";
             this.resetToolStripButton2.Size = new System.Drawing.Size(23, 22);
             this.resetToolStripButton2.Text = "Сбросить фильтры";
-            // 
-            // id
-            // 
-            this.id.HeaderText = "id";
-            this.id.Name = "id";
-            this.id.ReadOnly = true;
-            this.id.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.id.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.id.Width = 5;
-            // 
-            // Code
-            // 
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Code.DefaultCellStyle = dataGridViewCellStyle1;
-            this.Code.HeaderText = "#";
-            this.Code.Name = "Code";
-            this.Code.ReadOnly = true;
-            this.Code.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Code.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.Code.Width = 70;
-            // 
-            // Names
-            // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.Names.DefaultCellStyle = dataGridViewCellStyle2;
-            this.Names.HeaderText = "Наименование";
-            this.Names.Name = "Names";
-            this.Names.ReadOnly = true;
-            this.Names.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Names.Width = 300;
-            // 
-            // ed
-            // 
-            this.ed.HeaderText = "Ед. изм.";
-            this.ed.Name = "ed";
-            this.ed.ReadOnly = true;
-            this.ed.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.ed.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.ed.Width = 115;
-            // 
-            // ed_norm
-            // 
-            this.ed_norm.HeaderText = "Ед. изм. нормы";
-            this.ed_norm.Name = "ed_norm";
-            this.ed_norm.ReadOnly = true;
-            this.ed_norm.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.ed_norm.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.ed_norm.Width = 115;
-            // 
-            // s111
-            // 
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.NullValue = false;
-            this.s111.DefaultCellStyle = dataGridViewCellStyle3;
-            this.s111.FalseValue = null;
-            this.s111.HeaderText = "стр. 111";
-            this.s111.IndeterminateValue = null;
-            this.s111.MinimumWidth = 70;
-            this.s111.Name = "s111";
-            this.s111.ReadOnly = true;
-            this.s111.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.s111.TrueValue = null;
-            this.s111.Width = 70;
-            // 
-            // s112
-            // 
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle4.NullValue = false;
-            this.s112.DefaultCellStyle = dataGridViewCellStyle4;
-            this.s112.FalseValue = null;
-            this.s112.HeaderText = "стр. 112";
-            this.s112.IndeterminateValue = null;
-            this.s112.MinimumWidth = 70;
-            this.s112.Name = "s112";
-            this.s112.ReadOnly = true;
-            this.s112.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.s112.TrueValue = null;
-            this.s112.Width = 70;
-            // 
-            // type
-            // 
-            this.type.HeaderText = "Тип";
-            this.type.Name = "type";
-            this.type.ReadOnly = true;
-            this.type.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.type.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.type.Width = 50;
+            this.resetToolStripButton2.Click += new System.EventHandler(this.resetToolStripButton2_Click);
             // 
             // ProductsListForm
             // 
@@ -372,7 +375,7 @@
             this.Name = "ProductsListForm";
             this.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Office2007Blue;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Standard Docking";
+            this.Text = "Виды продукции (работ, услуг)";
             this.Load += new System.EventHandler(this.ProductsListForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonOutlookGrid1)).EndInit();
             this.toolStripContainer1.ContentPanel.ResumeLayout(false);
