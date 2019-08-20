@@ -903,7 +903,7 @@ namespace WindowsFormsApp1.DBO
         /// Человеки справочник
         /// </summary>
         /// <returns></returns> 
-        public static List<PersonTable> GetPersonList()
+        public static List<PersonTable> GetPersonList(string sample)
         {
             int hval = 0;
             int impval = 0;
@@ -915,8 +915,9 @@ namespace WindowsFormsApp1.DBO
                 SqlConnection myConnection = new SqlConnection(cnStr);
                 myConnection.Open();
 
-                string query = "SELECT * FROM [NewPersons]";
+                string query = "SELECT * FROM [NewPersons] where surname like @sample";
                 SqlCommand command = new SqlCommand(query, myConnection);
+                command.Parameters.AddWithValue("@sample", "%" + sample + "%");
 
                 using (SqlDataReader dr = command.ExecuteReader())
                 {

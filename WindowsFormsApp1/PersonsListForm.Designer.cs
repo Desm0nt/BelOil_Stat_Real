@@ -33,6 +33,18 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PersonsListForm));
             this.kryptonManager = new ComponentFactory.Krypton.Toolkit.KryptonManager(this.components);
             this.kryptonOutlookGrid1 = new KryptonOutlookGrid.Classes.KryptonOutlookGrid();
+            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.surname = new KryptonOutlookGrid.CustomColumns.KryptonDataGridViewTextAndImageColumn();
+            this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.otchestvo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sign = new KryptonOutlookGrid.CustomColumns.KryptonDataGridViewTextAndImageColumn();
+            this.post = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.phone_work = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.phone = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.email = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.head = new KryptonOutlookGrid.CustomColumns.KryptonDataGridViewTextAndImageColumn();
+            this.subhead = new KryptonOutlookGrid.CustomColumns.KryptonDataGridViewTextAndImageColumn();
+            this.org_id = new KryptonOutlookGrid.CustomColumns.KryptonDataGridViewTextAndImageColumn();
             this.kryptonOutlookGridGroupBox1 = new KryptonOutlookGrid.Controls.KryptonOutlookGridGroupBox();
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -48,18 +60,6 @@
             this.toolStripTextBox2 = new System.Windows.Forms.ToolStripTextBox();
             this.searchToolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.resetToolStripButton2 = new System.Windows.Forms.ToolStripButton();
-            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.surname = new KryptonOutlookGrid.CustomColumns.KryptonDataGridViewTextAndImageColumn();
-            this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.otchestvo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sign = new KryptonOutlookGrid.CustomColumns.KryptonDataGridViewTextAndImageColumn();
-            this.post = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.phone_work = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.phone = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.email = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.head = new KryptonOutlookGrid.CustomColumns.KryptonDataGridViewTextAndImageColumn();
-            this.subhead = new KryptonOutlookGrid.CustomColumns.KryptonDataGridViewTextAndImageColumn();
-            this.org_id = new KryptonOutlookGrid.CustomColumns.KryptonDataGridViewTextAndImageColumn();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonOutlookGrid1)).BeginInit();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
@@ -109,6 +109,110 @@
             this.kryptonOutlookGrid1.TabIndex = 0;
             this.kryptonOutlookGrid1.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.kryptonOutlookGrid1_CellEnter);
             this.kryptonOutlookGrid1.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.kryptonOutlookGrid1_CellMouseDoubleClick);
+            // 
+            // id
+            // 
+            this.id.HeaderText = "id";
+            this.id.Name = "id";
+            this.id.ReadOnly = true;
+            this.id.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.id.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.id.Width = 5;
+            // 
+            // surname
+            // 
+            this.surname.HeaderText = "Фамилия";
+            this.surname.MinimumWidth = 192;
+            this.surname.Name = "surname";
+            this.surname.ReadOnly = true;
+            this.surname.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.surname.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.surname.Width = 192;
+            // 
+            // name
+            // 
+            this.name.HeaderText = "Имя";
+            this.name.Name = "name";
+            this.name.ReadOnly = true;
+            this.name.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.name.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.name.Width = 180;
+            // 
+            // otchestvo
+            // 
+            this.otchestvo.HeaderText = "Отчество";
+            this.otchestvo.Name = "otchestvo";
+            this.otchestvo.ReadOnly = true;
+            this.otchestvo.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.otchestvo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.otchestvo.Width = 158;
+            // 
+            // sign
+            // 
+            this.sign.HeaderText = "подпись";
+            this.sign.Name = "sign";
+            this.sign.ReadOnly = true;
+            this.sign.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.sign.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.sign.Width = 105;
+            // 
+            // post
+            // 
+            this.post.HeaderText = "Должность";
+            this.post.Name = "post";
+            this.post.ReadOnly = true;
+            this.post.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.post.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.post.Width = 175;
+            // 
+            // phone_work
+            // 
+            this.phone_work.HeaderText = "Раб. тел.";
+            this.phone_work.Name = "phone_work";
+            this.phone_work.ReadOnly = true;
+            this.phone_work.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.phone_work.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.phone_work.Width = 103;
+            // 
+            // phone
+            // 
+            this.phone.HeaderText = "Моб. тел.";
+            this.phone.Name = "phone";
+            this.phone.ReadOnly = true;
+            this.phone.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.phone.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.phone.Width = 103;
+            // 
+            // email
+            // 
+            this.email.HeaderText = "e-mail";
+            this.email.Name = "email";
+            this.email.ReadOnly = true;
+            this.email.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.email.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.email.Width = 135;
+            // 
+            // head
+            // 
+            this.head.HeaderText = " ";
+            this.head.Name = "head";
+            this.head.ReadOnly = true;
+            this.head.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // subhead
+            // 
+            this.subhead.HeaderText = " ";
+            this.subhead.Name = "subhead";
+            this.subhead.ReadOnly = true;
+            this.subhead.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // org_id
+            // 
+            this.org_id.HeaderText = "org_id";
+            this.org_id.Name = "org_id";
+            this.org_id.ReadOnly = true;
+            this.org_id.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.org_id.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
             // 
             // kryptonOutlookGridGroupBox1
             // 
@@ -229,15 +333,15 @@
             this.resetToolStripButton2});
             this.toolStrip2.Location = new System.Drawing.Point(3, 25);
             this.toolStrip2.Name = "toolStrip2";
-            this.toolStrip2.Size = new System.Drawing.Size(254, 25);
+            this.toolStrip2.Size = new System.Drawing.Size(312, 25);
             this.toolStrip2.TabIndex = 1;
             // 
             // toolStripLabel2
             // 
             this.toolStripLabel2.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
             this.toolStripLabel2.Name = "toolStripLabel2";
-            this.toolStripLabel2.Size = new System.Drawing.Size(34, 22);
-            this.toolStripLabel2.Text = " Имя";
+            this.toolStripLabel2.Size = new System.Drawing.Size(61, 22);
+            this.toolStripLabel2.Text = " Фамилия";
             // 
             // toolStripTextBox2
             // 
@@ -252,6 +356,7 @@
             this.searchToolStripButton1.Name = "searchToolStripButton1";
             this.searchToolStripButton1.Size = new System.Drawing.Size(23, 22);
             this.searchToolStripButton1.Text = "Отфильтровать";
+            this.searchToolStripButton1.Click += new System.EventHandler(this.searchToolStripButton1_Click);
             // 
             // resetToolStripButton2
             // 
@@ -261,110 +366,7 @@
             this.resetToolStripButton2.Name = "resetToolStripButton2";
             this.resetToolStripButton2.Size = new System.Drawing.Size(23, 22);
             this.resetToolStripButton2.Text = "Сбросить фильтры";
-            // 
-            // id
-            // 
-            this.id.HeaderText = "id";
-            this.id.Name = "id";
-            this.id.ReadOnly = true;
-            this.id.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.id.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.id.Width = 5;
-            // 
-            // surname
-            // 
-            this.surname.HeaderText = "Фамилия";
-            this.surname.MinimumWidth = 192;
-            this.surname.Name = "surname";
-            this.surname.ReadOnly = true;
-            this.surname.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.surname.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.surname.Width = 192;
-            // 
-            // name
-            // 
-            this.name.HeaderText = "Имя";
-            this.name.Name = "name";
-            this.name.ReadOnly = true;
-            this.name.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.name.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.name.Width = 180;
-            // 
-            // otchestvo
-            // 
-            this.otchestvo.HeaderText = "Отчество";
-            this.otchestvo.Name = "otchestvo";
-            this.otchestvo.ReadOnly = true;
-            this.otchestvo.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.otchestvo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.otchestvo.Width = 158;
-            // 
-            // sign
-            // 
-            this.sign.HeaderText = "подпись";
-            this.sign.Name = "sign";
-            this.sign.ReadOnly = true;
-            this.sign.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.sign.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.sign.Width = 105;
-            // 
-            // post
-            // 
-            this.post.HeaderText = "Должность";
-            this.post.Name = "post";
-            this.post.ReadOnly = true;
-            this.post.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.post.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.post.Width = 175;
-            // 
-            // phone_work
-            // 
-            this.phone_work.HeaderText = "Раб. тел.";
-            this.phone_work.Name = "phone_work";
-            this.phone_work.ReadOnly = true;
-            this.phone_work.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.phone_work.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.phone_work.Width = 103;
-            // 
-            // phone
-            // 
-            this.phone.HeaderText = "Моб. тел.";
-            this.phone.Name = "phone";
-            this.phone.ReadOnly = true;
-            this.phone.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.phone.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.phone.Width = 103;
-            // 
-            // email
-            // 
-            this.email.HeaderText = "e-mail";
-            this.email.Name = "email";
-            this.email.ReadOnly = true;
-            this.email.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.email.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.email.Width = 135;
-            // 
-            // head
-            // 
-            this.head.HeaderText = " ";
-            this.head.Name = "head";
-            this.head.ReadOnly = true;
-            this.head.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // subhead
-            // 
-            this.subhead.HeaderText = " ";
-            this.subhead.Name = "subhead";
-            this.subhead.ReadOnly = true;
-            this.subhead.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // org_id
-            // 
-            this.org_id.HeaderText = "org_id";
-            this.org_id.Name = "org_id";
-            this.org_id.ReadOnly = true;
-            this.org_id.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.org_id.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.resetToolStripButton2.Click += new System.EventHandler(this.resetToolStripButton2_Click);
             // 
             // PersonsListForm
             // 

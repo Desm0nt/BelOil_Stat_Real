@@ -43,7 +43,7 @@ namespace WindowsFormsApp1
         private void LoadData(bool edit)
         {
 
-            personList = dbOps.GetPersonList();
+            personList = dbOps.GetPersonList(toolStripTextBox2.Text);
             elList = new List<ListElement>();
             foreach (var a in personList)
                 elList.Add(new ListElement { Id = a.Id_org, Name = a.Orgs, Group = a.Subhead });
@@ -271,6 +271,17 @@ namespace WindowsFormsApp1
                     dbOps.DeleteFromPerson(Int32.Parse(kryptonOutlookGrid1.Rows[ind].Cells[0].Value.ToString()));
             }
             LoadData(true);
+        }
+
+        private void searchToolStripButton1_Click(object sender, EventArgs e)
+        {
+            LoadData(false);
+        }
+
+        private void resetToolStripButton2_Click(object sender, EventArgs e)
+        {
+            toolStripTextBox2.Text = "";
+            LoadData(false);
         }
     }
 }
