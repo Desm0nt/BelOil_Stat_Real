@@ -1058,6 +1058,66 @@ namespace WindowsFormsApp1.DBO
         }
 
 
+        /// <summary>
+        /// Топливо справочник
+        /// </summary>
+        /// <returns></returns> 
+        public static List<FuelsTable> GetFuelList(string sample1, string sample2)
+        {
+            List<FuelsTable> fuelList = new List<FuelsTable>();
+            try
+            {
+                SqlConnection myConnection = new SqlConnection(cnStr);
+                myConnection.Open();
+
+                string query = "SELECT * FROM [NewFuels] WHERE time_id = (SELECT MAX(time_id) FROM [NewFuels])  AND (name like @sample1 and fuel_id like @sample2)";
+                SqlCommand command = new SqlCommand(query, myConnection);
+                command.Parameters.AddWithValue("@sample1", "%" + sample1 + "%");
+                command.Parameters.AddWithValue("@sample2", "%" + sample2 + "%");
+
+                using (SqlDataReader dr = command.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        fuelList.Add(new FuelsTable
+                        {
+                            id = Int32.Parse(dr["id"].ToString()),
+                            fuel_id = Int32.Parse(dr["fuel_id"].ToString()),
+                            name = dr["name"].ToString(),
+                            Qn = Int32.Parse(dr["Qn"].ToString()),
+                            B_y = float.Parse(dr["B_y"].ToString()),
+                            unit = dr["unit"].ToString()
+                        });
+                    }
+                }
+                myConnection.Close();
+            }
+            catch (Exception Ex)
+            {
+                KryptonMessageBox.Show("Ошибка GetFuelList: " + Ex.Message);
+            }
+            return fuelList;
+        }
+
+        public static void DeleteFromFuel(int id)
+        {
+            try
+            {
+                SqlConnection myConnection = new SqlConnection(cnStr);
+                myConnection.Open();
+
+                string query = "DELETE FROM [NewFuels] where id = @id";
+                SqlCommand command = new SqlCommand(query, myConnection);
+                command.Parameters.AddWithValue("@id", id);
+                command.ExecuteNonQuery();
+                myConnection.Close();
+            }
+            catch (Exception Ex)
+            {
+                KryptonMessageBox.Show("DeleteFromFuel: " + Ex.Message);
+            }
+        }
+
 
 
         private static int GetType(int hv, int imp, int id)

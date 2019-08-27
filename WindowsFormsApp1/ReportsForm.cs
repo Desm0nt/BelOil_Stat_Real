@@ -4361,5 +4361,12 @@ namespace WindowsFormsApp1
             MonthBut.Text = mont.Text;
             MonthBut.Image = mont.Image;
         }
+
+        private void списокТопливныхРеусурсовToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var myForm = new FuelListForm();
+            myForm.FormClosed += new FormClosedEventHandler(myForm_FormClosed);
+            myForm.Show();
+        }
     }
 }

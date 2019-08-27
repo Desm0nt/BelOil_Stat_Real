@@ -237,29 +237,10 @@ namespace WindowsFormsApp1
         private void kryptonOutlookGrid1_CellEnter(object sender, DataGridViewCellEventArgs e)
         {
             KryptonOutlookGrid.Classes.KryptonOutlookGrid dataGridView = (KryptonOutlookGrid.Classes.KryptonOutlookGrid)sender;
-            //if (dataGridView.Rows[e.RowIndex].Cells[1].Value != null)
-            //{
-            //    label1.Text = "#" + dataGridView.Rows[e.RowIndex].Cells[0].Value.ToString() + " - " + dataGridView.Rows[e.RowIndex].Cells[2].Value.ToString();
-            //}
-            //else
-            //{
-            //    string typestr = "Раздел: ";
-            //    switch (Int32.Parse(dataGridView.Rows[e.RowIndex].Cells[0].Value.ToString()))
-            //    {
-            //        case 1:
-            //            typestr += "топливо";
-            //            break;
-            //        case 2:
-            //            typestr += "тепловая энергия";
-            //            break;
-            //        case 3:
-            //            typestr += "электрическая энергия";
-            //            break;
-            //        default:
-            //            break;
-            //    }
-            //    label1.Text = typestr;
-            //}
+            if (dataGridView.Rows[e.RowIndex].Cells[1].Value != null)
+            {
+                label1.Text = dataGridView.Rows[e.RowIndex].Cells[1].Value.ToString() + " " + dataGridView.Rows[e.RowIndex].Cells[2].Value.ToString() + " " + dataGridView.Rows[e.RowIndex].Cells[3].Value.ToString() + ", " + dataGridView.Rows[e.RowIndex].Cells[5].Value.ToString();
+            }
         }
 
         private void removeToolStripButton_Click(object sender, EventArgs e)

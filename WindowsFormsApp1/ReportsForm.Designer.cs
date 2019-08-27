@@ -98,8 +98,8 @@
             this.августToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.сентябрьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.окнтябрьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.декабрьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ноябрьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.декабрьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip4 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
@@ -276,6 +276,7 @@
             this.списокТопливныхРеусурсовToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F6;
             this.списокТопливныхРеусурсовToolStripMenuItem.Size = new System.Drawing.Size(315, 22);
             this.списокТопливныхРеусурсовToolStripMenuItem.Text = "Список Топливо и отходы производства";
+            this.списокТопливныхРеусурсовToolStripMenuItem.Click += new System.EventHandler(this.списокТопливныхРеусурсовToolStripMenuItem_Click);
             // 
             // списокПродуктовToolStripMenuItem
             // 
@@ -647,13 +648,13 @@
             this.MonthBut});
             this.toolStrip1.Location = new System.Drawing.Point(73, 24);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(336, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(77, 25);
             this.toolStrip1.TabIndex = 4;
             // 
             // toolStripLabel1
             // 
             this.toolStripLabel1.Name = "toolStripLabel1";
-            this.toolStripLabel1.Size = new System.Drawing.Size(96, 22);
+            this.toolStripLabel1.Size = new System.Drawing.Size(96, 15);
             this.toolStripLabel1.Text = "Выбор периода:";
             // 
             // yearButton
@@ -666,7 +667,7 @@
             this.yearButton.Image = ((System.Drawing.Image)(resources.GetObject("yearButton.Image")));
             this.yearButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.yearButton.Name = "yearButton";
-            this.yearButton.Size = new System.Drawing.Size(48, 22);
+            this.yearButton.Size = new System.Drawing.Size(48, 19);
             this.yearButton.Text = "year1";
             // 
             // year1Button
@@ -700,7 +701,7 @@
             this.toolStripDropDownButton1.Image = global::WindowsFormsApp1.Properties.Resources.ce1;
             this.toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
-            this.toolStripDropDownButton1.Size = new System.Drawing.Size(66, 22);
+            this.toolStripDropDownButton1.Size = new System.Drawing.Size(66, 20);
             this.toolStripDropDownButton1.Text = "Quart";
             // 
             // qButton
@@ -753,14 +754,14 @@
             this.MonthBut.Image = global::WindowsFormsApp1.Properties.Resources.ce1;
             this.MonthBut.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.MonthBut.Name = "MonthBut";
-            this.MonthBut.Size = new System.Drawing.Size(72, 22);
+            this.MonthBut.Size = new System.Drawing.Size(72, 20);
             this.MonthBut.Text = "Month";
             // 
             // monthSelectBut
             // 
             this.monthSelectBut.Image = ((System.Drawing.Image)(resources.GetObject("monthSelectBut.Image")));
             this.monthSelectBut.Name = "monthSelectBut";
-            this.monthSelectBut.Size = new System.Drawing.Size(180, 22);
+            this.monthSelectBut.Size = new System.Drawing.Size(126, 22);
             this.monthSelectBut.Text = "&Январь";
             this.monthSelectBut.Click += new System.EventHandler(this.monthSelectBut_Click);
             // 
@@ -768,7 +769,7 @@
             // 
             this.февральToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("февральToolStripMenuItem.Image")));
             this.февральToolStripMenuItem.Name = "февральToolStripMenuItem";
-            this.февральToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.февральToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.февральToolStripMenuItem.Text = "&Февраль";
             this.февральToolStripMenuItem.Click += new System.EventHandler(this.monthSelectBut_Click);
             // 
@@ -776,7 +777,7 @@
             // 
             this.мартToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("мартToolStripMenuItem.Image")));
             this.мартToolStripMenuItem.Name = "мартToolStripMenuItem";
-            this.мартToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.мартToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.мартToolStripMenuItem.Text = "&Март";
             this.мартToolStripMenuItem.Click += new System.EventHandler(this.monthSelectBut_Click);
             // 
@@ -784,7 +785,7 @@
             // 
             this.апрельToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("апрельToolStripMenuItem.Image")));
             this.апрельToolStripMenuItem.Name = "апрельToolStripMenuItem";
-            this.апрельToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.апрельToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.апрельToolStripMenuItem.Text = "&Апрель";
             this.апрельToolStripMenuItem.Click += new System.EventHandler(this.monthSelectBut_Click);
             // 
@@ -792,7 +793,7 @@
             // 
             this.майToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("майToolStripMenuItem.Image")));
             this.майToolStripMenuItem.Name = "майToolStripMenuItem";
-            this.майToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.майToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.майToolStripMenuItem.Text = "&Май";
             this.майToolStripMenuItem.Click += new System.EventHandler(this.monthSelectBut_Click);
             // 
@@ -800,7 +801,7 @@
             // 
             this.июньToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("июньToolStripMenuItem.Image")));
             this.июньToolStripMenuItem.Name = "июньToolStripMenuItem";
-            this.июньToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.июньToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.июньToolStripMenuItem.Text = "&Июнь";
             this.июньToolStripMenuItem.Click += new System.EventHandler(this.monthSelectBut_Click);
             // 
@@ -808,7 +809,7 @@
             // 
             this.июльToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("июльToolStripMenuItem.Image")));
             this.июльToolStripMenuItem.Name = "июльToolStripMenuItem";
-            this.июльToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.июльToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.июльToolStripMenuItem.Text = "&Июль";
             this.июльToolStripMenuItem.Click += new System.EventHandler(this.monthSelectBut_Click);
             // 
@@ -816,7 +817,7 @@
             // 
             this.августToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("августToolStripMenuItem.Image")));
             this.августToolStripMenuItem.Name = "августToolStripMenuItem";
-            this.августToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.августToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.августToolStripMenuItem.Text = "&Август";
             this.августToolStripMenuItem.Click += new System.EventHandler(this.monthSelectBut_Click);
             // 
@@ -824,7 +825,7 @@
             // 
             this.сентябрьToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("сентябрьToolStripMenuItem.Image")));
             this.сентябрьToolStripMenuItem.Name = "сентябрьToolStripMenuItem";
-            this.сентябрьToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.сентябрьToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.сентябрьToolStripMenuItem.Text = "&Сентябрь";
             this.сентябрьToolStripMenuItem.Click += new System.EventHandler(this.monthSelectBut_Click);
             // 
@@ -832,25 +833,25 @@
             // 
             this.окнтябрьToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("окнтябрьToolStripMenuItem.Image")));
             this.окнтябрьToolStripMenuItem.Name = "окнтябрьToolStripMenuItem";
-            this.окнтябрьToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.окнтябрьToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.окнтябрьToolStripMenuItem.Text = "&Октябрь";
             this.окнтябрьToolStripMenuItem.Click += new System.EventHandler(this.monthSelectBut_Click);
-            // 
-            // декабрьToolStripMenuItem
-            // 
-            this.декабрьToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("декабрьToolStripMenuItem.Image")));
-            this.декабрьToolStripMenuItem.Name = "декабрьToolStripMenuItem";
-            this.декабрьToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.декабрьToolStripMenuItem.Text = "&Декабрь";
-            this.декабрьToolStripMenuItem.Click += new System.EventHandler(this.monthSelectBut_Click);
             // 
             // ноябрьToolStripMenuItem
             // 
             this.ноябрьToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("ноябрьToolStripMenuItem.Image")));
             this.ноябрьToolStripMenuItem.Name = "ноябрьToolStripMenuItem";
-            this.ноябрьToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.ноябрьToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.ноябрьToolStripMenuItem.Text = "&Ноябрь";
             this.ноябрьToolStripMenuItem.Click += new System.EventHandler(this.monthSelectBut_Click);
+            // 
+            // декабрьToolStripMenuItem
+            // 
+            this.декабрьToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("декабрьToolStripMenuItem.Image")));
+            this.декабрьToolStripMenuItem.Name = "декабрьToolStripMenuItem";
+            this.декабрьToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
+            this.декабрьToolStripMenuItem.Text = "&Декабрь";
+            this.декабрьToolStripMenuItem.Click += new System.EventHandler(this.monthSelectBut_Click);
             // 
             // toolStrip4
             // 
@@ -865,7 +866,7 @@
             this.toolStripButton8});
             this.toolStrip4.Location = new System.Drawing.Point(3, 49);
             this.toolStrip4.Name = "toolStrip4";
-            this.toolStrip4.Size = new System.Drawing.Size(133, 25);
+            this.toolStrip4.Size = new System.Drawing.Size(164, 25);
             this.toolStrip4.TabIndex = 7;
             // 
             // toolStripButton4
@@ -900,6 +901,7 @@
             this.toolStripButton6.Name = "toolStripButton6";
             this.toolStripButton6.Size = new System.Drawing.Size(23, 22);
             this.toolStripButton6.Text = "toolStripButton6";
+            this.toolStripButton6.Click += new System.EventHandler(this.списокТопливныхРеусурсовToolStripMenuItem_Click);
             // 
             // toolStripButton7
             // 

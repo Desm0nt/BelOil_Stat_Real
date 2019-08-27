@@ -146,6 +146,7 @@
     <Compile Include="DataTables\CurrentData.cs" />
     <Compile Include="DataTables\FactorTable.cs" />
     <Compile Include="DataTables\FTradeInputTable.cs" />
+    <Compile Include="DataTables\FuelTable.cs" />
     <Compile Include="DataTables\Norm4InputQuater.cs" />
     <Compile Include="DataTables\Norm4InputTable.cs" />
     <Compile Include="DataTables\AllNormTable.cs" />
@@ -165,7 +166,7 @@
     <Compile Include="DataTables\PersonTable.cs" />
     <Compile Include="DataTables\WholeTable.cs" />
     <Compile Include="DataTables\TradeTable.cs" />
-    <Compile Include="DataTables\FuelTable.cs" />
+    <Compile Include="DataTables\FuelsTable.cs" />
     <Compile Include="DataTables\NormTable.cs" />
     <Compile Include="DataTables\SendedTable.cs" />
     <Compile Include="DataTables\RecievedTable.cs" />
@@ -191,8 +192,10 @@
     <Compile Include="Docking.Designer.cs">
       <DependentUpon>Docking.cs</DependentUpon>
     </Compile>
+    <Compile Include="OutlookGridFuelGroup2.cs" />
     <Compile Include="OutlookGridPersonGroup2.cs" />
     <Compile Include="OutlookGridPersonGroup.cs" />
+    <Compile Include="OutlookGridFuelGroup.cs" />
     <Compile Include="OutlookGridTypeGroup.cs" />
     <Compile Include="PersonAddForm.cs">
       <SubType>Form</SubType>
@@ -211,6 +214,12 @@
     </Compile>
     <Compile Include="PersonsListForm.Designer.cs">
       <DependentUpon>PersonsListForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FuelListForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FuelListForm.Designer.cs">
+      <DependentUpon>FuelListForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -258,6 +267,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PersonsListForm.resx">
       <DependentUpon>PersonsListForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FuelListForm.resx">
+      <DependentUpon>FuelListForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -408,6 +420,12 @@
     <None Include="Resources\cp1.png" />
     <None Include="Resources\ChooseUser.png" />
     <None Include="Resources\Exit.png" />
+    <None Include="Resources\t1.png" />
+    <None Include="Resources\t2.png" />
+    <None Include="Resources\t3.png" />
+    <None Include="Resources\t4.png" />
+    <None Include="Resources\t5.png" />
+    <None Include="Resources\t1ico1.png" />
     <Content Include="Themes\Access 2007 Alt White Text.xml" />
     <Content Include="Themes\Access 2007 Alt.xml" />
     <Content Include="Themes\Access 2007 White Text.xml" />
