@@ -38,7 +38,6 @@ namespace WindowsFormsApp1.DBO
                 var result = Convert.ToInt32(command.ExecuteScalar());
                 if (result == 1)
                     status = true;
-
                 myConnection.Close();
             }
             catch (Exception Ex)
@@ -236,7 +235,7 @@ namespace WindowsFormsApp1.DBO
             }
             catch (Exception Ex)
             {
-                KryptonMessageBox.Show("Ошибка GetFuelsTradeId: " + Ex.Message);
+                KryptonMessageBox.Show("Ошибка GetFuelsTradeId:  " + Ex.Message);
             }
             return trades;
         }
@@ -258,7 +257,7 @@ namespace WindowsFormsApp1.DBO
             }
             catch (Exception Ex)
             {
-                KryptonMessageBox.Show("Ошибка AddFuelTrades: " + Ex.Message);
+                KryptonMessageBox.Show("Ошибка в AddFuelTrades: " + Ex.Message);
             }
         }
 

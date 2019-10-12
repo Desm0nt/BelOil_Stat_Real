@@ -381,7 +381,7 @@
             this.Name = "PersonsListForm";
             this.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Office2007Blue;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = " ";
+            this.Text = " Сотрудники";
             this.Load += new System.EventHandler(this.PersonsListForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonOutlookGrid1)).EndInit();
             this.toolStripContainer1.ContentPanel.ResumeLayout(false);

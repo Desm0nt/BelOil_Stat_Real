@@ -59,6 +59,7 @@
             this.dataGridView1 = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
             this.label1 = new System.Windows.Forms.Label();
             this.panel2 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.panel18 = new System.Windows.Forms.Panel();
             this.dataGridView2 = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
             this.label2 = new System.Windows.Forms.Label();
             this.panel3 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
@@ -81,6 +82,7 @@
             this.dataGridView8 = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
             this.label8 = new System.Windows.Forms.Label();
             this.panel9 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.panel17 = new System.Windows.Forms.Panel();
             this.dataGridView9 = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
             this.label9 = new System.Windows.Forms.Label();
             this.panel10 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
@@ -111,14 +113,13 @@
             this.panel14 = new System.Windows.Forms.Panel();
             this.panel15 = new System.Windows.Forms.Panel();
             this.button16 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.panel17 = new System.Windows.Forms.Panel();
-            this.panel18 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.panel1)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel13.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panel2)).BeginInit();
             this.panel2.SuspendLayout();
+            this.panel18.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panel3)).BeginInit();
             this.panel3.SuspendLayout();
@@ -140,6 +141,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panel9)).BeginInit();
             this.panel9.SuspendLayout();
+            this.panel17.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView9)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panel10)).BeginInit();
             this.panel10.SuspendLayout();
@@ -161,8 +163,6 @@
             this.tabPage11.SuspendLayout();
             this.panel14.SuspendLayout();
             this.panel15.SuspendLayout();
-            this.panel17.SuspendLayout();
-            this.panel18.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -232,6 +232,20 @@
             this.panel2.PanelBackStyle = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ControlRibbon;
             this.panel2.Size = new System.Drawing.Size(921, 512);
             this.panel2.TabIndex = 2;
+            // 
+            // panel18
+            // 
+            this.panel18.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel18.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(246)))), ((int)(((byte)(254)))));
+            this.panel18.Controls.Add(this.dataGridView2);
+            this.panel18.ForeColor = System.Drawing.SystemColors.ControlLight;
+            this.panel18.Location = new System.Drawing.Point(6, 26);
+            this.panel18.Name = "panel18";
+            this.panel18.Size = new System.Drawing.Size(912, 483);
+            this.panel18.TabIndex = 4;
+            this.panel18.Paint += new System.Windows.Forms.PaintEventHandler(this.panel_Paint);
             // 
             // dataGridView2
             // 
@@ -488,6 +502,20 @@
             this.panel9.PanelBackStyle = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ControlRibbon;
             this.panel9.Size = new System.Drawing.Size(921, 512);
             this.panel9.TabIndex = 2;
+            // 
+            // panel17
+            // 
+            this.panel17.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel17.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(246)))), ((int)(((byte)(254)))));
+            this.panel17.Controls.Add(this.dataGridView9);
+            this.panel17.ForeColor = System.Drawing.SystemColors.ControlLight;
+            this.panel17.Location = new System.Drawing.Point(6, 26);
+            this.panel17.Name = "panel17";
+            this.panel17.Size = new System.Drawing.Size(912, 483);
+            this.panel17.TabIndex = 11;
+            this.panel17.Paint += new System.Windows.Forms.PaintEventHandler(this.panel_Paint);
             // 
             // dataGridView9
             // 
@@ -949,34 +977,6 @@
             this.button16.Values.Text = "  Назад";
             this.button16.Click += new System.EventHandler(this.button11_Click);
             // 
-            // panel17
-            // 
-            this.panel17.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel17.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(246)))), ((int)(((byte)(254)))));
-            this.panel17.Controls.Add(this.dataGridView9);
-            this.panel17.ForeColor = System.Drawing.SystemColors.ControlLight;
-            this.panel17.Location = new System.Drawing.Point(6, 26);
-            this.panel17.Name = "panel17";
-            this.panel17.Size = new System.Drawing.Size(912, 483);
-            this.panel17.TabIndex = 11;
-            this.panel17.Paint += new System.Windows.Forms.PaintEventHandler(this.panel_Paint);
-            // 
-            // panel18
-            // 
-            this.panel18.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel18.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(246)))), ((int)(((byte)(254)))));
-            this.panel18.Controls.Add(this.dataGridView2);
-            this.panel18.ForeColor = System.Drawing.SystemColors.ControlLight;
-            this.panel18.Location = new System.Drawing.Point(6, 26);
-            this.panel18.Name = "panel18";
-            this.panel18.Size = new System.Drawing.Size(912, 483);
-            this.panel18.TabIndex = 4;
-            this.panel18.Paint += new System.Windows.Forms.PaintEventHandler(this.panel_Paint);
-            // 
             // ReportsCreateForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -999,6 +999,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.panel2)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            this.panel18.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panel3)).EndInit();
             this.panel3.ResumeLayout(false);
@@ -1027,6 +1028,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.panel9)).EndInit();
             this.panel9.ResumeLayout(false);
             this.panel9.PerformLayout();
+            this.panel17.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView9)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panel10)).EndInit();
             this.panel10.ResumeLayout(false);
@@ -1051,8 +1053,6 @@
             this.tabPage11.ResumeLayout(false);
             this.panel14.ResumeLayout(false);
             this.panel15.ResumeLayout(false);
-            this.panel17.ResumeLayout(false);
-            this.panel18.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

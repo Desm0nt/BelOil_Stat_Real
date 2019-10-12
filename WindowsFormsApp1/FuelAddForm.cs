@@ -25,7 +25,7 @@ namespace WindowsFormsApp1
             this.QnTextBox.Size = new Size(156, 18);
             this.UnitTextBox.AutoSize = false;
             this.UnitTextBox.Size = new Size(156, 18);
-            numUpDown1.Value = dbOps.GetPersonLastID();
+            numUpDown1.Value = 1001;
         }
 
         public FuelAddForm(DataTables.FuelsTable table, FuelListForm parrentForm)
@@ -40,7 +40,7 @@ namespace WindowsFormsApp1
             this.QnTextBox.Size = new Size(156, 18);
             this.UnitTextBox.AutoSize = false;
             this.UnitTextBox.Size = new Size(156, 18);
-            numUpDown1.Value = Table.id;
+            numUpDown1.Value = Table.fuel_id;
             nameTextBox.Text = Table.name;
             QnTextBox.Text = Table.Qn.ToString();
             UnitTextBox.Text = Table.unit;

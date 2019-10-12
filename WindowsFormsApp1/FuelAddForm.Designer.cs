@@ -58,7 +58,6 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Enabled = false;
             this.label3.Location = new System.Drawing.Point(37, 18);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(64, 13);
@@ -68,16 +67,25 @@
             // numUpDown1
             // 
             this.numUpDown1.DecimalPlaces = 99;
-            this.numUpDown1.Enabled = false;
             this.numUpDown1.Location = new System.Drawing.Point(35, 35);
             this.numUpDown1.Maximum = new decimal(new int[] {
-            1000000,
+            5999,
+            0,
+            0,
+            0});
+            this.numUpDown1.Minimum = new decimal(new int[] {
+            1001,
             0,
             0,
             0});
             this.numUpDown1.Name = "numUpDown1";
             this.numUpDown1.Size = new System.Drawing.Size(74, 22);
             this.numUpDown1.TabIndex = 5;
+            this.numUpDown1.Value = new decimal(new int[] {
+            1001,
+            0,
+            0,
+            0});
             // 
             // label6
             // 
@@ -221,7 +229,7 @@
             this.Name = "FuelAddForm";
             this.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Office2007Blue;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Данные сотрудника";
+            this.Text = "Данные вида топлива";
             this.Load += new System.EventHandler(this.FuelAddForm_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);
             this.ResumeLayout(false);
