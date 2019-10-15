@@ -4368,5 +4368,12 @@ namespace WindowsFormsApp1
             myForm.FormClosed += new FormClosedEventHandler(myForm_FormClosed);
             myForm.Show();
         }
+
+        private void профильToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var myForm = new ProfileForm();
+            myForm.FormClosed += new FormClosedEventHandler(myForm_FormClosed);
+            myForm.Show();
+        }
     }
 }

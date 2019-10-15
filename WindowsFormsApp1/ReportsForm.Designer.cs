@@ -112,6 +112,7 @@
             this.RUPButton = new System.Windows.Forms.ToolStripButton();
             this.POButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.профильToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tabPage6.SuspendLayout();
@@ -223,7 +224,8 @@
             this.сформировать1ПЭРToolStripMenuItem,
             this.мастерВвода4Нормы1ТЭКToolStripMenuItem,
             this.сохранитьОтчетToolStripMenuItem,
-            this.сохранитьОтчет1ТЭКToolStripMenuItem});
+            this.сохранитьОтчет1ТЭКToolStripMenuItem,
+            this.профильToolStripMenuItem});
             this.отчетыToolStripMenuItem.Image = global::WindowsFormsApp1.Properties.Resources.rep;
             this.отчетыToolStripMenuItem.Name = "отчетыToolStripMenuItem";
             this.отчетыToolStripMenuItem.Size = new System.Drawing.Size(76, 20);
@@ -866,7 +868,7 @@
             this.toolStripButton8});
             this.toolStrip4.Location = new System.Drawing.Point(3, 49);
             this.toolStrip4.Name = "toolStrip4";
-            this.toolStrip4.Size = new System.Drawing.Size(164, 25);
+            this.toolStrip4.Size = new System.Drawing.Size(133, 25);
             this.toolStrip4.TabIndex = 7;
             // 
             // toolStripButton4
@@ -978,6 +980,13 @@
             this.toolStripButton1.Name = "toolStripButton1";
             this.toolStripButton1.Size = new System.Drawing.Size(23, 22);
             this.toolStripButton1.Text = "toolStripButton1";
+            // 
+            // профильToolStripMenuItem
+            // 
+            this.профильToolStripMenuItem.Name = "профильToolStripMenuItem";
+            this.профильToolStripMenuItem.Size = new System.Drawing.Size(248, 22);
+            this.профильToolStripMenuItem.Text = "Профиль";
+            this.профильToolStripMenuItem.Click += new System.EventHandler(this.профильToolStripMenuItem_Click);
             // 
             // ReportsForm
             // 
@@ -1103,5 +1112,6 @@
         private System.Windows.Forms.ToolStripMenuItem экспортироватьВExcelToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem сохранитьToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
+        private System.Windows.Forms.ToolStripMenuItem профильToolStripMenuItem;
     }
 }

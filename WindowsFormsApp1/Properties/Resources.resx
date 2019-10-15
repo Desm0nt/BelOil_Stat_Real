@@ -133,6 +133,9 @@
   <data name="t4" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\t4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="t1ico1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\t1ico1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="predpr" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\predpr.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -163,8 +166,8 @@
   <data name="t5" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\t5.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="reset" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\reset.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="007359-blue-jelly-icon-arrows-arrow-thick-right2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\007359-blue-jelly-icon-arrows-arrow-thick-right22.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="cg" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\cg.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -175,6 +178,9 @@
   <data name="ok" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ok.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="reset" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\reset.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="ok1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ok1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -183,9 +189,6 @@
   </data>
   <data name="cp1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\cp1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="007359-blue-jelly-icon-arrows-arrow-thick-right2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\007359-blue-jelly-icon-arrows-arrow-thick-right22.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="add" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\add.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -232,14 +235,14 @@
   <data name="cb9pk-llwrs" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\cb9pk-llwrs.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="icoprod" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icoprod.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="ce1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ce1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="ce1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ce1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="icoprod" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icoprod.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="t3" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\t3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -253,7 +256,7 @@
   <data name="gf" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\gf.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="t1ico1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\t1ico1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="box" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\box.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

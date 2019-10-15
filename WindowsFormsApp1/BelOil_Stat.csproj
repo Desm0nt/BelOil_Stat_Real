@@ -192,12 +192,6 @@
     <Compile Include="NormReportCreateForm.Designer.cs">
       <DependentUpon>NormReportCreateForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Docking.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Docking.Designer.cs">
-      <DependentUpon>Docking.cs</DependentUpon>
-    </Compile>
     <Compile Include="OutlookGridFuelGroup2.cs" />
     <Compile Include="OutlookGridPersonGroup2.cs" />
     <Compile Include="OutlookGridPersonGroup.cs" />
@@ -226,6 +220,12 @@
     </Compile>
     <Compile Include="FuelListForm.Designer.cs">
       <DependentUpon>FuelListForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ProfileForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProfileForm.Designer.cs">
+      <DependentUpon>ProfileForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -265,9 +265,6 @@
     <EmbeddedResource Include="NormReportCreateForm.resx">
       <DependentUpon>NormReportCreateForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Docking.resx">
-      <DependentUpon>Docking.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="PersonAddForm.resx">
       <DependentUpon>PersonAddForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -279,6 +276,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FuelListForm.resx">
       <DependentUpon>FuelListForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProfileForm.resx">
+      <DependentUpon>ProfileForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -435,6 +435,7 @@
     <None Include="Resources\t4.png" />
     <None Include="Resources\t5.png" />
     <None Include="Resources\t1ico1.png" />
+    <None Include="Resources\box.png" />
     <Content Include="Themes\Access 2007 Alt White Text.xml" />
     <Content Include="Themes\Access 2007 Alt.xml" />
     <Content Include="Themes\Access 2007 White Text.xml" />
