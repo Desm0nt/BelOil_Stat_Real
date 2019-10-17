@@ -44,6 +44,7 @@
             this.мастерВвода4Нормы1ТЭКToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.сохранитьОтчетToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.сохранитьОтчет1ТЭКToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.профильToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.данныеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.списокТопливныхРеусурсовToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.списокПродуктовToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -112,7 +113,6 @@
             this.RUPButton = new System.Windows.Forms.ToolStripButton();
             this.POButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
-            this.профильToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tabPage6.SuspendLayout();
@@ -258,6 +258,13 @@
             this.сохранитьОтчет1ТЭКToolStripMenuItem.Size = new System.Drawing.Size(248, 22);
             this.сохранитьОтчет1ТЭКToolStripMenuItem.Text = "Сохранить отчет 1-ТЭК";
             this.сохранитьОтчет1ТЭКToolStripMenuItem.Click += new System.EventHandler(this.сохранитьОтчет1ТЭКToolStripMenuItem_Click);
+            // 
+            // профильToolStripMenuItem
+            // 
+            this.профильToolStripMenuItem.Name = "профильToolStripMenuItem";
+            this.профильToolStripMenuItem.Size = new System.Drawing.Size(248, 22);
+            this.профильToolStripMenuItem.Text = "Профиль";
+            this.профильToolStripMenuItem.Click += new System.EventHandler(this.профильToolStripMenuItem_Click);
             // 
             // данныеToolStripMenuItem
             // 
@@ -980,13 +987,6 @@
             this.toolStripButton1.Name = "toolStripButton1";
             this.toolStripButton1.Size = new System.Drawing.Size(23, 22);
             this.toolStripButton1.Text = "toolStripButton1";
-            // 
-            // профильToolStripMenuItem
-            // 
-            this.профильToolStripMenuItem.Name = "профильToolStripMenuItem";
-            this.профильToolStripMenuItem.Size = new System.Drawing.Size(248, 22);
-            this.профильToolStripMenuItem.Text = "Профиль";
-            this.профильToolStripMenuItem.Click += new System.EventHandler(this.профильToolStripMenuItem_Click);
             // 
             // ReportsForm
             // 

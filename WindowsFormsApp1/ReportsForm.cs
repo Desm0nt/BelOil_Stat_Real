@@ -4371,9 +4371,10 @@ namespace WindowsFormsApp1
 
         private void профильToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var myForm = new ProfileForm();
+            var myForm = new ProfileForm(dateTimePicker1.Value.Year, dateTimePicker1.Value.Month);
             myForm.FormClosed += new FormClosedEventHandler(myForm_FormClosed);
             myForm.Show();
         }
+
     }
 }
