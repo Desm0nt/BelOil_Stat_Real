@@ -1,4 +1,6 @@
 ﻿using ComponentFactory.Krypton.Toolkit;
+using KryptonOutlookGrid.Classes;
+using KryptonOutlookGrid.CustomColumns;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WindowsFormsApp1.DataTables;
+using WindowsFormsApp1.DBO;
 
 namespace WindowsFormsApp1
 {
@@ -23,8 +26,33 @@ namespace WindowsFormsApp1
             cur_org_id = CurrentData.UserData.Id_org;
             cyear = curyear;
             cmonth = curmonth;
+            LoadObjects();
         }
 
+        private void LoadObjects()
+        {
+            List<ObjectTable> objectList = new List<ObjectTable>();
+            objectList = dbOps.GetObjList(cur_org_id);
+            treeView1.Nodes.Clear();
+            for (int i = 0; i < objectList.Count; i++)
+            {
+                TreeNode child = new TreeNode();
+                child.Text = objectList[i].Name;
+                child.Tag = objectList[i].Id;
+                child.ImageIndex = 0;
+                treeView1.Nodes.Add(child);
+            }
+            treeView1.ExpandAll();
+
+        }
+        private void treeView1_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            if (Int32.Parse(e.Node.Tag.ToString()) != -1)
+            {
+                //pictureBox1.Image = Image.FromFile(System.IO.Directory.GetCurrentDirectory() + pics[Int32.Parse(e.Node.Tag.ToString())].path);
+                //pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            }
+        }
 
 
 

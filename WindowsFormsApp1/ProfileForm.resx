@@ -123,12 +123,6 @@
   <metadata name="toolStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
-  <metadata name="toolStrip8.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>227, 56</value>
-  </metadata>
-  <metadata name="toolStrip4.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>712, 17</value>
-  </metadata>
   <metadata name="Column3.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -142,13 +136,19 @@
     <value>17, 17</value>
   </metadata>
   <metadata name="toolStrip8.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>227, 56</value>
+    <value>927, 17</value>
+  </metadata>
+  <metadata name="toolStrip8.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>927, 17</value>
   </metadata>
   <metadata name="Column7.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <metadata name="Column8.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
+  </metadata>
+  <metadata name="toolStrip4.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>712, 17</value>
   </metadata>
   <metadata name="Column1.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -159,16 +159,50 @@
   <metadata name="toolStrip4.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>712, 17</value>
   </metadata>
-  <metadata name="toolStrip3.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>332, 56</value>
+  <metadata name="imageList1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>817, 17</value>
   </metadata>
-  <metadata name="objName.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
+  <data name="imageList1.ImageStream" mimetype="application/x-microsoft.net.object.binary.base64">
+    <value>
+        AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
+        LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
+        ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAAA0
+        BgAAAk1TRnQBSQFMAwEBAAEQAQABEAEAARABAAEQAQAE/wEhAQAI/wFCAU0BNgcAATYDAAEoAwABQAMA
+        ARADAAEBAQABIAYAARAuAAMUARwDFwEg7AADFwEgAyoBQAMqAUABeAGKAZMB5wGNAaMBrAH/AyoBQAMq
+        AUADHAEo1AADCQEMAjsBPAFgATkBOgE7AWABVQFhAWcBsAFJAXsBlAH/ASMBZQGIAf8BJQFvAZQB/wES
+        AVcBeQH/ARMBTQFvAf8BOQFpAYMB/wFbAWoBbwHDATkCOgFgAToCOwFgAxIBGMgAAU4BUgFTAZABWQGQ
+        AaoB/wE0AXUBlwH/ATMBeAGcAf8BOwGDAaQB/wFBAYUBpQH/AUQBiAGnAf8BLgFsAYwB/wEuAXABkAH/
+        ASoBbwGSAf8BHwFkAYcB/wEiAWEBggH/AUcBfQGXAf8BWAFcAV0BoAMMARDEAAFtAY0BmQH/AU0BmgG9
+        Af8BSAGNAawB/wFKAY0BqwH/AUoBjQGrAf8BSQGNAa0B/wFMAY8BrwH/ATABcAGRAf8BOQF5AZgB/wEu
+        AWgBhQH/AS4BZwGCAf8BNQF2AZYB/wE4AYYBqQH/AYcBnwGpAf8DFwEgxAABfAGZAaQB/wFaAacByQH/
+        AU8BlQGyAf8BUAGUAbQB/wFQAZQBtAH/AVIBlgG2Af8BVQGWAboB/wE2AXkBmQH/AToBeAGXAf8BLQFf
+        AXUB/wEuAWYBggH/ATQBbAGLAf8BRwGRAbQB/wGVAa0BtgH/AxcBIMQAAYMBnAGmAf8BZAGvAdQB/wFa
+        AZsBvQH/AVoBmwG9Af8BWQGbAb0B/wFaAZwBvgH/AWEBogHCAf8BQAGDAZ8B/wE9AYABnAH/ATYBbwGK
+        Af8BNgFuAYwB/wExAWMBewH/AUgBjgGvAf8BmwGyAboB/wMXASDEAAGHAZ4BrAH/AW4BtwHfAf8BXgGh
+        AcQB/wFbAZ0BwAH/AV4BoQHDAf8BYQGlAccB/wFoAakBzgH/AUQBhgGkAf8BSwGQAbEB/wEzAWQBeQH/
+        ASsBVgFqAf8BMAFbAXEB/wFUAZsBvwH/AZ4BtQG+Af8DFwEgxAABiwGiAawB/wF2AcIB5wH/AWkBrAHM
+        Af8BcgG1AdIB/wFpAa0BzgH/AWcBrgHPAf8BcgG0AdUB/wFIAY0BqgH/AU8BlgG6Af8BVAGXAbYB/wE5
+        AW0BhwH/ATkBbgGIAf8BWwGoAcoB/wGiAbkBwQH/AxcBIMQAAYwBowGtAf8BgAHJAe4B/wGBAcIB4wH/
+        AZEB1QHwAf8BcwG2AdkB/wFuAbAB1wH/AXkBuAHbAf8BTwGQAbEB/wFRAZcBuAH/AVoBnQG/Af8BWAGa
+        AbsB/wFQAY4BqgH/AWABqQHLAf8BowG5AcIB/wMXASDEAAGLAaEBrQH/AYoB0QH1Af8BdwG7Ad8B/wF2
+        Ab0B4QH/AXsBvgHgAf8BggHDAeYB/wGKAckB6QH/AWgBqgHLAf8BXwGhAcMB/wFdAZ4BwAH/AV0BnwHC
+        Af8BXgGiAcQB/wFsAbcB3QH/AaABtQG+Af8DFwEgxAABpAG/Ac4B/wGQAdMB9gH/AYUBxAHmAf8BegG8
+        AeAB/wF2AbsB3wH/AXgBwQHlAf8BggHLAe0B/wGHAdIB7wH/AYIByQHlAf8BdwG9AdkB/wFxAbUB1AH/
+        AW0BsgHRAf8BcgG7Ad4B/wGtAcYB0QH/AxcBIMQAATwCPQFgATsCPQFgAVwBYwFlAZwBoQHRAecB/wF4
+        AbsB2wH/AWoBtQHXAf8BcAG3AdsB/wFrAbIB1gH/AWkBsgHYAf8BdwG8Ad4B/wGiAdQB6AH/AWgBcQF2
+        AbABOwE8AT0BYAE8Aj0BYAMJAQzMAAMSARgDKwFAASoCKwFAAYcBlQGZAc8BpQHTAeYB/wGnAdIB5AH/
+        AioBKwFAASoCKwFAAysBQAMXASDkAAMSARgDFwEgAxcBIP8A3QABQgFNAT4HAAE+AwABKAMAAUADAAEQ
+        AwABAQEAAQEFAAGAFwAD/wEAAf4BfwYAAfABDwYAAYABAQYAAYAHAAGABwABgAcAAYAHAAGABwABgAcA
+        AYAHAAGABwABgAcAAYAHAAHgAQcGAAH8AX8GAAL/BgAL
+</value>
+  </data>
+  <metadata name="toolStrip3.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>1032, 17</value>
   </metadata>
   <metadata name="toolStrip5.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>437, 56</value>
+    <value>1137, 17</value>
   </metadata>
   <metadata name="toolStrip6.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>542, 56</value>
+    <value>17, 56</value>
   </metadata>
 </root>

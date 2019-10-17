@@ -154,6 +154,7 @@
     <Compile Include="DataTables\NormIdTypeTable.cs" />
     <Compile Include="DataTables\NormInputTable.cs" />
     <Compile Include="DataTables\OneNorm.cs" />
+    <Compile Include="DataTables\ObjectTable.cs" />
     <Compile Include="DataTables\RecievedInputTable.cs" />
     <Compile Include="DataTables\SendedIdTable.cs" />
     <Compile Include="DataTables\RecievedIdTable.cs" />

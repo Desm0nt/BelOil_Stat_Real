@@ -1117,8 +1117,6 @@ namespace WindowsFormsApp1.DBO
             }
         }
 
-
-
         private static int GetType(int hv, int imp, int id)
         {
             int type = 0;
@@ -1997,7 +1995,6 @@ namespace WindowsFormsApp1.DBO
             return Norm4List;
         }
 
-
         public static List<int> GetRepIdList (int id_org, int year, int quater)
         {
             List<int> RepIdList = new List<int>();
@@ -2155,6 +2152,28 @@ namespace WindowsFormsApp1.DBO
             myConnection.Close();
             return name;
         }
+
+        public static List<ObjectTable> GetObjList(int id_org)
+        {
+            List<ObjectTable> ObList = new List<ObjectTable>();
+            SqlConnection myConnection = new SqlConnection(cnStr);
+            myConnection.Open();
+
+            string query = "SELECT * FROM [NewObjects] WHERE id_org = @id_org ";
+            SqlCommand command = new SqlCommand(query, myConnection);
+            command.Parameters.AddWithValue("@id_org", id_org);
+
+            using (SqlDataReader dr = command.ExecuteReader())
+            {
+                while (dr.Read())
+                {
+                    ObList.Add(new ObjectTable { Id = Int32.Parse(dr["id"].ToString()), Name = dr["name"].ToString(), FullName = dr["full_name"].ToString() });
+                }
+            }
+            myConnection.Close();
+            return ObList;
+        }
+
         public static float GetSrcValue(int id_rep, int id_src)
         {
             float value = 0;
