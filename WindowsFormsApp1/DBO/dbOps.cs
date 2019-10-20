@@ -1216,6 +1216,111 @@ namespace WindowsFormsApp1.DBO
             }
             return normtList;
         }
+        public static List<ProfNormTable> GetProfNormTypedList(int id_org, int num, int month, int year, string sample1, string sample2, int type)
+        {
+            List<ProfNormTable> normtList = new List<ProfNormTable>();
+            try
+            {
+                SqlConnection myConnection = new SqlConnection(cnStr);
+                myConnection.Open();
+
+                string query = "SELECT COUNT(*) FROM NewNorm where num = @num AND id_org = @id_org";
+                SqlCommand command = new SqlCommand(query, myConnection);
+                command.Parameters.AddWithValue("@num", num);
+                command.Parameters.AddWithValue("@id_org", id_org);
+                var result = Convert.ToInt32(command.ExecuteScalar());
+                if (result >= 1)
+                {
+                    query = "SELECT * FROM [NewNorm] where num = @num AND id_org = @id_org AND (name like @sample1 and code like @sample2) AND type = @type";
+                    command = new SqlCommand(query, myConnection);
+                    command.Parameters.AddWithValue("@sample1", "%" + sample1 + "%");
+                    command.Parameters.AddWithValue("@sample2", "%" + sample2 + "%");
+                    command.Parameters.AddWithValue("@num", num);
+                    command.Parameters.AddWithValue("@id_org", id_org);
+                    command.Parameters.AddWithValue("@type", type);
+                    using (SqlDataReader dr = command.ExecuteReader())
+                    {
+                        while (dr.Read())
+                        {
+                            bool f111 = false;
+                            bool f112 = false;
+                            var array = dr["row_options"].ToString().Split(',');
+                            if (array.Length == 2)
+                            {
+                                f111 = true;
+                                f112 = true;
+                            }
+                            else if (array.Length == 1 && array[0] == "111")
+                                f111 = true;
+                            else if (array.Length == 1 && array[0] == "112")
+                                f112 = true;
+                            normtList.Add(new ProfNormTable
+                            {
+                                Id = Int32.Parse(dr["id"].ToString()),
+                                Id_prod = Int32.Parse(dr["id_prod"].ToString()),
+                                Code = Int32.Parse(dr["code"].ToString()),
+                                Name = dr["name"].ToString(),
+                                Unit = GetNormUnit(Int32.Parse(dr["id_prod"].ToString())),
+                                nUnit = GetNormNUnit(Int32.Parse(dr["id_prod"].ToString())),
+                                id_obj = Int32.Parse(dr["id_obj"].ToString()),
+                                s111 = f111,
+                                s112 = f112,
+                                type = Int32.Parse(dr["type"].ToString())
+                            });
+                        }
+                    }
+                }
+                else
+                {
+                    query = "SELECT * FROM [NewNorm] where id_org = @id_org AND num = (SELECT MAX(num) FROM [NewNorm] where year <= @year AND month <= @month) AND (name like @sample1 and code like @sample2) AND type = @type";
+                    command = new SqlCommand(query, myConnection);
+                    command.Parameters.AddWithValue("@sample1", "%" + sample1 + "%");
+                    command.Parameters.AddWithValue("@sample2", "%" + sample2 + "%");
+                    command.Parameters.AddWithValue("@id_org", id_org);
+                    command.Parameters.AddWithValue("@year", year);
+                    command.Parameters.AddWithValue("@month", month);
+                    command.Parameters.AddWithValue("@type", type);
+                    using (SqlDataReader dr = command.ExecuteReader())
+                    {
+                        while (dr.Read())
+                        {
+                            bool f111 = false;
+                            bool f112 = false;
+                            var array = dr["row_options"].ToString().Split(',');
+                            if (array.Length == 2)
+                            {
+                                f111 = true;
+                                f112 = true;
+                            }
+                            else if (array.Length == 1 && array[0] == "111")
+                                f111 = true;
+                            else if (array.Length == 1 && array[0] == "112")
+                                f112 = true;
+                            normtList.Add(new ProfNormTable
+                            {
+                                Id = Int32.Parse(dr["id"].ToString()),
+                                Id_prod = Int32.Parse(dr["id_prod"].ToString()),
+                                Code = Int32.Parse(dr["code"].ToString()),
+                                Name = dr["name"].ToString(),
+                                Unit = GetNormUnit(Int32.Parse(dr["id_prod"].ToString())),
+                                nUnit = GetNormNUnit(Int32.Parse(dr["id_prod"].ToString())),
+                                id_obj = Int32.Parse(dr["id_obj"].ToString()),
+                                s111 = f111,
+                                s112 = f112,
+                                type = Int32.Parse(dr["type"].ToString())
+                            });
+                        }
+                    }
+                }
+                myConnection.Close();
+            }
+            catch (Exception Ex)
+            {
+                KryptonMessageBox.Show("Ошибка GetNormList: " + Ex.Message);
+            }
+            return normtList;
+        }
+
         public static List<int> GetNormIdList(int type)
         {
             List<int> productList = new List<int>();

@@ -28,6 +28,9 @@ namespace WindowsFormsApp1
             cmonth = curmonth;
             LoadObjects();
             LoadAllNorms();
+            LoadTypedNorms(1, kryptonOutlookGrid4);
+            LoadTypedNorms(2, kryptonOutlookGrid3);
+            LoadTypedNorms(3, kryptonOutlookGrid2);
         }
 
         private void LoadObjects()
@@ -55,6 +58,7 @@ namespace WindowsFormsApp1
 
             kryptonOutlookGrid9.ClearInternalRows();
             kryptonOutlookGrid9.ClearGroups();
+            kryptonOutlookGrid9.RowHeadersWidth = 10;
 
             kryptonOutlookGrid9.GroupBox = kryptonOutlookGridGroupBox1;
             kryptonOutlookGrid9.RegisterGroupBoxEvents();
@@ -100,6 +104,62 @@ namespace WindowsFormsApp1
             kryptonOutlookGrid9.AssignRows(l);
             kryptonOutlookGrid9.ForceRefreshGroupBox();
             kryptonOutlookGrid9.Fill();
+        }
+
+        private void LoadTypedNorms(int type, KryptonOutlookGrid.Classes.KryptonOutlookGrid grid)
+        {
+            List<ProfNormTable> normList = new List<ProfNormTable>();
+            ProfileTable profData = dbOps.GetProfileData(cur_org_id, cmonth, cyear);
+            normList = dbOps.GetProfNormTypedList(cur_org_id, profData.Num, profData.Month, profData.Year, toolStripTextBox2.Text, toolStripTextBox2.Text, type);
+
+            grid.ClearInternalRows();
+            grid.ClearGroups();
+            grid.RowHeadersWidth = 10;
+
+            grid.GroupBox = kryptonOutlookGridGroupBox1;
+            grid.RegisterGroupBoxEvents();
+            DataGridViewColumn[] columnsToAdd = new DataGridViewColumn[8];
+            columnsToAdd[0] = grid.Columns[0];
+            columnsToAdd[1] = grid.Columns[1];
+            columnsToAdd[2] = grid.Columns[2];
+            columnsToAdd[3] = grid.Columns[3];
+            columnsToAdd[4] = grid.Columns[4];
+            columnsToAdd[5] = grid.Columns[5];
+            columnsToAdd[6] = grid.Columns[6];
+            columnsToAdd[7] = grid.Columns[7];
+            //grid.Columns.AddRange(columnsToAdd);
+
+            grid.AddInternalColumn(grid.Columns[0], new OutlookGridDefaultGroup(null), SortOrder.None, -1, -1);
+            grid.AddInternalColumn(grid.Columns[1], new OutlookGridDefaultGroup(null), SortOrder.Ascending, -1, 1);
+            grid.AddInternalColumn(grid.Columns[2], new OutlookGridDefaultGroup(null), SortOrder.None, -1, -1);
+            grid.AddInternalColumn(grid.Columns[3], new OutlookGridDefaultGroup(null), SortOrder.None, -1, -1);
+            grid.AddInternalColumn(grid.Columns[4], new OutlookGridDefaultGroup(null), SortOrder.None, -1, -1);
+            grid.AddInternalColumn(grid.Columns[5], new OutlookGridDefaultGroup(null), SortOrder.None, -1, -1);
+            grid.AddInternalColumn(grid.Columns[6], new OutlookGridDefaultGroup(null), SortOrder.None, -1, -1);
+            grid.AddInternalColumn(grid.Columns[7], new OutlookGridTypeGroup(null), SortOrder.Ascending, 1, -1);
+            grid.Columns[0].Visible = false;
+            grid.Columns[7].Visible = false;
+
+            grid.ShowLines = true;
+
+            //Setup Rows
+            OutlookGridRow row = new OutlookGridRow();
+            List<OutlookGridRow> l = new List<OutlookGridRow>();
+            grid.SuspendLayout();
+            //grid.ClearInternalRows();
+            grid.FillMode = FillMode.GROUPSONLY;
+
+            foreach (var product in normList)
+            {
+                row = new OutlookGridRow();
+                row.CreateCells(grid, new object[] { product.Id, product.Code, product.Name, product.Unit, product.nUnit, product.s111, product.s112, new TextAndImage(product.type.ToString(), GetFlag(product.type)) });
+                l.Add(row);
+            }
+
+            grid.ResumeLayout();
+            grid.AssignRows(l);
+            grid.ForceRefreshGroupBox();
+            grid.Fill();
         }
 
         private void treeView1_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
@@ -176,22 +236,23 @@ namespace WindowsFormsApp1
 
         private void kryptonOutlookGrid1_Resize(object sender, EventArgs e)
         {
+            KryptonOutlookGrid.Classes.KryptonOutlookGrid grid = (KryptonOutlookGrid.Classes.KryptonOutlookGrid)sender;
             int PreferredTotalWidth = 0;
             //Calculate the total preferred width
-            foreach (DataGridViewColumn c in kryptonOutlookGrid9.Columns)
+            foreach (DataGridViewColumn c in grid.Columns)
             {
                 PreferredTotalWidth += Math.Min(c.GetPreferredWidth(DataGridViewAutoSizeColumnMode.DisplayedCells, true), 250);
             }
 
-            if (kryptonOutlookGrid9.Width > PreferredTotalWidth)
+            if (grid.Width > PreferredTotalWidth)
             {
-                kryptonOutlookGrid9.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-                kryptonOutlookGrid9.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.DisplayedCells);
+                grid.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                grid.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.DisplayedCells);
             }
             else
             {
-                kryptonOutlookGrid1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
-                foreach (DataGridViewColumn c in kryptonOutlookGrid9.Columns)
+                grid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
+                foreach (DataGridViewColumn c in grid.Columns)
                 {
                     c.Width = Math.Min(c.GetPreferredWidth(DataGridViewAutoSizeColumnMode.DisplayedCells, true), 250);
                 }
