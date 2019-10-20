@@ -1056,6 +1056,268 @@ namespace WindowsFormsApp1.DBO
             }
         }
 
+        /// <summary>
+        /// нормы предприятия профиль
+        /// </summary>
+        /// <returns></returns>
+        public static string GetNormUnit(int id_prod)
+        {
+            string unit = "";
+            try
+            {
+                SqlConnection myConnection = new SqlConnection(cnStr);
+                myConnection.Open();
+
+                string query = "SELECT unit FROM [NewProduct] where id = @id_prod";
+                SqlCommand command = new SqlCommand(query, myConnection);
+                command.Parameters.AddWithValue("@id_prod", id_prod);
+
+                using (SqlDataReader dr = command.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        unit = dr["unit"].ToString();
+                    }
+                }
+                myConnection.Close();
+            }
+            catch (Exception Ex)
+            {
+                KryptonMessageBox.Show("Ошибка получения данных организации: " + Ex.Message);
+            }
+            return unit;
+        }
+        public static string GetNormNUnit(int id_prod)
+        {
+            string nunit = "";
+            try
+            {
+                SqlConnection myConnection = new SqlConnection(cnStr);
+                myConnection.Open();
+
+                string query = "SELECT norm_unit FROM [NewProduct] where id = @id_prod";
+                SqlCommand command = new SqlCommand(query, myConnection);
+                command.Parameters.AddWithValue("@id_prod", id_prod);
+
+                using (SqlDataReader dr = command.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        nunit = dr["norm_unit"].ToString();
+                    }
+                }
+                myConnection.Close();
+            }
+            catch (Exception Ex)
+            {
+                KryptonMessageBox.Show("Ошибка GetNormNUnit: " + Ex.Message);
+            }
+            return nunit;
+        }
+        public static List<ProfNormTable> GetProfNormList(int id_org, int num, int month, int year, string sample1, string sample2)
+        {
+            List<ProfNormTable> normtList = new List<ProfNormTable>();
+            try
+            {
+                SqlConnection myConnection = new SqlConnection(cnStr);
+                myConnection.Open();
+
+                string query = "SELECT COUNT(*) FROM NewNorm where num = @num AND id_org = @id_org";
+                SqlCommand command = new SqlCommand(query, myConnection);
+                command.Parameters.AddWithValue("@num", num);
+                command.Parameters.AddWithValue("@id_org", id_org);
+                var result = Convert.ToInt32(command.ExecuteScalar());
+                if (result >= 1)
+                {
+                    query = "SELECT * FROM [NewNorm] where num = @num AND id_org = @id_org AND (name like @sample1 and code like @sample2)";
+                    command = new SqlCommand(query, myConnection);
+                    command.Parameters.AddWithValue("@sample1", "%" + sample1 + "%");
+                    command.Parameters.AddWithValue("@sample2", "%" + sample2 + "%");
+                    command.Parameters.AddWithValue("@num", num);
+                    command.Parameters.AddWithValue("@id_org", id_org);                   
+                    using (SqlDataReader dr = command.ExecuteReader())
+                    {
+                        while (dr.Read())
+                        {
+                            bool f111 = false;
+                            bool f112 = false;
+                            var array = dr["row_options"].ToString().Split(',');
+                            if (array.Length == 2)
+                            {
+                                f111 = true;
+                                f112 = true;
+                            }
+                            else if (array.Length == 1 && array[0] == "111")
+                                f111 = true;
+                            else if (array.Length == 1 && array[0] == "112")
+                                f112 = true;
+                            normtList.Add(new ProfNormTable
+                            {
+                                Id = Int32.Parse(dr["id"].ToString()),
+                                Id_prod = Int32.Parse(dr["id_prod"].ToString()),
+                                Code = Int32.Parse(dr["code"].ToString()),
+                                Name = dr["name"].ToString(),
+                                Unit = GetNormUnit(Int32.Parse(dr["id_prod"].ToString())),
+                                nUnit = GetNormNUnit(Int32.Parse(dr["id_prod"].ToString())),
+                                id_obj = Int32.Parse(dr["id_obj"].ToString()),
+                                s111 = f111,
+                                s112 = f112,
+                                type = Int32.Parse(dr["type"].ToString())
+                            });
+                        }
+                    }
+                }
+                else
+                {
+                    query = "SELECT * FROM [NewNorm] where id_org = @id_org AND num = (SELECT MAX(num) FROM [NewNorm] where year <= @year AND month <= @month) AND (name like @sample1 and code like @sample2)";
+                    command = new SqlCommand(query, myConnection);
+                    command.Parameters.AddWithValue("@sample1", "%" + sample1 + "%");
+                    command.Parameters.AddWithValue("@sample2", "%" + sample2 + "%");
+                    command.Parameters.AddWithValue("@id_org", id_org);
+                    command.Parameters.AddWithValue("@year", year);
+                    command.Parameters.AddWithValue("@month", month);
+                    using (SqlDataReader dr = command.ExecuteReader())
+                    {
+                        while (dr.Read())
+                        {
+                            bool f111 = false;
+                            bool f112 = false;
+                            var array = dr["row_options"].ToString().Split(',');
+                            if (array.Length == 2)
+                            {
+                                f111 = true;
+                                f112 = true;
+                            }
+                            else if (array.Length == 1 && array[0] == "111")
+                                f111 = true;
+                            else if (array.Length == 1 && array[0] == "112")
+                                f112 = true;
+                            normtList.Add(new ProfNormTable
+                            {
+                                Id = Int32.Parse(dr["id"].ToString()),
+                                Id_prod = Int32.Parse(dr["id_prod"].ToString()),
+                                Code = Int32.Parse(dr["code"].ToString()),
+                                Name = dr["name"].ToString(),
+                                Unit = GetNormUnit(Int32.Parse(dr["id_prod"].ToString())),
+                                nUnit = GetNormNUnit(Int32.Parse(dr["id_prod"].ToString())),
+                                id_obj = Int32.Parse(dr["id_obj"].ToString()),
+                                s111 = f111,
+                                s112 = f112,
+                                type = Int32.Parse(dr["type"].ToString())
+                            });
+                        }
+                    }
+                }
+                myConnection.Close();
+            }
+            catch (Exception Ex)
+            {
+                KryptonMessageBox.Show("Ошибка GetNormList: " + Ex.Message);
+            }
+            return normtList;
+        }
+        public static List<int> GetNormIdList(int type)
+        {
+            List<int> productList = new List<int>();
+            try
+            {
+                SqlConnection myConnection = new SqlConnection(cnStr);
+                myConnection.Open();
+
+                string query = "SELECT id FROM [NewProduct] where pid = @type";
+                SqlCommand command = new SqlCommand(query, myConnection);
+                command.Parameters.AddWithValue("@type", type);
+
+                using (SqlDataReader dr = command.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        productList.Add(Int32.Parse(dr["id"].ToString()));
+                    }
+                }
+                myConnection.Close();
+            }
+            catch (Exception Ex)
+            {
+                KryptonMessageBox.Show("Ошибка GetProdIdList: " + Ex.Message);
+            }
+            return productList;
+        }
+        public static List<int> GetNormCodeList(int type)
+        {
+            List<int> productList = new List<int>();
+            try
+            {
+                SqlConnection myConnection = new SqlConnection(cnStr);
+                myConnection.Open();
+
+                string query = "SELECT code FROM [NewProduct] where pid = @type";
+                SqlCommand command = new SqlCommand(query, myConnection);
+                command.Parameters.AddWithValue("@type", type);
+
+                using (SqlDataReader dr = command.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        productList.Add(Int32.Parse(dr["code"].ToString()));
+                    }
+                }
+                myConnection.Close();
+            }
+            catch (Exception Ex)
+            {
+                KryptonMessageBox.Show("Ошибка GetProdCodeList: " + Ex.Message);
+            }
+            return productList;
+        }
+        public static void DeleteFromNorm(int id_prod)
+        {
+            try
+            {
+                SqlConnection myConnection = new SqlConnection(cnStr);
+                myConnection.Open();
+
+                string query = "DELETE FROM [NewProduct] where id = @id_prod";
+                SqlCommand command = new SqlCommand(query, myConnection);
+                command.Parameters.AddWithValue("@id_prod", id_prod);
+                command.ExecuteNonQuery();
+                myConnection.Close();
+            }
+            catch (Exception Ex)
+            {
+                KryptonMessageBox.Show("ОшибкаDeleteFromProd: " + Ex.Message);
+            }
+        }
+        public static void UpdateNormList(ProductTable productTable, int odlId)
+        {
+            try
+            {
+                SqlConnection myConnection = new SqlConnection(cnStr);
+                myConnection.Open();
+
+                string query = "UPDATE NewProduct SET id = @id, code=@code, pid=@pid, name=@name, unit=@unit, norm_unit=@norm_unit, f111=@f111, f112=@f112 WHERE id = @oldid";
+                SqlCommand command = new SqlCommand(query, myConnection);
+                command.Parameters.AddWithValue("@oldid", odlId);
+                command.Parameters.AddWithValue("@id", productTable.Id);
+                command.Parameters.AddWithValue("@code", productTable.Code);
+                command.Parameters.AddWithValue("@pid", productTable.type);
+                command.Parameters.AddWithValue("@name", productTable.Name);
+                command.Parameters.AddWithValue("@unit", productTable.Unit);
+                command.Parameters.AddWithValue("@norm_unit", productTable.nUnit);
+                command.Parameters.AddWithValue("@f111", productTable.s111);
+                command.Parameters.AddWithValue("@f112", productTable.s112);
+                command.ExecuteNonQuery();
+                myConnection.Close();
+            }
+            catch (Exception Ex)
+            {
+                KryptonMessageBox.Show("Ошибка UpdateProdList: " + Ex.Message);
+            }
+        }
+
+
+
+
 
         /// <summary>
         /// Топливо справочник
@@ -1097,7 +1359,7 @@ namespace WindowsFormsApp1.DBO
             }
             return fuelList;
         }
-
+  
         public static void DeleteFromFuel(int id)
         {
             try
@@ -2279,5 +2541,64 @@ namespace WindowsFormsApp1.DBO
             return SourceList;
         }
 
+        public static ProfileTable GetProfileData(int id_org, int month, int year)
+        {
+            ProfileTable profileTable = new ProfileTable();
+
+            SqlConnection myConnection = new SqlConnection(cnStr);
+            myConnection.Open();
+            string query = "SELECT COUNT(*) FROM NewProfiles where month = @month AND year = @year AND id_org = @id_org";
+            SqlCommand command = new SqlCommand(query, myConnection);
+            command.Parameters.AddWithValue("@id_org", id_org);
+            command.Parameters.AddWithValue("@month", month);
+            command.Parameters.AddWithValue("@year", year);
+            var result = Convert.ToInt32(command.ExecuteScalar());
+            if (result == 1)
+            {
+                query = "SELECT * FROM [NewProfiles] where month = @month AND year = @year AND id_org = @id_org";
+                command = new SqlCommand(query, myConnection);
+                command.Parameters.AddWithValue("@id_org", id_org);
+                command.Parameters.AddWithValue("@month", month);
+                command.Parameters.AddWithValue("@year", year);
+                using (SqlDataReader dr = command.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+
+                        profileTable = new ProfileTable
+                        {
+                            Id = Int32.Parse(dr["id"].ToString()),
+                            Num = Int32.Parse(dr["num"].ToString()),
+                            Month= Int32.Parse(dr["month"].ToString()),
+                            Year = Int32.Parse(dr["year"].ToString()),
+                        };
+                    }
+                }
+            }
+            else
+            {
+                query = "SELECT * FROM [NewProfiles] where id_org = @id_org AND num = (SELECT MAX(num) FROM [NewProfiles])";
+                command = new SqlCommand(query, myConnection);
+                command.Parameters.AddWithValue("@id_org", id_org);
+                command.Parameters.AddWithValue("@month", month);
+                command.Parameters.AddWithValue("@year", year);
+                using (SqlDataReader dr = command.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+
+                        profileTable = new ProfileTable
+                        {
+                            Id = Int32.Parse(dr["id"].ToString()),
+                            Num = Int32.Parse(dr["num"].ToString()),
+                            Month = Int32.Parse(dr["month"].ToString()),
+                            Year = Int32.Parse(dr["year"].ToString()),
+                        };
+                    }
+                }
+            }
+            myConnection.Close();
+            return profileTable;
+        }
     }
 }

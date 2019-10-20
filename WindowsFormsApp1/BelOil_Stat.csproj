@@ -153,6 +153,8 @@
     <Compile Include="DataTables\Norm4Table.cs" />
     <Compile Include="DataTables\NormIdTypeTable.cs" />
     <Compile Include="DataTables\NormInputTable.cs" />
+    <Compile Include="DataTables\ProfileTable.cs" />
+    <Compile Include="DataTables\ProfNormTable.cs" />
     <Compile Include="DataTables\OneNorm.cs" />
     <Compile Include="DataTables\ObjectTable.cs" />
     <Compile Include="DataTables\RecievedInputTable.cs" />
@@ -437,6 +439,14 @@
     <None Include="Resources\t5.png" />
     <None Include="Resources\t1ico1.png" />
     <None Include="Resources\box.png" />
+    <None Include="Resources\1_1.png" />
+    <None Include="Resources\2_1.png" />
+    <None Include="Resources\3_1.png" />
+    <None Include="Resources\4_1.png" />
+    <None Include="Resources\5.png" />
+    <None Include="Resources\5_1.png" />
+    <None Include="Resources\5_2.png" />
+    <None Include="Resources\6.png" />
     <Content Include="Themes\Access 2007 Alt White Text.xml" />
     <Content Include="Themes\Access 2007 Alt.xml" />
     <Content Include="Themes\Access 2007 White Text.xml" />

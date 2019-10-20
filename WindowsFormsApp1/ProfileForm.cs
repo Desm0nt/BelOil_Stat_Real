@@ -27,6 +27,7 @@ namespace WindowsFormsApp1
             cyear = curyear;
             cmonth = curmonth;
             LoadObjects();
+            LoadAllNorms();
         }
 
         private void LoadObjects()
@@ -45,6 +46,62 @@ namespace WindowsFormsApp1
             treeView1.ExpandAll();
 
         }
+
+        private void LoadAllNorms()
+        {
+            List<ProfNormTable> normList = new List<ProfNormTable>();
+            ProfileTable profData = dbOps.GetProfileData(cur_org_id, cmonth, cyear);
+            normList = dbOps.GetProfNormList(cur_org_id, profData.Num, profData.Month, profData.Year, toolStripTextBox2.Text, toolStripTextBox2.Text);
+
+            kryptonOutlookGrid9.ClearInternalRows();
+            kryptonOutlookGrid9.ClearGroups();
+
+            kryptonOutlookGrid9.GroupBox = kryptonOutlookGridGroupBox1;
+            kryptonOutlookGrid9.RegisterGroupBoxEvents();
+            DataGridViewColumn[] columnsToAdd = new DataGridViewColumn[8];
+            columnsToAdd[0] = kryptonOutlookGrid9.Columns[0];
+            columnsToAdd[1] = kryptonOutlookGrid9.Columns[1];
+            columnsToAdd[2] = kryptonOutlookGrid9.Columns[2];
+            columnsToAdd[3] = kryptonOutlookGrid9.Columns[3];
+            columnsToAdd[4] = kryptonOutlookGrid9.Columns[4];
+            columnsToAdd[5] = kryptonOutlookGrid9.Columns[5];
+            columnsToAdd[6] = kryptonOutlookGrid9.Columns[6];
+            columnsToAdd[7] = kryptonOutlookGrid9.Columns[7];
+            //kryptonOutlookGrid9.Columns.AddRange(columnsToAdd);
+
+            kryptonOutlookGrid9.AddInternalColumn(kryptonOutlookGrid9.Columns[0], new OutlookGridDefaultGroup(null), SortOrder.None, -1, -1);
+            kryptonOutlookGrid9.AddInternalColumn(kryptonOutlookGrid9.Columns[1], new OutlookGridDefaultGroup(null), SortOrder.Ascending, -1, 1);
+            kryptonOutlookGrid9.AddInternalColumn(kryptonOutlookGrid9.Columns[2], new OutlookGridDefaultGroup(null), SortOrder.None, -1, -1);
+            kryptonOutlookGrid9.AddInternalColumn(kryptonOutlookGrid9.Columns[3], new OutlookGridDefaultGroup(null), SortOrder.None, -1, -1);
+            kryptonOutlookGrid9.AddInternalColumn(kryptonOutlookGrid9.Columns[4], new OutlookGridDefaultGroup(null), SortOrder.None, -1, -1);
+            kryptonOutlookGrid9.AddInternalColumn(kryptonOutlookGrid9.Columns[5], new OutlookGridDefaultGroup(null), SortOrder.None, -1, -1);
+            kryptonOutlookGrid9.AddInternalColumn(kryptonOutlookGrid9.Columns[6], new OutlookGridDefaultGroup(null), SortOrder.None, -1, -1);
+            kryptonOutlookGrid9.AddInternalColumn(kryptonOutlookGrid9.Columns[7], new OutlookGridTypeGroup(null), SortOrder.Ascending, 1, -1);
+            kryptonOutlookGrid9.Columns[0].Visible = false;
+            kryptonOutlookGrid9.Columns[7].Visible = false;
+
+            kryptonOutlookGrid9.ShowLines = true;
+
+            //Setup Rows
+            OutlookGridRow row = new OutlookGridRow();
+            List<OutlookGridRow> l = new List<OutlookGridRow>();
+            kryptonOutlookGrid9.SuspendLayout();
+            //kryptonOutlookGrid9.ClearInternalRows();
+            kryptonOutlookGrid9.FillMode = FillMode.GROUPSONLY;
+
+            foreach (var product in normList)
+            {
+                row = new OutlookGridRow();
+                row.CreateCells(kryptonOutlookGrid9, new object[] { product.Id, product.Code, product.Name, product.Unit, product.nUnit, product.s111, product.s112, new TextAndImage(product.type.ToString(), GetFlag(product.type)) });
+                l.Add(row);
+            }
+
+            kryptonOutlookGrid9.ResumeLayout();
+            kryptonOutlookGrid9.AssignRows(l);
+            kryptonOutlookGrid9.ForceRefreshGroupBox();
+            kryptonOutlookGrid9.Fill();
+        }
+
         private void treeView1_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
             if (Int32.Parse(e.Node.Tag.ToString()) != -1)
@@ -54,6 +111,20 @@ namespace WindowsFormsApp1
             }
         }
 
+        private Image GetFlag(int type)
+        {
+            switch (type)
+            {
+                case 1:
+                    return Properties.Resources._1;
+                case 2:
+                    return Properties.Resources._2;
+                case 3:
+                    return Properties.Resources._3;
+                default:
+                    return null;
+            }
+        }
 
 
         /// <summary>
