@@ -1135,37 +1135,6 @@ namespace WindowsFormsApp1.DBO
                     command.Parameters.AddWithValue("@sample2", "%" + sample2 + "%");
                     command.Parameters.AddWithValue("@num", num);
                     command.Parameters.AddWithValue("@id_org", id_org);                   
-                    using (SqlDataReader dr = command.ExecuteReader())
-                    {
-                        while (dr.Read())
-                        {
-                            bool f111 = false;
-                            bool f112 = false;
-                            var array = dr["row_options"].ToString().Split(',');
-                            if (array.Length == 2)
-                            {
-                                f111 = true;
-                                f112 = true;
-                            }
-                            else if (array.Length == 1 && array[0] == "111")
-                                f111 = true;
-                            else if (array.Length == 1 && array[0] == "112")
-                                f112 = true;
-                            normtList.Add(new ProfNormTable
-                            {
-                                Id = Int32.Parse(dr["id"].ToString()),
-                                Id_prod = Int32.Parse(dr["id_prod"].ToString()),
-                                Code = Int32.Parse(dr["code"].ToString()),
-                                Name = dr["name"].ToString(),
-                                Unit = GetNormUnit(Int32.Parse(dr["id_prod"].ToString())),
-                                nUnit = GetNormNUnit(Int32.Parse(dr["id_prod"].ToString())),
-                                id_obj = Int32.Parse(dr["id_obj"].ToString()),
-                                s111 = f111,
-                                s112 = f112,
-                                type = Int32.Parse(dr["type"].ToString())
-                            });
-                        }
-                    }
                 }
                 else
                 {
@@ -1175,37 +1144,37 @@ namespace WindowsFormsApp1.DBO
                     command.Parameters.AddWithValue("@sample2", "%" + sample2 + "%");
                     command.Parameters.AddWithValue("@id_org", id_org);
                     command.Parameters.AddWithValue("@year", year);
-                    command.Parameters.AddWithValue("@month", month);
-                    using (SqlDataReader dr = command.ExecuteReader())
+                    command.Parameters.AddWithValue("@month", month);                   
+                }
+                using (SqlDataReader dr = command.ExecuteReader())
+                {
+                    while (dr.Read())
                     {
-                        while (dr.Read())
+                        bool f111 = false;
+                        bool f112 = false;
+                        var array = dr["row_options"].ToString().Split(',');
+                        if (array.Length == 2)
                         {
-                            bool f111 = false;
-                            bool f112 = false;
-                            var array = dr["row_options"].ToString().Split(',');
-                            if (array.Length == 2)
-                            {
-                                f111 = true;
-                                f112 = true;
-                            }
-                            else if (array.Length == 1 && array[0] == "111")
-                                f111 = true;
-                            else if (array.Length == 1 && array[0] == "112")
-                                f112 = true;
-                            normtList.Add(new ProfNormTable
-                            {
-                                Id = Int32.Parse(dr["id"].ToString()),
-                                Id_prod = Int32.Parse(dr["id_prod"].ToString()),
-                                Code = Int32.Parse(dr["code"].ToString()),
-                                Name = dr["name"].ToString(),
-                                Unit = GetNormUnit(Int32.Parse(dr["id_prod"].ToString())),
-                                nUnit = GetNormNUnit(Int32.Parse(dr["id_prod"].ToString())),
-                                id_obj = Int32.Parse(dr["id_obj"].ToString()),
-                                s111 = f111,
-                                s112 = f112,
-                                type = Int32.Parse(dr["type"].ToString())
-                            });
+                            f111 = true;
+                            f112 = true;
                         }
+                        else if (array.Length == 1 && array[0] == "111")
+                            f111 = true;
+                        else if (array.Length == 1 && array[0] == "112")
+                            f112 = true;
+                        normtList.Add(new ProfNormTable
+                        {
+                            Id = Int32.Parse(dr["id"].ToString()),
+                            Id_prod = Int32.Parse(dr["id_prod"].ToString()),
+                            Code = Int32.Parse(dr["code"].ToString()),
+                            Name = dr["name"].ToString(),
+                            Unit = GetNormUnit(Int32.Parse(dr["id_prod"].ToString())),
+                            nUnit = GetNormNUnit(Int32.Parse(dr["id_prod"].ToString())),
+                            id_obj = Int32.Parse(dr["id_obj"].ToString()),
+                            s111 = f111,
+                            s112 = f112,
+                            type = Int32.Parse(dr["type"].ToString())
+                        });
                     }
                 }
                 myConnection.Close();
@@ -1237,38 +1206,7 @@ namespace WindowsFormsApp1.DBO
                     command.Parameters.AddWithValue("@sample2", "%" + sample2 + "%");
                     command.Parameters.AddWithValue("@num", num);
                     command.Parameters.AddWithValue("@id_org", id_org);
-                    command.Parameters.AddWithValue("@type", type);
-                    using (SqlDataReader dr = command.ExecuteReader())
-                    {
-                        while (dr.Read())
-                        {
-                            bool f111 = false;
-                            bool f112 = false;
-                            var array = dr["row_options"].ToString().Split(',');
-                            if (array.Length == 2)
-                            {
-                                f111 = true;
-                                f112 = true;
-                            }
-                            else if (array.Length == 1 && array[0] == "111")
-                                f111 = true;
-                            else if (array.Length == 1 && array[0] == "112")
-                                f112 = true;
-                            normtList.Add(new ProfNormTable
-                            {
-                                Id = Int32.Parse(dr["id"].ToString()),
-                                Id_prod = Int32.Parse(dr["id_prod"].ToString()),
-                                Code = Int32.Parse(dr["code"].ToString()),
-                                Name = dr["name"].ToString(),
-                                Unit = GetNormUnit(Int32.Parse(dr["id_prod"].ToString())),
-                                nUnit = GetNormNUnit(Int32.Parse(dr["id_prod"].ToString())),
-                                id_obj = Int32.Parse(dr["id_obj"].ToString()),
-                                s111 = f111,
-                                s112 = f112,
-                                type = Int32.Parse(dr["type"].ToString())
-                            });
-                        }
-                    }
+                    command.Parameters.AddWithValue("@type", type);                    
                 }
                 else
                 {
@@ -1279,37 +1217,37 @@ namespace WindowsFormsApp1.DBO
                     command.Parameters.AddWithValue("@id_org", id_org);
                     command.Parameters.AddWithValue("@year", year);
                     command.Parameters.AddWithValue("@month", month);
-                    command.Parameters.AddWithValue("@type", type);
-                    using (SqlDataReader dr = command.ExecuteReader())
+                    command.Parameters.AddWithValue("@type", type);              
+                }
+                using (SqlDataReader dr = command.ExecuteReader())
+                {
+                    while (dr.Read())
                     {
-                        while (dr.Read())
+                        bool f111 = false;
+                        bool f112 = false;
+                        var array = dr["row_options"].ToString().Split(',');
+                        if (array.Length == 2)
                         {
-                            bool f111 = false;
-                            bool f112 = false;
-                            var array = dr["row_options"].ToString().Split(',');
-                            if (array.Length == 2)
-                            {
-                                f111 = true;
-                                f112 = true;
-                            }
-                            else if (array.Length == 1 && array[0] == "111")
-                                f111 = true;
-                            else if (array.Length == 1 && array[0] == "112")
-                                f112 = true;
-                            normtList.Add(new ProfNormTable
-                            {
-                                Id = Int32.Parse(dr["id"].ToString()),
-                                Id_prod = Int32.Parse(dr["id_prod"].ToString()),
-                                Code = Int32.Parse(dr["code"].ToString()),
-                                Name = dr["name"].ToString(),
-                                Unit = GetNormUnit(Int32.Parse(dr["id_prod"].ToString())),
-                                nUnit = GetNormNUnit(Int32.Parse(dr["id_prod"].ToString())),
-                                id_obj = Int32.Parse(dr["id_obj"].ToString()),
-                                s111 = f111,
-                                s112 = f112,
-                                type = Int32.Parse(dr["type"].ToString())
-                            });
+                            f111 = true;
+                            f112 = true;
                         }
+                        else if (array.Length == 1 && array[0] == "111")
+                            f111 = true;
+                        else if (array.Length == 1 && array[0] == "112")
+                            f112 = true;
+                        normtList.Add(new ProfNormTable
+                        {
+                            Id = Int32.Parse(dr["id"].ToString()),
+                            Id_prod = Int32.Parse(dr["id_prod"].ToString()),
+                            Code = Int32.Parse(dr["code"].ToString()),
+                            Name = dr["name"].ToString(),
+                            Unit = GetNormUnit(Int32.Parse(dr["id_prod"].ToString())),
+                            nUnit = GetNormNUnit(Int32.Parse(dr["id_prod"].ToString())),
+                            id_obj = Int32.Parse(dr["id_obj"].ToString()),
+                            s111 = f111,
+                            s112 = f112,
+                            type = Int32.Parse(dr["type"].ToString())
+                        });
                     }
                 }
                 myConnection.Close();
@@ -1320,6 +1258,113 @@ namespace WindowsFormsApp1.DBO
             }
             return normtList;
         }
+        public static FuelsTable GetFuelById(int fuel_id, int year, int month)
+        {
+            FuelsTable fuel = new FuelsTable();
+            try
+            {
+                SqlConnection myConnection = new SqlConnection(cnStr);
+                myConnection.Open();
+                string query = "SELECT COUNT(*)  FROM [NewFuels] where fuel_id = @fuel_id and year = @year and month = @month";
+                SqlCommand command = new SqlCommand(query, myConnection);
+                command.Parameters.AddWithValue("@fuel_id", fuel_id);
+                command.Parameters.AddWithValue("@year", year);
+                command.Parameters.AddWithValue("@month", month);
+
+                int RecordExist = (int)command.ExecuteScalar();
+                if (RecordExist > 0)
+                {
+                    query = "SELECT * FROM [NewFuels] where fuel_id = @fuel_id and year = @year and month = @month";
+                    command = new SqlCommand(query, myConnection);
+                    command.Parameters.AddWithValue("@fuel_id", fuel_id);
+                    command.Parameters.AddWithValue("@year", year);
+                    command.Parameters.AddWithValue("@month", month);
+                }
+                else
+                {
+                    query = "SELECT * FROM [NewFuels] WHERE fuel_id = @fuel_id AND time_id = (SELECT MAX(time_id) FROM [NewFuels])";
+                    command = new SqlCommand(query, myConnection);
+                    command.Parameters.AddWithValue("@fuel_id", fuel_id);
+                    command.Parameters.AddWithValue("@year", year);
+                    command.Parameters.AddWithValue("@month", month);
+                }
+                using (SqlDataReader dr = command.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        fuel = new FuelsTable
+                        {
+                            id = Int32.Parse(dr["id"].ToString()),
+                            fuel_id = Int32.Parse(dr["fuel_id"].ToString()),
+                            name = dr["name"].ToString(),
+                            Qn = Int32.Parse(dr["Qn"].ToString()),
+                            B_y = float.Parse(dr["B_y"].ToString()),
+                            unit = dr["unit"].ToString()
+                        };
+                    }
+                }
+                myConnection.Close();
+            }
+            catch (Exception Ex)
+            {
+                KryptonMessageBox.Show("Ошибка GetFuelById: " + Ex.Message);
+            }
+            return fuel;
+        }
+        public static List<ProfFuelsTable> GetProfFuelsList(int id_org, int num, int month, int year)
+        {
+            List<ProfFuelsTable> fuelList = new List<ProfFuelsTable>();
+            try
+            {
+                SqlConnection myConnection = new SqlConnection(cnStr);
+                myConnection.Open();
+
+                string query = "SELECT COUNT(*) FROM NewOrgFuels where num = @num AND id_org = @id_org";
+                SqlCommand command = new SqlCommand(query, myConnection);
+                command.Parameters.AddWithValue("@num", num);
+                command.Parameters.AddWithValue("@id_org", id_org);
+                var result = Convert.ToInt32(command.ExecuteScalar());
+                if (result >= 1)
+                {
+                    query = "SELECT * FROM [NewOrgFuels] where num = @num AND id_org = @id_org";
+                    command = new SqlCommand(query, myConnection);
+                    command.Parameters.AddWithValue("@num", num);
+                    command.Parameters.AddWithValue("@id_org", id_org);  
+                }
+                else
+                {
+                    query = "SELECT * FROM [NewOrgFuels] where id_org = @id_org AND num = (SELECT MAX(num) FROM [NewOrgFuels] where year <= @year AND month <= @month)";
+                    command = new SqlCommand(query, myConnection);
+                    command.Parameters.AddWithValue("@id_org", id_org);
+                    command.Parameters.AddWithValue("@year", year);
+                    command.Parameters.AddWithValue("@month", month);                 
+                }
+                using (SqlDataReader dr = command.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        var fuel = GetFuelById(Int32.Parse(dr["id_fuel"].ToString()), year, month);
+                        fuelList.Add(new ProfFuelsTable
+                        {
+                            id = Int32.Parse(dr["id"].ToString()),
+                            fuel_id = Int32.Parse(dr["id_fuel"].ToString()),
+                            name = fuel.name,
+                            Qn = fuel.Qn,
+                            B_y = fuel.B_y,
+                            unit = fuel.unit,
+                            trade = Boolean.Parse(dr["trade"].ToString())
+                        });
+                    }
+                }
+                myConnection.Close();
+            }
+            catch (Exception Ex)
+            {
+                KryptonMessageBox.Show("Ошибка GetProfFuelsList: " + Ex.Message);
+            }
+            return fuelList;
+        }
+
 
         public static List<int> GetNormIdList(int type)
         {

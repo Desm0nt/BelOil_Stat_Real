@@ -29,7 +29,8 @@ namespace WindowsFormsApp1
 
         private void ProductsListForm_Load(object sender, EventArgs e)
         {      
-            LoadData();       
+            LoadData();
+            this.Width = 803;
         }
 
         private void LoadData()
@@ -43,8 +44,8 @@ namespace WindowsFormsApp1
             //}
             kryptonOutlookGrid1.ClearInternalRows();
             kryptonOutlookGrid1.ClearGroups();
-            
-            
+            kryptonOutlookGrid1.RowHeadersWidth = 10;
+
 
             kryptonOutlookGrid1.GroupBox = kryptonOutlookGridGroupBox1;
             kryptonOutlookGrid1.RegisterGroupBoxEvents();

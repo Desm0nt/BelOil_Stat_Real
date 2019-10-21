@@ -82,6 +82,7 @@
             this.kryptonOutlookGrid1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.kryptonOutlookGrid1.ColumnHeadersHeight = 19;
             this.kryptonOutlookGrid1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.id,
             this.Code,
@@ -359,7 +360,7 @@
             this.Name = "FuelListForm";
             this.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Office2007Blue;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "kl";
+            this.Text = "Энергоресурсы";
             this.Load += new System.EventHandler(this.FuelListForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonOutlookGrid1)).EndInit();
             this.toolStripContainer1.ContentPanel.ResumeLayout(false);
