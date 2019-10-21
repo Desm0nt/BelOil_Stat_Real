@@ -33,6 +33,8 @@ namespace WindowsFormsApp1
             LoadTypedNorms(3, kryptonOutlookGrid2);
             LoadFuels();
             this.Width = 1516;
+            kryptonHeaderGroup2.ValuesPrimary.Heading = kryptonNavigator1.SelectedPage.Text;
+            kryptonHeaderGroup2.ValuesPrimary.Image = kryptonNavigator1.SelectedPage.ImageSmall;
         }
 
         private void LoadObjects()
@@ -307,6 +309,14 @@ namespace WindowsFormsApp1
             int variance = 1;
             g.DrawRectangle(p, new Rectangle(rukTextBox.Location.X - variance, rukTextBox.Location.Y - variance, rukTextBox.Width + variance, rukTextBox.Height + variance));
             g.DrawRectangle(p, new Rectangle(otvTextBox.Location.X - variance, otvTextBox.Location.Y - variance, otvTextBox.Width + variance, otvTextBox.Height + variance));
+        }
+
+
+        private void kryptonNavigator1_SelectedPageChanged(object sender, EventArgs e)
+        {
+            ComponentFactory.Krypton.Navigator.KryptonNavigator nav = (ComponentFactory.Krypton.Navigator.KryptonNavigator)sender;
+            kryptonHeaderGroup2.ValuesPrimary.Heading = nav.SelectedPage.Text;
+            kryptonHeaderGroup2.ValuesPrimary.Image = nav.SelectedPage.ImageSmall;
         }
 
         private void kryptonOutlookGrid1_Resize(object sender, EventArgs e)
