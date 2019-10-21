@@ -574,7 +574,7 @@
             this.kryptonPage6,
             this.kryptonPage7});
             this.kryptonNavigator2.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Office2007Blue;
-            this.kryptonNavigator2.SelectedIndex = 0;
+            this.kryptonNavigator2.SelectedIndex = 1;
             this.kryptonNavigator2.Size = new System.Drawing.Size(747, 377);
             this.kryptonNavigator2.TabIndex = 3;
             this.kryptonNavigator2.Text = "kryptonNavigator2";
@@ -1332,7 +1332,7 @@
             this.kryptonPage8,
             this.kryptonPage9,
             this.kryptonPage10});
-            this.kryptonNavigator3.SelectedIndex = 1;
+            this.kryptonNavigator3.SelectedIndex = 2;
             this.kryptonNavigator3.Size = new System.Drawing.Size(747, 402);
             this.kryptonNavigator3.TabIndex = 7;
             this.kryptonNavigator3.Text = "kryptonNavigator3";
@@ -1346,7 +1346,7 @@
             this.kryptonPage8.LastVisibleSet = true;
             this.kryptonPage8.MinimumSize = new System.Drawing.Size(50, 50);
             this.kryptonPage8.Name = "kryptonPage8";
-            this.kryptonPage8.Size = new System.Drawing.Size(722, 375);
+            this.kryptonPage8.Size = new System.Drawing.Size(745, 375);
             this.kryptonPage8.StateNormal.Page.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(239)))), ((int)(((byte)(255)))));
             this.kryptonPage8.Text = "Поставщики";
             this.kryptonPage8.ToolTipTitle = "Page ToolTip";
@@ -1367,7 +1367,7 @@
             this.kryptonOutlookGrid1.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Office2007Blue;
             this.kryptonOutlookGrid1.PreviousSelectedGroupRow = -1;
             this.kryptonOutlookGrid1.ShowLines = false;
-            this.kryptonOutlookGrid1.Size = new System.Drawing.Size(722, 375);
+            this.kryptonOutlookGrid1.Size = new System.Drawing.Size(745, 375);
             this.kryptonOutlookGrid1.TabIndex = 0;
             // 
             // Column1
@@ -1418,7 +1418,7 @@
             this.kryptonPage10.LastVisibleSet = true;
             this.kryptonPage10.MinimumSize = new System.Drawing.Size(50, 50);
             this.kryptonPage10.Name = "kryptonPage10";
-            this.kryptonPage10.Size = new System.Drawing.Size(722, 375);
+            this.kryptonPage10.Size = new System.Drawing.Size(745, 375);
             this.kryptonPage10.Text = "Население";
             this.kryptonPage10.ToolTipTitle = "Page ToolTip";
             this.kryptonPage10.UniqueName = "a09ec24c7f3748979f109a050fac6af4";
@@ -1431,7 +1431,7 @@
             this.kryptonPanel3.Name = "kryptonPanel3";
             this.kryptonPanel3.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Office2007Blue;
             this.kryptonPanel3.PanelBackStyle = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ControlRibbon;
-            this.kryptonPanel3.Size = new System.Drawing.Size(722, 375);
+            this.kryptonPanel3.Size = new System.Drawing.Size(745, 375);
             this.kryptonPanel3.TabIndex = 2;
             // 
             // toolStrip4

@@ -146,6 +146,7 @@
     <Compile Include="DataTables\CurrentData.cs" />
     <Compile Include="DataTables\FactorTable.cs" />
     <Compile Include="DataTables\FTradeInputTable.cs" />
+    <Compile Include="DataTables\ProfFuelsTable.cs" />
     <Compile Include="DataTables\FuelTable.cs" />
     <Compile Include="DataTables\Norm4InputQuater.cs" />
     <Compile Include="DataTables\Norm4InputTable.cs" />

@@ -45,28 +45,28 @@
             this.subgroup = new KryptonOutlookGrid.CustomColumns.KryptonDataGridViewTextAndImageColumn();
             this.kryptonOutlookGridGroupBox1 = new KryptonOutlookGrid.Controls.KryptonOutlookGridGroupBox();
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.addToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.removeToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
+            this.editToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripTextBox1 = new System.Windows.Forms.ToolStripTextBox();
             this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripTextBox2 = new System.Windows.Forms.ToolStripTextBox();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.addToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.removeToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.editToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.searchToolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.resetToolStripButton2 = new System.Windows.Forms.ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonOutlookGrid1)).BeginInit();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
             this.toolStripContainer1.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.toolStrip2.SuspendLayout();
-            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // kryptonManager
@@ -211,6 +211,26 @@
             this.toolStripContainer1.TopToolStripPanel.Controls.Add(this.toolStrip1);
             this.toolStripContainer1.TopToolStripPanel.Controls.Add(this.toolStrip2);
             // 
+            // panel1
+            // 
+            this.panel1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel1.BackgroundImage")));
+            this.panel1.Controls.Add(this.label1);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(743, 26);
+            this.panel1.TabIndex = 1;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.Font = new System.Drawing.Font("Arial Unicode MS", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label1.Location = new System.Drawing.Point(30, 6);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(0, 15);
+            this.label1.TabIndex = 0;
+            // 
             // toolStrip1
             // 
             this.toolStrip1.Dock = System.Windows.Forms.DockStyle.None;
@@ -224,13 +244,43 @@
             this.toolStripSeparator1});
             this.toolStrip1.Location = new System.Drawing.Point(3, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(124, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(93, 25);
             this.toolStrip1.TabIndex = 0;
+            // 
+            // addToolStripButton
+            // 
+            this.addToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.addToolStripButton.Image = global::WindowsFormsApp1.Properties.Resources.add;
+            this.addToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.addToolStripButton.Name = "addToolStripButton";
+            this.addToolStripButton.Size = new System.Drawing.Size(23, 22);
+            this.addToolStripButton.Text = "Добавить";
+            this.addToolStripButton.Click += new System.EventHandler(this.addToolStripButton_Click);
+            // 
+            // removeToolStripButton
+            // 
+            this.removeToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.removeToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("removeToolStripButton.Image")));
+            this.removeToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.removeToolStripButton.Name = "removeToolStripButton";
+            this.removeToolStripButton.Size = new System.Drawing.Size(23, 22);
+            this.removeToolStripButton.Text = "Удалить";
+            this.removeToolStripButton.Click += new System.EventHandler(this.removeToolStripButton_Click);
             // 
             // toolStripSeparator
             // 
             this.toolStripSeparator.Name = "toolStripSeparator";
             this.toolStripSeparator.Size = new System.Drawing.Size(6, 25);
+            // 
+            // editToolStripButton
+            // 
+            this.editToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.editToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("editToolStripButton.Image")));
+            this.editToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.editToolStripButton.Name = "editToolStripButton";
+            this.editToolStripButton.Size = new System.Drawing.Size(23, 22);
+            this.editToolStripButton.Text = "Редактировать";
+            this.editToolStripButton.Click += new System.EventHandler(this.editToolStripButton_Click);
             // 
             // toolStripSeparator1
             // 
@@ -276,56 +326,6 @@
             this.toolStripTextBox2.Name = "toolStripTextBox2";
             this.toolStripTextBox2.Size = new System.Drawing.Size(100, 25);
             // 
-            // panel1
-            // 
-            this.panel1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel1.BackgroundImage")));
-            this.panel1.Controls.Add(this.label1);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(743, 26);
-            this.panel1.TabIndex = 1;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.Font = new System.Drawing.Font("Arial Unicode MS", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(30, 6);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(0, 15);
-            this.label1.TabIndex = 0;
-            // 
-            // addToolStripButton
-            // 
-            this.addToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.addToolStripButton.Image = global::WindowsFormsApp1.Properties.Resources.add;
-            this.addToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.addToolStripButton.Name = "addToolStripButton";
-            this.addToolStripButton.Size = new System.Drawing.Size(23, 22);
-            this.addToolStripButton.Text = "Добавить";
-            this.addToolStripButton.Click += new System.EventHandler(this.addToolStripButton_Click);
-            // 
-            // removeToolStripButton
-            // 
-            this.removeToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.removeToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("removeToolStripButton.Image")));
-            this.removeToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.removeToolStripButton.Name = "removeToolStripButton";
-            this.removeToolStripButton.Size = new System.Drawing.Size(23, 22);
-            this.removeToolStripButton.Text = "Удалить";
-            this.removeToolStripButton.Click += new System.EventHandler(this.removeToolStripButton_Click);
-            // 
-            // editToolStripButton
-            // 
-            this.editToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.editToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("editToolStripButton.Image")));
-            this.editToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.editToolStripButton.Name = "editToolStripButton";
-            this.editToolStripButton.Size = new System.Drawing.Size(23, 22);
-            this.editToolStripButton.Text = "Редактировать";
-            this.editToolStripButton.Click += new System.EventHandler(this.editToolStripButton_Click);
-            // 
             // searchToolStripButton1
             // 
             this.searchToolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -359,7 +359,7 @@
             this.Name = "FuelListForm";
             this.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Office2007Blue;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Энергоресурсы";
+            this.Text = "kl";
             this.Load += new System.EventHandler(this.FuelListForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonOutlookGrid1)).EndInit();
             this.toolStripContainer1.ContentPanel.ResumeLayout(false);
@@ -367,12 +367,12 @@
             this.toolStripContainer1.TopToolStripPanel.PerformLayout();
             this.toolStripContainer1.ResumeLayout(false);
             this.toolStripContainer1.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.toolStrip2.ResumeLayout(false);
             this.toolStrip2.PerformLayout();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
