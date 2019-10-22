@@ -392,7 +392,7 @@ namespace WindowsFormsApp1
                     List<NormInputTable> NormHeatlist1 = new List<NormInputTable>();
                     for (int i = 0; i < NormHeatlist.Count; i++)
                     {
-                        var Factor = dbOps.GetFactorData(2);
+                        var Factor = dbOps.GetFactorData(2, month, year);
                         var Fuel = dbOps.GetFuelData(NormHeatlist[i].fuel, year, month);
                         NormHeatlist1.Add(new NormInputTable
                         {
@@ -505,7 +505,7 @@ namespace WindowsFormsApp1
                     List<NormInputTable> NormEllist1 = new List<NormInputTable>();
                     for (int i = 0; i < NormEllist.Count; i++)
                     {
-                        var Factor = dbOps.GetFactorData(3);
+                        var Factor = dbOps.GetFactorData(3, month, year);
                         var Fuel = dbOps.GetFuelData(NormEllist[i].fuel, year, month);
                         NormEllist1.Add(new NormInputTable
                         {

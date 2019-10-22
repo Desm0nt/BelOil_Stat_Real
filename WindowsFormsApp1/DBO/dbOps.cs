@@ -1364,7 +1364,32 @@ namespace WindowsFormsApp1.DBO
             }
             return fuelList;
         }
+        public static List<ProfFactorTable> GetProfFactorList()
+        {
+            List<ProfFactorTable> Factor = new List<ProfFactorTable>();
+            try
+            {
+                SqlConnection myConnection = new SqlConnection(cnStr);
+                myConnection.Open();
 
+                string query = "SELECT * FROM NewFactors";
+                SqlCommand command = new SqlCommand(query, myConnection);
+
+                using (SqlDataReader dr = command.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        Factor.Add(new ProfFactorTable { id = Int32.Parse(dr["id"].ToString()), month = Int32.Parse(dr["month"].ToString()), year = Int32.Parse(dr["year"].ToString()), gkal = float.Parse(dr["gkal"].ToString()), kVt = float.Parse(dr["kvch"].ToString()) });
+                    }
+                }
+                myConnection.Close();
+            }
+            catch (Exception Ex)
+            {
+                KryptonMessageBox.Show("Ошибка GetProfFactorList: " + Ex.Message);
+            }
+            return Factor;
+        }
 
         public static List<int> GetNormIdList(int type)
         {
@@ -2193,23 +2218,41 @@ namespace WindowsFormsApp1.DBO
             return Fuel;
         }
 
-        public static FactorTable GetFactorData(int type)
+        public static FactorTable GetFactorData(int type, int month, int year)
         {
             FactorTable Factor = new FactorTable();
             try
             {
                 SqlConnection myConnection = new SqlConnection(cnStr);
                 myConnection.Open();
-
-                string query = "SELECT * FROM [NewFactors] where type = @type";
+               
+                string query = "SELECT COUNT(*) FROM NewFactors where month = @month and year= @year";
                 SqlCommand command = new SqlCommand(query, myConnection);
-                command.Parameters.AddWithValue("@type", type);
-
+                command.Parameters.AddWithValue("@year", year);
+                command.Parameters.AddWithValue("@month", month);
+                var result = Convert.ToInt32(command.ExecuteScalar());
+                if (result >= 1)
+                {
+                    query = "SELECT * FROM NewFactors where month = @month and year= @year";
+                    command = new SqlCommand(query, myConnection);
+                    command.Parameters.AddWithValue("@year", year);
+                    command.Parameters.AddWithValue("@month", month);
+                }
+                else
+                {
+                    query = "SELECT * FROM [NewFactors] where num = (SELECT MAX(num) FROM [NewFactors] where year <= @year AND month <= @month)";
+                    command = new SqlCommand(query, myConnection);
+                    command.Parameters.AddWithValue("@year", year);
+                    command.Parameters.AddWithValue("@month", month);
+                }
                 using (SqlDataReader dr = command.ExecuteReader())
                 {
                     while (dr.Read())
                     {
-                        Factor = new FactorTable { type = Int32.Parse(dr["type"].ToString()), value = float.Parse(dr["value"].ToString()) };
+                        if (type == 2)
+                            Factor = new FactorTable { type = 2, value = float.Parse(dr["gkal"].ToString()) };
+                        else
+                            Factor = new FactorTable { type = 3, value = float.Parse(dr["kvch"].ToString()) };
                     }
                 }
                 myConnection.Close();

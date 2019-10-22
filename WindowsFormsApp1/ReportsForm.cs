@@ -213,7 +213,7 @@ namespace WindowsFormsApp1
                     worksheet1["D" + (heatrow + tmp)] = a.Code;
                     worksheet1["H" + (heatrow + tmp)] = String.Format("=ROUND({0}, 3)", Math.Round(a.val_plan, 1));
                     worksheet1["J" + (heatrow + tmp)] = String.Format("=ROUND({0}, 3)", Math.Round(a.val_fact, 1));
-                    var Factor = dbOps.GetFactorData(a.type);
+                    var Factor = dbOps.GetFactorData(a.type, dateTimePicker1.Value.Month, dateTimePicker1.Value.Year);
                     worksheet1[heatrow - 1 + tmp, 8] = String.Format("{0}", Math.Round(float.Parse(worksheet1.Cells["H" + (heatrow + tmp)].Data.ToString()) * Factor.value, 1));
                     //worksheet1[heatrow - 1 + tmp, 8] = String.Format("=ROUND(H{0} * {1}, 3)", heatrow + tmp, Factor.value);
                     //worksheet1[heatrow - 1 + tmp, 10] = String.Format("=ROUND(J{0} * {1}, 3)", heatrow + tmp, Factor.value);
@@ -233,7 +233,7 @@ namespace WindowsFormsApp1
                     worksheet1[heatrow - 1 + tmp, 3] = a.Code;
                     worksheet1["P" + (heatrow + tmp)] = String.Format("=ROUND({0}, 3)", Math.Round(a.val_plan,1));
                     worksheet1["R" + (heatrow + tmp)] = String.Format("=ROUND({0}, 3)", Math.Round(a.val_fact,1));
-                    var Factor = dbOps.GetFactorData(a.type);
+                    var Factor = dbOps.GetFactorData(a.type, dateTimePicker1.Value.Month, dateTimePicker1.Value.Year);
                     //worksheet1["Q" + (heatrow + tmp)] = String.Format("=ROUND(P{0} * {1}, 3)", heatrow + tmp, Factor.value);
                     //worksheet1["Q" + (heatrow + tmp)] = String.Format("{0}", Math.Round(float.Parse(worksheet1.Cells["P" + (heatrow + tmp)].Data.ToString()) * Factor.value, 1));
                     //worksheet1["S" + (heatrow + tmp)] = String.Format("=ROUND(R{0} * {1}, 3)", heatrow + tmp, Factor.value);
@@ -301,7 +301,7 @@ namespace WindowsFormsApp1
                     worksheet1["D" + (elrow + tmp)] = a.Code;
                     worksheet1["H" + (elrow + tmp)] = String.Format("=ROUND({0}, 3)", Math.Round(a.val_plan, 1));
                     worksheet1["J" + (elrow + tmp)] = String.Format("=ROUND({0}, 3)", Math.Round(a.val_fact, 1));
-                    var Factor = dbOps.GetFactorData(a.type);
+                    var Factor = dbOps.GetFactorData(a.type, dateTimePicker1.Value.Month, dateTimePicker1.Value.Year);
                     worksheet1[elrow - 1 + tmp, 8] = String.Format("{0}", Math.Round(float.Parse(worksheet1.Cells["H" + (elrow + tmp)].Data.ToString()) * Factor.value, 1));
                     //worksheet1[elrow - 1 + tmp, 8] = String.Format("=ROUND(H{0} * {1}, 3)", elrow + tmp, Factor.value);
                     //worksheet1[elrow - 1 + tmp, 10] = String.Format("=ROUND(J{0} * {1}, 3)", elrow + tmp, Factor.value);
@@ -321,7 +321,7 @@ namespace WindowsFormsApp1
                     worksheet1[elrow - 1 + tmp, 3] = a.Code;
                     worksheet1["P" + (elrow + tmp)] = String.Format("=ROUND({0}, 3)", Math.Round(a.val_plan,1));
                     worksheet1["R" + (elrow + tmp)] = String.Format("=ROUND({0}, 3)", Math.Round(a.val_fact,1));
-                    var Factor = dbOps.GetFactorData(a.type);
+                    var Factor = dbOps.GetFactorData(a.type, dateTimePicker1.Value.Month, dateTimePicker1.Value.Year);
                     //worksheet1["Q" + (elrow + tmp)] = String.Format("=ROUND(P{0} * {1}, 3)", elrow + tmp, Factor.value);
                     //worksheet1["Q" + (elrow + tmp)] = String.Format("{0}", Math.Round(float.Parse(worksheet1.Cells["P" + (elrow + tmp)].Data.ToString()) * Factor.value, 1));
                     //worksheet1["S" + (elrow + tmp)] = String.Format("=ROUND(R{0} * {1}, 3)", elrow + tmp, Factor.value);
@@ -4012,13 +4012,13 @@ namespace WindowsFormsApp1
                 }
                 if (NormList[i].type == 2)
                 {
-                    var Factor = dbOps.GetFactorData(NormList[i].type);
+                    var Factor = dbOps.GetFactorData(NormList[i].type, dateTimePicker1.Value.Month, dateTimePicker1.Value.Year);
                     NormList[i].val_fact_ut = Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(NormList[i].val_fact, 1)) * Factor.value), 1));
                     NormList[i].val_plan_ut = Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(NormList[i].val_plan, 1)) * Factor.value), 1));
                 }
                 if (NormList[i].type == 3)
                 {
-                    var Factor = dbOps.GetFactorData(NormList[i].type);
+                    var Factor = dbOps.GetFactorData(NormList[i].type, dateTimePicker1.Value.Month, dateTimePicker1.Value.Year);
                     NormList[i].val_fact_ut = Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(NormList[i].val_fact, 1)) * Factor.value), 1));
                     NormList[i].val_plan_ut = Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(NormList[i].val_plan, 1)) * Factor.value), 1));
                 }
@@ -4040,13 +4040,13 @@ namespace WindowsFormsApp1
                         }
                         if (tmplist[j].type == 2)
                         {
-                            var Factor = dbOps.GetFactorData(tmplist[j].type);
+                            var Factor = dbOps.GetFactorData(tmplist[j].type, dateTimePicker1.Value.Month, dateTimePicker1.Value.Year);
                             tmplist[j].val_fact_ut = Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(tmplist[j].val_fact, 1)) * Factor.value), 1));
                             tmplist[j].val_plan_ut = Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(tmplist[j].val_plan, 1)) * Factor.value), 1));
                         }
                         if (tmplist[j].type == 3)
                         {
-                            var Factor = dbOps.GetFactorData(tmplist[j].type);
+                            var Factor = dbOps.GetFactorData(tmplist[j].type, dateTimePicker1.Value.Month, dateTimePicker1.Value.Year);
                             tmplist[j].val_fact_ut = Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(tmplist[j].val_fact, 1)) * Factor.value), 1));
                             tmplist[j].val_plan_ut = Convert.ToSingle(Math.Round((Convert.ToSingle(Math.Round(tmplist[j].val_plan, 1)) * Factor.value), 1));
                         }

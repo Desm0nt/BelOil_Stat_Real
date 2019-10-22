@@ -31,6 +31,7 @@ namespace WindowsFormsApp1
             LoadTypedNorms(1, kryptonOutlookGrid4);
             LoadTypedNorms(2, kryptonOutlookGrid3);
             LoadTypedNorms(3, kryptonOutlookGrid2);
+            LoadCoeff();
             LoadFuels();
             this.Width = 1516;
             kryptonHeaderGroup2.ValuesPrimary.Heading = kryptonNavigator1.SelectedPage.Text;
@@ -227,6 +228,54 @@ namespace WindowsFormsApp1
             kryptonOutlookGrid7.AssignRows(l);
             kryptonOutlookGrid7.ForceRefreshGroupBox();
             kryptonOutlookGrid7.Fill();
+        }
+
+        private void LoadCoeff()
+        {
+            var factorData = dbOps.GetProfFactorList();
+            kryptonOutlookGrid8.ClearInternalRows();
+            kryptonOutlookGrid8.ClearGroups();
+            kryptonOutlookGrid8.RowHeadersVisible = false;
+
+
+            kryptonOutlookGrid8.GroupBox = kryptonOutlookGridGroupBox3;
+            kryptonOutlookGrid8.RegisterGroupBoxEvents();
+            DataGridViewColumn[] columnsToAdd = new DataGridViewColumn[4];
+            columnsToAdd[0] = kryptonOutlookGrid8.Columns[0];
+            columnsToAdd[1] = kryptonOutlookGrid8.Columns[1];
+            columnsToAdd[2] = kryptonOutlookGrid8.Columns[2];
+            columnsToAdd[3] = kryptonOutlookGrid8.Columns[3];
+
+            //kryptonOutlookGrid7.Columns.AddRange(columnsToAdd);
+
+            kryptonOutlookGrid8.AddInternalColumn(kryptonOutlookGrid8.Columns[0], new OutlookGridDefaultGroup(null), SortOrder.Ascending, -1, 1);
+            kryptonOutlookGrid8.AddInternalColumn(kryptonOutlookGrid8.Columns[1], new OutlookGridDefaultGroup(null), SortOrder.None, -1, -1);
+            kryptonOutlookGrid8.AddInternalColumn(kryptonOutlookGrid8.Columns[2], new OutlookGridDefaultGroup(null), SortOrder.None, -1, -1);
+            kryptonOutlookGrid8.AddInternalColumn(kryptonOutlookGrid8.Columns[3], new OutlookGridDefaultGroup(null), SortOrder.None, -1, -1);
+
+            kryptonOutlookGrid8.ShowLines = true;
+
+            //Setup Rows
+            OutlookGridRow row = new OutlookGridRow();
+            List<OutlookGridRow> l = new List<OutlookGridRow>();
+            kryptonOutlookGrid8.SuspendLayout();
+            //kryptonOutlookGrid9.ClearInternalRows();
+            kryptonOutlookGrid8.FillMode = FillMode.GROUPSONLY;
+
+            foreach (var factor in factorData)
+            {
+                string monthf = factor.month.ToString();
+                if (monthf.Length < 2)
+                    monthf = "0" + monthf;                   
+                row = new OutlookGridRow();
+                row.CreateCells(kryptonOutlookGrid8, new object[] { factor.id, new TextAndImage("01." + monthf + "." + factor.year, Properties.Resources.fdate), factor.gkal, factor.kVt  });
+                l.Add(row);
+            }
+
+            kryptonOutlookGrid8.ResumeLayout();
+            kryptonOutlookGrid8.AssignRows(l);
+            kryptonOutlookGrid8.ForceRefreshGroupBox();
+            kryptonOutlookGrid8.Fill();
         }
 
 

@@ -146,6 +146,7 @@
     <Compile Include="DataTables\CurrentData.cs" />
     <Compile Include="DataTables\FactorTable.cs" />
     <Compile Include="DataTables\FTradeInputTable.cs" />
+    <Compile Include="DataTables\ProfFactorTable.cs" />
     <Compile Include="DataTables\ProfFuelsTable.cs" />
     <Compile Include="DataTables\FuelTable.cs" />
     <Compile Include="DataTables\Norm4InputQuater.cs" />
@@ -448,6 +449,7 @@
     <None Include="Resources\5_1.png" />
     <None Include="Resources\5_2.png" />
     <None Include="Resources\6.png" />
+    <None Include="Resources\fdate.png" />
     <Content Include="Themes\Access 2007 Alt White Text.xml" />
     <Content Include="Themes\Access 2007 Alt.xml" />
     <Content Include="Themes\Access 2007 White Text.xml" />
