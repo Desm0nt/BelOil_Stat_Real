@@ -1390,6 +1390,58 @@ namespace WindowsFormsApp1.DBO
             }
             return Factor;
         }
+        public static List<ProfGenTable> GetProfGenList(int id_org, int num, int month, int year)
+        {
+            List<ProfGenTable> GenList = new List<ProfGenTable>();
+            try
+            {
+                SqlConnection myConnection = new SqlConnection(cnStr);
+                myConnection.Open();
+
+                string query = "SELECT COUNT(*) FROM NewOrgSoucesList where num = @num AND id_org = @id_org";
+                SqlCommand command = new SqlCommand(query, myConnection);
+                command.Parameters.AddWithValue("@num", num);
+                command.Parameters.AddWithValue("@id_org", id_org);
+                var result = Convert.ToInt32(command.ExecuteScalar());
+                if (result >= 1)
+                {
+                    query = "SELECT * FROM [NewOrgSoucesList] where num = @num AND id_org = @id_org";
+                    command = new SqlCommand(query, myConnection);
+                    command.Parameters.AddWithValue("@num", num);
+                    command.Parameters.AddWithValue("@id_org", id_org);
+                }
+                else
+                {
+                    query = "SELECT * FROM [NewOrgSoucesList] where id_org = @id_org AND num = (SELECT MAX(num) FROM [NewNorm] where year <= @year AND month <= @month)";
+                    command = new SqlCommand(query, myConnection);
+                    command.Parameters.AddWithValue("@id_org", id_org);
+                    command.Parameters.AddWithValue("@year", year);
+                    command.Parameters.AddWithValue("@month", month);
+                }
+                using (SqlDataReader dr = command.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        GenList.Add(new ProfGenTable
+                        {
+                            Id = Int32.Parse(dr["id"].ToString()),
+                            Obj_name = GetObjName(Int32.Parse(dr["id_object"].ToString())),
+                            Fuel_id = Int32.Parse(dr["id_fuel"].ToString()),
+                            Fuel_name = GetFuelNameById(Int32.Parse(dr["id_fuel"].ToString()), DateTime.Now.Year, DateTime.Now.Month),
+                            Type = Int32.Parse(dr["res_type"].ToString())
+                        });
+                    }
+                }
+                myConnection.Close();
+            }
+            catch (Exception Ex)
+            {
+                KryptonMessageBox.Show("Ошибка GetProfGenList: " + Ex.Message);
+            }
+            return GenList;
+        }
+
+
 
         public static List<int> GetNormIdList(int type)
         {
