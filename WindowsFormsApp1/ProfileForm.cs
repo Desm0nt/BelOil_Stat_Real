@@ -34,6 +34,8 @@ namespace WindowsFormsApp1
             LoadCoeff();
             LoadFuels();
             LoadGen();
+            LoadRec();
+            LoadSend();
             this.Width = 1516;
             kryptonHeaderGroup2.ValuesPrimary.Heading = kryptonNavigator1.SelectedPage.Text;
             kryptonHeaderGroup2.ValuesPrimary.Image = kryptonNavigator1.SelectedPage.ImageSmall;
@@ -325,6 +327,96 @@ namespace WindowsFormsApp1
             kryptonOutlookGrid10.ForceRefreshGroupBox();
             kryptonOutlookGrid10.Fill();
         }
+        private void LoadRec()
+        {
+            ProfileTable profData = dbOps.GetProfileData(cur_org_id, cmonth, cyear);
+            var genList = dbOps.GetProfRecList(cur_org_id, profData.Num, profData.Month, profData.Year);
+
+            kryptonOutlookGrid1.ClearInternalRows();
+            kryptonOutlookGrid1.ClearGroups();
+            kryptonOutlookGrid1.RowHeadersWidth = 10;
+
+            kryptonOutlookGrid1.GroupBox = kryptonOutlookGridGroupBox4;
+            kryptonOutlookGrid1.RegisterGroupBoxEvents();
+            DataGridViewColumn[] columnsToAdd = new DataGridViewColumn[5];
+            columnsToAdd[0] = kryptonOutlookGrid1.Columns[0];
+            columnsToAdd[1] = kryptonOutlookGrid1.Columns[1];
+            columnsToAdd[2] = kryptonOutlookGrid1.Columns[2];
+            columnsToAdd[3] = kryptonOutlookGrid1.Columns[3];
+            columnsToAdd[3] = kryptonOutlookGrid1.Columns[4];
+            //kryptonOutlookGrid10.Columns.AddRange(columnsToAdd);
+
+            kryptonOutlookGrid1.AddInternalColumn(kryptonOutlookGrid1.Columns[0], new OutlookGridDefaultGroup(null), SortOrder.Ascending, -1, 1);
+            kryptonOutlookGrid1.AddInternalColumn(kryptonOutlookGrid1.Columns[1], new OutlookGridDefaultGroup(null), SortOrder.None, -1, -1);
+            kryptonOutlookGrid1.AddInternalColumn(kryptonOutlookGrid1.Columns[2], new OutlookGridDefaultGroup(null), SortOrder.None, -1, -1);
+            kryptonOutlookGrid1.AddInternalColumn(kryptonOutlookGrid1.Columns[3], new OutlookGridTypeGroup(null), SortOrder.Ascending, 1, -1);
+            kryptonOutlookGrid1.AddInternalColumn(kryptonOutlookGrid1.Columns[4], new OutlookGridDefaultGroup(null), SortOrder.None, -1, -1);
+            kryptonOutlookGrid1.ShowLines = false;
+
+            //Setup Rows
+            OutlookGridRow row = new OutlookGridRow();
+            List<OutlookGridRow> l = new List<OutlookGridRow>();
+            kryptonOutlookGrid1.SuspendLayout();
+            //kryptonOutlookGrid10.ClearInternalRows();
+            kryptonOutlookGrid1.FillMode = FillMode.GROUPSONLY;
+
+            foreach (var gen in genList)
+            {
+                row = new OutlookGridRow();
+                row.CreateCells(kryptonOutlookGrid1, new object[] { gen.Id, gen.Id_org, new TextAndImage(gen.Org_name, GetRecSendFlag(gen.Head)), new TextAndImage(gen.Type.ToString(), GetFlag(gen.Type)), gen.Head });
+                l.Add(row);
+            }
+
+            kryptonOutlookGrid1.ResumeLayout();
+            kryptonOutlookGrid1.AssignRows(l);
+            kryptonOutlookGrid1.ForceRefreshGroupBox();
+            kryptonOutlookGrid1.Fill();
+        }
+        private void LoadSend()
+        {
+            ProfileTable profData = dbOps.GetProfileData(cur_org_id, cmonth, cyear);
+            var genList = dbOps.GetProfSendList(cur_org_id, profData.Num, profData.Month, profData.Year);
+
+            kryptonOutlookGrid6.ClearInternalRows();
+            kryptonOutlookGrid6.ClearGroups();
+            kryptonOutlookGrid6.RowHeadersWidth = 10;
+
+            kryptonOutlookGrid6.GroupBox = kryptonOutlookGridGroupBox4;
+            kryptonOutlookGrid6.RegisterGroupBoxEvents();
+            DataGridViewColumn[] columnsToAdd = new DataGridViewColumn[5];
+            columnsToAdd[0] = kryptonOutlookGrid6.Columns[0];
+            columnsToAdd[1] = kryptonOutlookGrid6.Columns[1];
+            columnsToAdd[2] = kryptonOutlookGrid6.Columns[2];
+            columnsToAdd[3] = kryptonOutlookGrid6.Columns[3];
+            columnsToAdd[3] = kryptonOutlookGrid6.Columns[4];
+            //kryptonOutlookGrid60.Columns.AddRange(columnsToAdd);
+
+            kryptonOutlookGrid6.AddInternalColumn(kryptonOutlookGrid6.Columns[0], new OutlookGridDefaultGroup(null), SortOrder.Ascending, -1, 1);
+            kryptonOutlookGrid6.AddInternalColumn(kryptonOutlookGrid6.Columns[1], new OutlookGridDefaultGroup(null), SortOrder.None, -1, -1);
+            kryptonOutlookGrid6.AddInternalColumn(kryptonOutlookGrid6.Columns[2], new OutlookGridDefaultGroup(null), SortOrder.None, -1, -1);
+            kryptonOutlookGrid6.AddInternalColumn(kryptonOutlookGrid6.Columns[3], new OutlookGridTypeGroup(null), SortOrder.Ascending, 1, -1);
+            kryptonOutlookGrid6.AddInternalColumn(kryptonOutlookGrid6.Columns[4], new OutlookGridDefaultGroup(null), SortOrder.None, -1, -1);
+            kryptonOutlookGrid6.ShowLines = false;
+
+            //Setup Rows
+            OutlookGridRow row = new OutlookGridRow();
+            List<OutlookGridRow> l = new List<OutlookGridRow>();
+            kryptonOutlookGrid6.SuspendLayout();
+            //kryptonOutlookGrid60.ClearInternalRows();
+            kryptonOutlookGrid6.FillMode = FillMode.GROUPSONLY;
+
+            foreach (var gen in genList)
+            {
+                row = new OutlookGridRow();
+                row.CreateCells(kryptonOutlookGrid6, new object[] { gen.Id, gen.Id_org, new TextAndImage(gen.Org_name, GetRecSendFlag(gen.Head)), new TextAndImage(gen.Type.ToString(), GetFlag(gen.Type)), gen.Head });
+                l.Add(row);
+            }
+
+            kryptonOutlookGrid6.ResumeLayout();
+            kryptonOutlookGrid6.AssignRows(l);
+            kryptonOutlookGrid6.ForceRefreshGroupBox();
+            kryptonOutlookGrid6.Fill();
+        }
 
 
 
@@ -342,7 +434,16 @@ namespace WindowsFormsApp1
                     return null;
             }
         }
-
+        private Image GetRecSendFlag(int type)
+        {
+            switch (type)
+            {
+                case 0:
+                    return Properties.Resources.org2;
+                default:
+                    return Properties.Resources.org1;
+            }
+        }
         private Image GetFuelFlag(int type)
         {
             switch (type)

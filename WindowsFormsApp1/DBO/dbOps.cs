@@ -679,6 +679,34 @@ namespace WindowsFormsApp1.DBO
             }
             return name;
         }
+        public static int GetCompanyHead(int id_org)
+        {
+            int head = 0 ;
+            try
+            {
+                SqlConnection myConnection = new SqlConnection(cnStr);
+                myConnection.Open();
+
+                string query = "SELECT head FROM [NewOrg] where id = @id";
+                SqlCommand command = new SqlCommand(query, myConnection);
+                command.Parameters.AddWithValue("@id", id_org);
+
+                using (SqlDataReader dr = command.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        head = Int32.Parse(dr["head"].ToString());
+                    }
+                }
+                myConnection.Close();
+            }
+            catch (Exception Ex)
+            {
+                KryptonMessageBox.Show("Ошибка GetCompanyHead: " + Ex.Message);
+            }
+            return head;
+        }
+
         public static List<CompanyListTable> GetCompanyList()
         {
             List<CompanyListTable> CompanyList = new List<CompanyListTable>();
@@ -1437,6 +1465,106 @@ namespace WindowsFormsApp1.DBO
             catch (Exception Ex)
             {
                 KryptonMessageBox.Show("Ошибка GetProfGenList: " + Ex.Message);
+            }
+            return GenList;
+        }
+        public static List<ProfSendRecTable> GetProfSendList(int id_org, int num, int month, int year)
+        {
+            List<ProfSendRecTable> GenList = new List<ProfSendRecTable>();
+            try
+            {
+                SqlConnection myConnection = new SqlConnection(cnStr);
+                myConnection.Open();
+
+                string query = "SELECT COUNT(*) FROM NewSendedOrgList where num = @num AND id_owner = @id_org";
+                SqlCommand command = new SqlCommand(query, myConnection);
+                command.Parameters.AddWithValue("@num", num);
+                command.Parameters.AddWithValue("@id_org", id_org);
+                var result = Convert.ToInt32(command.ExecuteScalar());
+                if (result >= 1)
+                {
+                    query = "SELECT * FROM [NewSendedOrgList] where num = @num AND id_owner = @id_org";
+                    command = new SqlCommand(query, myConnection);
+                    command.Parameters.AddWithValue("@num", num);
+                    command.Parameters.AddWithValue("@id_org", id_org);
+                }
+                else
+                {
+                    query = "SELECT * FROM [NewSendedOrgList] where id_org = @id_owner AND num = (SELECT MAX(num) FROM [NewNorm] where year <= @year AND month <= @month)";
+                    command = new SqlCommand(query, myConnection);
+                    command.Parameters.AddWithValue("@id_org", id_org);
+                    command.Parameters.AddWithValue("@year", year);
+                    command.Parameters.AddWithValue("@month", month);
+                }
+                using (SqlDataReader dr = command.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        GenList.Add(new ProfSendRecTable
+                        {
+                            Id = Int32.Parse(dr["id"].ToString()),
+                            Org_name = GetCompanyName(Int32.Parse(dr["id_org"].ToString())),
+                            Id_org = Int32.Parse(dr["id_org"].ToString()),
+                            Head = GetCompanyHead(Int32.Parse(dr["id_org"].ToString())),
+                            Type = Int32.Parse(dr["res_type"].ToString())
+                        });
+                    }
+                }
+                myConnection.Close();
+            }
+            catch (Exception Ex)
+            {
+                KryptonMessageBox.Show("Ошибка GetProfSendRecList: " + Ex.Message);
+            }
+            return GenList;
+        }
+        public static List<ProfSendRecTable> GetProfRecList(int id_org, int num, int month, int year)
+        {
+            List<ProfSendRecTable> GenList = new List<ProfSendRecTable>();
+            try
+            {
+                SqlConnection myConnection = new SqlConnection(cnStr);
+                myConnection.Open();
+
+                string query = "SELECT COUNT(*) FROM NewRecievedOrgList where num = @num AND id_owner = @id_org";
+                SqlCommand command = new SqlCommand(query, myConnection);
+                command.Parameters.AddWithValue("@num", num);
+                command.Parameters.AddWithValue("@id_org", id_org);
+                var result = Convert.ToInt32(command.ExecuteScalar());
+                if (result >= 1)
+                {
+                    query = "SELECT * FROM [NewRecievedOrgList] where num = @num AND id_owner = @id_org";
+                    command = new SqlCommand(query, myConnection);
+                    command.Parameters.AddWithValue("@num", num);
+                    command.Parameters.AddWithValue("@id_org", id_org);
+                }
+                else
+                {
+                    query = "SELECT * FROM [NewRecievedOrgList] where id_org = @id_owner AND num = (SELECT MAX(num) FROM [NewNorm] where year <= @year AND month <= @month)";
+                    command = new SqlCommand(query, myConnection);
+                    command.Parameters.AddWithValue("@id_org", id_org);
+                    command.Parameters.AddWithValue("@year", year);
+                    command.Parameters.AddWithValue("@month", month);
+                }
+                using (SqlDataReader dr = command.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        GenList.Add(new ProfSendRecTable
+                        {
+                            Id = Int32.Parse(dr["id"].ToString()),
+                            Org_name = GetCompanyName(Int32.Parse(dr["id_org"].ToString())),
+                            Id_org = Int32.Parse(dr["id_org"].ToString()),
+                            Head = GetCompanyHead(Int32.Parse(dr["id_org"].ToString())),
+                            Type = Int32.Parse(dr["res_type"].ToString())
+                        });
+                    }
+                }
+                myConnection.Close();
+            }
+            catch (Exception Ex)
+            {
+                KryptonMessageBox.Show("Ошибка GetProfSendRecList: " + Ex.Message);
             }
             return GenList;
         }

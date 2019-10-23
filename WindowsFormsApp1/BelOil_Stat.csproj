@@ -144,6 +144,7 @@
     <Compile Include="DataTables\CompanyTable.cs" />
     <Compile Include="DataTables\CompanyListTable.cs" />
     <Compile Include="DataTables\CurrentData.cs" />
+    <Compile Include="DataTables\ProfSendRecTable.cs" />
     <Compile Include="DataTables\ProfGenTable.cs" />
     <Compile Include="DataTables\FactorTable.cs" />
     <Compile Include="DataTables\FTradeInputTable.cs" />
@@ -451,6 +452,8 @@
     <None Include="Resources\5_2.png" />
     <None Include="Resources\6.png" />
     <None Include="Resources\fdate.png" />
+    <None Include="Resources\org1.png" />
+    <None Include="Resources\org2.png" />
     <Content Include="Themes\Access 2007 Alt White Text.xml" />
     <Content Include="Themes\Access 2007 Alt.xml" />
     <Content Include="Themes\Access 2007 White Text.xml" />
