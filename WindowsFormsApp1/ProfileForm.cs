@@ -36,6 +36,7 @@ namespace WindowsFormsApp1
             LoadGen();
             LoadRec();
             LoadSend();
+            LoadCompData();
             this.Width = 1516;
             kryptonHeaderGroup2.ValuesPrimary.Heading = kryptonNavigator1.SelectedPage.Text;
             kryptonHeaderGroup2.ValuesPrimary.Image = kryptonNavigator1.SelectedPage.ImageSmall;
@@ -57,6 +58,18 @@ namespace WindowsFormsApp1
             treeView1.ExpandAll();
 
         }
+
+        private void LoadCompData()
+        {
+            var compData = dbOps.GetProfCompList(cur_org_id);
+            nameTextBox.Text = compData.Name;
+            fnameTextBox.Text = compData.Name;
+            rukTextBox.Text = compData.Head;
+            otvTextBox.Text = compData.Impl;
+            kryptonCheckBox1.Checked = compData.doch;
+
+        }
+
 
         private void LoadAllNorms()
         {

@@ -1568,7 +1568,77 @@ namespace WindowsFormsApp1.DBO
             }
             return GenList;
         }
+        public static string GetPersonFIO(int id)
+        {
+            string FIO = "";
+            try
+            {
+                SqlConnection myConnection = new SqlConnection(cnStr);
+                myConnection.Open();
 
+                string query = "SELECT * FROM [NewPersons] where id = @id";
+                SqlCommand command = new SqlCommand(query, myConnection);
+                command.Parameters.AddWithValue("@id", id);
+                using (SqlDataReader dr = command.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        var name = dr["name"].ToString();
+                        var second_name = dr["patronymic"].ToString();
+                        FIO = name.ToArray()[0] + "." + second_name.ToArray()[0] +". " + dr["surname"].ToString();
+                    }
+                }
+                myConnection.Close();
+            }
+            catch (Exception Ex)
+            {
+                KryptonMessageBox.Show("Ошибка GetPersonFIO: " + Ex.Message);
+            }
+            return FIO;
+        }
+        public static ProfCompTable GetProfCompList(int id)
+        {
+            ProfCompTable CompanyList = new ProfCompTable();
+            try
+            {
+                SqlConnection myConnection = new SqlConnection(cnStr);
+                myConnection.Open();
+
+                string query = "SELECT * FROM [NewOrg] where id = @id";
+                SqlCommand command = new SqlCommand(query, myConnection);
+                command.Parameters.AddWithValue("@id", id);
+                using (SqlDataReader dr = command.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        var head = "?.?.?";
+                        var imp = "?.?.?";
+                        bool dochern = false;
+                        if (Int32.Parse(dr["head"].ToString()) != -1 && Int32.Parse(dr["head"].ToString()) != 0)
+                            head = GetPersonFIO(Int32.Parse(dr["head"].ToString()));
+                        if (Int32.Parse(dr["implementer"].ToString()) != -1 && Int32.Parse(dr["implementer"].ToString()) != 0)
+                            imp = GetPersonFIO(Int32.Parse(dr["implementer"].ToString()));
+                        if (Int32.Parse(dr["pid"].ToString()) == 200)
+                            dochern = true;
+                        CompanyList = new ProfCompTable
+                        {
+                            Id = Int32.Parse(dr["id"].ToString()),
+                            Name = dr["name"].ToString(),
+                            Head = head,
+                            Impl = imp,
+                            doch = dochern
+                        };
+
+                    }
+                }
+                myConnection.Close();
+            }
+            catch (Exception Ex)
+            {
+                KryptonMessageBox.Show("Ошибка GetProfCompList: " + Ex.Message);
+            }
+            return CompanyList;
+        }
 
 
         public static List<int> GetNormIdList(int type)

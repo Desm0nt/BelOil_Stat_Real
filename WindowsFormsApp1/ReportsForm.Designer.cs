@@ -312,6 +312,7 @@
             // 
             // списокОбъектовToolStripMenuItem
             // 
+            this.списокОбъектовToolStripMenuItem.Enabled = false;
             this.списокОбъектовToolStripMenuItem.Image = global::WindowsFormsApp1.Properties.Resources.icoprod;
             this.списокОбъектовToolStripMenuItem.Name = "списокОбъектовToolStripMenuItem";
             this.списокОбъектовToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F3;
