@@ -143,12 +143,12 @@ namespace WindowsFormsApp1
 
         private void btn_Click(object sender, EventArgs e)
         {
-            KryptonMessageBox.Show("hello world");
+            KryptonMessageBox.Show("Тут будет включен выбор ед.изм");
         }
 
         private void btn2_Click(object sender, EventArgs e)
         {
-            KryptonMessageBox.Show("hello world2");
+            KryptonMessageBox.Show("Тут будет включен выбор ед.изм (2)");
         }
 
         #region шаманства отрисовки и обработки  
@@ -169,8 +169,8 @@ namespace WindowsFormsApp1
             btn2.BackColor = Color.White;
             btn2.FlatStyle = FlatStyle.Flat;
             btn2.FlatAppearance.BorderSize = 0;
-            btn2.Size = new Size(25, textBox1.ClientSize.Height + 2);
-            btn2.Location = new Point(textBox1.ClientSize.Width - btn2.Width, -1);
+            btn2.Size = new Size(25, textBox2.ClientSize.Height + 2);
+            btn2.Location = new Point(textBox2.ClientSize.Width - btn2.Width, -1);
             btn2.Cursor = Cursors.Default;
             btn2.Text = "...";
             btn2.Click += btn2_Click;

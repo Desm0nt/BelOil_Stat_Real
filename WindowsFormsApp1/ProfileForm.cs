@@ -23,6 +23,10 @@ namespace WindowsFormsApp1
         public ProfileForm(int curyear, int curmonth)
         {
             InitializeComponent();
+            this.rukTextBox.AutoSize = false;
+            this.rukTextBox.Size = new Size(224, 18);
+            this.otvTextBox.AutoSize = false;
+            this.otvTextBox.Size = new Size(224, 18);
             cur_org_id = CurrentData.UserData.Id_org;
             cyear = curyear;
             cmonth = curmonth;
@@ -69,7 +73,6 @@ namespace WindowsFormsApp1
             kryptonCheckBox1.Checked = compData.doch;
 
         }
-
 
         private void LoadAllNorms()
         {
@@ -432,7 +435,6 @@ namespace WindowsFormsApp1
         }
 
 
-
         private Image GetFlag(int type)
         {
             switch (type)
@@ -476,6 +478,25 @@ namespace WindowsFormsApp1
             }
         }
 
+        private void myForm_FormClosed(object sender, EventArgs e)
+        {
+            LoadCompData();
+        }
+
+        private void btn_Click(object sender, EventArgs e)
+        {
+            var myForm = new SelectPersonForm(true);
+            myForm.FormClosed += new FormClosedEventHandler(myForm_FormClosed);
+            myForm.ShowDialog();
+        }
+
+        private void btn2_Click(object sender, EventArgs e)
+        {
+            var myForm = new SelectPersonForm(false);
+            myForm.FormClosed += new FormClosedEventHandler(myForm_FormClosed);
+            myForm.ShowDialog();
+        }
+
         /// <summary>
         /// Отрисовка элементов, их ресайз, рамки, сокрытия и прочее подобное
         /// </summary>
@@ -510,10 +531,6 @@ namespace WindowsFormsApp1
 
         private void panel_Paint(object sender, PaintEventArgs e)
         {
-            this.rukTextBox.AutoSize = false;
-            this.rukTextBox.Size = new Size(224, 18);
-            this.otvTextBox.AutoSize = false;
-            this.otvTextBox.Size = new Size(224, 18);
             Panel pan = (Panel)sender;
             ControlPaint.DrawBorder(e.Graphics, pan.ClientRectangle, System.Drawing.Color.FromArgb(((int)(((byte)(101)))), ((int)(((byte)(147)))), ((int)(((byte)(207))))), ButtonBorderStyle.Solid);
             Pen p = new Pen(System.Drawing.Color.FromArgb(((int)(((byte)(171)))), ((int)(((byte)(193)))), ((int)(((byte)(222))))));
@@ -523,6 +540,32 @@ namespace WindowsFormsApp1
             g.DrawRectangle(p, new Rectangle(otvTextBox.Location.X - variance, otvTextBox.Location.Y - variance, otvTextBox.Width + variance, otvTextBox.Height + variance));
         }
 
+        protected override void OnLoad(EventArgs e)
+        {
+            var btn = new Button();
+            var btn2 = new Button();
+            btn.BackColor = Color.White;
+            btn.FlatStyle = FlatStyle.Flat;
+            btn.FlatAppearance.BorderSize = 0;
+            btn.Size = new Size(25, rukTextBox.ClientSize.Height + 2);
+            btn.Location = new Point(rukTextBox.ClientSize.Width - btn.Width, -1);
+            btn.Cursor = Cursors.Default;
+            btn.Text = "...";
+            btn2.BackColor = Color.White;
+            btn2.FlatStyle = FlatStyle.Flat;
+            btn2.FlatAppearance.BorderSize = 0;
+            btn2.Size = new Size(25, otvTextBox.ClientSize.Height + 2);
+            btn2.Location = new Point(otvTextBox.ClientSize.Width - btn2.Width, -1);
+            btn2.Cursor = Cursors.Default;
+            btn2.Text = "...";
+            btn2.Click += btn2_Click;
+            btn.Click += btn_Click;
+            rukTextBox.Controls.Add(btn);
+            SendMessage(rukTextBox.Handle, 0xd3, (IntPtr)2, (IntPtr)(btn.Width << 16));
+            otvTextBox.Controls.Add(btn2);
+            SendMessage(otvTextBox.Handle, 0xd3, (IntPtr)2, (IntPtr)(btn2.Width << 16));
+            base.OnLoad(e);
+        }
 
         private void kryptonNavigator1_SelectedPageChanged(object sender, EventArgs e)
         {

@@ -69,9 +69,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.kryptonCheckBox1 = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.otvTextBox = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.rukTextBox = new System.Windows.Forms.TextBox();
             this.kryptonPanel2 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -220,6 +218,8 @@
             this.coeff_date = new KryptonOutlookGrid.CustomColumns.KryptonDataGridViewTextAndImageColumn();
             this.gkal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.kVt = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.rukTextBox = new System.Windows.Forms.TextBox();
+            this.otvTextBox = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup1.Panel)).BeginInit();
             this.kryptonHeaderGroup1.Panel.SuspendLayout();
@@ -407,8 +407,8 @@
             // panel2
             // 
             this.panel2.Controls.Add(this.otvTextBox);
-            this.panel2.Controls.Add(this.label5);
             this.panel2.Controls.Add(this.rukTextBox);
+            this.panel2.Controls.Add(this.label5);
             this.panel2.Controls.Add(this.kryptonPanel2);
             this.panel2.Controls.Add(this.label7);
             this.panel2.Location = new System.Drawing.Point(23, 224);
@@ -416,15 +416,6 @@
             this.panel2.Size = new System.Drawing.Size(262, 119);
             this.panel2.TabIndex = 49;
             this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel_Paint);
-            // 
-            // otvTextBox
-            // 
-            this.otvTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.otvTextBox.Font = new System.Drawing.Font("Arial Unicode MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.otvTextBox.Location = new System.Drawing.Point(24, 88);
-            this.otvTextBox.Name = "otvTextBox";
-            this.otvTextBox.Size = new System.Drawing.Size(224, 15);
-            this.otvTextBox.TabIndex = 39;
             // 
             // label5
             // 
@@ -434,15 +425,6 @@
             this.label5.Size = new System.Drawing.Size(86, 13);
             this.label5.TabIndex = 38;
             this.label5.Text = "Ответственный";
-            // 
-            // rukTextBox
-            // 
-            this.rukTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.rukTextBox.Font = new System.Drawing.Font("Arial Unicode MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.rukTextBox.Location = new System.Drawing.Point(24, 49);
-            this.rukTextBox.Name = "rukTextBox";
-            this.rukTextBox.Size = new System.Drawing.Size(224, 15);
-            this.rukTextBox.TabIndex = 37;
             // 
             // kryptonPanel2
             // 
@@ -2160,6 +2142,22 @@
             this.kVt.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.kVt.Width = 94;
             // 
+            // rukTextBox
+            // 
+            this.rukTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.rukTextBox.Location = new System.Drawing.Point(24, 48);
+            this.rukTextBox.Name = "rukTextBox";
+            this.rukTextBox.Size = new System.Drawing.Size(224, 13);
+            this.rukTextBox.TabIndex = 58;
+            // 
+            // otvTextBox
+            // 
+            this.otvTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.otvTextBox.Location = new System.Drawing.Point(24, 86);
+            this.otvTextBox.Name = "otvTextBox";
+            this.otvTextBox.Size = new System.Drawing.Size(224, 13);
+            this.otvTextBox.TabIndex = 59;
+            // 
             // ProfileForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2342,9 +2340,7 @@
         private System.Windows.Forms.TextBox unpTextBox;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.TextBox otvTextBox;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox rukTextBox;
         private ComponentFactory.Krypton.Toolkit.KryptonPanel kryptonPanel2;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
@@ -2431,5 +2427,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn send_head;
         private ComponentFactory.Krypton.Toolkit.KryptonCheckBox kryptonCheckBox3;
         private ComponentFactory.Krypton.Toolkit.KryptonCheckBox kryptonCheckBox2;
+        private System.Windows.Forms.TextBox otvTextBox;
+        private System.Windows.Forms.TextBox rukTextBox;
     }
 }

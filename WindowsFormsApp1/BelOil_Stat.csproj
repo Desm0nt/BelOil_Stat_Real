@@ -260,6 +260,12 @@
     <Compile Include="ProductsListForm.Designer.cs">
       <DependentUpon>ProductsListForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="SelectPersonForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SelectPersonForm.Designer.cs">
+      <DependentUpon>SelectPersonForm.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="AddUserForm.resx">
       <DependentUpon>AddUserForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -301,6 +307,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ProductsListForm.resx">
       <DependentUpon>ProductsListForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SelectPersonForm.resx">
+      <DependentUpon>SelectPersonForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
