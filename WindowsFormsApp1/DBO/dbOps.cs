@@ -733,6 +733,34 @@ namespace WindowsFormsApp1.DBO
             }
             return CompanyList;
         }
+        public static List<CompanyStructListTable> GetStructCompanyList(int pid)
+        {
+            List<CompanyStructListTable> CompanyList = new List<CompanyStructListTable>();
+            try
+            {
+                SqlConnection myConnection = new SqlConnection(cnStr);
+                myConnection.Open();
+
+                string query = "SELECT * FROM [NewOrg] where pid = @pid";
+                SqlCommand command = new SqlCommand(query, myConnection);
+                command.Parameters.AddWithValue("@pid", pid);
+
+                using (SqlDataReader dr = command.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        CompanyList.Add(new CompanyStructListTable { Id = Int32.Parse(dr["id"].ToString()), Name = dr["name"].ToString() });
+
+                    }
+                }
+                myConnection.Close();
+            }
+            catch (Exception Ex)
+            {
+                KryptonMessageBox.Show("Ошибка GetStructCompanyList: " + Ex.Message);
+            }
+            return CompanyList;
+        }
         public static List<int> GetCompanyIdList(int pid)
         {
             List<int> CompanyIdList = new List<int>();

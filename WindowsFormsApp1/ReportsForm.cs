@@ -41,6 +41,7 @@ namespace WindowsFormsApp1
                 CompanyBox.ValueMember = "Id";
                 toolStrip3.Enabled = true;
             }
+            LoadOrgTreeObjects();
             tabControl1.SelectedIndexChanged += new EventHandler(tabControl1_SelectedIndexChanged);
             toolStrip2.Size = new Size(70, 25);
             toolStrip1.Items.Insert(1, new ToolStripControlHost(this.dateTimePicker1));
@@ -1635,7 +1636,6 @@ namespace WindowsFormsApp1
             }
             CurrentData.UserData.Id_org = CurrentID;
         }
-
 
         void MakeTable12tekHidden()
         {
@@ -4300,7 +4300,6 @@ namespace WindowsFormsApp1
 
         }
 
-
         private void kryptonButton1_Click(object sender, EventArgs e)
         {
             var myForm = new AddUserForm();
@@ -4376,5 +4375,66 @@ namespace WindowsFormsApp1
             myForm.Show();
         }
 
+        private void LoadOrgTreeObjects()
+        {
+            var headlist = dbOps.GetStructCompanyList(-1);
+            var subheadlist = dbOps.GetStructCompanyList(1);
+            var list100 = dbOps.GetStructCompanyList(100);
+            var list200 = dbOps.GetStructCompanyList(200);
+            var list1001 = dbOps.GetStructCompanyList(1001);
+            treeView1.Nodes.Clear();
+            TreeNode PO = new TreeNode();
+            PO.Text = headlist[0].Name;
+            PO.Tag = headlist[0].Id;
+            PO.ImageIndex = 0;
+            treeView1.Nodes.Add(PO);
+
+            TreeNode Other = new TreeNode();
+            Other.Text = headlist[1].Name;
+            Other.Tag = headlist[1].Id;
+            Other.ImageIndex = 1;
+            treeView1.Nodes.Add(Other);
+
+            TreeNode RUP = new TreeNode();
+            RUP.Text = subheadlist[0].Name;
+            RUP.Tag = subheadlist[0].Id;
+            RUP.ImageIndex = 0;
+            PO.Nodes.Add(RUP);
+
+            TreeNode Child = new TreeNode();
+            Child.Text = subheadlist[1].Name;
+            Child.Tag = subheadlist[1].Id;
+            Child.ImageIndex = 0;
+            PO.Nodes.Add(Child);
+
+            for (int i = 0; i < list100.Count; i++)
+            {
+                TreeNode org = new TreeNode();
+                org.Text = list100[i].Name;
+                org.Tag = list100[i].Id;
+                org.ImageIndex = 0;
+                RUP.Nodes.Add(org);
+            }
+
+            for (int i = 0; i < list200.Count; i++)
+            {
+                TreeNode org = new TreeNode();
+                org.Text = list200[i].Name;
+                org.Tag = list200[i].Id;
+                org.ImageIndex = 0;
+                Child.Nodes.Add(org);
+            }
+
+            for (int i = 0; i < list1001.Count; i++)
+            {
+                TreeNode org = new TreeNode();
+                org.Text = list1001[i].Name;
+                org.Tag = list1001[i].Id;
+                org.ImageIndex = 1;
+                Other.Nodes.Add(org);
+            }
+            treeView1.ExpandAll();
+
+        }
     }
 }
