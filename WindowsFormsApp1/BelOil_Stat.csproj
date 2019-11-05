@@ -465,6 +465,12 @@
     <None Include="Resources\fdate.png" />
     <None Include="Resources\org1.png" />
     <None Include="Resources\org2.png" />
+    <None Include="Resources\rep1.png" />
+    <None Include="Resources\rep2.png" />
+    <None Include="Resources\rep3.png" />
+    <None Include="Resources\rep4.png" />
+    <None Include="Resources\rep5.png" />
+    <None Include="Resources\startup_wizard.png" />
     <Content Include="Themes\Access 2007 Alt White Text.xml" />
     <Content Include="Themes\Access 2007 Alt.xml" />
     <Content Include="Themes\Access 2007 White Text.xml" />

@@ -4393,6 +4393,7 @@ namespace WindowsFormsApp1
             Other.Text = headlist[1].Name;
             Other.Tag = headlist[1].Id;
             Other.ImageIndex = 1;
+            Other.SelectedImageIndex = 1;
             treeView1.Nodes.Add(Other);
 
             TreeNode RUP = new TreeNode();
@@ -4431,10 +4432,25 @@ namespace WindowsFormsApp1
                 org.Text = list1001[i].Name;
                 org.Tag = list1001[i].Id;
                 org.ImageIndex = 1;
+                org.SelectedImageIndex = 1;
                 Other.Nodes.Add(org);
             }
             treeView1.ExpandAll();
 
+        }
+
+        private void treeView1_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            if (Int32.Parse(e.Node.Tag.ToString()) != 1 && Int32.Parse(e.Node.Tag.ToString()) != 100 && Int32.Parse(e.Node.Tag.ToString()) != 200 && Int32.Parse(e.Node.Tag.ToString()) < 1001)
+            {
+                label9.Text = ">>" + e.Node.Text;
+                CurrentData.UserData.Id_org = Int32.Parse(e.Node.Tag.ToString());
+                MakeTable1per();
+                MakeTable12tek();
+                MakeTable12tekHidden();
+                MakeTable12TekPril();
+
+            }
         }
     }
 }
