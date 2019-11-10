@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace WindowsFormsApp1.DataTables
 {
+    [Serializable]
     public class NormTable
     {
         public int Id { get; set; }
@@ -20,5 +21,7 @@ namespace WindowsFormsApp1.DataTables
         public float val_fact { get; set; }
         public float val_plan_ut { get; set; }
         public float val_fact_ut { get; set; }
+        public int norm_code { get; set; }
+        public bool editable { get; set; }
     }
 }

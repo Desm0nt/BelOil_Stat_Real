@@ -87,8 +87,12 @@ namespace WindowsFormsApp1
             worksheet1["P7"] = DateTime.Now.ToString("dd.MM.yyyy");
 
             int report_id = dbOps.GetReportId(CurrentData.UserData.Id_org, dateTimePicker1.Value.Year, dateTimePicker1.Value.Month);
-            var NormList = dbOps.GetNormList(CurrentData.UserData.Id_org, report_id);
-            var NormListSum = MakeListSum(dateTimePicker1.Value.Year, dateTimePicker1.Value.Month);
+            int profile_num = dbOps.GetProflieNum(CurrentData.UserData.Id_org, dateTimePicker1.Value.Year, dateTimePicker1.Value.Month);
+            //var NormList = dbOps.GetNormList(CurrentData.UserData.Id_org, report_id);
+            //var NormListSum = MakeListSum(dateTimePicker1.Value.Year, dateTimePicker1.Value.Month);
+            var NormList2 = dbOps.GetNormListPR(CurrentData.UserData.Id_org, report_id, profile_num, dateTimePicker1.Value.Month, dateTimePicker1.Value.Year);
+            var NormListSum = MakeListSumPR(dateTimePicker1.Value.Year, dateTimePicker1.Value.Month);
+            List<NormTable> NormList = MakeListOnePR(NormList2, NormListSum);
             actualList = NormListSum;
             var OldNormListSum = MakeListSum(dateTimePicker1.Value.Year-1, dateTimePicker1.Value.Month);
             oldList = OldNormListSum;
@@ -3998,6 +4002,63 @@ namespace WindowsFormsApp1
             return NormList;
         }
 
+        private List<NormTable> MakeListSumPR(int year, int month)
+        {
+            List<NormTable> NormListPR = new List<NormTable>();
+            for (int i = 1; i <= month; i++)
+            {
+                int report_id = dbOps.GetReportId(CurrentData.UserData.Id_org, year, i);
+                int profile_num = dbOps.GetProflieNum(CurrentData.UserData.Id_org, year, i);
+                var tempList = dbOps.GetNormListPR(CurrentData.UserData.Id_org, report_id, profile_num, month, year);
+                foreach (var t in tempList)
+                {
+                    if (NormListPR.Any(norm => norm.norm_code == t.norm_code))
+                    {
+                        var index = NormListPR.FindIndex(norm => norm.norm_code == t.norm_code);
+                        NormListPR[index].val_fact += t.val_fact;
+                        NormListPR[index].val_plan += t.val_plan;
+                        NormListPR[index].val_fact_ut += t.val_fact_ut;
+                        NormListPR[index].val_plan_ut += t.val_plan_ut;
+
+                    }
+                    else
+                    {
+                        NormListPR.Add(t);
+                    }
+                }
+            }
+            
+            return NormListPR;
+        }
+
+        private List<NormTable> MakeListOnePR(List<NormTable> list, List<NormTable> listSum)
+        {
+            List<NormTable> ListOnePR = listSum.DeepClone();
+            foreach (var t in ListOnePR)
+            {
+                if (list.Any(norm => norm.norm_code == t.norm_code))
+                {
+                    var sumIndex = ListOnePR.FindIndex(norm => norm.norm_code == t.norm_code);
+                    var index = list.FindIndex(norm => norm.norm_code == t.norm_code);
+                    ListOnePR[sumIndex].val_fact = list[index].val_fact;
+                    ListOnePR[sumIndex].val_plan = list[index].val_plan;
+                    ListOnePR[sumIndex].val_fact_ut = list[index].val_fact_ut;
+                    ListOnePR[sumIndex].val_plan_ut = list[index].val_plan_ut;
+                    ListOnePR[sumIndex].editable = true;
+
+                }
+                else
+                {
+                    var sumIndex = ListOnePR.FindIndex(norm => norm.norm_code == t.norm_code);
+                    ListOnePR[sumIndex].val_fact = 0;
+                    ListOnePR[sumIndex].val_plan = 0;
+                    ListOnePR[sumIndex].val_fact_ut = 0;
+                    ListOnePR[sumIndex].val_plan_ut = 0;
+                }
+            }
+            return ListOnePR;
+        }
+
         private List<NormTable> MakeListSum(int year, int month)
         {
             int report_id = dbOps.GetReportId(CurrentData.UserData.Id_org, year, 1);
@@ -4451,6 +4512,20 @@ namespace WindowsFormsApp1
                 MakeTable12TekPril();
 
             }
+        }
+    }
+}
+public static class ExtensionMethods
+{
+    // Deep clone
+    public static T DeepClone<T>(this T a)
+    {
+        using (MemoryStream stream = new MemoryStream())
+        {
+            System.Runtime.Serialization.Formatters.Binary.BinaryFormatter formatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
+            formatter.Serialize(stream, a);
+            stream.Position = 0;
+            return (T)formatter.Deserialize(stream);
         }
     }
 }

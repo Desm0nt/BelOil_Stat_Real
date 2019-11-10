@@ -1965,6 +1965,81 @@ namespace WindowsFormsApp1.DBO
             return trades;
         }
 
+        public static List<NormTable> GetNormListPR(int id_org, int id_rep, int num, int month, int year)
+        {
+            List<NormTable> NormList = new List<NormTable>();
+            try
+            {
+                SqlConnection myConnection = new SqlConnection(cnStr);
+                SqlConnection myConnection2 = new SqlConnection(cnStr);
+                myConnection.Open();
+
+                string query = "SELECT * FROM [NewNorm] where id_org = @id_org and num = @num";
+                SqlCommand command = new SqlCommand(query, myConnection);
+                command.Parameters.AddWithValue("@id_org", id_org);
+                command.Parameters.AddWithValue("@num", num);
+                using (SqlDataReader dr = command.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        myConnection2.Open();
+                        string query2 = "SELECT * FROM [NewNormData] WHERE [id_norm] = @id_norm AND [id_rep] = @id_rep";
+                        SqlCommand command2 = new SqlCommand(query2, myConnection2);
+                        command2.Parameters.AddWithValue("@id_norm", Int32.Parse(dr["norm_code"].ToString()));
+                        command2.Parameters.AddWithValue("@id_rep", id_rep);
+                        var a = Int32.Parse(dr["id"].ToString());
+                        using (SqlDataReader dr2 = command2.ExecuteReader())
+                        {
+                            while (dr2.Read())
+                            {
+                                string[] rowopt = !String.IsNullOrWhiteSpace(dr["row_options"].ToString()) ? dr["row_options"].ToString().Split(',') : new string[] { };
+                                float coeff = 0;
+                                int? fuel = !String.IsNullOrWhiteSpace(dr["fuel"].ToString()) ? Int32.Parse(dr["fuel"].ToString()) : 0;
+                                switch (Int32.Parse(dr["type"].ToString()))
+                                {
+                                    case 1:
+                                        coeff = GetFuelData(fuel, year, month).B_y;
+                                        break; // переход к case 5
+                                    case 2:
+                                        coeff = GetFactorData(Int32.Parse(dr["type"].ToString()), month, year).value;
+                                        break;
+                                    case 3:
+                                        coeff = GetFactorData(Int32.Parse(dr["type"].ToString()), month, year).value;
+                                        break;
+                                    default:;
+                                        break;
+                                }
+                                NormList.Add(new NormTable
+                                {
+                                    Id = Int32.Parse(dr["id"].ToString()),
+                                    Id_org = Int32.Parse(dr["id_org"].ToString()),
+                                    Id_prod = Int32.Parse(dr["id_prod"].ToString()),
+                                    Code = Int32.Parse(dr["code"].ToString()),
+                                    name = dr["name"].ToString(),
+                                    fuel = fuel,
+                                    type = Int32.Parse(dr["type"].ToString()),
+                                    row_options = rowopt,
+                                    val_plan = float.Parse(dr2["value_plan"].ToString()),
+                                    val_fact = float.Parse(dr2["value_fact"].ToString()),
+                                    val_fact_ut = float.Parse(dr2["value_fact"].ToString()) * coeff,
+                                    val_plan_ut = float.Parse(dr2["value_fact"].ToString()) * coeff,
+                                    norm_code = Int32.Parse(dr["norm_code"].ToString()),
+                                    editable = false
+                                });
+                            }
+                        }
+                        myConnection2.Close();
+                    }
+                }
+                myConnection.Close();
+            }
+            catch (Exception Ex)
+            {
+                KryptonMessageBox.Show("Ошибка GetNormListPR: " + Ex.Message);
+            }
+            return NormList;
+        }
+
         public static List<NormTable> GetNormList(int id_org, int id_rep)
         {
             List<NormTable> NormList = new List<NormTable>();
@@ -1992,9 +2067,23 @@ namespace WindowsFormsApp1.DBO
                             while (dr2.Read())
                             {
                                 string[] rowopt = !String.IsNullOrWhiteSpace(dr["row_options"].ToString())?dr["row_options"].ToString().Split(','): new string[] { };
-                                NormList.Add(new NormTable { Id = Int32.Parse(dr["id"].ToString()), Id_org = Int32.Parse(dr["id_org"].ToString()), Id_prod = Int32.Parse(dr["id_prod"].ToString()), Code = Int32.Parse(dr["code"].ToString()),
-                                    name = dr["name"].ToString(), fuel = !String.IsNullOrWhiteSpace(dr["fuel"].ToString()) ? Int32.Parse(dr["fuel"].ToString()) : 0, type = Int32.Parse(dr["type"].ToString()), row_options = rowopt,
-                                    val_plan = float.Parse(dr2["value_plan"].ToString()), val_fact = float.Parse(dr2["value_fact"].ToString()), val_fact_ut = 0, val_plan_ut =0 });
+                                NormList.Add(new NormTable
+                                {
+                                    Id = Int32.Parse(dr["id"].ToString()),
+                                    Id_org = Int32.Parse(dr["id_org"].ToString()),
+                                    Id_prod = Int32.Parse(dr["id_prod"].ToString()),
+                                    Code = Int32.Parse(dr["code"].ToString()),
+                                    name = dr["name"].ToString(),
+                                    fuel = !String.IsNullOrWhiteSpace(dr["fuel"].ToString()) ? Int32.Parse(dr["fuel"].ToString()) : 0,
+                                    type = Int32.Parse(dr["type"].ToString()),
+                                    row_options = rowopt,
+                                    val_plan = float.Parse(dr2["value_plan"].ToString()),
+                                    val_fact = float.Parse(dr2["value_fact"].ToString()),
+                                    val_fact_ut = 0,
+                                    val_plan_ut = 0,
+                                    norm_code = Int32.Parse(dr["norm_code"].ToString()),
+                                    editable = false
+                                });
                             }
                         }
                         myConnection2.Close();
@@ -2658,6 +2747,71 @@ namespace WindowsFormsApp1.DBO
             myConnection.Close();
             return repid;
         }
+        public static int GetProflieNum(int id_org, int year, int month)
+        {
+            int profNum = 0;
+            try
+            {
+
+                SqlConnection myConnection = new SqlConnection(cnStr);
+                myConnection.Open();
+
+                string query = "SELECT COUNT(*) FROM [NewProfiles] WHERE [id_org] = @id_org AND [year] = @year AND [month] = @month";
+                SqlCommand command = new SqlCommand(query, myConnection);
+                command.Parameters.AddWithValue("@id_org", id_org);
+                command.Parameters.AddWithValue("@year", year);
+                command.Parameters.AddWithValue("@month", month);
+                var result = Convert.ToInt32(command.ExecuteScalar());
+                if (result >= 1)
+                {
+                    query = "SELECT num FROM [NewProfiles] WHERE [id_org] = @id_org AND [year] = @year AND [month] = @month";
+                    command = new SqlCommand(query, myConnection);
+                    command.Parameters.AddWithValue("@id_org", id_org);
+                    command.Parameters.AddWithValue("@year", year);
+                    command.Parameters.AddWithValue("@month", month);
+                }
+                else
+                {
+                    query = "SELECT COUNT(*) FROM [NewProfiles] WHERE [id_org] = @id_org AND  year <= @year AND month <= @month";
+                    command = new SqlCommand(query, myConnection);
+                    command.Parameters.AddWithValue("@id_org", id_org);
+                    command.Parameters.AddWithValue("@year", year);
+                    command.Parameters.AddWithValue("@month", month);
+                    var result2 = Convert.ToInt32(command.ExecuteScalar());
+
+                    if (result2 > 0)
+                    {
+                        query = "SELECT num FROM [NewProfiles] WHERE [id_org] = @id_org AND num = (SELECT MAX(num) FROM [NewProfiles] WHERE year <= @year AND month <= @month AND [id_org] = @id_org)";
+                        command = new SqlCommand(query, myConnection);
+                        command.Parameters.AddWithValue("@id_org", id_org);
+                        command.Parameters.AddWithValue("@year", year);
+                        command.Parameters.AddWithValue("@month", month);
+                    }
+                    else
+                    {
+                        query = "SELECT num FROM [NewProfiles] WHERE [id_org] = @id_org AND num = (SELECT MIN(num) FROM [NewProfiles] WHERE [id_org] = @id_org)";
+                        command = new SqlCommand(query, myConnection);
+                        command.Parameters.AddWithValue("@id_org", id_org);
+                        command.Parameters.AddWithValue("@year", year);
+                        command.Parameters.AddWithValue("@month", month);
+                    }
+                }
+                using (SqlDataReader dr = command.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        profNum = Int32.Parse(dr["num"].ToString());
+                    }
+                }
+                myConnection.Close();
+            }
+            catch (Exception Ex)
+            {
+                KryptonMessageBox.Show("Ошибка GetProflieNum: " + Ex.Message);
+            }
+            return profNum;
+        }
+
 
         public static int GetNormId(int id_org, int id_prod)
         {
