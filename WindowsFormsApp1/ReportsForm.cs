@@ -94,7 +94,7 @@ namespace WindowsFormsApp1
             var NormListSum = MakeListSumPR(dateTimePicker1.Value.Year, dateTimePicker1.Value.Month);
             List<NormTable> NormList = MakeListOnePR(NormList2, NormListSum);
             actualList = NormListSum;
-            var OldNormListSum = MakeListSum(dateTimePicker1.Value.Year-1, dateTimePicker1.Value.Month);
+            var OldNormListSum = MakeListSumPR(dateTimePicker1.Value.Year-1, dateTimePicker1.Value.Month);
             oldList = OldNormListSum;
 
             #region топливо
@@ -550,8 +550,8 @@ namespace WindowsFormsApp1
             worksheet2["H14"] = oldSum_112;
             #endregion
 
-            var TFuelListSum = MakeTFuelSum(dateTimePicker1.Value.Year, dateTimePicker1.Value.Month);
-            var OldTFuelListSum = MakeTFuelSum(dateTimePicker1.Value.Year - 1, dateTimePicker1.Value.Month);
+            var TFuelListSum = MakeTFuelSumPR(dateTimePicker1.Value.Year, dateTimePicker1.Value.Month);
+            var OldTFuelListSum = MakeTFuelSumPR(dateTimePicker1.Value.Year - 1, dateTimePicker1.Value.Month);
 
             #region тепло продано всего
             float TFuelSum = 0;
@@ -4030,7 +4030,6 @@ namespace WindowsFormsApp1
             
             return NormListPR;
         }
-
         private List<NormTable> MakeListOnePR(List<NormTable> list, List<NormTable> listSum)
         {
             List<NormTable> ListOnePR = listSum.DeepClone();
@@ -4058,7 +4057,6 @@ namespace WindowsFormsApp1
             }
             return ListOnePR;
         }
-
         private List<NormTable> MakeListSum(int year, int month)
         {
             int report_id = dbOps.GetReportId(CurrentData.UserData.Id_org, year, 1);
@@ -4203,20 +4201,45 @@ namespace WindowsFormsApp1
         private List<FTradeTable> MakeTFuelSum(int year, int month)
         {
             int report_id = dbOps.GetReportId(CurrentData.UserData.Id_org, year, 1);
-            var TFuelList = dbOps.GetFTradeList(CurrentData.UserData.Id_org, report_id);
+            int profile_num = dbOps.GetProflieNum(CurrentData.UserData.Id_org, year, 1);
+            var TFuelList = dbOps.GetFTradeList(CurrentData.UserData.Id_org, report_id, profile_num);
 
             if (month > 1)
             {
                 for (int i = 2; i <= month; i++)
                 {
                     report_id = dbOps.GetReportId(CurrentData.UserData.Id_org, year, i);
-                    var tmplist = dbOps.GetFTradeList(CurrentData.UserData.Id_org, report_id);
+                    profile_num = dbOps.GetProflieNum(CurrentData.UserData.Id_org, year, i);
+                    var tmplist = dbOps.GetFTradeList(CurrentData.UserData.Id_org, report_id, profile_num);
                     if (tmplist.Count != 0)
                     {
                         for (int j = 0; j < TFuelList.Count; j++)
                         {
                             TFuelList[j].Value += Convert.ToSingle(Math.Round(tmplist[j].Value, 1));
                         }
+                    }
+                }
+            }
+            return TFuelList;
+        }
+        private List<FTradeTable> MakeTFuelSumPR(int year, int month)
+        {
+            List<FTradeTable> TFuelList = new List<FTradeTable>();
+            for (int i = 1; i <= month; i++)
+            {
+                int report_id = dbOps.GetReportId(CurrentData.UserData.Id_org, year, i);
+                int profile_num = dbOps.GetProflieNum(CurrentData.UserData.Id_org, year, i);
+                var TFuelListTemp = dbOps.GetFTradeList(CurrentData.UserData.Id_org, report_id, profile_num);
+                foreach (var t in TFuelListTemp)
+                {
+                    if (TFuelList.Any(fuel => fuel.fuel_code == t.fuel_code))
+                    {
+                        var index = TFuelList.FindIndex(fuel => fuel.fuel_code == t.fuel_code);
+                        TFuelList[index].Value += Convert.ToSingle(Math.Round(t.Value, 1));
+                    }
+                    else
+                    {
+                        TFuelList.Add(t);
                     }
                 }
             }
