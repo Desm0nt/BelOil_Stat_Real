@@ -929,7 +929,7 @@ namespace WindowsFormsApp1
             worksheet2["L16"] = eOldSendSum;
             #endregion
 
-            var SourceSum = MakeSourceSum(dateTimePicker1.Value.Year, dateTimePicker1.Value.Month);
+            var SourceSum = MakeSourceSumPR(dateTimePicker1.Value.Year, dateTimePicker1.Value.Month);
             var OldSourceSum = MakeSourceSumPR(dateTimePicker1.Value.Year - 1, dateTimePicker1.Value.Month);
 
             var a1 = SourceSum;
@@ -1155,9 +1155,9 @@ namespace WindowsFormsApp1
             foreach (var b in CompanyIdList)
             {
                 CurrentData.UserData.Id_org = b;
-                var NormListSum = MakeListSum(dateTimePicker1.Value.Year, dateTimePicker1.Value.Month);
+                var NormListSum = MakeListSumPR(dateTimePicker1.Value.Year, dateTimePicker1.Value.Month);
                 var actualList1 = NormListSum;
-                var OldNormListSum = MakeListSum(dateTimePicker1.Value.Year - 1, dateTimePicker1.Value.Month);
+                var OldNormListSum = MakeListSumPR(dateTimePicker1.Value.Year - 1, dateTimePicker1.Value.Month);
                 var oldList1 = OldNormListSum;
 
                 foreach (var a in actualList1)
@@ -1391,8 +1391,8 @@ namespace WindowsFormsApp1
             foreach (var b in CompanyIdList)
             {
                 CurrentData.UserData.Id_org = b;
-                var TFuelListSum = MakeTFuelSum(dateTimePicker1.Value.Year, dateTimePicker1.Value.Month);
-                var OldTFuelListSum = MakeTFuelSum(dateTimePicker1.Value.Year - 1, dateTimePicker1.Value.Month);
+                var TFuelListSum = MakeTFuelSumPR(dateTimePicker1.Value.Year, dateTimePicker1.Value.Month);
+                var OldTFuelListSum = MakeTFuelSumPR(dateTimePicker1.Value.Year - 1, dateTimePicker1.Value.Month);
                 foreach (var a in TFuelListSum)
                 {
                     TFuelSum += Convert.ToSingle(Math.Round(a.Value, 1));
@@ -1438,8 +1438,8 @@ namespace WindowsFormsApp1
             foreach (var b in CompanyIdList)
             {
                 CurrentData.UserData.Id_org = b;
-                var RecievedListSum = MakeRecListSum(dateTimePicker1.Value.Year, dateTimePicker1.Value.Month);
-                var OldRecievedListSum = MakeRecListSum(dateTimePicker1.Value.Year - 1, dateTimePicker1.Value.Month);
+                var RecievedListSum = MakeRecListSumPR(dateTimePicker1.Value.Year, dateTimePicker1.Value.Month);
+                var OldRecievedListSum = MakeRecListSumPR(dateTimePicker1.Value.Year - 1, dateTimePicker1.Value.Month);
 
                 foreach (var a in RecievedListSum)
                 {
@@ -1479,8 +1479,8 @@ namespace WindowsFormsApp1
             foreach (var b in CompanyIdList)
             {
                 CurrentData.UserData.Id_org = b;
-                var SendedListSum = MakeSendListSum(dateTimePicker1.Value.Year, dateTimePicker1.Value.Month);
-                var OldSendedListSum = MakeSendListSum(dateTimePicker1.Value.Year - 1, dateTimePicker1.Value.Month);
+                var SendedListSum = MakeSendListSumPR(dateTimePicker1.Value.Year, dateTimePicker1.Value.Month);
+                var OldSendedListSum = MakeSendListSumPR(dateTimePicker1.Value.Year - 1, dateTimePicker1.Value.Month);
 
                 foreach (var a in SendedListSum)
                 {
@@ -1527,8 +1527,8 @@ namespace WindowsFormsApp1
             foreach (var b in CompanyIdList)
             {
                 CurrentData.UserData.Id_org = b;
-                var SourceSum = MakeSourceSum(dateTimePicker1.Value.Year, dateTimePicker1.Value.Month);
-                var OldSourceSum = MakeSourceSum(dateTimePicker1.Value.Year - 1, dateTimePicker1.Value.Month);
+                var SourceSum = MakeSourceSumPR(dateTimePicker1.Value.Year, dateTimePicker1.Value.Month);
+                var OldSourceSum = MakeSourceSumPR(dateTimePicker1.Value.Year - 1, dateTimePicker1.Value.Month);
                 foreach (var a in SourceSum)
                 {
                     if (a.Res_type == 2)
@@ -4280,7 +4280,6 @@ namespace WindowsFormsApp1
             return SourceList;
         }
 
-
         private List<FTradeTable> MakeTFuelSum(int year, int month)
         {
             int report_id = dbOps.GetReportId(CurrentData.UserData.Id_org, year, 1);
@@ -4351,6 +4350,29 @@ namespace WindowsFormsApp1
             }
             return TradeList;
         }
+        private List<TradeTable> MakeTradeSumPR(int year, int month)
+        {
+            int report_id = dbOps.GetReportId(CurrentData.UserData.Id_org, year, 1);
+            var TradeList = dbOps.GetTrades(report_id);
+
+            if (month > 1)
+            {
+                for (int i = 2; i <= month; i++)
+                {
+                    report_id = dbOps.GetReportId(CurrentData.UserData.Id_org, year, i);
+                    var tmplist = dbOps.GetTrades(report_id);
+                    if (tmplist.Count != 0)
+                    {
+                        for (int j = 0; j < TradeList.Count; j++)
+                        {
+                            TradeList[j].value += Convert.ToSingle(Math.Round(tmplist[j].value, 1));
+                        }
+                    }
+                }
+            }
+            return TradeList;
+        }
+
 
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
         {
