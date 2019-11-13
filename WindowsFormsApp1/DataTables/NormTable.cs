@@ -12,6 +12,7 @@ namespace WindowsFormsApp1.DataTables
         public int Id { get; set; }
         public int Id_org { get; set; }
         public int Id_prod { get; set; }
+        public Int64 Id_local { get; set; }
         public int Code { get; set; }
         public string name { get; set; }
         public int? fuel { get; set; }

@@ -13,5 +13,6 @@ namespace WindowsFormsApp1.DataTables
         public int Fuel_group { get; set; }
         public int Id_org { get; set; }
         public float Value { get; set; }
+        public int fuel_code { get; set; }
     }
 }

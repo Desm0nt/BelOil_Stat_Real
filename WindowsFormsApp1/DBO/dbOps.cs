@@ -2024,6 +2024,7 @@ namespace WindowsFormsApp1.DBO
                                     val_fact_ut = float.Parse(dr2["value_fact"].ToString()) * coeff,
                                     val_plan_ut = float.Parse(dr2["value_fact"].ToString()) * coeff,
                                     norm_code = Int32.Parse(dr["norm_code"].ToString()),
+                                    Id_local = Int64.Parse(dr["id_local"].ToString()),
                                     editable = false
                                 });
                             }
@@ -2175,7 +2176,7 @@ namespace WindowsFormsApp1.DBO
             return NormList;
         }
 
-        public static List<RecievedTable> GetRecievedList(int id_owner, int id_rep)
+        public static List<RecievedTable> GetRecievedList(int id_owner, int id_rep, int num)
         {
             List<RecievedTable> RecievedList = new List<RecievedTable>();
             try
@@ -2184,9 +2185,10 @@ namespace WindowsFormsApp1.DBO
                 SqlConnection myConnection2 = new SqlConnection(cnStr);
                 myConnection.Open();
 
-                string query = "SELECT * FROM [NewRecievedOrgList] where id_owner = @id_owner";
+                string query = "SELECT * FROM [NewRecievedOrgList] where id_owner = @id_owner AND num = @num";
                 SqlCommand command = new SqlCommand(query, myConnection);
                 command.Parameters.AddWithValue("@id_owner", id_owner);
+                command.Parameters.AddWithValue("@num", num);
                 using (SqlDataReader dr = command.ExecuteReader())
                 {
                     while (dr.Read())
@@ -2203,7 +2205,15 @@ namespace WindowsFormsApp1.DBO
                             {
 
                                 //тут баги
-                                RecievedList.Add(new RecievedTable { Id = Int32.Parse(dr["id"].ToString()), Id_owner = Int32.Parse(dr["id_owner"].ToString()), Id_org = Int32.Parse(dr["id_org"].ToString()), org_name = GetCompanyName(Int32.Parse(dr["id_org"].ToString())), res_type = Int32.Parse(dr["res_type"].ToString()), value = float.Parse(dr2["value"].ToString()) });
+                                RecievedList.Add(new RecievedTable
+                                {
+                                    Id = Int32.Parse(dr["id"].ToString()),
+                                    Id_owner = Int32.Parse(dr["id_owner"].ToString()),
+                                    Id_org = Int32.Parse(dr["id_org"].ToString()),
+                                    org_name = GetCompanyName(Int32.Parse(dr["id_org"].ToString())),
+                                    res_type = Int32.Parse(dr["res_type"].ToString()),
+                                    value = float.Parse(dr2["value"].ToString())
+                                });
                             }
                         }
                         myConnection2.Close();
@@ -2261,7 +2271,7 @@ namespace WindowsFormsApp1.DBO
             return RecievedList;
         }
 
-        public static List<SendedTable> GetSendedList(int id_owner, int id_rep)
+        public static List<SendedTable> GetSendedList(int id_owner, int id_rep, int num)
         {
             List<SendedTable> SendedList = new List<SendedTable>();
             try
@@ -2270,9 +2280,10 @@ namespace WindowsFormsApp1.DBO
                 SqlConnection myConnection2 = new SqlConnection(cnStr);
                 myConnection.Open();
 
-                string query = "SELECT * FROM [NewSendedOrgList] where id_owner = @id_owner";
+                string query = "SELECT * FROM [NewSendedOrgList] where id_owner = @id_owner AND num = @num";
                 SqlCommand command = new SqlCommand(query, myConnection);
                 command.Parameters.AddWithValue("@id_owner", id_owner);
+                command.Parameters.AddWithValue("@num", num);
                 using (SqlDataReader dr = command.ExecuteReader())
                 {
                     while (dr.Read())
@@ -2288,7 +2299,15 @@ namespace WindowsFormsApp1.DBO
                             while (dr2.Read())
                             {
                                 //тут баги
-                                SendedList.Add(new SendedTable { Id = Int32.Parse(dr["id"].ToString()), Id_owner = Int32.Parse(dr["id_owner"].ToString()), Id_org = Int32.Parse(dr["id_org"].ToString()), org_name = GetCompanyName(Int32.Parse(dr["id_org"].ToString())), res_type = Int32.Parse(dr["res_type"].ToString()), value = float.Parse(dr2["value"].ToString()) });
+                                SendedList.Add(new SendedTable
+                                {
+                                    Id = Int32.Parse(dr["id"].ToString()),
+                                    Id_owner = Int32.Parse(dr["id_owner"].ToString()),
+                                    Id_org = Int32.Parse(dr["id_org"].ToString()),
+                                    org_name = GetCompanyName(Int32.Parse(dr["id_org"].ToString())),
+                                    res_type = Int32.Parse(dr["res_type"].ToString()),
+                                    value = float.Parse(dr2["value"].ToString())
+                                });
                             }
                         }
                         myConnection2.Close();
@@ -2345,7 +2364,7 @@ namespace WindowsFormsApp1.DBO
             return SendedList;
         }
 
-        public static List<SourceTable> GetSourceList(int id_org, int id_rep)
+        public static List<SourceTable> GetSourceList(int id_org, int id_rep, int num)
         {
             List<SourceTable> SourceList = new List<SourceTable>();
             try
@@ -2354,9 +2373,10 @@ namespace WindowsFormsApp1.DBO
                 SqlConnection myConnection2 = new SqlConnection(cnStr);
                 myConnection.Open();
 
-                string query = "SELECT * FROM [NewOrgSoucesList] where id_org = @id_org";
+                string query = "SELECT * FROM [NewOrgSoucesList] where id_org = @id_org AND num = @num";
                 SqlCommand command = new SqlCommand(query, myConnection);
                 command.Parameters.AddWithValue("@id_org", id_org);
+                command.Parameters.AddWithValue("@num", num);
                 using (SqlDataReader dr = command.ExecuteReader())
                 {
                     while (dr.Read())
@@ -2445,12 +2465,13 @@ namespace WindowsFormsApp1.DBO
             return SourceList;
         }
 
-        public static List<FTradeTable> GetFTradeList(int id_org, int id_rep)
+        public static List<FTradeTable> GetFTradeList(int id_org, int id_rep, int num)
         {
             List<FTradeTable> FTradeList = new List<FTradeTable>();
             try
             {
                 SqlConnection myConnection = new SqlConnection(cnStr);
+
                 SqlConnection myConnection2 = new SqlConnection(cnStr);
                 myConnection.Open();
 
@@ -2466,7 +2487,7 @@ namespace WindowsFormsApp1.DBO
                         myConnection2.Open();
                         string query2 = "SELECT * FROM [NewFuelsTrade] WHERE [id_fuel] = @id_tfuel AND [id_rep] = @id_rep";
                         SqlCommand command2 = new SqlCommand(query2, myConnection2);
-                        command2.Parameters.AddWithValue("@id_tfuel", Int32.Parse(dr["id"].ToString()));
+                        command2.Parameters.AddWithValue("@id_tfuel", Int32.Parse(dr["fuel_code"].ToString()));
                         command2.Parameters.AddWithValue("@id_rep", id_rep);
                         var a = Int32.Parse(dr["id"].ToString());
                         using (SqlDataReader dr2 = command2.ExecuteReader())
@@ -2490,7 +2511,15 @@ namespace WindowsFormsApp1.DBO
                                 else
                                     fuel_type = 1100;
                                 //тут баги
-                                FTradeList.Add(new FTradeTable { Id = Int32.Parse(dr["id"].ToString()), Id_fuel = Int32.Parse(dr["id_fuel"].ToString()), Fuel_group = fuel_type, Id_org = Int32.Parse(dr["id_org"].ToString()),  Value = float.Parse(dr2["value"].ToString()) });
+                                FTradeList.Add(new FTradeTable
+                                {
+                                    Id = Int32.Parse(dr["id"].ToString()),
+                                    Id_fuel = Int32.Parse(dr["id_fuel"].ToString()),
+                                    Fuel_group = fuel_type,
+                                    Id_org = Int32.Parse(dr["id_org"].ToString()),
+                                    Value = float.Parse(dr2["value"].ToString()),
+                                    fuel_code = Int32.Parse(dr["fuel_code"].ToString())
+                                });
                             }
                         }
                         myConnection2.Close();
@@ -2574,6 +2603,7 @@ namespace WindowsFormsApp1.DBO
         public static float MakeTInputFuelSum(int year, int month, int fuel_id)
         {
             int report_id = dbOps.GetReportId(CurrentData.UserData.Id_org, year, 1);
+            int profile_num = dbOps.GetProflieNum(CurrentData.UserData.Id_org, year, 1);
             float yearFVal = 0;
 
             if (month > 1)
@@ -2581,7 +2611,8 @@ namespace WindowsFormsApp1.DBO
                 for (int i = 1; i < month; i++)
                 {
                     report_id = dbOps.GetReportId(CurrentData.UserData.Id_org, year, i);
-                    var tmplist = dbOps.GetFTradeList(CurrentData.UserData.Id_org, report_id);
+                    profile_num = dbOps.GetProflieNum(CurrentData.UserData.Id_org, year, i);
+                    var tmplist = dbOps.GetFTradeList(CurrentData.UserData.Id_org, report_id, profile_num);
                     yearFVal += dbOps.GetInputMonthFuelValue(report_id, fuel_id);
                 }
             }

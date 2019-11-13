@@ -838,8 +838,8 @@ namespace WindowsFormsApp1
             worksheet2["L14"] = oldSum3_112;
             #endregion
 
-            var RecievedListSum = MakeRecListSum(dateTimePicker1.Value.Year, dateTimePicker1.Value.Month);
-            var OldRecievedListSum = MakeRecListSum(dateTimePicker1.Value.Year-1, dateTimePicker1.Value.Month);
+            var RecievedListSum = MakeRecListSumPR(dateTimePicker1.Value.Year, dateTimePicker1.Value.Month);
+            var OldRecievedListSum = MakeRecListSumPR(dateTimePicker1.Value.Year-1, dateTimePicker1.Value.Month);
                 
             #region тепло получено
             float tRecSum = 0;
@@ -883,8 +883,8 @@ namespace WindowsFormsApp1
             worksheet2["L21"] = eOldRecSum;
             #endregion
 
-            var SendedListSum = MakeSendListSum(dateTimePicker1.Value.Year, dateTimePicker1.Value.Month);
-            var OldSendedListSum = MakeSendListSum(dateTimePicker1.Value.Year - 1, dateTimePicker1.Value.Month);
+            var SendedListSum = MakeSendListSumPR(dateTimePicker1.Value.Year, dateTimePicker1.Value.Month);
+            var OldSendedListSum = MakeSendListSumPR(dateTimePicker1.Value.Year - 1, dateTimePicker1.Value.Month);
 
             #region тепло отдано
             float tSendSum = 0;
@@ -930,7 +930,10 @@ namespace WindowsFormsApp1
             #endregion
 
             var SourceSum = MakeSourceSum(dateTimePicker1.Value.Year, dateTimePicker1.Value.Month);
-            var OldSourceSum = MakeSourceSum(dateTimePicker1.Value.Year - 1, dateTimePicker1.Value.Month);
+            var OldSourceSum = MakeSourceSumPR(dateTimePicker1.Value.Year - 1, dateTimePicker1.Value.Month);
+
+            var a1 = SourceSum;
+            var a2 = OldSourceSum;
 
             #region получено собственного тепла
             float tSourceSum = 0;
@@ -2286,9 +2289,10 @@ namespace WindowsFormsApp1
 
             worksheet4["B1"] = String.Format("Приложение к отчету 12-тэк за январь - {0} {1} г", dateTimePicker1.Value.ToString("MMMM"), dateTimePicker1.Value.ToString("yyyy"));
             int report_id = dbOps.GetReportId(CurrentData.UserData.Id_org, dateTimePicker1.Value.Year, dateTimePicker1.Value.Month);
+            int profile_num = dbOps.GetProflieNum(CurrentData.UserData.Id_org, dateTimePicker1.Value.Year, dateTimePicker1.Value.Month);
 
             #region строка 120
-            var SendedList = dbOps.GetSendedList(CurrentData.UserData.Id_org, report_id);
+            var SendedList = dbOps.GetSendedList(CurrentData.UserData.Id_org, report_id, profile_num);
             var SendedListSum = MakeSendListSum(dateTimePicker1.Value.Year, dateTimePicker1.Value.Month);
             var OldSendedListSum = MakeSendListSum(dateTimePicker1.Value.Year - 1, dateTimePicker1.Value.Month);
             List<WholeTable> WholeList = new List<WholeTable>();
@@ -2467,7 +2471,7 @@ namespace WindowsFormsApp1
             }
             #endregion
 
-            var RecievedList = dbOps.GetRecievedList(CurrentData.UserData.Id_org, report_id);
+            var RecievedList = dbOps.GetRecievedList(CurrentData.UserData.Id_org, report_id, profile_num);
             var RecievedListSum = MakeRecListSum(dateTimePicker1.Value.Year, dateTimePicker1.Value.Month);
             var OldRecievedListSum = MakeRecListSum(dateTimePicker1.Value.Year - 1, dateTimePicker1.Value.Month);
             List<WholeTable> RWholeList = new List<WholeTable>();
@@ -4128,14 +4132,16 @@ namespace WindowsFormsApp1
         private List<RecievedTable> MakeRecListSum(int year, int month)
         {
             int report_id = dbOps.GetReportId(CurrentData.UserData.Id_org, year, 1);
-            var RecievedList = dbOps.GetRecievedList(CurrentData.UserData.Id_org, report_id);
+            int profile_num = dbOps.GetProflieNum(CurrentData.UserData.Id_org, year, 1);
+            var RecievedList = dbOps.GetRecievedList(CurrentData.UserData.Id_org, report_id, profile_num);
 
             if (month > 1)
             {
                 for (int i = 2; i <= month; i++)
                 {
                     report_id = dbOps.GetReportId(CurrentData.UserData.Id_org, year, i);
-                    var tmplist = dbOps.GetRecievedList(CurrentData.UserData.Id_org, report_id);
+                    profile_num = dbOps.GetProflieNum(CurrentData.UserData.Id_org, year, i);
+                    var tmplist = dbOps.GetRecievedList(CurrentData.UserData.Id_org, report_id, profile_num);
                     if (tmplist.Count != 0)
                     {
                         for (int j = 0; j < RecievedList.Count; j++)
@@ -4149,18 +4155,44 @@ namespace WindowsFormsApp1
             }
             return RecievedList;
         }
+        private List<RecievedTable> MakeRecListSumPR(int year, int month)
+        {
+            List<RecievedTable> RecievedList = new List<RecievedTable>();
+            for (int i = 1; i <= month; i++)
+            {
+                int report_id = dbOps.GetReportId(CurrentData.UserData.Id_org, year, i);
+                int profile_num = dbOps.GetProflieNum(CurrentData.UserData.Id_org, year, i);
+                var RecievedListTemp = dbOps.GetRecievedList(CurrentData.UserData.Id_org, report_id, profile_num);
+                foreach (var t in RecievedListTemp)
+                {
+                    if (RecievedList.Any(rec => rec.Id_org == t.Id_org && rec.res_type == t.res_type))
+                    {
+                        var index = RecievedList.FindIndex(rec => rec.Id_org == t.Id_org && rec.res_type == t.res_type);
+                        if (index >= 0)
+                            RecievedList[index].value += Convert.ToSingle(Math.Round(t.value, 1));
+                    }
+                    else
+                    {
+                        RecievedList.Add(t);
+                    }
+                }
+            }
+            return RecievedList;
+        }
 
         private List<SendedTable> MakeSendListSum(int year, int month)
         {
             int report_id = dbOps.GetReportId(CurrentData.UserData.Id_org, year, 1);
-            var SendedList = dbOps.GetSendedList(CurrentData.UserData.Id_org, report_id);
+            int profile_num = dbOps.GetProflieNum(CurrentData.UserData.Id_org, year, 1);
+            var SendedList = dbOps.GetSendedList(CurrentData.UserData.Id_org, report_id, profile_num);
 
             if (month > 1)
             {
                 for (int i = 2; i <= month; i++)
                 {
                     report_id = dbOps.GetReportId(CurrentData.UserData.Id_org, year, i);
-                    var tmplist = dbOps.GetSendedList(CurrentData.UserData.Id_org, report_id);
+                    profile_num = dbOps.GetProflieNum(CurrentData.UserData.Id_org, year, i);
+                    var tmplist = dbOps.GetSendedList(CurrentData.UserData.Id_org, report_id, profile_num);
                     if (tmplist.Count != 0)
                     {
                         for (int j = 0; j < SendedList.Count; j++)
@@ -4174,18 +4206,44 @@ namespace WindowsFormsApp1
             }
             return SendedList;
         }
+        private List<SendedTable> MakeSendListSumPR(int year, int month)
+        {
+            List<SendedTable> SendedList = new List<SendedTable>();
+            for (int i = 1; i <= month; i++)
+            {
+                int report_id = dbOps.GetReportId(CurrentData.UserData.Id_org, year, i);
+                int profile_num = dbOps.GetProflieNum(CurrentData.UserData.Id_org, year, i);
+                var SendedListTemp = dbOps.GetSendedList(CurrentData.UserData.Id_org, report_id, profile_num);
+                foreach (var t in SendedListTemp)
+                {
+                    if (SendedList.Any(send => send.Id_org == t.Id_org && send.res_type == t.res_type))
+                    {
+                        var index = SendedList.FindIndex(send => send.Id_org == t.Id_org && send.res_type == t.res_type);
+                        if (index >= 0)
+                            SendedList[index].value += Convert.ToSingle(Math.Round(t.value, 1));
+                    }
+                    else
+                    {
+                        SendedList.Add(t);
+                    }
+                }
+            }
+            return SendedList;
+        }
 
         private List<SourceTable> MakeSourceSum(int year, int month)
         {
             int report_id = dbOps.GetReportId(CurrentData.UserData.Id_org, year, 1);
-            var SourceList = dbOps.GetSourceList(CurrentData.UserData.Id_org, report_id);
+            int profile_num = dbOps.GetProflieNum(CurrentData.UserData.Id_org, year, 1);
+            var SourceList = dbOps.GetSourceList(CurrentData.UserData.Id_org, report_id, profile_num);
 
             if (month > 1)
             {
                 for (int i = 2; i <= month; i++)
                 {
                     report_id = dbOps.GetReportId(CurrentData.UserData.Id_org, year, i);
-                    var tmplist = dbOps.GetSourceList(CurrentData.UserData.Id_org, report_id);
+                    profile_num = dbOps.GetProflieNum(CurrentData.UserData.Id_org, year, i);
+                    var tmplist = dbOps.GetSourceList(CurrentData.UserData.Id_org, report_id, profile_num);
                     if (tmplist.Count != 0)
                     {
                         for (int j = 0; j < SourceList.Count; j++)
@@ -4197,6 +4255,31 @@ namespace WindowsFormsApp1
             }
             return SourceList;
         }
+        private List<SourceTable> MakeSourceSumPR(int year, int month)
+        {
+            List<SourceTable> SourceList = new List<SourceTable>();
+            for (int i = 1; i <= month; i++)
+            {
+                int report_id = dbOps.GetReportId(CurrentData.UserData.Id_org, year, i);
+                int profile_num = dbOps.GetProflieNum(CurrentData.UserData.Id_org, year, i);
+                var SourceListTemp = dbOps.GetSourceList(CurrentData.UserData.Id_org, report_id, profile_num);
+                foreach (var t in SourceListTemp)
+                {
+                    if (SourceList.Any(sorc => sorc.Id_object == t.Id_object && sorc.Id_fuel == t.Id_fuel && sorc.Res_type == t.Res_type))
+                    {
+                        var index = SourceList.FindIndex(sorc => sorc.Id_object == t.Id_object && sorc.Id_fuel == t.Id_fuel && sorc.Res_type == t.Res_type);
+                        if (index >= 0)
+                            SourceList[index].Value += Convert.ToSingle(Math.Round(t.Value, 1));
+                    }
+                    else
+                    {
+                        SourceList.Add(t);
+                    }
+                }
+            }
+            return SourceList;
+        }
+
 
         private List<FTradeTable> MakeTFuelSum(int year, int month)
         {
