@@ -1717,8 +1717,8 @@ namespace WindowsFormsApp1
             worksheet3["Y14"] = oldSum_112;
             #endregion
 
-            var TFuelListSum = MakeTFuelSum(dateTimePicker1.Value.Year, dateTimePicker1.Value.Month);
-            var OldTFuelListSum = MakeTFuelSum(dateTimePicker1.Value.Year - 1, dateTimePicker1.Value.Month);
+            var TFuelListSum = MakeTFuelSumPR(dateTimePicker1.Value.Year, dateTimePicker1.Value.Month);
+            var OldTFuelListSum = MakeTFuelSumPR(dateTimePicker1.Value.Year - 1, dateTimePicker1.Value.Month);
 
             #region тепло продано всего
             float TFuelSum = 0;
@@ -2005,8 +2005,8 @@ namespace WindowsFormsApp1
             worksheet3["AC14"] = oldSum3_112;
             #endregion
 
-            var RecievedListSum = MakeRecListSum(dateTimePicker1.Value.Year, dateTimePicker1.Value.Month);
-            var OldRecievedListSum = MakeRecListSum(dateTimePicker1.Value.Year - 1, dateTimePicker1.Value.Month);
+            var RecievedListSum = MakeRecListSumPR(dateTimePicker1.Value.Year, dateTimePicker1.Value.Month);
+            var OldRecievedListSum = MakeRecListSumPR(dateTimePicker1.Value.Year - 1, dateTimePicker1.Value.Month);
 
             #region тепло получено
             float tRecSum = 0;
@@ -2050,8 +2050,8 @@ namespace WindowsFormsApp1
             worksheet3["AC21"] = eOldRecSum;
             #endregion
 
-            var SendedListSum = MakeSendListSum(dateTimePicker1.Value.Year, dateTimePicker1.Value.Month);
-            var OldSendedListSum = MakeSendListSum(dateTimePicker1.Value.Year - 1, dateTimePicker1.Value.Month);
+            var SendedListSum = MakeSendListSumPR(dateTimePicker1.Value.Year, dateTimePicker1.Value.Month);
+            var OldSendedListSum = MakeSendListSumPR(dateTimePicker1.Value.Year - 1, dateTimePicker1.Value.Month);
 
             #region тепло отдано
             float tSendSum = 0;
@@ -2096,8 +2096,8 @@ namespace WindowsFormsApp1
             worksheet3["AC16"] = eOldSendSum;
             #endregion
 
-            var SourceSum = MakeSourceSum(dateTimePicker1.Value.Year, dateTimePicker1.Value.Month);
-            var OldSourceSum = MakeSourceSum(dateTimePicker1.Value.Year - 1, dateTimePicker1.Value.Month);
+            var SourceSum = MakeSourceSumPR(dateTimePicker1.Value.Year, dateTimePicker1.Value.Month);
+            var OldSourceSum = MakeSourceSumPR(dateTimePicker1.Value.Year - 1, dateTimePicker1.Value.Month);
 
             #region получено собственного тепла
             float tSourceSum = 0;
@@ -2293,8 +2293,8 @@ namespace WindowsFormsApp1
 
             #region строка 120
             var SendedList = dbOps.GetSendedList(CurrentData.UserData.Id_org, report_id, profile_num);
-            var SendedListSum = MakeSendListSum(dateTimePicker1.Value.Year, dateTimePicker1.Value.Month);
-            var OldSendedListSum = MakeSendListSum(dateTimePicker1.Value.Year - 1, dateTimePicker1.Value.Month);
+            var SendedListSum = MakeSendListSumPR(dateTimePicker1.Value.Year, dateTimePicker1.Value.Month);
+            var OldSendedListSum = MakeSendListSumPR(dateTimePicker1.Value.Year - 1, dateTimePicker1.Value.Month);
             List<WholeTable> WholeList = new List<WholeTable>();
             List<WholeTable> WholeListSum = new List<WholeTable>();
             List<WholeTable> WholeListSumOld = new List<WholeTable>();
@@ -2472,8 +2472,8 @@ namespace WindowsFormsApp1
             #endregion
 
             var RecievedList = dbOps.GetRecievedList(CurrentData.UserData.Id_org, report_id, profile_num);
-            var RecievedListSum = MakeRecListSum(dateTimePicker1.Value.Year, dateTimePicker1.Value.Month);
-            var OldRecievedListSum = MakeRecListSum(dateTimePicker1.Value.Year - 1, dateTimePicker1.Value.Month);
+            var RecievedListSum = MakeRecListSumPR(dateTimePicker1.Value.Year, dateTimePicker1.Value.Month);
+            var OldRecievedListSum = MakeRecListSumPR(dateTimePicker1.Value.Year - 1, dateTimePicker1.Value.Month);
             List<WholeTable> RWholeList = new List<WholeTable>();
             List<WholeTable> RWholeListSum = new List<WholeTable>();
             List<WholeTable> RWholeListSumOld = new List<WholeTable>();

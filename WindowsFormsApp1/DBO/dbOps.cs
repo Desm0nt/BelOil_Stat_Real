@@ -1860,8 +1860,45 @@ namespace WindowsFormsApp1.DBO
                 KryptonMessageBox.Show("Ошибка UpdateOrgPerson: " + Ex.Message);
             }
         }
-
-
+        public static void AddNewObject(int id_org, string name, string full_name)
+        {
+            try
+            {
+                SqlConnection myConnection2 = new SqlConnection(cnStr);
+                myConnection2.Open();
+                string query2 = "INSERT INTO NewObjects (id_org, name, full_name) VALUES (@id_org, @name, @full_name)"; //пишем данные параметрическим запросом
+                SqlCommand command2 = new SqlCommand(query2, myConnection2);
+                command2.Parameters.AddWithValue("@id_org", id_org);
+                command2.Parameters.AddWithValue("@name", name);
+                command2.Parameters.AddWithValue("@full_name", full_name);
+                command2.ExecuteNonQuery();
+                myConnection2.Close();
+            }
+            catch (Exception Ex)
+            {
+                MessageBox.Show("Ошибка AddNewObject: " + Ex.Message);
+            }
+        }
+        public static void UpdateObject(int id_obj, int id_org, string name, string full_name)
+        {
+            try
+            {
+                SqlConnection myConnection2 = new SqlConnection(cnStr);
+                myConnection2.Open();
+                string query2 = "UPDATE NewObjects SET id_org = @id_org, name = @name, full_name = @full_name WHERE id = @id_obj"; //пишем данные параметрическим запросом
+                SqlCommand command2 = new SqlCommand(query2, myConnection2);
+                command2.Parameters.AddWithValue("@id_org", id_org);
+                command2.Parameters.AddWithValue("@name", name);
+                command2.Parameters.AddWithValue("@full_name", full_name);
+                command2.Parameters.AddWithValue("@id_obj", id_obj);
+                command2.ExecuteNonQuery();
+                myConnection2.Close();
+            }
+            catch (Exception Ex)
+            {
+                MessageBox.Show("Ошибка UpdateObject: " + Ex.Message);
+            }
+        }
 
 
 
@@ -2885,7 +2922,19 @@ namespace WindowsFormsApp1.DBO
                     while (dr.Read())
                     {
                         OneNorm oneNomr = GetOneNormDescr(Int32.Parse(dr["id_norm"].ToString()), Int32.Parse(dr["id_prod"].ToString()));
-                        Norm4List.Add(new Norm4Table { Id_org = Int32.Parse(dr["id_org"].ToString()), Id_prod = Int32.Parse(dr["id_prod"].ToString()), Id_local = long.Parse(dr["id_local"].ToString()), Norm_name = oneNomr.name, Norm_code = oneNomr.Code, Norm_type = oneNomr.type, Fuel_name = !String.IsNullOrWhiteSpace(dr["fuelname"].ToString()) ? dr["fuelname"].ToString() : " ", Volume = float.Parse(dr["volume"].ToString()), Norm = float.Parse(dr["norm"].ToString()), Value = float.Parse(dr["value"].ToString()) });
+                        Norm4List.Add(new Norm4Table
+                        {
+                            Id_org = Int32.Parse(dr["id_org"].ToString()),
+                            Id_prod = Int32.Parse(dr["id_prod"].ToString()),
+                            Id_local = long.Parse(dr["id_local"].ToString()),
+                            Norm_name = oneNomr.name,
+                            Norm_code = oneNomr.Code,
+                            Norm_type = oneNomr.type,
+                            Fuel_name = !String.IsNullOrWhiteSpace(dr["fuelname"].ToString()) ? dr["fuelname"].ToString() : " ",
+                            Volume = float.Parse(dr["volume"].ToString()),
+                            Norm = float.Parse(dr["norm"].ToString()),
+                            Value = float.Parse(dr["value"].ToString())
+                        });
                     }
                 }
                 myConnection.Close();

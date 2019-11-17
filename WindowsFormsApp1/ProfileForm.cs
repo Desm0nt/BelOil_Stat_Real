@@ -56,6 +56,7 @@ namespace WindowsFormsApp1
                 TreeNode child = new TreeNode();
                 child.Text = objectList[i].Name;
                 child.Tag = objectList[i].Id;
+                child.ToolTipText = objectList[i].FullName;
                 child.ImageIndex = 0;
                 treeView1.Nodes.Add(child);
             }
@@ -481,6 +482,7 @@ namespace WindowsFormsApp1
         private void myForm_FormClosed(object sender, EventArgs e)
         {
             LoadCompData();
+            LoadObjects();
         }
 
         private void btn_Click(object sender, EventArgs e)
@@ -572,6 +574,32 @@ namespace WindowsFormsApp1
             ComponentFactory.Krypton.Navigator.KryptonNavigator nav = (ComponentFactory.Krypton.Navigator.KryptonNavigator)sender;
             kryptonHeaderGroup2.ValuesPrimary.Heading = nav.SelectedPage.Text;
             kryptonHeaderGroup2.ValuesPrimary.Image = nav.SelectedPage.ImageSmall;
+        }
+
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+            var myForm = new AddOrgObjectForm();
+            myForm.FormClosed += new FormClosedEventHandler(myForm_FormClosed);
+            myForm.ShowDialog();
+        }
+
+        private void toolStripButton6_Click(object sender, EventArgs e)
+        {
+            if (treeView1.SelectedNode == null)
+                Console.WriteLine("No tree node selected.");
+            else
+            {
+                var myForm = new AddOrgObjectForm(Int32.Parse(treeView1.SelectedNode.Tag.ToString()), treeView1.SelectedNode.Text.ToString(), treeView1.SelectedNode.ToolTipText.ToString());
+                myForm.FormClosed += new FormClosedEventHandler(myForm_FormClosed);
+                myForm.ShowDialog();
+            }
+        }
+
+        private void treeView1_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            var myForm = new AddOrgObjectForm(Int32.Parse(e.Node.Tag.ToString()), e.Node.Text.ToString(), e.Node.ToolTipText.ToString());
+            myForm.FormClosed += new FormClosedEventHandler(myForm_FormClosed);
+            myForm.ShowDialog();
         }
 
         private void kryptonOutlookGrid1_Resize(object sender, EventArgs e)
