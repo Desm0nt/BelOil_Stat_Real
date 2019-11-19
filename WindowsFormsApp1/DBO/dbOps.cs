@@ -1899,6 +1899,60 @@ namespace WindowsFormsApp1.DBO
                 MessageBox.Show("Ошибка UpdateObject: " + Ex.Message);
             }
         }
+        public static void AddNewFactor(int month, int year, float gkal, float kvch)
+        {
+            SqlConnection myConnection = new SqlConnection(cnStr);
+            myConnection.Open();
+
+            string query = "SELECT COUNT(*) FROM NewFactors where month = @month AND year = @year";
+            SqlCommand command = new SqlCommand(query, myConnection);
+            command.Parameters.AddWithValue("@month", month);
+            command.Parameters.AddWithValue("@year", year);
+
+            var result = Convert.ToInt32(command.ExecuteScalar());
+            myConnection.Close();
+            if (result < 1)
+            {
+                try
+                {
+                    SqlConnection myConnection2 = new SqlConnection(cnStr);
+                    myConnection2.Open();
+                    string query2 = "INSERT INTO NewFactors (month, year, gkal, kvch) VALUES (@month, @year, @gkal, @kvch)"; //пишем данные параметрическим запросом
+                    SqlCommand command2 = new SqlCommand(query2, myConnection2);
+                    command2.Parameters.AddWithValue("@month", month);
+                    command2.Parameters.AddWithValue("@year", year);
+                    command2.Parameters.AddWithValue("@gkal", gkal);
+                    command2.Parameters.AddWithValue("@kvch", kvch);
+                    command2.ExecuteNonQuery();
+                    myConnection2.Close();
+                }
+                catch (Exception Ex)
+                {
+                    MessageBox.Show("Ошибка AddNewFactor: " + Ex.Message);
+                }
+            }
+            else
+                MessageBox.Show("Ошибка: Коэффициенты за данный период уже добавлены!");
+        }
+        public static void UpdateFactor(float gkal, float kvch, int id)
+        {
+            try
+            {
+                SqlConnection myConnection2 = new SqlConnection(cnStr);
+                myConnection2.Open();
+                string query2 = "UPDATE NewFactors SET gkal = @gkal, kvch = @kvch WHERE id = @id"; //пишем данные параметрическим запросом
+                SqlCommand command2 = new SqlCommand(query2, myConnection2);
+                command2.Parameters.AddWithValue("@gkal", gkal);
+                command2.Parameters.AddWithValue("@kvch", kvch);
+                command2.Parameters.AddWithValue("@id", id);
+                command2.ExecuteNonQuery();
+                myConnection2.Close();
+            }
+            catch (Exception Ex)
+            {
+                MessageBox.Show("Ошибка UpdateFactor: " + Ex.Message);
+            }
+        }
 
 
 

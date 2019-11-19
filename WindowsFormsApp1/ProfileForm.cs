@@ -602,6 +602,23 @@ namespace WindowsFormsApp1
             myForm.ShowDialog();
         }
 
+        private void AddFactorButton_Click(object sender, EventArgs e)
+        {
+            dbOps.AddNewFactor(DateTime.Now.Month, DateTime.Now.Year, 0, 0);
+            LoadCoeff();
+        }
+
+        private void kryptonOutlookGrid8_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            DataGridView dataGridView = (DataGridView)sender;
+            var row = dataGridView.Rows[e.RowIndex];
+            int id = (int)row.Cells[0].Value;
+            float gkal = float.Parse(row.Cells[2].Value.ToString());
+            float kvch = float.Parse(row.Cells[3].Value.ToString());
+            dbOps.UpdateFactor(gkal, kvch, id);
+            LoadCoeff();
+        }
+
         private void kryptonOutlookGrid1_Resize(object sender, EventArgs e)
         {
             KryptonOutlookGrid.Classes.KryptonOutlookGrid grid = (KryptonOutlookGrid.Classes.KryptonOutlookGrid)sender;
