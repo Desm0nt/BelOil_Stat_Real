@@ -1940,7 +1940,7 @@ namespace WindowsFormsApp1.DBO
             {
                 SqlConnection myConnection2 = new SqlConnection(cnStr);
                 myConnection2.Open();
-                string query2 = "UPDATE NewFactors SET gkal = @gkal, kvch = @kvch WHERE id = @id"; //пишем данные параметрическим запросом
+                string query2 = "UPDATE NewFactors SET gkal = ROUND(@gkal, 3), kvch = ROUND(@kvch, 3)  WHERE id = @id"; //пишем данные параметрическим запросом
                 SqlCommand command2 = new SqlCommand(query2, myConnection2);
                 command2.Parameters.AddWithValue("@gkal", gkal);
                 command2.Parameters.AddWithValue("@kvch", kvch);
@@ -1951,6 +1951,24 @@ namespace WindowsFormsApp1.DBO
             catch (Exception Ex)
             {
                 MessageBox.Show("Ошибка UpdateFactor: " + Ex.Message);
+            }
+        }
+        public static void DeleteFactor(int id)
+        {
+            try
+            {
+                SqlConnection myConnection = new SqlConnection(cnStr);
+                myConnection.Open();
+
+                string query = "DELETE FROM [NewFactors] where id = @id";
+                SqlCommand command = new SqlCommand(query, myConnection);
+                command.Parameters.AddWithValue("@id", id);
+                command.ExecuteNonQuery();
+                myConnection.Close();
+            }
+            catch (Exception Ex)
+            {
+                KryptonMessageBox.Show("Ошибка DeleteFactor: " + Ex.Message);
             }
         }
 

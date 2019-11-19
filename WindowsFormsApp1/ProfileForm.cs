@@ -27,6 +27,7 @@ namespace WindowsFormsApp1
             this.rukTextBox.Size = new Size(224, 18);
             this.otvTextBox.AutoSize = false;
             this.otvTextBox.Size = new Size(224, 18);
+            this.Text = "Профиль организации " + dbOps.GetCompanyName(CurrentData.UserData.Id_org);
             cur_org_id = CurrentData.UserData.Id_org;
             cyear = curyear;
             cmonth = curmonth;
@@ -252,50 +253,54 @@ namespace WindowsFormsApp1
 
         private void LoadCoeff()
         {
-            var factorData = dbOps.GetProfFactorList();
-            kryptonOutlookGrid8.ClearInternalRows();
-            kryptonOutlookGrid8.ClearGroups();
-            kryptonOutlookGrid8.RowHeadersVisible = false;
-
-
-            kryptonOutlookGrid8.GroupBox = kryptonOutlookGridGroupBox3;
-            kryptonOutlookGrid8.RegisterGroupBoxEvents();
-            DataGridViewColumn[] columnsToAdd = new DataGridViewColumn[4];
-            columnsToAdd[0] = kryptonOutlookGrid8.Columns[0];
-            columnsToAdd[1] = kryptonOutlookGrid8.Columns[1];
-            columnsToAdd[2] = kryptonOutlookGrid8.Columns[2];
-            columnsToAdd[3] = kryptonOutlookGrid8.Columns[3];
-
-            //kryptonOutlookGrid7.Columns.AddRange(columnsToAdd);
-
-            kryptonOutlookGrid8.AddInternalColumn(kryptonOutlookGrid8.Columns[0], new OutlookGridDefaultGroup(null), SortOrder.Ascending, -1, 1);
-            kryptonOutlookGrid8.AddInternalColumn(kryptonOutlookGrid8.Columns[1], new OutlookGridDefaultGroup(null), SortOrder.None, -1, -1);
-            kryptonOutlookGrid8.AddInternalColumn(kryptonOutlookGrid8.Columns[2], new OutlookGridDefaultGroup(null), SortOrder.None, -1, -1);
-            kryptonOutlookGrid8.AddInternalColumn(kryptonOutlookGrid8.Columns[3], new OutlookGridDefaultGroup(null), SortOrder.None, -1, -1);
-
-            kryptonOutlookGrid8.ShowLines = true;
-
-            //Setup Rows
-            OutlookGridRow row = new OutlookGridRow();
-            List<OutlookGridRow> l = new List<OutlookGridRow>();
-            kryptonOutlookGrid8.SuspendLayout();
-            //kryptonOutlookGrid9.ClearInternalRows();
-            kryptonOutlookGrid8.FillMode = FillMode.GROUPSONLY;
-
-            foreach (var factor in factorData)
+            try
             {
-                string monthf = factor.month.ToString();
-                if (monthf.Length < 2)
-                    monthf = "0" + monthf;                   
-                row = new OutlookGridRow();
-                row.CreateCells(kryptonOutlookGrid8, new object[] { factor.id, new TextAndImage("01." + monthf + "." + factor.year, Properties.Resources.fdate), factor.gkal, factor.kVt  });
-                l.Add(row);
-            }
+                var factorData = dbOps.GetProfFactorList();
+                kryptonOutlookGrid8.ClearInternalRows();
+                kryptonOutlookGrid8.ClearGroups();
+                kryptonOutlookGrid8.RowHeadersVisible = false;
 
-            kryptonOutlookGrid8.ResumeLayout();
-            kryptonOutlookGrid8.AssignRows(l);
-            kryptonOutlookGrid8.ForceRefreshGroupBox();
-            kryptonOutlookGrid8.Fill();
+
+                kryptonOutlookGrid8.GroupBox = kryptonOutlookGridGroupBox3;
+                kryptonOutlookGrid8.RegisterGroupBoxEvents();
+                DataGridViewColumn[] columnsToAdd = new DataGridViewColumn[4];
+                columnsToAdd[0] = kryptonOutlookGrid8.Columns[0];
+                columnsToAdd[1] = kryptonOutlookGrid8.Columns[1];
+                columnsToAdd[2] = kryptonOutlookGrid8.Columns[2];
+                columnsToAdd[3] = kryptonOutlookGrid8.Columns[3];
+
+                //kryptonOutlookGrid7.Columns.AddRange(columnsToAdd);
+
+                kryptonOutlookGrid8.AddInternalColumn(kryptonOutlookGrid8.Columns[0], new OutlookGridDefaultGroup(null), SortOrder.Ascending, -1, 1);
+                kryptonOutlookGrid8.AddInternalColumn(kryptonOutlookGrid8.Columns[1], new OutlookGridDefaultGroup(null), SortOrder.None, -1, -1);
+                kryptonOutlookGrid8.AddInternalColumn(kryptonOutlookGrid8.Columns[2], new OutlookGridDefaultGroup(null), SortOrder.None, -1, -1);
+                kryptonOutlookGrid8.AddInternalColumn(kryptonOutlookGrid8.Columns[3], new OutlookGridDefaultGroup(null), SortOrder.None, -1, -1);
+
+                kryptonOutlookGrid8.ShowLines = true;
+
+                //Setup Rows
+                OutlookGridRow row = new OutlookGridRow();
+                List<OutlookGridRow> l = new List<OutlookGridRow>();
+                kryptonOutlookGrid8.SuspendLayout();
+                //kryptonOutlookGrid9.ClearInternalRows();
+                kryptonOutlookGrid8.FillMode = FillMode.GROUPSONLY;
+
+                foreach (var factor in factorData)
+                {
+                    string monthf = factor.month.ToString();
+                    if (monthf.Length < 2)
+                        monthf = "0" + monthf;
+                    row = new OutlookGridRow();
+                    row.CreateCells(kryptonOutlookGrid8, new object[] { factor.id, new TextAndImage("01." + monthf + "." + factor.year, Properties.Resources.fdate), factor.gkal, factor.kVt });
+                    l.Add(row);
+                }
+
+                kryptonOutlookGrid8.ResumeLayout();
+                kryptonOutlookGrid8.AssignRows(l);
+                kryptonOutlookGrid8.ForceRefreshGroupBox();
+                kryptonOutlookGrid8.Fill();
+            }
+            catch (Exception ex) { }
         }
 
         private void LoadGen()
@@ -576,6 +581,33 @@ namespace WindowsFormsApp1
             kryptonHeaderGroup2.ValuesPrimary.Image = nav.SelectedPage.ImageSmall;
         }
 
+
+        private void kryptonOutlookGrid1_Resize(object sender, EventArgs e)
+        {
+            KryptonOutlookGrid.Classes.KryptonOutlookGrid grid = (KryptonOutlookGrid.Classes.KryptonOutlookGrid)sender;
+            int PreferredTotalWidth = 0;
+            //Calculate the total preferred width
+            foreach (DataGridViewColumn c in grid.Columns)
+            {
+                PreferredTotalWidth += Math.Min(c.GetPreferredWidth(DataGridViewAutoSizeColumnMode.DisplayedCells, true), 250);
+            }
+
+            if (grid.Width > PreferredTotalWidth)
+            {
+                grid.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                grid.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.DisplayedCells);
+            }
+            else
+            {
+                grid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
+                foreach (DataGridViewColumn c in grid.Columns)
+                {
+                    c.Width = Math.Min(c.GetPreferredWidth(DataGridViewAutoSizeColumnMode.DisplayedCells, true), 250);
+                }
+            }
+        }
+        #endregion
+
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
             var myForm = new AddOrgObjectForm();
@@ -619,30 +651,22 @@ namespace WindowsFormsApp1
             LoadCoeff();
         }
 
-        private void kryptonOutlookGrid1_Resize(object sender, EventArgs e)
+        private void toolStripButton11_Click(object sender, EventArgs e)
         {
-            KryptonOutlookGrid.Classes.KryptonOutlookGrid grid = (KryptonOutlookGrid.Classes.KryptonOutlookGrid)sender;
-            int PreferredTotalWidth = 0;
-            //Calculate the total preferred width
-            foreach (DataGridViewColumn c in grid.Columns)
+            var ind = kryptonOutlookGrid8.CurrentCell.RowIndex;
+            if (ind >= 0)
             {
-                PreferredTotalWidth += Math.Min(c.GetPreferredWidth(DataGridViewAutoSizeColumnMode.DisplayedCells, true), 250);
+                if (kryptonOutlookGrid8.Rows[ind].Cells[1].Value != null)
+                    dbOps.DeleteFactor(Int32.Parse(kryptonOutlookGrid8.Rows[ind].Cells[0].Value.ToString()));
             }
-
-            if (grid.Width > PreferredTotalWidth)
-            {
-                grid.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-                grid.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.DisplayedCells);
-            }
-            else
-            {
-                grid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
-                foreach (DataGridViewColumn c in grid.Columns)
-                {
-                    c.Width = Math.Min(c.GetPreferredWidth(DataGridViewAutoSizeColumnMode.DisplayedCells, true), 250);
-                }
-            }
+            LoadCoeff();
         }
-        #endregion
+
+        private void SourceAddButton_Click(object sender, EventArgs e)
+        {
+            var myForm = new AddSourceMainForm();
+           // myForm.FormClosed += new FormClosedEventHandler(myForm_FormClosed);
+            myForm.ShowDialog();
+        }
     }
 }
