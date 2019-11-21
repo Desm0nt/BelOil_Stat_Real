@@ -141,6 +141,12 @@
     <Compile Include="AddOrgObjectForm.Designer.cs">
       <DependentUpon>AddOrgObjectForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="AddSourceFuelForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddSourceFuelForm.Designer.cs">
+      <DependentUpon>AddSourceFuelForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="AddSourceObjectForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -152,12 +158,6 @@
     </Compile>
     <Compile Include="AddSourceMainForm.Designer.cs">
       <DependentUpon>AddSourceMainForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="AddSourceFuelsForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AddSourceFuelsForm.Designer.cs">
-      <DependentUpon>AddSourceFuelsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="AddUserForm.cs">
       <SubType>Form</SubType>
@@ -293,6 +293,9 @@
     </Compile>
     <EmbeddedResource Include="AddOrgObjectForm.resx">
       <DependentUpon>AddOrgObjectForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddSourceFuelForm.resx">
+      <DependentUpon>AddSourceFuelForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AddSourceObjectForm.resx">
       <DependentUpon>AddSourceObjectForm.cs</DependentUpon>

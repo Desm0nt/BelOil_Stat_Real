@@ -17,6 +17,8 @@ namespace WindowsFormsApp1
 {
     public partial class AddSourceObjectForm : KryptonForm
     {
+        public int obj_id;
+        public string obj_name;
         public AddSourceObjectForm()
         {
             InitializeComponent();
@@ -70,7 +72,13 @@ namespace WindowsFormsApp1
 
         private void kryptonButton1_Click(object sender, EventArgs e)
         {
-
+            if (kryptonOutlookGrid1.SelectedRows.Count > 0)
+            {
+                obj_id = Int32.Parse(kryptonOutlookGrid1.SelectedRows[0].Cells[0].Value.ToString());
+                obj_name = kryptonOutlookGrid1.SelectedRows[0].Cells[1].Value.ToString();
+                this.DialogResult = DialogResult.OK;
+            }
+            this.Close();
         }
     }
 }

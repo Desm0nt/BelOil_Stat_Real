@@ -145,7 +145,7 @@
             this.MinimumSize = new System.Drawing.Size(544, 251);
             this.Name = "AddOrgObjectForm";
             this.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Office2007Blue;
-            this.Text = "AddOrgObjectForm";
+            this.Text = "Добавление объекта";
             this.ResumeLayout(false);
             this.PerformLayout();
 

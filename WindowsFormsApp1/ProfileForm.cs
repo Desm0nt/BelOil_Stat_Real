@@ -667,6 +667,10 @@ namespace WindowsFormsApp1
             var myForm = new AddSourceMainForm();
            // myForm.FormClosed += new FormClosedEventHandler(myForm_FormClosed);
             myForm.ShowDialog();
+            if (myForm.DialogResult == DialogResult.OK)
+            {
+                //ds
+            }
         }
     }
 }

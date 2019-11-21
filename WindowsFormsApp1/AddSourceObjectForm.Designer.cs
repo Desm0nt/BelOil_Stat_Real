@@ -32,12 +32,12 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.kryptonOutlookGrid1 = new KryptonOutlookGrid.Classes.KryptonOutlookGrid();
-            this.kryptonOutlookGridGroupBox1 = new KryptonOutlookGrid.Controls.KryptonOutlookGridGroupBox();
-            this.kryptonButton2 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.kryptonButton1 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.name = new KryptonOutlookGrid.CustomColumns.KryptonDataGridViewTextAndImageColumn();
             this.fname = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.kryptonOutlookGridGroupBox1 = new KryptonOutlookGrid.Controls.KryptonOutlookGridGroupBox();
+            this.kryptonButton2 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.kryptonButton1 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonOutlookGrid1)).BeginInit();
             this.SuspendLayout();
@@ -82,13 +82,38 @@
             this.kryptonOutlookGrid1.GroupCollection = outlookGridGroupCollection1;
             this.kryptonOutlookGrid1.HideOuterBorders = true;
             this.kryptonOutlookGrid1.Location = new System.Drawing.Point(0, 0);
+            this.kryptonOutlookGrid1.MultiSelect = false;
             this.kryptonOutlookGrid1.Name = "kryptonOutlookGrid1";
             this.kryptonOutlookGrid1.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Office2007Blue;
             this.kryptonOutlookGrid1.PreviousSelectedGroupRow = -1;
             this.kryptonOutlookGrid1.RowHeadersWidth = 10;
+            this.kryptonOutlookGrid1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.kryptonOutlookGrid1.ShowLines = false;
             this.kryptonOutlookGrid1.Size = new System.Drawing.Size(453, 388);
             this.kryptonOutlookGrid1.TabIndex = 2;
+            // 
+            // id
+            // 
+            this.id.HeaderText = "id";
+            this.id.Name = "id";
+            this.id.ReadOnly = true;
+            this.id.Visible = false;
+            // 
+            // name
+            // 
+            this.name.HeaderText = "Наименование";
+            this.name.Name = "name";
+            this.name.ReadOnly = true;
+            this.name.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.name.Width = 442;
+            // 
+            // fname
+            // 
+            this.fname.HeaderText = "Полное наименование";
+            this.fname.Name = "fname";
+            this.fname.ReadOnly = true;
+            this.fname.Visible = false;
+            this.fname.Width = 220;
             // 
             // kryptonOutlookGridGroupBox1
             // 
@@ -122,29 +147,6 @@
             this.kryptonButton1.Values.Text = "&Выбрать";
             this.kryptonButton1.Click += new System.EventHandler(this.kryptonButton1_Click);
             // 
-            // id
-            // 
-            this.id.HeaderText = "id";
-            this.id.Name = "id";
-            this.id.ReadOnly = true;
-            this.id.Visible = false;
-            // 
-            // name
-            // 
-            this.name.HeaderText = "Наименование";
-            this.name.Name = "name";
-            this.name.ReadOnly = true;
-            this.name.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.name.Width = 442;
-            // 
-            // fname
-            // 
-            this.fname.HeaderText = "Полное наименование";
-            this.fname.Name = "fname";
-            this.fname.ReadOnly = true;
-            this.fname.Visible = false;
-            this.fname.Width = 220;
-            // 
             // AddSourceObjectForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -158,7 +160,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "AddSourceObjectForm";
             this.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Office2007Blue;
-            this.Text = "AddSourceFuelForm";
+            this.Text = "Выбор источника";
             this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonOutlookGrid1)).EndInit();
             this.ResumeLayout(false);
