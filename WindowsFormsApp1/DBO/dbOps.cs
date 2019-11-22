@@ -1551,6 +1551,7 @@ namespace WindowsFormsApp1.DBO
                         GenList.Add(new ProfGenTable
                         {
                             Id = Int32.Parse(dr["id"].ToString()),
+                            Obj_id = Int32.Parse(dr["id_object"].ToString()),
                             Obj_name = GetObjName(Int32.Parse(dr["id_object"].ToString())),
                             Fuel_id = Int32.Parse(dr["id_fuel"].ToString()),
                             Fuel_name = GetFuelNameById(Int32.Parse(dr["id_fuel"].ToString()), DateTime.Now.Year, DateTime.Now.Month),

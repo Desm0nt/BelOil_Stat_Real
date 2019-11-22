@@ -314,17 +314,21 @@ namespace WindowsFormsApp1
 
             kryptonOutlookGrid10.GroupBox = kryptonOutlookGridGroupBox4;
             kryptonOutlookGrid10.RegisterGroupBoxEvents();
-            DataGridViewColumn[] columnsToAdd = new DataGridViewColumn[4];
+            DataGridViewColumn[] columnsToAdd = new DataGridViewColumn[6];
             columnsToAdd[0] = kryptonOutlookGrid10.Columns[0];
             columnsToAdd[1] = kryptonOutlookGrid10.Columns[1];
             columnsToAdd[2] = kryptonOutlookGrid10.Columns[2];
             columnsToAdd[3] = kryptonOutlookGrid10.Columns[3];
+            columnsToAdd[3] = kryptonOutlookGrid10.Columns[4];
+            columnsToAdd[3] = kryptonOutlookGrid10.Columns[5];
             //kryptonOutlookGrid10.Columns.AddRange(columnsToAdd);
 
             kryptonOutlookGrid10.AddInternalColumn(kryptonOutlookGrid10.Columns[0], new OutlookGridDefaultGroup(null), SortOrder.Ascending, -1, 1);
             kryptonOutlookGrid10.AddInternalColumn(kryptonOutlookGrid10.Columns[1], new OutlookGridDefaultGroup(null), SortOrder.None, -1, -1);
             kryptonOutlookGrid10.AddInternalColumn(kryptonOutlookGrid10.Columns[2], new OutlookGridDefaultGroup(null), SortOrder.None, -1, -1);
-            kryptonOutlookGrid10.AddInternalColumn(kryptonOutlookGrid10.Columns[3], new OutlookGridTypeGroup(null), SortOrder.Ascending, 1, -1);
+            kryptonOutlookGrid10.AddInternalColumn(kryptonOutlookGrid10.Columns[3], new OutlookGridDefaultGroup(null), SortOrder.None, -1, -1);
+            kryptonOutlookGrid10.AddInternalColumn(kryptonOutlookGrid10.Columns[4], new OutlookGridDefaultGroup(null), SortOrder.None, -1, -1);
+            kryptonOutlookGrid10.AddInternalColumn(kryptonOutlookGrid10.Columns[5], new OutlookGridTypeGroup(null), SortOrder.Ascending, 1, -1);
 
             kryptonOutlookGrid10.ShowLines = true;
 
@@ -340,7 +344,7 @@ namespace WindowsFormsApp1
             {
                 row = new OutlookGridRow();
                 group = gen.Fuel_id.ToString();
-                row.CreateCells(kryptonOutlookGrid10, new object[] { gen.Id, new TextAndImage(gen.Obj_name, Properties.Resources.box), new TextAndImage(gen.Fuel_name, GetFuelFlag(Int32.Parse(group[0].ToString()))), new TextAndImage(gen.Type.ToString(), GetFlag(gen.Type)) });
+                row.CreateCells(kryptonOutlookGrid10, new object[] { gen.Id, gen.Obj_id, gen.Fuel_id, new TextAndImage(gen.Obj_name, Properties.Resources.box), new TextAndImage(gen.Fuel_name, GetFuelFlag(Int32.Parse(group[0].ToString()))), new TextAndImage(gen.Type.ToString(), GetFlag(gen.Type)) });
                 l.Add(row);
             }
 
@@ -666,10 +670,30 @@ namespace WindowsFormsApp1
         {
             var myForm = new AddSourceMainForm();
            // myForm.FormClosed += new FormClosedEventHandler(myForm_FormClosed);
-            myForm.ShowDialog();
+            myForm.ShowDialog(); 
             if (myForm.DialogResult == DialogResult.OK)
             {
-                //ds
+                OutlookGridRow row = new OutlookGridRow();
+                List<OutlookGridRow> l = new List<OutlookGridRow>();
+                foreach (OutlookGridRow a in kryptonOutlookGrid10.Rows)
+                {
+                    if (a.Cells[1].Value != null)
+                        l.Add(a);
+                }
+                kryptonOutlookGrid10.SuspendLayout();
+                kryptonOutlookGrid10.ClearInternalRows();
+                kryptonOutlookGrid10.FillMode = FillMode.GROUPSONLY;
+
+                string group = "";
+                row = new OutlookGridRow();
+                group = myForm.fuel_id.ToString();
+                row.CreateCells(kryptonOutlookGrid10, new object[] { 0, myForm.obj_id, myForm.fuel_id, new TextAndImage(myForm.obj_name, Properties.Resources.box), new TextAndImage(myForm.fuel_name, GetFuelFlag(Int32.Parse(group[0].ToString()))), new TextAndImage(myForm.type.ToString(), GetFlag(myForm.type)) });
+                l.Add(row);
+
+                kryptonOutlookGrid10.ResumeLayout();
+                kryptonOutlookGrid10.AssignRows(l);
+                kryptonOutlookGrid10.ForceRefreshGroupBox();
+                kryptonOutlookGrid10.Fill();
             }
         }
     }

@@ -46,6 +46,7 @@
             this.FuelTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.FuelTextBox.Location = new System.Drawing.Point(19, 68);
             this.FuelTextBox.Name = "FuelTextBox";
+            this.FuelTextBox.ReadOnly = true;
             this.FuelTextBox.Size = new System.Drawing.Size(224, 13);
             this.FuelTextBox.TabIndex = 63;
             // 
@@ -54,6 +55,7 @@
             this.SourceTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.SourceTextBox.Location = new System.Drawing.Point(19, 30);
             this.SourceTextBox.Name = "SourceTextBox";
+            this.SourceTextBox.ReadOnly = true;
             this.SourceTextBox.Size = new System.Drawing.Size(224, 13);
             this.SourceTextBox.TabIndex = 62;
             // 

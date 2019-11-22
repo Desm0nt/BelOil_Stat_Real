@@ -15,7 +15,8 @@ namespace WindowsFormsApp1
 {
     public partial class AddSourceMainForm : KryptonForm
     {
-        int obj_id, fuel_id;
+        public int obj_id, fuel_id, type;
+        public string obj_name, fuel_name;
         public AddSourceMainForm()
         {
             InitializeComponent();
@@ -40,6 +41,7 @@ namespace WindowsFormsApp1
             if (myForm.DialogResult == DialogResult.OK)
             {
                 obj_id = myForm.obj_id;
+                obj_name = myForm.obj_name;
                 SourceTextBox.Text = myForm.obj_name;
             }
         }
@@ -52,6 +54,7 @@ namespace WindowsFormsApp1
             if (myForm.DialogResult == DialogResult.OK)
             {
                 fuel_id = myForm.fuel_id;
+                fuel_name = myForm.fuel_name;
                 FuelTextBox.Text = myForm.fuel_name;
             }
 
@@ -100,7 +103,16 @@ namespace WindowsFormsApp1
 
         private void kryptonButton1_Click(object sender, EventArgs e)
         {
-
+            if (!String.IsNullOrWhiteSpace(SourceTextBox.Text) && !String.IsNullOrWhiteSpace(FuelTextBox.Text))
+            {
+                type = Int32.Parse(typeComboBox.SelectedValue.ToString());
+                this.DialogResult = DialogResult.OK;
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Не все поля заполнены");
+            }
         }
     }
 }

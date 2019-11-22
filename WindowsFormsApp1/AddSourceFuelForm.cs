@@ -84,7 +84,7 @@ namespace WindowsFormsApp1
         {
             if (kryptonOutlookGrid7.SelectedRows.Count > 0)
             {
-                fuel_id = Int32.Parse(kryptonOutlookGrid7.SelectedRows[0].Cells[0].Value.ToString());
+                fuel_id = Int32.Parse(kryptonOutlookGrid7.SelectedRows[0].Cells[1].Value.ToString());
                 fuel_name = kryptonOutlookGrid7.SelectedRows[0].Cells[2].Value.ToString();
                 this.DialogResult = DialogResult.OK;
             }

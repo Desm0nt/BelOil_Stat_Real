@@ -9,6 +9,7 @@ namespace WindowsFormsApp1.DataTables
     public class ProfGenTable
     {
         public int Id { get; set; }
+        public int Obj_id { get; set; }
         public string Obj_name { get; set; }
         public int Fuel_id { get; set; }
         public string Fuel_name { get; set; }
