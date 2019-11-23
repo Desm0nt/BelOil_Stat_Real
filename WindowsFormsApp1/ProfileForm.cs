@@ -666,6 +666,36 @@ namespace WindowsFormsApp1
             LoadCoeff();
         }
 
+        private void AddFuelButton_Click(object sender, EventArgs e)
+        {
+            var myForm = new AddOrgFuelForm();
+            myForm.ShowDialog();
+            if (myForm.DialogResult == DialogResult.OK)
+            {
+                OutlookGridRow row = new OutlookGridRow();
+                List<OutlookGridRow> l = new List<OutlookGridRow>();
+                foreach (OutlookGridRow a in kryptonOutlookGrid7.Rows)
+                {
+                    if (a.Cells[1].Value != null)
+                        l.Add(a);
+                }
+                kryptonOutlookGrid7.SuspendLayout();
+                kryptonOutlookGrid7.ClearInternalRows();
+                kryptonOutlookGrid7.FillMode = FillMode.GROUPSONLY;
+
+                string group = "";
+                row = new OutlookGridRow();
+                group = myForm.FuelRow.fuel_id.ToString();
+                row.CreateCells(kryptonOutlookGrid7, new object[] { myForm.FuelRow.id, myForm.FuelRow.fuel_id, new TextAndImage(myForm.FuelRow.name.ToString(), GetFuelFlag(Int32.Parse(group[0].ToString()))), myForm.FuelRow.unit, myForm.FuelRow.Qn, myForm.FuelRow.B_y, false });
+                l.Add(row);
+
+                kryptonOutlookGrid7.ResumeLayout();
+                kryptonOutlookGrid7.AssignRows(l);
+                kryptonOutlookGrid7.ForceRefreshGroupBox();
+                kryptonOutlookGrid7.Fill();
+            }
+        }
+
         private void SourceAddButton_Click(object sender, EventArgs e)
         {
             var myForm = new AddSourceMainForm();

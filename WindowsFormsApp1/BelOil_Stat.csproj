@@ -213,6 +213,12 @@
     <Compile Include="FuelAddForm.Designer.cs">
       <DependentUpon>FuelAddForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="AddOrgFuelForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddOrgFuelForm.Designer.cs">
+      <DependentUpon>AddOrgFuelForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -308,6 +314,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FuelAddForm.resx">
       <DependentUpon>FuelAddForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddOrgFuelForm.resx">
+      <DependentUpon>AddOrgFuelForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
