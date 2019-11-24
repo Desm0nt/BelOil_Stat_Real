@@ -141,6 +141,12 @@
     <Compile Include="AddOrgObjectForm.Designer.cs">
       <DependentUpon>AddOrgObjectForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="AddOrgSendRecieveForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddOrgSendRecieveForm.Designer.cs">
+      <DependentUpon>AddOrgSendRecieveForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="AddSourceFuelForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -260,6 +266,12 @@
     <Compile Include="FuelListForm.Designer.cs">
       <DependentUpon>FuelListForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="AddOrgNormForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddOrgNormForm.Designer.cs">
+      <DependentUpon>AddOrgNormForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ProfileForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -300,6 +312,9 @@
     <EmbeddedResource Include="AddOrgObjectForm.resx">
       <DependentUpon>AddOrgObjectForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="AddOrgSendRecieveForm.resx">
+      <DependentUpon>AddOrgSendRecieveForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AddSourceFuelForm.resx">
       <DependentUpon>AddSourceFuelForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -336,6 +351,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FuelListForm.resx">
       <DependentUpon>FuelListForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddOrgNormForm.resx">
+      <DependentUpon>AddOrgNormForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ProfileForm.resx">
       <DependentUpon>ProfileForm.cs</DependentUpon>

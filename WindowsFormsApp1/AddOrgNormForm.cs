@@ -14,30 +14,43 @@ using ComponentFactory.Krypton.Docking;
 using WindowsFormsApp1.DBO;
 using KryptonOutlookGrid.Classes;
 using KryptonOutlookGrid.CustomColumns;
+using WindowsFormsApp1.DataTables;
 
 namespace WindowsFormsApp1
 {
-    public partial class AddOrgFuelForm : KryptonForm
+    public partial class AddOrgNormForm : KryptonForm
     {
-        List<DataTables.FuelsTable> fueltList;
-        public DataTables.FuelsTable FuelRow;
+        public ProfNormTable NormTable = new ProfNormTable();
+        int object_id = -1;
+        int nType = 0;
+        List<DataTables.ProductTable> productList;
         bool[] groustate = new bool[3];
 
-        public AddOrgFuelForm()
+        public AddOrgNormForm(int index)
         {
             InitializeComponent();
+            if (index > 1)
+                nType = index -1;
+            LoadData();
+            this.Width = 803;
         }
 
-        private void AddOrgFuelForm_Load(object sender, EventArgs e)
-        {      
+        public AddOrgNormForm(int index, int _ntype, int obj_id)
+        {
+            InitializeComponent();
+            object_id = obj_id;
+            nType = _ntype;
             LoadData();
-            this.Width = 760;
+            this.Width = 803;
         }
 
         private void LoadData()
         {
-
-            fueltList = dbOps.GetFuelList(toolStripTextBox2.Text, toolStripTextBox1.Text);
+            List<ProductTable> productList = new List<ProductTable>();
+            if (nType > 0)
+                productList = dbOps.GetTypedProdList(toolStripTextBox2.Text, toolStripTextBox1.Text, nType);
+            else
+                productList = dbOps.GetProdList(toolStripTextBox2.Text, toolStripTextBox1.Text);
             //if (edit)
             //{
             //    for (int i = 0; i < kryptonOutlookGrid1.GroupCollection.Count; i++)
@@ -48,10 +61,9 @@ namespace WindowsFormsApp1
             kryptonOutlookGrid1.RowHeadersWidth = 10;
 
 
-
             kryptonOutlookGrid1.GroupBox = kryptonOutlookGridGroupBox1;
             kryptonOutlookGrid1.RegisterGroupBoxEvents();
-            DataGridViewColumn[] columnsToAdd = new DataGridViewColumn[9];
+            DataGridViewColumn[] columnsToAdd = new DataGridViewColumn[8];
             columnsToAdd[0] = kryptonOutlookGrid1.Columns[0];
             columnsToAdd[1] = kryptonOutlookGrid1.Columns[1];
             columnsToAdd[2] = kryptonOutlookGrid1.Columns[2];
@@ -60,7 +72,6 @@ namespace WindowsFormsApp1
             columnsToAdd[5] = kryptonOutlookGrid1.Columns[5];
             columnsToAdd[6] = kryptonOutlookGrid1.Columns[6];
             columnsToAdd[7] = kryptonOutlookGrid1.Columns[7];
-
             //kryptonOutlookGrid1.Columns.AddRange(columnsToAdd);
 
             kryptonOutlookGrid1.AddInternalColumn(kryptonOutlookGrid1.Columns[0], new OutlookGridDefaultGroup(null), SortOrder.None, -1, -1);
@@ -69,10 +80,9 @@ namespace WindowsFormsApp1
             kryptonOutlookGrid1.AddInternalColumn(kryptonOutlookGrid1.Columns[3], new OutlookGridDefaultGroup(null), SortOrder.None, -1, -1);
             kryptonOutlookGrid1.AddInternalColumn(kryptonOutlookGrid1.Columns[4], new OutlookGridDefaultGroup(null), SortOrder.None, -1, -1);
             kryptonOutlookGrid1.AddInternalColumn(kryptonOutlookGrid1.Columns[5], new OutlookGridDefaultGroup(null), SortOrder.None, -1, -1);
-            kryptonOutlookGrid1.AddInternalColumn(kryptonOutlookGrid1.Columns[6], new OutlookGridFuelGroup(null), SortOrder.Ascending, 1, -1);
-            kryptonOutlookGrid1.AddInternalColumn(kryptonOutlookGrid1.Columns[7], new OutlookGridFuelGroup2(null), SortOrder.Ascending, 1, -1);
-
-            kryptonOutlookGrid1.Columns[6].Visible = false;
+            kryptonOutlookGrid1.AddInternalColumn(kryptonOutlookGrid1.Columns[6], new OutlookGridDefaultGroup(null), SortOrder.None, -1, -1);
+            kryptonOutlookGrid1.AddInternalColumn(kryptonOutlookGrid1.Columns[7], new OutlookGridTypeGroup(null), SortOrder.Ascending, 1, -1);
+            kryptonOutlookGrid1.Columns[0].Visible = false;
             kryptonOutlookGrid1.Columns[7].Visible = false;
 
             kryptonOutlookGrid1.ShowLines = true;
@@ -83,12 +93,11 @@ namespace WindowsFormsApp1
             kryptonOutlookGrid1.SuspendLayout();
             //kryptonOutlookGrid1.ClearInternalRows();
             kryptonOutlookGrid1.FillMode = FillMode.GROUPSONLY;
-            string group = "";
-            foreach (var fuel in fueltList)
+
+            foreach (var product in productList)
             {
-                row = new OutlookGridRow();
-                group = fuel.fuel_id.ToString();
-                row.CreateCells(kryptonOutlookGrid1, new object[] { fuel.id, fuel.fuel_id, fuel.name, fuel.unit, fuel.Qn, fuel.B_y, new TextAndImage(group[0].ToString(), GetFlag(Int32.Parse(group[0].ToString()))), new TextAndImage(group[0].ToString() + group[1].ToString(), GetFlag(Int32.Parse(group[0].ToString()))) });
+                row = new OutlookGridRow();               
+                row.CreateCells(kryptonOutlookGrid1, new object[] { product.Id, product.Code, product.Name, product.Unit, product.nUnit, product.s111, product.s112, new TextAndImage(product.type.ToString(), GetFlag(product.type)) });
                 l.Add(row);
             }
 
@@ -151,15 +160,11 @@ namespace WindowsFormsApp1
             switch (type)
             {
                 case 1:
-                    return Properties.Resources.t1ico1;
+                    return Properties.Resources._1;
                 case 2:
-                    return Properties.Resources.t2;
+                    return Properties.Resources._2;
                 case 3:
-                    return Properties.Resources.t3;
-                case 4:
-                    return Properties.Resources.t4;
-                case 5:
-                    return Properties.Resources.t5;
+                    return Properties.Resources._3;
                 default:
                     return null;
             }
@@ -172,27 +177,45 @@ namespace WindowsFormsApp1
 
         private void kryptonOutlookGrid1_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            KryptonOutlookGrid.Classes.KryptonOutlookGrid dataGridView = (KryptonOutlookGrid.Classes.KryptonOutlookGrid)sender;
-            if (e.RowIndex >= 0)
-            {
-                if (dataGridView.Rows[e.RowIndex].Cells[1].Value != null)
-                {
-                    FuelRow = new DataTables.FuelsTable();
-                    FuelRow.id = 0;
-                    FuelRow.fuel_id = Int32.Parse(kryptonOutlookGrid1.SelectedRows[0].Cells[1].Value.ToString());
-                    FuelRow.name = kryptonOutlookGrid1.SelectedRows[0].Cells[2].Value.ToString();
-                    FuelRow.Qn = Int32.Parse(kryptonOutlookGrid1.SelectedRows[0].Cells[4].Value.ToString());
-                    FuelRow.B_y = float.Parse(kryptonOutlookGrid1.SelectedRows[0].Cells[5].Value.ToString());
-                    FuelRow.unit = kryptonOutlookGrid1.SelectedRows[0].Cells[3].Value.ToString();
-                    this.DialogResult = DialogResult.OK;
-                    this.Close();
-                }
-            }
+            //KryptonOutlookGrid.Classes.KryptonOutlookGrid dataGridView = (KryptonOutlookGrid.Classes.KryptonOutlookGrid)sender;
+            //if (e.RowIndex >= 0)
+            //{
+            //    if (dataGridView.Rows[e.RowIndex].Cells[1].Value != null)
+            //    {
+            //        DataTables.ProductTable table = new DataTables.ProductTable
+            //        {
+            //            Id = Int32.Parse(dataGridView.Rows[e.RowIndex].Cells[0].Value.ToString()),
+            //            Code = Int32.Parse(dataGridView.Rows[e.RowIndex].Cells[1].Value.ToString()),
+            //            Name = dataGridView.Rows[e.RowIndex].Cells[2].Value.ToString(),
+            //            Unit = dataGridView.Rows[e.RowIndex].Cells[3].Value.ToString(),
+            //            nUnit = dataGridView.Rows[e.RowIndex].Cells[4].Value.ToString(),
+            //            s111 = Boolean.Parse(dataGridView.Rows[e.RowIndex].Cells[5].Value.ToString()),
+            //            s112 = Boolean.Parse(dataGridView.Rows[e.RowIndex].Cells[6].Value.ToString()),
+            //            type = Int32.Parse(((TextAndImage)dataGridView.Rows[e.RowIndex].Cells[7].Value).Text)
+            //        };
+            //        var myForm = new ProductAddForm(table, this);
+            //        //myForm.FormClosed += new FormClosedEventHandler(myForm_FormClosed);
+            //        myForm.ShowDialog ();
+
+            //        if (myForm.DialogResult == DialogResult.OK)
+            //        {
+            //            var productTable = myForm.productTable;
+            //            dataGridView.Rows[e.RowIndex].Cells[0].Value = productTable.Id;
+            //            dataGridView.Rows[e.RowIndex].Cells[1].Value = productTable.Code;
+            //            dataGridView.Rows[e.RowIndex].Cells[2].Value = productTable.Name;
+            //            dataGridView.Rows[e.RowIndex].Cells[3].Value = productTable.Unit;
+            //            dataGridView.Rows[e.RowIndex].Cells[4].Value = productTable.nUnit;
+            //            dataGridView.Rows[e.RowIndex].Cells[5].Value = productTable.s111;
+            //            dataGridView.Rows[e.RowIndex].Cells[6].Value = productTable.s112;
+            //        }
+            //    }
+            //}
         }
+
 
         private void addToolStripButton_Click(object sender, EventArgs e)
         {
-            var myForm = new FuelAddForm();
+            var myForm = new ProductAddForm();
             myForm.FormClosed += new FormClosedEventHandler(myForm_FormClosed);
             myForm.ShowDialog();
         }
@@ -209,7 +232,7 @@ namespace WindowsFormsApp1
             KryptonOutlookGrid.Classes.KryptonOutlookGrid dataGridView = (KryptonOutlookGrid.Classes.KryptonOutlookGrid)sender;
             if (dataGridView.Rows[e.RowIndex].Cells[1].Value != null)
             {
-                label1.Text = "#" + dataGridView.Rows[e.RowIndex].Cells[1].Value.ToString() + " - " + dataGridView.Rows[e.RowIndex].Cells[2].Value.ToString();
+                label1.Text = "#" + dataGridView.Rows[e.RowIndex].Cells[0].Value.ToString() + " - " + dataGridView.Rows[e.RowIndex].Cells[2].Value.ToString();
             }
             else
             {
@@ -217,19 +240,13 @@ namespace WindowsFormsApp1
                 switch (Int32.Parse(dataGridView.Rows[e.RowIndex].Cells[0].Value.ToString()))
                 {
                     case 1:
-                        typestr += "Топливо промышленное";
+                        typestr += "топливо";
                         break;
                     case 2:
-                        typestr += "Местные виды топлива";
+                        typestr += "тепловая энергия";
                         break;
                     case 3:
-                        typestr += "Отходы производства";
-                        break;
-                    case 4:
-                        typestr += "Вторичные энергетические ресурсы";
-                        break;
-                    case 5:
-                        typestr += "Альтернативные энергетические ресурсы";
+                        typestr += "электрическая энергия";
                         break;
                     default:
                         break;
@@ -244,7 +261,7 @@ namespace WindowsFormsApp1
             if (ind >= 0)
             {
                 if (kryptonOutlookGrid1.Rows[ind].Cells[1].Value != null)
-                    dbOps.DeleteFromFuel(Int32.Parse(kryptonOutlookGrid1.Rows[ind].Cells[0].Value.ToString()));
+                    dbOps.DeleteFromProd(Int32.Parse(kryptonOutlookGrid1.Rows[ind].Cells[0].Value.ToString()));
             }
             LoadData();
         }
@@ -267,16 +284,30 @@ namespace WindowsFormsApp1
             {
                 if (kryptonOutlookGrid1.SelectedRows[0].Cells[1].Value != null)
                 {
-                    FuelRow = new DataTables.FuelsTable();
-                    FuelRow.id = 0;
-                    FuelRow.fuel_id = Int32.Parse(kryptonOutlookGrid1.SelectedRows[0].Cells[1].Value.ToString());
-                    FuelRow.name = kryptonOutlookGrid1.SelectedRows[0].Cells[2].Value.ToString();
-                    FuelRow.Qn = Int32.Parse(kryptonOutlookGrid1.SelectedRows[0].Cells[4].Value.ToString());
-                    FuelRow.B_y = float.Parse(kryptonOutlookGrid1.SelectedRows[0].Cells[5].Value.ToString());
-                    FuelRow.unit = kryptonOutlookGrid1.SelectedRows[0].Cells[3].Value.ToString();
+                    NormTable.Id = 0;
+                    NormTable.Id_prod = Int32.Parse(kryptonOutlookGrid1.SelectedRows[0].Cells[0].Value.ToString());
+                    NormTable.Code = Int32.Parse(kryptonOutlookGrid1.SelectedRows[0].Cells[1].Value.ToString());
+                    NormTable.Name = kryptonOutlookGrid1.SelectedRows[0].Cells[2].Value.ToString();
+                    NormTable.Unit = kryptonOutlookGrid1.SelectedRows[0].Cells[3].Value.ToString();
+                    NormTable.nUnit = kryptonOutlookGrid1.SelectedRows[0].Cells[4].Value.ToString();
+                    NormTable.id_obj = object_id;
+                    NormTable.s111 = bool.Parse(kryptonOutlookGrid1.SelectedRows[0].Cells[5].Value.ToString());
+                    NormTable.s112 = bool.Parse(kryptonOutlookGrid1.SelectedRows[0].Cells[6].Value.ToString());
+                    if (nType > 0)
+                        NormTable.type = nType;
+                    else
+                        NormTable.type = Int32.Parse(kryptonOutlookGrid1.SelectedRows[0].Cells[7].Value.ToString());
                     this.DialogResult = DialogResult.OK;
                     this.Close();
                 }
+                else
+                {
+                    MessageBox.Show("Выберите корректный элемент!");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Элемент не выбран!");
             }
         }
     }

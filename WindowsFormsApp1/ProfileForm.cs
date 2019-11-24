@@ -88,7 +88,7 @@ namespace WindowsFormsApp1
 
             kryptonOutlookGrid9.GroupBox = kryptonOutlookGridGroupBox1;
             kryptonOutlookGrid9.RegisterGroupBoxEvents();
-            DataGridViewColumn[] columnsToAdd = new DataGridViewColumn[8];
+            DataGridViewColumn[] columnsToAdd = new DataGridViewColumn[9];
             columnsToAdd[0] = kryptonOutlookGrid9.Columns[0];
             columnsToAdd[1] = kryptonOutlookGrid9.Columns[1];
             columnsToAdd[2] = kryptonOutlookGrid9.Columns[2];
@@ -97,6 +97,7 @@ namespace WindowsFormsApp1
             columnsToAdd[5] = kryptonOutlookGrid9.Columns[5];
             columnsToAdd[6] = kryptonOutlookGrid9.Columns[6];
             columnsToAdd[7] = kryptonOutlookGrid9.Columns[7];
+            columnsToAdd[8] = kryptonOutlookGrid9.Columns[8];
             //kryptonOutlookGrid9.Columns.AddRange(columnsToAdd);
 
             kryptonOutlookGrid9.AddInternalColumn(kryptonOutlookGrid9.Columns[0], new OutlookGridDefaultGroup(null), SortOrder.None, -1, -1);
@@ -107,6 +108,7 @@ namespace WindowsFormsApp1
             kryptonOutlookGrid9.AddInternalColumn(kryptonOutlookGrid9.Columns[5], new OutlookGridDefaultGroup(null), SortOrder.None, -1, -1);
             kryptonOutlookGrid9.AddInternalColumn(kryptonOutlookGrid9.Columns[6], new OutlookGridDefaultGroup(null), SortOrder.None, -1, -1);
             kryptonOutlookGrid9.AddInternalColumn(kryptonOutlookGrid9.Columns[7], new OutlookGridTypeGroup(null), SortOrder.Ascending, 1, -1);
+            kryptonOutlookGrid9.AddInternalColumn(kryptonOutlookGrid9.Columns[8], new OutlookGridDefaultGroup(null), SortOrder.None, -1, -1);
             kryptonOutlookGrid9.Columns[0].Visible = false;
             kryptonOutlookGrid9.Columns[7].Visible = false;
 
@@ -122,7 +124,7 @@ namespace WindowsFormsApp1
             foreach (var product in normList)
             {
                 row = new OutlookGridRow();
-                row.CreateCells(kryptonOutlookGrid9, new object[] { product.Id, product.Code, product.Name, product.Unit, product.nUnit, product.s111, product.s112, new TextAndImage(product.type.ToString(), GetFlag(product.type)) });
+                row.CreateCells(kryptonOutlookGrid9, new object[] { product.Id, product.Code, product.Name, product.Unit, product.nUnit, product.s111, product.s112, new TextAndImage(product.type.ToString(), GetFlag(product.type)), product.id_obj });
                 l.Add(row);
             }
 
@@ -144,7 +146,7 @@ namespace WindowsFormsApp1
 
             grid.GroupBox = kryptonOutlookGridGroupBox1;
             grid.RegisterGroupBoxEvents();
-            DataGridViewColumn[] columnsToAdd = new DataGridViewColumn[8];
+            DataGridViewColumn[] columnsToAdd = new DataGridViewColumn[9];
             columnsToAdd[0] = grid.Columns[0];
             columnsToAdd[1] = grid.Columns[1];
             columnsToAdd[2] = grid.Columns[2];
@@ -153,6 +155,7 @@ namespace WindowsFormsApp1
             columnsToAdd[5] = grid.Columns[5];
             columnsToAdd[6] = grid.Columns[6];
             columnsToAdd[7] = grid.Columns[7];
+            columnsToAdd[8] = grid.Columns[8];
             //grid.Columns.AddRange(columnsToAdd);
 
             grid.AddInternalColumn(grid.Columns[0], new OutlookGridDefaultGroup(null), SortOrder.None, -1, -1);
@@ -163,6 +166,7 @@ namespace WindowsFormsApp1
             grid.AddInternalColumn(grid.Columns[5], new OutlookGridDefaultGroup(null), SortOrder.None, -1, -1);
             grid.AddInternalColumn(grid.Columns[6], new OutlookGridDefaultGroup(null), SortOrder.None, -1, -1);
             grid.AddInternalColumn(grid.Columns[7], new OutlookGridTypeGroup(null), SortOrder.Ascending, 1, -1);
+            grid.AddInternalColumn(grid.Columns[8], new OutlookGridDefaultGroup(null), SortOrder.None, -1, -1);
             grid.Columns[0].Visible = false;
             grid.Columns[7].Visible = false;
 
@@ -178,7 +182,7 @@ namespace WindowsFormsApp1
             foreach (var product in normList)
             {
                 row = new OutlookGridRow();
-                row.CreateCells(grid, new object[] { product.Id, product.Code, product.Name, product.Unit, product.nUnit, product.s111, product.s112, new TextAndImage(product.type.ToString(), GetFlag(product.type)) });
+                row.CreateCells(grid, new object[] { product.Id, product.Code, product.Name, product.Unit, product.nUnit, product.s111, product.s112, new TextAndImage(product.type.ToString(), GetFlag(product.type)), product.id_obj });
                 l.Add(row);
             }
 
@@ -693,6 +697,132 @@ namespace WindowsFormsApp1
                 kryptonOutlookGrid7.AssignRows(l);
                 kryptonOutlookGrid7.ForceRefreshGroupBox();
                 kryptonOutlookGrid7.Fill();
+            }
+        }
+
+        private void SendRecievAddButton_Click(object sender, EventArgs e)
+        {
+            ComponentFactory.Krypton.Navigator.KryptonNavigator nav = kryptonNavigator3;
+            int index = Int32.Parse(nav.SelectedPage.Tag.ToString());
+            if (index == 1 || index == 2)
+            {
+                var myForm = new AddOrgSendRecieveForm(index);
+                myForm.ShowDialog();
+                if (myForm.DialogResult == DialogResult.OK)
+                {
+                    OutlookGridRow row = new OutlookGridRow();
+                    List<OutlookGridRow> l = new List<OutlookGridRow>();
+                    KryptonOutlookGrid.Classes.KryptonOutlookGrid newGrid = new KryptonOutlookGrid.Classes.KryptonOutlookGrid();
+                    if (index == 1)
+                        newGrid = kryptonOutlookGrid1;
+                    else if (index == 2)
+                        newGrid = kryptonOutlookGrid6;
+                    foreach (OutlookGridRow a in newGrid.Rows)
+                    {
+                        if (a.Cells[1].Value != null)
+                            l.Add(a);
+                    }
+                    newGrid.SuspendLayout();
+                    newGrid.ClearInternalRows();
+                    newGrid.FillMode = FillMode.GROUPSONLY;
+
+                    string group = "";
+                    row = new OutlookGridRow();
+                    row.CreateCells(newGrid, new object[] { myForm.SendRecTable.Id, myForm.SendRecTable.Id_org, new TextAndImage(myForm.SendRecTable.Org_name, GetRecSendFlag(myForm.SendRecTable.Head)), new TextAndImage(myForm.SendRecTable.Type.ToString(), GetFlag(myForm.SendRecTable.Type)), myForm.SendRecTable.Head });
+                    l.Add(row);
+
+                    newGrid.ResumeLayout();
+                    newGrid.AssignRows(l);
+                    newGrid.ForceRefreshGroupBox();
+                    newGrid.Fill();
+                }
+            }
+
+        }
+
+        private KryptonOutlookGrid.Classes.KryptonOutlookGrid GetGridByType(int type)
+        {
+            KryptonOutlookGrid.Classes.KryptonOutlookGrid Grid = new KryptonOutlookGrid.Classes.KryptonOutlookGrid();
+            if (type == 0)
+                Grid = kryptonOutlookGrid9;
+            else if (type == 1)
+                Grid = kryptonOutlookGrid4;
+            else if (type == 2)
+                Grid = kryptonOutlookGrid3;
+            else if (type == 3)
+                Grid = kryptonOutlookGrid2;
+            return Grid;
+        }
+
+        private void AddNormButton_Click(object sender, EventArgs e)
+        {
+            ComponentFactory.Krypton.Navigator.KryptonNavigator nav = kryptonNavigator2;
+            int index = Int32.Parse(nav.SelectedPage.Tag.ToString());
+            if (index == 1 || index == 2 || index == 3 || index == 4)
+            {
+                KryptonOutlookGrid.Classes.KryptonOutlookGrid newGrid = new KryptonOutlookGrid.Classes.KryptonOutlookGrid();
+                KryptonOutlookGrid.Classes.KryptonOutlookGrid newGrid2 = new KryptonOutlookGrid.Classes.KryptonOutlookGrid();
+                newGrid = GetGridByType(index - 1);
+
+                var myForm = new AddOrgNormForm(index);
+                if (newGrid.SelectedRows.Count > 0)
+                {
+                    if (newGrid.SelectedRows[0].Cells[1].Value != null)
+                    {
+                        if (index != 1)
+                            myForm = new AddOrgNormForm(index, (index-1),  Int32.Parse(newGrid.SelectedRows[0].Cells[8].Value.ToString()));
+                        else
+                            myForm = new AddOrgNormForm(index, Int32.Parse(newGrid.SelectedRows[0].Cells[7].Value.ToString()) , Int32.Parse(newGrid.SelectedRows[0].Cells[8].Value.ToString()));
+                    }
+                }
+                myForm.ShowDialog();
+                if (myForm.DialogResult == DialogResult.OK)
+                {
+                    OutlookGridRow row = new OutlookGridRow();
+                    List<OutlookGridRow> l = new List<OutlookGridRow>();
+                    List<OutlookGridRow> l2 = new List<OutlookGridRow>();
+                    if (index != 1)
+                        newGrid2 = kryptonOutlookGrid9;
+                    else if(index == 1)
+                        newGrid2 = GetGridByType(myForm.NormTable.type);
+
+                    foreach (OutlookGridRow a in newGrid2.Rows)
+                    {
+                        if (a.Cells[1].Value != null)
+                            l2.Add(a);
+                    }
+                    newGrid2.SuspendLayout();
+                    newGrid2.ClearInternalRows();
+                    newGrid2.FillMode = FillMode.GROUPSONLY;
+                    row = new OutlookGridRow();
+                    row.CreateCells(newGrid2, new object[] { myForm.NormTable.Id, myForm.NormTable.Code, myForm.NormTable.Name, myForm.NormTable.Unit, myForm.NormTable.nUnit, myForm.NormTable.s111, myForm.NormTable.s112, new TextAndImage(myForm.NormTable.type.ToString(), GetFlag(myForm.NormTable.type)), myForm.NormTable.id_obj });
+                    l2.Add(row);
+
+                    newGrid2.ResumeLayout();
+                    newGrid2.AssignRows(l2);
+                    newGrid2.ForceRefreshGroupBox();
+                    newGrid2.Fill();
+
+                    foreach (OutlookGridRow a in newGrid.Rows)
+                    {
+                        if (a.Cells[1].Value != null)
+                            l.Add(a);
+                    }
+                    newGrid.SuspendLayout();
+                    newGrid.ClearInternalRows();
+                    newGrid.FillMode = FillMode.GROUPSONLY;
+
+                    string group = "";
+                    row = new OutlookGridRow();
+                    row.CreateCells(newGrid, new object[] { myForm.NormTable.Id, myForm.NormTable.Code, myForm.NormTable.Name, myForm.NormTable.Unit, myForm.NormTable.nUnit, myForm.NormTable.s111, myForm.NormTable.s112, new TextAndImage(myForm.NormTable.type.ToString(), GetFlag(myForm.NormTable.type)), myForm.NormTable.id_obj });
+                    l.Add(row);
+
+                    newGrid.ResumeLayout();
+                    newGrid.AssignRows(l);
+                    newGrid.ForceRefreshGroupBox();
+                    newGrid.Fill();
+
+                }
             }
         }
 

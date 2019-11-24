@@ -749,8 +749,7 @@ namespace WindowsFormsApp1.DBO
                 {
                     while (dr.Read())
                     {
-                        CompanyList.Add(new CompanyStructListTable { Id = Int32.Parse(dr["id"].ToString()), Name = dr["name"].ToString() });
-
+                        CompanyList.Add(new CompanyStructListTable { Id = Int32.Parse(dr["id"].ToString()), Name = dr["name"].ToString(), Pid = Int32.Parse(dr["pid"].ToString()) });
                     }
                 }
                 myConnection.Close();
@@ -854,6 +853,46 @@ namespace WindowsFormsApp1.DBO
             }
             return productList;
         }
+        public static List<ProductTable> GetTypedProdList(string sample1, string sample2, int type)
+        {
+            List<ProductTable> productList = new List<ProductTable>();
+            try
+            {
+                SqlConnection myConnection = new SqlConnection(cnStr);
+                myConnection.Open();
+
+                string query = "SELECT * FROM [NewProduct] where pid = @pid AND (name like @sample1 and code like @sample2)";
+                SqlCommand command = new SqlCommand(query, myConnection);
+                command.Parameters.AddWithValue("@sample1", "%" + sample1 + "%");
+                command.Parameters.AddWithValue("@sample2", "%" + sample2 + "%");
+                command.Parameters.AddWithValue("@pid", type);
+
+                using (SqlDataReader dr = command.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        productList.Add(new ProductTable
+                        {
+                            Id = Int32.Parse(dr["id"].ToString()),
+                            Code = Int32.Parse(dr["code"].ToString()),
+                            Name = dr["name"].ToString(),
+                            Unit = dr["unit"].ToString(),
+                            nUnit = dr["norm_unit"].ToString(),
+                            s111 = Boolean.Parse(dr["f111"].ToString()),
+                            s112 = Boolean.Parse(dr["f112"].ToString()),
+                            type = Int32.Parse(dr["pid"].ToString())
+                        });
+                    }
+                }
+                myConnection.Close();
+            }
+            catch (Exception Ex)
+            {
+                KryptonMessageBox.Show("Ошибка GetProdList: " + Ex.Message);
+            }
+            return productList;
+        }
+
         public static List<int> GetProdIdList(int type)
         {
             List<int> productList = new List<int>();
