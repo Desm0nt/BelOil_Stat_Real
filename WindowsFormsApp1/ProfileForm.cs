@@ -245,7 +245,7 @@ namespace WindowsFormsApp1
             {
                 row = new OutlookGridRow();
                 group = fuel.fuel_id.ToString();
-                row.CreateCells(kryptonOutlookGrid7, new object[] { fuel.id, fuel.fuel_id, new TextAndImage(fuel.name.ToString(), GetFuelFlag(Int32.Parse(group[0].ToString()))), fuel.unit, fuel.Qn, fuel.B_y, fuel.trade});
+                row.CreateCells(kryptonOutlookGrid7, new object[] { fuel.id, fuel.fuel_id, new TextAndImage(fuel.name.ToString(), GetFuelFlag(Int32.Parse(group[0].ToString()))), fuel.unit, fuel.Qn, fuel.B_y, fuel.trade });
                 l.Add(row);
             }
 
@@ -447,7 +447,6 @@ namespace WindowsFormsApp1
             kryptonOutlookGrid6.ForceRefreshGroupBox();
             kryptonOutlookGrid6.Fill();
         }
-
 
         private Image GetFlag(int type)
         {
@@ -701,7 +700,7 @@ namespace WindowsFormsApp1
         }
         private void RemoveFuelButton_Click(object sender, EventArgs e)
         {
-            if(kryptonOutlookGrid7.SelectedRows.Count > 0)
+            if (kryptonOutlookGrid7.SelectedRows.Count > 0)
             {
                 if (kryptonOutlookGrid7.SelectedRows[0].Cells[1].Value != null)
                 {
@@ -800,9 +799,9 @@ namespace WindowsFormsApp1
                     if (newGrid.SelectedRows[0].Cells[1].Value != null)
                     {
                         if (index != 1)
-                            myForm = new AddOrgNormForm(index, (index-1),  Int32.Parse(newGrid.SelectedRows[0].Cells[8].Value.ToString()));
+                            myForm = new AddOrgNormForm(index, (index - 1), Int32.Parse(newGrid.SelectedRows[0].Cells[8].Value.ToString()));
                         else
-                            myForm = new AddOrgNormForm(index, Int32.Parse(newGrid.SelectedRows[0].Cells[7].Value.ToString()) , Int32.Parse(newGrid.SelectedRows[0].Cells[8].Value.ToString()));
+                            myForm = new AddOrgNormForm(index, Int32.Parse(newGrid.SelectedRows[0].Cells[7].Value.ToString()), Int32.Parse(newGrid.SelectedRows[0].Cells[8].Value.ToString()));
                     }
                 }
                 myForm.ShowDialog();
@@ -813,7 +812,7 @@ namespace WindowsFormsApp1
                     List<OutlookGridRow> l2 = new List<OutlookGridRow>();
                     if (index != 1)
                         newGrid2 = kryptonOutlookGrid9;
-                    else if(index == 1)
+                    else if (index == 1)
                         newGrid2 = GetGridByType(myForm.NormTable.type);
 
                     foreach (OutlookGridRow a in newGrid2.Rows)
@@ -821,11 +820,12 @@ namespace WindowsFormsApp1
                         if (a.Cells[1].Value != null)
                             l2.Add(a);
                     }
+                    string tmp_id = myForm.NormTable.Id + DateTime.Now.ToString();
                     newGrid2.SuspendLayout();
                     newGrid2.ClearInternalRows();
                     newGrid2.FillMode = FillMode.GROUPSONLY;
                     row = new OutlookGridRow();
-                    row.CreateCells(newGrid2, new object[] { myForm.NormTable.Id, myForm.NormTable.Code, myForm.NormTable.Name, myForm.NormTable.Unit, myForm.NormTable.nUnit, myForm.NormTable.s111, myForm.NormTable.s112, new TextAndImage(myForm.NormTable.type.ToString(), GetFlag(myForm.NormTable.type)), myForm.NormTable.id_obj });
+                    row.CreateCells(newGrid2, new object[] { tmp_id, myForm.NormTable.Code, myForm.NormTable.Name, myForm.NormTable.Unit, myForm.NormTable.nUnit, myForm.NormTable.s111, myForm.NormTable.s112, new TextAndImage(myForm.NormTable.type.ToString(), GetFlag(myForm.NormTable.type)), myForm.NormTable.id_obj });
                     l2.Add(row);
 
                     newGrid2.ResumeLayout();
@@ -844,7 +844,7 @@ namespace WindowsFormsApp1
 
                     string group = "";
                     row = new OutlookGridRow();
-                    row.CreateCells(newGrid, new object[] { myForm.NormTable.Id, myForm.NormTable.Code, myForm.NormTable.Name, myForm.NormTable.Unit, myForm.NormTable.nUnit, myForm.NormTable.s111, myForm.NormTable.s112, new TextAndImage(myForm.NormTable.type.ToString(), GetFlag(myForm.NormTable.type)), myForm.NormTable.id_obj });
+                    row.CreateCells(newGrid, new object[] { tmp_id, myForm.NormTable.Code, myForm.NormTable.Name, myForm.NormTable.Unit, myForm.NormTable.nUnit, myForm.NormTable.s111, myForm.NormTable.s112, new TextAndImage(myForm.NormTable.type.ToString(), GetFlag(myForm.NormTable.type)), myForm.NormTable.id_obj });
                     l.Add(row);
 
                     newGrid.ResumeLayout();
@@ -853,6 +853,39 @@ namespace WindowsFormsApp1
                     newGrid.Fill();
 
                 }
+            }
+        }
+        private void RemoveNormButton_Click(object sender, EventArgs e)
+        {
+            ComponentFactory.Krypton.Navigator.KryptonNavigator nav = kryptonNavigator2;
+            int index = Int32.Parse(nav.SelectedPage.Tag.ToString());
+            if (index == 1 || index == 2 || index == 3 || index == 4)
+            {
+                KryptonOutlookGrid.Classes.KryptonOutlookGrid newGrid = new KryptonOutlookGrid.Classes.KryptonOutlookGrid();
+                KryptonOutlookGrid.Classes.KryptonOutlookGrid newGrid2 = new KryptonOutlookGrid.Classes.KryptonOutlookGrid();
+                newGrid = GetGridByType(index - 1);
+                if (newGrid.SelectedRows.Count > 0)
+                {
+                    if (newGrid.SelectedRows[0].Cells[1].Value != null)
+                    {
+                        int type = Int32.Parse(newGrid.SelectedRows[0].Cells[7].Value.ToString());
+                        if (index != 1)
+                            newGrid2 = kryptonOutlookGrid9;
+                        else if (index == 1)
+                            newGrid2 = GetGridByType(type);
+                        int rowIndex = -1;
+
+                        DataGridViewRow tmprow = newGrid2.Rows
+                            .Cast<DataGridViewRow>()
+                            .Where(r => r.Cells[0].Value.ToString().Equals(newGrid.SelectedRows[0].Cells[0].Value.ToString()))
+                            .First();
+
+                        rowIndex = tmprow.Index;
+                        newGrid.Rows.RemoveAt(newGrid.SelectedRows[0].Index);
+                        newGrid2.Rows.RemoveAt(newGrid2.Rows[rowIndex].Index);
+                    }
+                }
+
             }
         }
 
