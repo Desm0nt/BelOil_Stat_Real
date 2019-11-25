@@ -699,6 +699,16 @@ namespace WindowsFormsApp1
                 kryptonOutlookGrid7.Fill();
             }
         }
+        private void RemoveFuelButton_Click(object sender, EventArgs e)
+        {
+            if(kryptonOutlookGrid7.SelectedRows.Count > 0)
+            {
+                if (kryptonOutlookGrid7.SelectedRows[0].Cells[1].Value != null)
+                {
+                    kryptonOutlookGrid7.Rows.RemoveAt(kryptonOutlookGrid7.SelectedRows[0].Index);
+                }
+            }
+        }
 
         private void SendRecievAddButton_Click(object sender, EventArgs e)
         {
@@ -738,6 +748,26 @@ namespace WindowsFormsApp1
                 }
             }
 
+        }
+        private void SendRecievRemoveButton_Click(object sender, EventArgs e)
+        {
+            ComponentFactory.Krypton.Navigator.KryptonNavigator nav = kryptonNavigator3;
+            int index = Int32.Parse(nav.SelectedPage.Tag.ToString());
+            if (index == 1 || index == 2)
+            {
+                KryptonOutlookGrid.Classes.KryptonOutlookGrid newGrid = new KryptonOutlookGrid.Classes.KryptonOutlookGrid();
+                if (index == 1)
+                    newGrid = kryptonOutlookGrid1;
+                else if (index == 2)
+                    newGrid = kryptonOutlookGrid6;
+                if (newGrid.SelectedRows.Count > 0)
+                {
+                    if (newGrid.SelectedRows[0].Cells[1].Value != null)
+                    {
+                        newGrid.Rows.RemoveAt(newGrid.SelectedRows[0].Index);
+                    }
+                }
+            }
         }
 
         private KryptonOutlookGrid.Classes.KryptonOutlookGrid GetGridByType(int type)
@@ -854,6 +884,16 @@ namespace WindowsFormsApp1
                 kryptonOutlookGrid10.AssignRows(l);
                 kryptonOutlookGrid10.ForceRefreshGroupBox();
                 kryptonOutlookGrid10.Fill();
+            }
+        }
+        private void SourceRemoveButton_Click(object sender, EventArgs e)
+        {
+            if (kryptonOutlookGrid10.SelectedRows.Count > 0)
+            {
+                if (kryptonOutlookGrid10.SelectedRows[0].Cells[1].Value != null)
+                {
+                    kryptonOutlookGrid10.Rows.RemoveAt(kryptonOutlookGrid10.SelectedRows[0].Index);
+                }
             }
         }
     }
