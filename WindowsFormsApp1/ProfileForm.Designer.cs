@@ -2259,6 +2259,7 @@
             this.SaveProfileButton.Name = "SaveProfileButton";
             this.SaveProfileButton.Size = new System.Drawing.Size(23, 22);
             this.SaveProfileButton.Text = "toolStripButton2";
+            this.SaveProfileButton.Click += new System.EventHandler(this.SaveProfileButton_Click);
             // 
             // ProfileForm
             // 

@@ -919,6 +919,38 @@ namespace WindowsFormsApp1
                 kryptonOutlookGrid10.Fill();
             }
         }
+
+        private void SaveProfileButton_Click(object sender, EventArgs e)
+        {
+            int profilenum = dbOps.GetProfileNumIfExist(cur_org_id, DateTime.Now.Year, DateTime.Now.Month);
+            ProfileTable profData = dbOps.GetProfileData(cur_org_id, cmonth, cyear);
+            if (profilenum != 0)
+            {
+                //тут будем вайпать кучу табличек по номеру
+            }
+            else
+            {
+                profilenum = profData.Num + 1;
+                dbOps.AddProfile(DateTime.Now.Year, DateTime.Now.Month, cur_org_id, profilenum);
+            }
+
+            //добавление Fuel
+            foreach (OutlookGridRow a in kryptonOutlookGrid7.Rows)
+            {
+                if (a.Cells[1].Value != null)
+                    dbOps.AddNewOrgFuels(DateTime.Now.Year, DateTime.Now.Month, profilenum, cur_org_id, Int32.Parse(a.Cells[1].Value.ToString()), bool.Parse(a.Cells[6].Value.ToString()));
+            }
+
+            //Добавление Source 
+            foreach (OutlookGridRow a in kryptonOutlookGrid10.Rows)
+            {
+                if (a.Cells[1].Value != null)
+                    dbOps.AddNewOrgSource(DateTime.Now.Year, DateTime.Now.Month, profilenum, cur_org_id, Int32.Parse(a.Cells[1].Value.ToString()), Int32.Parse(a.Cells[2].Value.ToString()), Int32.Parse(a.Cells[1].Value.ToString()));
+            }
+
+
+        }
+
         private void SourceRemoveButton_Click(object sender, EventArgs e)
         {
             if (kryptonOutlookGrid10.SelectedRows.Count > 0)

@@ -992,7 +992,6 @@ namespace WindowsFormsApp1.DBO
             }
         }
 
-
         /// <summary>
         /// Человеки справочник
         /// </summary>
@@ -1218,8 +1217,6 @@ namespace WindowsFormsApp1.DBO
             }
             return personList;
         }
-
-
 
         /// <summary>
         /// нормы предприятия профиль
@@ -1778,7 +1775,6 @@ namespace WindowsFormsApp1.DBO
             return CompanyList;
         }
 
-
         public static List<int> GetNormIdList(int type)
         {
             List<int> productList = new List<int>();
@@ -2011,8 +2007,6 @@ namespace WindowsFormsApp1.DBO
                 KryptonMessageBox.Show("Ошибка DeleteFactor: " + Ex.Message);
             }
         }
-
-
 
         /// <summary>
         /// Топливо справочник
@@ -2932,7 +2926,6 @@ namespace WindowsFormsApp1.DBO
             int profNum = 0;
             try
             {
-
                 SqlConnection myConnection = new SqlConnection(cnStr);
                 myConnection.Open();
 
@@ -2991,7 +2984,6 @@ namespace WindowsFormsApp1.DBO
             }
             return profNum;
         }
-
 
         public static int GetNormId(int id_org, int id_prod)
         {
@@ -3510,5 +3502,111 @@ namespace WindowsFormsApp1.DBO
             myConnection.Close();
             return profileTable;
         }
+
+        public static int GetProfileNumIfExist(int org_id, int year, int month)
+        {
+            int prnum = 0;
+            try
+            {
+                SqlConnection myConnection = new SqlConnection(cnStr);
+                myConnection.Open();
+                string query = "SELECT COUNT(*) FROM [NewProfiles] where org_id = @org_id and year >= @year and month >= @month";
+                SqlCommand command = new SqlCommand(query, myConnection);
+                command.Parameters.AddWithValue("@org_id", org_id);
+                command.Parameters.AddWithValue("@year", year);
+                command.Parameters.AddWithValue("@month", month);
+
+                int RecordExist = (int)command.ExecuteScalar();
+                if (RecordExist > 0)
+                {
+                    query = "SELECT * FROM [NewFuels] where org_id = @org_id and year = @year and month = @month";
+                    command = new SqlCommand(query, myConnection);
+                    command.Parameters.AddWithValue("@org_id", org_id);
+                    command.Parameters.AddWithValue("@year", year);
+                    command.Parameters.AddWithValue("@month", month);
+                    using (SqlDataReader dr = command.ExecuteReader())
+                    {
+                        while (dr.Read())
+                        {
+                            prnum = Int32.Parse(dr["num"].ToString());
+                        }
+                    }
+                }
+                myConnection.Close();
+            }
+            catch (Exception Ex)
+            {
+                KryptonMessageBox.Show("Ошибка GetProfileNumIfExist: " + Ex.Message);
+            }
+            return prnum;
+        }
+        public static void AddProfile(int year, int month, int id_org, int num)
+        {
+            try
+            {
+                SqlConnection myConnection2 = new SqlConnection(cnStr);
+                myConnection2.Open();
+                string query2 = "INSERT INTO NewProfiles (id_org, num, month, year) VALUES (@id_org, @num, @month, @year)";
+                SqlCommand command2 = new SqlCommand(query2, myConnection2);
+                command2 = new SqlCommand(query2, myConnection2);
+                command2.Parameters.AddWithValue("@id_org", id_org);
+                command2.Parameters.AddWithValue("@month", month);
+                command2.Parameters.AddWithValue("@year", year);
+                command2.Parameters.AddWithValue("@num", num);
+                command2.ExecuteNonQuery();
+                myConnection2.Close();
+            }
+            catch (Exception Ex)
+            {
+                KryptonMessageBox.Show("Ошибка AddProfile: " + Ex.Message);
+            }
+        }
+        public static void AddNewOrgFuels(int year, int month, int num, int id_org, int id_fuel, bool trade)
+        {
+            try
+            {
+                SqlConnection myConnection2 = new SqlConnection(cnStr);
+                myConnection2.Open();
+                string query2 = "INSERT INTO NewProfiles (id_org, num, month, year, id_fuel, trade) VALUES (@id_org, @num, @month, @year, @id_fuel, @trade)";
+                SqlCommand command2 = new SqlCommand(query2, myConnection2);
+                command2 = new SqlCommand(query2, myConnection2);
+                command2.Parameters.AddWithValue("@id_org", id_org);
+                command2.Parameters.AddWithValue("@month", month);
+                command2.Parameters.AddWithValue("@year", year);
+                command2.Parameters.AddWithValue("@num", num);
+                command2.Parameters.AddWithValue("@id_fuel", id_fuel);
+                command2.Parameters.AddWithValue("@trade", trade);
+                command2.ExecuteNonQuery();
+                myConnection2.Close();
+            }
+            catch (Exception Ex)
+            {
+                KryptonMessageBox.Show("Ошибка AddNewOrgFuels: " + Ex.Message);
+            }
+        }
+        public static void AddNewOrgSource(int year, int month, int num, int id_org, int id_object, int id_fuel, int res_type)
+        {
+            try
+            {
+                SqlConnection myConnection2 = new SqlConnection(cnStr);
+                myConnection2.Open();
+                string query2 = "INSERT INTO NewOrgSoucesList (id_org, id_object, id_fuel, res_type, num, month, year) VALUES (@id_org, @id_object, @id_fuel, @res_type, @num, @month, @year)";
+                SqlCommand command2 = new SqlCommand(query2, myConnection2);
+                command2.Parameters.AddWithValue("@id_org", id_org);
+                command2.Parameters.AddWithValue("@id_object", id_object);
+                command2.Parameters.AddWithValue("@id_fuel", id_fuel);
+                command2.Parameters.AddWithValue("@res_type", res_type);
+                command2.Parameters.AddWithValue("@num", num);
+                command2.Parameters.AddWithValue("@month", month);
+                command2.Parameters.AddWithValue("@year", year);
+                command2.ExecuteNonQuery();
+                myConnection2.Close();
+            }
+            catch (Exception Ex)
+            {
+                KryptonMessageBox.Show("Ошибка AddNewOrgSource: " + Ex.Message);
+            }
+        }
+
     }
 }
