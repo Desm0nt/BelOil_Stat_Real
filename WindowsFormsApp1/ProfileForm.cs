@@ -948,7 +948,17 @@ namespace WindowsFormsApp1
                     dbOps.AddNewOrgSource(DateTime.Now.Year, DateTime.Now.Month, profilenum, cur_org_id, Int32.Parse(a.Cells[1].Value.ToString()), Int32.Parse(a.Cells[2].Value.ToString()), Int32.Parse(a.Cells[1].Value.ToString()));
             }
 
-
+            //Добавление Sended & Recieved
+            foreach (OutlookGridRow a in kryptonOutlookGrid1.Rows)
+            {
+                if (a.Cells[1].Value != null)
+                    dbOps.AddNewOrgRec(DateTime.Now.Year, DateTime.Now.Month, profilenum, Int32.Parse(a.Cells[1].Value.ToString()), cur_org_id, Int32.Parse(a.Cells[3].Value.ToString()));
+            }
+            foreach (OutlookGridRow a in kryptonOutlookGrid6.Rows)
+            {
+                if (a.Cells[1].Value != null)
+                    dbOps.AddNewOrgSend(DateTime.Now.Year, DateTime.Now.Month, profilenum, Int32.Parse(a.Cells[1].Value.ToString()), cur_org_id, Int32.Parse(a.Cells[3].Value.ToString()));
+            }
         }
 
         private void SourceRemoveButton_Click(object sender, EventArgs e)

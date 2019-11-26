@@ -1625,7 +1625,7 @@ namespace WindowsFormsApp1.DBO
                 }
                 else
                 {
-                    query = "SELECT * FROM [NewSendedOrgList] where id_org = @id_owner AND num = (SELECT MAX(num) FROM [NewNorm] where year <= @year AND month <= @month)";
+                    query = "SELECT * FROM [NewSendedOrgList] where id_owner = @id_org AND num = (SELECT MAX(num) FROM [NewNorm] where year <= @year AND month <= @month)";
                     command = new SqlCommand(query, myConnection);
                     command.Parameters.AddWithValue("@id_org", id_org);
                     command.Parameters.AddWithValue("@year", year);
@@ -1675,7 +1675,7 @@ namespace WindowsFormsApp1.DBO
                 }
                 else
                 {
-                    query = "SELECT * FROM [NewRecievedOrgList] where id_org = @id_owner AND num = (SELECT MAX(num) FROM [NewNorm] where year <= @year AND month <= @month)";
+                    query = "SELECT * FROM [NewRecievedOrgList] where id_owner = @id_org AND num = (SELECT MAX(num) FROM [NewNorm] where year <= @year AND month <= @month)";
                     command = new SqlCommand(query, myConnection);
                     command.Parameters.AddWithValue("@id_org", id_org);
                     command.Parameters.AddWithValue("@year", year);
@@ -3479,7 +3479,7 @@ namespace WindowsFormsApp1.DBO
             }
             else
             {
-                query = "SELECT * FROM [NewProfiles] where id_org = @id_org AND num = (SELECT MAX(num) FROM [NewProfiles])";
+                query = "SELECT * FROM [NewProfiles] where id_org = @id_org AND num = (SELECT MAX(num) FROM [NewProfiles] where id_org = @id_org)";
                 command = new SqlCommand(query, myConnection);
                 command.Parameters.AddWithValue("@id_org", id_org);
                 command.Parameters.AddWithValue("@month", month);
@@ -3503,25 +3503,25 @@ namespace WindowsFormsApp1.DBO
             return profileTable;
         }
 
-        public static int GetProfileNumIfExist(int org_id, int year, int month)
+        public static int GetProfileNumIfExist(int id_org, int year, int month)
         {
             int prnum = 0;
             try
             {
                 SqlConnection myConnection = new SqlConnection(cnStr);
                 myConnection.Open();
-                string query = "SELECT COUNT(*) FROM [NewProfiles] where org_id = @org_id and year >= @year and month >= @month";
+                string query = "SELECT COUNT(*) FROM [NewProfiles] where id_org = @id_org and year >= @year and month >= @month";
                 SqlCommand command = new SqlCommand(query, myConnection);
-                command.Parameters.AddWithValue("@org_id", org_id);
+                command.Parameters.AddWithValue("@id_org", id_org);
                 command.Parameters.AddWithValue("@year", year);
                 command.Parameters.AddWithValue("@month", month);
 
                 int RecordExist = (int)command.ExecuteScalar();
                 if (RecordExist > 0)
                 {
-                    query = "SELECT * FROM [NewFuels] where org_id = @org_id and year = @year and month = @month";
+                    query = "SELECT * FROM [NewProfiles] where id_org = @id_org and year = @year and month = @month";
                     command = new SqlCommand(query, myConnection);
-                    command.Parameters.AddWithValue("@org_id", org_id);
+                    command.Parameters.AddWithValue("@id_org", id_org);
                     command.Parameters.AddWithValue("@year", year);
                     command.Parameters.AddWithValue("@month", month);
                     using (SqlDataReader dr = command.ExecuteReader())
@@ -3567,7 +3567,7 @@ namespace WindowsFormsApp1.DBO
             {
                 SqlConnection myConnection2 = new SqlConnection(cnStr);
                 myConnection2.Open();
-                string query2 = "INSERT INTO NewProfiles (id_org, num, month, year, id_fuel, trade) VALUES (@id_org, @num, @month, @year, @id_fuel, @trade)";
+                string query2 = "INSERT INTO NewOrgFuels (id_org, num, month, year, id_fuel, trade) VALUES (@id_org, @num, @month, @year, @id_fuel, @trade)";
                 SqlCommand command2 = new SqlCommand(query2, myConnection2);
                 command2 = new SqlCommand(query2, myConnection2);
                 command2.Parameters.AddWithValue("@id_org", id_org);
@@ -3607,6 +3607,51 @@ namespace WindowsFormsApp1.DBO
                 KryptonMessageBox.Show("Ошибка AddNewOrgSource: " + Ex.Message);
             }
         }
-
+        public static void AddNewOrgRec(int year, int month, int num, int id_org, int id_owner, int res_type)
+        {
+            try
+            {
+                SqlConnection myConnection2 = new SqlConnection(cnStr);
+                myConnection2.Open();
+                string query2 = "INSERT INTO NewRecievedOrgList (id_org, num, month, year, id_owner, res_type) VALUES (@id_org, @num, @month, @year, @id_owner, @res_type)";
+                SqlCommand command2 = new SqlCommand(query2, myConnection2);
+                command2 = new SqlCommand(query2, myConnection2);
+                command2.Parameters.AddWithValue("@id_org", id_org);
+                command2.Parameters.AddWithValue("@month", month);
+                command2.Parameters.AddWithValue("@year", year);
+                command2.Parameters.AddWithValue("@num", num);
+                command2.Parameters.AddWithValue("@id_owner", id_owner);
+                command2.Parameters.AddWithValue("@res_type", res_type);
+                command2.ExecuteNonQuery();
+                myConnection2.Close();
+            }
+            catch (Exception Ex)
+            {
+                KryptonMessageBox.Show("Ошибка AddNewOrgRec: " + Ex.Message);
+            }
+        }
+        public static void AddNewOrgSend(int year, int month, int num, int id_org, int id_owner, int res_type)
+        {
+            try
+            {
+                SqlConnection myConnection2 = new SqlConnection(cnStr);
+                myConnection2.Open();
+                string query2 = "INSERT INTO NewRecievedOrgList (id_org, num, month, year, id_owner, res_type) VALUES (@id_org, @num, @month, @year, @id_owner, @res_type)";
+                SqlCommand command2 = new SqlCommand(query2, myConnection2);
+                command2 = new SqlCommand(query2, myConnection2);
+                command2.Parameters.AddWithValue("@id_org", id_org);
+                command2.Parameters.AddWithValue("@month", month);
+                command2.Parameters.AddWithValue("@year", year);
+                command2.Parameters.AddWithValue("@num", num);
+                command2.Parameters.AddWithValue("@id_owner", id_owner);
+                command2.Parameters.AddWithValue("@res_type", res_type);
+                command2.ExecuteNonQuery();
+                myConnection2.Close();
+            }
+            catch (Exception Ex)
+            {
+                KryptonMessageBox.Show("Ошибка NewSendedOrgList: " + Ex.Message);
+            }
+        }
     }
 }
