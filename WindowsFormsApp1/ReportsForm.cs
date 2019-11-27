@@ -4016,9 +4016,9 @@ namespace WindowsFormsApp1
                 var tempList = dbOps.GetNormListPR(CurrentData.UserData.Id_org, report_id, profile_num, month, year);
                 foreach (var t in tempList)
                 {
-                    if (NormListPR.Any(norm => norm.norm_code == t.norm_code))
+                    if (NormListPR.Any(norm => norm.Id_local == t.Id_local))
                     {
-                        var index = NormListPR.FindIndex(norm => norm.norm_code == t.norm_code);
+                        var index = NormListPR.FindIndex(norm => norm.Id_local == t.Id_local);
                         NormListPR[index].val_fact += t.val_fact;
                         NormListPR[index].val_plan += t.val_plan;
                         NormListPR[index].val_fact_ut += t.val_fact_ut;
@@ -4039,10 +4039,10 @@ namespace WindowsFormsApp1
             List<NormTable> ListOnePR = listSum.DeepClone();
             foreach (var t in ListOnePR)
             {
-                if (list.Any(norm => norm.norm_code == t.norm_code))
+                if (list.Any(norm => norm.Id_local == t.Id_local))
                 {
-                    var sumIndex = ListOnePR.FindIndex(norm => norm.norm_code == t.norm_code);
-                    var index = list.FindIndex(norm => norm.norm_code == t.norm_code);
+                    var sumIndex = ListOnePR.FindIndex(norm => norm.Id_local == t.Id_local);
+                    var index = list.FindIndex(norm => norm.Id_local == t.Id_local);
                     ListOnePR[sumIndex].val_fact = list[index].val_fact;
                     ListOnePR[sumIndex].val_plan = list[index].val_plan;
                     ListOnePR[sumIndex].val_fact_ut = list[index].val_fact_ut;
@@ -4052,7 +4052,7 @@ namespace WindowsFormsApp1
                 }
                 else
                 {
-                    var sumIndex = ListOnePR.FindIndex(norm => norm.norm_code == t.norm_code);
+                    var sumIndex = ListOnePR.FindIndex(norm => norm.Id_local == t.Id_local);
                     ListOnePR[sumIndex].val_fact = 0;
                     ListOnePR[sumIndex].val_plan = 0;
                     ListOnePR[sumIndex].val_fact_ut = 0;

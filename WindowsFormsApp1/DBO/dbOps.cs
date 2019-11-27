@@ -2131,8 +2131,8 @@ namespace WindowsFormsApp1.DBO
         public static List<NormTable> GetNormListPR(int id_org, int id_rep, int num, int month, int year)
         {
             List<NormTable> NormList = new List<NormTable>();
-            try
-            {
+            //try
+            //{
                 SqlConnection myConnection = new SqlConnection(cnStr);
                 SqlConnection myConnection2 = new SqlConnection(cnStr);
                 myConnection.Open();
@@ -2196,11 +2196,11 @@ namespace WindowsFormsApp1.DBO
                     }
                 }
                 myConnection.Close();
-            }
-            catch (Exception Ex)
-            {
-                KryptonMessageBox.Show("Ошибка GetNormListPR: " + Ex.Message);
-            }
+            //}
+            //catch (Exception Ex)
+            //{
+            //    KryptonMessageBox.Show("Ошибка GetNormListPR: " + Ex.Message);
+            //}
             return NormList;
         }
 
@@ -3673,6 +3673,39 @@ namespace WindowsFormsApp1.DBO
                 KryptonMessageBox.Show("Ошибка NewSendedOrgList: " + Ex.Message);
             }
         }
+        public static void AddNewOrgNorm(int id_org, int id_prod, string id_local, int code, string name, int fuel, string row_options, int type, int id_obj, int num, int month, int year, string real_name)
+        {
+            try
+            {
+                SqlConnection myConnection2 = new SqlConnection(cnStr);
+                myConnection2.Open();
+                string query2 = "INSERT INTO NewNorm (id_org, id_prod, id_local, code, name, row_options, type, id_obj, num, month, year, real_name) VALUES (@id_org, @id_prod, @id_local, @code, @name, @row_options, @type, @id_obj, @num, @month, @year, @real_name)";
+                if (fuel >0)
+                    query2 = "INSERT INTO NewNorm (id_org, id_prod, id_local, code, name, fuel, row_options, type, id_obj, num, month, year, real_name) VALUES (@id_org, @id_prod, @id_local, @code, @name, @fuel, @row_options, @type, @id_obj, @num, @month, @year, @real_name)";
+                SqlCommand command2 = new SqlCommand(query2, myConnection2);
+                command2 = new SqlCommand(query2, myConnection2);
+                command2.Parameters.AddWithValue("@id_org", id_org);
+                command2.Parameters.AddWithValue("@id_prod", id_prod);
+                command2.Parameters.AddWithValue("@id_local", id_local);
+                command2.Parameters.AddWithValue("@code", code);
+                command2.Parameters.AddWithValue("@name", name);
+                command2.Parameters.AddWithValue("@fuel", fuel);
+                command2.Parameters.AddWithValue("@row_options", row_options);
+                command2.Parameters.AddWithValue("@type", type);
+                command2.Parameters.AddWithValue("@id_obj", id_obj);
+                command2.Parameters.AddWithValue("@num", num);
+                command2.Parameters.AddWithValue("@month", month);
+                command2.Parameters.AddWithValue("@year", year);
+                command2.Parameters.AddWithValue("@real_name", real_name);
+                command2.ExecuteNonQuery();
+                myConnection2.Close();
+            }
+            catch (Exception Ex)
+            {
+                KryptonMessageBox.Show("Ошибка AddNewOrgNorm: " + Ex.Message);
+            }
+        }
+
         public static void DeleteOldProfileVariant(int num, int id_org)
         {
             try
@@ -3703,6 +3736,12 @@ namespace WindowsFormsApp1.DBO
 
                 //потребители
                 query = "DELETE FROM [NewSendedOrgList] where id_owner = @id_org and num = @num";
+                command = new SqlCommand(query, myConnection);
+                command.Parameters.AddWithValue("@id_org", id_org);
+                command.Parameters.AddWithValue("@num", num);
+                command.ExecuteNonQuery();
+
+                query = "DELETE FROM [NewNorm] where id_org = @id_org and num = @num";
                 command = new SqlCommand(query, myConnection);
                 command.Parameters.AddWithValue("@id_org", id_org);
                 command.Parameters.AddWithValue("@num", num);

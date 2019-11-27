@@ -19,6 +19,7 @@ namespace WindowsFormsApp1
     {
         int cur_org_id;
         int cyear, cmonth;
+        bool edited = false;
 
         public ProfileForm(int curyear, int curmonth)
         {
@@ -88,7 +89,7 @@ namespace WindowsFormsApp1
 
             kryptonOutlookGrid9.GroupBox = kryptonOutlookGridGroupBox1;
             kryptonOutlookGrid9.RegisterGroupBoxEvents();
-            DataGridViewColumn[] columnsToAdd = new DataGridViewColumn[13];
+            DataGridViewColumn[] columnsToAdd = new DataGridViewColumn[14];
             columnsToAdd[0] = kryptonOutlookGrid9.Columns[0];
             columnsToAdd[1] = kryptonOutlookGrid9.Columns[1];
             columnsToAdd[2] = kryptonOutlookGrid9.Columns[2];
@@ -102,6 +103,7 @@ namespace WindowsFormsApp1
             columnsToAdd[10] = kryptonOutlookGrid9.Columns[10];
             columnsToAdd[11] = kryptonOutlookGrid9.Columns[11];
             columnsToAdd[12] = kryptonOutlookGrid9.Columns[12];
+            columnsToAdd[13] = kryptonOutlookGrid9.Columns[13];
 
             //kryptonOutlookGrid9.Columns.AddRange(columnsToAdd);
 
@@ -118,6 +120,7 @@ namespace WindowsFormsApp1
             kryptonOutlookGrid9.AddInternalColumn(kryptonOutlookGrid9.Columns[10], new OutlookGridDefaultGroup(null), SortOrder.None, -1, -1);
             kryptonOutlookGrid9.AddInternalColumn(kryptonOutlookGrid9.Columns[11], new OutlookGridDefaultGroup(null), SortOrder.None, -1, -1);
             kryptonOutlookGrid9.AddInternalColumn(kryptonOutlookGrid9.Columns[12], new OutlookGridDefaultGroup(null), SortOrder.None, -1, -1);
+            kryptonOutlookGrid9.AddInternalColumn(kryptonOutlookGrid9.Columns[13], new OutlookGridDefaultGroup(null), SortOrder.None, -1, -1);
             kryptonOutlookGrid9.Columns[0].Visible = false;
             kryptonOutlookGrid9.Columns[7].Visible = false;
 
@@ -133,7 +136,7 @@ namespace WindowsFormsApp1
             foreach (var product in normList)
             {
                 row = new OutlookGridRow();
-                row.CreateCells(kryptonOutlookGrid9, new object[] { product.Id, product.Code, product.name_with_fuel, product.Unit, product.nUnit, product.s111, product.s112, new TextAndImage(product.type.ToString(), GetFlag(product.type)), product.id_obj, product.Id_local, product.real_name, product.Name, product.id_fuel });
+                row.CreateCells(kryptonOutlookGrid9, new object[] { product.Id, product.Code, product.name_with_fuel, product.Unit, product.nUnit, product.s111, product.s112, new TextAndImage(product.type.ToString(), GetFlag(product.type)), product.id_obj, product.Id_local, product.real_name, product.Name, product.id_fuel, product.Id_prod });
                 l.Add(row);
             }
 
@@ -155,7 +158,7 @@ namespace WindowsFormsApp1
 
             grid.GroupBox = kryptonOutlookGridGroupBox1;
             grid.RegisterGroupBoxEvents();
-            DataGridViewColumn[] columnsToAdd = new DataGridViewColumn[13];
+            DataGridViewColumn[] columnsToAdd = new DataGridViewColumn[14];
             columnsToAdd[0] = grid.Columns[0];
             columnsToAdd[1] = grid.Columns[1];
             columnsToAdd[2] = grid.Columns[2];
@@ -169,6 +172,7 @@ namespace WindowsFormsApp1
             columnsToAdd[10] = grid.Columns[10];
             columnsToAdd[11] = grid.Columns[11];
             columnsToAdd[12] = grid.Columns[12];
+            columnsToAdd[13] = grid.Columns[13];
             //grid.Columns.AddRange(columnsToAdd);
 
             grid.AddInternalColumn(grid.Columns[0], new OutlookGridDefaultGroup(null), SortOrder.None, -1, -1);
@@ -184,6 +188,7 @@ namespace WindowsFormsApp1
             grid.AddInternalColumn(grid.Columns[10], new OutlookGridDefaultGroup(null), SortOrder.None, -1, -1);
             grid.AddInternalColumn(grid.Columns[11], new OutlookGridDefaultGroup(null), SortOrder.None, -1, -1);
             grid.AddInternalColumn(grid.Columns[12], new OutlookGridDefaultGroup(null), SortOrder.None, -1, -1);
+            grid.AddInternalColumn(grid.Columns[13], new OutlookGridDefaultGroup(null), SortOrder.None, -1, -1);
             grid.Columns[0].Visible = false;
             grid.Columns[7].Visible = false;
 
@@ -199,7 +204,7 @@ namespace WindowsFormsApp1
             foreach (var product in normList)
             {
                 row = new OutlookGridRow();
-                row.CreateCells(grid, new object[] { product.Id, product.Code, product.name_with_fuel, product.Unit, product.nUnit, product.s111, product.s112, new TextAndImage(product.type.ToString(), GetFlag(product.type)), product.id_obj, product.Id_local, product.real_name, product.Name, product.id_fuel });
+                row.CreateCells(grid, new object[] { product.Id, product.Code, product.name_with_fuel, product.Unit, product.nUnit, product.s111, product.s112, new TextAndImage(product.type.ToString(), GetFlag(product.type)), product.id_obj, product.Id_local, product.real_name, product.Name, product.id_fuel, product.Id_prod });
                 l.Add(row);
             }
 
@@ -605,7 +610,30 @@ namespace WindowsFormsApp1
             kryptonHeaderGroup2.ValuesPrimary.Image = nav.SelectedPage.ImageSmall;
         }
 
+        private void kryptonOutlookGrid1_Resize2(object sender, EventArgs e)
+        {
+            KryptonOutlookGrid.Classes.KryptonOutlookGrid grid = (KryptonOutlookGrid.Classes.KryptonOutlookGrid)sender;
+            int PreferredTotalWidth = 0;
+            //Calculate the total preferred width
+            foreach (DataGridViewColumn c in grid.Columns)
+            {
+                PreferredTotalWidth += Math.Min(c.GetPreferredWidth(DataGridViewAutoSizeColumnMode.DisplayedCells, true), 250);
+            }
 
+            if (grid.Width < PreferredTotalWidth)
+            {
+                grid.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                grid.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.DisplayedCells);
+            }
+            else
+            {
+                grid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
+                foreach (DataGridViewColumn c in grid.Columns)
+                {
+                    c.Width = Math.Min(c.GetPreferredWidth(DataGridViewAutoSizeColumnMode.DisplayedCells, true), 250);
+                }
+            }
+        }
         private void kryptonOutlookGrid1_Resize(object sender, EventArgs e)
         {
             KryptonOutlookGrid.Classes.KryptonOutlookGrid grid = (KryptonOutlookGrid.Classes.KryptonOutlookGrid)sender;
@@ -713,6 +741,7 @@ namespace WindowsFormsApp1
                 kryptonOutlookGrid7.AssignRows(l);
                 kryptonOutlookGrid7.ForceRefreshGroupBox();
                 kryptonOutlookGrid7.Fill();
+                edited = true;
             }
         }
         private void RemoveFuelButton_Click(object sender, EventArgs e)
@@ -722,6 +751,7 @@ namespace WindowsFormsApp1
                 if (kryptonOutlookGrid7.SelectedRows[0].Cells[1].Value != null)
                 {
                     kryptonOutlookGrid7.Rows.RemoveAt(kryptonOutlookGrid7.SelectedRows[0].Index);
+                    edited = true;
                 }
             }
         }
@@ -761,6 +791,7 @@ namespace WindowsFormsApp1
                     newGrid.AssignRows(l);
                     newGrid.ForceRefreshGroupBox();
                     newGrid.Fill();
+                    edited = true;
                 }
             }
 
@@ -781,6 +812,7 @@ namespace WindowsFormsApp1
                     if (newGrid.SelectedRows[0].Cells[1].Value != null)
                     {
                         newGrid.Rows.RemoveAt(newGrid.SelectedRows[0].Index);
+                        edited = true;
                     }
                 }
             }
@@ -867,7 +899,7 @@ namespace WindowsFormsApp1
                         id_local = tmpid.ToString();
                         valid = dbOps.LocalIdValidChecking(id_local, cur_org_id, myForm.NormTable.id_fuel, myForm.NormTable.Id_prod, myForm.NormTable.real_name);
                     }
-                    row.CreateCells(newGrid2, new object[] { tmp_id, myForm.NormTable.Code, myForm.NormTable.name_with_fuel, myForm.NormTable.Unit, myForm.NormTable.nUnit, myForm.NormTable.s111, myForm.NormTable.s112, new TextAndImage(myForm.NormTable.type.ToString(), GetFlag(myForm.NormTable.type)), myForm.NormTable.id_obj, id_local, myForm.NormTable.real_name, myForm.NormTable.Name, myForm.NormTable.id_fuel });
+                    row.CreateCells(newGrid2, new object[] { tmp_id, myForm.NormTable.Code, myForm.NormTable.name_with_fuel, myForm.NormTable.Unit, myForm.NormTable.nUnit, myForm.NormTable.s111, myForm.NormTable.s112, new TextAndImage(myForm.NormTable.type.ToString(), GetFlag(myForm.NormTable.type)), myForm.NormTable.id_obj, id_local, myForm.NormTable.real_name, myForm.NormTable.Name, myForm.NormTable.id_fuel, myForm.NormTable.Id_prod });
                     l2.Add(row);
 
                     newGrid2.ResumeLayout();
@@ -886,14 +918,14 @@ namespace WindowsFormsApp1
 
                     string group = "";
                     row = new OutlookGridRow();
-                    row.CreateCells(newGrid, new object[] { tmp_id, myForm.NormTable.Code, myForm.NormTable.name_with_fuel, myForm.NormTable.Unit, myForm.NormTable.nUnit, myForm.NormTable.s111, myForm.NormTable.s112, new TextAndImage(myForm.NormTable.type.ToString(), GetFlag(myForm.NormTable.type)), myForm.NormTable.id_obj, id_local, myForm.NormTable.real_name, myForm.NormTable.Name, myForm.NormTable.id_fuel });
+                    row.CreateCells(newGrid, new object[] { tmp_id, myForm.NormTable.Code, myForm.NormTable.name_with_fuel, myForm.NormTable.Unit, myForm.NormTable.nUnit, myForm.NormTable.s111, myForm.NormTable.s112, new TextAndImage(myForm.NormTable.type.ToString(), GetFlag(myForm.NormTable.type)), myForm.NormTable.id_obj, id_local, myForm.NormTable.real_name, myForm.NormTable.Name, myForm.NormTable.id_fuel, myForm.NormTable.Id_prod });
                     l.Add(row);
 
                     newGrid.ResumeLayout();
                     newGrid.AssignRows(l);
                     newGrid.ForceRefreshGroupBox();
                     newGrid.Fill();
-
+                    edited = true;
                 }
             }
         }
@@ -925,6 +957,7 @@ namespace WindowsFormsApp1
                         rowIndex = tmprow.Index;
                         newGrid.Rows.RemoveAt(newGrid.SelectedRows[0].Index);
                         newGrid2.Rows.RemoveAt(newGrid2.Rows[rowIndex].Index);
+                        edited = true;
                     }
                 }
             }
@@ -958,10 +991,52 @@ namespace WindowsFormsApp1
                 kryptonOutlookGrid10.AssignRows(l);
                 kryptonOutlookGrid10.ForceRefreshGroupBox();
                 kryptonOutlookGrid10.Fill();
+                edited = true;
             }
         }
 
         private void SaveProfileButton_Click(object sender, EventArgs e)
+        {
+            DialogResult dialogResult = MessageBox.Show("Вы уверены, что желаете сохранить внесенные в профиль изменения?", "Сохранение изменений", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                SaveProfile();
+                edited = false;
+            }
+            else if (dialogResult == DialogResult.No)
+            {
+                //do something else
+            }           
+        }
+
+        private void SourceRemoveButton_Click(object sender, EventArgs e)
+        {
+            if (kryptonOutlookGrid10.SelectedRows.Count > 0)
+            {
+                if (kryptonOutlookGrid10.SelectedRows[0].Cells[1].Value != null)
+                {
+                    kryptonOutlookGrid10.Rows.RemoveAt(kryptonOutlookGrid10.SelectedRows[0].Index);
+                    edited = true;
+                }
+            }
+        }
+
+        private void ProfileForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (edited)
+            {
+                DialogResult dialogResult = MessageBox.Show("Вы уверены, что желаете сохранить внесенные в профиль изменения?", "Закрытие редактора профиля", MessageBoxButtons.YesNo);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    SaveProfile();
+                }
+                else if (dialogResult == DialogResult.No)
+                {
+                }
+            }
+        }
+
+        private void SaveProfile()
         {
             int profilenum = dbOps.GetProfileNumIfExist(cur_org_id, DateTime.Now.Year, DateTime.Now.Month);
             ProfileTable profData = dbOps.GetProfileData(cur_org_id, cmonth, cyear);
@@ -986,14 +1061,12 @@ namespace WindowsFormsApp1
                 if (a.Cells[1].Value != null)
                     dbOps.AddNewOrgFuels(DateTime.Now.Year, DateTime.Now.Month, profilenum, cur_org_id, Int32.Parse(a.Cells[1].Value.ToString()), bool.Parse(a.Cells[6].Value.ToString()));
             }
-
             //Добавление Source 
             foreach (OutlookGridRow a in kryptonOutlookGrid10.Rows)
             {
                 if (a.Cells[1].Value != null)
                     dbOps.AddNewOrgSource(DateTime.Now.Year, DateTime.Now.Month, profilenum, cur_org_id, Int32.Parse(a.Cells[1].Value.ToString()), Int32.Parse(a.Cells[2].Value.ToString()), Int32.Parse(a.Cells[1].Value.ToString()));
             }
-
             //Добавление Sended & Recieved
             foreach (OutlookGridRow a in kryptonOutlookGrid1.Rows)
             {
@@ -1005,17 +1078,22 @@ namespace WindowsFormsApp1
                 if (a.Cells[1].Value != null)
                     dbOps.AddNewOrgSend(DateTime.Now.Year, DateTime.Now.Month, profilenum, Int32.Parse(a.Cells[1].Value.ToString()), cur_org_id, Int32.Parse(a.Cells[3].Value.ToString()));
             }
-        }
-
-        private void SourceRemoveButton_Click(object sender, EventArgs e)
-        {
-            if (kryptonOutlookGrid10.SelectedRows.Count > 0)
+            foreach (OutlookGridRow a in kryptonOutlookGrid9.Rows)
             {
-                if (kryptonOutlookGrid10.SelectedRows[0].Cells[1].Value != null)
+                if (a.Cells[1].Value != null)
                 {
-                    kryptonOutlookGrid10.Rows.RemoveAt(kryptonOutlookGrid10.SelectedRows[0].Index);
+                    string row_options = "";
+                    if (bool.Parse(a.Cells[5].Value.ToString()) && bool.Parse(a.Cells[6].Value.ToString()))
+                        row_options = "111,112";
+                    else if (bool.Parse(a.Cells[5].Value.ToString()))
+                        row_options = "111";
+                    else if (bool.Parse(a.Cells[6].Value.ToString()))
+                        row_options = "112";
+                    dbOps.AddNewOrgNorm(cur_org_id, Int32.Parse(a.Cells[13].Value.ToString()), a.Cells[9].Value.ToString(), Int32.Parse(a.Cells[1].Value.ToString()), a.Cells[11].Value.ToString(), Int32.Parse(a.Cells[12].Value.ToString()), row_options, Int32.Parse(a.Cells[7].Value.ToString()), Int32.Parse(a.Cells[8].Value.ToString()), profilenum, DateTime.Now.Month, DateTime.Now.Year, a.Cells[10].Value.ToString());
                 }
             }
+            MessageBox.Show("Данные сохранены.");
         }
+
     }
 }
