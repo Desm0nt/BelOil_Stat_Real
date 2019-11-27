@@ -18,5 +18,9 @@ namespace WindowsFormsApp1.DataTables
         public bool s111 { get; set; }
         public bool s112 { get; set; }
         public int type { get; set; }
+        public string Id_local { get; set; }
+        public string real_name { get; set; }
+        public string name_with_fuel { get; set; }
+        public int id_fuel { get; set; }
     }
 }

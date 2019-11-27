@@ -88,7 +88,7 @@ namespace WindowsFormsApp1
 
             kryptonOutlookGrid9.GroupBox = kryptonOutlookGridGroupBox1;
             kryptonOutlookGrid9.RegisterGroupBoxEvents();
-            DataGridViewColumn[] columnsToAdd = new DataGridViewColumn[9];
+            DataGridViewColumn[] columnsToAdd = new DataGridViewColumn[13];
             columnsToAdd[0] = kryptonOutlookGrid9.Columns[0];
             columnsToAdd[1] = kryptonOutlookGrid9.Columns[1];
             columnsToAdd[2] = kryptonOutlookGrid9.Columns[2];
@@ -98,6 +98,11 @@ namespace WindowsFormsApp1
             columnsToAdd[6] = kryptonOutlookGrid9.Columns[6];
             columnsToAdd[7] = kryptonOutlookGrid9.Columns[7];
             columnsToAdd[8] = kryptonOutlookGrid9.Columns[8];
+            columnsToAdd[9] = kryptonOutlookGrid9.Columns[9];
+            columnsToAdd[10] = kryptonOutlookGrid9.Columns[10];
+            columnsToAdd[11] = kryptonOutlookGrid9.Columns[11];
+            columnsToAdd[12] = kryptonOutlookGrid9.Columns[12];
+
             //kryptonOutlookGrid9.Columns.AddRange(columnsToAdd);
 
             kryptonOutlookGrid9.AddInternalColumn(kryptonOutlookGrid9.Columns[0], new OutlookGridDefaultGroup(null), SortOrder.None, -1, -1);
@@ -109,6 +114,10 @@ namespace WindowsFormsApp1
             kryptonOutlookGrid9.AddInternalColumn(kryptonOutlookGrid9.Columns[6], new OutlookGridDefaultGroup(null), SortOrder.None, -1, -1);
             kryptonOutlookGrid9.AddInternalColumn(kryptonOutlookGrid9.Columns[7], new OutlookGridTypeGroup(null), SortOrder.Ascending, 1, -1);
             kryptonOutlookGrid9.AddInternalColumn(kryptonOutlookGrid9.Columns[8], new OutlookGridDefaultGroup(null), SortOrder.None, -1, -1);
+            kryptonOutlookGrid9.AddInternalColumn(kryptonOutlookGrid9.Columns[9], new OutlookGridDefaultGroup(null), SortOrder.None, -1, -1);
+            kryptonOutlookGrid9.AddInternalColumn(kryptonOutlookGrid9.Columns[10], new OutlookGridDefaultGroup(null), SortOrder.None, -1, -1);
+            kryptonOutlookGrid9.AddInternalColumn(kryptonOutlookGrid9.Columns[11], new OutlookGridDefaultGroup(null), SortOrder.None, -1, -1);
+            kryptonOutlookGrid9.AddInternalColumn(kryptonOutlookGrid9.Columns[12], new OutlookGridDefaultGroup(null), SortOrder.None, -1, -1);
             kryptonOutlookGrid9.Columns[0].Visible = false;
             kryptonOutlookGrid9.Columns[7].Visible = false;
 
@@ -124,7 +133,7 @@ namespace WindowsFormsApp1
             foreach (var product in normList)
             {
                 row = new OutlookGridRow();
-                row.CreateCells(kryptonOutlookGrid9, new object[] { product.Id, product.Code, product.Name, product.Unit, product.nUnit, product.s111, product.s112, new TextAndImage(product.type.ToString(), GetFlag(product.type)), product.id_obj });
+                row.CreateCells(kryptonOutlookGrid9, new object[] { product.Id, product.Code, product.name_with_fuel, product.Unit, product.nUnit, product.s111, product.s112, new TextAndImage(product.type.ToString(), GetFlag(product.type)), product.id_obj, product.Id_local, product.real_name, product.Name, product.id_fuel });
                 l.Add(row);
             }
 
@@ -146,7 +155,7 @@ namespace WindowsFormsApp1
 
             grid.GroupBox = kryptonOutlookGridGroupBox1;
             grid.RegisterGroupBoxEvents();
-            DataGridViewColumn[] columnsToAdd = new DataGridViewColumn[9];
+            DataGridViewColumn[] columnsToAdd = new DataGridViewColumn[13];
             columnsToAdd[0] = grid.Columns[0];
             columnsToAdd[1] = grid.Columns[1];
             columnsToAdd[2] = grid.Columns[2];
@@ -156,6 +165,10 @@ namespace WindowsFormsApp1
             columnsToAdd[6] = grid.Columns[6];
             columnsToAdd[7] = grid.Columns[7];
             columnsToAdd[8] = grid.Columns[8];
+            columnsToAdd[9] = grid.Columns[9];
+            columnsToAdd[10] = grid.Columns[10];
+            columnsToAdd[11] = grid.Columns[11];
+            columnsToAdd[12] = grid.Columns[12];
             //grid.Columns.AddRange(columnsToAdd);
 
             grid.AddInternalColumn(grid.Columns[0], new OutlookGridDefaultGroup(null), SortOrder.None, -1, -1);
@@ -167,6 +180,10 @@ namespace WindowsFormsApp1
             grid.AddInternalColumn(grid.Columns[6], new OutlookGridDefaultGroup(null), SortOrder.None, -1, -1);
             grid.AddInternalColumn(grid.Columns[7], new OutlookGridTypeGroup(null), SortOrder.Ascending, 1, -1);
             grid.AddInternalColumn(grid.Columns[8], new OutlookGridDefaultGroup(null), SortOrder.None, -1, -1);
+            grid.AddInternalColumn(grid.Columns[9], new OutlookGridDefaultGroup(null), SortOrder.None, -1, -1);
+            grid.AddInternalColumn(grid.Columns[10], new OutlookGridDefaultGroup(null), SortOrder.None, -1, -1);
+            grid.AddInternalColumn(grid.Columns[11], new OutlookGridDefaultGroup(null), SortOrder.None, -1, -1);
+            grid.AddInternalColumn(grid.Columns[12], new OutlookGridDefaultGroup(null), SortOrder.None, -1, -1);
             grid.Columns[0].Visible = false;
             grid.Columns[7].Visible = false;
 
@@ -182,7 +199,7 @@ namespace WindowsFormsApp1
             foreach (var product in normList)
             {
                 row = new OutlookGridRow();
-                row.CreateCells(grid, new object[] { product.Id, product.Code, product.Name, product.Unit, product.nUnit, product.s111, product.s112, new TextAndImage(product.type.ToString(), GetFlag(product.type)), product.id_obj });
+                row.CreateCells(grid, new object[] { product.Id, product.Code, product.name_with_fuel, product.Unit, product.nUnit, product.s111, product.s112, new TextAndImage(product.type.ToString(), GetFlag(product.type)), product.id_obj, product.Id_local, product.real_name, product.Name, product.id_fuel });
                 l.Add(row);
             }
 
@@ -825,7 +842,32 @@ namespace WindowsFormsApp1
                     newGrid2.ClearInternalRows();
                     newGrid2.FillMode = FillMode.GROUPSONLY;
                     row = new OutlookGridRow();
-                    row.CreateCells(newGrid2, new object[] { tmp_id, myForm.NormTable.Code, myForm.NormTable.Name, myForm.NormTable.Unit, myForm.NormTable.nUnit, myForm.NormTable.s111, myForm.NormTable.s112, new TextAndImage(myForm.NormTable.type.ToString(), GetFlag(myForm.NormTable.type)), myForm.NormTable.id_obj });
+                    string obj_for_local ="00";
+                    if (myForm.NormTable.id_obj != -1)
+                    {
+                        obj_for_local = myForm.NormTable.id_obj.ToString();
+                    }            
+                    string code_for_local = myForm.NormTable.Code.ToString();
+                    int lenght = obj_for_local.Length;
+                    for (int i=lenght; i<2; i++)
+                    {
+                        obj_for_local = "0" + obj_for_local;
+                    }
+                    lenght = code_for_local.Length;
+                    for (int i = lenght; i < 4; i++)
+                    {
+                        code_for_local = "0" + code_for_local;
+                    }
+                    string id_local = myForm.NormTable.type.ToString() + "0000" + obj_for_local + "000000" + code_for_local + "00";
+                    bool valid = dbOps.LocalIdValidChecking(id_local, cur_org_id, myForm.NormTable.id_fuel, myForm.NormTable.Id_prod, myForm.NormTable.real_name);
+                    while (!valid)
+                    {
+                        Int64 tmpid = Int64.Parse(id_local);
+                        tmpid += 1;
+                        id_local = tmpid.ToString();
+                        valid = dbOps.LocalIdValidChecking(id_local, cur_org_id, myForm.NormTable.id_fuel, myForm.NormTable.Id_prod, myForm.NormTable.real_name);
+                    }
+                    row.CreateCells(newGrid2, new object[] { tmp_id, myForm.NormTable.Code, myForm.NormTable.name_with_fuel, myForm.NormTable.Unit, myForm.NormTable.nUnit, myForm.NormTable.s111, myForm.NormTable.s112, new TextAndImage(myForm.NormTable.type.ToString(), GetFlag(myForm.NormTable.type)), myForm.NormTable.id_obj, id_local, myForm.NormTable.real_name, myForm.NormTable.Name, myForm.NormTable.id_fuel });
                     l2.Add(row);
 
                     newGrid2.ResumeLayout();
@@ -844,7 +886,7 @@ namespace WindowsFormsApp1
 
                     string group = "";
                     row = new OutlookGridRow();
-                    row.CreateCells(newGrid, new object[] { tmp_id, myForm.NormTable.Code, myForm.NormTable.Name, myForm.NormTable.Unit, myForm.NormTable.nUnit, myForm.NormTable.s111, myForm.NormTable.s112, new TextAndImage(myForm.NormTable.type.ToString(), GetFlag(myForm.NormTable.type)), myForm.NormTable.id_obj });
+                    row.CreateCells(newGrid, new object[] { tmp_id, myForm.NormTable.Code, myForm.NormTable.name_with_fuel, myForm.NormTable.Unit, myForm.NormTable.nUnit, myForm.NormTable.s111, myForm.NormTable.s112, new TextAndImage(myForm.NormTable.type.ToString(), GetFlag(myForm.NormTable.type)), myForm.NormTable.id_obj, id_local, myForm.NormTable.real_name, myForm.NormTable.Name, myForm.NormTable.id_fuel });
                     l.Add(row);
 
                     newGrid.ResumeLayout();

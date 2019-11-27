@@ -1324,6 +1324,12 @@ namespace WindowsFormsApp1.DBO
                             f111 = true;
                         else if (array.Length == 1 && array[0] == "112")
                             f112 = true;
+                        int fuel = !String.IsNullOrWhiteSpace(dr["fuel"].ToString()) ? Int32.Parse(dr["fuel"].ToString()) : 0;
+                        string fuel_name = "";
+                        if (fuel != 0)
+                        {
+                            fuel_name = " (" + GetFuelNameById(fuel, DateTime.Now.Year, DateTime.Now.Month) + ")";
+                        }
                         normtList.Add(new ProfNormTable
                         {
                             Id = Int32.Parse(dr["id"].ToString()),
@@ -1335,7 +1341,11 @@ namespace WindowsFormsApp1.DBO
                             id_obj = Int32.Parse(dr["id_obj"].ToString()),
                             s111 = f111,
                             s112 = f112,
-                            type = Int32.Parse(dr["type"].ToString())
+                            type = Int32.Parse(dr["type"].ToString()),
+                            Id_local = dr["id_local"].ToString(),
+                            real_name = dr["real_name"].ToString(),
+                            name_with_fuel = dr["name"].ToString() + fuel_name,
+                            id_fuel = fuel
                         });
                     }
                 }
@@ -1397,6 +1407,12 @@ namespace WindowsFormsApp1.DBO
                             f111 = true;
                         else if (array.Length == 1 && array[0] == "112")
                             f112 = true;
+                        int fuel = !String.IsNullOrWhiteSpace(dr["fuel"].ToString()) ? Int32.Parse(dr["fuel"].ToString()) : 0;
+                        string fuel_name = "";
+                        if (fuel != 0)
+                        {
+                            fuel_name =" (" + GetFuelNameById(fuel, DateTime.Now.Year, DateTime.Now.Month) +")";
+                        }
                         normtList.Add(new ProfNormTable
                         {
                             Id = Int32.Parse(dr["id"].ToString()),
@@ -1408,7 +1424,11 @@ namespace WindowsFormsApp1.DBO
                             id_obj = Int32.Parse(dr["id_obj"].ToString()),
                             s111 = f111,
                             s112 = f112,
-                            type = Int32.Parse(dr["type"].ToString())
+                            type = Int32.Parse(dr["type"].ToString()),
+                            Id_local = dr["id_local"].ToString(),
+                            real_name = dr["real_name"].ToString(),
+                            name_with_fuel = dr["name"].ToString() + fuel_name,
+                            id_fuel = fuel
                         });
                     }
                 }
@@ -3695,6 +3715,45 @@ namespace WindowsFormsApp1.DBO
                 KryptonMessageBox.Show("DeleteOldProfileVariant: " + Ex.Message);
             }
         }
+        public static bool LocalIdValidChecking(string id_local, int id_org, int fuel, int id_prod, string real_name)
+        {
+            bool valid = false;
+            Int64 local_id = Int64.Parse(id_local);
+            try
+            {
+                SqlConnection myConnection = new SqlConnection(cnStr);
+                myConnection.Open();
+                string query = "SELECT COUNT(*) FROM [NewNorm] where id_org = @id_org and id_local = @id_local";
+                SqlCommand command = new SqlCommand(query, myConnection);
+                command.Parameters.AddWithValue("@id_org", id_org);
+                command.Parameters.AddWithValue("@id_local", local_id);
 
+                int RecordExist = (int)command.ExecuteScalar();
+                if (RecordExist <= 0)
+                    valid = true;
+                else if (RecordExist > 0)
+                {
+                    query = "SELECT COUNT(*) FROM [NewNorm] where id_org = @id_org and id_local = @id_local and fuel = @fuel and id_prod = @id_prod and real_name = @real_name";
+                    command = new SqlCommand(query, myConnection);
+                    command.Parameters.AddWithValue("@id_org", id_org);
+                    command.Parameters.AddWithValue("@id_local", local_id);
+                    command.Parameters.AddWithValue("@fuel", fuel);
+                    command.Parameters.AddWithValue("@id_prod", id_prod);
+                    command.Parameters.AddWithValue("@real_name", real_name);
+                    int RecordExist2 = (int)command.ExecuteScalar();
+                    if (RecordExist2 > 0)
+                        valid = true;
+                    else
+                        valid = false;
+                }
+                
+                myConnection.Close();
+            }
+            catch (Exception Ex)
+            {
+                KryptonMessageBox.Show("Ошибка LocalIdValidChecking: " + Ex.Message);
+            }
+            return valid;
+        }
     }
 }

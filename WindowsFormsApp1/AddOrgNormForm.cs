@@ -284,19 +284,35 @@ namespace WindowsFormsApp1
             {
                 if (kryptonOutlookGrid1.SelectedRows[0].Cells[1].Value != null)
                 {
+                    string name = kryptonOutlookGrid1.SelectedRows[0].Cells[2].Value.ToString();
+                    int fuel = 0;
+                    string fuel_name = "";
+                    int type4form = 0;
+                    if (nType > 0)
+                        type4form = nType;
+                    else
+                        type4form = Int32.Parse(kryptonOutlookGrid1.SelectedRows[0].Cells[7].Value.ToString());
+                    var myForm = new AddOrgNormSupportForm(kryptonOutlookGrid1.SelectedRows[0].Cells[2].Value.ToString(), type4form);
+                    myForm.ShowDialog();
+                    if (myForm.DialogResult == DialogResult.OK)
+                    {
+                        name = myForm.name;
+                        fuel = myForm.fuel_id;
+                        fuel_name = myForm.fuel_name;
+                    }
                     NormTable.Id = 0;
                     NormTable.Id_prod = Int32.Parse(kryptonOutlookGrid1.SelectedRows[0].Cells[0].Value.ToString());
                     NormTable.Code = Int32.Parse(kryptonOutlookGrid1.SelectedRows[0].Cells[1].Value.ToString());
-                    NormTable.Name = kryptonOutlookGrid1.SelectedRows[0].Cells[2].Value.ToString();
+                    NormTable.Name = name;
                     NormTable.Unit = kryptonOutlookGrid1.SelectedRows[0].Cells[3].Value.ToString();
                     NormTable.nUnit = kryptonOutlookGrid1.SelectedRows[0].Cells[4].Value.ToString();
                     NormTable.id_obj = object_id;
                     NormTable.s111 = bool.Parse(kryptonOutlookGrid1.SelectedRows[0].Cells[5].Value.ToString());
                     NormTable.s112 = bool.Parse(kryptonOutlookGrid1.SelectedRows[0].Cells[6].Value.ToString());
-                    if (nType > 0)
-                        NormTable.type = nType;
-                    else
-                        NormTable.type = Int32.Parse(kryptonOutlookGrid1.SelectedRows[0].Cells[7].Value.ToString());
+                    NormTable.id_fuel = 0;
+                    NormTable.name_with_fuel = name + fuel_name;
+                    NormTable.real_name = kryptonOutlookGrid1.SelectedRows[0].Cells[2].Value.ToString();
+                    NormTable.type = type4form;
                     this.DialogResult = DialogResult.OK;
                     this.Close();
                 }

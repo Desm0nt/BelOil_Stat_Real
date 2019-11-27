@@ -153,6 +153,12 @@
     <Compile Include="AddSourceFuelForm.Designer.cs">
       <DependentUpon>AddSourceFuelForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="AddOrgNormSupportForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddOrgNormSupportForm.Designer.cs">
+      <DependentUpon>AddOrgNormSupportForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="AddSourceObjectForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -317,6 +323,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AddSourceFuelForm.resx">
       <DependentUpon>AddSourceFuelForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddOrgNormSupportForm.resx">
+      <DependentUpon>AddOrgNormSupportForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AddSourceObjectForm.resx">
       <DependentUpon>AddSourceObjectForm.cs</DependentUpon>
