@@ -3636,7 +3636,7 @@ namespace WindowsFormsApp1.DBO
             {
                 SqlConnection myConnection2 = new SqlConnection(cnStr);
                 myConnection2.Open();
-                string query2 = "INSERT INTO NewRecievedOrgList (id_org, num, month, year, id_owner, res_type) VALUES (@id_org, @num, @month, @year, @id_owner, @res_type)";
+                string query2 = "INSERT INTO NewSendedOrgList (id_org, num, month, year, id_owner, res_type) VALUES (@id_org, @num, @month, @year, @id_owner, @res_type)";
                 SqlCommand command2 = new SqlCommand(query2, myConnection2);
                 command2 = new SqlCommand(query2, myConnection2);
                 command2.Parameters.AddWithValue("@id_org", id_org);
@@ -3653,5 +3653,48 @@ namespace WindowsFormsApp1.DBO
                 KryptonMessageBox.Show("Ошибка NewSendedOrgList: " + Ex.Message);
             }
         }
+        public static void DeleteOldProfileVariant(int num, int id_org)
+        {
+            try
+            {
+                SqlConnection myConnection = new SqlConnection(cnStr);
+                myConnection.Open();
+
+                //топливо
+                string query = "DELETE FROM [NewOrgFuels] where id_org = @id_org and num = @num";
+                SqlCommand command = new SqlCommand(query, myConnection);
+                command.Parameters.AddWithValue("@id_org", id_org);
+                command.Parameters.AddWithValue("@num", num);
+                command.ExecuteNonQuery();
+
+                //источники
+                query = "DELETE FROM [NewOrgSoucesList] where id_org = @id_org and num = @num";
+                command = new SqlCommand(query, myConnection);
+                command.Parameters.AddWithValue("@id_org", id_org);
+                command.Parameters.AddWithValue("@num", num);
+                command.ExecuteNonQuery();
+
+                //поставщики
+                query = "DELETE FROM [NewRecievedOrgList] where id_owner = @id_org and num = @num";
+                command = new SqlCommand(query, myConnection);
+                command.Parameters.AddWithValue("@id_org", id_org);
+                command.Parameters.AddWithValue("@num", num);
+                command.ExecuteNonQuery();
+
+                //потребители
+                query = "DELETE FROM [NewSendedOrgList] where id_owner = @id_org and num = @num";
+                command = new SqlCommand(query, myConnection);
+                command.Parameters.AddWithValue("@id_org", id_org);
+                command.Parameters.AddWithValue("@num", num);
+                command.ExecuteNonQuery();
+
+                myConnection.Close();
+            }
+            catch (Exception Ex)
+            {
+                KryptonMessageBox.Show("DeleteOldProfileVariant: " + Ex.Message);
+            }
+        }
+
     }
 }

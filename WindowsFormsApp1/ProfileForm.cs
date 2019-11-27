@@ -885,7 +885,6 @@ namespace WindowsFormsApp1
                         newGrid2.Rows.RemoveAt(newGrid2.Rows[rowIndex].Index);
                     }
                 }
-
             }
         }
 
@@ -926,6 +925,11 @@ namespace WindowsFormsApp1
             ProfileTable profData = dbOps.GetProfileData(cur_org_id, cmonth, cyear);
             if (profilenum != 0)
             {
+                dbOps.DeleteOldProfileVariant(profilenum, cur_org_id);
+                //тут будем вайпать кучу табличек по номеру
+                //тут будем вайпать кучу табличек по номеру
+                //тут будем вайпать кучу табличек по номеру
+                //тут будем вайпать кучу табличек по номеру
                 //тут будем вайпать кучу табличек по номеру
             }
             else
