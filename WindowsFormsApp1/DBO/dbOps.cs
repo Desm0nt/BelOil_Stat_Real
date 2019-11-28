@@ -2182,13 +2182,17 @@ namespace WindowsFormsApp1.DBO
                                     fuel = fuel,
                                     type = Int32.Parse(dr["type"].ToString()),
                                     row_options = rowopt,
+                                    Unit = GetNormUnit(Int32.Parse(dr["id_prod"].ToString())),
+                                    nUnit = GetNormNUnit(Int32.Parse(dr["id_prod"].ToString())),
                                     val_plan = float.Parse(dr2["value_plan"].ToString()),
                                     val_fact = float.Parse(dr2["value_fact"].ToString()),
                                     val_fact_ut = float.Parse(dr2["value_fact"].ToString()) * coeff,
                                     val_plan_ut = float.Parse(dr2["value_fact"].ToString()) * coeff,
                                     norm_code = Int32.Parse(dr["norm_code"].ToString()),
                                     Id_local = Int64.Parse(dr["id_local"].ToString()),
-                                    editable = false
+                                    editable = false,
+                                    id_obj = Int32.Parse(dr["id_obj"].ToString())
+
                                 });
                             }
                         }
@@ -2241,12 +2245,15 @@ namespace WindowsFormsApp1.DBO
                                     fuel = !String.IsNullOrWhiteSpace(dr["fuel"].ToString()) ? Int32.Parse(dr["fuel"].ToString()) : 0,
                                     type = Int32.Parse(dr["type"].ToString()),
                                     row_options = rowopt,
+                                    Unit = GetNormUnit(Int32.Parse(dr["id_prod"].ToString())),
+                                    nUnit = GetNormNUnit(Int32.Parse(dr["id_prod"].ToString())),
                                     val_plan = float.Parse(dr2["value_plan"].ToString()),
                                     val_fact = float.Parse(dr2["value_fact"].ToString()),
                                     val_fact_ut = 0,
                                     val_plan_ut = 0,
                                     norm_code = Int32.Parse(dr["norm_code"].ToString()),
-                                    editable = false
+                                    editable = false,
+                                    id_obj = Int32.Parse(dr["id_obj"].ToString())
                                 });
                             }
                         }

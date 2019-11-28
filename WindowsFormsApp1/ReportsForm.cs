@@ -86,6 +86,11 @@ namespace WindowsFormsApp1
             worksheet1["S6"] = CurrentData.UserData.Name;
             worksheet1["P7"] = DateTime.Now.ToString("dd.MM.yyyy");
 
+            List<Full1terTable> full1Ter1 = new List<Full1terTable>();
+            List<Full1terTable> full1Ter2 = new List<Full1terTable>();
+            List<Full1terTable> full1Ter3 = new List<Full1terTable>();
+            List<Full1terTable> full1Ter = new List<Full1terTable>();
+
             int report_id = dbOps.GetReportId(CurrentData.UserData.Id_org, dateTimePicker1.Value.Year, dateTimePicker1.Value.Month);
             int profile_num = dbOps.GetProflieNum(CurrentData.UserData.Id_org, dateTimePicker1.Value.Year, dateTimePicker1.Value.Month);
             //var NormList = dbOps.GetNormList(CurrentData.UserData.Id_org, report_id);
@@ -139,6 +144,33 @@ namespace WindowsFormsApp1
                     worksheet1["E" + (fuelrow + tmp)] = String.Format("=E{0}", fuelrow - 1); //dbOps.GetProdUnit(a.Id_prod); 
                     worksheet1["L" + (fuelrow + tmp)] = String.Format("=ROUND(IF(H{0}>0, J{0}/H{0}, 0), 3)", fuelrow + tmp);
                     worksheet1["M" + (fuelrow + tmp)] = String.Format("=ROUND(IF(F{0}>0, J{0}/F{0}, 0), 3)", fuelrow + tmp);
+
+                    full1Ter1.Add(new Full1terTable
+                    {
+                        Id = a.Id,
+                        Id_org = a.Id_org,
+                        Id_prod = a.Id_prod,
+                        Id_local = a.Id_local,
+                        Code = a.Code,
+                        name = a.name,
+                        Unit = a.Unit,
+                        nUnit = a.nUnit,
+                        fuel = a.fuel,
+                        type = a.type,
+                        id_rep = report_id,
+                        koeff = Fuel.B_y,
+                        row_options = a.row_options,
+                        val_fact = a.val_fact,
+                        val_plan = a.val_plan,
+                        val_fact_ut = a.val_fact_ut,
+                        val_plan_ut = a.val_plan_ut,
+                        val_fact_old = 0,
+                        sum_val_fact = 0,
+                        sum_val_fact_old = 0,
+                        sum_val_fact_ut = 0,
+                        sum_val_plan = 0,
+                        sum_val_plan_ut = 0,                        
+                    });
                     tmp++;
                 }                 
             }
@@ -166,6 +198,13 @@ namespace WindowsFormsApp1
                     var Norm = dbOps.GetOneNorm(CurrentData.UserData.Id_org, oldreport, a.Id);
                     worksheet1["F" + (fuelrow + tmp)] = String.Format("=ROUND({0}, 3)", Math.Round(Norm.val_fact,1));
                     worksheet1["G" + (fuelrow + tmp)] = String.Format("{0}", Math.Round(Math.Round(Norm.val_fact, 1) * Fuel.B_y, 1));
+
+                    full1Ter1[tmp].val_fact_old = float.Parse(Math.Round(Norm.val_fact, 1).ToString());
+                    full1Ter1[tmp].sum_val_fact = float.Parse(Math.Round(a.val_fact, 1).ToString());
+                    full1Ter1[tmp].sum_val_fact_old = float.Parse(Normo != null ? Math.Round(Normo.val_fact, 1).ToString() : "0");
+                    full1Ter1[tmp].sum_val_fact_ut = float.Parse(Math.Round(a.val_fact_ut, 1).ToString());
+                    full1Ter1[tmp].sum_val_plan = float.Parse(Math.Round(a.val_plan, 1).ToString());
+                    full1Ter1[tmp].sum_val_plan_ut = float.Parse(Math.Round(a.val_plan_ut, 1).ToString());
                     tmp++;
                 }
             }
@@ -226,6 +265,33 @@ namespace WindowsFormsApp1
                     worksheet1["E" + (heatrow + tmp)] = String.Format("=E{0}", heatrow - 1);
                     worksheet1["L" + (heatrow + tmp)] = String.Format("=ROUND(IF(H{0}>0, J{0}/H{0}, 0), 3)", heatrow + tmp);
                     worksheet1["M" + (heatrow + tmp)] = String.Format("=ROUND(IF(F{0}>0, J{0}/F{0}, 0), 3)", heatrow + tmp);
+
+                    full1Ter2.Add(new Full1terTable
+                    {
+                        Id = a.Id,
+                        Id_org = a.Id_org,
+                        Id_prod = a.Id_prod,
+                        Id_local = a.Id_local,
+                        Code = a.Code,
+                        name = a.name,
+                        Unit = a.Unit,
+                        nUnit = a.nUnit,
+                        fuel = a.fuel,
+                        type = a.type,
+                        id_rep = report_id,
+                        koeff = Factor.value,
+                        row_options = a.row_options,
+                        val_fact = a.val_fact,
+                        val_plan = a.val_plan,
+                        val_fact_ut = a.val_fact_ut,
+                        val_plan_ut = a.val_plan_ut,
+                        val_fact_old = 0,
+                        sum_val_fact = 0,
+                        sum_val_fact_old = 0,
+                        sum_val_fact_ut = 0,
+                        sum_val_plan = 0,
+                        sum_val_plan_ut = 0,
+                    });
                     tmp++;
                 }
             }
@@ -255,6 +321,12 @@ namespace WindowsFormsApp1
                     var Norm = dbOps.GetOneNorm(CurrentData.UserData.Id_org, oldreport, a.Id);
                     worksheet1["F" + (heatrow + tmp)] = String.Format("=ROUND({0}, 3)", Math.Round(Norm.val_fact,1));
                     worksheet1["G" + (heatrow + tmp)] = String.Format("{0}", Math.Round(Math.Round(Norm.val_fact, 1) * Factor.value, 1));
+                    full1Ter2[tmp].val_fact_old = float.Parse(Math.Round(Norm.val_fact, 1).ToString());
+                    full1Ter2[tmp].sum_val_fact = float.Parse(Math.Round(a.val_fact, 1).ToString());
+                    full1Ter2[tmp].sum_val_fact_old = float.Parse(Normo != null ? Math.Round(Normo.val_fact, 1).ToString() : "0");
+                    full1Ter2[tmp].sum_val_fact_ut = float.Parse(Math.Round(a.val_fact_ut, 1).ToString());
+                    full1Ter2[tmp].sum_val_plan = float.Parse(Math.Round(a.val_plan, 1).ToString());
+                    full1Ter2[tmp].sum_val_plan_ut = float.Parse(Math.Round(a.val_plan_ut, 1).ToString());
                     tmp++;
                 }
             }
@@ -4640,6 +4712,11 @@ namespace WindowsFormsApp1
                 MakeTable12TekPril();
 
             }
+        }
+
+        private void toolStripButton9_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -177,6 +177,7 @@
     <Compile Include="AddUserForm.Designer.cs">
       <DependentUpon>AddUserForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="DataTables\Full1terTable.cs" />
     <Compile Include="DataTables\CompanyStructListTable.cs" />
     <Compile Include="DataTables\ProfCompTable.cs" />
     <Compile Include="DataTables\CompanyTable.cs" />

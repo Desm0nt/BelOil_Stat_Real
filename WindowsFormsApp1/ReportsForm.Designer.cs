@@ -71,6 +71,7 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.CompanyBox = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage5 = new System.Windows.Forms.TabPage();
             this.kryptonManager1 = new ComponentFactory.Krypton.Toolkit.KryptonManager(this.components);
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -125,7 +126,6 @@
             this.RUPButton = new System.Windows.Forms.ToolStripButton();
             this.POButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
-            this.tabPage5 = new System.Windows.Forms.TabPage();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tabPage6.SuspendLayout();
@@ -608,6 +608,16 @@
             this.tabControl1.TabIndex = 0;
             this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
+            // tabPage5
+            // 
+            this.tabPage5.Location = new System.Drawing.Point(4, 22);
+            this.tabPage5.Name = "tabPage5";
+            this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage5.Size = new System.Drawing.Size(1097, 569);
+            this.tabPage5.TabIndex = 6;
+            this.tabPage5.Text = "tabPage5";
+            this.tabPage5.UseVisualStyleBackColor = true;
+            // 
             // kryptonManager1
             // 
             this.kryptonManager1.GlobalPaletteMode = ComponentFactory.Krypton.Toolkit.PaletteModeManager.Office2007Blue;
@@ -738,6 +748,7 @@
             this.toolStripButton9.Name = "toolStripButton9";
             this.toolStripButton9.Size = new System.Drawing.Size(23, 22);
             this.toolStripButton9.Text = "Добавить";
+            this.toolStripButton9.Click += new System.EventHandler(this.toolStripButton9_Click);
             // 
             // toolStripButton10
             // 
@@ -1148,16 +1159,6 @@
             this.toolStripButton1.Name = "toolStripButton1";
             this.toolStripButton1.Size = new System.Drawing.Size(23, 22);
             this.toolStripButton1.Text = "toolStripButton1";
-            // 
-            // tabPage5
-            // 
-            this.tabPage5.Location = new System.Drawing.Point(4, 22);
-            this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(1097, 569);
-            this.tabPage5.TabIndex = 6;
-            this.tabPage5.Text = "tabPage5";
-            this.tabPage5.UseVisualStyleBackColor = true;
             // 
             // ReportsForm
             // 
