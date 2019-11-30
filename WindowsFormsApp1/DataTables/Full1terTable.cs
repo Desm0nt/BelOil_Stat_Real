@@ -17,6 +17,7 @@ namespace WindowsFormsApp1.DataTables
         public string Unit { get; set; }
         public string nUnit { get; set; }
         public int? fuel { get; set; }
+        public string fuel_name { get; set; }
         public int type { get; set; }
         public int id_rep { get; set; }
         public float koeff { get; set; }

@@ -2131,8 +2131,8 @@ namespace WindowsFormsApp1.DBO
         public static List<NormTable> GetNormListPR(int id_org, int id_rep, int num, int month, int year)
         {
             List<NormTable> NormList = new List<NormTable>();
-            //try
-            //{
+            try
+            {
                 SqlConnection myConnection = new SqlConnection(cnStr);
                 SqlConnection myConnection2 = new SqlConnection(cnStr);
                 myConnection.Open();
@@ -2158,18 +2158,22 @@ namespace WindowsFormsApp1.DBO
                                 string[] rowopt = !String.IsNullOrWhiteSpace(dr["row_options"].ToString()) ? dr["row_options"].ToString().Split(',') : new string[] { };
                                 float coeff = 0;
                                 int? fuel = !String.IsNullOrWhiteSpace(dr["fuel"].ToString()) ? Int32.Parse(dr["fuel"].ToString()) : 0;
+                                string fname = "";
                                 switch (Int32.Parse(dr["type"].ToString()))
                                 {
                                     case 1:
-                                        coeff = GetFuelData(fuel, year, month).B_y;
-                                        break; // переход к case 5
+                                        var fuels = GetFuelData(fuel, year, month);
+                                        coeff = fuels.B_y;
+                                        fname = fuels.name;
+                                        break;
                                     case 2:
                                         coeff = GetFactorData(Int32.Parse(dr["type"].ToString()), month, year).value;
                                         break;
                                     case 3:
                                         coeff = GetFactorData(Int32.Parse(dr["type"].ToString()), month, year).value;
                                         break;
-                                    default:;
+                                    default:
+                                        ;
                                         break;
                                 }
                                 NormList.Add(new NormTable
@@ -2180,6 +2184,7 @@ namespace WindowsFormsApp1.DBO
                                     Code = Int32.Parse(dr["code"].ToString()),
                                     name = dr["name"].ToString(),
                                     fuel = fuel,
+                                    fuel_name = " (" + fname + ")",
                                     type = Int32.Parse(dr["type"].ToString()),
                                     row_options = rowopt,
                                     Unit = GetNormUnit(Int32.Parse(dr["id_prod"].ToString())),
@@ -2200,11 +2205,11 @@ namespace WindowsFormsApp1.DBO
                     }
                 }
                 myConnection.Close();
-            //}
-            //catch (Exception Ex)
-            //{
-            //    KryptonMessageBox.Show("Ошибка GetNormListPR: " + Ex.Message);
-            //}
+            }
+            catch (Exception Ex)
+            {
+                KryptonMessageBox.Show("Ошибка GetNormListPR: " + Ex.Message);
+            }
             return NormList;
         }
 
@@ -2840,7 +2845,7 @@ namespace WindowsFormsApp1.DBO
                 SqlConnection myConnection = new SqlConnection(cnStr);
                 myConnection.Open();
 
-                string query = "SELECT COUNT(*)  FROM [NewFuels] where fuel_id = @fuel_id and year = @year and month = @month";
+                string query = "SELECT COUNT(*) FROM [NewFuels] where fuel_id = @fuel_id and year = @year and month = @month";
                 SqlCommand command = new SqlCommand(query, myConnection);
                 command.Parameters.AddWithValue("@fuel_id", fuel_id);
                 command.Parameters.AddWithValue("@year", year);

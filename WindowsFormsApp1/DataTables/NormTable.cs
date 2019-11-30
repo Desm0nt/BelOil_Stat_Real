@@ -18,6 +18,7 @@ namespace WindowsFormsApp1.DataTables
         public string nUnit { get; set; }
         public string name { get; set; }
         public int? fuel { get; set; }
+        public string fuel_name { get; set; }
         public int type { get; set; }
         public string[] row_options { get; set; }
         public float val_plan { get; set; }

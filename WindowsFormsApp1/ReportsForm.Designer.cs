@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            KryptonOutlookGrid.Classes.OutlookGridGroupCollection outlookGridGroupCollection1 = new KryptonOutlookGrid.Classes.OutlookGridGroupCollection();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ReportsForm));
             this.dateTimePicker1 = new ComponentFactory.Krypton.Toolkit.KryptonDateTimePicker();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -72,6 +73,12 @@
             this.CompanyBox = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.kryptonPanel5 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.kryptonPanel4 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.kryptonPanel3 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.kryptonPanel2 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.kryptonOutlookGrid1 = new KryptonOutlookGrid.Classes.KryptonOutlookGrid();
+            this.kryptonOutlookGridGroupBox1 = new KryptonOutlookGrid.Controls.KryptonOutlookGridGroupBox();
             this.kryptonManager1 = new ComponentFactory.Krypton.Toolkit.KryptonManager(this.components);
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -126,6 +133,31 @@
             this.RUPButton = new System.Windows.Forms.ToolStripButton();
             this.POButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.id_prod = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.id_local = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Code = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.unit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nUnit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fuel = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.id_rep = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.val_fact_old = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.B_y = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.val_plan = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.val_plan_ut = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.val_fact = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.vasl_fact_ut = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.factplan = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.factplanlast = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fsumpred = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.plan_sum = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sum_plan_ut = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sum_fatc = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sum_fact_ut = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sumplanfact = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sumfact_fact = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.type = new KryptonOutlookGrid.CustomColumns.KryptonDataGridViewTextAndImageColumn();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tabPage6.SuspendLayout();
@@ -136,6 +168,12 @@
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.CompanyBox)).BeginInit();
             this.tabControl1.SuspendLayout();
+            this.tabPage5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonOutlookGrid1)).BeginInit();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
             this.toolStripContainer1.SuspendLayout();
@@ -179,7 +217,7 @@
             this.cToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1379, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1487, 24);
             this.menuStrip1.TabIndex = 3;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -395,7 +433,7 @@
             this.tabPage6.Controls.Add(this.reoGridControl5);
             this.tabPage6.Location = new System.Drawing.Point(4, 22);
             this.tabPage6.Name = "tabPage6";
-            this.tabPage6.Size = new System.Drawing.Size(1097, 569);
+            this.tabPage6.Size = new System.Drawing.Size(1205, 569);
             this.tabPage6.TabIndex = 5;
             this.tabPage6.Text = "1-ТЭК";
             // 
@@ -425,7 +463,7 @@
             this.reoGridControl5.SheetTabVisible = true;
             this.reoGridControl5.SheetTabWidth = 60;
             this.reoGridControl5.ShowScrollEndSpacing = true;
-            this.reoGridControl5.Size = new System.Drawing.Size(1094, 757);
+            this.reoGridControl5.Size = new System.Drawing.Size(1202, 757);
             this.reoGridControl5.TabIndex = 2;
             this.reoGridControl5.Text = "reoGridControl5";
             // 
@@ -437,7 +475,7 @@
             this.tabPage4.Controls.Add(this.reoGridControl4);
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Size = new System.Drawing.Size(1097, 569);
+            this.tabPage4.Size = new System.Drawing.Size(1205, 569);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "4-норма";
             // 
@@ -476,7 +514,7 @@
             this.reoGridControl4.SheetTabVisible = true;
             this.reoGridControl4.SheetTabWidth = 60;
             this.reoGridControl4.ShowScrollEndSpacing = true;
-            this.reoGridControl4.Size = new System.Drawing.Size(1094, 758);
+            this.reoGridControl4.Size = new System.Drawing.Size(1202, 758);
             this.reoGridControl4.TabIndex = 2;
             this.reoGridControl4.Text = "reoGridControl4";
             // 
@@ -487,7 +525,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(1097, 569);
+            this.tabPage3.Size = new System.Drawing.Size(1205, 569);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Приложение к 12-ТЭК";
             // 
@@ -506,7 +544,7 @@
             this.reoGrid4.SheetTabVisible = true;
             this.reoGrid4.SheetTabWidth = 60;
             this.reoGrid4.ShowScrollEndSpacing = true;
-            this.reoGrid4.Size = new System.Drawing.Size(1091, 563);
+            this.reoGrid4.Size = new System.Drawing.Size(1199, 563);
             this.reoGrid4.TabIndex = 1;
             this.reoGrid4.Text = "reoGridControl4";
             // 
@@ -517,7 +555,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1097, 569);
+            this.tabPage2.Size = new System.Drawing.Size(1205, 569);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "12-ТЭК";
             // 
@@ -536,7 +574,7 @@
             this.reoGridControl2.SheetTabVisible = true;
             this.reoGridControl2.SheetTabWidth = 60;
             this.reoGridControl2.ShowScrollEndSpacing = true;
-            this.reoGridControl2.Size = new System.Drawing.Size(1091, 563);
+            this.reoGridControl2.Size = new System.Drawing.Size(1199, 563);
             this.reoGridControl2.TabIndex = 0;
             this.reoGridControl2.Text = "reoGridControl2";
             // 
@@ -549,7 +587,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1097, 569);
+            this.tabPage1.Size = new System.Drawing.Size(1205, 569);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "1-ПЭР";
             // 
@@ -568,7 +606,7 @@
             this.reoGridControl1.SheetTabVisible = true;
             this.reoGridControl1.SheetTabWidth = 60;
             this.reoGridControl1.ShowScrollEndSpacing = true;
-            this.reoGridControl1.Size = new System.Drawing.Size(1091, 563);
+            this.reoGridControl1.Size = new System.Drawing.Size(1199, 563);
             this.reoGridControl1.TabIndex = 0;
             this.reoGridControl1.Text = "reoGridControl1";
             // 
@@ -604,19 +642,124 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1105, 595);
+            this.tabControl1.Size = new System.Drawing.Size(1213, 595);
             this.tabControl1.TabIndex = 0;
             this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
             // tabPage5
             // 
+            this.tabPage5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(246)))), ((int)(((byte)(254)))));
+            this.tabPage5.Controls.Add(this.kryptonPanel5);
+            this.tabPage5.Controls.Add(this.kryptonPanel4);
+            this.tabPage5.Controls.Add(this.kryptonPanel3);
+            this.tabPage5.Controls.Add(this.kryptonPanel2);
+            this.tabPage5.Controls.Add(this.kryptonOutlookGrid1);
+            this.tabPage5.Controls.Add(this.kryptonOutlookGridGroupBox1);
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(1097, 569);
+            this.tabPage5.Size = new System.Drawing.Size(1205, 569);
             this.tabPage5.TabIndex = 6;
             this.tabPage5.Text = "tabPage5";
-            this.tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // kryptonPanel5
+            // 
+            this.kryptonPanel5.AutoSize = true;
+            this.kryptonPanel5.Location = new System.Drawing.Point(773, 1);
+            this.kryptonPanel5.Name = "kryptonPanel5";
+            this.kryptonPanel5.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Office2007Blue;
+            this.kryptonPanel5.PanelBackStyle = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ControlToolTip;
+            this.kryptonPanel5.Size = new System.Drawing.Size(324, 20);
+            this.kryptonPanel5.TabIndex = 5;
+            // 
+            // kryptonPanel4
+            // 
+            this.kryptonPanel4.AutoSize = true;
+            this.kryptonPanel4.Location = new System.Drawing.Point(392, 1);
+            this.kryptonPanel4.Name = "kryptonPanel4";
+            this.kryptonPanel4.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Office2007Blue;
+            this.kryptonPanel4.PanelBackStyle = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ControlToolTip;
+            this.kryptonPanel4.Size = new System.Drawing.Size(381, 20);
+            this.kryptonPanel4.TabIndex = 4;
+            // 
+            // kryptonPanel3
+            // 
+            this.kryptonPanel3.AutoSize = true;
+            this.kryptonPanel3.Location = new System.Drawing.Point(11, 1);
+            this.kryptonPanel3.Name = "kryptonPanel3";
+            this.kryptonPanel3.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Office2007Blue;
+            this.kryptonPanel3.PanelBackStyle = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ControlToolTip;
+            this.kryptonPanel3.Size = new System.Drawing.Size(381, 20);
+            this.kryptonPanel3.TabIndex = 3;
+            // 
+            // kryptonPanel2
+            // 
+            this.kryptonPanel2.AutoSize = true;
+            this.kryptonPanel2.Location = new System.Drawing.Point(1, 1);
+            this.kryptonPanel2.Name = "kryptonPanel2";
+            this.kryptonPanel2.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Office2007Blue;
+            this.kryptonPanel2.PanelBackStyle = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ControlToolTip;
+            this.kryptonPanel2.Size = new System.Drawing.Size(10, 20);
+            this.kryptonPanel2.TabIndex = 2;
+            // 
+            // kryptonOutlookGrid1
+            // 
+            this.kryptonOutlookGrid1.AllowUserToAddRows = false;
+            this.kryptonOutlookGrid1.AllowUserToDeleteRows = false;
+            this.kryptonOutlookGrid1.AllowUserToResizeRows = false;
+            this.kryptonOutlookGrid1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.kryptonOutlookGrid1.ColumnHeadersHeight = 19;
+            this.kryptonOutlookGrid1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.id,
+            this.id_prod,
+            this.id_local,
+            this.Code,
+            this.name,
+            this.unit,
+            this.nUnit,
+            this.fuel,
+            this.id_rep,
+            this.val_fact_old,
+            this.B_y,
+            this.val_plan,
+            this.val_plan_ut,
+            this.val_fact,
+            this.vasl_fact_ut,
+            this.factplan,
+            this.factplanlast,
+            this.fsumpred,
+            this.plan_sum,
+            this.sum_plan_ut,
+            this.sum_fatc,
+            this.sum_fact_ut,
+            this.sumplanfact,
+            this.sumfact_fact,
+            this.type});
+            this.kryptonOutlookGrid1.FillMode = KryptonOutlookGrid.Classes.FillMode.GROUPSONLY;
+            this.kryptonOutlookGrid1.GridStyles.Style = ComponentFactory.Krypton.Toolkit.DataGridViewStyle.Mixed;
+            this.kryptonOutlookGrid1.GridStyles.StyleBackground = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ControlRibbon;
+            this.kryptonOutlookGrid1.GroupCollection = outlookGridGroupCollection1;
+            this.kryptonOutlookGrid1.Location = new System.Drawing.Point(2, 23);
+            this.kryptonOutlookGrid1.MultiSelect = false;
+            this.kryptonOutlookGrid1.Name = "kryptonOutlookGrid1";
+            this.kryptonOutlookGrid1.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Office2007Blue;
+            this.kryptonOutlookGrid1.PreviousSelectedGroupRow = -1;
+            this.kryptonOutlookGrid1.RowHeadersWidth = 10;
+            this.kryptonOutlookGrid1.ShowLines = false;
+            this.kryptonOutlookGrid1.Size = new System.Drawing.Size(1203, 544);
+            this.kryptonOutlookGrid1.TabIndex = 0;
+            this.kryptonOutlookGrid1.Resize += new System.EventHandler(this.kryptonOutlookGrid1_Resize);
+            // 
+            // kryptonOutlookGridGroupBox1
+            // 
+            this.kryptonOutlookGridGroupBox1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.kryptonOutlookGridGroupBox1.Location = new System.Drawing.Point(176, 356);
+            this.kryptonOutlookGridGroupBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.kryptonOutlookGridGroupBox1.Name = "kryptonOutlookGridGroupBox1";
+            this.kryptonOutlookGridGroupBox1.Size = new System.Drawing.Size(744, 46);
+            this.kryptonOutlookGridGroupBox1.TabIndex = 6;
             // 
             // kryptonManager1
             // 
@@ -629,11 +772,11 @@
             // 
             this.toolStripContainer1.ContentPanel.Controls.Add(this.panel3);
             this.toolStripContainer1.ContentPanel.Controls.Add(this.kryptonHeaderGroup3);
-            this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(1379, 600);
+            this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(1487, 600);
             this.toolStripContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.toolStripContainer1.Location = new System.Drawing.Point(0, 0);
             this.toolStripContainer1.Name = "toolStripContainer1";
-            this.toolStripContainer1.Size = new System.Drawing.Size(1379, 699);
+            this.toolStripContainer1.Size = new System.Drawing.Size(1487, 699);
             this.toolStripContainer1.TabIndex = 10;
             this.toolStripContainer1.Text = "toolStripContainer1";
             // 
@@ -653,7 +796,7 @@
             this.panel3.Controls.Add(this.tabControl1);
             this.panel3.Location = new System.Drawing.Point(271, 2);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1105, 595);
+            this.panel3.Size = new System.Drawing.Size(1213, 595);
             this.panel3.TabIndex = 5;
             // 
             // kryptonHeaderGroup3
@@ -1160,12 +1303,214 @@
             this.toolStripButton1.Size = new System.Drawing.Size(23, 22);
             this.toolStripButton1.Text = "toolStripButton1";
             // 
+            // id
+            // 
+            this.id.HeaderText = "id";
+            this.id.Name = "id";
+            this.id.ReadOnly = true;
+            this.id.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.id.Visible = false;
+            // 
+            // id_prod
+            // 
+            this.id_prod.HeaderText = "id продукта";
+            this.id_prod.Name = "id_prod";
+            this.id_prod.ReadOnly = true;
+            this.id_prod.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.id_prod.Visible = false;
+            // 
+            // id_local
+            // 
+            this.id_local.HeaderText = "id_local";
+            this.id_local.Name = "id_local";
+            this.id_local.ReadOnly = true;
+            this.id_local.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.id_local.Visible = false;
+            // 
+            // Code
+            // 
+            this.Code.HeaderText = "#";
+            this.Code.Name = "Code";
+            this.Code.ReadOnly = true;
+            this.Code.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Code.Width = 50;
+            // 
+            // name
+            // 
+            this.name.HeaderText = "Наименование";
+            this.name.Name = "name";
+            this.name.ReadOnly = true;
+            this.name.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.name.Width = 150;
+            // 
+            // unit
+            // 
+            this.unit.HeaderText = "ед. изм.";
+            this.unit.Name = "unit";
+            this.unit.ReadOnly = true;
+            this.unit.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.unit.Width = 55;
+            // 
+            // nUnit
+            // 
+            this.nUnit.HeaderText = "ед. изм. т.у.т.";
+            this.nUnit.Name = "nUnit";
+            this.nUnit.ReadOnly = true;
+            this.nUnit.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.nUnit.Visible = false;
+            // 
+            // fuel
+            // 
+            this.fuel.HeaderText = "id топлива";
+            this.fuel.Name = "fuel";
+            this.fuel.ReadOnly = true;
+            this.fuel.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.fuel.Visible = false;
+            // 
+            // id_rep
+            // 
+            this.id_rep.HeaderText = "id отчета";
+            this.id_rep.Name = "id_rep";
+            this.id_rep.ReadOnly = true;
+            this.id_rep.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.id_rep.Visible = false;
+            // 
+            // val_fact_old
+            // 
+            this.val_fact_old.HeaderText = "Факт, пред.";
+            this.val_fact_old.Name = "val_fact_old";
+            this.val_fact_old.ReadOnly = true;
+            this.val_fact_old.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.val_fact_old.Width = 70;
+            // 
+            // B_y
+            // 
+            this.B_y.HeaderText = "By";
+            this.B_y.Name = "B_y";
+            this.B_y.ReadOnly = true;
+            this.B_y.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.B_y.Width = 45;
+            // 
+            // val_plan
+            // 
+            this.val_plan.HeaderText = "План";
+            this.val_plan.Name = "val_plan";
+            this.val_plan.ReadOnly = true;
+            this.val_plan.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.val_plan.Width = 70;
+            // 
+            // val_plan_ut
+            // 
+            this.val_plan_ut.HeaderText = "П, т.у.т.";
+            this.val_plan_ut.Name = "val_plan_ut";
+            this.val_plan_ut.ReadOnly = true;
+            this.val_plan_ut.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.val_plan_ut.Width = 65;
+            // 
+            // val_fact
+            // 
+            this.val_fact.HeaderText = "Факт";
+            this.val_fact.Name = "val_fact";
+            this.val_fact.ReadOnly = true;
+            this.val_fact.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.val_fact.Width = 70;
+            // 
+            // vasl_fact_ut
+            // 
+            this.vasl_fact_ut.HeaderText = "Ф, т.у.т.";
+            this.vasl_fact_ut.Name = "vasl_fact_ut";
+            this.vasl_fact_ut.ReadOnly = true;
+            this.vasl_fact_ut.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.vasl_fact_ut.Width = 65;
+            // 
+            // factplan
+            // 
+            this.factplan.HeaderText = "Ф/П, %";
+            this.factplan.Name = "factplan";
+            this.factplan.ReadOnly = true;
+            this.factplan.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.factplan.Width = 50;
+            // 
+            // factplanlast
+            // 
+            this.factplanlast.HeaderText = "Ф/Ф (пред.)";
+            this.factplanlast.Name = "factplanlast";
+            this.factplanlast.ReadOnly = true;
+            this.factplanlast.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.factplanlast.Width = 70;
+            // 
+            // fsumpred
+            // 
+            this.fsumpred.HeaderText = "Факт, пред";
+            this.fsumpred.Name = "fsumpred";
+            this.fsumpred.ReadOnly = true;
+            this.fsumpred.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.fsumpred.Width = 70;
+            // 
+            // plan_sum
+            // 
+            this.plan_sum.HeaderText = "План";
+            this.plan_sum.Name = "plan_sum";
+            this.plan_sum.ReadOnly = true;
+            this.plan_sum.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.plan_sum.Width = 65;
+            // 
+            // sum_plan_ut
+            // 
+            this.sum_plan_ut.HeaderText = "П, т.у.т.";
+            this.sum_plan_ut.Name = "sum_plan_ut";
+            this.sum_plan_ut.ReadOnly = true;
+            this.sum_plan_ut.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.sum_plan_ut.Width = 65;
+            // 
+            // sum_fatc
+            // 
+            this.sum_fatc.HeaderText = "Факт";
+            this.sum_fatc.Name = "sum_fatc";
+            this.sum_fatc.ReadOnly = true;
+            this.sum_fatc.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.sum_fatc.Width = 65;
+            // 
+            // sum_fact_ut
+            // 
+            this.sum_fact_ut.HeaderText = "Ф, т.у.т.";
+            this.sum_fact_ut.Name = "sum_fact_ut";
+            this.sum_fact_ut.ReadOnly = true;
+            this.sum_fact_ut.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.sum_fact_ut.Width = 65;
+            // 
+            // sumplanfact
+            // 
+            this.sumplanfact.HeaderText = "Ф/П, %";
+            this.sumplanfact.Name = "sumplanfact";
+            this.sumplanfact.ReadOnly = true;
+            this.sumplanfact.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.sumplanfact.Width = 50;
+            // 
+            // sumfact_fact
+            // 
+            this.sumfact_fact.HeaderText = "Ф/Ф (пред)";
+            this.sumfact_fact.Name = "sumfact_fact";
+            this.sumfact_fact.ReadOnly = true;
+            this.sumfact_fact.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.sumfact_fact.Width = 70;
+            // 
+            // type
+            // 
+            this.type.HeaderText = "Тип";
+            this.type.Name = "type";
+            this.type.ReadOnly = true;
+            this.type.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.type.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.type.Visible = false;
+            this.type.Width = 5;
+            // 
             // ReportsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(246)))), ((int)(((byte)(254)))));
-            this.ClientSize = new System.Drawing.Size(1379, 699);
+            this.ClientSize = new System.Drawing.Size(1487, 699);
             this.Controls.Add(this.toolStripContainer1);
             this.Controls.Add(this.panel1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -1184,6 +1529,13 @@
             this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.CompanyBox)).EndInit();
             this.tabControl1.ResumeLayout(false);
+            this.tabPage5.ResumeLayout(false);
+            this.tabPage5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonOutlookGrid1)).EndInit();
             this.toolStripContainer1.ContentPanel.ResumeLayout(false);
             this.toolStripContainer1.TopToolStripPanel.ResumeLayout(false);
             this.toolStripContainer1.TopToolStripPanel.PerformLayout();
@@ -1309,5 +1661,36 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
         private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.TabPage tabPage5;
+        private ComponentFactory.Krypton.Toolkit.KryptonPanel kryptonPanel5;
+        private ComponentFactory.Krypton.Toolkit.KryptonPanel kryptonPanel4;
+        private ComponentFactory.Krypton.Toolkit.KryptonPanel kryptonPanel3;
+        private ComponentFactory.Krypton.Toolkit.KryptonPanel kryptonPanel2;
+        private KryptonOutlookGrid.Classes.KryptonOutlookGrid kryptonOutlookGrid1;
+        private KryptonOutlookGrid.Controls.KryptonOutlookGridGroupBox kryptonOutlookGridGroupBox1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn id_prod;
+        private System.Windows.Forms.DataGridViewTextBoxColumn id_local;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Code;
+        private System.Windows.Forms.DataGridViewTextBoxColumn name;
+        private System.Windows.Forms.DataGridViewTextBoxColumn unit;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nUnit;
+        private System.Windows.Forms.DataGridViewTextBoxColumn fuel;
+        private System.Windows.Forms.DataGridViewTextBoxColumn id_rep;
+        private System.Windows.Forms.DataGridViewTextBoxColumn val_fact_old;
+        private System.Windows.Forms.DataGridViewTextBoxColumn B_y;
+        private System.Windows.Forms.DataGridViewTextBoxColumn val_plan;
+        private System.Windows.Forms.DataGridViewTextBoxColumn val_plan_ut;
+        private System.Windows.Forms.DataGridViewTextBoxColumn val_fact;
+        private System.Windows.Forms.DataGridViewTextBoxColumn vasl_fact_ut;
+        private System.Windows.Forms.DataGridViewTextBoxColumn factplan;
+        private System.Windows.Forms.DataGridViewTextBoxColumn factplanlast;
+        private System.Windows.Forms.DataGridViewTextBoxColumn fsumpred;
+        private System.Windows.Forms.DataGridViewTextBoxColumn plan_sum;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sum_plan_ut;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sum_fatc;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sum_fact_ut;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sumplanfact;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sumfact_fact;
+        private KryptonOutlookGrid.CustomColumns.KryptonDataGridViewTextAndImageColumn type;
     }
 }
