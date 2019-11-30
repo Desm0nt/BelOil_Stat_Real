@@ -765,9 +765,9 @@ namespace WindowsFormsApp1
         {
             KryptonOutlookGrid.Classes.KryptonOutlookGrid grid = (KryptonOutlookGrid.Classes.KryptonOutlookGrid)sender;
             kryptonPanel3.Width = grid.Columns[3].Width + grid.Columns[4].Width + grid.Columns[5].Width - 1;
-            kryptonPanel4.Left = 10 + grid.Columns[3].Width + grid.Columns[4].Width + grid.Columns[5].Width - 1;
+            kryptonPanel4.Left = 10 + grid.Columns[3].Width + grid.Columns[4].Width + grid.Columns[5].Width;
             kryptonPanel4.Width = grid.Columns[9].Width + grid.Columns[10].Width + grid.Columns[11].Width + grid.Columns[12].Width + grid.Columns[13].Width + grid.Columns[14].Width + grid.Columns[15].Width + grid.Columns[16].Width - 1;
-            kryptonPanel5.Left = 10 + grid.Columns[3].Width + grid.Columns[4].Width + grid.Columns[5].Width + grid.Columns[9].Width + grid.Columns[10].Width + grid.Columns[11].Width + grid.Columns[12].Width + grid.Columns[13].Width + grid.Columns[14].Width + grid.Columns[15].Width + grid.Columns[16].Width - 1;
+            kryptonPanel5.Left = 10 + grid.Columns[3].Width + grid.Columns[4].Width + grid.Columns[5].Width + grid.Columns[9].Width + grid.Columns[10].Width + grid.Columns[11].Width + grid.Columns[12].Width + grid.Columns[13].Width + grid.Columns[14].Width + grid.Columns[15].Width + grid.Columns[16].Width;
             kryptonPanel5.Width = grid.Columns[17].Width + grid.Columns[18].Width + grid.Columns[19].Width + grid.Columns[20].Width + grid.Columns[21].Width + grid.Columns[22].Width + grid.Columns[23].Width - 1;          
             label1.Left = kryptonPanel3.Width / 2 - label1.Width / 2;
             label2.Left = kryptonPanel4.Width / 2 - label2.Width / 2;
