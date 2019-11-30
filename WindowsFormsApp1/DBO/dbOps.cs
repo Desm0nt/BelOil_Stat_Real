@@ -2137,71 +2137,61 @@ namespace WindowsFormsApp1.DBO
                 SqlConnection myConnection2 = new SqlConnection(cnStr);
                 myConnection.Open();
 
-                string query = "SELECT * FROM [NewNorm] where id_org = @id_org and num = @num";
+                string query = "exec dbo.GetNormListPR @id_org, @id_rep, @num, @month, @year";
                 SqlCommand command = new SqlCommand(query, myConnection);
                 command.Parameters.AddWithValue("@id_org", id_org);
                 command.Parameters.AddWithValue("@num", num);
+                command.Parameters.AddWithValue("@id_rep", id_rep);
+                command.Parameters.AddWithValue("@month", month);
+                command.Parameters.AddWithValue("@year", year);
                 using (SqlDataReader dr = command.ExecuteReader())
                 {
                     while (dr.Read())
                     {
-                        myConnection2.Open();
-                        string query2 = "SELECT * FROM [NewNormData] WHERE [id_norm] = @id_norm AND [id_rep] = @id_rep";
-                        SqlCommand command2 = new SqlCommand(query2, myConnection2);
-                        command2.Parameters.AddWithValue("@id_norm", Int32.Parse(dr["norm_code"].ToString()));
-                        command2.Parameters.AddWithValue("@id_rep", id_rep);
-                        var a = Int32.Parse(dr["id"].ToString());
-                        using (SqlDataReader dr2 = command2.ExecuteReader())
+                        string[] rowopt = !String.IsNullOrWhiteSpace(dr["row_options"].ToString()) ? dr["row_options"].ToString().Split(',') : new string[] { };
+                        float coeff = 0;
+                        int fuel = 0;
+                        string fname = "";
+                        switch (Int32.Parse(dr["type"].ToString()))
                         {
-                            while (dr2.Read())
-                            {
-                                string[] rowopt = !String.IsNullOrWhiteSpace(dr["row_options"].ToString()) ? dr["row_options"].ToString().Split(',') : new string[] { };
-                                float coeff = 0;
-                                int? fuel = !String.IsNullOrWhiteSpace(dr["fuel"].ToString()) ? Int32.Parse(dr["fuel"].ToString()) : 0;
-                                string fname = "";
-                                switch (Int32.Parse(dr["type"].ToString()))
-                                {
-                                    case 1:
-                                        var fuels = GetFuelData(fuel, year, month);
-                                        coeff = fuels.B_y;
-                                        fname = fuels.name;
-                                        break;
-                                    case 2:
-                                        coeff = GetFactorData(Int32.Parse(dr["type"].ToString()), month, year).value;
-                                        break;
-                                    case 3:
-                                        coeff = GetFactorData(Int32.Parse(dr["type"].ToString()), month, year).value;
-                                        break;
-                                    default:
-                                        ;
-                                        break;
-                                }
-                                NormList.Add(new NormTable
-                                {
-                                    Id = Int32.Parse(dr["id"].ToString()),
-                                    Id_org = Int32.Parse(dr["id_org"].ToString()),
-                                    Id_prod = Int32.Parse(dr["id_prod"].ToString()),
-                                    Code = Int32.Parse(dr["code"].ToString()),
-                                    name = dr["name"].ToString(),
-                                    fuel = fuel,
-                                    fuel_name = " (" + fname + ")",
-                                    type = Int32.Parse(dr["type"].ToString()),
-                                    row_options = rowopt,
-                                    Unit = GetNormUnit(Int32.Parse(dr["id_prod"].ToString())),
-                                    nUnit = GetNormNUnit(Int32.Parse(dr["id_prod"].ToString())),
-                                    val_plan = float.Parse(dr2["value_plan"].ToString()),
-                                    val_fact = float.Parse(dr2["value_fact"].ToString()),
-                                    val_fact_ut = float.Parse(dr2["value_fact"].ToString()) * coeff,
-                                    val_plan_ut = float.Parse(dr2["value_fact"].ToString()) * coeff,
-                                    norm_code = Int32.Parse(dr["norm_code"].ToString()),
-                                    Id_local = Int64.Parse(dr["id_local"].ToString()),
-                                    editable = false,
-                                    id_obj = Int32.Parse(dr["id_obj"].ToString())
-
-                                });
-                            }
+                            case 1:
+                                coeff = float.Parse(dr["B_y"].ToString());
+                                fname = dr["fuel_name"].ToString();
+                                fuel = Int32.Parse(dr["fuel"].ToString());
+                                break;
+                            case 2:
+                                coeff = float.Parse(dr["gkal"].ToString());
+                                break;
+                            case 3:
+                                coeff = float.Parse(dr["kvch"].ToString());
+                                break;
+                            default:
+                                ;
+                                break;
                         }
-                        myConnection2.Close();
+                        NormList.Add(new NormTable
+                        {
+                            Id = Int32.Parse(dr["id"].ToString()),
+                            Id_org = Int32.Parse(dr["id_org"].ToString()),
+                            Id_prod = Int32.Parse(dr["id_prod"].ToString()),
+                            Code = Int32.Parse(dr["code"].ToString()),
+                            name = dr["name"].ToString(),
+                            fuel = fuel,
+                            fuel_name = " (" + fname + ")",
+                            type = Int32.Parse(dr["type"].ToString()),
+                            row_options = rowopt,
+                            Unit = GetNormUnit(Int32.Parse(dr["id_prod"].ToString())),
+                            nUnit = GetNormNUnit(Int32.Parse(dr["id_prod"].ToString())),
+                            val_plan = float.Parse(dr["value_plan"].ToString()),
+                            val_fact = float.Parse(dr["value_fact"].ToString()),
+                            val_fact_ut = float.Parse(dr["value_fact"].ToString()) * coeff,
+                            val_plan_ut = float.Parse(dr["value_fact"].ToString()) * coeff,
+                            norm_code = Int32.Parse(dr["norm_code"].ToString()),
+                            Id_local = Int64.Parse(dr["id_local"].ToString()),
+                            editable = false,
+                            id_obj = Int32.Parse(dr["id_obj"].ToString())
+
+                        });
                     }
                 }
                 myConnection.Close();
@@ -2213,66 +2203,6 @@ namespace WindowsFormsApp1.DBO
             return NormList;
         }
 
-        public static List<NormTable> GetNormList(int id_org, int id_rep)
-        {
-            List<NormTable> NormList = new List<NormTable>();
-            try
-            {
-                SqlConnection myConnection = new SqlConnection(cnStr);
-                SqlConnection myConnection2 = new SqlConnection(cnStr);
-                myConnection.Open();
-
-                string query = "SELECT * FROM [NewNorm] where id_org = @id_org";
-                SqlCommand command = new SqlCommand(query, myConnection);
-                command.Parameters.AddWithValue("@id_org", id_org);
-                using (SqlDataReader dr = command.ExecuteReader())
-                {
-                    while (dr.Read())
-                    {
-                        myConnection2.Open();
-                        string query2 = "SELECT * FROM [NewNormData] WHERE [id_norm] = @id_norm AND [id_rep] = @id_rep";
-                        SqlCommand command2 = new SqlCommand(query2, myConnection2);
-                        command2.Parameters.AddWithValue("@id_norm", Int32.Parse(dr["id"].ToString()));
-                        command2.Parameters.AddWithValue("@id_rep", id_rep);
-                        var a = Int32.Parse(dr["id"].ToString());
-                        using (SqlDataReader dr2 = command2.ExecuteReader())
-                        {
-                            while (dr2.Read())
-                            {
-                                string[] rowopt = !String.IsNullOrWhiteSpace(dr["row_options"].ToString())?dr["row_options"].ToString().Split(','): new string[] { };
-                                NormList.Add(new NormTable
-                                {
-                                    Id = Int32.Parse(dr["id"].ToString()),
-                                    Id_org = Int32.Parse(dr["id_org"].ToString()),
-                                    Id_prod = Int32.Parse(dr["id_prod"].ToString()),
-                                    Code = Int32.Parse(dr["code"].ToString()),
-                                    name = dr["name"].ToString(),
-                                    fuel = !String.IsNullOrWhiteSpace(dr["fuel"].ToString()) ? Int32.Parse(dr["fuel"].ToString()) : 0,
-                                    type = Int32.Parse(dr["type"].ToString()),
-                                    row_options = rowopt,
-                                    Unit = GetNormUnit(Int32.Parse(dr["id_prod"].ToString())),
-                                    nUnit = GetNormNUnit(Int32.Parse(dr["id_prod"].ToString())),
-                                    val_plan = float.Parse(dr2["value_plan"].ToString()),
-                                    val_fact = float.Parse(dr2["value_fact"].ToString()),
-                                    val_fact_ut = 0,
-                                    val_plan_ut = 0,
-                                    norm_code = Int32.Parse(dr["norm_code"].ToString()),
-                                    editable = false,
-                                    id_obj = Int32.Parse(dr["id_obj"].ToString())
-                                });
-                            }
-                        }
-                        myConnection2.Close();
-                    }
-                }
-                myConnection.Close();
-            }
-            catch (Exception Ex)
-            {
-                KryptonMessageBox.Show("Ошибка получения данных организации: " + Ex.Message);
-            }
-            return NormList;
-        }
         public static List<NormTable> GetNormInputList(int id_org, int id_rep, int type, int year, int month)
         {
             List<NormTable> NormList = new List<NormTable>();
@@ -2861,7 +2791,7 @@ namespace WindowsFormsApp1.DBO
                 }
                 else
                 {
-                    query = "SELECT * FROM [NewFuels] WHERE fuel_id = @fuel_id and time_id = (SELECT MAX(time_id) FROM [NewFuels])";
+                    query = "SELECT * FROM [NewFuels] WHERE fuel_id = @fuel_id and time_id = (SELECT MAX(time_id) FROM [NewFuels] where fuel_id = @fuel_id and year <= @year and month <= @month)";
                     command = new SqlCommand(query, myConnection);
                     command.Parameters.AddWithValue("@fuel_id", fuel_id);
                     command.Parameters.AddWithValue("@year", year);
