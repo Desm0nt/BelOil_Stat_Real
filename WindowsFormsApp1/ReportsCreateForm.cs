@@ -712,10 +712,10 @@ namespace WindowsFormsApp1
             }
         }
 
+
         private void panel_Paint(object sender, PaintEventArgs e)
         {
             Panel pan = (Panel)sender;
-
             ControlPaint.DrawBorder(e.Graphics, pan.ClientRectangle, System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(203)))), ((int)(((byte)(227))))), ButtonBorderStyle.Solid);
         }
     }
