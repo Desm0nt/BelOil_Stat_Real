@@ -1065,7 +1065,7 @@ namespace WindowsFormsApp1
             foreach (OutlookGridRow a in kryptonOutlookGrid10.Rows)
             {
                 if (a.Cells[1].Value != null)
-                    dbOps.AddNewOrgSource(DateTime.Now.Year, DateTime.Now.Month, profilenum, cur_org_id, Int32.Parse(a.Cells[1].Value.ToString()), Int32.Parse(a.Cells[2].Value.ToString()), Int32.Parse(a.Cells[1].Value.ToString()));
+                    dbOps.AddNewOrgSource(DateTime.Now.Year, DateTime.Now.Month, profilenum, cur_org_id, Int32.Parse(a.Cells[1].Value.ToString()), Int32.Parse(a.Cells[2].Value.ToString()), Int32.Parse(a.Cells[5].Value.ToString()));
             }
             //Добавление Sended & Recieved
             foreach (OutlookGridRow a in kryptonOutlookGrid1.Rows)

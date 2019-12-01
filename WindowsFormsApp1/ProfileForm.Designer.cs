@@ -29,38 +29,38 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            KryptonOutlookGrid.Classes.OutlookGridGroupCollection outlookGridGroupCollection21 = new KryptonOutlookGrid.Classes.OutlookGridGroupCollection();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle43 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle44 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle45 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle46 = new System.Windows.Forms.DataGridViewCellStyle();
-            KryptonOutlookGrid.Classes.OutlookGridGroupCollection outlookGridGroupCollection22 = new KryptonOutlookGrid.Classes.OutlookGridGroupCollection();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle47 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle48 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle49 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle50 = new System.Windows.Forms.DataGridViewCellStyle();
-            KryptonOutlookGrid.Classes.OutlookGridGroupCollection outlookGridGroupCollection23 = new KryptonOutlookGrid.Classes.OutlookGridGroupCollection();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle51 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle52 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle53 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle54 = new System.Windows.Forms.DataGridViewCellStyle();
-            KryptonOutlookGrid.Classes.OutlookGridGroupCollection outlookGridGroupCollection24 = new KryptonOutlookGrid.Classes.OutlookGridGroupCollection();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle55 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle56 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle57 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle58 = new System.Windows.Forms.DataGridViewCellStyle();
-            KryptonOutlookGrid.Classes.OutlookGridGroupCollection outlookGridGroupCollection25 = new KryptonOutlookGrid.Classes.OutlookGridGroupCollection();
-            KryptonOutlookGrid.Classes.OutlookGridGroupCollection outlookGridGroupCollection26 = new KryptonOutlookGrid.Classes.OutlookGridGroupCollection();
-            KryptonOutlookGrid.Classes.OutlookGridGroupCollection outlookGridGroupCollection27 = new KryptonOutlookGrid.Classes.OutlookGridGroupCollection();
-            KryptonOutlookGrid.Classes.OutlookGridGroupCollection outlookGridGroupCollection28 = new KryptonOutlookGrid.Classes.OutlookGridGroupCollection();
+            KryptonOutlookGrid.Classes.OutlookGridGroupCollection outlookGridGroupCollection11 = new KryptonOutlookGrid.Classes.OutlookGridGroupCollection();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
+            KryptonOutlookGrid.Classes.OutlookGridGroupCollection outlookGridGroupCollection12 = new KryptonOutlookGrid.Classes.OutlookGridGroupCollection();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle28 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle29 = new System.Windows.Forms.DataGridViewCellStyle();
+            KryptonOutlookGrid.Classes.OutlookGridGroupCollection outlookGridGroupCollection13 = new KryptonOutlookGrid.Classes.OutlookGridGroupCollection();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle30 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle31 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle32 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle33 = new System.Windows.Forms.DataGridViewCellStyle();
+            KryptonOutlookGrid.Classes.OutlookGridGroupCollection outlookGridGroupCollection14 = new KryptonOutlookGrid.Classes.OutlookGridGroupCollection();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle34 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle35 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle36 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle37 = new System.Windows.Forms.DataGridViewCellStyle();
+            KryptonOutlookGrid.Classes.OutlookGridGroupCollection outlookGridGroupCollection15 = new KryptonOutlookGrid.Classes.OutlookGridGroupCollection();
+            KryptonOutlookGrid.Classes.OutlookGridGroupCollection outlookGridGroupCollection16 = new KryptonOutlookGrid.Classes.OutlookGridGroupCollection();
+            KryptonOutlookGrid.Classes.OutlookGridGroupCollection outlookGridGroupCollection17 = new KryptonOutlookGrid.Classes.OutlookGridGroupCollection();
+            KryptonOutlookGrid.Classes.OutlookGridGroupCollection outlookGridGroupCollection18 = new KryptonOutlookGrid.Classes.OutlookGridGroupCollection();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ProfileForm));
-            KryptonOutlookGrid.Classes.OutlookGridGroupCollection outlookGridGroupCollection29 = new KryptonOutlookGrid.Classes.OutlookGridGroupCollection();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle59 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle60 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle61 = new System.Windows.Forms.DataGridViewCellStyle();
-            KryptonOutlookGrid.Classes.OutlookGridGroupCollection outlookGridGroupCollection30 = new KryptonOutlookGrid.Classes.OutlookGridGroupCollection();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle62 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle63 = new System.Windows.Forms.DataGridViewCellStyle();
+            KryptonOutlookGrid.Classes.OutlookGridGroupCollection outlookGridGroupCollection19 = new KryptonOutlookGrid.Classes.OutlookGridGroupCollection();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle38 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle39 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle40 = new System.Windows.Forms.DataGridViewCellStyle();
+            KryptonOutlookGrid.Classes.OutlookGridGroupCollection outlookGridGroupCollection20 = new KryptonOutlookGrid.Classes.OutlookGridGroupCollection();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle41 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle42 = new System.Windows.Forms.DataGridViewCellStyle();
             this.kryptonHeaderGroup1 = new ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup();
             this.panel1 = new System.Windows.Forms.Panel();
             this.mailTextBox = new System.Windows.Forms.TextBox();
@@ -685,7 +685,7 @@
             this.kryptonOutlookGrid9.FillMode = KryptonOutlookGrid.Classes.FillMode.GROUPSONLY;
             this.kryptonOutlookGrid9.GridStyles.Style = ComponentFactory.Krypton.Toolkit.DataGridViewStyle.Mixed;
             this.kryptonOutlookGrid9.GridStyles.StyleBackground = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ControlRibbon;
-            this.kryptonOutlookGrid9.GroupCollection = outlookGridGroupCollection21;
+            this.kryptonOutlookGrid9.GroupCollection = outlookGridGroupCollection11;
             this.kryptonOutlookGrid9.HideColumnOnGrouping = true;
             this.kryptonOutlookGrid9.Location = new System.Drawing.Point(0, 0);
             this.kryptonOutlookGrid9.MultiSelect = false;
@@ -709,8 +709,8 @@
             // 
             // Code
             // 
-            dataGridViewCellStyle43.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Code.DefaultCellStyle = dataGridViewCellStyle43;
+            dataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Code.DefaultCellStyle = dataGridViewCellStyle22;
             this.Code.HeaderText = "#";
             this.Code.Name = "Code";
             this.Code.ReadOnly = true;
@@ -720,8 +720,8 @@
             // 
             // Names
             // 
-            dataGridViewCellStyle44.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.Names.DefaultCellStyle = dataGridViewCellStyle44;
+            dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.Names.DefaultCellStyle = dataGridViewCellStyle23;
             this.Names.HeaderText = "Наименование";
             this.Names.Name = "Names";
             this.Names.ReadOnly = true;
@@ -748,9 +748,9 @@
             // 
             // s111
             // 
-            dataGridViewCellStyle45.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle45.NullValue = false;
-            this.s111.DefaultCellStyle = dataGridViewCellStyle45;
+            dataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle24.NullValue = false;
+            this.s111.DefaultCellStyle = dataGridViewCellStyle24;
             this.s111.FalseValue = null;
             this.s111.HeaderText = "стр. 111";
             this.s111.IndeterminateValue = null;
@@ -763,9 +763,9 @@
             // 
             // s112
             // 
-            dataGridViewCellStyle46.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle46.NullValue = false;
-            this.s112.DefaultCellStyle = dataGridViewCellStyle46;
+            dataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle25.NullValue = false;
+            this.s112.DefaultCellStyle = dataGridViewCellStyle25;
             this.s112.FalseValue = null;
             this.s112.HeaderText = "стр. 112";
             this.s112.IndeterminateValue = null;
@@ -882,7 +882,7 @@
             this.kryptonOutlookGrid4.FillMode = KryptonOutlookGrid.Classes.FillMode.GROUPSONLY;
             this.kryptonOutlookGrid4.GridStyles.Style = ComponentFactory.Krypton.Toolkit.DataGridViewStyle.Mixed;
             this.kryptonOutlookGrid4.GridStyles.StyleBackground = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ControlRibbon;
-            this.kryptonOutlookGrid4.GroupCollection = outlookGridGroupCollection22;
+            this.kryptonOutlookGrid4.GroupCollection = outlookGridGroupCollection12;
             this.kryptonOutlookGrid4.HideColumnOnGrouping = true;
             this.kryptonOutlookGrid4.Location = new System.Drawing.Point(0, 0);
             this.kryptonOutlookGrid4.MultiSelect = false;
@@ -907,8 +907,8 @@
             // 
             // Codef
             // 
-            dataGridViewCellStyle47.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Codef.DefaultCellStyle = dataGridViewCellStyle47;
+            dataGridViewCellStyle26.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Codef.DefaultCellStyle = dataGridViewCellStyle26;
             this.Codef.HeaderText = "#";
             this.Codef.Name = "Codef";
             this.Codef.ReadOnly = true;
@@ -918,8 +918,8 @@
             // 
             // Namesf
             // 
-            dataGridViewCellStyle48.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.Namesf.DefaultCellStyle = dataGridViewCellStyle48;
+            dataGridViewCellStyle27.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.Namesf.DefaultCellStyle = dataGridViewCellStyle27;
             this.Namesf.HeaderText = "Наименование";
             this.Namesf.Name = "Namesf";
             this.Namesf.ReadOnly = true;
@@ -946,9 +946,9 @@
             // 
             // s111f
             // 
-            dataGridViewCellStyle49.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle49.NullValue = false;
-            this.s111f.DefaultCellStyle = dataGridViewCellStyle49;
+            dataGridViewCellStyle28.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle28.NullValue = false;
+            this.s111f.DefaultCellStyle = dataGridViewCellStyle28;
             this.s111f.FalseValue = null;
             this.s111f.HeaderText = "стр. 111";
             this.s111f.IndeterminateValue = null;
@@ -961,9 +961,9 @@
             // 
             // s112f
             // 
-            dataGridViewCellStyle50.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle50.NullValue = false;
-            this.s112f.DefaultCellStyle = dataGridViewCellStyle50;
+            dataGridViewCellStyle29.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle29.NullValue = false;
+            this.s112f.DefaultCellStyle = dataGridViewCellStyle29;
             this.s112f.FalseValue = null;
             this.s112f.HeaderText = "стр. 112";
             this.s112f.IndeterminateValue = null;
@@ -1097,7 +1097,7 @@
             this.kryptonOutlookGrid3.FillMode = KryptonOutlookGrid.Classes.FillMode.GROUPSONLY;
             this.kryptonOutlookGrid3.GridStyles.Style = ComponentFactory.Krypton.Toolkit.DataGridViewStyle.Mixed;
             this.kryptonOutlookGrid3.GridStyles.StyleBackground = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ControlRibbon;
-            this.kryptonOutlookGrid3.GroupCollection = outlookGridGroupCollection23;
+            this.kryptonOutlookGrid3.GroupCollection = outlookGridGroupCollection13;
             this.kryptonOutlookGrid3.HideColumnOnGrouping = true;
             this.kryptonOutlookGrid3.Location = new System.Drawing.Point(0, 0);
             this.kryptonOutlookGrid3.MultiSelect = false;
@@ -1122,8 +1122,8 @@
             // 
             // Code_heat
             // 
-            dataGridViewCellStyle51.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Code_heat.DefaultCellStyle = dataGridViewCellStyle51;
+            dataGridViewCellStyle30.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Code_heat.DefaultCellStyle = dataGridViewCellStyle30;
             this.Code_heat.HeaderText = "#";
             this.Code_heat.Name = "Code_heat";
             this.Code_heat.ReadOnly = true;
@@ -1133,8 +1133,8 @@
             // 
             // Names_heat
             // 
-            dataGridViewCellStyle52.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.Names_heat.DefaultCellStyle = dataGridViewCellStyle52;
+            dataGridViewCellStyle31.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.Names_heat.DefaultCellStyle = dataGridViewCellStyle31;
             this.Names_heat.HeaderText = "Наименование";
             this.Names_heat.Name = "Names_heat";
             this.Names_heat.ReadOnly = true;
@@ -1161,9 +1161,9 @@
             // 
             // s111_heat
             // 
-            dataGridViewCellStyle53.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle53.NullValue = false;
-            this.s111_heat.DefaultCellStyle = dataGridViewCellStyle53;
+            dataGridViewCellStyle32.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle32.NullValue = false;
+            this.s111_heat.DefaultCellStyle = dataGridViewCellStyle32;
             this.s111_heat.FalseValue = null;
             this.s111_heat.HeaderText = "стр. 111";
             this.s111_heat.IndeterminateValue = null;
@@ -1176,9 +1176,9 @@
             // 
             // s112_heat
             // 
-            dataGridViewCellStyle54.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle54.NullValue = false;
-            this.s112_heat.DefaultCellStyle = dataGridViewCellStyle54;
+            dataGridViewCellStyle33.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle33.NullValue = false;
+            this.s112_heat.DefaultCellStyle = dataGridViewCellStyle33;
             this.s112_heat.FalseValue = null;
             this.s112_heat.HeaderText = "стр. 112";
             this.s112_heat.IndeterminateValue = null;
@@ -1282,7 +1282,7 @@
             this.kryptonOutlookGrid2.FillMode = KryptonOutlookGrid.Classes.FillMode.GROUPSONLY;
             this.kryptonOutlookGrid2.GridStyles.Style = ComponentFactory.Krypton.Toolkit.DataGridViewStyle.Mixed;
             this.kryptonOutlookGrid2.GridStyles.StyleBackground = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ControlRibbon;
-            this.kryptonOutlookGrid2.GroupCollection = outlookGridGroupCollection24;
+            this.kryptonOutlookGrid2.GroupCollection = outlookGridGroupCollection14;
             this.kryptonOutlookGrid2.HideColumnOnGrouping = true;
             this.kryptonOutlookGrid2.Location = new System.Drawing.Point(0, 0);
             this.kryptonOutlookGrid2.MultiSelect = false;
@@ -1308,8 +1308,8 @@
             // 
             // Code_el
             // 
-            dataGridViewCellStyle55.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Code_el.DefaultCellStyle = dataGridViewCellStyle55;
+            dataGridViewCellStyle34.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Code_el.DefaultCellStyle = dataGridViewCellStyle34;
             this.Code_el.HeaderText = "#";
             this.Code_el.Name = "Code_el";
             this.Code_el.ReadOnly = true;
@@ -1319,8 +1319,8 @@
             // 
             // Names_el
             // 
-            dataGridViewCellStyle56.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.Names_el.DefaultCellStyle = dataGridViewCellStyle56;
+            dataGridViewCellStyle35.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.Names_el.DefaultCellStyle = dataGridViewCellStyle35;
             this.Names_el.HeaderText = "Наименование";
             this.Names_el.Name = "Names_el";
             this.Names_el.ReadOnly = true;
@@ -1347,9 +1347,9 @@
             // 
             // s111_el
             // 
-            dataGridViewCellStyle57.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle57.NullValue = false;
-            this.s111_el.DefaultCellStyle = dataGridViewCellStyle57;
+            dataGridViewCellStyle36.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle36.NullValue = false;
+            this.s111_el.DefaultCellStyle = dataGridViewCellStyle36;
             this.s111_el.FalseValue = null;
             this.s111_el.HeaderText = "стр. 111";
             this.s111_el.IndeterminateValue = null;
@@ -1362,9 +1362,9 @@
             // 
             // s112_el
             // 
-            dataGridViewCellStyle58.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle58.NullValue = false;
-            this.s112_el.DefaultCellStyle = dataGridViewCellStyle58;
+            dataGridViewCellStyle37.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle37.NullValue = false;
+            this.s112_el.DefaultCellStyle = dataGridViewCellStyle37;
             this.s112_el.FalseValue = null;
             this.s112_el.HeaderText = "стр. 112";
             this.s112_el.IndeterminateValue = null;
@@ -1629,7 +1629,7 @@
             this.kryptonOutlookGrid10.FillMode = KryptonOutlookGrid.Classes.FillMode.GROUPSONLY;
             this.kryptonOutlookGrid10.GridStyles.Style = ComponentFactory.Krypton.Toolkit.DataGridViewStyle.Mixed;
             this.kryptonOutlookGrid10.GridStyles.StyleBackground = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ControlRibbon;
-            this.kryptonOutlookGrid10.GroupCollection = outlookGridGroupCollection25;
+            this.kryptonOutlookGrid10.GroupCollection = outlookGridGroupCollection15;
             this.kryptonOutlookGrid10.Location = new System.Drawing.Point(0, 25);
             this.kryptonOutlookGrid10.Name = "kryptonOutlookGrid10";
             this.kryptonOutlookGrid10.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Office2007Blue;
@@ -1751,7 +1751,7 @@
             this.kryptonOutlookGrid1.FillMode = KryptonOutlookGrid.Classes.FillMode.GROUPSONLY;
             this.kryptonOutlookGrid1.GridStyles.Style = ComponentFactory.Krypton.Toolkit.DataGridViewStyle.Mixed;
             this.kryptonOutlookGrid1.GridStyles.StyleBackground = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ControlRibbon;
-            this.kryptonOutlookGrid1.GroupCollection = outlookGridGroupCollection26;
+            this.kryptonOutlookGrid1.GroupCollection = outlookGridGroupCollection16;
             this.kryptonOutlookGrid1.Location = new System.Drawing.Point(0, 0);
             this.kryptonOutlookGrid1.MultiSelect = false;
             this.kryptonOutlookGrid1.Name = "kryptonOutlookGrid1";
@@ -1832,7 +1832,7 @@
             this.kryptonOutlookGrid6.FillMode = KryptonOutlookGrid.Classes.FillMode.GROUPSONLY;
             this.kryptonOutlookGrid6.GridStyles.Style = ComponentFactory.Krypton.Toolkit.DataGridViewStyle.Mixed;
             this.kryptonOutlookGrid6.GridStyles.StyleBackground = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ControlRibbon;
-            this.kryptonOutlookGrid6.GroupCollection = outlookGridGroupCollection27;
+            this.kryptonOutlookGrid6.GroupCollection = outlookGridGroupCollection17;
             this.kryptonOutlookGrid6.Location = new System.Drawing.Point(0, 0);
             this.kryptonOutlookGrid6.MultiSelect = false;
             this.kryptonOutlookGrid6.Name = "kryptonOutlookGrid6";
@@ -1987,7 +1987,7 @@
             this.kryptonOutlookGrid5.FillMode = KryptonOutlookGrid.Classes.FillMode.GROUPSONLY;
             this.kryptonOutlookGrid5.GridStyles.Style = ComponentFactory.Krypton.Toolkit.DataGridViewStyle.Mixed;
             this.kryptonOutlookGrid5.GridStyles.StyleBackground = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ControlRibbon;
-            this.kryptonOutlookGrid5.GroupCollection = outlookGridGroupCollection28;
+            this.kryptonOutlookGrid5.GroupCollection = outlookGridGroupCollection18;
             this.kryptonOutlookGrid5.Location = new System.Drawing.Point(0, 0);
             this.kryptonOutlookGrid5.Name = "kryptonOutlookGrid5";
             this.kryptonOutlookGrid5.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Office2007Blue;
@@ -2099,7 +2099,7 @@
             this.kryptonOutlookGrid7.FillMode = KryptonOutlookGrid.Classes.FillMode.GROUPSONLY;
             this.kryptonOutlookGrid7.GridStyles.Style = ComponentFactory.Krypton.Toolkit.DataGridViewStyle.Mixed;
             this.kryptonOutlookGrid7.GridStyles.StyleBackground = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ControlRibbon;
-            this.kryptonOutlookGrid7.GroupCollection = outlookGridGroupCollection29;
+            this.kryptonOutlookGrid7.GroupCollection = outlookGridGroupCollection19;
             this.kryptonOutlookGrid7.Location = new System.Drawing.Point(2, 25);
             this.kryptonOutlookGrid7.Name = "kryptonOutlookGrid7";
             this.kryptonOutlookGrid7.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Office2007Blue;
@@ -2121,8 +2121,8 @@
             // 
             // fCode
             // 
-            dataGridViewCellStyle59.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.fCode.DefaultCellStyle = dataGridViewCellStyle59;
+            dataGridViewCellStyle38.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.fCode.DefaultCellStyle = dataGridViewCellStyle38;
             this.fCode.HeaderText = "#";
             this.fCode.Name = "fCode";
             this.fCode.ReadOnly = true;
@@ -2131,8 +2131,8 @@
             // 
             // fNames
             // 
-            dataGridViewCellStyle60.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.fNames.DefaultCellStyle = dataGridViewCellStyle60;
+            dataGridViewCellStyle39.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.fNames.DefaultCellStyle = dataGridViewCellStyle39;
             this.fNames.HeaderText = "Наименование";
             this.fNames.Name = "fNames";
             this.fNames.ReadOnly = true;
@@ -2165,9 +2165,9 @@
             // 
             // trade
             // 
-            dataGridViewCellStyle61.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle61.NullValue = false;
-            this.trade.DefaultCellStyle = dataGridViewCellStyle61;
+            dataGridViewCellStyle40.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle40.NullValue = false;
+            this.trade.DefaultCellStyle = dataGridViewCellStyle40;
             this.trade.FalseValue = null;
             this.trade.HeaderText = "о.н.";
             this.trade.IndeterminateValue = null;
@@ -2268,7 +2268,7 @@
             this.kryptonOutlookGrid8.FillMode = KryptonOutlookGrid.Classes.FillMode.GROUPSONLY;
             this.kryptonOutlookGrid8.GridStyles.Style = ComponentFactory.Krypton.Toolkit.DataGridViewStyle.Mixed;
             this.kryptonOutlookGrid8.GridStyles.StyleBackground = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ControlRibbon;
-            this.kryptonOutlookGrid8.GroupCollection = outlookGridGroupCollection30;
+            this.kryptonOutlookGrid8.GroupCollection = outlookGridGroupCollection20;
             this.kryptonOutlookGrid8.Location = new System.Drawing.Point(1, 25);
             this.kryptonOutlookGrid8.Name = "kryptonOutlookGrid8";
             this.kryptonOutlookGrid8.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Office2007Blue;
@@ -2297,9 +2297,9 @@
             // 
             // gkal
             // 
-            dataGridViewCellStyle62.Format = "N3";
-            dataGridViewCellStyle62.NullValue = "0";
-            this.gkal.DefaultCellStyle = dataGridViewCellStyle62;
+            dataGridViewCellStyle41.Format = "N3";
+            dataGridViewCellStyle41.NullValue = "0";
+            this.gkal.DefaultCellStyle = dataGridViewCellStyle41;
             this.gkal.HeaderText = "Гкалл -> т у.т.";
             this.gkal.Name = "gkal";
             this.gkal.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
@@ -2307,9 +2307,9 @@
             // 
             // kVt
             // 
-            dataGridViewCellStyle63.Format = "N3";
-            dataGridViewCellStyle63.NullValue = null;
-            this.kVt.DefaultCellStyle = dataGridViewCellStyle63;
+            dataGridViewCellStyle42.Format = "N3";
+            dataGridViewCellStyle42.NullValue = null;
+            this.kVt.DefaultCellStyle = dataGridViewCellStyle42;
             this.kVt.HeaderText = "кВт.ч -> т у.т.";
             this.kVt.Name = "kVt";
             this.kVt.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;

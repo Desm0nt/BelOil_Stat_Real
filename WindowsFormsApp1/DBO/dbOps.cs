@@ -87,19 +87,20 @@ namespace WindowsFormsApp1.DBO
         /// <param name="year"></param>
         /// <param name="month"></param>
         /// <param name="id_user"></param>
-        public static void AddNewReport(int id_org, int year, int month, int id_user)
+        public static void AddNewReport(int id_org, int year, int month, int id_user, int prof_num)
         {
             try
             {
                 SqlConnection myConnection = new SqlConnection(cnStr);
                 myConnection.Open();
 
-                string query = "INSERT INTO NewReport_1Per (id_org, month, year, id_user) VALUES (@id_org, @month, @year, @id_user)";
+                string query = "INSERT INTO NewReport_1Per (id_org, month, year, id_user, prof_num) VALUES (@id_org, @month, @year, @id_user, @prof_num)";
                 SqlCommand command = new SqlCommand(query, myConnection);
                 command.Parameters.AddWithValue("@id_org", id_org);
                 command.Parameters.AddWithValue("@year", year);
                 command.Parameters.AddWithValue("@month", month);
                 command.Parameters.AddWithValue("@id_user", id_user);
+                command.Parameters.AddWithValue("@prof_num", prof_num);
                 command.ExecuteNonQuery();
                 myConnection.Close();
             }
@@ -110,16 +111,17 @@ namespace WindowsFormsApp1.DBO
         }
 
         #region Долучение списков
-        public static List<NormIdTypeTable> GetNormIdTypeList(int id_org)
+        public static List<NormIdTypeTable> GetNormIdTypeList(int id_org, int num)
         {
             List<NormIdTypeTable> NormList = new List<NormIdTypeTable>();
             try
             {
                 SqlConnection myConnection = new SqlConnection(cnStr);
                 myConnection.Open();
-                string query = "SELECT * FROM [NewNorm] where id_org = @id_org";
+                string query = "SELECT * FROM [NewNorm] where id_org = @id_org and num = @num";
                 SqlCommand command = new SqlCommand(query, myConnection);
                 command.Parameters.AddWithValue("@id_org", id_org);
+                command.Parameters.AddWithValue("@num", num);
                 using (SqlDataReader dr = command.ExecuteReader())
                 {
                     while (dr.Read())
@@ -135,16 +137,17 @@ namespace WindowsFormsApp1.DBO
             }
             return NormList;
         }
-        public static List<SourceIdTable> GetSoucreIdList(int id_org)
+        public static List<SourceIdTable> GetSoucreIdList(int id_org, int num)
         {
             List<SourceIdTable> SourceList = new List<SourceIdTable>();
             try
             {
                 SqlConnection myConnection = new SqlConnection(cnStr);
                 myConnection.Open();
-                string query = "SELECT * FROM [NewOrgSoucesList] where id_org = @id_org";
+                string query = "SELECT * FROM [NewOrgSoucesList] where id_org = @id_org and num = @num";
                 SqlCommand command = new SqlCommand(query, myConnection);
                 command.Parameters.AddWithValue("@id_org", id_org);
+                command.Parameters.AddWithValue("@num", num);
                 using (SqlDataReader dr = command.ExecuteReader())
                 {
                     while (dr.Read())
@@ -160,16 +163,17 @@ namespace WindowsFormsApp1.DBO
             }
             return SourceList;
         }
-        public static List<RecievedIdTable> GetRecievedIdList(int id_owner)
+        public static List<RecievedIdTable> GetRecievedIdList(int id_owner, int num)
         {
             List<RecievedIdTable> SourceList = new List<RecievedIdTable>();
             try
             {
                 SqlConnection myConnection = new SqlConnection(cnStr);
                 myConnection.Open();
-                string query = "SELECT * FROM [NewRecievedOrgList] where id_owner = @id_owner";
+                string query = "SELECT * FROM [NewRecievedOrgList] where id_owner = @id_owner and num = @num";
                 SqlCommand command = new SqlCommand(query, myConnection);
                 command.Parameters.AddWithValue("@id_owner", id_owner);
+                command.Parameters.AddWithValue("@num", num);
                 using (SqlDataReader dr = command.ExecuteReader())
                 {
                     while (dr.Read())
@@ -185,16 +189,17 @@ namespace WindowsFormsApp1.DBO
             }
             return SourceList;
         }
-        public static List<SendedIdTable> GetSendedIdList(int id_owner)
+        public static List<SendedIdTable> GetSendedIdList(int id_owner, int num)
         {
             List<SendedIdTable> SourceList = new List<SendedIdTable>();
             try
             {
                 SqlConnection myConnection = new SqlConnection(cnStr);
                 myConnection.Open();
-                string query = "SELECT * FROM [NewSendedOrgList] where id_owner = @id_owner";
+                string query = "SELECT * FROM [NewSendedOrgList] where id_owner = @id_owner and num = @num";
                 SqlCommand command = new SqlCommand(query, myConnection);
                 command.Parameters.AddWithValue("@id_owner", id_owner);
+                command.Parameters.AddWithValue("@num", num);
                 using (SqlDataReader dr = command.ExecuteReader())
                 {
                     while (dr.Read())
@@ -1300,7 +1305,7 @@ namespace WindowsFormsApp1.DBO
                 }
                 else
                 {
-                    query = "SELECT * FROM [NewNorm] where id_org = @id_org AND num = (SELECT MAX(num) FROM [NewNorm] where year <= @year AND month <= @month) AND (name like @sample1 and code like @sample2)";
+                    query = "SELECT * FROM [NewNorm] where id_org = @id_org AND num = (SELECT MAX(num) FROM [NewNorm] where ((year = @year AND month <= @month) OR year< @year)) AND (name like @sample1 and code like @sample2)";
                     command = new SqlCommand(query, myConnection);
                     command.Parameters.AddWithValue("@sample1", "%" + sample1 + "%");
                     command.Parameters.AddWithValue("@sample2", "%" + sample2 + "%");
@@ -1382,7 +1387,7 @@ namespace WindowsFormsApp1.DBO
                 }
                 else
                 {
-                    query = "SELECT * FROM [NewNorm] where id_org = @id_org AND num = (SELECT MAX(num) FROM [NewNorm] where year <= @year AND month <= @month) AND (name like @sample1 and code like @sample2) AND type = @type";
+                    query = "SELECT * FROM [NewNorm] where id_org = @id_org AND num = (SELECT MAX(num) FROM [NewNorm] where ((year = @year AND month <= @month) OR year< @year)) AND (name like @sample1 and code like @sample2) AND type = @type";
                     command = new SqlCommand(query, myConnection);
                     command.Parameters.AddWithValue("@sample1", "%" + sample1 + "%");
                     command.Parameters.AddWithValue("@sample2", "%" + sample2 + "%");
@@ -1515,7 +1520,7 @@ namespace WindowsFormsApp1.DBO
                 }
                 else
                 {
-                    query = "SELECT * FROM [NewOrgFuels] where id_org = @id_org AND num = (SELECT MAX(num) FROM [NewOrgFuels] where year <= @year AND month <= @month)";
+                    query = "SELECT * FROM [NewOrgFuels] where id_org = @id_org AND num = (SELECT MAX(num) FROM [NewOrgFuels] where ((year = @year AND month <= @month) OR year< @year))";
                     command = new SqlCommand(query, myConnection);
                     command.Parameters.AddWithValue("@id_org", id_org);
                     command.Parameters.AddWithValue("@year", year);
@@ -1594,7 +1599,7 @@ namespace WindowsFormsApp1.DBO
                 }
                 else
                 {
-                    query = "SELECT * FROM [NewOrgSoucesList] where id_org = @id_org AND num = (SELECT MAX(num) FROM [NewNorm] where year <= @year AND month <= @month)";
+                    query = "SELECT * FROM [NewOrgSoucesList] where id_org = @id_org AND num = (SELECT MAX(num) FROM [NewNorm] where ((year = @year AND month <= @month) OR year< @year))";
                     command = new SqlCommand(query, myConnection);
                     command.Parameters.AddWithValue("@id_org", id_org);
                     command.Parameters.AddWithValue("@year", year);
@@ -1645,7 +1650,7 @@ namespace WindowsFormsApp1.DBO
                 }
                 else
                 {
-                    query = "SELECT * FROM [NewSendedOrgList] where id_owner = @id_org AND num = (SELECT MAX(num) FROM [NewNorm] where year <= @year AND month <= @month)";
+                    query = "SELECT * FROM [NewSendedOrgList] where id_owner = @id_org AND num = (SELECT MAX(num) FROM [NewNorm] where ((year = @year AND month <= @month) OR year< @year))";
                     command = new SqlCommand(query, myConnection);
                     command.Parameters.AddWithValue("@id_org", id_org);
                     command.Parameters.AddWithValue("@year", year);
@@ -1695,7 +1700,7 @@ namespace WindowsFormsApp1.DBO
                 }
                 else
                 {
-                    query = "SELECT * FROM [NewRecievedOrgList] where id_owner = @id_org AND num = (SELECT MAX(num) FROM [NewNorm] where year <= @year AND month <= @month)";
+                    query = "SELECT * FROM [NewRecievedOrgList] where id_owner = @id_org AND num = (SELECT MAX(num) FROM [NewNorm] where ((year = @year AND month <= @month) OR year< @year))";
                     command = new SqlCommand(query, myConnection);
                     command.Parameters.AddWithValue("@id_org", id_org);
                     command.Parameters.AddWithValue("@year", year);
@@ -2203,7 +2208,83 @@ namespace WindowsFormsApp1.DBO
             return NormList;
         }
 
-        public static List<NormTable> GetNormInputList(int id_org, int id_rep, int type, int year, int month)
+        public static List<NormTable> GetNormInputList(int id_org, int id_rep, int num, int type, int year, int month)
+        {
+            List<NormTable> NormList = new List<NormTable>();
+            try
+            {
+                SqlConnection myConnection = new SqlConnection(cnStr);
+                SqlConnection myConnection2 = new SqlConnection(cnStr);
+                myConnection.Open();
+
+                string query = "exec dbo.GetTypedNormListPR @id_org, @id_rep, @num, @month, @year, @type";
+                SqlCommand command = new SqlCommand(query, myConnection);
+                command.Parameters.AddWithValue("@id_org", id_org);
+                command.Parameters.AddWithValue("@num", num);
+                command.Parameters.AddWithValue("@id_rep", id_rep);
+                command.Parameters.AddWithValue("@month", month);
+                command.Parameters.AddWithValue("@year", year);
+                command.Parameters.AddWithValue("@type", type);
+                using (SqlDataReader dr = command.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        string[] rowopt = !String.IsNullOrWhiteSpace(dr["row_options"].ToString()) ? dr["row_options"].ToString().Split(',') : new string[] { };
+                        float coeff = 0;
+                        int fuel = 0;
+                        string fname = "";
+                        switch (Int32.Parse(dr["type"].ToString()))
+                        {
+                            case 1:
+                                coeff = float.Parse(dr["B_y"].ToString());
+                                fname = dr["fuel_name"].ToString();
+                                fuel = Int32.Parse(dr["fuel"].ToString());
+                                break;
+                            case 2:
+                                coeff = float.Parse(dr["gkal"].ToString());
+                                break;
+                            case 3:
+                                coeff = float.Parse(dr["kvch"].ToString());
+                                break;
+                            default:
+                                ;
+                                break;
+                        }
+                        NormList.Add(new NormTable
+                        {
+                            Id = Int32.Parse(dr["norm_id"].ToString()),
+                            Id_org = Int32.Parse(dr["id_org"].ToString()),
+                            Id_prod = Int32.Parse(dr["id_prod"].ToString()),
+                            Code = Int32.Parse(dr["code"].ToString()),
+                            name = dr["name"].ToString(),
+                            fuel = fuel,
+                            fuel_name = " (" + fname + ")",
+                            type = Int32.Parse(dr["type"].ToString()),
+                            row_options = rowopt,
+                            Unit = GetNormUnit(Int32.Parse(dr["id_prod"].ToString())),
+                            nUnit = GetNormNUnit(Int32.Parse(dr["id_prod"].ToString())),
+                            val_plan = float.Parse(dr["value_plan"].ToString()),
+                            val_fact = float.Parse(dr["value_fact"].ToString()),
+                            val_fact_ut = float.Parse(dr["value_fact"].ToString()) * coeff,
+                            val_plan_ut = float.Parse(dr["value_fact"].ToString()) * coeff,
+                            norm_code = Int32.Parse(dr["norm_code"].ToString()),
+                            Id_local = Int64.Parse(dr["id_local"].ToString()),
+                            editable = false,
+                            id_obj = Int32.Parse(dr["id_obj"].ToString())
+
+                        });
+                    }
+                }
+                myConnection.Close();
+            }
+            catch (Exception Ex)
+            {
+                KryptonMessageBox.Show("Ошибка GetNormInputList: " + Ex.Message);
+            }
+            return NormList;
+        }
+
+        public static List<NormTable> GetNormInputListOld(int id_org, int id_rep, int type, int year, int month)
         {
             List<NormTable> NormList = new List<NormTable>();
             try
@@ -2791,7 +2872,7 @@ namespace WindowsFormsApp1.DBO
                 }
                 else
                 {
-                    query = "SELECT * FROM [NewFuels] WHERE fuel_id = @fuel_id and time_id = (SELECT MAX(time_id) FROM [NewFuels] where fuel_id = @fuel_id and year <= @year and month <= @month)";
+                    query = "SELECT * FROM [NewFuels] WHERE fuel_id = @fuel_id and time_id = (SELECT MAX(time_id) FROM [NewFuels] where fuel_id = @fuel_id and ((year = @year AND month <= @month) OR year< @year))";
                     command = new SqlCommand(query, myConnection);
                     command.Parameters.AddWithValue("@fuel_id", fuel_id);
                     command.Parameters.AddWithValue("@year", year);
@@ -2836,7 +2917,7 @@ namespace WindowsFormsApp1.DBO
                 }
                 else
                 {
-                    query = "SELECT * FROM [NewFactors] where num = (SELECT MAX(num) FROM [NewFactors] where year <= @year AND month <= @month)";
+                    query = "SELECT * FROM [NewFactors] where num = (SELECT MAX(num) FROM [NewFactors] where ((year = @year AND month <= @month) OR year< @year))";
                     command = new SqlCommand(query, myConnection);
                     command.Parameters.AddWithValue("@year", year);
                     command.Parameters.AddWithValue("@month", month);
@@ -2883,6 +2964,31 @@ namespace WindowsFormsApp1.DBO
             myConnection.Close();
             return repid;
         }
+
+        public static ReportDataTable GetReportData(int id_org, int year, int month)
+        {
+            ReportDataTable rep =  new ReportDataTable();
+            SqlConnection myConnection = new SqlConnection(cnStr);
+            myConnection.Open();
+
+            string query = "SELECT * FROM [NewReport_1Per] WHERE [id_org] = @id_org AND [year] = @year AND [month] = @month";
+            SqlCommand command = new SqlCommand(query, myConnection);
+            command.Parameters.AddWithValue("@id_org", id_org);
+            command.Parameters.AddWithValue("@year", year);
+            command.Parameters.AddWithValue("@month", month);
+
+            using (SqlDataReader dr = command.ExecuteReader())
+            {
+                while (dr.Read())
+                {
+                    rep.id = Int32.Parse(dr["id"].ToString());
+                    rep.num = Int32.Parse(dr["prof_num"].ToString());
+                }
+            }
+            myConnection.Close();
+            return rep;
+        }
+
         public static int GetProflieNum(int id_org, int year, int month)
         {
             int profNum = 0;
@@ -2907,7 +3013,7 @@ namespace WindowsFormsApp1.DBO
                 }
                 else
                 {
-                    query = "SELECT COUNT(*) FROM [NewProfiles] WHERE [id_org] = @id_org AND  year <= @year AND month <= @month";
+                    query = "SELECT COUNT(*) FROM [NewProfiles] WHERE [id_org] = @id_org AND ((year = @year AND month <= @month) OR year< @year)";
                     command = new SqlCommand(query, myConnection);
                     command.Parameters.AddWithValue("@id_org", id_org);
                     command.Parameters.AddWithValue("@year", year);
@@ -2916,7 +3022,7 @@ namespace WindowsFormsApp1.DBO
 
                     if (result2 > 0)
                     {
-                        query = "SELECT num FROM [NewProfiles] WHERE [id_org] = @id_org AND num = (SELECT MAX(num) FROM [NewProfiles] WHERE year <= @year AND month <= @month AND [id_org] = @id_org)";
+                        query = "SELECT num FROM [NewProfiles] WHERE [id_org] = @id_org AND num = (SELECT MAX(num) FROM [NewProfiles] WHERE ((year = @year AND month <= @month) OR year< @year) AND [id_org] = @id_org)";
                         command = new SqlCommand(query, myConnection);
                         command.Parameters.AddWithValue("@id_org", id_org);
                         command.Parameters.AddWithValue("@year", year);
@@ -3663,6 +3769,11 @@ namespace WindowsFormsApp1.DBO
                 command.ExecuteNonQuery();
 
                 //источники
+                query = "Delete From [NewOrgSouces] From [NewOrgSoucesList] Where [NewOrgSouces].id_src = [NewOrgSoucesList].id and [NewOrgSoucesList].id_org = @id_org and [NewOrgSoucesList].num = @num";
+                command = new SqlCommand(query, myConnection);
+                command.Parameters.AddWithValue("@id_org", id_org);
+                command.Parameters.AddWithValue("@num", num);
+                command.ExecuteNonQuery();
                 query = "DELETE FROM [NewOrgSoucesList] where id_org = @id_org and num = @num";
                 command = new SqlCommand(query, myConnection);
                 command.Parameters.AddWithValue("@id_org", id_org);
@@ -3670,6 +3781,11 @@ namespace WindowsFormsApp1.DBO
                 command.ExecuteNonQuery();
 
                 //поставщики
+                query = "Delete From [NewRecievedOrg] From [NewRecievedOrgList] Where [NewRecievedOrg].id_recieved = [NewRecievedOrgList].id and [NewRecievedOrgList].id_owner = @id_org and [NewRecievedOrgList].num = @num";
+                command = new SqlCommand(query, myConnection);
+                command.Parameters.AddWithValue("@id_org", id_org);
+                command.Parameters.AddWithValue("@num", num);
+                command.ExecuteNonQuery();
                 query = "DELETE FROM [NewRecievedOrgList] where id_owner = @id_org and num = @num";
                 command = new SqlCommand(query, myConnection);
                 command.Parameters.AddWithValue("@id_org", id_org);
@@ -3677,12 +3793,22 @@ namespace WindowsFormsApp1.DBO
                 command.ExecuteNonQuery();
 
                 //потребители
+                query = "Delete From [NewSendedOrg] From [NewSendedOrgList] Where [NewSendedOrg].id_sended = [NewSendedOrgList].id and [NewSendedOrgList].id_owner = @id_org and [NewSendedOrgList].num = @num";
+                command = new SqlCommand(query, myConnection);
+                command.Parameters.AddWithValue("@id_org", id_org);
+                command.Parameters.AddWithValue("@num", num);
+                command.ExecuteNonQuery();
                 query = "DELETE FROM [NewSendedOrgList] where id_owner = @id_org and num = @num";
                 command = new SqlCommand(query, myConnection);
                 command.Parameters.AddWithValue("@id_org", id_org);
                 command.Parameters.AddWithValue("@num", num);
                 command.ExecuteNonQuery();
 
+                query = "Delete From [NewNormData] From [NewNorm] Where [NewNormData].id_norm= [NewNorm].id and [NewNorm].id_org = @id_org and [NewNorm].num = @num";
+                command = new SqlCommand(query, myConnection);
+                command.Parameters.AddWithValue("@id_org", id_org);
+                command.Parameters.AddWithValue("@num", num);
+                command.ExecuteNonQuery();
                 query = "DELETE FROM [NewNorm] where id_org = @id_org and num = @num";
                 command = new SqlCommand(query, myConnection);
                 command.Parameters.AddWithValue("@id_org", id_org);

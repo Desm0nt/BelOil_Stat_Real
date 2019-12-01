@@ -309,7 +309,7 @@ namespace WindowsFormsApp1
                     NormTable.id_obj = object_id;
                     NormTable.s111 = bool.Parse(kryptonOutlookGrid1.SelectedRows[0].Cells[5].Value.ToString());
                     NormTable.s112 = bool.Parse(kryptonOutlookGrid1.SelectedRows[0].Cells[6].Value.ToString());
-                    NormTable.id_fuel = 0;
+                    NormTable.id_fuel = fuel;
                     NormTable.name_with_fuel = name + fuel_name;
                     NormTable.real_name = kryptonOutlookGrid1.SelectedRows[0].Cells[2].Value.ToString();
                     NormTable.type = type4form;

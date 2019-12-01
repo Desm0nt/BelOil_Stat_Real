@@ -94,8 +94,9 @@ namespace WindowsFormsApp1
             List<Full1terTable> full1Ter3 = new List<Full1terTable>();
             List<Full1terTable> full1Ter = new List<Full1terTable>();
 
-            int report_id = dbOps.GetReportId(CurrentData.UserData.Id_org, dateTimePicker1.Value.Year, dateTimePicker1.Value.Month);
-            int profile_num = dbOps.GetProflieNum(CurrentData.UserData.Id_org, dateTimePicker1.Value.Year, dateTimePicker1.Value.Month);
+            var rep = dbOps.GetReportData(CurrentData.UserData.Id_org, dateTimePicker1.Value.Year, dateTimePicker1.Value.Month);
+            int report_id = rep.id;
+            int profile_num = rep.num;
             //var NormList = dbOps.GetNormList(CurrentData.UserData.Id_org, report_id);
             //var NormListSum = MakeListSum(dateTimePicker1.Value.Year, dateTimePicker1.Value.Month);
             var NormList2 = dbOps.GetNormListPR(CurrentData.UserData.Id_org, report_id, profile_num, dateTimePicker1.Value.Month, dateTimePicker1.Value.Year);
@@ -4305,8 +4306,9 @@ namespace WindowsFormsApp1
             List<NormTable> NormListPR = new List<NormTable>();
             for (int i = 1; i <= month; i++)
             {
-                int report_id = dbOps.GetReportId(CurrentData.UserData.Id_org, year, i);
-                int profile_num = dbOps.GetProflieNum(CurrentData.UserData.Id_org, year, i);
+                var rep = dbOps.GetReportData(CurrentData.UserData.Id_org, year, i);
+                int report_id = rep.id;
+                int profile_num = rep.num;
                 var tempList = dbOps.GetNormListPR(CurrentData.UserData.Id_org, report_id, profile_num, month, year);
                 foreach (var t in tempList)
                 {
@@ -4358,16 +4360,18 @@ namespace WindowsFormsApp1
 
         private List<RecievedTable> MakeRecListSum(int year, int month)
         {
-            int report_id = dbOps.GetReportId(CurrentData.UserData.Id_org, year, 1);
-            int profile_num = dbOps.GetProflieNum(CurrentData.UserData.Id_org, year, 1);
+            var rep = dbOps.GetReportData(CurrentData.UserData.Id_org, year, 1);
+            int report_id = rep.id;
+            int profile_num = rep.num;
             var RecievedList = dbOps.GetRecievedList(CurrentData.UserData.Id_org, report_id, profile_num);
 
             if (month > 1)
             {
                 for (int i = 2; i <= month; i++)
                 {
-                    report_id = dbOps.GetReportId(CurrentData.UserData.Id_org, year, i);
-                    profile_num = dbOps.GetProflieNum(CurrentData.UserData.Id_org, year, i);
+                    rep = dbOps.GetReportData(CurrentData.UserData.Id_org, year, i);
+                    report_id = rep.id;
+                    profile_num = rep.num;
                     var tmplist = dbOps.GetRecievedList(CurrentData.UserData.Id_org, report_id, profile_num);
                     if (tmplist.Count != 0)
                     {
@@ -4387,8 +4391,9 @@ namespace WindowsFormsApp1
             List<RecievedTable> RecievedList = new List<RecievedTable>();
             for (int i = 1; i <= month; i++)
             {
-                int report_id = dbOps.GetReportId(CurrentData.UserData.Id_org, year, i);
-                int profile_num = dbOps.GetProflieNum(CurrentData.UserData.Id_org, year, i);
+                var rep = dbOps.GetReportData(CurrentData.UserData.Id_org, year, i);
+                int report_id = rep.id;
+                int profile_num = rep.num;
                 var RecievedListTemp = dbOps.GetRecievedList(CurrentData.UserData.Id_org, report_id, profile_num);
                 foreach (var t in RecievedListTemp)
                 {
@@ -4409,16 +4414,18 @@ namespace WindowsFormsApp1
 
         private List<SendedTable> MakeSendListSum(int year, int month)
         {
-            int report_id = dbOps.GetReportId(CurrentData.UserData.Id_org, year, 1);
-            int profile_num = dbOps.GetProflieNum(CurrentData.UserData.Id_org, year, 1);
+            var rep = dbOps.GetReportData(CurrentData.UserData.Id_org, year, 1);
+            int report_id = rep.id;
+            int profile_num = rep.num;
             var SendedList = dbOps.GetSendedList(CurrentData.UserData.Id_org, report_id, profile_num);
 
             if (month > 1)
             {
                 for (int i = 2; i <= month; i++)
                 {
-                    report_id = dbOps.GetReportId(CurrentData.UserData.Id_org, year, i);
-                    profile_num = dbOps.GetProflieNum(CurrentData.UserData.Id_org, year, i);
+                    rep = dbOps.GetReportData(CurrentData.UserData.Id_org, year, i);
+                    report_id = rep.id;
+                    profile_num = rep.num;
                     var tmplist = dbOps.GetSendedList(CurrentData.UserData.Id_org, report_id, profile_num);
                     if (tmplist.Count != 0)
                     {
@@ -4438,8 +4445,9 @@ namespace WindowsFormsApp1
             List<SendedTable> SendedList = new List<SendedTable>();
             for (int i = 1; i <= month; i++)
             {
-                int report_id = dbOps.GetReportId(CurrentData.UserData.Id_org, year, i);
-                int profile_num = dbOps.GetProflieNum(CurrentData.UserData.Id_org, year, i);
+                var rep = dbOps.GetReportData(CurrentData.UserData.Id_org, year, i);
+                int report_id = rep.id;
+                int profile_num = rep.num;
                 var SendedListTemp = dbOps.GetSendedList(CurrentData.UserData.Id_org, report_id, profile_num);
                 foreach (var t in SendedListTemp)
                 {
@@ -4460,16 +4468,18 @@ namespace WindowsFormsApp1
 
         private List<SourceTable> MakeSourceSum(int year, int month)
         {
-            int report_id = dbOps.GetReportId(CurrentData.UserData.Id_org, year, 1);
-            int profile_num = dbOps.GetProflieNum(CurrentData.UserData.Id_org, year, 1);
+            var rep = dbOps.GetReportData(CurrentData.UserData.Id_org, year, 1);
+            int report_id = rep.id;
+            int profile_num = rep.num;
             var SourceList = dbOps.GetSourceList(CurrentData.UserData.Id_org, report_id, profile_num);
 
             if (month > 1)
             {
                 for (int i = 2; i <= month; i++)
                 {
-                    report_id = dbOps.GetReportId(CurrentData.UserData.Id_org, year, i);
-                    profile_num = dbOps.GetProflieNum(CurrentData.UserData.Id_org, year, i);
+                    rep = dbOps.GetReportData(CurrentData.UserData.Id_org, year, i);
+                    report_id = rep.id;
+                    profile_num = rep.num;
                     var tmplist = dbOps.GetSourceList(CurrentData.UserData.Id_org, report_id, profile_num);
                     if (tmplist.Count != 0)
                     {
@@ -4487,8 +4497,9 @@ namespace WindowsFormsApp1
             List<SourceTable> SourceList = new List<SourceTable>();
             for (int i = 1; i <= month; i++)
             {
-                int report_id = dbOps.GetReportId(CurrentData.UserData.Id_org, year, i);
-                int profile_num = dbOps.GetProflieNum(CurrentData.UserData.Id_org, year, i);
+                var rep = dbOps.GetReportData(CurrentData.UserData.Id_org, year, i);
+                int report_id = rep.id;
+                int profile_num = rep.num;
                 var SourceListTemp = dbOps.GetSourceList(CurrentData.UserData.Id_org, report_id, profile_num);
                 foreach (var t in SourceListTemp)
                 {
@@ -4509,16 +4520,18 @@ namespace WindowsFormsApp1
 
         private List<FTradeTable> MakeTFuelSum(int year, int month)
         {
-            int report_id = dbOps.GetReportId(CurrentData.UserData.Id_org, year, 1);
-            int profile_num = dbOps.GetProflieNum(CurrentData.UserData.Id_org, year, 1);
+            var rep = dbOps.GetReportData(CurrentData.UserData.Id_org, year, 1);
+            int report_id = rep.id;
+            int profile_num = rep.num;
             var TFuelList = dbOps.GetFTradeList(CurrentData.UserData.Id_org, report_id, profile_num);
 
             if (month > 1)
             {
                 for (int i = 2; i <= month; i++)
                 {
-                    report_id = dbOps.GetReportId(CurrentData.UserData.Id_org, year, i);
-                    profile_num = dbOps.GetProflieNum(CurrentData.UserData.Id_org, year, i);
+                    rep = dbOps.GetReportData(CurrentData.UserData.Id_org, year, i);
+                    report_id = rep.id;
+                    profile_num = rep.num;
                     var tmplist = dbOps.GetFTradeList(CurrentData.UserData.Id_org, report_id, profile_num);
                     if (tmplist.Count != 0)
                     {
@@ -4536,8 +4549,9 @@ namespace WindowsFormsApp1
             List<FTradeTable> TFuelList = new List<FTradeTable>();
             for (int i = 1; i <= month; i++)
             {
-                int report_id = dbOps.GetReportId(CurrentData.UserData.Id_org, year, i);
-                int profile_num = dbOps.GetProflieNum(CurrentData.UserData.Id_org, year, i);
+                var rep = dbOps.GetReportData(CurrentData.UserData.Id_org, year, i);
+                int report_id = rep.id;
+                int profile_num = rep.num;
                 var TFuelListTemp = dbOps.GetFTradeList(CurrentData.UserData.Id_org, report_id, profile_num);
                 foreach (var t in TFuelListTemp)
                 {
