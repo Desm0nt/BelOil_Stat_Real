@@ -58,6 +58,7 @@ namespace WindowsFormsApp1
             year3Button.Text = (DateTime.Now.Year - 2).ToString();
             toolStripDropDownButton1.Text = MakeQuaterText(DateTime.Now.Month);
             MonthBut.Text = "&" + System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(DateTime.Now.Month);
+            this.kryptonOutlookGrid1.EditingControlShowing += new DataGridViewEditingControlShowingEventHandler(EditingControlShowing);
         }
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
@@ -552,7 +553,10 @@ namespace WindowsFormsApp1
             #endregion
 
             var a1 = worksheet1.Cells["U" + (elrow + counter + 3)].Data;
-            LoadAllNorms(full1Ter);
+            LoadAllNorms(full1Ter, kryptonOutlookGrid1);
+            LoadAllNorms(full1Ter1, kryptonOutlookGrid2);
+            LoadAllNorms(full1Ter2, kryptonOutlookGrid3);
+            LoadAllNorms(full1Ter3, kryptonOutlookGrid4);
             #region style
             var grid = this.reoGridControl1;
             var sheet = grid.CurrentWorksheet;
@@ -599,94 +603,94 @@ namespace WindowsFormsApp1
             #endregion
         }
 
-        private void LoadAllNorms(List<Full1terTable> full1Ter)
+        private void LoadAllNorms(List<Full1terTable> full1Ter,  KryptonOutlookGrid.Classes.KryptonOutlookGrid grid)
         {
-            kryptonOutlookGrid1.ClearInternalRows();
-            kryptonOutlookGrid1.ClearGroups();
-            kryptonOutlookGrid1.RowHeadersWidth = 10;
+            grid.ClearInternalRows();
+            grid.ClearGroups();
+            grid.RowHeadersWidth = 10;
 
-            kryptonOutlookGrid1.GroupBox = kryptonOutlookGridGroupBox1;
-            kryptonOutlookGrid1.RegisterGroupBoxEvents();
+            grid.GroupBox = kryptonOutlookGridGroupBox1;
+            grid.RegisterGroupBoxEvents();
             DataGridViewColumn[] columnsToAdd = new DataGridViewColumn[25];
             #region список колонок
-            columnsToAdd[0] = kryptonOutlookGrid1.Columns[0];
-            columnsToAdd[1] = kryptonOutlookGrid1.Columns[1];
-            columnsToAdd[2] = kryptonOutlookGrid1.Columns[2];
-            columnsToAdd[3] = kryptonOutlookGrid1.Columns[3];
-            columnsToAdd[4] = kryptonOutlookGrid1.Columns[4];
-            columnsToAdd[5] = kryptonOutlookGrid1.Columns[5];
-            columnsToAdd[6] = kryptonOutlookGrid1.Columns[6];
-            columnsToAdd[7] = kryptonOutlookGrid1.Columns[7];
-            columnsToAdd[8] = kryptonOutlookGrid1.Columns[8];
-            columnsToAdd[9] = kryptonOutlookGrid1.Columns[9];
-            columnsToAdd[10] = kryptonOutlookGrid1.Columns[10];
-            columnsToAdd[11] = kryptonOutlookGrid1.Columns[11];
-            columnsToAdd[12] = kryptonOutlookGrid1.Columns[12];
-            columnsToAdd[13] = kryptonOutlookGrid1.Columns[13];
-            columnsToAdd[14] = kryptonOutlookGrid1.Columns[14];
-            columnsToAdd[15] = kryptonOutlookGrid1.Columns[15];
-            columnsToAdd[16] = kryptonOutlookGrid1.Columns[16];
-            columnsToAdd[17] = kryptonOutlookGrid1.Columns[17];
-            columnsToAdd[18] = kryptonOutlookGrid1.Columns[18];
-            columnsToAdd[19] = kryptonOutlookGrid1.Columns[19];
-            columnsToAdd[20] = kryptonOutlookGrid1.Columns[20];
-            columnsToAdd[21] = kryptonOutlookGrid1.Columns[21];
-            columnsToAdd[22] = kryptonOutlookGrid1.Columns[22];
-            columnsToAdd[23] = kryptonOutlookGrid1.Columns[23];
-            columnsToAdd[24] = kryptonOutlookGrid1.Columns[24];
+            columnsToAdd[0] = grid.Columns[0];
+            columnsToAdd[1] = grid.Columns[1];
+            columnsToAdd[2] = grid.Columns[2];
+            columnsToAdd[3] = grid.Columns[3];
+            columnsToAdd[4] = grid.Columns[4];
+            columnsToAdd[5] = grid.Columns[5];
+            columnsToAdd[6] = grid.Columns[6];
+            columnsToAdd[7] = grid.Columns[7];
+            columnsToAdd[8] = grid.Columns[8];
+            columnsToAdd[9] = grid.Columns[9];
+            columnsToAdd[10] = grid.Columns[10];
+            columnsToAdd[11] = grid.Columns[11];
+            columnsToAdd[12] = grid.Columns[12];
+            columnsToAdd[13] = grid.Columns[13];
+            columnsToAdd[14] = grid.Columns[14];
+            columnsToAdd[15] = grid.Columns[15];
+            columnsToAdd[16] = grid.Columns[16];
+            columnsToAdd[17] = grid.Columns[17];
+            columnsToAdd[18] = grid.Columns[18];
+            columnsToAdd[19] = grid.Columns[19];
+            columnsToAdd[20] = grid.Columns[20];
+            columnsToAdd[21] = grid.Columns[21];
+            columnsToAdd[22] = grid.Columns[22];
+            columnsToAdd[23] = grid.Columns[23];
+            columnsToAdd[24] = grid.Columns[24];
             #endregion
 
-            //kryptonOutlookGrid1.Columns.AddRange(columnsToAdd);
+            //grid.Columns.AddRange(columnsToAdd);
 
             #region форматирование колонок
-            kryptonOutlookGrid1.AddInternalColumn(kryptonOutlookGrid1.Columns[0], new OutlookGridDefaultGroup(null), System.Windows.Forms.SortOrder.None, -1, -1);
-            kryptonOutlookGrid1.AddInternalColumn(kryptonOutlookGrid1.Columns[1], new OutlookGridDefaultGroup(null), System.Windows.Forms.SortOrder.Ascending, -1, 1);
-            kryptonOutlookGrid1.AddInternalColumn(kryptonOutlookGrid1.Columns[2], new OutlookGridDefaultGroup(null), System.Windows.Forms.SortOrder.None, -1, -1);
-            kryptonOutlookGrid1.AddInternalColumn(kryptonOutlookGrid1.Columns[3], new OutlookGridDefaultGroup(null), System.Windows.Forms.SortOrder.None, -1, -1);
-            kryptonOutlookGrid1.AddInternalColumn(kryptonOutlookGrid1.Columns[4], new OutlookGridDefaultGroup(null), System.Windows.Forms.SortOrder.None, -1, -1);
-            kryptonOutlookGrid1.AddInternalColumn(kryptonOutlookGrid1.Columns[5], new OutlookGridDefaultGroup(null), System.Windows.Forms.SortOrder.None, -1, -1);
-            kryptonOutlookGrid1.AddInternalColumn(kryptonOutlookGrid1.Columns[6], new OutlookGridDefaultGroup(null), System.Windows.Forms.SortOrder.None, -1, -1);
-            kryptonOutlookGrid1.AddInternalColumn(kryptonOutlookGrid1.Columns[7], new OutlookGridDefaultGroup(null), System.Windows.Forms.SortOrder.None, -1, -1);
-            kryptonOutlookGrid1.AddInternalColumn(kryptonOutlookGrid1.Columns[8], new OutlookGridDefaultGroup(null), System.Windows.Forms.SortOrder.None, -1, -1);
-            kryptonOutlookGrid1.AddInternalColumn(kryptonOutlookGrid1.Columns[9], new OutlookGridDefaultGroup(null), System.Windows.Forms.SortOrder.None, -1, -1);
-            kryptonOutlookGrid1.AddInternalColumn(kryptonOutlookGrid1.Columns[10], new OutlookGridDefaultGroup(null), System.Windows.Forms.SortOrder.None, -1, -1);
-            kryptonOutlookGrid1.AddInternalColumn(kryptonOutlookGrid1.Columns[11], new OutlookGridDefaultGroup(null), System.Windows.Forms.SortOrder.None, -1, -1);
-            kryptonOutlookGrid1.AddInternalColumn(kryptonOutlookGrid1.Columns[12], new OutlookGridDefaultGroup(null), System.Windows.Forms.SortOrder.None, -1, -1);
-            kryptonOutlookGrid1.AddInternalColumn(kryptonOutlookGrid1.Columns[13], new OutlookGridDefaultGroup(null), System.Windows.Forms.SortOrder.None, -1, -1);
-            kryptonOutlookGrid1.AddInternalColumn(kryptonOutlookGrid1.Columns[14], new OutlookGridDefaultGroup(null), System.Windows.Forms.SortOrder.None, -1, -1);
-            kryptonOutlookGrid1.AddInternalColumn(kryptonOutlookGrid1.Columns[15], new OutlookGridDefaultGroup(null), System.Windows.Forms.SortOrder.None, -1, -1);
-            kryptonOutlookGrid1.AddInternalColumn(kryptonOutlookGrid1.Columns[16], new OutlookGridDefaultGroup(null), System.Windows.Forms.SortOrder.None, -1, -1);
-            kryptonOutlookGrid1.AddInternalColumn(kryptonOutlookGrid1.Columns[17], new OutlookGridDefaultGroup(null), System.Windows.Forms.SortOrder.None, -1, -1);
-            kryptonOutlookGrid1.AddInternalColumn(kryptonOutlookGrid1.Columns[18], new OutlookGridDefaultGroup(null), System.Windows.Forms.SortOrder.None, -1, -1);
-            kryptonOutlookGrid1.AddInternalColumn(kryptonOutlookGrid1.Columns[19], new OutlookGridDefaultGroup(null), System.Windows.Forms.SortOrder.None, -1, -1);
-            kryptonOutlookGrid1.AddInternalColumn(kryptonOutlookGrid1.Columns[20], new OutlookGridDefaultGroup(null), System.Windows.Forms.SortOrder.None, -1, -1);
-            kryptonOutlookGrid1.AddInternalColumn(kryptonOutlookGrid1.Columns[21], new OutlookGridDefaultGroup(null), System.Windows.Forms.SortOrder.None, -1, -1);
-            kryptonOutlookGrid1.AddInternalColumn(kryptonOutlookGrid1.Columns[22], new OutlookGridDefaultGroup(null), System.Windows.Forms.SortOrder.None, -1, -1);
-            kryptonOutlookGrid1.AddInternalColumn(kryptonOutlookGrid1.Columns[23], new OutlookGridDefaultGroup(null), System.Windows.Forms.SortOrder.None, -1, -1);
-            kryptonOutlookGrid1.AddInternalColumn(kryptonOutlookGrid1.Columns[24], new OutlookGridTypeGroup(null), System.Windows.Forms.SortOrder.Ascending, 1, -1);
+            grid.AddInternalColumn(grid.Columns[0], new OutlookGridDefaultGroup(null), System.Windows.Forms.SortOrder.None, -1, -1);
+            grid.AddInternalColumn(grid.Columns[1], new OutlookGridDefaultGroup(null), System.Windows.Forms.SortOrder.Ascending, -1, 1);
+            grid.AddInternalColumn(grid.Columns[2], new OutlookGridDefaultGroup(null), System.Windows.Forms.SortOrder.None, -1, -1);
+            grid.AddInternalColumn(grid.Columns[3], new OutlookGridDefaultGroup(null), System.Windows.Forms.SortOrder.None, -1, -1);
+            grid.AddInternalColumn(grid.Columns[4], new OutlookGridDefaultGroup(null), System.Windows.Forms.SortOrder.None, -1, -1);
+            grid.AddInternalColumn(grid.Columns[5], new OutlookGridDefaultGroup(null), System.Windows.Forms.SortOrder.None, -1, -1);
+            grid.AddInternalColumn(grid.Columns[6], new OutlookGridDefaultGroup(null), System.Windows.Forms.SortOrder.None, -1, -1);
+            grid.AddInternalColumn(grid.Columns[7], new OutlookGridDefaultGroup(null), System.Windows.Forms.SortOrder.None, -1, -1);
+            grid.AddInternalColumn(grid.Columns[8], new OutlookGridDefaultGroup(null), System.Windows.Forms.SortOrder.None, -1, -1);
+            grid.AddInternalColumn(grid.Columns[9], new OutlookGridDefaultGroup(null), System.Windows.Forms.SortOrder.None, -1, -1);
+            grid.AddInternalColumn(grid.Columns[10], new OutlookGridDefaultGroup(null), System.Windows.Forms.SortOrder.None, -1, -1);
+            grid.AddInternalColumn(grid.Columns[11], new OutlookGridDefaultGroup(null), System.Windows.Forms.SortOrder.None, -1, -1);
+            grid.AddInternalColumn(grid.Columns[12], new OutlookGridDefaultGroup(null), System.Windows.Forms.SortOrder.None, -1, -1);
+            grid.AddInternalColumn(grid.Columns[13], new OutlookGridDefaultGroup(null), System.Windows.Forms.SortOrder.None, -1, -1);
+            grid.AddInternalColumn(grid.Columns[14], new OutlookGridDefaultGroup(null), System.Windows.Forms.SortOrder.None, -1, -1);
+            grid.AddInternalColumn(grid.Columns[15], new OutlookGridDefaultGroup(null), System.Windows.Forms.SortOrder.None, -1, -1);
+            grid.AddInternalColumn(grid.Columns[16], new OutlookGridDefaultGroup(null), System.Windows.Forms.SortOrder.None, -1, -1);
+            grid.AddInternalColumn(grid.Columns[17], new OutlookGridDefaultGroup(null), System.Windows.Forms.SortOrder.None, -1, -1);
+            grid.AddInternalColumn(grid.Columns[18], new OutlookGridDefaultGroup(null), System.Windows.Forms.SortOrder.None, -1, -1);
+            grid.AddInternalColumn(grid.Columns[19], new OutlookGridDefaultGroup(null), System.Windows.Forms.SortOrder.None, -1, -1);
+            grid.AddInternalColumn(grid.Columns[20], new OutlookGridDefaultGroup(null), System.Windows.Forms.SortOrder.None, -1, -1);
+            grid.AddInternalColumn(grid.Columns[21], new OutlookGridDefaultGroup(null), System.Windows.Forms.SortOrder.None, -1, -1);
+            grid.AddInternalColumn(grid.Columns[22], new OutlookGridDefaultGroup(null), System.Windows.Forms.SortOrder.None, -1, -1);
+            grid.AddInternalColumn(grid.Columns[23], new OutlookGridDefaultGroup(null), System.Windows.Forms.SortOrder.None, -1, -1);
+            grid.AddInternalColumn(grid.Columns[24], new OutlookGridTypeGroup(null), System.Windows.Forms.SortOrder.Ascending, 1, -1);
             #endregion
 
-            kryptonOutlookGrid1.Columns[24].Visible = false;
-            kryptonOutlookGrid1.ShowLines = true;
+            grid.Columns[24].Visible = false;
+            grid.ShowLines = true;
 
             //Setup Rows
             OutlookGridRow row = new OutlookGridRow();
             List<OutlookGridRow> l = new List<OutlookGridRow>();
-            kryptonOutlookGrid1.SuspendLayout();
-            //kryptonOutlookGrid1.ClearInternalRows();
-            kryptonOutlookGrid1.FillMode = FillMode.GROUPSONLY;
+            grid.SuspendLayout();
+            //grid.ClearInternalRows();
+            grid.FillMode = FillMode.GROUPSONLY;
 
             foreach (var norm in full1Ter)
             {
                 string norm_code = norm.Code.ToString();
                 int lenght = norm_code.Length;
-                for (int i = lenght; i< 4; i++)
+                for (int i = lenght; i < 4; i++)
                 {
                     norm_code = "0" + norm_code;
                 }
 
                 row = new OutlookGridRow();
-                row.CreateCells(kryptonOutlookGrid1, new object[]
+                row.CreateCells(grid, new object[]
                 {
                     norm.Id,
                     norm.Id_prod,
@@ -703,76 +707,24 @@ namespace WindowsFormsApp1
                     Math.Round(norm.val_plan_ut, round_koeff),
                     Math.Round(norm.val_fact, round_koeff),
                     Math.Round(norm.val_fact_ut, round_koeff),
-                    norm.val_plan > 0 ? Math.Round((Math.Round(norm.val_fact, round_koeff) / Math.Round(norm.val_plan, round_koeff)) * 100, 1).ToString() + "%" : "0",
-                    norm.val_fact_old > 0 ? Math.Round((Math.Round(norm.val_fact, round_koeff) / Math.Round(norm.val_fact_old, round_koeff)) * 100, 1).ToString() + "%" : "0",
+                    norm.val_plan > 0 ? Math.Round((Math.Round(norm.val_fact, round_koeff) / Math.Round(norm.val_plan, round_koeff)) * 100, 1).ToString() + "%" : "?",
+                    norm.val_fact_old > 0 ? Math.Round((Math.Round(norm.val_fact, round_koeff) / Math.Round(norm.val_fact_old, round_koeff)) * 100, 1).ToString() + "%" : "?",
                     Math.Round(norm.sum_val_fact_old, round_koeff),
                     Math.Round(norm.sum_val_plan, round_koeff),
                     Math.Round(norm.sum_val_plan_ut, round_koeff),
                     Math.Round( norm.sum_val_fact, round_koeff),
                     Math.Round(norm.sum_val_fact_ut, round_koeff),
-                    norm.sum_val_plan > 0 ? Math.Round((Math.Round( norm.sum_val_fact, round_koeff) / Math.Round(norm.sum_val_plan, round_koeff)) * 100, 1).ToString() + "%" : "0",
-                    norm.sum_val_fact_old > 0 ? Math.Round((Math.Round( norm.sum_val_fact, round_koeff) / Math.Round(norm.sum_val_fact_old, round_koeff)) * 100, 1).ToString() + "%" : "0",
+                    norm.sum_val_plan > 0 ? Math.Round((Math.Round( norm.sum_val_fact, round_koeff) / Math.Round(norm.sum_val_plan, round_koeff)) * 100, 1).ToString() + "%" : "?",
+                    norm.sum_val_fact_old > 0 ? Math.Round((Math.Round( norm.sum_val_fact, round_koeff) / Math.Round(norm.sum_val_fact_old, round_koeff)) * 100, 1).ToString() + "%" : "?",
                     new TextAndImage(norm.type.ToString(), GetFlag(norm.type)),
                 });
                 l.Add(row);
             }
 
-            kryptonOutlookGrid1.ResumeLayout();
-            kryptonOutlookGrid1.AssignRows(l);
-            kryptonOutlookGrid1.ForceRefreshGroupBox();
-            kryptonOutlookGrid1.Fill();
-        }
-
-        private Image GetFlag(int type)
-        {
-            switch (type)
-            {
-                case 1:
-                    return Properties.Resources._1;
-                case 2:
-                    return Properties.Resources._2;
-                case 3:
-                    return Properties.Resources._3;
-                default:
-                    return null;
-            }
-        }
-        private void kryptonOutlookGrid1_Resize(object sender, EventArgs e)
-        {
-            KryptonOutlookGrid.Classes.KryptonOutlookGrid grid = (KryptonOutlookGrid.Classes.KryptonOutlookGrid)sender;
-            int PreferredTotalWidth = 0;
-            //Calculate the total preferred width
-            foreach (DataGridViewColumn c in grid.Columns)
-            {
-                PreferredTotalWidth += Math.Min(c.GetPreferredWidth(DataGridViewAutoSizeColumnMode.DisplayedCells, true), 250);
-            }
-
-            if (grid.Width < PreferredTotalWidth)
-            {
-                grid.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-                grid.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.DisplayedCells);
-            }
-            else
-            {
-                grid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
-                foreach (DataGridViewColumn c in grid.Columns)
-                {
-                    c.Width = Math.Min(c.GetPreferredWidth(DataGridViewAutoSizeColumnMode.DisplayedCells, true), 250);
-                }
-            }
-
-        }
-        private void kryptonOutlookGrid1_ColumnWidthChanged(object sender, DataGridViewColumnEventArgs e)
-        {
-            KryptonOutlookGrid.Classes.KryptonOutlookGrid grid = (KryptonOutlookGrid.Classes.KryptonOutlookGrid)sender;
-            kryptonPanel3.Width = grid.Columns[3].Width + grid.Columns[4].Width + grid.Columns[5].Width - 1;
-            kryptonPanel4.Left = 10 + grid.Columns[3].Width + grid.Columns[4].Width + grid.Columns[5].Width;
-            kryptonPanel4.Width = grid.Columns[9].Width + grid.Columns[10].Width + grid.Columns[11].Width + grid.Columns[12].Width + grid.Columns[13].Width + grid.Columns[14].Width + grid.Columns[15].Width + grid.Columns[16].Width - 1;
-            kryptonPanel5.Left = 10 + grid.Columns[3].Width + grid.Columns[4].Width + grid.Columns[5].Width + grid.Columns[9].Width + grid.Columns[10].Width + grid.Columns[11].Width + grid.Columns[12].Width + grid.Columns[13].Width + grid.Columns[14].Width + grid.Columns[15].Width + grid.Columns[16].Width;
-            kryptonPanel5.Width = grid.Columns[17].Width + grid.Columns[18].Width + grid.Columns[19].Width + grid.Columns[20].Width + grid.Columns[21].Width + grid.Columns[22].Width + grid.Columns[23].Width - 1;          
-            label1.Left = kryptonPanel3.Width / 2 - label1.Width / 2;
-            label2.Left = kryptonPanel4.Width / 2 - label2.Width / 2;
-            label3.Left = kryptonPanel5.Width / 2 - label3.Width / 2;
+            grid.ResumeLayout();
+            grid.AssignRows(l);
+            grid.ForceRefreshGroupBox();
+            grid.Fill();
         }
 
         void MakeTable12tek()
@@ -4886,6 +4838,139 @@ namespace WindowsFormsApp1
         private void toolStripButton9_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private Image GetFlag(int type)
+        {
+            switch (type)
+            {
+                case 1:
+                    return Properties.Resources._1;
+                case 2:
+                    return Properties.Resources._2;
+                case 3:
+                    return Properties.Resources._3;
+                default:
+                    return null;
+            }
+        }
+        private void kryptonOutlookGrid1_Resize(object sender, EventArgs e)
+        {
+            KryptonOutlookGrid.Classes.KryptonOutlookGrid grid = (KryptonOutlookGrid.Classes.KryptonOutlookGrid)sender;
+            int PreferredTotalWidth = 0;
+            //Calculate the total preferred width
+            foreach (DataGridViewColumn c in grid.Columns)
+            {
+                PreferredTotalWidth += Math.Min(c.GetPreferredWidth(DataGridViewAutoSizeColumnMode.DisplayedCells, true), 250);
+            }
+
+            if (grid.Width < PreferredTotalWidth)
+            {
+                grid.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                grid.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.DisplayedCells);
+            }
+            else
+            {
+                grid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
+                foreach (DataGridViewColumn c in grid.Columns)
+                {
+                    c.Width = Math.Min(c.GetPreferredWidth(DataGridViewAutoSizeColumnMode.DisplayedCells, true), 250);
+                }
+            }
+
+        }
+        private void kryptonOutlookGrid1_ColumnWidthChanged(object sender, DataGridViewColumnEventArgs e)
+        {
+            KryptonOutlookGrid.Classes.KryptonOutlookGrid grid = (KryptonOutlookGrid.Classes.KryptonOutlookGrid)sender;
+            kryptonPanel3.Width = grid.Columns[3].Width + grid.Columns[4].Width + grid.Columns[5].Width - 1;
+            kryptonPanel4.Left = 10 + grid.Columns[3].Width + grid.Columns[4].Width + grid.Columns[5].Width;
+            kryptonPanel4.Width = grid.Columns[9].Width + grid.Columns[10].Width + grid.Columns[11].Width + grid.Columns[12].Width + grid.Columns[13].Width + grid.Columns[14].Width + grid.Columns[15].Width + grid.Columns[16].Width - 1;
+            kryptonPanel5.Left = 10 + grid.Columns[3].Width + grid.Columns[4].Width + grid.Columns[5].Width + grid.Columns[9].Width + grid.Columns[10].Width + grid.Columns[11].Width + grid.Columns[12].Width + grid.Columns[13].Width + grid.Columns[14].Width + grid.Columns[15].Width + grid.Columns[16].Width;
+            kryptonPanel5.Width = grid.Columns[17].Width + grid.Columns[18].Width + grid.Columns[19].Width + grid.Columns[20].Width + grid.Columns[21].Width + grid.Columns[22].Width + grid.Columns[23].Width - 1;
+            label1.Left = kryptonPanel3.Width / 2 - label1.Width / 2;
+            label2.Left = kryptonPanel4.Width / 2 - label2.Width / 2;
+            label3.Left = kryptonPanel5.Width / 2 - label3.Width / 2;
+        }
+        private void kryptonOutlookGrid2_ColumnWidthChanged(object sender, DataGridViewColumnEventArgs e)
+        {
+            KryptonOutlookGrid.Classes.KryptonOutlookGrid grid = (KryptonOutlookGrid.Classes.KryptonOutlookGrid)sender;
+            kryptonPanel9.Width = grid.Columns[3].Width + grid.Columns[4].Width + grid.Columns[5].Width - 1;
+            kryptonPanel8.Left = 10 + grid.Columns[3].Width + grid.Columns[4].Width + grid.Columns[5].Width;
+            kryptonPanel8.Width = grid.Columns[9].Width + grid.Columns[10].Width + grid.Columns[11].Width + grid.Columns[12].Width + grid.Columns[13].Width + grid.Columns[14].Width + grid.Columns[15].Width + grid.Columns[16].Width - 1;
+            kryptonPanel6.Left = 10 + grid.Columns[3].Width + grid.Columns[4].Width + grid.Columns[5].Width + grid.Columns[9].Width + grid.Columns[10].Width + grid.Columns[11].Width + grid.Columns[12].Width + grid.Columns[13].Width + grid.Columns[14].Width + grid.Columns[15].Width + grid.Columns[16].Width;
+            kryptonPanel6.Width = grid.Columns[17].Width + grid.Columns[18].Width + grid.Columns[19].Width + grid.Columns[20].Width + grid.Columns[21].Width + grid.Columns[22].Width + grid.Columns[23].Width - 1;
+            label6.Left = kryptonPanel9.Width / 2 - label6.Width / 2;
+            label5.Left = kryptonPanel8.Width / 2 - label5.Width / 2;
+            label4.Left = kryptonPanel6.Width / 2 - label4.Width / 2;
+        }
+        private void kryptonOutlookGrid3_ColumnWidthChanged(object sender, DataGridViewColumnEventArgs e)
+        {
+            KryptonOutlookGrid.Classes.KryptonOutlookGrid grid = (KryptonOutlookGrid.Classes.KryptonOutlookGrid)sender;
+            kryptonPanel13.Width = grid.Columns[3].Width + grid.Columns[4].Width + grid.Columns[5].Width - 1;
+            kryptonPanel12.Left = 10 + grid.Columns[3].Width + grid.Columns[4].Width + grid.Columns[5].Width;
+            kryptonPanel12.Width = grid.Columns[9].Width + grid.Columns[10].Width + grid.Columns[11].Width + grid.Columns[12].Width + grid.Columns[13].Width + grid.Columns[14].Width + grid.Columns[15].Width + grid.Columns[16].Width - 1;
+            kryptonPanel10.Left = 10 + grid.Columns[3].Width + grid.Columns[4].Width + grid.Columns[5].Width + grid.Columns[9].Width + grid.Columns[10].Width + grid.Columns[11].Width + grid.Columns[12].Width + grid.Columns[13].Width + grid.Columns[14].Width + grid.Columns[15].Width + grid.Columns[16].Width;
+            kryptonPanel10.Width = grid.Columns[17].Width + grid.Columns[18].Width + grid.Columns[19].Width + grid.Columns[20].Width + grid.Columns[21].Width + grid.Columns[22].Width + grid.Columns[23].Width - 1;
+            label10.Left = kryptonPanel13.Width / 2 - label10.Width / 2;
+            label8.Left = kryptonPanel12.Width / 2 - label8.Width / 2;
+            label7.Left = kryptonPanel10.Width / 2 - label7.Width / 2;
+        }
+        private void kryptonOutlookGrid4_ColumnWidthChanged(object sender, DataGridViewColumnEventArgs e)
+        {
+            KryptonOutlookGrid.Classes.KryptonOutlookGrid grid = (KryptonOutlookGrid.Classes.KryptonOutlookGrid)sender;
+            kryptonPanel17.Width = grid.Columns[3].Width + grid.Columns[4].Width + grid.Columns[5].Width - 1;
+            kryptonPanel16.Left = 10 + grid.Columns[3].Width + grid.Columns[4].Width + grid.Columns[5].Width;
+            kryptonPanel16.Width = grid.Columns[9].Width + grid.Columns[10].Width + grid.Columns[11].Width + grid.Columns[12].Width + grid.Columns[13].Width + grid.Columns[14].Width + grid.Columns[15].Width + grid.Columns[16].Width - 1;
+            kryptonPanel14.Left = 10 + grid.Columns[3].Width + grid.Columns[4].Width + grid.Columns[5].Width + grid.Columns[9].Width + grid.Columns[10].Width + grid.Columns[11].Width + grid.Columns[12].Width + grid.Columns[13].Width + grid.Columns[14].Width + grid.Columns[15].Width + grid.Columns[16].Width;
+            kryptonPanel14.Width = grid.Columns[17].Width + grid.Columns[18].Width + grid.Columns[19].Width + grid.Columns[20].Width + grid.Columns[21].Width + grid.Columns[22].Width + grid.Columns[23].Width - 1;
+            label13.Left = kryptonPanel17.Width / 2 - label13.Width / 2;
+            label12.Left = kryptonPanel16.Width / 2 - label12.Width / 2;
+            label11.Left = kryptonPanel14.Width / 2 - label11.Width / 2;
+        }
+
+        private void kryptonOutlookGrid1_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            KryptonOutlookGrid.Classes.KryptonOutlookGrid dataGridView = (KryptonOutlookGrid.Classes.KryptonOutlookGrid)sender;
+            var row = dataGridView.Rows[e.RowIndex];
+            if(dataGridView.Rows[e.RowIndex].Cells[e.ColumnIndex].Value == null)
+            {
+                dataGridView.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = 0;
+            }
+            if (!String.IsNullOrWhiteSpace(row.Cells[11].Value.ToString()) && !String.IsNullOrWhiteSpace(row.Cells[13].Value.ToString()))
+            {
+                row.Cells[15].Value = float.Parse(row.Cells[11].Value.ToString()) > 0 ? Math.Round((float.Parse(row.Cells[13].Value.ToString()) / float.Parse(row.Cells[11].Value.ToString())) * 100, 1).ToString() + "%" : "?";
+                row.Cells[16].Value = float.Parse(row.Cells[9].Value.ToString()) > 0 ? Math.Round((float.Parse(row.Cells[13].Value.ToString()) / float.Parse(row.Cells[9].Value.ToString())) * 100, 1).ToString() + "%" : "?";
+            }
+        }
+
+        void EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
+        {
+            DataGridView dataGridView = (DataGridView)sender;
+            if (dataGridView.CurrentCell.ColumnIndex == 11 || dataGridView.CurrentCell.ColumnIndex == 13)
+            {
+                TextBox tb = e.Control as TextBox;
+                tb.KeyPress -= new KeyPressEventHandler(tb_KeyPress);
+                tb.KeyPress += new KeyPressEventHandler(tb_KeyPress);
+            }
+        }
+
+        void tb_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            string Text = ((TextBox)sender).Text;
+            // filter the decimal point
+            if (!char.IsControl(e.KeyChar)
+                && !char.IsDigit(e.KeyChar)
+                && e.KeyChar != '.' && e.KeyChar != ',')
+            {
+                e.Handled = true;
+            }
+            if (e.KeyChar == '.') e.KeyChar = ',';
+            // only allow one decimal point
+            if (e.KeyChar == ','
+                && (sender as TextBox).Text.IndexOf(',') > -1)
+            {
+                e.Handled = true;
+            }
         }
     }
 }
