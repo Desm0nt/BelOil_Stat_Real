@@ -23,7 +23,9 @@ namespace WindowsFormsApp1
     public partial class ReportsForm : KryptonForm
     {
         public int year;
+        bool edited_1per_flag = false;
         int round_koeff = 1;
+        List<Full1terTable> full1Ter1, full1Ter2, full1Ter3, full1Ter;
         public List<NormTable> actualList = new List<NormTable>();
         public List<NormTable> oldList = new List<NormTable>();
         public List<CompanyListTable> CompanyList = new List<CompanyListTable>();
@@ -90,10 +92,10 @@ namespace WindowsFormsApp1
             worksheet1["S6"] = CurrentData.UserData.Name;
             worksheet1["P7"] = DateTime.Now.ToString("dd.MM.yyyy");
 
-            List<Full1terTable> full1Ter1 = new List<Full1terTable>();
-            List<Full1terTable> full1Ter2 = new List<Full1terTable>();
-            List<Full1terTable> full1Ter3 = new List<Full1terTable>();
-            List<Full1terTable> full1Ter = new List<Full1terTable>();
+            full1Ter1 = new List<Full1terTable>();
+            full1Ter2 = new List<Full1terTable>();
+            full1Ter3 = new List<Full1terTable>();
+            full1Ter = new List<Full1terTable>();
 
             var rep = dbOps.GetReportData(CurrentData.UserData.Id_org, dateTimePicker1.Value.Year, dateTimePicker1.Value.Month);
             int report_id = rep.id;
@@ -175,7 +177,8 @@ namespace WindowsFormsApp1
                         sum_val_fact_old = 0,
                         sum_val_fact_ut = 0,
                         sum_val_plan = 0,
-                        sum_val_plan_ut = 0,                        
+                        sum_val_plan_ut = 0,    
+                        editable = a.editable
                     });
                     tmp++;
                 }                 
@@ -296,6 +299,7 @@ namespace WindowsFormsApp1
                         sum_val_fact_ut = 0,
                         sum_val_plan = 0,
                         sum_val_plan_ut = 0,
+                        editable = a.editable
                     });
                     tmp++;
                 }
@@ -419,6 +423,7 @@ namespace WindowsFormsApp1
                         sum_val_fact_ut = 0,
                         sum_val_plan = 0,
                         sum_val_plan_ut = 0,
+                        editable = a.editable
                     });
                     tmp++;
                 }
@@ -611,7 +616,7 @@ namespace WindowsFormsApp1
 
             grid.GroupBox = kryptonOutlookGridGroupBox1;
             grid.RegisterGroupBoxEvents();
-            DataGridViewColumn[] columnsToAdd = new DataGridViewColumn[25];
+            DataGridViewColumn[] columnsToAdd = new DataGridViewColumn[26];
             #region список колонок
             columnsToAdd[0] = grid.Columns[0];
             columnsToAdd[1] = grid.Columns[1];
@@ -638,6 +643,7 @@ namespace WindowsFormsApp1
             columnsToAdd[22] = grid.Columns[22];
             columnsToAdd[23] = grid.Columns[23];
             columnsToAdd[24] = grid.Columns[24];
+            columnsToAdd[25] = grid.Columns[25];
             #endregion
 
             //grid.Columns.AddRange(columnsToAdd);
@@ -668,6 +674,7 @@ namespace WindowsFormsApp1
             grid.AddInternalColumn(grid.Columns[22], new OutlookGridDefaultGroup(null), System.Windows.Forms.SortOrder.None, -1, -1);
             grid.AddInternalColumn(grid.Columns[23], new OutlookGridDefaultGroup(null), System.Windows.Forms.SortOrder.None, -1, -1);
             grid.AddInternalColumn(grid.Columns[24], new OutlookGridTypeGroup(null), System.Windows.Forms.SortOrder.Ascending, 1, -1);
+            grid.AddInternalColumn(grid.Columns[25], new OutlookGridDefaultGroup(null), System.Windows.Forms.SortOrder.None, -1, -1);
             #endregion
 
             grid.Columns[24].Visible = false;
@@ -717,7 +724,15 @@ namespace WindowsFormsApp1
                     norm.sum_val_plan > 0 ? Math.Round((Math.Round( norm.sum_val_fact, round_koeff) / Math.Round(norm.sum_val_plan, round_koeff)) * 100, 1).ToString() + "%" : "?",
                     norm.sum_val_fact_old > 0 ? Math.Round((Math.Round( norm.sum_val_fact, round_koeff) / Math.Round(norm.sum_val_fact_old, round_koeff)) * 100, 1).ToString() + "%" : "?",
                     new TextAndImage(norm.type.ToString(), GetFlag(norm.type)),
+                    norm.editable
                 });
+                if (norm.editable == false)
+                {
+                    row.Cells[11].ReadOnly = true;
+                    row.Cells[11].Style.BackColor = Color.LightGray;
+                    row.Cells[13].ReadOnly = true;
+                    row.Cells[13].Style.BackColor = Color.LightGray;
+                }
                 l.Add(row);
             }
 
@@ -4291,6 +4306,7 @@ namespace WindowsFormsApp1
                 {
                     var sumIndex = ListOnePR.FindIndex(norm => norm.Id_local == t.Id_local);
                     var index = list.FindIndex(norm => norm.Id_local == t.Id_local);
+                    ListOnePR[sumIndex].Id = list[index].Id;
                     ListOnePR[sumIndex].val_fact = list[index].val_fact;
                     ListOnePR[sumIndex].val_plan = list[index].val_plan;
                     ListOnePR[sumIndex].val_fact_ut = list[index].val_fact_ut;
@@ -4305,6 +4321,7 @@ namespace WindowsFormsApp1
                     ListOnePR[sumIndex].val_plan = 0;
                     ListOnePR[sumIndex].val_fact_ut = 0;
                     ListOnePR[sumIndex].val_plan_ut = 0;
+                    ListOnePR[sumIndex].editable = false;
                 }
             }
             return ListOnePR;
@@ -4565,7 +4582,6 @@ namespace WindowsFormsApp1
             }
             return TradeList;
         }
-
 
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
         {
@@ -4930,17 +4946,54 @@ namespace WindowsFormsApp1
 
         private void kryptonOutlookGrid1_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
+            edited_1per_flag = true;
+            saveRapButton.Enabled = true;
             KryptonOutlookGrid.Classes.KryptonOutlookGrid dataGridView = (KryptonOutlookGrid.Classes.KryptonOutlookGrid)sender;
+            ComponentFactory.Krypton.Navigator.KryptonNavigator nav = kryptonNavigator1;
+            KryptonOutlookGrid.Classes.KryptonOutlookGrid newGrid = new KryptonOutlookGrid.Classes.KryptonOutlookGrid();
+            int index = Int32.Parse(nav.SelectedPage.Tag.ToString());
             var row = dataGridView.Rows[e.RowIndex];
-            if(dataGridView.Rows[e.RowIndex].Cells[e.ColumnIndex].Value == null)
+            if (index == 1)
+                newGrid = GetGridByType(Int32.Parse(row.Cells[24].Value.ToString()));
+            else
+                newGrid = kryptonOutlookGrid1;
+
+            int rowIndex = -1;
+
+            DataGridViewRow tmprow = newGrid.Rows
+                .Cast<DataGridViewRow>()
+                .Where(r => r.Cells[0].Value.ToString().Equals(row.Cells[0].Value.ToString()))
+                .First();
+
+            rowIndex = tmprow.Index;
+
+            if (dataGridView.Rows[e.RowIndex].Cells[e.ColumnIndex].Value == null)
             {
                 dataGridView.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = 0;
             }
             if (!String.IsNullOrWhiteSpace(row.Cells[11].Value.ToString()) && !String.IsNullOrWhiteSpace(row.Cells[13].Value.ToString()))
             {
+                newGrid.Rows[rowIndex].Cells[11].Value = row.Cells[11].Value;
+                newGrid.Rows[rowIndex].Cells[13].Value = row.Cells[13].Value;
                 row.Cells[15].Value = float.Parse(row.Cells[11].Value.ToString()) > 0 ? Math.Round((float.Parse(row.Cells[13].Value.ToString()) / float.Parse(row.Cells[11].Value.ToString())) * 100, 1).ToString() + "%" : "?";
                 row.Cells[16].Value = float.Parse(row.Cells[9].Value.ToString()) > 0 ? Math.Round((float.Parse(row.Cells[13].Value.ToString()) / float.Parse(row.Cells[9].Value.ToString())) * 100, 1).ToString() + "%" : "?";
+                newGrid.Rows[rowIndex].Cells[15].Value = row.Cells[15].Value;
+                newGrid.Rows[rowIndex].Cells[16].Value = row.Cells[16].Value;
             }
+        }
+
+        private KryptonOutlookGrid.Classes.KryptonOutlookGrid GetGridByType(int type)
+        {
+            KryptonOutlookGrid.Classes.KryptonOutlookGrid Grid = new KryptonOutlookGrid.Classes.KryptonOutlookGrid();
+            if (type == 0)
+                Grid = kryptonOutlookGrid1;
+            else if (type == 1)
+                Grid = kryptonOutlookGrid2;
+            else if (type == 2)
+                Grid = kryptonOutlookGrid3;
+            else if (type == 3)
+                Grid = kryptonOutlookGrid4;
+            return Grid;
         }
 
         void EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
@@ -4971,6 +5024,25 @@ namespace WindowsFormsApp1
             {
                 e.Handled = true;
             }
+        }
+
+        private void saveRapButton_Click(object sender, EventArgs e)
+        {
+            if (edited_1per_flag)
+            {
+                edited_1per_flag = false;
+                foreach (DataGridViewRow a in kryptonOutlookGrid1.Rows)
+                {
+                    if (a.Cells[1].Value!=null && bool.Parse(a.Cells[25].Value.ToString())==true)
+                        dbOps.UpdateFuelNorm(Int32.Parse(a.Cells[0].Value.ToString()), Int32.Parse(a.Cells[11].Value.ToString()), Int32.Parse(a.Cells[13].Value.ToString()));
+                }
+                MakeTable1per();
+            }
+            else
+            {
+
+            }
+            saveRapButton.Enabled = false;
         }
     }
 }

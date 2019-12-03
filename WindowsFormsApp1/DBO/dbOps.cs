@@ -2176,7 +2176,7 @@ namespace WindowsFormsApp1.DBO
                         }
                         NormList.Add(new NormTable
                         {
-                            Id = Int32.Parse(dr["id"].ToString()),
+                            Id = Int32.Parse(dr["norm_id"].ToString()),
                             Id_org = Int32.Parse(dr["id_org"].ToString()),
                             Id_prod = Int32.Parse(dr["id_prod"].ToString()),
                             Code = Int32.Parse(dr["code"].ToString()),
