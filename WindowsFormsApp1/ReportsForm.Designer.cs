@@ -30,18 +30,18 @@
         {
             this.components = new System.ComponentModel.Container();
             KryptonOutlookGrid.Classes.OutlookGridGroupCollection outlookGridGroupCollection1 = new KryptonOutlookGrid.Classes.OutlookGridGroupCollection();
-            KryptonOutlookGrid.Classes.OutlookGridGroupCollection outlookGridGroupCollection2 = new KryptonOutlookGrid.Classes.OutlookGridGroupCollection();
-            KryptonOutlookGrid.Classes.OutlookGridGroupCollection outlookGridGroupCollection3 = new KryptonOutlookGrid.Classes.OutlookGridGroupCollection();
-            KryptonOutlookGrid.Classes.OutlookGridGroupCollection outlookGridGroupCollection4 = new KryptonOutlookGrid.Classes.OutlookGridGroupCollection();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ReportsForm));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            KryptonOutlookGrid.Classes.OutlookGridGroupCollection outlookGridGroupCollection2 = new KryptonOutlookGrid.Classes.OutlookGridGroupCollection();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            KryptonOutlookGrid.Classes.OutlookGridGroupCollection outlookGridGroupCollection3 = new KryptonOutlookGrid.Classes.OutlookGridGroupCollection();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            KryptonOutlookGrid.Classes.OutlookGridGroupCollection outlookGridGroupCollection4 = new KryptonOutlookGrid.Classes.OutlookGridGroupCollection();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ReportsForm));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.менюToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.сменитьПользователяToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -73,6 +73,32 @@
             this.kryptonNavigator1 = new ComponentFactory.Krypton.Navigator.KryptonNavigator();
             this.AllPage = new ComponentFactory.Krypton.Navigator.KryptonPage();
             this.kryptonOutlookGrid1 = new KryptonOutlookGrid.Classes.KryptonOutlookGrid();
+            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.id_prod = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.id_local = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Code = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.unit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nUnit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fuel = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.id_rep = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.val_fact_old = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.B_y = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.val_plan = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.val_plan_ut = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.val_fact = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.vasl_fact_ut = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.factplan = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.factplanlast = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fsumpred = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.plan_sum = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sum_plan_ut = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sum_fatc = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sum_fact_ut = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sumplanfact = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sumfact_fact = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.type = new KryptonOutlookGrid.CustomColumns.KryptonDataGridViewTextAndImageColumn();
+            this.enabled = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.panel5 = new System.Windows.Forms.Panel();
             this.kryptonOutlookGridGroupBox1 = new KryptonOutlookGrid.Controls.KryptonOutlookGridGroupBox();
             this.kryptonPanel5 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
@@ -85,6 +111,32 @@
             this.FuelPage = new ComponentFactory.Krypton.Navigator.KryptonPage();
             this.panel4 = new System.Windows.Forms.Panel();
             this.kryptonOutlookGrid2 = new KryptonOutlookGrid.Classes.KryptonOutlookGrid();
+            this.fuel_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fuel_id_prod = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fuel_id_local = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fuel_Code = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fuel_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fuel_unit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fuel_nUnit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fuel_fuel = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fuel_id_rep = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fuel_val_fact_old = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fuel_B_y = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fuel_val_plan = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fuel_val_plan_ut = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fuel_val_fact = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fuel_vasl_fact_ut = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fuel_factplan = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fuel_factplanlast = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fuel_fsumpred = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fuel_plan_sum = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fuel_sum_plan_ut = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fuel_sum_fatc = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fuel_sum_fact_ut = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fuel_sumplanfact = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fuel_sumfact_fact = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fuel_type = new KryptonOutlookGrid.CustomColumns.KryptonDataGridViewTextAndImageColumn();
+            this.fuel_enabled = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.kryptonOutlookGridGroupBox2 = new KryptonOutlookGrid.Controls.KryptonOutlookGridGroupBox();
             this.kryptonPanel6 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.label4 = new System.Windows.Forms.Label();
@@ -96,6 +148,32 @@
             this.HeatPage = new ComponentFactory.Krypton.Navigator.KryptonPage();
             this.panel6 = new System.Windows.Forms.Panel();
             this.kryptonOutlookGrid3 = new KryptonOutlookGrid.Classes.KryptonOutlookGrid();
+            this.heat_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.heat_id_prod = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.heat_id_local = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.heat_Code = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.heat_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.heat_unit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.heat_nUnit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.heat_fuel = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.heat_id_rep = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.heat_val_fact_old = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.heat_B_y = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.heat_val_plan = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.heat_val_plan_ut = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.heat_val_fact = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.heat_vasl_fact_ut = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.heat_factplan = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.heat_factplanlast = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.heat_fsumpred = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.heat_plan_sum = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.heat_sum_plan_ut = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.heat_sum_fatc = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.heat_sum_fact_ut = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.heat_sumplanfact = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.heat_sumfact_fact = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.heat_type = new KryptonOutlookGrid.CustomColumns.KryptonDataGridViewTextAndImageColumn();
+            this.heat_enabled = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.kryptonOutlookGridGroupBox3 = new KryptonOutlookGrid.Controls.KryptonOutlookGridGroupBox();
             this.kryptonPanel10 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.label7 = new System.Windows.Forms.Label();
@@ -107,6 +185,32 @@
             this.ElPage = new ComponentFactory.Krypton.Navigator.KryptonPage();
             this.panel7 = new System.Windows.Forms.Panel();
             this.kryptonOutlookGrid4 = new KryptonOutlookGrid.Classes.KryptonOutlookGrid();
+            this.el_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.el_id_prod = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.el_id_local = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.el_Code = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.el_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.el_unit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.el_nUnit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.el_fuel = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.el_id_rep = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.el_val_fact_old = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.el_B_y = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.el_val_plan = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.el_val_plan_ut = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.el_val_fact = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.el_vasl_fact_ut = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.el_factplan = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.el_factplanlast = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.el_fsumpred = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.el_plan_sum = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.el_sum_plan_ut = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.el_sum_fatc = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.el_sum_fact_ut = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.el_sumplanfact = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.el_sumfact_fact = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.el_type = new KryptonOutlookGrid.CustomColumns.KryptonDataGridViewTextAndImageColumn();
+            this.el_enabled = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.kryptonOutlookGridGroupBox4 = new KryptonOutlookGrid.Controls.KryptonOutlookGridGroupBox();
             this.kryptonPanel14 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.label11 = new System.Windows.Forms.Label();
@@ -115,6 +219,8 @@
             this.label12 = new System.Windows.Forms.Label();
             this.kryptonPanel17 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.label13 = new System.Windows.Forms.Label();
+            this.Page12Tek = new ComponentFactory.Krypton.Navigator.KryptonPage();
+            this.reoGridControl2 = new unvell.ReoGrid.ReoGridControl();
             this.kryptonPage3 = new ComponentFactory.Krypton.Navigator.KryptonPage();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -123,7 +229,6 @@
             this.CompanyBox = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
             this.dateTimePicker1 = new ComponentFactory.Krypton.Toolkit.KryptonDateTimePicker();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.reoGridControl2 = new unvell.ReoGrid.ReoGridControl();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.reoGrid4 = new unvell.ReoGrid.ReoGridControl();
             this.tabPage4 = new System.Windows.Forms.TabPage();
@@ -186,110 +291,6 @@
             this.RUPButton = new System.Windows.Forms.ToolStripButton();
             this.POButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
-            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.id_prod = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.id_local = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Code = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.unit = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nUnit = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fuel = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.id_rep = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.val_fact_old = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.B_y = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.val_plan = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.val_plan_ut = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.val_fact = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.vasl_fact_ut = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.factplan = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.factplanlast = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fsumpred = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.plan_sum = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sum_plan_ut = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sum_fatc = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sum_fact_ut = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sumplanfact = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sumfact_fact = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.type = new KryptonOutlookGrid.CustomColumns.KryptonDataGridViewTextAndImageColumn();
-            this.enabled = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.fuel_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fuel_id_prod = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fuel_id_local = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fuel_Code = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fuel_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fuel_unit = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fuel_nUnit = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fuel_fuel = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fuel_id_rep = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fuel_val_fact_old = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fuel_B_y = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fuel_val_plan = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fuel_val_plan_ut = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fuel_val_fact = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fuel_vasl_fact_ut = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fuel_factplan = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fuel_factplanlast = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fuel_fsumpred = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fuel_plan_sum = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fuel_sum_plan_ut = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fuel_sum_fatc = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fuel_sum_fact_ut = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fuel_sumplanfact = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fuel_sumfact_fact = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fuel_type = new KryptonOutlookGrid.CustomColumns.KryptonDataGridViewTextAndImageColumn();
-            this.fuel_enabled = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.heat_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.heat_id_prod = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.heat_id_local = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.heat_Code = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.heat_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.heat_unit = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.heat_nUnit = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.heat_fuel = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.heat_id_rep = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.heat_val_fact_old = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.heat_B_y = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.heat_val_plan = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.heat_val_plan_ut = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.heat_val_fact = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.heat_vasl_fact_ut = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.heat_factplan = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.heat_factplanlast = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.heat_fsumpred = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.heat_plan_sum = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.heat_sum_plan_ut = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.heat_sum_fatc = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.heat_sum_fact_ut = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.heat_sumplanfact = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.heat_sumfact_fact = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.heat_type = new KryptonOutlookGrid.CustomColumns.KryptonDataGridViewTextAndImageColumn();
-            this.heat_enabled = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.el_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.el_id_prod = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.el_id_local = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.el_Code = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.el_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.el_unit = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.el_nUnit = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.el_fuel = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.el_id_rep = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.el_val_fact_old = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.el_B_y = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.el_val_plan = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.el_val_plan_ut = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.el_val_fact = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.el_vasl_fact_ut = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.el_factplan = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.el_factplanlast = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.el_fsumpred = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.el_plan_sum = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.el_sum_plan_ut = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.el_sum_fatc = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.el_sum_fact_ut = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.el_sumplanfact = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.el_sumfact_fact = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.el_type = new KryptonOutlookGrid.CustomColumns.KryptonDataGridViewTextAndImageColumn();
-            this.el_enabled = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
@@ -345,13 +346,14 @@
             this.kryptonPanel16.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel17)).BeginInit();
             this.kryptonPanel17.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Page12Tek)).BeginInit();
+            this.Page12Tek.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPage3)).BeginInit();
             this.kryptonPage3.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.CompanyBox)).BeginInit();
-            this.tabPage2.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.tabPage4.SuspendLayout();
             this.tabPage6.SuspendLayout();
@@ -635,6 +637,7 @@
             this.kryptonNavigator2.PageBackStyle = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ControlRibbon;
             this.kryptonNavigator2.Pages.AddRange(new ComponentFactory.Krypton.Navigator.KryptonPage[] {
             this.kryptonPage4,
+            this.Page12Tek,
             this.kryptonPage3});
             this.kryptonNavigator2.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Office2007Blue;
             this.kryptonNavigator2.Panel.PanelBackStyle = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ContextMenuItemImage;
@@ -755,6 +758,217 @@
             this.kryptonOutlookGrid1.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.kryptonOutlookGrid1_CellEndEdit);
             this.kryptonOutlookGrid1.ColumnWidthChanged += new System.Windows.Forms.DataGridViewColumnEventHandler(this.kryptonOutlookGrid1_ColumnWidthChanged);
             this.kryptonOutlookGrid1.Resize += new System.EventHandler(this.kryptonOutlookGrid1_Resize);
+            // 
+            // id
+            // 
+            this.id.HeaderText = "id";
+            this.id.Name = "id";
+            this.id.ReadOnly = true;
+            this.id.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.id.Visible = false;
+            // 
+            // id_prod
+            // 
+            this.id_prod.HeaderText = "id продукта";
+            this.id_prod.Name = "id_prod";
+            this.id_prod.ReadOnly = true;
+            this.id_prod.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.id_prod.Visible = false;
+            // 
+            // id_local
+            // 
+            this.id_local.HeaderText = "id_local";
+            this.id_local.Name = "id_local";
+            this.id_local.ReadOnly = true;
+            this.id_local.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.id_local.Visible = false;
+            // 
+            // Code
+            // 
+            this.Code.HeaderText = "#";
+            this.Code.Name = "Code";
+            this.Code.ReadOnly = true;
+            this.Code.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Code.Width = 50;
+            // 
+            // name
+            // 
+            this.name.HeaderText = "Наименование";
+            this.name.Name = "name";
+            this.name.ReadOnly = true;
+            this.name.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.name.Width = 150;
+            // 
+            // unit
+            // 
+            this.unit.HeaderText = "ед. изм.";
+            this.unit.Name = "unit";
+            this.unit.ReadOnly = true;
+            this.unit.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.unit.Width = 55;
+            // 
+            // nUnit
+            // 
+            this.nUnit.HeaderText = "ед. изм. т.у.т.";
+            this.nUnit.Name = "nUnit";
+            this.nUnit.ReadOnly = true;
+            this.nUnit.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.nUnit.Visible = false;
+            // 
+            // fuel
+            // 
+            this.fuel.HeaderText = "id топлива";
+            this.fuel.Name = "fuel";
+            this.fuel.ReadOnly = true;
+            this.fuel.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.fuel.Visible = false;
+            // 
+            // id_rep
+            // 
+            this.id_rep.HeaderText = "id отчета";
+            this.id_rep.Name = "id_rep";
+            this.id_rep.ReadOnly = true;
+            this.id_rep.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.id_rep.Visible = false;
+            // 
+            // val_fact_old
+            // 
+            this.val_fact_old.HeaderText = "Факт, пред.";
+            this.val_fact_old.Name = "val_fact_old";
+            this.val_fact_old.ReadOnly = true;
+            this.val_fact_old.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.val_fact_old.Width = 70;
+            // 
+            // B_y
+            // 
+            this.B_y.HeaderText = "By";
+            this.B_y.Name = "B_y";
+            this.B_y.ReadOnly = true;
+            this.B_y.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.B_y.Width = 45;
+            // 
+            // val_plan
+            // 
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.val_plan.DefaultCellStyle = dataGridViewCellStyle1;
+            this.val_plan.HeaderText = "План";
+            this.val_plan.Name = "val_plan";
+            this.val_plan.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.val_plan.Width = 70;
+            // 
+            // val_plan_ut
+            // 
+            this.val_plan_ut.HeaderText = "П, т.у.т.";
+            this.val_plan_ut.Name = "val_plan_ut";
+            this.val_plan_ut.ReadOnly = true;
+            this.val_plan_ut.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.val_plan_ut.Width = 65;
+            // 
+            // val_fact
+            // 
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.val_fact.DefaultCellStyle = dataGridViewCellStyle2;
+            this.val_fact.HeaderText = "Факт";
+            this.val_fact.Name = "val_fact";
+            this.val_fact.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.val_fact.Width = 70;
+            // 
+            // vasl_fact_ut
+            // 
+            this.vasl_fact_ut.HeaderText = "Ф, т.у.т.";
+            this.vasl_fact_ut.Name = "vasl_fact_ut";
+            this.vasl_fact_ut.ReadOnly = true;
+            this.vasl_fact_ut.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.vasl_fact_ut.Width = 65;
+            // 
+            // factplan
+            // 
+            this.factplan.HeaderText = "Ф/П, %";
+            this.factplan.Name = "factplan";
+            this.factplan.ReadOnly = true;
+            this.factplan.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.factplan.Width = 50;
+            // 
+            // factplanlast
+            // 
+            this.factplanlast.HeaderText = "Ф/Ф (пред.)";
+            this.factplanlast.Name = "factplanlast";
+            this.factplanlast.ReadOnly = true;
+            this.factplanlast.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.factplanlast.Width = 70;
+            // 
+            // fsumpred
+            // 
+            this.fsumpred.HeaderText = "Факт, пред";
+            this.fsumpred.Name = "fsumpred";
+            this.fsumpred.ReadOnly = true;
+            this.fsumpred.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.fsumpred.Width = 70;
+            // 
+            // plan_sum
+            // 
+            this.plan_sum.HeaderText = "План";
+            this.plan_sum.Name = "plan_sum";
+            this.plan_sum.ReadOnly = true;
+            this.plan_sum.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.plan_sum.Width = 65;
+            // 
+            // sum_plan_ut
+            // 
+            this.sum_plan_ut.HeaderText = "П, т.у.т.";
+            this.sum_plan_ut.Name = "sum_plan_ut";
+            this.sum_plan_ut.ReadOnly = true;
+            this.sum_plan_ut.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.sum_plan_ut.Width = 65;
+            // 
+            // sum_fatc
+            // 
+            this.sum_fatc.HeaderText = "Факт";
+            this.sum_fatc.Name = "sum_fatc";
+            this.sum_fatc.ReadOnly = true;
+            this.sum_fatc.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.sum_fatc.Width = 65;
+            // 
+            // sum_fact_ut
+            // 
+            this.sum_fact_ut.HeaderText = "Ф, т.у.т.";
+            this.sum_fact_ut.Name = "sum_fact_ut";
+            this.sum_fact_ut.ReadOnly = true;
+            this.sum_fact_ut.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.sum_fact_ut.Width = 65;
+            // 
+            // sumplanfact
+            // 
+            this.sumplanfact.HeaderText = "Ф/П, %";
+            this.sumplanfact.Name = "sumplanfact";
+            this.sumplanfact.ReadOnly = true;
+            this.sumplanfact.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.sumplanfact.Width = 50;
+            // 
+            // sumfact_fact
+            // 
+            this.sumfact_fact.HeaderText = "Ф/Ф (пред)";
+            this.sumfact_fact.Name = "sumfact_fact";
+            this.sumfact_fact.ReadOnly = true;
+            this.sumfact_fact.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.sumfact_fact.Width = 70;
+            // 
+            // type
+            // 
+            this.type.HeaderText = "Тип";
+            this.type.Name = "type";
+            this.type.ReadOnly = true;
+            this.type.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.type.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.type.Visible = false;
+            this.type.Width = 5;
+            // 
+            // enabled
+            // 
+            this.enabled.HeaderText = "enabled";
+            this.enabled.Name = "enabled";
+            this.enabled.ReadOnly = true;
+            this.enabled.Visible = false;
             // 
             // panel5
             // 
@@ -941,8 +1155,220 @@
             this.kryptonOutlookGrid2.ShowLines = false;
             this.kryptonOutlookGrid2.Size = new System.Drawing.Size(1209, 524);
             this.kryptonOutlookGrid2.TabIndex = 0;
+            this.kryptonOutlookGrid2.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.kryptonOutlookGrid1_CellEndEdit);
             this.kryptonOutlookGrid2.ColumnWidthChanged += new System.Windows.Forms.DataGridViewColumnEventHandler(this.kryptonOutlookGrid2_ColumnWidthChanged);
             this.kryptonOutlookGrid2.Resize += new System.EventHandler(this.kryptonOutlookGrid1_Resize);
+            // 
+            // fuel_id
+            // 
+            this.fuel_id.HeaderText = "id";
+            this.fuel_id.Name = "fuel_id";
+            this.fuel_id.ReadOnly = true;
+            this.fuel_id.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.fuel_id.Visible = false;
+            // 
+            // fuel_id_prod
+            // 
+            this.fuel_id_prod.HeaderText = "id продукта";
+            this.fuel_id_prod.Name = "fuel_id_prod";
+            this.fuel_id_prod.ReadOnly = true;
+            this.fuel_id_prod.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.fuel_id_prod.Visible = false;
+            // 
+            // fuel_id_local
+            // 
+            this.fuel_id_local.HeaderText = "id_local";
+            this.fuel_id_local.Name = "fuel_id_local";
+            this.fuel_id_local.ReadOnly = true;
+            this.fuel_id_local.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.fuel_id_local.Visible = false;
+            // 
+            // fuel_Code
+            // 
+            this.fuel_Code.HeaderText = "#";
+            this.fuel_Code.Name = "fuel_Code";
+            this.fuel_Code.ReadOnly = true;
+            this.fuel_Code.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.fuel_Code.Width = 50;
+            // 
+            // fuel_name
+            // 
+            this.fuel_name.HeaderText = "Наименование";
+            this.fuel_name.Name = "fuel_name";
+            this.fuel_name.ReadOnly = true;
+            this.fuel_name.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.fuel_name.Width = 150;
+            // 
+            // fuel_unit
+            // 
+            this.fuel_unit.HeaderText = "ед. изм.";
+            this.fuel_unit.Name = "fuel_unit";
+            this.fuel_unit.ReadOnly = true;
+            this.fuel_unit.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.fuel_unit.Width = 55;
+            // 
+            // fuel_nUnit
+            // 
+            this.fuel_nUnit.HeaderText = "ед. изм. т.у.т.";
+            this.fuel_nUnit.Name = "fuel_nUnit";
+            this.fuel_nUnit.ReadOnly = true;
+            this.fuel_nUnit.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.fuel_nUnit.Visible = false;
+            // 
+            // fuel_fuel
+            // 
+            this.fuel_fuel.HeaderText = "id топлива";
+            this.fuel_fuel.Name = "fuel_fuel";
+            this.fuel_fuel.ReadOnly = true;
+            this.fuel_fuel.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.fuel_fuel.Visible = false;
+            // 
+            // fuel_id_rep
+            // 
+            this.fuel_id_rep.HeaderText = "id отчета";
+            this.fuel_id_rep.Name = "fuel_id_rep";
+            this.fuel_id_rep.ReadOnly = true;
+            this.fuel_id_rep.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.fuel_id_rep.Visible = false;
+            // 
+            // fuel_val_fact_old
+            // 
+            this.fuel_val_fact_old.HeaderText = "Факт, пред.";
+            this.fuel_val_fact_old.Name = "fuel_val_fact_old";
+            this.fuel_val_fact_old.ReadOnly = true;
+            this.fuel_val_fact_old.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.fuel_val_fact_old.Width = 70;
+            // 
+            // fuel_B_y
+            // 
+            this.fuel_B_y.HeaderText = "By";
+            this.fuel_B_y.Name = "fuel_B_y";
+            this.fuel_B_y.ReadOnly = true;
+            this.fuel_B_y.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.fuel_B_y.Width = 45;
+            // 
+            // fuel_val_plan
+            // 
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.fuel_val_plan.DefaultCellStyle = dataGridViewCellStyle3;
+            this.fuel_val_plan.HeaderText = "План";
+            this.fuel_val_plan.Name = "fuel_val_plan";
+            this.fuel_val_plan.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.fuel_val_plan.Width = 70;
+            // 
+            // fuel_val_plan_ut
+            // 
+            this.fuel_val_plan_ut.HeaderText = "П, т.у.т.";
+            this.fuel_val_plan_ut.Name = "fuel_val_plan_ut";
+            this.fuel_val_plan_ut.ReadOnly = true;
+            this.fuel_val_plan_ut.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.fuel_val_plan_ut.Width = 65;
+            // 
+            // fuel_val_fact
+            // 
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.fuel_val_fact.DefaultCellStyle = dataGridViewCellStyle4;
+            this.fuel_val_fact.HeaderText = "Факт";
+            this.fuel_val_fact.Name = "fuel_val_fact";
+            this.fuel_val_fact.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.fuel_val_fact.Width = 70;
+            // 
+            // fuel_vasl_fact_ut
+            // 
+            this.fuel_vasl_fact_ut.HeaderText = "Ф, т.у.т.";
+            this.fuel_vasl_fact_ut.Name = "fuel_vasl_fact_ut";
+            this.fuel_vasl_fact_ut.ReadOnly = true;
+            this.fuel_vasl_fact_ut.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.fuel_vasl_fact_ut.Width = 65;
+            // 
+            // fuel_factplan
+            // 
+            this.fuel_factplan.HeaderText = "Ф/П, %";
+            this.fuel_factplan.Name = "fuel_factplan";
+            this.fuel_factplan.ReadOnly = true;
+            this.fuel_factplan.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.fuel_factplan.Width = 50;
+            // 
+            // fuel_factplanlast
+            // 
+            this.fuel_factplanlast.HeaderText = "Ф/Ф (пред.)";
+            this.fuel_factplanlast.Name = "fuel_factplanlast";
+            this.fuel_factplanlast.ReadOnly = true;
+            this.fuel_factplanlast.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.fuel_factplanlast.Width = 70;
+            // 
+            // fuel_fsumpred
+            // 
+            this.fuel_fsumpred.HeaderText = "Факт, пред";
+            this.fuel_fsumpred.Name = "fuel_fsumpred";
+            this.fuel_fsumpred.ReadOnly = true;
+            this.fuel_fsumpred.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.fuel_fsumpred.Width = 70;
+            // 
+            // fuel_plan_sum
+            // 
+            this.fuel_plan_sum.HeaderText = "План";
+            this.fuel_plan_sum.Name = "fuel_plan_sum";
+            this.fuel_plan_sum.ReadOnly = true;
+            this.fuel_plan_sum.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.fuel_plan_sum.Width = 65;
+            // 
+            // fuel_sum_plan_ut
+            // 
+            this.fuel_sum_plan_ut.HeaderText = "П, т.у.т.";
+            this.fuel_sum_plan_ut.Name = "fuel_sum_plan_ut";
+            this.fuel_sum_plan_ut.ReadOnly = true;
+            this.fuel_sum_plan_ut.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.fuel_sum_plan_ut.Width = 65;
+            // 
+            // fuel_sum_fatc
+            // 
+            this.fuel_sum_fatc.HeaderText = "Факт";
+            this.fuel_sum_fatc.Name = "fuel_sum_fatc";
+            this.fuel_sum_fatc.ReadOnly = true;
+            this.fuel_sum_fatc.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.fuel_sum_fatc.Width = 65;
+            // 
+            // fuel_sum_fact_ut
+            // 
+            this.fuel_sum_fact_ut.HeaderText = "Ф, т.у.т.";
+            this.fuel_sum_fact_ut.Name = "fuel_sum_fact_ut";
+            this.fuel_sum_fact_ut.ReadOnly = true;
+            this.fuel_sum_fact_ut.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.fuel_sum_fact_ut.Width = 65;
+            // 
+            // fuel_sumplanfact
+            // 
+            this.fuel_sumplanfact.HeaderText = "Ф/П, %";
+            this.fuel_sumplanfact.Name = "fuel_sumplanfact";
+            this.fuel_sumplanfact.ReadOnly = true;
+            this.fuel_sumplanfact.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.fuel_sumplanfact.Width = 50;
+            // 
+            // fuel_sumfact_fact
+            // 
+            this.fuel_sumfact_fact.HeaderText = "Ф/Ф (пред)";
+            this.fuel_sumfact_fact.Name = "fuel_sumfact_fact";
+            this.fuel_sumfact_fact.ReadOnly = true;
+            this.fuel_sumfact_fact.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.fuel_sumfact_fact.Width = 70;
+            // 
+            // fuel_type
+            // 
+            this.fuel_type.HeaderText = "Тип";
+            this.fuel_type.Name = "fuel_type";
+            this.fuel_type.ReadOnly = true;
+            this.fuel_type.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.fuel_type.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.fuel_type.Visible = false;
+            this.fuel_type.Width = 5;
+            // 
+            // fuel_enabled
+            // 
+            this.fuel_enabled.HeaderText = "enabled";
+            this.fuel_enabled.Name = "fuel_enabled";
+            this.fuel_enabled.ReadOnly = true;
+            this.fuel_enabled.Visible = false;
             // 
             // kryptonOutlookGridGroupBox2
             // 
@@ -1114,8 +1540,220 @@
             this.kryptonOutlookGrid3.ShowLines = false;
             this.kryptonOutlookGrid3.Size = new System.Drawing.Size(1209, 524);
             this.kryptonOutlookGrid3.TabIndex = 0;
+            this.kryptonOutlookGrid3.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.kryptonOutlookGrid1_CellEndEdit);
             this.kryptonOutlookGrid3.ColumnWidthChanged += new System.Windows.Forms.DataGridViewColumnEventHandler(this.kryptonOutlookGrid3_ColumnWidthChanged);
             this.kryptonOutlookGrid3.Resize += new System.EventHandler(this.kryptonOutlookGrid1_Resize);
+            // 
+            // heat_id
+            // 
+            this.heat_id.HeaderText = "id";
+            this.heat_id.Name = "heat_id";
+            this.heat_id.ReadOnly = true;
+            this.heat_id.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.heat_id.Visible = false;
+            // 
+            // heat_id_prod
+            // 
+            this.heat_id_prod.HeaderText = "id продукта";
+            this.heat_id_prod.Name = "heat_id_prod";
+            this.heat_id_prod.ReadOnly = true;
+            this.heat_id_prod.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.heat_id_prod.Visible = false;
+            // 
+            // heat_id_local
+            // 
+            this.heat_id_local.HeaderText = "id_local";
+            this.heat_id_local.Name = "heat_id_local";
+            this.heat_id_local.ReadOnly = true;
+            this.heat_id_local.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.heat_id_local.Visible = false;
+            // 
+            // heat_Code
+            // 
+            this.heat_Code.HeaderText = "#";
+            this.heat_Code.Name = "heat_Code";
+            this.heat_Code.ReadOnly = true;
+            this.heat_Code.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.heat_Code.Width = 50;
+            // 
+            // heat_name
+            // 
+            this.heat_name.HeaderText = "Наименование";
+            this.heat_name.Name = "heat_name";
+            this.heat_name.ReadOnly = true;
+            this.heat_name.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.heat_name.Width = 150;
+            // 
+            // heat_unit
+            // 
+            this.heat_unit.HeaderText = "ед. изм.";
+            this.heat_unit.Name = "heat_unit";
+            this.heat_unit.ReadOnly = true;
+            this.heat_unit.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.heat_unit.Width = 55;
+            // 
+            // heat_nUnit
+            // 
+            this.heat_nUnit.HeaderText = "ед. изм. т.у.т.";
+            this.heat_nUnit.Name = "heat_nUnit";
+            this.heat_nUnit.ReadOnly = true;
+            this.heat_nUnit.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.heat_nUnit.Visible = false;
+            // 
+            // heat_fuel
+            // 
+            this.heat_fuel.HeaderText = "id топлива";
+            this.heat_fuel.Name = "heat_fuel";
+            this.heat_fuel.ReadOnly = true;
+            this.heat_fuel.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.heat_fuel.Visible = false;
+            // 
+            // heat_id_rep
+            // 
+            this.heat_id_rep.HeaderText = "id отчета";
+            this.heat_id_rep.Name = "heat_id_rep";
+            this.heat_id_rep.ReadOnly = true;
+            this.heat_id_rep.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.heat_id_rep.Visible = false;
+            // 
+            // heat_val_fact_old
+            // 
+            this.heat_val_fact_old.HeaderText = "Факт, пред.";
+            this.heat_val_fact_old.Name = "heat_val_fact_old";
+            this.heat_val_fact_old.ReadOnly = true;
+            this.heat_val_fact_old.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.heat_val_fact_old.Width = 70;
+            // 
+            // heat_B_y
+            // 
+            this.heat_B_y.HeaderText = "By";
+            this.heat_B_y.Name = "heat_B_y";
+            this.heat_B_y.ReadOnly = true;
+            this.heat_B_y.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.heat_B_y.Width = 45;
+            // 
+            // heat_val_plan
+            // 
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.heat_val_plan.DefaultCellStyle = dataGridViewCellStyle5;
+            this.heat_val_plan.HeaderText = "План";
+            this.heat_val_plan.Name = "heat_val_plan";
+            this.heat_val_plan.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.heat_val_plan.Width = 70;
+            // 
+            // heat_val_plan_ut
+            // 
+            this.heat_val_plan_ut.HeaderText = "П, т.у.т.";
+            this.heat_val_plan_ut.Name = "heat_val_plan_ut";
+            this.heat_val_plan_ut.ReadOnly = true;
+            this.heat_val_plan_ut.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.heat_val_plan_ut.Width = 65;
+            // 
+            // heat_val_fact
+            // 
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.heat_val_fact.DefaultCellStyle = dataGridViewCellStyle6;
+            this.heat_val_fact.HeaderText = "Факт";
+            this.heat_val_fact.Name = "heat_val_fact";
+            this.heat_val_fact.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.heat_val_fact.Width = 70;
+            // 
+            // heat_vasl_fact_ut
+            // 
+            this.heat_vasl_fact_ut.HeaderText = "Ф, т.у.т.";
+            this.heat_vasl_fact_ut.Name = "heat_vasl_fact_ut";
+            this.heat_vasl_fact_ut.ReadOnly = true;
+            this.heat_vasl_fact_ut.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.heat_vasl_fact_ut.Width = 65;
+            // 
+            // heat_factplan
+            // 
+            this.heat_factplan.HeaderText = "Ф/П, %";
+            this.heat_factplan.Name = "heat_factplan";
+            this.heat_factplan.ReadOnly = true;
+            this.heat_factplan.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.heat_factplan.Width = 50;
+            // 
+            // heat_factplanlast
+            // 
+            this.heat_factplanlast.HeaderText = "Ф/Ф (пред.)";
+            this.heat_factplanlast.Name = "heat_factplanlast";
+            this.heat_factplanlast.ReadOnly = true;
+            this.heat_factplanlast.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.heat_factplanlast.Width = 70;
+            // 
+            // heat_fsumpred
+            // 
+            this.heat_fsumpred.HeaderText = "Факт, пред";
+            this.heat_fsumpred.Name = "heat_fsumpred";
+            this.heat_fsumpred.ReadOnly = true;
+            this.heat_fsumpred.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.heat_fsumpred.Width = 70;
+            // 
+            // heat_plan_sum
+            // 
+            this.heat_plan_sum.HeaderText = "План";
+            this.heat_plan_sum.Name = "heat_plan_sum";
+            this.heat_plan_sum.ReadOnly = true;
+            this.heat_plan_sum.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.heat_plan_sum.Width = 65;
+            // 
+            // heat_sum_plan_ut
+            // 
+            this.heat_sum_plan_ut.HeaderText = "П, т.у.т.";
+            this.heat_sum_plan_ut.Name = "heat_sum_plan_ut";
+            this.heat_sum_plan_ut.ReadOnly = true;
+            this.heat_sum_plan_ut.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.heat_sum_plan_ut.Width = 65;
+            // 
+            // heat_sum_fatc
+            // 
+            this.heat_sum_fatc.HeaderText = "Факт";
+            this.heat_sum_fatc.Name = "heat_sum_fatc";
+            this.heat_sum_fatc.ReadOnly = true;
+            this.heat_sum_fatc.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.heat_sum_fatc.Width = 65;
+            // 
+            // heat_sum_fact_ut
+            // 
+            this.heat_sum_fact_ut.HeaderText = "Ф, т.у.т.";
+            this.heat_sum_fact_ut.Name = "heat_sum_fact_ut";
+            this.heat_sum_fact_ut.ReadOnly = true;
+            this.heat_sum_fact_ut.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.heat_sum_fact_ut.Width = 65;
+            // 
+            // heat_sumplanfact
+            // 
+            this.heat_sumplanfact.HeaderText = "Ф/П, %";
+            this.heat_sumplanfact.Name = "heat_sumplanfact";
+            this.heat_sumplanfact.ReadOnly = true;
+            this.heat_sumplanfact.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.heat_sumplanfact.Width = 50;
+            // 
+            // heat_sumfact_fact
+            // 
+            this.heat_sumfact_fact.HeaderText = "Ф/Ф (пред)";
+            this.heat_sumfact_fact.Name = "heat_sumfact_fact";
+            this.heat_sumfact_fact.ReadOnly = true;
+            this.heat_sumfact_fact.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.heat_sumfact_fact.Width = 70;
+            // 
+            // heat_type
+            // 
+            this.heat_type.HeaderText = "Тип";
+            this.heat_type.Name = "heat_type";
+            this.heat_type.ReadOnly = true;
+            this.heat_type.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.heat_type.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.heat_type.Visible = false;
+            this.heat_type.Width = 5;
+            // 
+            // heat_enabled
+            // 
+            this.heat_enabled.HeaderText = "enabled";
+            this.heat_enabled.Name = "heat_enabled";
+            this.heat_enabled.ReadOnly = true;
+            this.heat_enabled.Visible = false;
             // 
             // kryptonOutlookGridGroupBox3
             // 
@@ -1287,8 +1925,220 @@
             this.kryptonOutlookGrid4.ShowLines = false;
             this.kryptonOutlookGrid4.Size = new System.Drawing.Size(1209, 524);
             this.kryptonOutlookGrid4.TabIndex = 0;
+            this.kryptonOutlookGrid4.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.kryptonOutlookGrid1_CellEndEdit);
             this.kryptonOutlookGrid4.ColumnWidthChanged += new System.Windows.Forms.DataGridViewColumnEventHandler(this.kryptonOutlookGrid4_ColumnWidthChanged);
             this.kryptonOutlookGrid4.Resize += new System.EventHandler(this.kryptonOutlookGrid1_Resize);
+            // 
+            // el_id
+            // 
+            this.el_id.HeaderText = "id";
+            this.el_id.Name = "el_id";
+            this.el_id.ReadOnly = true;
+            this.el_id.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.el_id.Visible = false;
+            // 
+            // el_id_prod
+            // 
+            this.el_id_prod.HeaderText = "id продукта";
+            this.el_id_prod.Name = "el_id_prod";
+            this.el_id_prod.ReadOnly = true;
+            this.el_id_prod.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.el_id_prod.Visible = false;
+            // 
+            // el_id_local
+            // 
+            this.el_id_local.HeaderText = "id_local";
+            this.el_id_local.Name = "el_id_local";
+            this.el_id_local.ReadOnly = true;
+            this.el_id_local.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.el_id_local.Visible = false;
+            // 
+            // el_Code
+            // 
+            this.el_Code.HeaderText = "#";
+            this.el_Code.Name = "el_Code";
+            this.el_Code.ReadOnly = true;
+            this.el_Code.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.el_Code.Width = 50;
+            // 
+            // el_name
+            // 
+            this.el_name.HeaderText = "Наименование";
+            this.el_name.Name = "el_name";
+            this.el_name.ReadOnly = true;
+            this.el_name.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.el_name.Width = 150;
+            // 
+            // el_unit
+            // 
+            this.el_unit.HeaderText = "ед. изм.";
+            this.el_unit.Name = "el_unit";
+            this.el_unit.ReadOnly = true;
+            this.el_unit.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.el_unit.Width = 55;
+            // 
+            // el_nUnit
+            // 
+            this.el_nUnit.HeaderText = "ед. изм. т.у.т.";
+            this.el_nUnit.Name = "el_nUnit";
+            this.el_nUnit.ReadOnly = true;
+            this.el_nUnit.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.el_nUnit.Visible = false;
+            // 
+            // el_fuel
+            // 
+            this.el_fuel.HeaderText = "id топлива";
+            this.el_fuel.Name = "el_fuel";
+            this.el_fuel.ReadOnly = true;
+            this.el_fuel.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.el_fuel.Visible = false;
+            // 
+            // el_id_rep
+            // 
+            this.el_id_rep.HeaderText = "id отчета";
+            this.el_id_rep.Name = "el_id_rep";
+            this.el_id_rep.ReadOnly = true;
+            this.el_id_rep.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.el_id_rep.Visible = false;
+            // 
+            // el_val_fact_old
+            // 
+            this.el_val_fact_old.HeaderText = "Факт, пред.";
+            this.el_val_fact_old.Name = "el_val_fact_old";
+            this.el_val_fact_old.ReadOnly = true;
+            this.el_val_fact_old.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.el_val_fact_old.Width = 70;
+            // 
+            // el_B_y
+            // 
+            this.el_B_y.HeaderText = "By";
+            this.el_B_y.Name = "el_B_y";
+            this.el_B_y.ReadOnly = true;
+            this.el_B_y.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.el_B_y.Width = 45;
+            // 
+            // el_val_plan
+            // 
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.el_val_plan.DefaultCellStyle = dataGridViewCellStyle7;
+            this.el_val_plan.HeaderText = "План";
+            this.el_val_plan.Name = "el_val_plan";
+            this.el_val_plan.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.el_val_plan.Width = 70;
+            // 
+            // el_val_plan_ut
+            // 
+            this.el_val_plan_ut.HeaderText = "П, т.у.т.";
+            this.el_val_plan_ut.Name = "el_val_plan_ut";
+            this.el_val_plan_ut.ReadOnly = true;
+            this.el_val_plan_ut.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.el_val_plan_ut.Width = 65;
+            // 
+            // el_val_fact
+            // 
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.el_val_fact.DefaultCellStyle = dataGridViewCellStyle8;
+            this.el_val_fact.HeaderText = "Факт";
+            this.el_val_fact.Name = "el_val_fact";
+            this.el_val_fact.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.el_val_fact.Width = 70;
+            // 
+            // el_vasl_fact_ut
+            // 
+            this.el_vasl_fact_ut.HeaderText = "Ф, т.у.т.";
+            this.el_vasl_fact_ut.Name = "el_vasl_fact_ut";
+            this.el_vasl_fact_ut.ReadOnly = true;
+            this.el_vasl_fact_ut.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.el_vasl_fact_ut.Width = 65;
+            // 
+            // el_factplan
+            // 
+            this.el_factplan.HeaderText = "Ф/П, %";
+            this.el_factplan.Name = "el_factplan";
+            this.el_factplan.ReadOnly = true;
+            this.el_factplan.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.el_factplan.Width = 50;
+            // 
+            // el_factplanlast
+            // 
+            this.el_factplanlast.HeaderText = "Ф/Ф (пред.)";
+            this.el_factplanlast.Name = "el_factplanlast";
+            this.el_factplanlast.ReadOnly = true;
+            this.el_factplanlast.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.el_factplanlast.Width = 70;
+            // 
+            // el_fsumpred
+            // 
+            this.el_fsumpred.HeaderText = "Факт, пред";
+            this.el_fsumpred.Name = "el_fsumpred";
+            this.el_fsumpred.ReadOnly = true;
+            this.el_fsumpred.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.el_fsumpred.Width = 70;
+            // 
+            // el_plan_sum
+            // 
+            this.el_plan_sum.HeaderText = "План";
+            this.el_plan_sum.Name = "el_plan_sum";
+            this.el_plan_sum.ReadOnly = true;
+            this.el_plan_sum.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.el_plan_sum.Width = 65;
+            // 
+            // el_sum_plan_ut
+            // 
+            this.el_sum_plan_ut.HeaderText = "П, т.у.т.";
+            this.el_sum_plan_ut.Name = "el_sum_plan_ut";
+            this.el_sum_plan_ut.ReadOnly = true;
+            this.el_sum_plan_ut.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.el_sum_plan_ut.Width = 65;
+            // 
+            // el_sum_fatc
+            // 
+            this.el_sum_fatc.HeaderText = "Факт";
+            this.el_sum_fatc.Name = "el_sum_fatc";
+            this.el_sum_fatc.ReadOnly = true;
+            this.el_sum_fatc.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.el_sum_fatc.Width = 65;
+            // 
+            // el_sum_fact_ut
+            // 
+            this.el_sum_fact_ut.HeaderText = "Ф, т.у.т.";
+            this.el_sum_fact_ut.Name = "el_sum_fact_ut";
+            this.el_sum_fact_ut.ReadOnly = true;
+            this.el_sum_fact_ut.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.el_sum_fact_ut.Width = 65;
+            // 
+            // el_sumplanfact
+            // 
+            this.el_sumplanfact.HeaderText = "Ф/П, %";
+            this.el_sumplanfact.Name = "el_sumplanfact";
+            this.el_sumplanfact.ReadOnly = true;
+            this.el_sumplanfact.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.el_sumplanfact.Width = 50;
+            // 
+            // el_sumfact_fact
+            // 
+            this.el_sumfact_fact.HeaderText = "Ф/Ф (пред)";
+            this.el_sumfact_fact.Name = "el_sumfact_fact";
+            this.el_sumfact_fact.ReadOnly = true;
+            this.el_sumfact_fact.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.el_sumfact_fact.Width = 70;
+            // 
+            // el_type
+            // 
+            this.el_type.HeaderText = "Тип";
+            this.el_type.Name = "el_type";
+            this.el_type.ReadOnly = true;
+            this.el_type.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.el_type.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.el_type.Visible = false;
+            this.el_type.Width = 5;
+            // 
+            // el_enabled
+            // 
+            this.el_enabled.HeaderText = "enabled";
+            this.el_enabled.Name = "el_enabled";
+            this.el_enabled.ReadOnly = true;
+            this.el_enabled.Visible = false;
             // 
             // kryptonOutlookGridGroupBox4
             // 
@@ -1381,6 +2231,38 @@
             this.label13.TabIndex = 1;
             this.label13.Text = "Направление потребления";
             // 
+            // Page12Tek
+            // 
+            this.Page12Tek.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
+            this.Page12Tek.Controls.Add(this.reoGridControl2);
+            this.Page12Tek.Flags = 65534;
+            this.Page12Tek.LastVisibleSet = true;
+            this.Page12Tek.MinimumSize = new System.Drawing.Size(50, 50);
+            this.Page12Tek.Name = "Page12Tek";
+            this.Page12Tek.Size = new System.Drawing.Size(1211, 569);
+            this.Page12Tek.Text = "12-ТЭК";
+            this.Page12Tek.ToolTipTitle = "Page ToolTip";
+            this.Page12Tek.UniqueName = "c62e428d6faf43cdbd17d01295581ddb";
+            // 
+            // reoGridControl2
+            // 
+            this.reoGridControl2.BackColor = System.Drawing.Color.White;
+            this.reoGridControl2.ColumnHeaderContextMenuStrip = null;
+            this.reoGridControl2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.reoGridControl2.LeadHeaderContextMenuStrip = null;
+            this.reoGridControl2.Location = new System.Drawing.Point(0, 0);
+            this.reoGridControl2.Name = "reoGridControl2";
+            this.reoGridControl2.RowHeaderContextMenuStrip = null;
+            this.reoGridControl2.Script = null;
+            this.reoGridControl2.SheetTabContextMenuStrip = null;
+            this.reoGridControl2.SheetTabNewButtonVisible = true;
+            this.reoGridControl2.SheetTabVisible = true;
+            this.reoGridControl2.SheetTabWidth = 60;
+            this.reoGridControl2.ShowScrollEndSpacing = true;
+            this.reoGridControl2.Size = new System.Drawing.Size(1211, 569);
+            this.reoGridControl2.TabIndex = 1;
+            this.reoGridControl2.Text = "reoGridControl2";
+            // 
             // kryptonPage3
             // 
             this.kryptonPage3.AutoHiddenSlideSize = new System.Drawing.Size(200, 200);
@@ -1389,7 +2271,7 @@
             this.kryptonPage3.LastVisibleSet = true;
             this.kryptonPage3.MinimumSize = new System.Drawing.Size(50, 50);
             this.kryptonPage3.Name = "kryptonPage3";
-            this.kryptonPage3.Size = new System.Drawing.Size(1213, 576);
+            this.kryptonPage3.Size = new System.Drawing.Size(1211, 569);
             this.kryptonPage3.Text = "Старое";
             this.kryptonPage3.ToolTipTitle = "Page ToolTip";
             this.kryptonPage3.UniqueName = "ee2a291e2ef343f39444deaa3cc4bbd4";
@@ -1407,7 +2289,7 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1213, 576);
+            this.tabControl1.Size = new System.Drawing.Size(1211, 569);
             this.tabControl1.TabIndex = 0;
             this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
@@ -1420,7 +2302,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1205, 550);
+            this.tabPage1.Size = new System.Drawing.Size(1203, 543);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "1-ПЭР";
             // 
@@ -1439,7 +2321,7 @@
             this.reoGridControl1.SheetTabVisible = true;
             this.reoGridControl1.SheetTabWidth = 60;
             this.reoGridControl1.ShowScrollEndSpacing = true;
-            this.reoGridControl1.Size = new System.Drawing.Size(1199, 544);
+            this.reoGridControl1.Size = new System.Drawing.Size(1197, 537);
             this.reoGridControl1.TabIndex = 0;
             this.reoGridControl1.Text = "reoGridControl1";
             // 
@@ -1478,32 +2360,12 @@
             // tabPage2
             // 
             this.tabPage2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(246)))), ((int)(((byte)(254)))));
-            this.tabPage2.Controls.Add(this.reoGridControl2);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1205, 550);
+            this.tabPage2.Size = new System.Drawing.Size(1203, 543);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "12-ТЭК";
-            // 
-            // reoGridControl2
-            // 
-            this.reoGridControl2.BackColor = System.Drawing.Color.White;
-            this.reoGridControl2.ColumnHeaderContextMenuStrip = null;
-            this.reoGridControl2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.reoGridControl2.LeadHeaderContextMenuStrip = null;
-            this.reoGridControl2.Location = new System.Drawing.Point(3, 3);
-            this.reoGridControl2.Name = "reoGridControl2";
-            this.reoGridControl2.RowHeaderContextMenuStrip = null;
-            this.reoGridControl2.Script = null;
-            this.reoGridControl2.SheetTabContextMenuStrip = null;
-            this.reoGridControl2.SheetTabNewButtonVisible = true;
-            this.reoGridControl2.SheetTabVisible = true;
-            this.reoGridControl2.SheetTabWidth = 60;
-            this.reoGridControl2.ShowScrollEndSpacing = true;
-            this.reoGridControl2.Size = new System.Drawing.Size(1199, 544);
-            this.reoGridControl2.TabIndex = 0;
-            this.reoGridControl2.Text = "reoGridControl2";
             // 
             // tabPage3
             // 
@@ -1512,7 +2374,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(1205, 550);
+            this.tabPage3.Size = new System.Drawing.Size(1203, 543);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Приложение к 12-ТЭК";
             // 
@@ -1531,7 +2393,7 @@
             this.reoGrid4.SheetTabVisible = true;
             this.reoGrid4.SheetTabWidth = 60;
             this.reoGrid4.ShowScrollEndSpacing = true;
-            this.reoGrid4.Size = new System.Drawing.Size(1199, 544);
+            this.reoGrid4.Size = new System.Drawing.Size(1197, 537);
             this.reoGrid4.TabIndex = 1;
             this.reoGrid4.Text = "reoGridControl4";
             // 
@@ -1543,7 +2405,7 @@
             this.tabPage4.Controls.Add(this.reoGridControl4);
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Size = new System.Drawing.Size(1205, 550);
+            this.tabPage4.Size = new System.Drawing.Size(1203, 543);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "4-норма";
             // 
@@ -1582,7 +2444,7 @@
             this.reoGridControl4.SheetTabVisible = true;
             this.reoGridControl4.SheetTabWidth = 60;
             this.reoGridControl4.ShowScrollEndSpacing = true;
-            this.reoGridControl4.Size = new System.Drawing.Size(1202, 739);
+            this.reoGridControl4.Size = new System.Drawing.Size(1200, 732);
             this.reoGridControl4.TabIndex = 2;
             this.reoGridControl4.Text = "reoGridControl4";
             // 
@@ -1593,7 +2455,7 @@
             this.tabPage6.Controls.Add(this.reoGridControl5);
             this.tabPage6.Location = new System.Drawing.Point(4, 22);
             this.tabPage6.Name = "tabPage6";
-            this.tabPage6.Size = new System.Drawing.Size(1205, 550);
+            this.tabPage6.Size = new System.Drawing.Size(1203, 543);
             this.tabPage6.TabIndex = 5;
             this.tabPage6.Text = "1-ТЭК";
             // 
@@ -1623,7 +2485,7 @@
             this.reoGridControl5.SheetTabVisible = true;
             this.reoGridControl5.SheetTabWidth = 60;
             this.reoGridControl5.ShowScrollEndSpacing = true;
-            this.reoGridControl5.Size = new System.Drawing.Size(1202, 738);
+            this.reoGridControl5.Size = new System.Drawing.Size(1200, 731);
             this.reoGridControl5.TabIndex = 2;
             this.reoGridControl5.Text = "reoGridControl5";
             // 
@@ -1633,7 +2495,7 @@
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(1205, 550);
+            this.tabPage5.Size = new System.Drawing.Size(1203, 543);
             this.tabPage5.TabIndex = 6;
             this.tabPage5.Text = "tabPage5";
             // 
@@ -1739,7 +2601,6 @@
             this.toolStripButton9.Name = "toolStripButton9";
             this.toolStripButton9.Size = new System.Drawing.Size(23, 22);
             this.toolStripButton9.Text = "Добавить";
-            this.toolStripButton9.Click += new System.EventHandler(this.toolStripButton9_Click);
             // 
             // toolStripButton10
             // 
@@ -2050,7 +2911,8 @@
             this.toolStripButton4.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton4.Name = "toolStripButton4";
             this.toolStripButton4.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton4.Text = "toolStripButton4";
+            this.toolStripButton4.Text = "Профиль";
+            this.toolStripButton4.Click += new System.EventHandler(this.профильToolStripMenuItem_Click);
             // 
             // toolStripButton5
             // 
@@ -2059,7 +2921,7 @@
             this.toolStripButton5.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton5.Name = "toolStripButton5";
             this.toolStripButton5.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton5.Text = "toolStripButton5";
+            this.toolStripButton5.Text = "Сотрудники";
             this.toolStripButton5.Click += new System.EventHandler(this.списокСотрудниковToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
@@ -2074,7 +2936,7 @@
             this.toolStripButton6.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton6.Name = "toolStripButton6";
             this.toolStripButton6.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton6.Text = "toolStripButton6";
+            this.toolStripButton6.Text = "Энергоресурсы";
             this.toolStripButton6.Click += new System.EventHandler(this.списокТопливныхРеусурсовToolStripMenuItem_Click);
             // 
             // toolStripButton7
@@ -2084,7 +2946,7 @@
             this.toolStripButton7.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton7.Name = "toolStripButton7";
             this.toolStripButton7.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton7.Text = "toolStripButton7";
+            this.toolStripButton7.Text = "Виды продукции";
             this.toolStripButton7.Click += new System.EventHandler(this.списокПродуктовToolStripMenuItem_Click);
             // 
             // toolStripButton8
@@ -2153,856 +3015,6 @@
             this.toolStripButton1.Size = new System.Drawing.Size(23, 22);
             this.toolStripButton1.Text = "toolStripButton1";
             // 
-            // id
-            // 
-            this.id.HeaderText = "id";
-            this.id.Name = "id";
-            this.id.ReadOnly = true;
-            this.id.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.id.Visible = false;
-            // 
-            // id_prod
-            // 
-            this.id_prod.HeaderText = "id продукта";
-            this.id_prod.Name = "id_prod";
-            this.id_prod.ReadOnly = true;
-            this.id_prod.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.id_prod.Visible = false;
-            // 
-            // id_local
-            // 
-            this.id_local.HeaderText = "id_local";
-            this.id_local.Name = "id_local";
-            this.id_local.ReadOnly = true;
-            this.id_local.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.id_local.Visible = false;
-            // 
-            // Code
-            // 
-            this.Code.HeaderText = "#";
-            this.Code.Name = "Code";
-            this.Code.ReadOnly = true;
-            this.Code.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Code.Width = 50;
-            // 
-            // name
-            // 
-            this.name.HeaderText = "Наименование";
-            this.name.Name = "name";
-            this.name.ReadOnly = true;
-            this.name.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.name.Width = 150;
-            // 
-            // unit
-            // 
-            this.unit.HeaderText = "ед. изм.";
-            this.unit.Name = "unit";
-            this.unit.ReadOnly = true;
-            this.unit.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.unit.Width = 55;
-            // 
-            // nUnit
-            // 
-            this.nUnit.HeaderText = "ед. изм. т.у.т.";
-            this.nUnit.Name = "nUnit";
-            this.nUnit.ReadOnly = true;
-            this.nUnit.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.nUnit.Visible = false;
-            // 
-            // fuel
-            // 
-            this.fuel.HeaderText = "id топлива";
-            this.fuel.Name = "fuel";
-            this.fuel.ReadOnly = true;
-            this.fuel.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.fuel.Visible = false;
-            // 
-            // id_rep
-            // 
-            this.id_rep.HeaderText = "id отчета";
-            this.id_rep.Name = "id_rep";
-            this.id_rep.ReadOnly = true;
-            this.id_rep.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.id_rep.Visible = false;
-            // 
-            // val_fact_old
-            // 
-            this.val_fact_old.HeaderText = "Факт, пред.";
-            this.val_fact_old.Name = "val_fact_old";
-            this.val_fact_old.ReadOnly = true;
-            this.val_fact_old.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.val_fact_old.Width = 70;
-            // 
-            // B_y
-            // 
-            this.B_y.HeaderText = "By";
-            this.B_y.Name = "B_y";
-            this.B_y.ReadOnly = true;
-            this.B_y.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.B_y.Width = 45;
-            // 
-            // val_plan
-            // 
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.val_plan.DefaultCellStyle = dataGridViewCellStyle1;
-            this.val_plan.HeaderText = "План";
-            this.val_plan.Name = "val_plan";
-            this.val_plan.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.val_plan.Width = 70;
-            // 
-            // val_plan_ut
-            // 
-            this.val_plan_ut.HeaderText = "П, т.у.т.";
-            this.val_plan_ut.Name = "val_plan_ut";
-            this.val_plan_ut.ReadOnly = true;
-            this.val_plan_ut.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.val_plan_ut.Width = 65;
-            // 
-            // val_fact
-            // 
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.val_fact.DefaultCellStyle = dataGridViewCellStyle2;
-            this.val_fact.HeaderText = "Факт";
-            this.val_fact.Name = "val_fact";
-            this.val_fact.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.val_fact.Width = 70;
-            // 
-            // vasl_fact_ut
-            // 
-            this.vasl_fact_ut.HeaderText = "Ф, т.у.т.";
-            this.vasl_fact_ut.Name = "vasl_fact_ut";
-            this.vasl_fact_ut.ReadOnly = true;
-            this.vasl_fact_ut.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.vasl_fact_ut.Width = 65;
-            // 
-            // factplan
-            // 
-            this.factplan.HeaderText = "Ф/П, %";
-            this.factplan.Name = "factplan";
-            this.factplan.ReadOnly = true;
-            this.factplan.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.factplan.Width = 50;
-            // 
-            // factplanlast
-            // 
-            this.factplanlast.HeaderText = "Ф/Ф (пред.)";
-            this.factplanlast.Name = "factplanlast";
-            this.factplanlast.ReadOnly = true;
-            this.factplanlast.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.factplanlast.Width = 70;
-            // 
-            // fsumpred
-            // 
-            this.fsumpred.HeaderText = "Факт, пред";
-            this.fsumpred.Name = "fsumpred";
-            this.fsumpred.ReadOnly = true;
-            this.fsumpred.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.fsumpred.Width = 70;
-            // 
-            // plan_sum
-            // 
-            this.plan_sum.HeaderText = "План";
-            this.plan_sum.Name = "plan_sum";
-            this.plan_sum.ReadOnly = true;
-            this.plan_sum.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.plan_sum.Width = 65;
-            // 
-            // sum_plan_ut
-            // 
-            this.sum_plan_ut.HeaderText = "П, т.у.т.";
-            this.sum_plan_ut.Name = "sum_plan_ut";
-            this.sum_plan_ut.ReadOnly = true;
-            this.sum_plan_ut.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.sum_plan_ut.Width = 65;
-            // 
-            // sum_fatc
-            // 
-            this.sum_fatc.HeaderText = "Факт";
-            this.sum_fatc.Name = "sum_fatc";
-            this.sum_fatc.ReadOnly = true;
-            this.sum_fatc.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.sum_fatc.Width = 65;
-            // 
-            // sum_fact_ut
-            // 
-            this.sum_fact_ut.HeaderText = "Ф, т.у.т.";
-            this.sum_fact_ut.Name = "sum_fact_ut";
-            this.sum_fact_ut.ReadOnly = true;
-            this.sum_fact_ut.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.sum_fact_ut.Width = 65;
-            // 
-            // sumplanfact
-            // 
-            this.sumplanfact.HeaderText = "Ф/П, %";
-            this.sumplanfact.Name = "sumplanfact";
-            this.sumplanfact.ReadOnly = true;
-            this.sumplanfact.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.sumplanfact.Width = 50;
-            // 
-            // sumfact_fact
-            // 
-            this.sumfact_fact.HeaderText = "Ф/Ф (пред)";
-            this.sumfact_fact.Name = "sumfact_fact";
-            this.sumfact_fact.ReadOnly = true;
-            this.sumfact_fact.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.sumfact_fact.Width = 70;
-            // 
-            // type
-            // 
-            this.type.HeaderText = "Тип";
-            this.type.Name = "type";
-            this.type.ReadOnly = true;
-            this.type.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.type.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.type.Visible = false;
-            this.type.Width = 5;
-            // 
-            // enabled
-            // 
-            this.enabled.HeaderText = "enabled";
-            this.enabled.Name = "enabled";
-            this.enabled.ReadOnly = true;
-            this.enabled.Visible = false;
-            // 
-            // fuel_id
-            // 
-            this.fuel_id.HeaderText = "id";
-            this.fuel_id.Name = "fuel_id";
-            this.fuel_id.ReadOnly = true;
-            this.fuel_id.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.fuel_id.Visible = false;
-            // 
-            // fuel_id_prod
-            // 
-            this.fuel_id_prod.HeaderText = "id продукта";
-            this.fuel_id_prod.Name = "fuel_id_prod";
-            this.fuel_id_prod.ReadOnly = true;
-            this.fuel_id_prod.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.fuel_id_prod.Visible = false;
-            // 
-            // fuel_id_local
-            // 
-            this.fuel_id_local.HeaderText = "id_local";
-            this.fuel_id_local.Name = "fuel_id_local";
-            this.fuel_id_local.ReadOnly = true;
-            this.fuel_id_local.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.fuel_id_local.Visible = false;
-            // 
-            // fuel_Code
-            // 
-            this.fuel_Code.HeaderText = "#";
-            this.fuel_Code.Name = "fuel_Code";
-            this.fuel_Code.ReadOnly = true;
-            this.fuel_Code.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.fuel_Code.Width = 50;
-            // 
-            // fuel_name
-            // 
-            this.fuel_name.HeaderText = "Наименование";
-            this.fuel_name.Name = "fuel_name";
-            this.fuel_name.ReadOnly = true;
-            this.fuel_name.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.fuel_name.Width = 150;
-            // 
-            // fuel_unit
-            // 
-            this.fuel_unit.HeaderText = "ед. изм.";
-            this.fuel_unit.Name = "fuel_unit";
-            this.fuel_unit.ReadOnly = true;
-            this.fuel_unit.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.fuel_unit.Width = 55;
-            // 
-            // fuel_nUnit
-            // 
-            this.fuel_nUnit.HeaderText = "ед. изм. т.у.т.";
-            this.fuel_nUnit.Name = "fuel_nUnit";
-            this.fuel_nUnit.ReadOnly = true;
-            this.fuel_nUnit.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.fuel_nUnit.Visible = false;
-            // 
-            // fuel_fuel
-            // 
-            this.fuel_fuel.HeaderText = "id топлива";
-            this.fuel_fuel.Name = "fuel_fuel";
-            this.fuel_fuel.ReadOnly = true;
-            this.fuel_fuel.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.fuel_fuel.Visible = false;
-            // 
-            // fuel_id_rep
-            // 
-            this.fuel_id_rep.HeaderText = "id отчета";
-            this.fuel_id_rep.Name = "fuel_id_rep";
-            this.fuel_id_rep.ReadOnly = true;
-            this.fuel_id_rep.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.fuel_id_rep.Visible = false;
-            // 
-            // fuel_val_fact_old
-            // 
-            this.fuel_val_fact_old.HeaderText = "Факт, пред.";
-            this.fuel_val_fact_old.Name = "fuel_val_fact_old";
-            this.fuel_val_fact_old.ReadOnly = true;
-            this.fuel_val_fact_old.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.fuel_val_fact_old.Width = 70;
-            // 
-            // fuel_B_y
-            // 
-            this.fuel_B_y.HeaderText = "By";
-            this.fuel_B_y.Name = "fuel_B_y";
-            this.fuel_B_y.ReadOnly = true;
-            this.fuel_B_y.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.fuel_B_y.Width = 45;
-            // 
-            // fuel_val_plan
-            // 
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.fuel_val_plan.DefaultCellStyle = dataGridViewCellStyle3;
-            this.fuel_val_plan.HeaderText = "План";
-            this.fuel_val_plan.Name = "fuel_val_plan";
-            this.fuel_val_plan.ReadOnly = true;
-            this.fuel_val_plan.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.fuel_val_plan.Width = 70;
-            // 
-            // fuel_val_plan_ut
-            // 
-            this.fuel_val_plan_ut.HeaderText = "П, т.у.т.";
-            this.fuel_val_plan_ut.Name = "fuel_val_plan_ut";
-            this.fuel_val_plan_ut.ReadOnly = true;
-            this.fuel_val_plan_ut.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.fuel_val_plan_ut.Width = 65;
-            // 
-            // fuel_val_fact
-            // 
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.fuel_val_fact.DefaultCellStyle = dataGridViewCellStyle4;
-            this.fuel_val_fact.HeaderText = "Факт";
-            this.fuel_val_fact.Name = "fuel_val_fact";
-            this.fuel_val_fact.ReadOnly = true;
-            this.fuel_val_fact.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.fuel_val_fact.Width = 70;
-            // 
-            // fuel_vasl_fact_ut
-            // 
-            this.fuel_vasl_fact_ut.HeaderText = "Ф, т.у.т.";
-            this.fuel_vasl_fact_ut.Name = "fuel_vasl_fact_ut";
-            this.fuel_vasl_fact_ut.ReadOnly = true;
-            this.fuel_vasl_fact_ut.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.fuel_vasl_fact_ut.Width = 65;
-            // 
-            // fuel_factplan
-            // 
-            this.fuel_factplan.HeaderText = "Ф/П, %";
-            this.fuel_factplan.Name = "fuel_factplan";
-            this.fuel_factplan.ReadOnly = true;
-            this.fuel_factplan.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.fuel_factplan.Width = 50;
-            // 
-            // fuel_factplanlast
-            // 
-            this.fuel_factplanlast.HeaderText = "Ф/Ф (пред.)";
-            this.fuel_factplanlast.Name = "fuel_factplanlast";
-            this.fuel_factplanlast.ReadOnly = true;
-            this.fuel_factplanlast.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.fuel_factplanlast.Width = 70;
-            // 
-            // fuel_fsumpred
-            // 
-            this.fuel_fsumpred.HeaderText = "Факт, пред";
-            this.fuel_fsumpred.Name = "fuel_fsumpred";
-            this.fuel_fsumpred.ReadOnly = true;
-            this.fuel_fsumpred.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.fuel_fsumpred.Width = 70;
-            // 
-            // fuel_plan_sum
-            // 
-            this.fuel_plan_sum.HeaderText = "План";
-            this.fuel_plan_sum.Name = "fuel_plan_sum";
-            this.fuel_plan_sum.ReadOnly = true;
-            this.fuel_plan_sum.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.fuel_plan_sum.Width = 65;
-            // 
-            // fuel_sum_plan_ut
-            // 
-            this.fuel_sum_plan_ut.HeaderText = "П, т.у.т.";
-            this.fuel_sum_plan_ut.Name = "fuel_sum_plan_ut";
-            this.fuel_sum_plan_ut.ReadOnly = true;
-            this.fuel_sum_plan_ut.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.fuel_sum_plan_ut.Width = 65;
-            // 
-            // fuel_sum_fatc
-            // 
-            this.fuel_sum_fatc.HeaderText = "Факт";
-            this.fuel_sum_fatc.Name = "fuel_sum_fatc";
-            this.fuel_sum_fatc.ReadOnly = true;
-            this.fuel_sum_fatc.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.fuel_sum_fatc.Width = 65;
-            // 
-            // fuel_sum_fact_ut
-            // 
-            this.fuel_sum_fact_ut.HeaderText = "Ф, т.у.т.";
-            this.fuel_sum_fact_ut.Name = "fuel_sum_fact_ut";
-            this.fuel_sum_fact_ut.ReadOnly = true;
-            this.fuel_sum_fact_ut.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.fuel_sum_fact_ut.Width = 65;
-            // 
-            // fuel_sumplanfact
-            // 
-            this.fuel_sumplanfact.HeaderText = "Ф/П, %";
-            this.fuel_sumplanfact.Name = "fuel_sumplanfact";
-            this.fuel_sumplanfact.ReadOnly = true;
-            this.fuel_sumplanfact.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.fuel_sumplanfact.Width = 50;
-            // 
-            // fuel_sumfact_fact
-            // 
-            this.fuel_sumfact_fact.HeaderText = "Ф/Ф (пред)";
-            this.fuel_sumfact_fact.Name = "fuel_sumfact_fact";
-            this.fuel_sumfact_fact.ReadOnly = true;
-            this.fuel_sumfact_fact.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.fuel_sumfact_fact.Width = 70;
-            // 
-            // fuel_type
-            // 
-            this.fuel_type.HeaderText = "Тип";
-            this.fuel_type.Name = "fuel_type";
-            this.fuel_type.ReadOnly = true;
-            this.fuel_type.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.fuel_type.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.fuel_type.Visible = false;
-            this.fuel_type.Width = 5;
-            // 
-            // fuel_enabled
-            // 
-            this.fuel_enabled.HeaderText = "enabled";
-            this.fuel_enabled.Name = "fuel_enabled";
-            this.fuel_enabled.ReadOnly = true;
-            this.fuel_enabled.Visible = false;
-            // 
-            // heat_id
-            // 
-            this.heat_id.HeaderText = "id";
-            this.heat_id.Name = "heat_id";
-            this.heat_id.ReadOnly = true;
-            this.heat_id.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.heat_id.Visible = false;
-            // 
-            // heat_id_prod
-            // 
-            this.heat_id_prod.HeaderText = "id продукта";
-            this.heat_id_prod.Name = "heat_id_prod";
-            this.heat_id_prod.ReadOnly = true;
-            this.heat_id_prod.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.heat_id_prod.Visible = false;
-            // 
-            // heat_id_local
-            // 
-            this.heat_id_local.HeaderText = "id_local";
-            this.heat_id_local.Name = "heat_id_local";
-            this.heat_id_local.ReadOnly = true;
-            this.heat_id_local.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.heat_id_local.Visible = false;
-            // 
-            // heat_Code
-            // 
-            this.heat_Code.HeaderText = "#";
-            this.heat_Code.Name = "heat_Code";
-            this.heat_Code.ReadOnly = true;
-            this.heat_Code.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.heat_Code.Width = 50;
-            // 
-            // heat_name
-            // 
-            this.heat_name.HeaderText = "Наименование";
-            this.heat_name.Name = "heat_name";
-            this.heat_name.ReadOnly = true;
-            this.heat_name.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.heat_name.Width = 150;
-            // 
-            // heat_unit
-            // 
-            this.heat_unit.HeaderText = "ед. изм.";
-            this.heat_unit.Name = "heat_unit";
-            this.heat_unit.ReadOnly = true;
-            this.heat_unit.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.heat_unit.Width = 55;
-            // 
-            // heat_nUnit
-            // 
-            this.heat_nUnit.HeaderText = "ед. изм. т.у.т.";
-            this.heat_nUnit.Name = "heat_nUnit";
-            this.heat_nUnit.ReadOnly = true;
-            this.heat_nUnit.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.heat_nUnit.Visible = false;
-            // 
-            // heat_fuel
-            // 
-            this.heat_fuel.HeaderText = "id топлива";
-            this.heat_fuel.Name = "heat_fuel";
-            this.heat_fuel.ReadOnly = true;
-            this.heat_fuel.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.heat_fuel.Visible = false;
-            // 
-            // heat_id_rep
-            // 
-            this.heat_id_rep.HeaderText = "id отчета";
-            this.heat_id_rep.Name = "heat_id_rep";
-            this.heat_id_rep.ReadOnly = true;
-            this.heat_id_rep.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.heat_id_rep.Visible = false;
-            // 
-            // heat_val_fact_old
-            // 
-            this.heat_val_fact_old.HeaderText = "Факт, пред.";
-            this.heat_val_fact_old.Name = "heat_val_fact_old";
-            this.heat_val_fact_old.ReadOnly = true;
-            this.heat_val_fact_old.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.heat_val_fact_old.Width = 70;
-            // 
-            // heat_B_y
-            // 
-            this.heat_B_y.HeaderText = "By";
-            this.heat_B_y.Name = "heat_B_y";
-            this.heat_B_y.ReadOnly = true;
-            this.heat_B_y.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.heat_B_y.Width = 45;
-            // 
-            // heat_val_plan
-            // 
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.heat_val_plan.DefaultCellStyle = dataGridViewCellStyle5;
-            this.heat_val_plan.HeaderText = "План";
-            this.heat_val_plan.Name = "heat_val_plan";
-            this.heat_val_plan.ReadOnly = true;
-            this.heat_val_plan.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.heat_val_plan.Width = 70;
-            // 
-            // heat_val_plan_ut
-            // 
-            this.heat_val_plan_ut.HeaderText = "П, т.у.т.";
-            this.heat_val_plan_ut.Name = "heat_val_plan_ut";
-            this.heat_val_plan_ut.ReadOnly = true;
-            this.heat_val_plan_ut.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.heat_val_plan_ut.Width = 65;
-            // 
-            // heat_val_fact
-            // 
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.heat_val_fact.DefaultCellStyle = dataGridViewCellStyle6;
-            this.heat_val_fact.HeaderText = "Факт";
-            this.heat_val_fact.Name = "heat_val_fact";
-            this.heat_val_fact.ReadOnly = true;
-            this.heat_val_fact.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.heat_val_fact.Width = 70;
-            // 
-            // heat_vasl_fact_ut
-            // 
-            this.heat_vasl_fact_ut.HeaderText = "Ф, т.у.т.";
-            this.heat_vasl_fact_ut.Name = "heat_vasl_fact_ut";
-            this.heat_vasl_fact_ut.ReadOnly = true;
-            this.heat_vasl_fact_ut.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.heat_vasl_fact_ut.Width = 65;
-            // 
-            // heat_factplan
-            // 
-            this.heat_factplan.HeaderText = "Ф/П, %";
-            this.heat_factplan.Name = "heat_factplan";
-            this.heat_factplan.ReadOnly = true;
-            this.heat_factplan.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.heat_factplan.Width = 50;
-            // 
-            // heat_factplanlast
-            // 
-            this.heat_factplanlast.HeaderText = "Ф/Ф (пред.)";
-            this.heat_factplanlast.Name = "heat_factplanlast";
-            this.heat_factplanlast.ReadOnly = true;
-            this.heat_factplanlast.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.heat_factplanlast.Width = 70;
-            // 
-            // heat_fsumpred
-            // 
-            this.heat_fsumpred.HeaderText = "Факт, пред";
-            this.heat_fsumpred.Name = "heat_fsumpred";
-            this.heat_fsumpred.ReadOnly = true;
-            this.heat_fsumpred.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.heat_fsumpred.Width = 70;
-            // 
-            // heat_plan_sum
-            // 
-            this.heat_plan_sum.HeaderText = "План";
-            this.heat_plan_sum.Name = "heat_plan_sum";
-            this.heat_plan_sum.ReadOnly = true;
-            this.heat_plan_sum.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.heat_plan_sum.Width = 65;
-            // 
-            // heat_sum_plan_ut
-            // 
-            this.heat_sum_plan_ut.HeaderText = "П, т.у.т.";
-            this.heat_sum_plan_ut.Name = "heat_sum_plan_ut";
-            this.heat_sum_plan_ut.ReadOnly = true;
-            this.heat_sum_plan_ut.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.heat_sum_plan_ut.Width = 65;
-            // 
-            // heat_sum_fatc
-            // 
-            this.heat_sum_fatc.HeaderText = "Факт";
-            this.heat_sum_fatc.Name = "heat_sum_fatc";
-            this.heat_sum_fatc.ReadOnly = true;
-            this.heat_sum_fatc.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.heat_sum_fatc.Width = 65;
-            // 
-            // heat_sum_fact_ut
-            // 
-            this.heat_sum_fact_ut.HeaderText = "Ф, т.у.т.";
-            this.heat_sum_fact_ut.Name = "heat_sum_fact_ut";
-            this.heat_sum_fact_ut.ReadOnly = true;
-            this.heat_sum_fact_ut.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.heat_sum_fact_ut.Width = 65;
-            // 
-            // heat_sumplanfact
-            // 
-            this.heat_sumplanfact.HeaderText = "Ф/П, %";
-            this.heat_sumplanfact.Name = "heat_sumplanfact";
-            this.heat_sumplanfact.ReadOnly = true;
-            this.heat_sumplanfact.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.heat_sumplanfact.Width = 50;
-            // 
-            // heat_sumfact_fact
-            // 
-            this.heat_sumfact_fact.HeaderText = "Ф/Ф (пред)";
-            this.heat_sumfact_fact.Name = "heat_sumfact_fact";
-            this.heat_sumfact_fact.ReadOnly = true;
-            this.heat_sumfact_fact.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.heat_sumfact_fact.Width = 70;
-            // 
-            // heat_type
-            // 
-            this.heat_type.HeaderText = "Тип";
-            this.heat_type.Name = "heat_type";
-            this.heat_type.ReadOnly = true;
-            this.heat_type.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.heat_type.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.heat_type.Visible = false;
-            this.heat_type.Width = 5;
-            // 
-            // heat_enabled
-            // 
-            this.heat_enabled.HeaderText = "enabled";
-            this.heat_enabled.Name = "heat_enabled";
-            this.heat_enabled.ReadOnly = true;
-            this.heat_enabled.Visible = false;
-            // 
-            // el_id
-            // 
-            this.el_id.HeaderText = "id";
-            this.el_id.Name = "el_id";
-            this.el_id.ReadOnly = true;
-            this.el_id.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.el_id.Visible = false;
-            // 
-            // el_id_prod
-            // 
-            this.el_id_prod.HeaderText = "id продукта";
-            this.el_id_prod.Name = "el_id_prod";
-            this.el_id_prod.ReadOnly = true;
-            this.el_id_prod.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.el_id_prod.Visible = false;
-            // 
-            // el_id_local
-            // 
-            this.el_id_local.HeaderText = "id_local";
-            this.el_id_local.Name = "el_id_local";
-            this.el_id_local.ReadOnly = true;
-            this.el_id_local.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.el_id_local.Visible = false;
-            // 
-            // el_Code
-            // 
-            this.el_Code.HeaderText = "#";
-            this.el_Code.Name = "el_Code";
-            this.el_Code.ReadOnly = true;
-            this.el_Code.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.el_Code.Width = 50;
-            // 
-            // el_name
-            // 
-            this.el_name.HeaderText = "Наименование";
-            this.el_name.Name = "el_name";
-            this.el_name.ReadOnly = true;
-            this.el_name.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.el_name.Width = 150;
-            // 
-            // el_unit
-            // 
-            this.el_unit.HeaderText = "ед. изм.";
-            this.el_unit.Name = "el_unit";
-            this.el_unit.ReadOnly = true;
-            this.el_unit.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.el_unit.Width = 55;
-            // 
-            // el_nUnit
-            // 
-            this.el_nUnit.HeaderText = "ед. изм. т.у.т.";
-            this.el_nUnit.Name = "el_nUnit";
-            this.el_nUnit.ReadOnly = true;
-            this.el_nUnit.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.el_nUnit.Visible = false;
-            // 
-            // el_fuel
-            // 
-            this.el_fuel.HeaderText = "id топлива";
-            this.el_fuel.Name = "el_fuel";
-            this.el_fuel.ReadOnly = true;
-            this.el_fuel.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.el_fuel.Visible = false;
-            // 
-            // el_id_rep
-            // 
-            this.el_id_rep.HeaderText = "id отчета";
-            this.el_id_rep.Name = "el_id_rep";
-            this.el_id_rep.ReadOnly = true;
-            this.el_id_rep.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.el_id_rep.Visible = false;
-            // 
-            // el_val_fact_old
-            // 
-            this.el_val_fact_old.HeaderText = "Факт, пред.";
-            this.el_val_fact_old.Name = "el_val_fact_old";
-            this.el_val_fact_old.ReadOnly = true;
-            this.el_val_fact_old.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.el_val_fact_old.Width = 70;
-            // 
-            // el_B_y
-            // 
-            this.el_B_y.HeaderText = "By";
-            this.el_B_y.Name = "el_B_y";
-            this.el_B_y.ReadOnly = true;
-            this.el_B_y.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.el_B_y.Width = 45;
-            // 
-            // el_val_plan
-            // 
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.el_val_plan.DefaultCellStyle = dataGridViewCellStyle7;
-            this.el_val_plan.HeaderText = "План";
-            this.el_val_plan.Name = "el_val_plan";
-            this.el_val_plan.ReadOnly = true;
-            this.el_val_plan.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.el_val_plan.Width = 70;
-            // 
-            // el_val_plan_ut
-            // 
-            this.el_val_plan_ut.HeaderText = "П, т.у.т.";
-            this.el_val_plan_ut.Name = "el_val_plan_ut";
-            this.el_val_plan_ut.ReadOnly = true;
-            this.el_val_plan_ut.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.el_val_plan_ut.Width = 65;
-            // 
-            // el_val_fact
-            // 
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.el_val_fact.DefaultCellStyle = dataGridViewCellStyle8;
-            this.el_val_fact.HeaderText = "Факт";
-            this.el_val_fact.Name = "el_val_fact";
-            this.el_val_fact.ReadOnly = true;
-            this.el_val_fact.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.el_val_fact.Width = 70;
-            // 
-            // el_vasl_fact_ut
-            // 
-            this.el_vasl_fact_ut.HeaderText = "Ф, т.у.т.";
-            this.el_vasl_fact_ut.Name = "el_vasl_fact_ut";
-            this.el_vasl_fact_ut.ReadOnly = true;
-            this.el_vasl_fact_ut.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.el_vasl_fact_ut.Width = 65;
-            // 
-            // el_factplan
-            // 
-            this.el_factplan.HeaderText = "Ф/П, %";
-            this.el_factplan.Name = "el_factplan";
-            this.el_factplan.ReadOnly = true;
-            this.el_factplan.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.el_factplan.Width = 50;
-            // 
-            // el_factplanlast
-            // 
-            this.el_factplanlast.HeaderText = "Ф/Ф (пред.)";
-            this.el_factplanlast.Name = "el_factplanlast";
-            this.el_factplanlast.ReadOnly = true;
-            this.el_factplanlast.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.el_factplanlast.Width = 70;
-            // 
-            // el_fsumpred
-            // 
-            this.el_fsumpred.HeaderText = "Факт, пред";
-            this.el_fsumpred.Name = "el_fsumpred";
-            this.el_fsumpred.ReadOnly = true;
-            this.el_fsumpred.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.el_fsumpred.Width = 70;
-            // 
-            // el_plan_sum
-            // 
-            this.el_plan_sum.HeaderText = "План";
-            this.el_plan_sum.Name = "el_plan_sum";
-            this.el_plan_sum.ReadOnly = true;
-            this.el_plan_sum.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.el_plan_sum.Width = 65;
-            // 
-            // el_sum_plan_ut
-            // 
-            this.el_sum_plan_ut.HeaderText = "П, т.у.т.";
-            this.el_sum_plan_ut.Name = "el_sum_plan_ut";
-            this.el_sum_plan_ut.ReadOnly = true;
-            this.el_sum_plan_ut.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.el_sum_plan_ut.Width = 65;
-            // 
-            // el_sum_fatc
-            // 
-            this.el_sum_fatc.HeaderText = "Факт";
-            this.el_sum_fatc.Name = "el_sum_fatc";
-            this.el_sum_fatc.ReadOnly = true;
-            this.el_sum_fatc.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.el_sum_fatc.Width = 65;
-            // 
-            // el_sum_fact_ut
-            // 
-            this.el_sum_fact_ut.HeaderText = "Ф, т.у.т.";
-            this.el_sum_fact_ut.Name = "el_sum_fact_ut";
-            this.el_sum_fact_ut.ReadOnly = true;
-            this.el_sum_fact_ut.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.el_sum_fact_ut.Width = 65;
-            // 
-            // el_sumplanfact
-            // 
-            this.el_sumplanfact.HeaderText = "Ф/П, %";
-            this.el_sumplanfact.Name = "el_sumplanfact";
-            this.el_sumplanfact.ReadOnly = true;
-            this.el_sumplanfact.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.el_sumplanfact.Width = 50;
-            // 
-            // el_sumfact_fact
-            // 
-            this.el_sumfact_fact.HeaderText = "Ф/Ф (пред)";
-            this.el_sumfact_fact.Name = "el_sumfact_fact";
-            this.el_sumfact_fact.ReadOnly = true;
-            this.el_sumfact_fact.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.el_sumfact_fact.Width = 70;
-            // 
-            // el_type
-            // 
-            this.el_type.HeaderText = "Тип";
-            this.el_type.Name = "el_type";
-            this.el_type.ReadOnly = true;
-            this.el_type.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.el_type.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.el_type.Visible = false;
-            this.el_type.Width = 5;
-            // 
-            // el_enabled
-            // 
-            this.el_enabled.HeaderText = "enabled";
-            this.el_enabled.Name = "el_enabled";
-            this.el_enabled.ReadOnly = true;
-            this.el_enabled.Visible = false;
-            // 
             // ReportsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -3016,6 +3028,7 @@
             this.Name = "ReportsForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Статистика";
+            this.Shown += new System.EventHandler(this.ReportsForm_Shown);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.panel1.ResumeLayout(false);
@@ -3090,13 +3103,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel17)).EndInit();
             this.kryptonPanel17.ResumeLayout(false);
             this.kryptonPanel17.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Page12Tek)).EndInit();
+            this.Page12Tek.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPage3)).EndInit();
             this.kryptonPage3.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.CompanyBox)).EndInit();
-            this.tabPage2.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
             this.tabPage4.ResumeLayout(false);
             this.tabPage6.ResumeLayout(false);
@@ -3211,7 +3225,6 @@
         private ComponentFactory.Krypton.Toolkit.KryptonComboBox CompanyBox;
         private ComponentFactory.Krypton.Toolkit.KryptonDateTimePicker dateTimePicker1;
         private System.Windows.Forms.TabPage tabPage2;
-        private unvell.ReoGrid.ReoGridControl reoGridControl2;
         private System.Windows.Forms.TabPage tabPage3;
         public unvell.ReoGrid.ReoGridControl reoGrid4;
         private System.Windows.Forms.TabPage tabPage4;
@@ -3371,5 +3384,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn el_sumfact_fact;
         private KryptonOutlookGrid.CustomColumns.KryptonDataGridViewTextAndImageColumn el_type;
         private System.Windows.Forms.DataGridViewTextBoxColumn el_enabled;
+        private ComponentFactory.Krypton.Navigator.KryptonPage Page12Tek;
+        private unvell.ReoGrid.ReoGridControl reoGridControl2;
     }
 }

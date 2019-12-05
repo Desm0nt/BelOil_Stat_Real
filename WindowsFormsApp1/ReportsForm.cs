@@ -61,6 +61,8 @@ namespace WindowsFormsApp1
             toolStripDropDownButton1.Text = MakeQuaterText(DateTime.Now.Month);
             MonthBut.Text = "&" + System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(DateTime.Now.Month);
             this.kryptonOutlookGrid1.EditingControlShowing += new DataGridViewEditingControlShowingEventHandler(EditingControlShowing);
+
+            
         }
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
@@ -85,6 +87,18 @@ namespace WindowsFormsApp1
             reoGridControl1.CurrentWorksheet.EnableSettings(WorksheetSettings.Edit_AutoExpandColumnWidth);
             worksheet1.SelectionStyle = WorksheetSelectionStyle.None;
             worksheet1.SetSettings(WorksheetSettings.Behavior_MouseWheelToZoom, false);
+
+            string name1 = "Данные за " + dateTimePicker1.Value.ToString("MMMM") + " месяц";
+            string name2 = "Нарастающий итог за Январь - " + dateTimePicker1.Value.ToString("MMMM");
+
+            label2.Text = name1;
+            label5.Text = name1;
+            label8.Text = name1;
+            label12.Text = name1;
+            label3.Text = name2;
+            label4.Text = name2;
+            label7.Text = name2;
+            label11.Text = name2;
 
             worksheet1["B2"] = dbOps.GetCompanyName(CurrentData.UserData.Id_org);
             worksheet1["F3"] = String.Format("Данные за {0} месяц {1} года", dateTimePicker1.Value.ToString("MMMM"), dateTimePicker1.Value.ToString("yyyy"));
@@ -4842,6 +4856,7 @@ namespace WindowsFormsApp1
             if (Int32.Parse(e.Node.Tag.ToString()) != 1 && Int32.Parse(e.Node.Tag.ToString()) != 100 && Int32.Parse(e.Node.Tag.ToString()) != 200 && Int32.Parse(e.Node.Tag.ToString()) < 1001)
             {
                 label9.Text = ">>" + e.Node.Text;
+                kryptonPage4.Text = "1-пэр: " + e.Node.Text;
                 CurrentData.UserData.Id_org = Int32.Parse(e.Node.Tag.ToString());
                 MakeTable1per();
                 MakeTable12tek();
@@ -4953,6 +4968,7 @@ namespace WindowsFormsApp1
             KryptonOutlookGrid.Classes.KryptonOutlookGrid newGrid = new KryptonOutlookGrid.Classes.KryptonOutlookGrid();
             int index = Int32.Parse(nav.SelectedPage.Tag.ToString());
             var row = dataGridView.Rows[e.RowIndex];
+
             if (index == 1)
                 newGrid = GetGridByType(Int32.Parse(row.Cells[24].Value.ToString()));
             else
@@ -4996,6 +5012,43 @@ namespace WindowsFormsApp1
             return Grid;
         }
 
+        private void ReportsForm_Shown(object sender, EventArgs e)
+        {
+            var myForm = new StartUpForm();
+            //myForm.FormClosed += new FormClosedEventHandler(myForm_FormClosed);
+            myForm.ShowDialog();
+            if (myForm.DialogResult == DialogResult.OK)
+            {
+                switch (myForm.type)
+                {
+                    case 1:
+                        профильToolStripMenuItem_Click(профильToolStripMenuItem, EventArgs.Empty);
+                        break;
+                    case 2:
+                        сменитьПользователяToolStripMenuItem_Click(сменитьПользователяToolStripMenuItem, EventArgs.Empty);
+                        break;
+                    case 3:
+                        //none
+                        break;
+                    case 4:
+                        закрытьПрограммуToolStripMenuItem_Click(закрытьПрограммуToolStripMenuItem, EventArgs.Empty);
+                        break;
+                    case 5:
+                        сформировать1ПЭРToolStripMenuItem_Click(сформировать1ПЭРToolStripMenuItem, EventArgs.Empty);
+                        break;
+                    case 6:
+                        kryptonNavigator2.SelectedPage = kryptonPage4;
+                        break;
+                    case 7:
+                        kryptonNavigator2.SelectedPage = Page12Tek;
+                        break;
+                    default:
+                        Console.WriteLine("default");
+                        break;
+                }
+            }
+        }
+
         void EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
             DataGridView dataGridView = (DataGridView)sender;
@@ -5034,7 +5087,7 @@ namespace WindowsFormsApp1
                 foreach (DataGridViewRow a in kryptonOutlookGrid1.Rows)
                 {
                     if (a.Cells[1].Value!=null && bool.Parse(a.Cells[25].Value.ToString())==true)
-                        dbOps.UpdateFuelNorm(Int32.Parse(a.Cells[0].Value.ToString()), Int32.Parse(a.Cells[11].Value.ToString()), Int32.Parse(a.Cells[13].Value.ToString()));
+                        dbOps.UpdateFuelNorm(Int32.Parse(a.Cells[0].Value.ToString()), float.Parse(a.Cells[11].Value.ToString()), float.Parse(a.Cells[13].Value.ToString()));
                 }
                 MakeTable1per();
             }

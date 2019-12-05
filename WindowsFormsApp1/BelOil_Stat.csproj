@@ -317,6 +317,12 @@
     <Compile Include="SelectPersonForm.Designer.cs">
       <DependentUpon>SelectPersonForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="StartUpForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StartUpForm.Designer.cs">
+      <DependentUpon>StartUpForm.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="AddOrgObjectForm.resx">
       <DependentUpon>AddOrgObjectForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -385,6 +391,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SelectPersonForm.resx">
       <DependentUpon>SelectPersonForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StartUpForm.resx">
+      <DependentUpon>StartUpForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -545,6 +554,10 @@
     <None Include="Resources\rep4.png" />
     <None Include="Resources\rep5.png" />
     <None Include="Resources\startup_wizard.png" />
+    <None Include="Resources\st4.png" />
+    <None Include="Resources\st5.png" />
+    <None Include="Resources\st6.png" />
+    <None Include="Resources\st7.png" />
     <Content Include="Themes\Access 2007 Alt White Text.xml" />
     <Content Include="Themes\Access 2007 Alt.xml" />
     <Content Include="Themes\Access 2007 White Text.xml" />
