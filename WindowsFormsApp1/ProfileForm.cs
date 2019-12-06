@@ -21,7 +21,7 @@ namespace WindowsFormsApp1
         int cyear, cmonth;
         bool edited = false;
 
-        public ProfileForm(int curyear, int curmonth)
+        public ProfileForm(int curyear, int curmonth, int id_org)
         {
             InitializeComponent();
             this.rukTextBox.AutoSize = false;
@@ -29,7 +29,7 @@ namespace WindowsFormsApp1
             this.otvTextBox.AutoSize = false;
             this.otvTextBox.Size = new Size(224, 18);
             this.Text = "Профиль организации " + dbOps.GetCompanyName(CurrentData.UserData.Id_org);
-            cur_org_id = CurrentData.UserData.Id_org;
+            cur_org_id = id_org;
             cyear = curyear;
             cmonth = curmonth;
             LoadObjects();
@@ -662,7 +662,7 @@ namespace WindowsFormsApp1
 
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
-            var myForm = new AddOrgObjectForm();
+            var myForm = new AddOrgObjectForm(cur_org_id);
             myForm.FormClosed += new FormClosedEventHandler(myForm_FormClosed);
             myForm.ShowDialog();
         }
@@ -673,7 +673,7 @@ namespace WindowsFormsApp1
                 Console.WriteLine("No tree node selected.");
             else
             {
-                var myForm = new AddOrgObjectForm(Int32.Parse(treeView1.SelectedNode.Tag.ToString()), treeView1.SelectedNode.Text.ToString(), treeView1.SelectedNode.ToolTipText.ToString());
+                var myForm = new AddOrgObjectForm(Int32.Parse(treeView1.SelectedNode.Tag.ToString()), treeView1.SelectedNode.Text.ToString(), treeView1.SelectedNode.ToolTipText.ToString(), cur_org_id);
                 myForm.FormClosed += new FormClosedEventHandler(myForm_FormClosed);
                 myForm.ShowDialog();
             }
@@ -681,7 +681,7 @@ namespace WindowsFormsApp1
 
         private void treeView1_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
         {
-            var myForm = new AddOrgObjectForm(Int32.Parse(e.Node.Tag.ToString()), e.Node.Text.ToString(), e.Node.ToolTipText.ToString());
+            var myForm = new AddOrgObjectForm(Int32.Parse(e.Node.Tag.ToString()), e.Node.Text.ToString(), e.Node.ToolTipText.ToString(), cur_org_id);
             myForm.FormClosed += new FormClosedEventHandler(myForm_FormClosed);
             myForm.ShowDialog();
         }
@@ -842,15 +842,15 @@ namespace WindowsFormsApp1
                 KryptonOutlookGrid.Classes.KryptonOutlookGrid newGrid2 = new KryptonOutlookGrid.Classes.KryptonOutlookGrid();
                 newGrid = GetGridByType(index - 1);
 
-                var myForm = new AddOrgNormForm(index);
+                var myForm = new AddOrgNormForm(index, cur_org_id);
                 if (newGrid.SelectedRows.Count > 0)
                 {
                     if (newGrid.SelectedRows[0].Cells[1].Value != null)
                     {
                         if (index != 1)
-                            myForm = new AddOrgNormForm(index, (index - 1), Int32.Parse(newGrid.SelectedRows[0].Cells[8].Value.ToString()));
+                            myForm = new AddOrgNormForm(index, (index - 1), Int32.Parse(newGrid.SelectedRows[0].Cells[8].Value.ToString()), cur_org_id);
                         else
-                            myForm = new AddOrgNormForm(index, Int32.Parse(newGrid.SelectedRows[0].Cells[7].Value.ToString()), Int32.Parse(newGrid.SelectedRows[0].Cells[8].Value.ToString()));
+                            myForm = new AddOrgNormForm(index, Int32.Parse(newGrid.SelectedRows[0].Cells[7].Value.ToString()), Int32.Parse(newGrid.SelectedRows[0].Cells[8].Value.ToString()), cur_org_id);
                     }
                 }
                 myForm.ShowDialog();

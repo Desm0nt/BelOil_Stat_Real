@@ -23,21 +23,24 @@ namespace WindowsFormsApp1
         public ProfNormTable NormTable = new ProfNormTable();
         int object_id = -1;
         int nType = 0;
+        int cur_org_id;
         List<DataTables.ProductTable> productList;
         bool[] groustate = new bool[3];
 
-        public AddOrgNormForm(int index)
+        public AddOrgNormForm(int index, int org_id)
         {
             InitializeComponent();
+            cur_org_id = org_id;
             if (index > 1)
                 nType = index -1;
             LoadData();
             this.Width = 803;
         }
 
-        public AddOrgNormForm(int index, int _ntype, int obj_id)
+        public AddOrgNormForm(int index, int _ntype, int obj_id, int org_id)
         {
             InitializeComponent();
+            cur_org_id = org_id;
             object_id = obj_id;
             nType = _ntype;
             LoadData();
