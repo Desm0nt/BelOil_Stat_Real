@@ -299,22 +299,22 @@ namespace WindowsFormsApp1
                         name = myForm.name;
                         fuel = myForm.fuel_id;
                         fuel_name = myForm.fuel_name;
+                        NormTable.Id = 0;
+                        NormTable.Id_prod = Int32.Parse(kryptonOutlookGrid1.SelectedRows[0].Cells[0].Value.ToString());
+                        NormTable.Code = Int32.Parse(kryptonOutlookGrid1.SelectedRows[0].Cells[1].Value.ToString());
+                        NormTable.Name = name;
+                        NormTable.Unit = kryptonOutlookGrid1.SelectedRows[0].Cells[3].Value.ToString();
+                        NormTable.nUnit = kryptonOutlookGrid1.SelectedRows[0].Cells[4].Value.ToString();
+                        NormTable.id_obj = object_id;
+                        NormTable.s111 = bool.Parse(kryptonOutlookGrid1.SelectedRows[0].Cells[5].Value.ToString());
+                        NormTable.s112 = bool.Parse(kryptonOutlookGrid1.SelectedRows[0].Cells[6].Value.ToString());
+                        NormTable.id_fuel = fuel;
+                        NormTable.name_with_fuel = name + fuel_name;
+                        NormTable.real_name = kryptonOutlookGrid1.SelectedRows[0].Cells[2].Value.ToString();
+                        NormTable.type = type4form;
+                        this.DialogResult = DialogResult.OK;
+                        this.Close();
                     }
-                    NormTable.Id = 0;
-                    NormTable.Id_prod = Int32.Parse(kryptonOutlookGrid1.SelectedRows[0].Cells[0].Value.ToString());
-                    NormTable.Code = Int32.Parse(kryptonOutlookGrid1.SelectedRows[0].Cells[1].Value.ToString());
-                    NormTable.Name = name;
-                    NormTable.Unit = kryptonOutlookGrid1.SelectedRows[0].Cells[3].Value.ToString();
-                    NormTable.nUnit = kryptonOutlookGrid1.SelectedRows[0].Cells[4].Value.ToString();
-                    NormTable.id_obj = object_id;
-                    NormTable.s111 = bool.Parse(kryptonOutlookGrid1.SelectedRows[0].Cells[5].Value.ToString());
-                    NormTable.s112 = bool.Parse(kryptonOutlookGrid1.SelectedRows[0].Cells[6].Value.ToString());
-                    NormTable.id_fuel = fuel;
-                    NormTable.name_with_fuel = name + fuel_name;
-                    NormTable.real_name = kryptonOutlookGrid1.SelectedRows[0].Cells[2].Value.ToString();
-                    NormTable.type = type4form;
-                    this.DialogResult = DialogResult.OK;
-                    this.Close();
                 }
                 else
                 {

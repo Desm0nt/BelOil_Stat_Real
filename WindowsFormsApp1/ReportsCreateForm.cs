@@ -290,6 +290,7 @@ namespace WindowsFormsApp1
                     dataGridView1.Columns[1].Visible = false;
                     dataGridView1.Columns[1].ReadOnly = true;
                     dataGridView1.Columns[2].HeaderText = "Наименование";
+                    dataGridView1.Columns[2].Width = 200;
                     dataGridView1.Columns[2].ReadOnly = true;
                     dataGridView1.Columns[3].HeaderText = "Ед. изм.";
                     dataGridView1.Columns[3].ReadOnly = true;
@@ -328,7 +329,7 @@ namespace WindowsFormsApp1
                             {
                                 Id = NormToplist[i].Id,
                                 Code = NormToplist[i].Code,
-                                name = NormToplist[i].name,
+                                name = NormToplist[i].name + NormToplist[i].fuel_name,
                                 Ed_izm = Fuel.unit,
                                 val_fact_old = 0,
                                 By = (float)Math.Round(Fuel.B_y, 3),
@@ -362,6 +363,9 @@ namespace WindowsFormsApp1
                     dataGridView2.Columns[1].ReadOnly = true;
                     dataGridView2.Columns[2].HeaderText = "Наименование";
                     dataGridView2.Columns[2].ReadOnly = true;
+                    dataGridView2.Columns[2].DefaultCellStyle.WrapMode = DataGridViewTriState.True;
+                    dataGridView2.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+                    dataGridView2.Columns[2].Width = 200;
                     dataGridView2.Columns[3].HeaderText = "Ед. изм.";
                     dataGridView2.Columns[3].ReadOnly = true;
                     dataGridView2.Columns[4].HeaderText = "Ф, " + (year-1);
@@ -404,6 +408,7 @@ namespace WindowsFormsApp1
                     dataGridView3.DataSource = SourceInputList;
                     dataGridView3.Columns[0].ReadOnly = true;
                     dataGridView3.Columns[1].HeaderText = "Наименование";
+                    dataGridView3.Columns[1].Width = 250;
                     dataGridView3.Columns[1].ReadOnly = true;
                     dataGridView3.Columns[2].HeaderText = "Значение";
                     break;
@@ -412,6 +417,7 @@ namespace WindowsFormsApp1
                     dataGridView4.DataSource = RecievedInputList;
                     dataGridView4.Columns[0].ReadOnly = true;
                     dataGridView4.Columns[1].HeaderText = "Наименование организации";
+                    dataGridView4.Columns[1].Width = 250;
                     dataGridView4.Columns[1].ReadOnly = true;
                     dataGridView4.Columns[2].HeaderText = "Значение";
                     break;
@@ -420,6 +426,7 @@ namespace WindowsFormsApp1
                     dataGridView5.DataSource = SendedInputList;
                     dataGridView5.Columns[0].ReadOnly = true;
                     dataGridView5.Columns[1].HeaderText = "Наименование организации";
+                    dataGridView5.Columns[1].Width = 250;
                     dataGridView5.Columns[1].ReadOnly = true;
                     dataGridView5.Columns[2].HeaderText = "Значение";
                     break;
@@ -472,6 +479,7 @@ namespace WindowsFormsApp1
                     dataGridView6.Columns[1].ReadOnly = true;
                     dataGridView6.Columns[2].HeaderText = "Наименование";
                     dataGridView6.Columns[2].ReadOnly = true;
+                    dataGridView6.Columns[2].Width = 250;
                     dataGridView6.Columns[3].HeaderText = "Ед. изм.";
                     dataGridView6.Columns[3].ReadOnly = true;
                     dataGridView6.Columns[4].HeaderText = "Ф, " + (year - 1);
@@ -515,6 +523,7 @@ namespace WindowsFormsApp1
                     dataGridView7.Columns[0].ReadOnly = true;
                     dataGridView7.Columns[1].HeaderText = "Наименование";
                     dataGridView7.Columns[1].ReadOnly = true;
+                    dataGridView7.Columns[1].Width = 250;
                     dataGridView7.Columns[2].HeaderText = "Значение";
                     break;
                 case 8:
@@ -523,6 +532,7 @@ namespace WindowsFormsApp1
                     dataGridView8.Columns[0].ReadOnly = true;
                     dataGridView8.Columns[1].HeaderText = "Наименование организации";
                     dataGridView8.Columns[1].ReadOnly = true;
+                    dataGridView8.Columns[1].Width = 250;
                     dataGridView8.Columns[2].HeaderText = "Значение";
                     break;
                 case 9:
@@ -531,6 +541,7 @@ namespace WindowsFormsApp1
                     dataGridView9.Columns[0].ReadOnly = true;
                     dataGridView9.Columns[1].HeaderText = "Наименование организации";
                     dataGridView9.Columns[1].ReadOnly = true;
+                    dataGridView9.Columns[1].Width = 250;
                     dataGridView9.Columns[2].HeaderText = "Значение";
                     break;
                 case 10:
@@ -585,6 +596,7 @@ namespace WindowsFormsApp1
                     dataGridView10.Columns[1].HeaderText = " # ";
                     dataGridView10.Columns[1].ReadOnly = true;
                     dataGridView10.Columns[2].HeaderText = "Наименование";
+                    dataGridView10.Columns[2].Width = 250;
                     dataGridView10.Columns[2].ReadOnly = true;
                     dataGridView10.Columns[3].HeaderText = "Ед. изм.";
                     dataGridView10.Columns[3].ReadOnly = true;

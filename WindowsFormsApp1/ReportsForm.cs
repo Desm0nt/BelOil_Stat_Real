@@ -55,6 +55,7 @@ namespace WindowsFormsApp1
             toolStrip3.Items.Insert(0, new ToolStripControlHost(this.CompanyBox));
             toolStrip3.Location = new Point(495, 24);
             yearButton.Text = DateTime.Now.Year.ToString();
+            year0Button.Text = (DateTime.Now.Year + 1).ToString();
             year1Button.Text = DateTime.Now.Year.ToString();
             year2Button.Text = (DateTime.Now.Year - 1).ToString();
             year3Button.Text = (DateTime.Now.Year - 2).ToString();
@@ -717,7 +718,7 @@ namespace WindowsFormsApp1
                     norm.Id_prod,
                     norm.Id_local,
                     norm_code,
-                    norm.name + norm.fuel_name,
+                    norm.fuel!=0 ? norm.name + Environment.NewLine + norm.fuel_name : norm.name,
                     norm.Unit,
                     norm.nUnit,
                     norm.fuel,
@@ -747,6 +748,13 @@ namespace WindowsFormsApp1
                     row.Cells[13].ReadOnly = true;
                     row.Cells[13].Style.BackColor = Color.LightGray;
                 }
+                else if (norm.editable == true)
+                {
+                    row.Cells[11].ReadOnly = false;
+                    row.Cells[11].Style.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(229)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
+                    row.Cells[13].ReadOnly = false;
+                    row.Cells[13].Style.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(229)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
+                }
                 l.Add(row);
             }
 
@@ -754,6 +762,7 @@ namespace WindowsFormsApp1
             grid.AssignRows(l);
             grid.ForceRefreshGroupBox();
             grid.Fill();
+            grid.Columns[4].DefaultCellStyle.WrapMode = DataGridViewTriState.True;
         }
 
         void MakeTable12tek()
@@ -4887,25 +4896,49 @@ namespace WindowsFormsApp1
         }
         private void kryptonOutlookGrid1_Resize(object sender, EventArgs e)
         {
+            var width1 = kryptonNavigator1.Width;
             KryptonOutlookGrid.Classes.KryptonOutlookGrid grid = (KryptonOutlookGrid.Classes.KryptonOutlookGrid)sender;
             int PreferredTotalWidth = 0;
             //Calculate the total preferred width
+            List<int>  aaa= new List<int>();
             foreach (DataGridViewColumn c in grid.Columns)
             {
-                PreferredTotalWidth += Math.Min(c.GetPreferredWidth(DataGridViewAutoSizeColumnMode.DisplayedCells, true), 250);
+                if (c.Visible == true)
+                {
+                    PreferredTotalWidth += Math.Min(c.GetPreferredWidth(DataGridViewAutoSizeColumnMode.DisplayedCells, true), 150);
+                }
             }
 
-            if (grid.Width < PreferredTotalWidth)
+            if (grid.Width >= PreferredTotalWidth)
             {
                 grid.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                 grid.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.DisplayedCells);
+                grid.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+                grid.Columns[5].Width = 55;
+                grid.Columns[9].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+                grid.Columns[9].Width = 70;
+                grid.Columns[16].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+                grid.Columns[16].Width = 70;
+                grid.Columns[17].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+                grid.Columns[17].Width = 70;
+                grid.Columns[23].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+                grid.Columns[23].Width = 70;
             }
             else
             {
                 grid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
                 foreach (DataGridViewColumn c in grid.Columns)
                 {
-                    c.Width = Math.Min(c.GetPreferredWidth(DataGridViewAutoSizeColumnMode.DisplayedCells, true), 250);
+                    if (c.Visible == true)
+                    {
+                        if (c.HeaderText == "#")
+                            c.Width = 50;
+                        else if (c.HeaderText == "Наименование")
+                            c.Width = 150;
+                        else
+                            c.Width = Math.Min(c.GetPreferredWidth(DataGridViewAutoSizeColumnMode.DisplayedCells, true), 150);
+
+                    }
                 }
             }
 
@@ -5047,6 +5080,51 @@ namespace WindowsFormsApp1
                         break;
                 }
             }
+        }
+
+        private void toolStripButton3_Click(object sender, EventArgs e)
+        {
+            if (kryptonNavigator2.SelectedPage.Tag.ToString() == "1t")
+            {
+                FolderBrowserDialog folderBrowserDialog1 = new FolderBrowserDialog();
+                string fpath = "";
+                if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+                {
+                    fpath = folderBrowserDialog1.SelectedPath;
+                    var workbook = reoGridControl1;
+                    var name = dbOps.GetCompanyName(CurrentData.UserData.Id_org);
+                    workbook.Save(fpath + "\\1_PER_" + name.Replace("\"", " ") + "_" + dateTimePicker1.Value.ToString("yyyy") + ".xlsx", unvell.ReoGrid.IO.FileFormat.Excel2007);
+                    ComponentFactory.Krypton.Toolkit.KryptonMessageBox.Show("Файл " + "1_PER_" + name.Replace("\"", " ") + "_" + dateTimePicker1.Value.ToString("yyyy") + ".xlsx" + " успешно сохранен в выбранную папку");
+                }
+            }
+
+            if (kryptonNavigator2.SelectedPage.Tag.ToString() == "12t")
+            {
+                FolderBrowserDialog folderBrowserDialog1 = new FolderBrowserDialog();
+                string fpath = "";
+                if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+                {
+                    fpath = folderBrowserDialog1.SelectedPath;
+                    var workbook = reoGridControl3;
+                    workbook.Worksheets[1] = reoGrid4.CurrentWorksheet;
+                    workbook.Worksheets[1].Name = "Приложение";
+                    var name = dbOps.GetCompanyName(CurrentData.UserData.Id_org);
+                    workbook.Save(fpath + "\\12_TEK_" + name.Replace("\"", " ") + "_" + dateTimePicker1.Value.ToString("yyyy") + "_" + dateTimePicker1.Value.ToString("MMMM") + ".xlsx", unvell.ReoGrid.IO.FileFormat.Excel2007);
+                    //worksheet4.Workbook.Save(Directory.GetCurrentDirectory() + "\\12_TEK_Prilozhenie_" + name.Replace("\"", " ") + "_" + dateTimePicker1.Value.ToString("yyyy") + "_" + dateTimePicker1.Value.ToString("MMMM") + ".xlsx", unvell.ReoGrid.IO.FileFormat.Excel2007);
+                    ComponentFactory.Krypton.Toolkit.KryptonMessageBox.Show("Файл " + "12_TEK_" + name.Replace("\"", " ") + "_" + dateTimePicker1.Value.ToString("yyyy") + "_" + dateTimePicker1.Value.ToString("MMMM") + ".xlsx" + " успешно сохранен в выбранную папку");
+                }
+            }
+        }
+
+        private void kryptonNavigator2_SelectedPageChanged(object sender, EventArgs e)
+        {
+            ComponentFactory.Krypton.Navigator.KryptonNavigator nav = (ComponentFactory.Krypton.Navigator.KryptonNavigator)sender;
+            if (nav.SelectedPage.Tag.ToString() == "1t")
+                toolStripButton3.Enabled = true;
+            else if (nav.SelectedPage.Tag.ToString() == "12t")
+                toolStripButton3.Enabled = true;
+            else
+                toolStripButton3.Enabled = false;
         }
 
         void EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
