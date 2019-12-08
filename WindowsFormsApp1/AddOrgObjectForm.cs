@@ -17,21 +17,24 @@ namespace WindowsFormsApp1
     {
         int id;
         bool edit = false;
-        public AddOrgObjectForm()
+        int cur_org_id;
+        public AddOrgObjectForm(int org_id)
         {
             InitializeComponent();
-            OrgLable.Text = dbOps.GetCompanyName(CurrentData.UserData.Id_org);
+            cur_org_id = org_id;
+            OrgLable.Text = dbOps.GetCompanyName(cur_org_id);
             NameTextbox.Text = "Новый объект (" + OrgLable.Text + ")";
             FullnameTextBox.Text = "Новый объект (" + OrgLable.Text + ")";
             this.Text = "Данные нового объекта " + OrgLable.Text;
         }
 
-        public AddOrgObjectForm(int obj_id, string name, string fullname)
+        public AddOrgObjectForm(int obj_id, string name, string fullname, int org_id)
         {
             InitializeComponent();
+            cur_org_id = org_id;
             NameTextbox.Text = name;
             FullnameTextBox.Text = fullname;
-            OrgLable.Text = dbOps.GetCompanyName(CurrentData.UserData.Id_org);
+            OrgLable.Text = dbOps.GetCompanyName(cur_org_id);
             id = obj_id;
             edit = true;
             this.Text = "Данные объекта " + fullname;
@@ -43,11 +46,11 @@ namespace WindowsFormsApp1
             {          
                 if (edit)
                 {
-                    dbOps.UpdateObject(id, CurrentData.UserData.Id_org, NameTextbox.Text, FullnameTextBox.Text);
+                    dbOps.UpdateObject(id, cur_org_id, NameTextbox.Text, FullnameTextBox.Text);
                 }
                 else
                 {
-                    dbOps.AddNewObject(CurrentData.UserData.Id_org, NameTextbox.Text, FullnameTextBox.Text);
+                    dbOps.AddNewObject(cur_org_id, NameTextbox.Text, FullnameTextBox.Text);
                 }
                 this.Close();
             }

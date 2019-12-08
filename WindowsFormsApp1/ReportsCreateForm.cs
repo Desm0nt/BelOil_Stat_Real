@@ -18,12 +18,13 @@ namespace WindowsFormsApp1
     public partial class ReportsCreateForm : KryptonForm
     {
         bool checkreport;
-        int curRepid, curProfNum, year, month, currentTubIndex;
+        int curRepid, curProfNum, year, month, currentTubIndex, cur_org_id;
         
 
-        public ReportsCreateForm(int year1, int month1)
+        public ReportsCreateForm(int year1, int month1, int org_id)
         {
             InitializeComponent();
+            cur_org_id = org_id;
             tabControl1.SelectedIndex = 0;
             currentTubIndex = 0;
             label14.Text = "Данные за " + CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(month1) + " " + year1;
@@ -44,27 +45,27 @@ namespace WindowsFormsApp1
             curProfNum = 0;
             year = year1;
             month = month1;       
-            checkreport = dbOps.ExistReportCheck(CurrentData.UserData.Id_org, year, month);
+            checkreport = dbOps.ExistReportCheck(cur_org_id, year, month);
 
             if (checkreport == false)
             {
-                int prof_num = dbOps.GetProflieNum(CurrentData.UserData.Id_org, year, month);
-                dbOps.AddNewReport(CurrentData.UserData.Id_org, year, month, CurrentData.UserData.Id, prof_num);
+                int prof_num = dbOps.GetProflieNum(cur_org_id, year, month);
+                dbOps.AddNewReport(cur_org_id, year, month, CurrentData.UserData.Id, prof_num);
             }
             
-            var curRep = dbOps.GetReportData(CurrentData.UserData.Id_org, year, month);
+            var curRep = dbOps.GetReportData(cur_org_id, year, month);
             curRepid = curRep.id;
             curProfNum = curRep.num;
-            var TradeFuelList = dbOps.GetFuelsTradeId(CurrentData.UserData.Id_org, 1);
-            var NormIdTypeList = dbOps.GetNormIdTypeList(CurrentData.UserData.Id_org, curRep.num);
-            var SourceIdList = dbOps.GetSoucreIdList(CurrentData.UserData.Id_org, curRep.num);
-            var RecievedIdList = dbOps.GetRecievedIdList(CurrentData.UserData.Id_org, curRep.num);
-            var SendedIdList = dbOps.GetSendedIdList(CurrentData.UserData.Id_org, curRep.num);
+            var TradeFuelList = dbOps.GetFuelsTradeId(cur_org_id, 1);
+            var NormIdTypeList = dbOps.GetNormIdTypeList(cur_org_id, curRep.num);
+            var SourceIdList = dbOps.GetSoucreIdList(cur_org_id, curRep.num);
+            var RecievedIdList = dbOps.GetRecievedIdList(cur_org_id, curRep.num);
+            var SendedIdList = dbOps.GetSendedIdList(cur_org_id, curRep.num);
             if (checkreport == false)
             {
                 foreach (var a in TradeFuelList)
                 {
-                    dbOps.AddFuelTrades(a, CurrentData.UserData.Id_org, curRepid, 0);
+                    dbOps.AddFuelTrades(a, cur_org_id, curRepid, 0);
                 }
                 foreach (var a in NormIdTypeList)
                 {
@@ -72,15 +73,15 @@ namespace WindowsFormsApp1
                 }
                 foreach (var a in SourceIdList)
                 {
-                    dbOps.AddSource(a.Id, CurrentData.UserData.Id_org, curRepid, 0);
+                    dbOps.AddSource(a.Id, cur_org_id, curRepid, 0);
                 }
                 foreach (var a in RecievedIdList)
                 {
-                    dbOps.AddRecieved(a.Id, CurrentData.UserData.Id_org, curRepid, 0);
+                    dbOps.AddRecieved(a.Id, cur_org_id, curRepid, 0);
                 }
                 foreach (var a in SendedIdList)
                 {
-                    dbOps.AddSended(a.Id, CurrentData.UserData.Id_org, curRepid, 0);
+                    dbOps.AddSended(a.Id, cur_org_id, curRepid, 0);
                 }
             }
         }
@@ -115,9 +116,9 @@ namespace WindowsFormsApp1
 
         private List<NormTable> MakeListSum(int yearr, int monthh, int type)
         {
-            var rep = dbOps.GetReportData(CurrentData.UserData.Id_org, yearr, 1);
+            var rep = dbOps.GetReportData(cur_org_id, yearr, 1);
             int report_id = rep.id;
-            var NormList = dbOps.GetNormInputList(CurrentData.UserData.Id_org, report_id, rep.num, type, yearr, monthh);
+            var NormList = dbOps.GetNormInputList(cur_org_id, report_id, rep.num, type, yearr, monthh);
             foreach (var a in NormList)
             {
                 a.val_fact = 0;
@@ -128,9 +129,9 @@ namespace WindowsFormsApp1
             {
                 for (int i = 1; i < monthh; i++)
                 {
-                    rep = dbOps.GetReportData(CurrentData.UserData.Id_org, yearr, i);
+                    rep = dbOps.GetReportData(cur_org_id, yearr, i);
                     report_id = rep.id;
-                    var tmplist = dbOps.GetNormInputList(CurrentData.UserData.Id_org, report_id, rep.num, type, yearr, i);
+                    var tmplist = dbOps.GetNormInputList(cur_org_id, report_id, rep.num, type, yearr, i);
                     if (tmplist.Count != 0)
                     {
                         for (int j = 0; j < NormList.Count; j++)
@@ -149,10 +150,10 @@ namespace WindowsFormsApp1
             List<NormTable> NormListPR = new List<NormTable>();
             for (int i = 1; i <= month; i++)
             {
-                var rep = dbOps.GetReportData(CurrentData.UserData.Id_org, year, i);
+                var rep = dbOps.GetReportData(cur_org_id, year, i);
                 int report_id = rep.id;
                 int profile_num = rep.num;
-                var tempList = dbOps.GetNormInputList(CurrentData.UserData.Id_org, report_id, rep.num, type, yearr, monthh);
+                var tempList = dbOps.GetNormInputList(cur_org_id, report_id, rep.num, type, yearr, monthh);
                 foreach (var t in tempList)
                 {
                     if (NormListPR.Any(norm => norm.Id_local == t.Id_local))
@@ -176,15 +177,15 @@ namespace WindowsFormsApp1
 
         //private List<NormTable> MakeListOldSum(int yearr, int monthh, int type)
         //{
-        //    int report_id = dbOps.GetReportId(CurrentData.UserData.Id_org, yearr, 1);
-        //    var NormList = dbOps.GetNormInputList(CurrentData.UserData.Id_org, report_id, type, yearr, monthh);
+        //    int report_id = dbOps.GetReportId(cur_org_id, yearr, 1);
+        //    var NormList = dbOps.GetNormInputList(cur_org_id, report_id, type, yearr, monthh);
 
         //    if (monthh > 1)
         //    {
         //        for (int i = 2; i <= monthh; i++)
         //        {
-        //            report_id = dbOps.GetReportId(CurrentData.UserData.Id_org, yearr, i);
-        //            var tmplist = dbOps.GetNormInputList(CurrentData.UserData.Id_org, report_id, type, yearr, i);
+        //            report_id = dbOps.GetReportId(cur_org_id, yearr, i);
+        //            var tmplist = dbOps.GetNormInputList(cur_org_id, report_id, type, yearr, i);
         //            if (tmplist.Count != 0)
         //            {
         //                for (int j = 0; j < NormList.Count; j++)
@@ -283,7 +284,7 @@ namespace WindowsFormsApp1
             switch (tabControl1.SelectedIndex)
             {
                 case 1:
-                    List<FTradeInputTable> tradelist = dbOps.GetFTradeInputList(CurrentData.UserData.Id_org, curRepid, year, month);
+                    List<FTradeInputTable> tradelist = dbOps.GetFTradeInputList(cur_org_id, curRepid, year, month);
                     dataGridView1.DataSource = tradelist;
                     dataGridView1.Columns[0].ReadOnly = true;
                     dataGridView1.Columns[0].Visible = false;
@@ -316,10 +317,10 @@ namespace WindowsFormsApp1
                     }
                     break;
                 case 2:
-                    List<NormTable> NormToplist = dbOps.GetNormInputList(CurrentData.UserData.Id_org, curRepid, curProfNum, 1, year, month);
+                    List<NormTable> NormToplist = dbOps.GetNormInputList(cur_org_id, curRepid, curProfNum, 1, year, month);
                     List<NormTable> NormToplistSum = MakeListSumPR(year, month, 1);
-                    var repp = dbOps.GetReportData(CurrentData.UserData.Id_org, (year - 1), month);
-                    List<NormTable> NormToplistOld = dbOps.GetNormInputList(CurrentData.UserData.Id_org, repp.id, repp.num, 1, (year-1), month);
+                    var repp = dbOps.GetReportData(cur_org_id, (year - 1), month);
+                    List<NormTable> NormToplistOld = dbOps.GetNormInputList(cur_org_id, repp.id, repp.num, 1, (year-1), month);
                     List<NormTable> NormToplistOldSum = MakeListSumPR((year-1), month, 1);
                     List<NormInputTable> NormToplist1 = new List<NormInputTable>();
                     for (int i = 0; i < NormToplist.Count; i++)
@@ -404,7 +405,7 @@ namespace WindowsFormsApp1
                     }
                     break;
                 case 3:
-                    List<SourceInputTable> SourceInputList = dbOps.GetSourceInputList(CurrentData.UserData.Id_org, curRepid, 2);
+                    List<SourceInputTable> SourceInputList = dbOps.GetSourceInputList(cur_org_id, curRepid, 2);
                     dataGridView3.DataSource = SourceInputList;
                     dataGridView3.Columns[0].ReadOnly = true;
                     dataGridView3.Columns[1].HeaderText = "Наименование";
@@ -413,7 +414,7 @@ namespace WindowsFormsApp1
                     dataGridView3.Columns[2].HeaderText = "Значение";
                     break;
                 case 4:
-                    List<RecievedInputTable> RecievedInputList = dbOps.GetRecievedInputList(CurrentData.UserData.Id_org, curRepid, 2);
+                    List<RecievedInputTable> RecievedInputList = dbOps.GetRecievedInputList(cur_org_id, curRepid, 2);
                     dataGridView4.DataSource = RecievedInputList;
                     dataGridView4.Columns[0].ReadOnly = true;
                     dataGridView4.Columns[1].HeaderText = "Наименование организации";
@@ -422,7 +423,7 @@ namespace WindowsFormsApp1
                     dataGridView4.Columns[2].HeaderText = "Значение";
                     break;
                 case 5:
-                    List<SendedInputTable> SendedInputList = dbOps.GetSendedInputList(CurrentData.UserData.Id_org, curRepid, 2);
+                    List<SendedInputTable> SendedInputList = dbOps.GetSendedInputList(cur_org_id, curRepid, 2);
                     dataGridView5.DataSource = SendedInputList;
                     dataGridView5.Columns[0].ReadOnly = true;
                     dataGridView5.Columns[1].HeaderText = "Наименование организации";
@@ -431,10 +432,10 @@ namespace WindowsFormsApp1
                     dataGridView5.Columns[2].HeaderText = "Значение";
                     break;
                 case 6:
-                    List<NormTable> NormHeatlist = dbOps.GetNormInputList(CurrentData.UserData.Id_org, curRepid, curProfNum, 2, year, month);
+                    List<NormTable> NormHeatlist = dbOps.GetNormInputList(cur_org_id, curRepid, curProfNum, 2, year, month);
                     List<NormTable> NormHeatlistSum = MakeListSumPR(year, month, 2);
-                    repp = dbOps.GetReportData(CurrentData.UserData.Id_org, (year - 1), month);
-                    List<NormTable> NormHeatlistOld = dbOps.GetNormInputList(CurrentData.UserData.Id_org, repp.id, repp.num, 2, (year - 1), month);
+                    repp = dbOps.GetReportData(cur_org_id, (year - 1), month);
+                    List<NormTable> NormHeatlistOld = dbOps.GetNormInputList(cur_org_id, repp.id, repp.num, 2, (year - 1), month);
                     List<NormTable> NormHeatlistOldSum = MakeListSumPR((year - 1), month, 2);
                     List<NormInputTable> NormHeatlist1 = new List<NormInputTable>();
                     for (int i = 0; i < NormHeatlist.Count; i++)
@@ -518,7 +519,7 @@ namespace WindowsFormsApp1
                     }
                     break;
                 case 7:
-                    List<SourceInputTable> SourceInputList1 = dbOps.GetSourceInputList(CurrentData.UserData.Id_org, curRepid, 3);
+                    List<SourceInputTable> SourceInputList1 = dbOps.GetSourceInputList(cur_org_id, curRepid, 3);
                     dataGridView7.DataSource = SourceInputList1;
                     dataGridView7.Columns[0].ReadOnly = true;
                     dataGridView7.Columns[1].HeaderText = "Наименование";
@@ -527,7 +528,7 @@ namespace WindowsFormsApp1
                     dataGridView7.Columns[2].HeaderText = "Значение";
                     break;
                 case 8:
-                    List<RecievedInputTable> RecievedInputList1 = dbOps.GetRecievedInputList(CurrentData.UserData.Id_org, curRepid, 3);
+                    List<RecievedInputTable> RecievedInputList1 = dbOps.GetRecievedInputList(cur_org_id, curRepid, 3);
                     dataGridView8.DataSource = RecievedInputList1;
                     dataGridView8.Columns[0].ReadOnly = true;
                     dataGridView8.Columns[1].HeaderText = "Наименование организации";
@@ -536,7 +537,7 @@ namespace WindowsFormsApp1
                     dataGridView8.Columns[2].HeaderText = "Значение";
                     break;
                 case 9:
-                    List<SendedInputTable> SendedInputList1 = dbOps.GetSendedInputList(CurrentData.UserData.Id_org, curRepid, 3);
+                    List<SendedInputTable> SendedInputList1 = dbOps.GetSendedInputList(cur_org_id, curRepid, 3);
                     dataGridView9.DataSource = SendedInputList1;
                     dataGridView9.Columns[0].ReadOnly = true;
                     dataGridView9.Columns[1].HeaderText = "Наименование организации";
@@ -549,10 +550,10 @@ namespace WindowsFormsApp1
                     button10.Visible = true;
                     button6.Enabled = false;
                     button6.Visible = false;
-                    List<NormTable> NormEllist = dbOps.GetNormInputList(CurrentData.UserData.Id_org, curRepid, curProfNum, 3, year, month);
+                    List<NormTable> NormEllist = dbOps.GetNormInputList(cur_org_id, curRepid, curProfNum, 3, year, month);
                     List<NormTable> NormEllistSum = MakeListSumPR(year, month, 3);
-                    repp = dbOps.GetReportData(CurrentData.UserData.Id_org, (year - 1), month);
-                    List<NormTable> NormEllistOld = dbOps.GetNormInputList(CurrentData.UserData.Id_org, repp.id, repp.num, 3, (year - 1), month);
+                    repp = dbOps.GetReportData(cur_org_id, (year - 1), month);
+                    List<NormTable> NormEllistOld = dbOps.GetNormInputList(cur_org_id, repp.id, repp.num, 3, (year - 1), month);
                     List<NormTable> NormEllistOldSum = MakeListSumPR((year - 1), month, 3);
                     List<NormInputTable> NormEllist1 = new List<NormInputTable>();
                     for (int i = 0; i < NormEllist.Count; i++)

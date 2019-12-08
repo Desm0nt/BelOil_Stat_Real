@@ -4697,7 +4697,7 @@ namespace WindowsFormsApp1
 
         private void сформировать1ПЭРToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var myForm = new ReportsCreateForm(dateTimePicker1.Value.Year, dateTimePicker1.Value.Month);
+            var myForm = new ReportsCreateForm(dateTimePicker1.Value.Year, dateTimePicker1.Value.Month, CurrentData.UserData.Id_org);
             myForm.FormClosed += new FormClosedEventHandler(myForm_FormClosed);
             myForm.Show();
         }
@@ -4791,7 +4791,7 @@ namespace WindowsFormsApp1
 
         private void профильToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var myForm = new ProfileForm(dateTimePicker1.Value.Year, dateTimePicker1.Value.Month);
+            var myForm = new ProfileForm(dateTimePicker1.Value.Year, dateTimePicker1.Value.Month, CurrentData.UserData.Id_org);
             myForm.FormClosed += new FormClosedEventHandler(myForm_FormClosed);
             myForm.Show();
         }
