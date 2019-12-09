@@ -135,6 +135,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EditNormNameForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditNormNameForm.Designer.cs">
+      <DependentUpon>EditNormNameForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="AddOrgObjectForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -323,6 +329,9 @@
     <Compile Include="StartUpForm.Designer.cs">
       <DependentUpon>StartUpForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="EditNormNameForm.resx">
+      <DependentUpon>EditNormNameForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AddOrgObjectForm.resx">
       <DependentUpon>AddOrgObjectForm.cs</DependentUpon>
     </EmbeddedResource>

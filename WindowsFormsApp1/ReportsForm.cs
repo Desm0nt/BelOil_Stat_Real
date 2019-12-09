@@ -61,9 +61,7 @@ namespace WindowsFormsApp1
             year3Button.Text = (DateTime.Now.Year - 2).ToString();
             toolStripDropDownButton1.Text = MakeQuaterText(DateTime.Now.Month);
             MonthBut.Text = "&" + System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(DateTime.Now.Month);
-            this.kryptonOutlookGrid1.EditingControlShowing += new DataGridViewEditingControlShowingEventHandler(EditingControlShowing);
-
-            
+            this.kryptonOutlookGrid1.EditingControlShowing += new DataGridViewEditingControlShowingEventHandler(EditingControlShowing);          
         }
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
