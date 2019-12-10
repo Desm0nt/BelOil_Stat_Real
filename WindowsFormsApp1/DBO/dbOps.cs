@@ -1960,6 +1960,27 @@ namespace WindowsFormsApp1.DBO
                 MessageBox.Show("Ошибка UpdateObject: " + Ex.Message);
             }
         }
+        public static void ActivateObject(int id_org, string name, string full_name)
+        {
+            try
+            {
+                bool active = true;
+                SqlConnection myConnection2 = new SqlConnection(cnStr);
+                myConnection2.Open();
+                string query2 = "UPDATE NewObjects SET  active = @active WHERE id_org = @id_org and name = @name and full_name = @full_name"; //пишем данные параметрическим запросом
+                SqlCommand command2 = new SqlCommand(query2, myConnection2);
+                command2.Parameters.AddWithValue("@active", active);
+                command2.Parameters.AddWithValue("@id_org", id_org);
+                command2.Parameters.AddWithValue("@name", name);
+                command2.Parameters.AddWithValue("@full_name", full_name);
+                command2.ExecuteNonQuery();
+                myConnection2.Close();
+            }
+            catch (Exception Ex)
+            {
+                MessageBox.Show("Ошибка ActivateObject: " + Ex.Message);
+            }
+        }
         public static void AddNewFactor(int month, int year, float gkal, float kvch)
         {
             SqlConnection myConnection = new SqlConnection(cnStr);
@@ -3390,10 +3411,11 @@ namespace WindowsFormsApp1.DBO
             List<ObjectTable> ObList = new List<ObjectTable>();
             SqlConnection myConnection = new SqlConnection(cnStr);
             myConnection.Open();
-
-            string query = "SELECT * FROM [NewObjects] WHERE id_org = @id_org ";
+            bool active = true;
+            string query = "SELECT * FROM [NewObjects] WHERE id_org = @id_org and active = @active";
             SqlCommand command = new SqlCommand(query, myConnection);
             command.Parameters.AddWithValue("@id_org", id_org);
+            command.Parameters.AddWithValue("@active", active);
 
             using (SqlDataReader dr = command.ExecuteReader())
             {
@@ -3404,6 +3426,32 @@ namespace WindowsFormsApp1.DBO
             }
             myConnection.Close();
             return ObList;
+        }
+
+        public static bool ChechExistObject (int id_org, string name, string full_name)
+        {
+            bool status = false;
+            try
+            {
+                SqlConnection myConnection = new SqlConnection(cnStr);
+                myConnection.Open();
+
+                string query = "SELECT COUNT(*) FROM NewObjects where id_org = @id_org and name = @name and full_name = @full_name";
+                SqlCommand command = new SqlCommand(query, myConnection);
+                command.Parameters.AddWithValue("@id_org", id_org);
+                command.Parameters.AddWithValue("@name", name);
+                command.Parameters.AddWithValue("@full_name", full_name);
+                var result = Convert.ToInt32(command.ExecuteScalar());
+                if (result >= 1)
+                    status = true;
+
+                myConnection.Close();
+            }
+            catch (Exception Ex)
+            {
+                KryptonMessageBox.Show("Ошибка ChechExistObject: " + Ex.Message);
+            }
+            return status;
         }
 
         public static float GetSrcValue(int id_rep, int id_src)

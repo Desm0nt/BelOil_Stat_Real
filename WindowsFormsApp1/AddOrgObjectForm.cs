@@ -50,7 +50,11 @@ namespace WindowsFormsApp1
                 }
                 else
                 {
-                    dbOps.AddNewObject(cur_org_id, NameTextbox.Text, FullnameTextBox.Text);
+                    bool status = dbOps.ChechExistObject(cur_org_id, NameTextbox.Text, FullnameTextBox.Text);
+                    if (status ==  false)
+                        dbOps.AddNewObject(cur_org_id, NameTextbox.Text, FullnameTextBox.Text);
+                    else
+                        dbOps.ActivateObject(cur_org_id, NameTextbox.Text, FullnameTextBox.Text);
                 }
                 this.Close();
             }

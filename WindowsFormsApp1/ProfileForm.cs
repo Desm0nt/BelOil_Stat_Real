@@ -20,6 +20,7 @@ namespace WindowsFormsApp1
         int cur_org_id;
         int cyear, cmonth;
         bool edited = false;
+        List<int> objToDisactivate = new List<int>();
 
         public ProfileForm(int curyear, int curmonth, int id_org)
         {
@@ -1101,6 +1102,11 @@ namespace WindowsFormsApp1
                     }
                 }
             }
+        }
+
+        private void toolStripButton2_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void SaveProfile()
