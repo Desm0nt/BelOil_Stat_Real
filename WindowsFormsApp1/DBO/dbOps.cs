@@ -1981,6 +1981,26 @@ namespace WindowsFormsApp1.DBO
                 MessageBox.Show("Ошибка ActivateObject: " + Ex.Message);
             }
         }
+        public static void DisactivateObject(int id)
+        {
+            try
+            {
+                bool active = false;
+                SqlConnection myConnection2 = new SqlConnection(cnStr);
+                myConnection2.Open();
+                string query2 = "UPDATE NewObjects SET active = @active WHERE id = @id"; //пишем данные параметрическим запросом
+                SqlCommand command2 = new SqlCommand(query2, myConnection2);
+                command2.Parameters.AddWithValue("@active", active);
+                command2.Parameters.AddWithValue("@id", id);
+                command2.ExecuteNonQuery();
+                myConnection2.Close();
+            }
+            catch (Exception Ex)
+            {
+                MessageBox.Show("Ошибка DisactivateObject: " + Ex.Message);
+            }
+        }
+
         public static void AddNewFactor(int month, int year, float gkal, float kvch)
         {
             SqlConnection myConnection = new SqlConnection(cnStr);
@@ -2694,7 +2714,8 @@ namespace WindowsFormsApp1.DBO
                         myConnection2.Open();
                         string query2 = "SELECT * FROM [NewFuelsTrade] WHERE [id_fuel] = @id_tfuel AND [id_rep] = @id_rep";
                         SqlCommand command2 = new SqlCommand(query2, myConnection2);
-                        command2.Parameters.AddWithValue("@id_tfuel", Int32.Parse(dr["fuel_code"].ToString()));
+
+                        command2.Parameters.AddWithValue("@id_tfuel", Int32.Parse(dr["id"].ToString()));
                         command2.Parameters.AddWithValue("@id_rep", id_rep);
                         var a = Int32.Parse(dr["id"].ToString());
                         using (SqlDataReader dr2 = command2.ExecuteReader())

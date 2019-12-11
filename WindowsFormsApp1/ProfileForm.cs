@@ -15,12 +15,20 @@ using WindowsFormsApp1.DBO;
 
 namespace WindowsFormsApp1
 {
+    public struct ListObjects
+    {
+        public int Id;
+        public string Name;
+    }
+
     public partial class ProfileForm : KryptonForm
     {
         int cur_org_id;
         int cyear, cmonth;
         bool edited = false;
         List<int> objToDisactivate = new List<int>();
+        public static List<ListObjects> elList;
+        List<DataTables.ObjectTable> objectsList;
 
         public ProfileForm(int curyear, int curmonth, int id_org)
         {
@@ -80,6 +88,12 @@ namespace WindowsFormsApp1
 
         private void LoadAllNorms()
         {
+            objectsList = dbOps.GetObjList(cur_org_id);
+            elList = new List<ListObjects>();
+            foreach (var a in objectsList)
+                elList.Add(new ListObjects { Id = a.Id, Name = a.Name});
+            elList.Add(new ListObjects { Id = -1, Name = "Общие по организации" });
+
             List<ProfNormTable> normList = new List<ProfNormTable>();
             ProfileTable profData = dbOps.GetProfileData(cur_org_id, cmonth, cyear);
             normList = dbOps.GetProfNormList(cur_org_id, profData.Num, profData.Month, profData.Year, toolStripTextBox2.Text, toolStripTextBox2.Text);
@@ -116,7 +130,7 @@ namespace WindowsFormsApp1
             kryptonOutlookGrid9.AddInternalColumn(kryptonOutlookGrid9.Columns[5], new OutlookGridDefaultGroup(null), SortOrder.None, -1, -1);
             kryptonOutlookGrid9.AddInternalColumn(kryptonOutlookGrid9.Columns[6], new OutlookGridDefaultGroup(null), SortOrder.None, -1, -1);
             kryptonOutlookGrid9.AddInternalColumn(kryptonOutlookGrid9.Columns[7], new OutlookGridTypeGroup(null), SortOrder.Ascending, 1, -1);
-            kryptonOutlookGrid9.AddInternalColumn(kryptonOutlookGrid9.Columns[8], new OutlookGridDefaultGroup(null), SortOrder.None, -1, -1);
+            kryptonOutlookGrid9.AddInternalColumn(kryptonOutlookGrid9.Columns[8], new OutlookGridObjectGroup(null), SortOrder.Ascending, 1, -1);
             kryptonOutlookGrid9.AddInternalColumn(kryptonOutlookGrid9.Columns[9], new OutlookGridDefaultGroup(null), SortOrder.None, -1, -1);
             kryptonOutlookGrid9.AddInternalColumn(kryptonOutlookGrid9.Columns[10], new OutlookGridDefaultGroup(null), SortOrder.None, -1, -1);
             kryptonOutlookGrid9.AddInternalColumn(kryptonOutlookGrid9.Columns[11], new OutlookGridDefaultGroup(null), SortOrder.None, -1, -1);
@@ -147,7 +161,7 @@ namespace WindowsFormsApp1
                     product.s111,
                     product.s112,
                     new TextAndImage(product.type.ToString(), GetFlag(product.type)),
-                    product.id_obj,
+                    new TextAndImage(product.id_obj.ToString(), GetFlagObj(product.id_obj)),
                     product.Id_local,
                     product.real_name,
                     product.Name,
@@ -199,7 +213,7 @@ namespace WindowsFormsApp1
             grid.AddInternalColumn(grid.Columns[5], new OutlookGridDefaultGroup(null), SortOrder.None, -1, -1);
             grid.AddInternalColumn(grid.Columns[6], new OutlookGridDefaultGroup(null), SortOrder.None, -1, -1);
             grid.AddInternalColumn(grid.Columns[7], new OutlookGridTypeGroup(null), SortOrder.Ascending, 1, -1);
-            grid.AddInternalColumn(grid.Columns[8], new OutlookGridDefaultGroup(null), SortOrder.None, -1, -1);
+            grid.AddInternalColumn(grid.Columns[8], new OutlookGridObjectGroup(null), SortOrder.Ascending, 1, -1);
             grid.AddInternalColumn(grid.Columns[9], new OutlookGridDefaultGroup(null), SortOrder.None, -1, -1);
             grid.AddInternalColumn(grid.Columns[10], new OutlookGridDefaultGroup(null), SortOrder.None, -1, -1);
             grid.AddInternalColumn(grid.Columns[11], new OutlookGridDefaultGroup(null), SortOrder.None, -1, -1);
@@ -220,7 +234,7 @@ namespace WindowsFormsApp1
             foreach (var product in normList)
             {
                 row = new OutlookGridRow();
-                row.CreateCells(grid, new object[] { product.Id, product.Code, product.name_with_fuel, product.Unit, product.nUnit, product.s111, product.s112, new TextAndImage(product.type.ToString(), GetFlag(product.type)), product.id_obj, product.Id_local, product.real_name, product.Name, product.id_fuel, product.Id_prod });
+                row.CreateCells(grid, new object[] { product.Id, product.Code, product.name_with_fuel, product.Unit, product.nUnit, product.s111, product.s112, new TextAndImage(product.type.ToString(), GetFlag(product.type)), new TextAndImage(product.id_obj.ToString(), GetFlagObj(product.id_obj)), product.Id_local, product.real_name, product.Name, product.id_fuel, product.Id_prod });
                 l.Add(row);
             }
 
@@ -498,6 +512,16 @@ namespace WindowsFormsApp1
                     return Properties.Resources._3;
                 default:
                     return null;
+            }
+        }
+        private Image GetFlagObj(int type)
+        {
+            switch (type)
+            {
+                case -1:
+                    return Properties.Resources.star;
+                default:
+                    return Properties.Resources.box;
             }
         }
         private Image GetRecSendFlag(int type)
@@ -915,7 +939,7 @@ namespace WindowsFormsApp1
                         id_local = tmpid.ToString();
                         valid = dbOps.LocalIdValidChecking(id_local, cur_org_id, myForm.NormTable.id_fuel, myForm.NormTable.Id_prod, myForm.NormTable.real_name);
                     }
-                    row.CreateCells(newGrid2, new object[] { tmp_id, myForm.NormTable.Code, myForm.NormTable.name_with_fuel, myForm.NormTable.Unit, myForm.NormTable.nUnit, myForm.NormTable.s111, myForm.NormTable.s112, new TextAndImage(myForm.NormTable.type.ToString(), GetFlag(myForm.NormTable.type)), myForm.NormTable.id_obj, id_local, myForm.NormTable.real_name, myForm.NormTable.Name, myForm.NormTable.id_fuel, myForm.NormTable.Id_prod });
+                    row.CreateCells(newGrid2, new object[] { tmp_id, myForm.NormTable.Code, myForm.NormTable.name_with_fuel, myForm.NormTable.Unit, myForm.NormTable.nUnit, myForm.NormTable.s111, myForm.NormTable.s112, new TextAndImage(myForm.NormTable.type.ToString(), GetFlag(myForm.NormTable.type)), new TextAndImage(myForm.NormTable.id_obj.ToString(), GetFlagObj(myForm.NormTable.id_obj)), id_local, myForm.NormTable.real_name, myForm.NormTable.Name, myForm.NormTable.id_fuel, myForm.NormTable.Id_prod });
                     l2.Add(row);
 
                     newGrid2.ResumeLayout();
@@ -934,7 +958,7 @@ namespace WindowsFormsApp1
 
                     string group = "";
                     row = new OutlookGridRow();
-                    row.CreateCells(newGrid, new object[] { tmp_id, myForm.NormTable.Code, myForm.NormTable.name_with_fuel, myForm.NormTable.Unit, myForm.NormTable.nUnit, myForm.NormTable.s111, myForm.NormTable.s112, new TextAndImage(myForm.NormTable.type.ToString(), GetFlag(myForm.NormTable.type)), myForm.NormTable.id_obj, id_local, myForm.NormTable.real_name, myForm.NormTable.Name, myForm.NormTable.id_fuel, myForm.NormTable.Id_prod });
+                    row.CreateCells(newGrid, new object[] { tmp_id, myForm.NormTable.Code, myForm.NormTable.name_with_fuel, myForm.NormTable.Unit, myForm.NormTable.nUnit, myForm.NormTable.s111, myForm.NormTable.s112, new TextAndImage(myForm.NormTable.type.ToString(), GetFlag(myForm.NormTable.type)), new TextAndImage(myForm.NormTable.id_obj.ToString(), GetFlagObj(myForm.NormTable.id_obj)), id_local, myForm.NormTable.real_name, myForm.NormTable.Name, myForm.NormTable.id_fuel, myForm.NormTable.Id_prod });
                     l.Add(row);
 
                     newGrid.ResumeLayout();
@@ -1106,20 +1130,47 @@ namespace WindowsFormsApp1
 
         private void toolStripButton2_Click(object sender, EventArgs e)
         {
+            if (treeView1.SelectedNode == null)
+                Console.WriteLine("No tree node selected.");
+            else
+            {
+                var main_obj = kryptonOutlookGrid9.Rows
+                            .Cast<DataGridViewRow>()
+                            .Where(r => r.Cells[8].Value != null && r.Cells[8].Value.ToString().Equals(treeView1.SelectedNode.Tag.ToString()));
+                foreach (var a in main_obj.ToList())
+                    kryptonOutlookGrid9.Rows.RemoveAt(kryptonOutlookGrid9.Rows[a.Index].Index);
+                var fuel_obj = kryptonOutlookGrid4.Rows
+                            .Cast<DataGridViewRow>()
+                            .Where(r => r.Cells[8].Value != null && r.Cells[8].Value.ToString().Equals(treeView1.SelectedNode.Tag.ToString()));
+                foreach (var a in fuel_obj.ToList())
+                    kryptonOutlookGrid4.Rows.RemoveAt(kryptonOutlookGrid4.Rows[a.Index].Index);
+                var heat_obj = kryptonOutlookGrid3.Rows
+                            .Cast<DataGridViewRow>()
+                            .Where(r => r.Cells[8].Value != null && r.Cells[8].Value.ToString().Equals(treeView1.SelectedNode.Tag.ToString()));
+                foreach (var a in heat_obj.ToList())
+                    kryptonOutlookGrid3.Rows.RemoveAt(kryptonOutlookGrid3.Rows[a.Index].Index);
+                var el_obj = kryptonOutlookGrid2.Rows
+                            .Cast<DataGridViewRow>()
+                            .Where(r => r.Cells[8].Value != null && r.Cells[8].Value.ToString().Equals(treeView1.SelectedNode.Tag.ToString()));
+                foreach (var a in el_obj.ToList())
+                    kryptonOutlookGrid2.Rows.RemoveAt(kryptonOutlookGrid2.Rows[a.Index].Index);
+                objToDisactivate.Add(Int32.Parse(treeView1.SelectedNode.Tag.ToString()));
+                treeView1.SelectedNode.Remove();
 
+            }        
         }
 
         private void SaveProfile()
         {
+            foreach (var a in objToDisactivate)
+            {
+                dbOps.DisactivateObject(a);
+            }
             int profilenum = dbOps.GetProfileNumIfExist(cur_org_id, DateTime.Now.Year, DateTime.Now.Month);
             ProfileTable profData = dbOps.GetProfileData(cur_org_id, cmonth, cyear);
             if (profilenum != 0)
             {
                 dbOps.DeleteOldProfileVariant(profilenum, cur_org_id);
-                //тут будем вайпать кучу табличек по номеру
-                //тут будем вайпать кучу табличек по номеру
-                //тут будем вайпать кучу табличек по номеру
-                //тут будем вайпать кучу табличек по номеру
                 //тут будем вайпать кучу табличек по номеру
             }
             else

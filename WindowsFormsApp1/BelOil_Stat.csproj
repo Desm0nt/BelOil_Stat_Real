@@ -252,6 +252,7 @@
       <DependentUpon>NormReportCreateForm.cs</DependentUpon>
     </Compile>
     <Compile Include="OutlookGridFuelGroup2.cs" />
+    <Compile Include="OutlookGridObjectGroup.cs" />
     <Compile Include="OutlookGridPersonGroup2.cs" />
     <Compile Include="OutlookGridPersonGroup.cs" />
     <Compile Include="OutlookGridFuelGroup.cs" />
@@ -567,6 +568,7 @@
     <None Include="Resources\st5.png" />
     <None Include="Resources\st6.png" />
     <None Include="Resources\st7.png" />
+    <None Include="Resources\star.png" />
     <Content Include="Themes\Access 2007 Alt White Text.xml" />
     <Content Include="Themes\Access 2007 Alt.xml" />
     <Content Include="Themes\Access 2007 White Text.xml" />
