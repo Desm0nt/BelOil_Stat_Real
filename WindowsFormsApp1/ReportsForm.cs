@@ -29,6 +29,9 @@ namespace WindowsFormsApp1
         public List<NormTable> actualList = new List<NormTable>();
         public List<NormTable> oldList = new List<NormTable>();
         public List<CompanyListTable> CompanyList = new List<CompanyListTable>();
+        public static List<ListObjects> elLists;
+        List<DataTables.ObjectTable> objectsList;
+
         public ReportsForm()
         {
             InitializeComponent();
@@ -191,7 +194,8 @@ namespace WindowsFormsApp1
                         sum_val_fact_ut = 0,
                         sum_val_plan = 0,
                         sum_val_plan_ut = 0,    
-                        editable = a.editable
+                        editable = a.editable,
+                        id_obj = a.id_obj
                     });
                     tmp++;
                 }                 
@@ -312,7 +316,8 @@ namespace WindowsFormsApp1
                         sum_val_fact_ut = 0,
                         sum_val_plan = 0,
                         sum_val_plan_ut = 0,
-                        editable = a.editable
+                        editable = a.editable,
+                        id_obj = a.id_obj
                     });
                     tmp++;
                 }
@@ -436,7 +441,8 @@ namespace WindowsFormsApp1
                         sum_val_fact_ut = 0,
                         sum_val_plan = 0,
                         sum_val_plan_ut = 0,
-                        editable = a.editable
+                        editable = a.editable,
+                        id_obj = a.id_obj
                     });
                     tmp++;
                 }
@@ -623,6 +629,13 @@ namespace WindowsFormsApp1
 
         private void LoadAllNorms(List<Full1terTable> full1Ter,  KryptonOutlookGrid.Classes.KryptonOutlookGrid grid)
         {
+
+            objectsList = dbOps.GetObjList(CurrentData.UserData.Id);
+            elLists = new List<ListObjects>();
+            foreach (var a in objectsList)
+                elLists.Add(new ListObjects { Id = a.Id, Name = a.Name });
+            elLists.Add(new ListObjects { Id = -1, Name = "Общие по организации" });
+
             grid.ClearInternalRows();
             grid.ClearGroups();
             grid.RowHeadersWidth = 10;
@@ -657,6 +670,7 @@ namespace WindowsFormsApp1
             columnsToAdd[23] = grid.Columns[23];
             columnsToAdd[24] = grid.Columns[24];
             columnsToAdd[25] = grid.Columns[25];
+            //columnsToAdd[26] = grid.Columns[26];
             #endregion
 
             //grid.Columns.AddRange(columnsToAdd);
@@ -688,9 +702,11 @@ namespace WindowsFormsApp1
             grid.AddInternalColumn(grid.Columns[23], new OutlookGridDefaultGroup(null), System.Windows.Forms.SortOrder.None, -1, -1);
             grid.AddInternalColumn(grid.Columns[24], new OutlookGridTypeGroup(null), System.Windows.Forms.SortOrder.Ascending, 1, -1);
             grid.AddInternalColumn(grid.Columns[25], new OutlookGridDefaultGroup(null), System.Windows.Forms.SortOrder.None, -1, -1);
+            grid.AddInternalColumn(grid.Columns[26], new OutlookGridObjectGroup2(null), System.Windows.Forms.SortOrder.Ascending, 1, -1);
             #endregion
 
             grid.Columns[24].Visible = false;
+            grid.Columns[26].Visible = false;
             grid.ShowLines = true;
 
             //Setup Rows
@@ -737,7 +753,8 @@ namespace WindowsFormsApp1
                     norm.sum_val_plan > 0 ? Math.Round((Math.Round( norm.sum_val_fact, round_koeff) / Math.Round(norm.sum_val_plan, round_koeff)) * 100, 1).ToString() + "%" : "?",
                     norm.sum_val_fact_old > 0 ? Math.Round((Math.Round( norm.sum_val_fact, round_koeff) / Math.Round(norm.sum_val_fact_old, round_koeff)) * 100, 1).ToString() + "%" : "?",
                     new TextAndImage(norm.type.ToString(), GetFlag(norm.type)),
-                    norm.editable
+                    norm.editable,
+                    new TextAndImage(norm.id_obj.ToString(), GetFlagObj(norm.id_obj))
                 });
                 if (norm.editable == false)
                 {
@@ -4890,6 +4907,16 @@ namespace WindowsFormsApp1
                     return Properties.Resources._3;
                 default:
                     return null;
+            }
+        }
+        private Image GetFlagObj(int type)
+        {
+            switch (type)
+            {
+                case -1:
+                    return Properties.Resources.star;
+                default:
+                    return Properties.Resources.box;
             }
         }
         private void kryptonOutlookGrid1_Resize(object sender, EventArgs e)

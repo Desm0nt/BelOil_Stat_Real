@@ -252,6 +252,7 @@
       <DependentUpon>NormReportCreateForm.cs</DependentUpon>
     </Compile>
     <Compile Include="OutlookGridFuelGroup2.cs" />
+    <Compile Include="OutlookGridObjectGroup2.cs" />
     <Compile Include="OutlookGridObjectGroup.cs" />
     <Compile Include="OutlookGridPersonGroup2.cs" />
     <Compile Include="OutlookGridPersonGroup.cs" />
