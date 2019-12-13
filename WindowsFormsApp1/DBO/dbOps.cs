@@ -997,6 +997,33 @@ namespace WindowsFormsApp1.DBO
             }
         }
 
+        public static void AddProdList(ProductTable productTable, int odlId)
+        {
+            try
+            {
+                SqlConnection myConnection = new SqlConnection(cnStr);
+                myConnection.Open();
+
+                string query = "INSERT INTO NewProduct (id, code, pid, name, unit, norm_unit, f111, f112) VALUES (@id, @code, @pid, @name, @unit, @norm_unit, @f111, @f112) ";
+                SqlCommand command = new SqlCommand(query, myConnection);
+                command.Parameters.AddWithValue("@id", productTable.Id);
+                command.Parameters.AddWithValue("@code", productTable.Code);
+                command.Parameters.AddWithValue("@pid", productTable.type);
+                command.Parameters.AddWithValue("@name", productTable.Name);
+                command.Parameters.AddWithValue("@unit", productTable.Unit);
+                command.Parameters.AddWithValue("@norm_unit", productTable.nUnit);
+                command.Parameters.AddWithValue("@f111", productTable.s111);
+                command.Parameters.AddWithValue("@f112", productTable.s112);
+                command.ExecuteNonQuery();
+                myConnection.Close();
+            }
+            catch (Exception Ex)
+            {
+                KryptonMessageBox.Show("Ошибка AddProdList: " + Ex.Message);
+            }
+        }
+
+
         /// <summary>
         /// Человеки справочник
         /// </summary>
@@ -2846,6 +2873,42 @@ namespace WindowsFormsApp1.DBO
             }
             return yearFVal;
         }
+
+        public static List<UnitsTable> GetUnitsList(string sample1, string sample2)
+        {
+            List<UnitsTable> unitstList = new List<UnitsTable>();
+            try
+            {
+                SqlConnection myConnection = new SqlConnection(cnStr);
+                myConnection.Open();
+
+                string query = "SELECT * FROM [NewUnits] where pid > 0 and (name like @sample1 and id like @sample2)";
+                SqlCommand command = new SqlCommand(query, myConnection);
+                command.Parameters.AddWithValue("@sample1", "%" + sample1 + "%");
+                command.Parameters.AddWithValue("@sample2", "%" + sample2 + "%");
+
+                using (SqlDataReader dr = command.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        unitstList.Add(new UnitsTable
+                        {
+                            id = Int32.Parse(dr["id"].ToString()),
+                            pid = Int32.Parse(dr["pid"].ToString()),
+                            name = dr["name"].ToString(),
+                            full_name = dr["name_full"].ToString()
+                        });
+                    }
+                }
+                myConnection.Close();
+            }
+            catch (Exception Ex)
+            {
+                KryptonMessageBox.Show("Ошибка GetUnitsList: " + Ex.Message);
+            }
+            return unitstList;
+        }
+
 
         public static NormTable GetOneNorm(int id_org, int id_rep, int id_norm)
         {

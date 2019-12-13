@@ -49,8 +49,8 @@ namespace WindowsFormsApp1
 
         private void OkButton1_Click(object sender, EventArgs e)
         {
-            try
-            {
+            //try
+            //{
                 if (numUpDown1.Value == 0 || String.IsNullOrWhiteSpace(nameTextBox.Text)
                     || String.IsNullOrWhiteSpace(QnTextBox.Text) || String.IsNullOrWhiteSpace(UnitTextBox.Text))
                     throw new Exception("Все поля должны быть заполнены!");
@@ -65,7 +65,7 @@ namespace WindowsFormsApp1
                     Qn = Int32.Parse(this.QnTextBox.Text),
                     name = this.nameTextBox.Text,
                     unit = this.UnitTextBox.Text,
-                    B_y = Int32.Parse(this.warninglbl.Text)
+                    B_y = String.IsNullOrWhiteSpace(this.warninglbl.Text)?0:Int32.Parse(this.warninglbl.Text)
                 };
                 if (edit)
                 {
@@ -77,11 +77,11 @@ namespace WindowsFormsApp1
                     //dbOps.AddNewPerson(fuelTable);
                 }
                 this.Close();
-            }
-            catch (Exception ex)
-            {
-                KryptonMessageBox.Show("Ошибка: " + ex.Message);
-            }
+            //}
+            //catch (Exception ex)
+            //{
+            //    KryptonMessageBox.Show("Ошибка: " + ex.Message);
+            //}
         }
 
         private void AbortButton2_Click(object sender, EventArgs e)

@@ -4811,6 +4811,13 @@ namespace WindowsFormsApp1
             myForm.Show();
         }
 
+        private void списокОбъектовToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var myForm = new UnitListForm();
+            //myForm.FormClosed += new FormClosedEventHandler(myForm_FormClosed);
+            myForm.Show();
+        }
+
         private void LoadOrgTreeObjects()
         {
             var headlist = dbOps.GetStructCompanyList(-1);

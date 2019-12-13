@@ -108,6 +108,11 @@ namespace WindowsFormsApp1
                     this.DialogResult = DialogResult.OK;
                     dbOps.UpdateProdList(productTable, Table.Id);
                 }
+                else if (edit == false)
+                {
+                    this.DialogResult = DialogResult.OK;
+                    dbOps.AddProdList(productTable, Table.Id);                    
+                }
                 this.Close();               
             }
             catch (Exception ex)
@@ -143,12 +148,24 @@ namespace WindowsFormsApp1
 
         private void btn_Click(object sender, EventArgs e)
         {
-            KryptonMessageBox.Show("Тут будет включен выбор ед.изм");
+            var myForm = new SelectUnitListForm();
+            myForm.ShowDialog();
+            if (myForm.DialogResult == DialogResult.OK)
+            {
+                textBox1.Text = myForm.unit_id.ToString();
+                label7.Text = myForm.unit_name;
+            }
         }
 
         private void btn2_Click(object sender, EventArgs e)
         {
-            KryptonMessageBox.Show("Тут будет включен выбор ед.изм (2)");
+            var myForm = new SelectUnitListForm();
+            myForm.ShowDialog();
+            if (myForm.DialogResult == DialogResult.OK)
+            {
+                textBox2.Text = myForm.unit_id.ToString();
+                label6.Text = myForm.unit_name;
+            }
         }
 
         #region шаманства отрисовки и обработки  

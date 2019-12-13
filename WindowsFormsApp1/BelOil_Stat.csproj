@@ -135,6 +135,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataTables\UnitsTable.cs" />
     <Compile Include="EditNormNameForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -238,6 +239,19 @@
     </Compile>
     <Compile Include="AddOrgFuelForm.Designer.cs">
       <DependentUpon>AddOrgFuelForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OutlookGridUnitGroup.cs" />
+    <Compile Include="SelectUnitListForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SelectUnitListForm.Designer.cs">
+      <DependentUpon>SelectUnitListForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UnitListForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UnitListForm.Designer.cs">
+      <DependentUpon>UnitListForm.cs</DependentUpon>
     </Compile>
     <Compile Include="LoginForm.cs">
       <SubType>Form</SubType>
@@ -360,6 +374,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AddOrgFuelForm.resx">
       <DependentUpon>AddOrgFuelForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SelectUnitListForm.resx">
+      <DependentUpon>SelectUnitListForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UnitListForm.resx">
+      <DependentUpon>UnitListForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
