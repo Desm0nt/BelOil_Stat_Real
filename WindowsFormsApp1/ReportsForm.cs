@@ -630,7 +630,7 @@ namespace WindowsFormsApp1
         private void LoadAllNorms(List<Full1terTable> full1Ter,  KryptonOutlookGrid.Classes.KryptonOutlookGrid grid)
         {
 
-            objectsList = dbOps.GetObjList(CurrentData.UserData.Id);
+            objectsList = dbOps.GetObjList(CurrentData.UserData.Id_org);
             elLists = new List<ListObjects>();
             foreach (var a in objectsList)
                 elLists.Add(new ListObjects { Id = a.Id, Name = a.Name });

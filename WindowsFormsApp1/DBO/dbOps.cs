@@ -2510,7 +2510,7 @@ namespace WindowsFormsApp1.DBO
                             {
 
                                 //тут баги
-                                RecievedList.Add(new RecievedInputTable { Id = Int32.Parse(dr2["id"].ToString()), org_name = GetCompanyName(Int32.Parse(dr["id_org"].ToString())), value = float.Parse(dr2["value"].ToString()) });
+                                RecievedList.Add(new RecievedInputTable { Id = Int32.Parse(dr2["id"].ToString()), Id_org = Int32.Parse(dr["id_org"].ToString()), org_name = GetCompanyName(Int32.Parse(dr["id_org"].ToString())), value = float.Parse(dr2["value"].ToString()) });
                             }
                         }
                         myConnection2.Close();
@@ -2603,7 +2603,7 @@ namespace WindowsFormsApp1.DBO
                             while (dr2.Read())
                             {
                                 //тут баги
-                                SendedList.Add(new SendedInputTable { Id = Int32.Parse(dr["id"].ToString()), org_name = GetCompanyName(Int32.Parse(dr["id_org"].ToString())), value = float.Parse(dr2["value"].ToString()) });
+                                SendedList.Add(new SendedInputTable { Id = Int32.Parse(dr["id"].ToString()), Id_org = Int32.Parse(dr["id_org"].ToString()), org_name = GetCompanyName(Int32.Parse(dr["id_org"].ToString())), value = float.Parse(dr2["value"].ToString()) });
                             }
                         }
                         myConnection2.Close();
@@ -3069,6 +3069,7 @@ namespace WindowsFormsApp1.DBO
             myConnection.Close();
             return repid;
         }
+
 
         public static ReportDataTable GetReportData(int id_org, int year, int month)
         {
@@ -3993,6 +3994,78 @@ namespace WindowsFormsApp1.DBO
                 KryptonMessageBox.Show("Ошибка LocalIdValidChecking: " + Ex.Message);
             }
             return valid;
+        }
+
+        public static float GetSendedValue(int id_owner, int id_org, int res_type, int id_rep)
+        {
+            float value = 0;
+            SqlConnection myConnection = new SqlConnection(cnStr);
+            myConnection.Open();
+
+            string query = "SELECT id FROM [NewSendedOrgList] WHERE [id_owner] = @id_owner AND [id_org] = @id_org AND [res_type] = @res_type";
+            SqlCommand command = new SqlCommand(query, myConnection);
+            command.Parameters.AddWithValue("@id_owner", id_owner);
+            command.Parameters.AddWithValue("@id_org", id_org);
+            command.Parameters.AddWithValue("@res_type", res_type);
+
+            using (SqlDataReader dr = command.ExecuteReader())
+            {
+                while (dr.Read())
+                {
+                    SqlConnection myConnection2 = new SqlConnection(cnStr);
+                    myConnection2.Open();
+                    string query2 = "SELECT id FROM [NewSendedOrg] WHERE [id_sended] = @id_sended and [id_rep] = @id_rep";
+                    SqlCommand command2 = new SqlCommand(query, myConnection);
+                    command2.Parameters.AddWithValue("@id_sended", Int32.Parse(dr["id"].ToString()));
+                    command2.Parameters.AddWithValue("@id_rep", id_rep);
+                    using (SqlDataReader dr2 = command2.ExecuteReader())
+                    {
+                        while (dr2.Read())
+                        {
+                            value = float.Parse(dr2["value"].ToString());
+                        }
+                    }
+                    myConnection2.Close();
+                }
+            }
+            myConnection.Close();    
+            return value;
+        }
+
+        public static float GetRecievedValue(int id_owner, int id_org, int res_type, int id_rep)
+        {
+            float value = 0;
+            SqlConnection myConnection = new SqlConnection(cnStr);
+            myConnection.Open();
+
+            string query = "SELECT id FROM [NewRecievedOrgList] WHERE [id_owner] = @id_owner AND [id_org] = @id_org AND [res_type] = @res_type";
+            SqlCommand command = new SqlCommand(query, myConnection);
+            command.Parameters.AddWithValue("@id_owner", id_owner);
+            command.Parameters.AddWithValue("@id_org", id_org);
+            command.Parameters.AddWithValue("@res_type", res_type);
+
+            using (SqlDataReader dr = command.ExecuteReader())
+            {
+                while (dr.Read())
+                {
+                    SqlConnection myConnection2 = new SqlConnection(cnStr);
+                    myConnection2.Open();
+                    string query2 = "SELECT * FROM [NewRecievedOrg] WHERE [id_recieved] = @id_recieved and [id_rep] = @id_rep";
+                    SqlCommand command2 = new SqlCommand(query2, myConnection2);
+                    command2.Parameters.AddWithValue("@id_recieved", Int32.Parse(dr["id"].ToString()));
+                    command2.Parameters.AddWithValue("@id_rep", id_rep);
+                    using (SqlDataReader dr2 = command2.ExecuteReader())
+                    {
+                        while (dr2.Read())
+                        {
+                            value = float.Parse(dr2["value"].ToString());
+                        }
+                    }
+                    myConnection2.Close();
+                }
+            }
+            myConnection.Close();
+            return value;
         }
     }
 }

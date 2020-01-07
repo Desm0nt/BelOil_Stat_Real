@@ -9,6 +9,7 @@ namespace WindowsFormsApp1.DataTables
     public class RecievedInputTable
     {
         public int Id { get; set; }
+        public int Id_org { get; set; }
         public string org_name { get; set; }
         public float value { get; set; }
     }

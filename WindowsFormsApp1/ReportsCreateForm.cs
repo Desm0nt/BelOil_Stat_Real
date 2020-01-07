@@ -19,7 +19,7 @@ namespace WindowsFormsApp1
     {
         bool checkreport;
         int curRepid, curProfNum, year, month, currentTubIndex, cur_org_id;
-        
+        List<bool> TabFistOpenFlags = new List<bool>();
 
         public ReportsCreateForm(int year1, int month1, int org_id)
         {
@@ -46,6 +46,8 @@ namespace WindowsFormsApp1
             year = year1;
             month = month1;       
             checkreport = dbOps.ExistReportCheck(cur_org_id, year, month);
+            for (int i = 0; i < 10; i++)
+                TabFistOpenFlags.Add(true);
 
             if (checkreport == false)
             {
@@ -201,85 +203,10 @@ namespace WindowsFormsApp1
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            switch (currentTubIndex)
-            {
-                case 1:
-                    List<FTradeInputTable> FTradeInputList = dataGridView1.DataSource as List<FTradeInputTable>;
-                    foreach (var a in FTradeInputList)
-                    {
-                        dbOps.UpdateFuelTrades(a.Id, a.Value);
-                    }
-                    break;
-                case 2:
-                    List<NormInputTable> NormToplist = dataGridView2.DataSource as List<NormInputTable>;
-                    foreach (var a in NormToplist)
-                    {
-                        dbOps.UpdateFuelNorm(a.Id, a.val_plan, a.val_fact);
-                    }
-                    break;
-                case 3:
-                    List<SourceInputTable> SourceInputList = dataGridView3.DataSource as List<SourceInputTable>;
-                    foreach (var a in SourceInputList)
-                    {
-                        dbOps.UpdateSource(a.Id, a.Value);
-                    }
-                    break;
-                case 4:
-                    List<RecievedInputTable> RecievedInputList = dataGridView4.DataSource as List<RecievedInputTable>;
-                    foreach (var a in RecievedInputList)
-                    {
-                        dbOps.UpdateRecieved(a.Id, a.value);
-                    }
-                    break;
-                case 5:
-                    List<SendedInputTable> SendedInputList = dataGridView5.DataSource as List<SendedInputTable>;
-                    foreach (var a in SendedInputList)
-                    {
-                        dbOps.UpdateSended(a.Id, a.value);
-                    }
-                    break;
-                case 6:
-                    List<NormInputTable> NormHeatlist = dataGridView6.DataSource as List<NormInputTable>;
-                    foreach (var a in NormHeatlist)
-                    {
-                        dbOps.UpdateFuelNorm(a.Id, a.val_plan, a.val_fact);
-                    }
-                    break;
-                case 7:
-                    List<SourceInputTable> SourceInputList1 = dataGridView7.DataSource as List<SourceInputTable>;
-                    foreach (var a in SourceInputList1)
-                    {
-                        dbOps.UpdateSource(a.Id, a.Value);
-                    }
-                    break;
-                case 8:
-                    List<RecievedInputTable> RecievedInputList1 = dataGridView8.DataSource as List<RecievedInputTable>;
-                    foreach (var a in RecievedInputList1)
-                    {
-                        dbOps.UpdateRecieved(a.Id, a.value);
-                    };
-                    break;
-                case 9:
-                    List<SendedInputTable> SendedInputList1 = dataGridView9.DataSource as List<SendedInputTable>;
-                    foreach (var a in SendedInputList1)
-                    {
-                        dbOps.UpdateSended(a.Id, a.value);
-                    };
-                    break;
-                case 10:
-                    List<NormInputTable> NormEllist = dataGridView10.DataSource as List<NormInputTable>;
-                    foreach (var a in NormEllist)
-                    {
-                        dbOps.UpdateFuelNorm(a.Id, a.val_plan, a.val_fact);
-                    }
-                    button10.Enabled = false;
-                    button10.Visible = false;
-                    button6.Enabled = true;
-                    button6.Visible = true;
-                    break;
-                default:
-                    break;
-            }
+            if (tabControl1.SelectedIndex > 0)
+                TabFistOpenFlags[tabControl1.SelectedIndex - 1] = false;
+
+            
             currentTubIndex = tabControl1.SelectedIndex;
             switch (tabControl1.SelectedIndex)
             {
@@ -417,19 +344,21 @@ namespace WindowsFormsApp1
                     List<RecievedInputTable> RecievedInputList = dbOps.GetRecievedInputList(cur_org_id, curRepid, 2);
                     dataGridView4.DataSource = RecievedInputList;
                     dataGridView4.Columns[0].ReadOnly = true;
-                    dataGridView4.Columns[1].HeaderText = "Наименование организации";
-                    dataGridView4.Columns[1].Width = 250;
-                    dataGridView4.Columns[1].ReadOnly = true;
-                    dataGridView4.Columns[2].HeaderText = "Значение";
+                    dataGridView4.Columns[1].Visible = false;
+                    dataGridView4.Columns[2].HeaderText = "Наименование организации";
+                    dataGridView4.Columns[2].Width = 250;
+                    dataGridView4.Columns[2].ReadOnly = true;
+                    dataGridView4.Columns[3].HeaderText = "Значение";
                     break;
                 case 5:
                     List<SendedInputTable> SendedInputList = dbOps.GetSendedInputList(cur_org_id, curRepid, 2);
                     dataGridView5.DataSource = SendedInputList;
                     dataGridView5.Columns[0].ReadOnly = true;
-                    dataGridView5.Columns[1].HeaderText = "Наименование организации";
-                    dataGridView5.Columns[1].Width = 250;
-                    dataGridView5.Columns[1].ReadOnly = true;
-                    dataGridView5.Columns[2].HeaderText = "Значение";
+                    dataGridView5.Columns[1].Visible = false;
+                    dataGridView5.Columns[2].HeaderText = "Наименование организации";
+                    dataGridView5.Columns[2].Width = 250;
+                    dataGridView5.Columns[2].ReadOnly = true;
+                    dataGridView5.Columns[3].HeaderText = "Значение";
                     break;
                 case 6:
                     List<NormTable> NormHeatlist = dbOps.GetNormInputList(cur_org_id, curRepid, curProfNum, 2, year, month);
@@ -531,19 +460,21 @@ namespace WindowsFormsApp1
                     List<RecievedInputTable> RecievedInputList1 = dbOps.GetRecievedInputList(cur_org_id, curRepid, 3);
                     dataGridView8.DataSource = RecievedInputList1;
                     dataGridView8.Columns[0].ReadOnly = true;
-                    dataGridView8.Columns[1].HeaderText = "Наименование организации";
-                    dataGridView8.Columns[1].ReadOnly = true;
-                    dataGridView8.Columns[1].Width = 250;
-                    dataGridView8.Columns[2].HeaderText = "Значение";
+                    dataGridView8.Columns[1].Visible = false;
+                    dataGridView8.Columns[2].HeaderText = "Наименование организации";
+                    dataGridView8.Columns[2].ReadOnly = true;
+                    dataGridView8.Columns[2].Width = 250;
+                    dataGridView8.Columns[3].HeaderText = "Значение";
                     break;
                 case 9:
                     List<SendedInputTable> SendedInputList1 = dbOps.GetSendedInputList(cur_org_id, curRepid, 3);
                     dataGridView9.DataSource = SendedInputList1;
                     dataGridView9.Columns[0].ReadOnly = true;
-                    dataGridView9.Columns[1].HeaderText = "Наименование организации";
-                    dataGridView9.Columns[1].ReadOnly = true;
-                    dataGridView9.Columns[1].Width = 250;
-                    dataGridView9.Columns[2].HeaderText = "Значение";
+                    dataGridView9.Columns[1].Visible = false;
+                    dataGridView9.Columns[2].HeaderText = "Наименование организации";
+                    dataGridView9.Columns[2].ReadOnly = true;
+                    dataGridView9.Columns[2].Width = 250;
+                    dataGridView9.Columns[3].HeaderText = "Значение";
                     break;
                 case 10:
                     button10.Enabled = true;
@@ -649,11 +580,96 @@ namespace WindowsFormsApp1
 
         private void button10_Click(object sender, EventArgs e)
         {
-            List<NormInputTable> NormEllist = dataGridView10.DataSource as List<NormInputTable>;
-            foreach (var a in NormEllist)
+            for (int i = 0; i < TabFistOpenFlags.Count; i++)
             {
-                dbOps.UpdateFuelNorm(a.Id, a.val_plan, a.val_fact);
+                if (TabFistOpenFlags[i] == false)
+                {
+                    switch (i + 1)
+                    {
+                        case 1:
+                            List<FTradeInputTable> FTradeInputList = dataGridView1.DataSource as List<FTradeInputTable>;
+                            foreach (var a in FTradeInputList)
+                            {
+                                dbOps.UpdateFuelTrades(a.Id, a.Value);
+                            }
+                            break;
+                        case 2:
+                            List<NormInputTable> NormToplist = dataGridView2.DataSource as List<NormInputTable>;
+                            foreach (var a in NormToplist)
+                            {
+                                dbOps.UpdateFuelNorm(a.Id, a.val_plan, a.val_fact);
+                            }
+                            break;
+                        case 3:
+                            List<SourceInputTable> SourceInputList = dataGridView3.DataSource as List<SourceInputTable>;
+                            foreach (var a in SourceInputList)
+                            {
+                                dbOps.UpdateSource(a.Id, a.Value);
+                            }
+                            break;
+                        case 4:
+                            List<RecievedInputTable> RecievedInputList = dataGridView4.DataSource as List<RecievedInputTable>;
+                            foreach (var a in RecievedInputList)
+                            {
+                                dbOps.UpdateRecieved(a.Id, a.value);
+                            }
+                            break;
+                        case 5:
+                            List<SendedInputTable> SendedInputList = dataGridView5.DataSource as List<SendedInputTable>;
+                            foreach (var a in SendedInputList)
+                            {
+                                dbOps.UpdateSended(a.Id, a.value);
+                            }
+                            break;
+                        case 6:
+                            List<NormInputTable> NormHeatlist = dataGridView6.DataSource as List<NormInputTable>;
+                            foreach (var a in NormHeatlist)
+                            {
+                                dbOps.UpdateFuelNorm(a.Id, a.val_plan, a.val_fact);
+                            }
+                            break;
+                        case 7:
+                            List<SourceInputTable> SourceInputList1 = dataGridView7.DataSource as List<SourceInputTable>;
+                            foreach (var a in SourceInputList1)
+                            {
+                                dbOps.UpdateSource(a.Id, a.Value);
+                            }
+                            break;
+                        case 8:
+                            List<RecievedInputTable> RecievedInputList1 = dataGridView8.DataSource as List<RecievedInputTable>;
+                            foreach (var a in RecievedInputList1)
+                            {
+                                dbOps.UpdateRecieved(a.Id, a.value);
+                            };
+                            break;
+                        case 9:
+                            List<SendedInputTable> SendedInputList1 = dataGridView9.DataSource as List<SendedInputTable>;
+                            foreach (var a in SendedInputList1)
+                            {
+                                dbOps.UpdateSended(a.Id, a.value);
+                            };
+                            break;
+                        case 10:
+                            List<NormInputTable> NormEllist = dataGridView10.DataSource as List<NormInputTable>;
+                            foreach (var a in NormEllist)
+                            {
+                                dbOps.UpdateFuelNorm(a.Id, a.val_plan, a.val_fact);
+                            }
+                            button10.Enabled = false;
+                            button10.Visible = false;
+                            button6.Enabled = true;
+                            button6.Visible = true;
+                            break;
+                        default:
+                            break;
+                    }
+                }
             }
+            //List<NormInputTable> NormEllist = dataGridView10.DataSource as List<NormInputTable>;
+            //foreach (var a in NormEllist)
+            //{
+            //    dbOps.UpdateFuelNorm(a.Id, a.val_plan, a.val_fact);
+            //}
             this.Close();
         }
 
@@ -682,6 +698,54 @@ namespace WindowsFormsApp1
         {
             if (Int32.Parse(e.Node.Tag.ToString()) != -1)
                 tabControl1.SelectedIndex = Int32.Parse(e.Node.Tag.ToString());
+        }
+
+        private void dataGridView5_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            float val = float.Parse(dataGridView5.Rows[e.RowIndex].Cells[3].Value.ToString());
+            var org_id = Int32.Parse(dataGridView5.Rows[e.RowIndex].Cells[1].Value.ToString());
+            var result = CheckInputOutputBalance(cur_org_id, org_id, year, month, val, 2, 1);
+            if( result != "OK")
+            {
+                MessageBox.Show(result);
+                dataGridView5.Rows[e.RowIndex].Cells[3].Value = 0;
+            }
+        }
+
+        private void dataGridView4_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            float val = float.Parse(dataGridView4.Rows[e.RowIndex].Cells[3].Value.ToString());
+            var org_id = Int32.Parse(dataGridView4.Rows[e.RowIndex].Cells[1].Value.ToString());
+            var result = CheckInputOutputBalance(cur_org_id, org_id, year, month, val, 2, 2);
+            if (result != "OK")
+            {
+                MessageBox.Show(result);
+                dataGridView4.Rows[e.RowIndex].Cells[3].Value = 0;
+            }
+        }
+
+        private void dataGridView8_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            float val = float.Parse(dataGridView8.Rows[e.RowIndex].Cells[3].Value.ToString());
+            var org_id = Int32.Parse(dataGridView8.Rows[e.RowIndex].Cells[1].Value.ToString());
+            var result = CheckInputOutputBalance(cur_org_id, org_id, year, month, val, 3, 2);
+            if (result != "OK")
+            {
+                MessageBox.Show(result);
+                dataGridView8.Rows[e.RowIndex].Cells[3].Value = 0;
+            }
+        }
+
+        private void dataGridView9_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            float val = float.Parse(dataGridView9.Rows[e.RowIndex].Cells[3].Value.ToString());
+            var org_id = Int32.Parse(dataGridView9.Rows[e.RowIndex].Cells[1].Value.ToString());
+            var result = CheckInputOutputBalance(cur_org_id, org_id, year, month, val, 3, 1);
+            if (result != "OK")
+            {
+                MessageBox.Show(result);
+                dataGridView9.Rows[e.RowIndex].Cells[3].Value = 0;
+            }
         }
 
         void EditingControlShowing1(object sender, DataGridViewEditingControlShowingEventArgs e)
@@ -725,11 +789,50 @@ namespace WindowsFormsApp1
             }
         }
 
-
         private void panel_Paint(object sender, PaintEventArgs e)
         {
             Panel pan = (Panel)sender;
             ControlPaint.DrawBorder(e.Graphics, pan.ClientRectangle, System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(203)))), ((int)(((byte)(227))))), ButtonBorderStyle.Solid);
+        }
+
+        private string CheckInputOutputBalance(int main_org_id, int target_org_id, int year, int month, float value, int res_type, int type)
+        {
+            string result = "";
+            // проверить по target и дате существует ли отчет.
+            bool check = dbOps.ExistReportCheck(target_org_id, year, month);
+            if (check == false)
+                result = "OK";
+            else
+            {
+                float value_another = 0;
+                // если существует  - получить по target и дате получить номер отчета.
+                int rep_id = dbOps.GetReportId(target_org_id, year, month);
+                // по номеру отчета получить send/recieve значение для main.
+                if (type == 1) //sended => ищем в recieved
+                {
+                    value_another = dbOps.GetRecievedValue(target_org_id, main_org_id, res_type, rep_id);
+                }
+                else if (type == 2) // recieved => ищем в sended
+                {
+                    value_another = dbOps.GetSendedValue(target_org_id, main_org_id, res_type, rep_id);
+                }
+                else
+                    throw new Exception("Неверный тип действий над ресурсом");
+                // сверить значения.
+                // если идентичны - сохранить, ОК в сообщение.
+                if (value == value_another)
+                {
+                    result = "OK";
+                }
+                //если нет то:
+                // 1) получить имена организаций
+                // 2) в сообщении выдать ошибку "организация name отправила/получила N, однако 
+                else
+                {
+                    result = "Вы указали " + value.ToString() + ", в то время как другая сторона указала " + value_another.ToString() + ". Приведите в соотвествие!";
+                }
+            }
+            return result;
         }
     }
 }

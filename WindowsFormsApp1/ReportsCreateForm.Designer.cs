@@ -332,6 +332,7 @@
             this.dataGridView4.Name = "dataGridView4";
             this.dataGridView4.Size = new System.Drawing.Size(912, 483);
             this.dataGridView4.TabIndex = 5;
+            this.dataGridView4.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView4_CellEndEdit);
             // 
             // label4
             // 
@@ -366,6 +367,7 @@
             this.dataGridView5.Name = "dataGridView5";
             this.dataGridView5.Size = new System.Drawing.Size(912, 483);
             this.dataGridView5.TabIndex = 6;
+            this.dataGridView5.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView5_CellEndEdit);
             // 
             // label5
             // 
@@ -481,6 +483,7 @@
             this.dataGridView8.Name = "dataGridView8";
             this.dataGridView8.Size = new System.Drawing.Size(912, 483);
             this.dataGridView8.TabIndex = 9;
+            this.dataGridView8.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView8_CellEndEdit);
             // 
             // label8
             // 
@@ -529,6 +532,7 @@
             this.dataGridView9.Name = "dataGridView9";
             this.dataGridView9.Size = new System.Drawing.Size(910, 481);
             this.dataGridView9.TabIndex = 10;
+            this.dataGridView9.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView9_CellEndEdit);
             // 
             // label9
             // 
