@@ -2603,7 +2603,7 @@ namespace WindowsFormsApp1.DBO
                             while (dr2.Read())
                             {
                                 //тут баги
-                                SendedList.Add(new SendedInputTable { Id = Int32.Parse(dr["id"].ToString()), Id_org = Int32.Parse(dr["id_org"].ToString()), org_name = GetCompanyName(Int32.Parse(dr["id_org"].ToString())), value = float.Parse(dr2["value"].ToString()) });
+                                SendedList.Add(new SendedInputTable { Id = Int32.Parse(dr2["id"].ToString()), Id_org = Int32.Parse(dr["id_org"].ToString()), org_name = GetCompanyName(Int32.Parse(dr["id_org"].ToString())), value = float.Parse(dr2["value"].ToString()) });
                             }
                         }
                         myConnection2.Close();
@@ -4014,8 +4014,8 @@ namespace WindowsFormsApp1.DBO
                 {
                     SqlConnection myConnection2 = new SqlConnection(cnStr);
                     myConnection2.Open();
-                    string query2 = "SELECT id FROM [NewSendedOrg] WHERE [id_sended] = @id_sended and [id_rep] = @id_rep";
-                    SqlCommand command2 = new SqlCommand(query, myConnection);
+                    string query2 = "SELECT * FROM [NewSendedOrg] WHERE [id_sended] = @id_sended and [id_rep] = @id_rep";
+                    SqlCommand command2 = new SqlCommand(query2, myConnection2);
                     command2.Parameters.AddWithValue("@id_sended", Int32.Parse(dr["id"].ToString()));
                     command2.Parameters.AddWithValue("@id_rep", id_rep);
                     using (SqlDataReader dr2 = command2.ExecuteReader())
