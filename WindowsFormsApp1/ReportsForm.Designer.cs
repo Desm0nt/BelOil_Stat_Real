@@ -430,6 +430,7 @@
             this.экспортироватьВExcelToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.E)));
             this.экспортироватьВExcelToolStripMenuItem.Size = new System.Drawing.Size(241, 22);
             this.экспортироватьВExcelToolStripMenuItem.Text = "Экспортировать в Excel";
+            this.экспортироватьВExcelToolStripMenuItem.Click += new System.EventHandler(this.экспортироватьВExcelToolStripMenuItem_Click);
             // 
             // сохранитьToolStripMenuItem
             // 
@@ -651,7 +652,7 @@
             this.kryptonPage3});
             this.kryptonNavigator2.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Office2007Blue;
             this.kryptonNavigator2.Panel.PanelBackStyle = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ContextMenuItemImage;
-            this.kryptonNavigator2.SelectedIndex = 0;
+            this.kryptonNavigator2.SelectedIndex = 1;
             this.kryptonNavigator2.Size = new System.Drawing.Size(1215, 598);
             this.kryptonNavigator2.StateCommon.HeaderGroup.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 

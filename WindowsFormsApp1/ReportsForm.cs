@@ -4659,16 +4659,6 @@ namespace WindowsFormsApp1
             this.Close();
         }
 
-        private void сохранитьОтчетToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            var workbook = reoGridControl3;
-            workbook.Worksheets[1] = reoGrid4.CurrentWorksheet;
-            workbook.Worksheets[1].Name = "Приложение";
-            var name = dbOps.GetCompanyName(CurrentData.UserData.Id_org);
-            workbook.Save(Directory.GetCurrentDirectory() + "\\12_TEK_" + name.Replace("\"", " ") + "_" + dateTimePicker1.Value.ToString("yyyy") + "_" + dateTimePicker1.Value.ToString("MMMM") + ".xlsx", unvell.ReoGrid.IO.FileFormat.Excel2007);
-            //worksheet4.Workbook.Save(Directory.GetCurrentDirectory() + "\\12_TEK_Prilozhenie_" + name.Replace("\"", " ") + "_" + dateTimePicker1.Value.ToString("yyyy") + "_" + dateTimePicker1.Value.ToString("MMMM") + ".xlsx", unvell.ReoGrid.IO.FileFormat.Excel2007);
-        }
-
         private void button1_Click_1(object sender, EventArgs e)
         {
             MakeTable4norm();
@@ -5122,37 +5112,71 @@ namespace WindowsFormsApp1
             }
         }
 
+        private void сохранитьОтчетToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FolderBrowserDialog folderBrowserDialog1 = new FolderBrowserDialog();
+            string fpath = "";
+            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+            {
+                fpath = folderBrowserDialog1.SelectedPath;
+                var workbook = reoGridControl3;
+                workbook.Worksheets[1] = reoGrid4.CurrentWorksheet;
+                workbook.Worksheets[1].Name = "Приложение";
+                workbook.Worksheets[2] = reoGridControl1.CurrentWorksheet;
+                workbook.Worksheets[2].Name = "1-ПЭР";
+                var name = dbOps.GetCompanyName(CurrentData.UserData.Id_org);
+                workbook.Save(fpath + "\\Report_1_Пэр_12_TEK_" + name.Replace("\"", " ") + "_" + dateTimePicker1.Value.ToString("yyyy") + "_" + dateTimePicker1.Value.ToString("MMMM") + ".xlsx", unvell.ReoGrid.IO.FileFormat.Excel2007);
+                //worksheet4.Workbook.Save(Directory.GetCurrentDirectory() + "\\12_TEK_Prilozhenie_" + name.Replace("\"", " ") + "_" + dateTimePicker1.Value.ToString("yyyy") + "_" + dateTimePicker1.Value.ToString("MMMM") + ".xlsx", unvell.ReoGrid.IO.FileFormat.Excel2007);
+                ComponentFactory.Krypton.Toolkit.KryptonMessageBox.Show("Файл " + "Report_1_Пэр_12_TEK_" + name.Replace("\"", " ") + "_" + dateTimePicker1.Value.ToString("yyyy") + "_" + dateTimePicker1.Value.ToString("MMMM") + ".xlsx" + " успешно сохранен в выбранную папку");
+            }
+        }
+
         private void toolStripButton3_Click(object sender, EventArgs e)
         {
-            if (kryptonNavigator2.SelectedPage.Tag.ToString() == "1t")
-            {
-                FolderBrowserDialog folderBrowserDialog1 = new FolderBrowserDialog();
-                string fpath = "";
-                if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
-                {
-                    fpath = folderBrowserDialog1.SelectedPath;
-                    var workbook = reoGridControl1;
-                    var name = dbOps.GetCompanyName(CurrentData.UserData.Id_org);
-                    workbook.Save(fpath + "\\1_PER_" + name.Replace("\"", " ") + "_" + dateTimePicker1.Value.ToString("yyyy") + ".xlsx", unvell.ReoGrid.IO.FileFormat.Excel2007);
-                    ComponentFactory.Krypton.Toolkit.KryptonMessageBox.Show("Файл " + "1_PER_" + name.Replace("\"", " ") + "_" + dateTimePicker1.Value.ToString("yyyy") + ".xlsx" + " успешно сохранен в выбранную папку");
-                }
-            }
+            //if (kryptonNavigator2.SelectedPage.Tag.ToString() == "1t")
+            //{
+            //    FolderBrowserDialog folderBrowserDialog1 = new FolderBrowserDialog();
+            //    string fpath = "";
+            //    if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+            //    {
+            //        fpath = folderBrowserDialog1.SelectedPath;
+            //        var workbook = reoGridControl1;
+            //        var name = dbOps.GetCompanyName(CurrentData.UserData.Id_org);
+            //        workbook.Save(fpath + "\\1_PER_" + name.Replace("\"", " ") + "_" + dateTimePicker1.Value.ToString("yyyy") + ".xlsx", unvell.ReoGrid.IO.FileFormat.Excel2007);
+            //        ComponentFactory.Krypton.Toolkit.KryptonMessageBox.Show("Файл " + "1_PER_" + name.Replace("\"", " ") + "_" + dateTimePicker1.Value.ToString("yyyy") + ".xlsx" + " успешно сохранен в выбранную папку");
+            //    }
+            //}
 
-            if (kryptonNavigator2.SelectedPage.Tag.ToString() == "12t")
+            //if (kryptonNavigator2.SelectedPage.Tag.ToString() == "12t")
+            //{
+            //    FolderBrowserDialog folderBrowserDialog1 = new FolderBrowserDialog();
+            //    string fpath = "";
+            //    if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+            //    {
+            //        fpath = folderBrowserDialog1.SelectedPath;
+            //        var workbook = reoGridControl3;
+            //        workbook.Worksheets[1] = reoGrid4.CurrentWorksheet;
+            //        workbook.Worksheets[1].Name = "Приложение";
+            //        var name = dbOps.GetCompanyName(CurrentData.UserData.Id_org);
+            //        workbook.Save(fpath + "\\12_TEK_" + name.Replace("\"", " ") + "_" + dateTimePicker1.Value.ToString("yyyy") + "_" + dateTimePicker1.Value.ToString("MMMM") + ".xlsx", unvell.ReoGrid.IO.FileFormat.Excel2007);
+            //        //worksheet4.Workbook.Save(Directory.GetCurrentDirectory() + "\\12_TEK_Prilozhenie_" + name.Replace("\"", " ") + "_" + dateTimePicker1.Value.ToString("yyyy") + "_" + dateTimePicker1.Value.ToString("MMMM") + ".xlsx", unvell.ReoGrid.IO.FileFormat.Excel2007);
+            //        ComponentFactory.Krypton.Toolkit.KryptonMessageBox.Show("Файл " + "12_TEK_" + name.Replace("\"", " ") + "_" + dateTimePicker1.Value.ToString("yyyy") + "_" + dateTimePicker1.Value.ToString("MMMM") + ".xlsx" + " успешно сохранен в выбранную папку");
+            //    }
+            //}
+            FolderBrowserDialog folderBrowserDialog1 = new FolderBrowserDialog();
+            string fpath = "";
+            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
             {
-                FolderBrowserDialog folderBrowserDialog1 = new FolderBrowserDialog();
-                string fpath = "";
-                if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
-                {
-                    fpath = folderBrowserDialog1.SelectedPath;
-                    var workbook = reoGridControl3;
-                    workbook.Worksheets[1] = reoGrid4.CurrentWorksheet;
-                    workbook.Worksheets[1].Name = "Приложение";
-                    var name = dbOps.GetCompanyName(CurrentData.UserData.Id_org);
-                    workbook.Save(fpath + "\\12_TEK_" + name.Replace("\"", " ") + "_" + dateTimePicker1.Value.ToString("yyyy") + "_" + dateTimePicker1.Value.ToString("MMMM") + ".xlsx", unvell.ReoGrid.IO.FileFormat.Excel2007);
-                    //worksheet4.Workbook.Save(Directory.GetCurrentDirectory() + "\\12_TEK_Prilozhenie_" + name.Replace("\"", " ") + "_" + dateTimePicker1.Value.ToString("yyyy") + "_" + dateTimePicker1.Value.ToString("MMMM") + ".xlsx", unvell.ReoGrid.IO.FileFormat.Excel2007);
-                    ComponentFactory.Krypton.Toolkit.KryptonMessageBox.Show("Файл " + "12_TEK_" + name.Replace("\"", " ") + "_" + dateTimePicker1.Value.ToString("yyyy") + "_" + dateTimePicker1.Value.ToString("MMMM") + ".xlsx" + " успешно сохранен в выбранную папку");
-                }
+                fpath = folderBrowserDialog1.SelectedPath;
+                var workbook = reoGridControl3;
+                workbook.Worksheets[1] = reoGrid4.CurrentWorksheet;
+                workbook.Worksheets[1].Name = "Приложение";
+                workbook.Worksheets[2] = reoGridControl1.CurrentWorksheet;
+                workbook.Worksheets[2].Name = "1-ПЭР";
+                var name = dbOps.GetCompanyName(CurrentData.UserData.Id_org);
+                workbook.Save(fpath + "\\Report_1_Пэр_12_TEK_" + name.Replace("\"", " ") + "_" + dateTimePicker1.Value.ToString("yyyy") + "_" + dateTimePicker1.Value.ToString("MMMM") + ".xlsx", unvell.ReoGrid.IO.FileFormat.Excel2007);
+                //worksheet4.Workbook.Save(Directory.GetCurrentDirectory() + "\\12_TEK_Prilozhenie_" + name.Replace("\"", " ") + "_" + dateTimePicker1.Value.ToString("yyyy") + "_" + dateTimePicker1.Value.ToString("MMMM") + ".xlsx", unvell.ReoGrid.IO.FileFormat.Excel2007);
+                ComponentFactory.Krypton.Toolkit.KryptonMessageBox.Show("Файл " + "Report_1_Пэр_12_TEK_" + name.Replace("\"", " ") + "_" + dateTimePicker1.Value.ToString("yyyy") + "_" + dateTimePicker1.Value.ToString("MMMM") + ".xlsx" + " успешно сохранен в выбранную папку");
             }
         }
 
@@ -5165,6 +5189,11 @@ namespace WindowsFormsApp1
                 toolStripButton3.Enabled = true;
             else
                 toolStripButton3.Enabled = false;
+        }
+
+        private void экспортироватьВExcelToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
 
         void EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)

@@ -986,7 +986,7 @@ namespace WindowsFormsApp1
             if (b == final)
                 result = "OK";
             else
-                result = "ТЕПЛО: Выработано " + src + ", получено " + rec + ", отдано " + send + ", всего - " + b + ", а указано " + final;
+                result = "ТЕПЛО:\nВыработано: " + src + "\nПолучено: " + rec + "\nОтдано: " + send + "\nИзрасходовано: " + b + "\nУказано: " + final;
 
             return result;
         }
