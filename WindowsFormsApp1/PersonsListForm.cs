@@ -14,6 +14,7 @@ using ComponentFactory.Krypton.Docking;
 using WindowsFormsApp1.DBO;
 using KryptonOutlookGrid.Classes;
 using KryptonOutlookGrid.CustomColumns;
+using WindowsFormsApp1.DataTables;
 
 namespace WindowsFormsApp1
 {
@@ -33,6 +34,12 @@ namespace WindowsFormsApp1
         public PersonsListForm()
         {
             InitializeComponent();
+            if (CurrentData.UserData.Id != 1)
+            {
+                addToolStripButton.Enabled = false;
+                removeToolStripButton.Enabled = false;
+                editToolStripButton.Enabled = false;
+            }
         }
 
         private void PersonsListForm_Load(object sender, EventArgs e)
@@ -181,39 +188,42 @@ namespace WindowsFormsApp1
 
         private void kryptonOutlookGrid1_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            KryptonOutlookGrid.Classes.KryptonOutlookGrid dataGridView = (KryptonOutlookGrid.Classes.KryptonOutlookGrid)sender;
-            if (e.RowIndex >= 0)
+            if (CurrentData.UserData.Id == 1)
             {
-                if (dataGridView.Rows[e.RowIndex].Cells[1].Value != null)
+                KryptonOutlookGrid.Classes.KryptonOutlookGrid dataGridView = (KryptonOutlookGrid.Classes.KryptonOutlookGrid)sender;
+                if (e.RowIndex >= 0)
                 {
-                    DataTables.PersonTable table = new DataTables.PersonTable
+                    if (dataGridView.Rows[e.RowIndex].Cells[1].Value != null)
                     {
-                        Id = Int32.Parse(dataGridView.Rows[e.RowIndex].Cells[0].Value.ToString()),
-                        Name = dataGridView.Rows[e.RowIndex].Cells[2].Value.ToString(),
-                        Surname = dataGridView.Rows[e.RowIndex].Cells[1].Value.ToString(),
-                        Otchestvo = dataGridView.Rows[e.RowIndex].Cells[3].Value.ToString(),
-                        Post = dataGridView.Rows[e.RowIndex].Cells[5].Value.ToString(),
-                        Email = dataGridView.Rows[e.RowIndex].Cells[8].Value.ToString(),
-                        WPhone = dataGridView.Rows[e.RowIndex].Cells[6].Value.ToString(),
-                        Phone = dataGridView.Rows[e.RowIndex].Cells[7].Value.ToString(),
-                        Id_org = Int32.Parse(dataGridView.Rows[e.RowIndex].Cells[11].Value.ToString())
-                    };
-                    var myForm = new PersonAddForm(table, this, elList);
-                    //myForm.FormClosed += new FormClosedEventHandler(myForm_FormClosed);
-                    myForm.ShowDialog();
+                        DataTables.PersonTable table = new DataTables.PersonTable
+                        {
+                            Id = Int32.Parse(dataGridView.Rows[e.RowIndex].Cells[0].Value.ToString()),
+                            Name = dataGridView.Rows[e.RowIndex].Cells[2].Value.ToString(),
+                            Surname = dataGridView.Rows[e.RowIndex].Cells[1].Value.ToString(),
+                            Otchestvo = dataGridView.Rows[e.RowIndex].Cells[3].Value.ToString(),
+                            Post = dataGridView.Rows[e.RowIndex].Cells[5].Value.ToString(),
+                            Email = dataGridView.Rows[e.RowIndex].Cells[8].Value.ToString(),
+                            WPhone = dataGridView.Rows[e.RowIndex].Cells[6].Value.ToString(),
+                            Phone = dataGridView.Rows[e.RowIndex].Cells[7].Value.ToString(),
+                            Id_org = Int32.Parse(dataGridView.Rows[e.RowIndex].Cells[11].Value.ToString())
+                        };
+                        var myForm = new PersonAddForm(table, this, elList);
+                        //myForm.FormClosed += new FormClosedEventHandler(myForm_FormClosed);
+                        myForm.ShowDialog();
 
-                    if (myForm.DialogResult == DialogResult.OK)
-                    {
-                        var personTable = myForm.personTable;
-                        dataGridView.Rows[e.RowIndex].Cells[0].Value = personTable.Id;
-                        dataGridView.Rows[e.RowIndex].Cells[1].Value = new TextAndImage(personTable.Surname, Properties.Resources.cbx2p_h0eqv);
-                        dataGridView.Rows[e.RowIndex].Cells[2].Value = personTable.Name;
-                        dataGridView.Rows[e.RowIndex].Cells[3].Value = personTable.Otchestvo;
-                        dataGridView.Rows[e.RowIndex].Cells[5].Value = personTable.Post;
-                        dataGridView.Rows[e.RowIndex].Cells[6].Value = personTable.WPhone;
-                        dataGridView.Rows[e.RowIndex].Cells[7].Value = personTable.Phone;
-                        dataGridView.Rows[e.RowIndex].Cells[8].Value = personTable.Email;
-                        dataGridView.Rows[e.RowIndex].Cells[11].Value = new TextAndImage(personTable.Id_org.ToString(), Properties.Resources.predpr);
+                        if (myForm.DialogResult == DialogResult.OK)
+                        {
+                            var personTable = myForm.personTable;
+                            dataGridView.Rows[e.RowIndex].Cells[0].Value = personTable.Id;
+                            dataGridView.Rows[e.RowIndex].Cells[1].Value = new TextAndImage(personTable.Surname, Properties.Resources.cbx2p_h0eqv);
+                            dataGridView.Rows[e.RowIndex].Cells[2].Value = personTable.Name;
+                            dataGridView.Rows[e.RowIndex].Cells[3].Value = personTable.Otchestvo;
+                            dataGridView.Rows[e.RowIndex].Cells[5].Value = personTable.Post;
+                            dataGridView.Rows[e.RowIndex].Cells[6].Value = personTable.WPhone;
+                            dataGridView.Rows[e.RowIndex].Cells[7].Value = personTable.Phone;
+                            dataGridView.Rows[e.RowIndex].Cells[8].Value = personTable.Email;
+                            dataGridView.Rows[e.RowIndex].Cells[11].Value = new TextAndImage(personTable.Id_org.ToString(), Properties.Resources.predpr);
+                        }
                     }
                 }
             }

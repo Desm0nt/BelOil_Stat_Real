@@ -14,6 +14,7 @@ using ComponentFactory.Krypton.Docking;
 using WindowsFormsApp1.DBO;
 using KryptonOutlookGrid.Classes;
 using KryptonOutlookGrid.CustomColumns;
+using WindowsFormsApp1.DataTables;
 
 namespace WindowsFormsApp1
 {
@@ -25,6 +26,12 @@ namespace WindowsFormsApp1
         public FuelListForm()
         {
             InitializeComponent();
+            if (CurrentData.UserData.Id != 1)
+            {
+                addToolStripButton.Enabled = false;
+                removeToolStripButton.Enabled = false;
+                editToolStripButton.Enabled = false;
+            }
         }
 
         private void FuelListForm_Load(object sender, EventArgs e)
@@ -171,33 +178,37 @@ namespace WindowsFormsApp1
 
         private void kryptonOutlookGrid1_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            KryptonOutlookGrid.Classes.KryptonOutlookGrid dataGridView = (KryptonOutlookGrid.Classes.KryptonOutlookGrid)sender;
-            if (e.RowIndex >= 0)
-            {
-                if (dataGridView.Rows[e.RowIndex].Cells[1].Value != null)
-                {
-                    DataTables.FuelsTable table = new DataTables.FuelsTable
-                    {
-                        id = Int32.Parse(dataGridView.Rows[e.RowIndex].Cells[0].Value.ToString()),
-                        fuel_id = Int32.Parse(dataGridView.Rows[e.RowIndex].Cells[1].Value.ToString()),
-                        name = dataGridView.Rows[e.RowIndex].Cells[2].Value.ToString(),
-                        Qn = Int32.Parse(dataGridView.Rows[e.RowIndex].Cells[4].Value.ToString()),
-                        B_y = float.Parse(dataGridView.Rows[e.RowIndex].Cells[5].Value.ToString()),
-                        unit = dataGridView.Rows[e.RowIndex].Cells[3].Value.ToString()
-                    };
-                    var myForm = new FuelAddForm(table, this);
-                    //myForm.FormClosed += new FormClosedEventHandler(myForm_FormClosed);
-                    myForm.ShowDialog();
 
-                    if (myForm.DialogResult == DialogResult.OK)
+            if (CurrentData.UserData.Id == 1)
+            {
+                KryptonOutlookGrid.Classes.KryptonOutlookGrid dataGridView = (KryptonOutlookGrid.Classes.KryptonOutlookGrid)sender;
+                if (e.RowIndex >= 0)
+                {
+                    if (dataGridView.Rows[e.RowIndex].Cells[1].Value != null)
                     {
-                        var productTable = myForm.fuelTable;
-                        dataGridView.Rows[e.RowIndex].Cells[0].Value = productTable.id;
-                        dataGridView.Rows[e.RowIndex].Cells[1].Value = productTable.fuel_id;
-                        dataGridView.Rows[e.RowIndex].Cells[2].Value = productTable.name;
-                        dataGridView.Rows[e.RowIndex].Cells[4].Value = productTable.Qn;
-                        dataGridView.Rows[e.RowIndex].Cells[5].Value = productTable.B_y;
-                        dataGridView.Rows[e.RowIndex].Cells[3].Value = productTable.unit;
+                        DataTables.FuelsTable table = new DataTables.FuelsTable
+                        {
+                            id = Int32.Parse(dataGridView.Rows[e.RowIndex].Cells[0].Value.ToString()),
+                            fuel_id = Int32.Parse(dataGridView.Rows[e.RowIndex].Cells[1].Value.ToString()),
+                            name = dataGridView.Rows[e.RowIndex].Cells[2].Value.ToString(),
+                            Qn = Int32.Parse(dataGridView.Rows[e.RowIndex].Cells[4].Value.ToString()),
+                            B_y = float.Parse(dataGridView.Rows[e.RowIndex].Cells[5].Value.ToString()),
+                            unit = dataGridView.Rows[e.RowIndex].Cells[3].Value.ToString()
+                        };
+                        var myForm = new FuelAddForm(table, this);
+                        //myForm.FormClosed += new FormClosedEventHandler(myForm_FormClosed);
+                        myForm.ShowDialog();
+
+                        if (myForm.DialogResult == DialogResult.OK)
+                        {
+                            var productTable = myForm.fuelTable;
+                            dataGridView.Rows[e.RowIndex].Cells[0].Value = productTable.id;
+                            dataGridView.Rows[e.RowIndex].Cells[1].Value = productTable.fuel_id;
+                            dataGridView.Rows[e.RowIndex].Cells[2].Value = productTable.name;
+                            dataGridView.Rows[e.RowIndex].Cells[4].Value = productTable.Qn;
+                            dataGridView.Rows[e.RowIndex].Cells[5].Value = productTable.B_y;
+                            dataGridView.Rows[e.RowIndex].Cells[3].Value = productTable.unit;
+                        }
                     }
                 }
             }

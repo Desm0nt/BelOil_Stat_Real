@@ -49,6 +49,14 @@ namespace WindowsFormsApp1
                 CompanyBox.ValueMember = "Id";
                 toolStrip3.Enabled = true;
             }
+            if (CurrentData.UserData.Id != 1)
+            {
+                kryptonHeaderGroup3.Enabled = false;
+                kryptonHeaderGroup3.Visible = false;
+                this.kryptonNavigator2.Location = new Point(this.kryptonNavigator2.Location.X - 268, this.kryptonNavigator2.Location.Y);
+                this.kryptonNavigator2.Width = this.kryptonNavigator2.Width + 268;
+
+            }
             LoadOrgTreeObjects();
             tabControl1.SelectedIndexChanged += new EventHandler(tabControl1_SelectedIndexChanged);
             toolStrip2.Size = new Size(70, 25);

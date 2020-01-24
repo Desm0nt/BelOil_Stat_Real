@@ -14,6 +14,7 @@ using ComponentFactory.Krypton.Docking;
 using WindowsFormsApp1.DBO;
 using KryptonOutlookGrid.Classes;
 using KryptonOutlookGrid.CustomColumns;
+using WindowsFormsApp1.DataTables;
 
 namespace WindowsFormsApp1
 {
@@ -25,6 +26,12 @@ namespace WindowsFormsApp1
         public ProductsListForm()
         {
             InitializeComponent();
+            if (CurrentData.UserData.Id != 1)
+            {
+                addToolStripButton.Enabled = false;
+                removeToolStripButton.Enabled = false;
+                editToolStripButton.Enabled = false;
+            }
         }
 
         private void ProductsListForm_Load(object sender, EventArgs e)
@@ -163,36 +170,39 @@ namespace WindowsFormsApp1
 
         private void kryptonOutlookGrid1_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            KryptonOutlookGrid.Classes.KryptonOutlookGrid dataGridView = (KryptonOutlookGrid.Classes.KryptonOutlookGrid)sender;
-            if (e.RowIndex >= 0)
+            if (CurrentData.UserData.Id == 1)
             {
-                if (dataGridView.Rows[e.RowIndex].Cells[1].Value != null)
+                KryptonOutlookGrid.Classes.KryptonOutlookGrid dataGridView = (KryptonOutlookGrid.Classes.KryptonOutlookGrid)sender;
+                if (e.RowIndex >= 0)
                 {
-                    DataTables.ProductTable table = new DataTables.ProductTable
+                    if (dataGridView.Rows[e.RowIndex].Cells[1].Value != null)
                     {
-                        Id = Int32.Parse(dataGridView.Rows[e.RowIndex].Cells[0].Value.ToString()),
-                        Code = Int32.Parse(dataGridView.Rows[e.RowIndex].Cells[1].Value.ToString()),
-                        Name = dataGridView.Rows[e.RowIndex].Cells[2].Value.ToString(),
-                        Unit = dataGridView.Rows[e.RowIndex].Cells[3].Value.ToString(),
-                        nUnit = dataGridView.Rows[e.RowIndex].Cells[4].Value.ToString(),
-                        s111 = Boolean.Parse(dataGridView.Rows[e.RowIndex].Cells[5].Value.ToString()),
-                        s112 = Boolean.Parse(dataGridView.Rows[e.RowIndex].Cells[6].Value.ToString()),
-                        type = Int32.Parse(((TextAndImage)dataGridView.Rows[e.RowIndex].Cells[7].Value).Text)
-                    };
-                    var myForm = new ProductAddForm(table, this);
-                    //myForm.FormClosed += new FormClosedEventHandler(myForm_FormClosed);
-                    myForm.ShowDialog ();
+                        DataTables.ProductTable table = new DataTables.ProductTable
+                        {
+                            Id = Int32.Parse(dataGridView.Rows[e.RowIndex].Cells[0].Value.ToString()),
+                            Code = Int32.Parse(dataGridView.Rows[e.RowIndex].Cells[1].Value.ToString()),
+                            Name = dataGridView.Rows[e.RowIndex].Cells[2].Value.ToString(),
+                            Unit = dataGridView.Rows[e.RowIndex].Cells[3].Value.ToString(),
+                            nUnit = dataGridView.Rows[e.RowIndex].Cells[4].Value.ToString(),
+                            s111 = Boolean.Parse(dataGridView.Rows[e.RowIndex].Cells[5].Value.ToString()),
+                            s112 = Boolean.Parse(dataGridView.Rows[e.RowIndex].Cells[6].Value.ToString()),
+                            type = Int32.Parse(((TextAndImage)dataGridView.Rows[e.RowIndex].Cells[7].Value).Text)
+                        };
+                        var myForm = new ProductAddForm(table, this);
+                        //myForm.FormClosed += new FormClosedEventHandler(myForm_FormClosed);
+                        myForm.ShowDialog();
 
-                    if (myForm.DialogResult == DialogResult.OK)
-                    {
-                        var productTable = myForm.productTable;
-                        dataGridView.Rows[e.RowIndex].Cells[0].Value = productTable.Id;
-                        dataGridView.Rows[e.RowIndex].Cells[1].Value = productTable.Code;
-                        dataGridView.Rows[e.RowIndex].Cells[2].Value = productTable.Name;
-                        dataGridView.Rows[e.RowIndex].Cells[3].Value = productTable.Unit;
-                        dataGridView.Rows[e.RowIndex].Cells[4].Value = productTable.nUnit;
-                        dataGridView.Rows[e.RowIndex].Cells[5].Value = productTable.s111;
-                        dataGridView.Rows[e.RowIndex].Cells[6].Value = productTable.s112;
+                        if (myForm.DialogResult == DialogResult.OK)
+                        {
+                            var productTable = myForm.productTable;
+                            dataGridView.Rows[e.RowIndex].Cells[0].Value = productTable.Id;
+                            dataGridView.Rows[e.RowIndex].Cells[1].Value = productTable.Code;
+                            dataGridView.Rows[e.RowIndex].Cells[2].Value = productTable.Name;
+                            dataGridView.Rows[e.RowIndex].Cells[3].Value = productTable.Unit;
+                            dataGridView.Rows[e.RowIndex].Cells[4].Value = productTable.nUnit;
+                            dataGridView.Rows[e.RowIndex].Cells[5].Value = productTable.s111;
+                            dataGridView.Rows[e.RowIndex].Cells[6].Value = productTable.s112;
+                        }
                     }
                 }
             }

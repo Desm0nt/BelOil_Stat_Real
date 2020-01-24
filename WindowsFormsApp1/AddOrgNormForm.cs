@@ -295,7 +295,7 @@ namespace WindowsFormsApp1
                         type4form = nType;
                     else
                         type4form = Int32.Parse(kryptonOutlookGrid1.SelectedRows[0].Cells[7].Value.ToString());
-                    var myForm = new AddOrgNormSupportForm(kryptonOutlookGrid1.SelectedRows[0].Cells[2].Value.ToString(), type4form);
+                    var myForm = new AddOrgNormSupportForm(kryptonOutlookGrid1.SelectedRows[0].Cells[2].Value.ToString(), type4form, object_id);
                     myForm.ShowDialog();
                     if (myForm.DialogResult == DialogResult.OK)
                     {
@@ -308,7 +308,7 @@ namespace WindowsFormsApp1
                         NormTable.Name = name;
                         NormTable.Unit = kryptonOutlookGrid1.SelectedRows[0].Cells[3].Value.ToString();
                         NormTable.nUnit = kryptonOutlookGrid1.SelectedRows[0].Cells[4].Value.ToString();
-                        NormTable.id_obj = object_id;
+                        NormTable.id_obj = myForm.obj_id;
                         NormTable.s111 = bool.Parse(kryptonOutlookGrid1.SelectedRows[0].Cells[5].Value.ToString());
                         NormTable.s112 = bool.Parse(kryptonOutlookGrid1.SelectedRows[0].Cells[6].Value.ToString());
                         NormTable.id_fuel = fuel;

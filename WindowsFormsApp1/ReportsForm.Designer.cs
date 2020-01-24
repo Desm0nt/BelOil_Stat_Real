@@ -571,6 +571,7 @@
             this.профильОрганизацииToolStripMenuItem.Name = "профильОрганизацииToolStripMenuItem";
             this.профильОрганизацииToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
             this.профильОрганизацииToolStripMenuItem.Text = "Профиль организации";
+            this.профильОрганизацииToolStripMenuItem.Click += new System.EventHandler(this.профильToolStripMenuItem_Click);
             // 
             // panel1
             // 
@@ -2408,6 +2409,7 @@
             // dateTimePicker1
             // 
             this.dateTimePicker1.CalendarFirstDayOfWeek = System.Windows.Forms.Day.Monday;
+            this.dateTimePicker1.CalendarTodayDate = new System.DateTime(2020, 1, 17, 0, 0, 0, 0);
             this.dateTimePicker1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dateTimePicker1.Location = new System.Drawing.Point(127, 49);

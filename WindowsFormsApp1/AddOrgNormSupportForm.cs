@@ -16,17 +16,26 @@ namespace WindowsFormsApp1
     public partial class AddOrgNormSupportForm : KryptonForm
     {
         public int fuel_id = 0;
+        public int obj_id = -1;
         public string name;
         public string fuel_name = "";
-        public AddOrgNormSupportForm(string norm_name, int type)
+        public AddOrgNormSupportForm(string norm_name, int type, int id_obj)
         {
             InitializeComponent();
             textBox1.Text = norm_name;
+            obj_id = id_obj;
             this.FuelTextBox.AutoSize = false;
             this.FuelTextBox.Size = new Size(224, 18);
-            if( type != 1)
+            this.ObjTextBox.AutoSize = false;
+            this.ObjTextBox.Size = new Size(224, 18);
+            if ( type != 1)
             {
                 checkBox1.Enabled = false;
+            }
+            if (obj_id != -1)
+            {
+                checkBox2.Checked = true;
+                ObjTextBox.Text = dbOps.GetObjName(obj_id);
             }
         }
 
@@ -44,6 +53,20 @@ namespace WindowsFormsApp1
 
         }
 
+        private void btn3_Click(object sender, EventArgs e)
+        {
+            var myForm = new AddSourceObjectForm();
+            //myForm.FormClosed += new FormClosedEventHandler(myForm_FormClosed);
+            myForm.ShowDialog();
+            if (myForm.DialogResult == DialogResult.OK)
+            {
+                obj_id = myForm.obj_id;
+                //obj_name = myForm.obj_name;
+                ObjTextBox.Text = myForm.obj_name;
+            }
+
+        }
+
         [System.Runtime.InteropServices.DllImport("user32.dll")]
         private static extern IntPtr SendMessage(IntPtr hWnd, int msg, IntPtr wp, IntPtr lp);
 
@@ -51,6 +74,7 @@ namespace WindowsFormsApp1
         {
             var btn = new Button();
             var btn2 = new Button();
+            var btn3 = new Button();
             btn.BackColor = Color.White;
             btn.FlatStyle = FlatStyle.Flat;
             btn.FlatAppearance.BorderSize = 0;
@@ -66,6 +90,16 @@ namespace WindowsFormsApp1
             btn2.Click += btn2_Click;
             FuelTextBox.Controls.Add(btn2);
             SendMessage(FuelTextBox.Handle, 0xd3, (IntPtr)2, (IntPtr)(btn2.Width << 16));
+            btn3.BackColor = Color.White;
+            btn3.FlatStyle = FlatStyle.Flat;
+            btn3.FlatAppearance.BorderSize = 0;
+            btn3.Size = new Size(25, ObjTextBox.ClientSize.Height + 2);
+            btn3.Location = new Point(ObjTextBox.ClientSize.Width - btn3.Width, -1);
+            btn3.Cursor = Cursors.Default;
+            btn3.Text = "...";
+            btn3.Click += btn3_Click;
+            ObjTextBox.Controls.Add(btn3);
+            SendMessage(ObjTextBox.Handle, 0xd3, (IntPtr)2, (IntPtr)(btn3.Width << 16));
             base.OnLoad(e);
         }
 
@@ -77,11 +111,12 @@ namespace WindowsFormsApp1
             Graphics g = e.Graphics;
             int variance = 1;
             g.DrawRectangle(p, new Rectangle(FuelTextBox.Location.X - variance, FuelTextBox.Location.Y - variance, FuelTextBox.Width + variance, FuelTextBox.Height + variance));
+            g.DrawRectangle(p, new Rectangle(ObjTextBox.Location.X - variance, ObjTextBox.Location.Y - variance, ObjTextBox.Width + variance, ObjTextBox.Height + variance));
         }
 
         private void kryptonButton1_Click(object sender, EventArgs e)
         {
-            if ((!FuelTextBox.Enabled || (FuelTextBox.Enabled && !String.IsNullOrWhiteSpace(FuelTextBox.Text))) && !String.IsNullOrWhiteSpace(textBox1.Text))
+            if ((!FuelTextBox.Enabled || (FuelTextBox.Enabled && !String.IsNullOrWhiteSpace(FuelTextBox.Text))) && !String.IsNullOrWhiteSpace(textBox1.Text) && (!ObjTextBox.Enabled || (ObjTextBox.Enabled && !String.IsNullOrWhiteSpace(ObjTextBox.Text))) && !String.IsNullOrWhiteSpace(textBox1.Text))
             {
                 name = textBox1.Text;
                 this.DialogResult = DialogResult.OK;
@@ -99,6 +134,14 @@ namespace WindowsFormsApp1
                 FuelTextBox.Enabled = true;
             else
                 FuelTextBox.Enabled = false;
+        }
+
+        private void checkBox2_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox2.Checked)
+                ObjTextBox.Enabled = true;
+            else
+                ObjTextBox.Enabled = false;
         }
     }
 }

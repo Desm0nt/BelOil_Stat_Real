@@ -1950,15 +1950,17 @@ namespace WindowsFormsApp1.DBO
         }
         public static void AddNewObject(int id_org, string name, string full_name)
         {
+            bool active = true;
             try
             {
                 SqlConnection myConnection2 = new SqlConnection(cnStr);
                 myConnection2.Open();
-                string query2 = "INSERT INTO NewObjects (id_org, name, full_name) VALUES (@id_org, @name, @full_name)"; //пишем данные параметрическим запросом
+                string query2 = "INSERT INTO NewObjects (id_org, name, full_name, active) VALUES (@id_org, @name, @full_name, @active)"; //пишем данные параметрическим запросом
                 SqlCommand command2 = new SqlCommand(query2, myConnection2);
                 command2.Parameters.AddWithValue("@id_org", id_org);
                 command2.Parameters.AddWithValue("@name", name);
                 command2.Parameters.AddWithValue("@full_name", full_name);
+                command2.Parameters.AddWithValue("@active", active);
                 command2.ExecuteNonQuery();
                 myConnection2.Close();
             }
@@ -3485,7 +3487,7 @@ namespace WindowsFormsApp1.DBO
                 {
 
                     name = dr["full_name"].ToString();
-                }
+                } 
             }
             myConnection.Close();
             return name;

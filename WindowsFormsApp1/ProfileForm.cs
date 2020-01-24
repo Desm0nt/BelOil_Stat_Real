@@ -55,6 +55,29 @@ namespace WindowsFormsApp1
             this.Width = 1516;
             kryptonHeaderGroup2.ValuesPrimary.Heading = kryptonNavigator1.SelectedPage.Text;
             kryptonHeaderGroup2.ValuesPrimary.Image = kryptonNavigator1.SelectedPage.ImageSmall;
+            if (CurrentData.UserData.Id != 1)
+            {
+                toolStripButton1.Enabled = false;
+                toolStripButton2.Enabled = false;
+                SaveProfileButton.Enabled = false;
+                SaveProfileButton.Visible = false;
+                toolStripButton5.Enabled = false;
+                toolStripButton6.Enabled = false;
+                toolStripButton9.Enabled = false;
+                toolStripButton12.Enabled = false;
+                toolStripButton18.Enabled = false;
+                editToolStripButton.Enabled = false;
+                AddNormButton.Enabled = false;
+                RemoveNormButton.Enabled = false;
+                SourceAddButton.Enabled = false;
+                SourceRemoveButton.Enabled = false;
+                SendRecievAddButton.Enabled = false;
+                SendRecievRemoveButton.Enabled = false;
+                AddFuelButton.Enabled = false;
+                RemoveFuelButton.Enabled = false;
+                AddFactorButton.Enabled = false;
+                FactorRemoveButton.Enabled = false;
+            }
         }
 
         private void LoadObjects()
@@ -721,9 +744,12 @@ namespace WindowsFormsApp1
 
         private void treeView1_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
         {
-            var myForm = new AddOrgObjectForm(Int32.Parse(e.Node.Tag.ToString()), e.Node.Text.ToString(), e.Node.ToolTipText.ToString(), cur_org_id);
-            myForm.FormClosed += new FormClosedEventHandler(myForm_FormClosed);
-            myForm.ShowDialog();
+            if (CurrentData.UserData.Id == 1)
+            {
+                var myForm = new AddOrgObjectForm(Int32.Parse(e.Node.Tag.ToString()), e.Node.Text.ToString(), e.Node.ToolTipText.ToString(), cur_org_id);
+                myForm.FormClosed += new FormClosedEventHandler(myForm_FormClosed);
+                myForm.ShowDialog();
+            }
         }
 
         private void AddFactorButton_Click(object sender, EventArgs e)
@@ -734,13 +760,16 @@ namespace WindowsFormsApp1
 
         private void kryptonOutlookGrid8_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
-            DataGridView dataGridView = (DataGridView)sender;
-            var row = dataGridView.Rows[e.RowIndex];
-            int id = (int)row.Cells[0].Value;
-            float gkal = float.Parse(row.Cells[2].Value.ToString());
-            float kvch = float.Parse(row.Cells[3].Value.ToString());
-            dbOps.UpdateFactor(gkal, kvch, id);
-            LoadCoeff();
+            if (CurrentData.UserData.Id == 1)
+            {
+                DataGridView dataGridView = (DataGridView)sender;
+                var row = dataGridView.Rows[e.RowIndex];
+                int id = (int)row.Cells[0].Value;
+                float gkal = float.Parse(row.Cells[2].Value.ToString());
+                float kvch = float.Parse(row.Cells[3].Value.ToString());
+                dbOps.UpdateFactor(gkal, kvch, id);
+                LoadCoeff();
+            }
         }
 
         private void toolStripButton11_Click(object sender, EventArgs e)
@@ -1065,13 +1094,16 @@ namespace WindowsFormsApp1
         {
             if (edited)
             {
-                DialogResult dialogResult = MessageBox.Show("Вы уверены, что желаете сохранить внесенные в профиль изменения?", "Закрытие редактора профиля", MessageBoxButtons.YesNo);
-                if (dialogResult == DialogResult.Yes)
+                if (CurrentData.UserData.Id == 1)
                 {
-                    SaveProfile();
-                }
-                else if (dialogResult == DialogResult.No)
-                {
+                    DialogResult dialogResult = MessageBox.Show("Вы уверены, что желаете сохранить внесенные в профиль изменения?", "Закрытие редактора профиля", MessageBoxButtons.YesNo);
+                    if (dialogResult == DialogResult.Yes)
+                    {
+                        SaveProfile();
+                    }
+                    else if (dialogResult == DialogResult.No)
+                    {
+                    }
                 }
             }
         }
@@ -1083,46 +1115,49 @@ namespace WindowsFormsApp1
 
         private void kryptonOutlookGrid9_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            KryptonOutlookGrid.Classes.KryptonOutlookGrid dataGridView = (KryptonOutlookGrid.Classes.KryptonOutlookGrid)sender;
-            var row = dataGridView.Rows[e.RowIndex];
-
-            if (row.Cells[1].Value != null)
+            if (CurrentData.UserData.Id == 1)
             {
-                var myForm = new EditNormNameForm(row.Cells[11].Value.ToString());
-                // myForm.FormClosed += new FormClosedEventHandler(myForm_FormClosed);
-                myForm.ShowDialog();
-                if (myForm.DialogResult == DialogResult.OK)
+                KryptonOutlookGrid.Classes.KryptonOutlookGrid dataGridView = (KryptonOutlookGrid.Classes.KryptonOutlookGrid)sender;
+                var row = dataGridView.Rows[e.RowIndex];
+
+                if (row.Cells[1].Value != null)
                 {
-                    ComponentFactory.Krypton.Navigator.KryptonNavigator nav = kryptonNavigator2;
-                    KryptonOutlookGrid.Classes.KryptonOutlookGrid newGrid = new KryptonOutlookGrid.Classes.KryptonOutlookGrid();
-                    int index = Int32.Parse(nav.SelectedPage.Tag.ToString());
-
-                    if (index == 1)
-                        newGrid = GetGridByType(Int32.Parse(row.Cells[7].Value.ToString()));
-                    else
-                        newGrid = kryptonOutlookGrid9;
-
-                    int rowIndex = -1;
-
-                    DataGridViewRow tmprow = newGrid.Rows
-                        .Cast<DataGridViewRow>()
-                        .Where(r => r.Cells[0].Value.ToString().Equals(row.Cells[0].Value.ToString()))
-                        .First();
-
-                    rowIndex = tmprow.Index;
-
-                    row.Cells[11].Value = myForm.name_of_norm;
-                    newGrid.Rows[rowIndex].Cells[11].Value = myForm.name_of_norm;
-                    if (Int32.Parse(row.Cells[12].Value.ToString()) != 0)
+                    var myForm = new EditNormNameForm(row.Cells[11].Value.ToString());
+                    // myForm.FormClosed += new FormClosedEventHandler(myForm_FormClosed);
+                    myForm.ShowDialog();
+                    if (myForm.DialogResult == DialogResult.OK)
                     {
-                        string fuel_name = " (" + dbOps.GetFuelNameById(Int32.Parse(row.Cells[12].Value.ToString()), DateTime.Now.Year, DateTime.Now.Month) + ")";
-                        row.Cells[2].Value = myForm.name_of_norm + fuel_name;
-                        newGrid.Rows[rowIndex].Cells[2].Value = myForm.name_of_norm + fuel_name;
-                    }
-                    else
-                    {
-                        row.Cells[2].Value = myForm.name_of_norm;
-                        newGrid.Rows[rowIndex].Cells[2].Value = myForm.name_of_norm;
+                        ComponentFactory.Krypton.Navigator.KryptonNavigator nav = kryptonNavigator2;
+                        KryptonOutlookGrid.Classes.KryptonOutlookGrid newGrid = new KryptonOutlookGrid.Classes.KryptonOutlookGrid();
+                        int index = Int32.Parse(nav.SelectedPage.Tag.ToString());
+
+                        if (index == 1)
+                            newGrid = GetGridByType(Int32.Parse(row.Cells[7].Value.ToString()));
+                        else
+                            newGrid = kryptonOutlookGrid9;
+
+                        int rowIndex = -1;
+
+                        DataGridViewRow tmprow = newGrid.Rows
+                            .Cast<DataGridViewRow>()
+                            .Where(r => r.Cells[0].Value.ToString().Equals(row.Cells[0].Value.ToString()))
+                            .First();
+
+                        rowIndex = tmprow.Index;
+
+                        row.Cells[11].Value = myForm.name_of_norm;
+                        newGrid.Rows[rowIndex].Cells[11].Value = myForm.name_of_norm;
+                        if (Int32.Parse(row.Cells[12].Value.ToString()) != 0)
+                        {
+                            string fuel_name = " (" + dbOps.GetFuelNameById(Int32.Parse(row.Cells[12].Value.ToString()), DateTime.Now.Year, DateTime.Now.Month) + ")";
+                            row.Cells[2].Value = myForm.name_of_norm + fuel_name;
+                            newGrid.Rows[rowIndex].Cells[2].Value = myForm.name_of_norm + fuel_name;
+                        }
+                        else
+                        {
+                            row.Cells[2].Value = myForm.name_of_norm;
+                            newGrid.Rows[rowIndex].Cells[2].Value = myForm.name_of_norm;
+                        }
                     }
                 }
             }
