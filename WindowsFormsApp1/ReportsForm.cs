@@ -635,6 +635,553 @@ namespace WindowsFormsApp1
             #endregion
         }
 
+        void MakeTable1perSUM()
+        {
+            reoGridControl1.Load("1per.xlsx");
+            var worksheet1 = reoGridControl1.CurrentWorksheet;
+            worksheet1.SetScale(0.94f);
+            reoGridControl1.CurrentWorksheet.EnableSettings(WorksheetSettings.Edit_AutoExpandColumnWidth);
+            worksheet1.SelectionStyle = WorksheetSelectionStyle.None;
+            worksheet1.SetSettings(WorksheetSettings.Behavior_MouseWheelToZoom, false);
+
+            string name1 = "Данные за " + dateTimePicker1.Value.ToString("MMMM") + " месяц";
+            string name2 = "Нарастающий итог за Январь - " + dateTimePicker1.Value.ToString("MMMM");
+
+            label2.Text = name1;
+            label5.Text = name1;
+            label8.Text = name1;
+            label12.Text = name1;
+            label3.Text = name2;
+            label4.Text = name2;
+            label7.Text = name2;
+            label11.Text = name2;
+
+            worksheet1["B2"] = dbOps.GetCompanyName(CurrentData.UserData.Id_org);
+            worksheet1["F3"] = String.Format("Данные за {0} месяц {1} года", dateTimePicker1.Value.ToString("MMMM"), dateTimePicker1.Value.ToString("yyyy"));
+            worksheet1["P5"] = CurrentData.UserData.Post;
+            worksheet1["S6"] = CurrentData.UserData.Name;
+            worksheet1["P7"] = DateTime.Now.ToString("dd.MM.yyyy");
+
+            full1Ter1 = new List<Full1terTable>();
+            full1Ter2 = new List<Full1terTable>();
+            full1Ter3 = new List<Full1terTable>();
+            full1Ter = new List<Full1terTable>();
+
+            var rep = dbOps.GetReportData(CurrentData.UserData.Id_org, dateTimePicker1.Value.Year, dateTimePicker1.Value.Month);
+            int report_id = rep.id;
+            int profile_num = rep.num;
+            //var NormList = dbOps.GetNormList(CurrentData.UserData.Id_org, report_id);
+            //var NormListSum = MakeListSum(dateTimePicker1.Value.Year, dateTimePicker1.Value.Month);
+            var NormList2 = dbOps.GetNormListPR(CurrentData.UserData.Id_org, report_id, profile_num, dateTimePicker1.Value.Month, dateTimePicker1.Value.Year);
+            var NormListSum = MakeListSumPR(dateTimePicker1.Value.Year, dateTimePicker1.Value.Month);
+            List<NormTable> NormList = MakeListOnePR(NormList2, NormListSum);
+            actualList = NormListSum;
+            var OldNormListSum = MakeListSumPR(dateTimePicker1.Value.Year - 1, dateTimePicker1.Value.Month);
+            oldList = OldNormListSum;
+
+            #region топливо
+            int fuelrow = 15;
+            int counter = 0;
+            foreach (var a in NormList)
+            {
+                if (a.type == 1)
+                    counter++;
+            }
+            if (counter > 1)
+                worksheet1.InsertRows(fuelrow, counter - 1);
+            else
+            {
+                counter = 0;
+                foreach (var a in NormListSum)
+                {
+                    if (a.type == 1)
+                        counter++;
+                }
+                if (counter > 1)
+                    worksheet1.InsertRows(fuelrow, counter - 1);
+            }
+            int tmp = 0;
+            foreach (var a in NormList)
+            {
+                if (a.type == 1)
+                {
+                    worksheet1["C" + (fuelrow + tmp)] = a.name;
+                    worksheet1["D" + (fuelrow + tmp)] = a.Code;
+                    worksheet1["H" + (fuelrow + tmp)] = String.Format("=ROUND({0}, 3)", Math.Round(a.val_plan, 1));
+                    worksheet1["J" + (fuelrow + tmp)] = String.Format("=ROUND({0}, 3)", Math.Round(a.val_fact, 1));
+                    var zz1 = String.Format("=ROUND({0}, 3)", Math.Round(a.val_plan, 1));
+                    var zz2 = String.Format("=ROUND({0}, 3)", Math.Round(a.val_fact, 1));
+                    var Fuel = dbOps.GetFuelData(a.fuel, dateTimePicker1.Value.Year, dateTimePicker1.Value.Month);
+                    var z1 = worksheet1.Cells["H" + (fuelrow + tmp)].Data;
+                    var z2 = worksheet1.Cells["J" + (fuelrow + tmp)].Data;
+                    worksheet1[fuelrow - 1 + tmp, 8] = String.Format("{0}", Math.Round(float.Parse(worksheet1.Cells["H" + (fuelrow + tmp)].Data.ToString()) * Fuel.B_y, 1));
+                    //worksheet1[fuelrow - 1 + tmp, 8] = String.Format("=ROUND(H{0} * {1}, 3)", fuelrow + tmp, Fuel.B_y);
+                    //worksheet1[fuelrow - 1 + tmp, 10] = String.Format("=ROUND(J{0} * {1}, 3)", fuelrow + tmp, Fuel.B_y);
+                    worksheet1["K" + (fuelrow + tmp)] = String.Format("{0}", Math.Round(float.Parse(worksheet1.Cells["J" + (fuelrow + tmp)].Data.ToString()) * Fuel.B_y, 1));
+                    worksheet1["E" + (fuelrow + tmp)] = String.Format("=E{0}", fuelrow - 1); //dbOps.GetProdUnit(a.Id_prod); 
+                    worksheet1["L" + (fuelrow + tmp)] = String.Format("=ROUND(IF(H{0}>0, J{0}/H{0}, 0), 3)", fuelrow + tmp);
+                    worksheet1["M" + (fuelrow + tmp)] = String.Format("=ROUND(IF(F{0}>0, J{0}/F{0}, 0), 3)", fuelrow + tmp);
+
+                    full1Ter1.Add(new Full1terTable
+                    {
+                        Id = a.Id,
+                        Id_org = a.Id_org,
+                        Id_prod = a.Id_prod,
+                        Id_local = a.Id_local,
+                        Code = a.Code,
+                        name = a.name,
+                        Unit = a.Unit,
+                        nUnit = a.nUnit,
+                        fuel = a.fuel,
+                        fuel_name = a.fuel_name,
+                        type = a.type,
+                        id_rep = report_id,
+                        koeff = Fuel.B_y,
+                        row_options = a.row_options,
+                        val_fact = a.val_fact,
+                        val_plan = a.val_plan,
+                        val_fact_ut = a.val_fact_ut,
+                        val_plan_ut = a.val_plan_ut,
+                        val_fact_old = 0,
+                        sum_val_fact = 0,
+                        sum_val_fact_old = 0,
+                        sum_val_fact_ut = 0,
+                        sum_val_plan = 0,
+                        sum_val_plan_ut = 0,
+                        editable = a.editable,
+                        id_obj = a.id_obj
+                    });
+                    tmp++;
+                }
+            }
+            tmp = 0;
+            foreach (var a in NormListSum)
+            {
+                if (a.type == 1)
+                {
+                    worksheet1[fuelrow - 1 + tmp, 2] = a.name;
+                    worksheet1[fuelrow - 1 + tmp, 3] = a.Code;
+                    worksheet1["P" + (fuelrow + tmp)] = String.Format("=ROUND({0}, 3)", Math.Round(a.val_plan, 1));
+                    worksheet1["R" + (fuelrow + tmp)] = String.Format("=ROUND({0}, 3)", Math.Round(a.val_fact, 1));
+                    var Fuel = dbOps.GetFuelData(a.fuel, dateTimePicker1.Value.Year, dateTimePicker1.Value.Month);
+                    //worksheet1["Q" + (fuelrow + tmp)] = String.Format("{0}", Math.Round(float.Parse(worksheet1.Cells["P" + (fuelrow + tmp)].Data.ToString()) * Fuel.B_y, 1));
+                    worksheet1["Q" + (fuelrow + tmp)] = String.Format("=ROUND({0}, 3)", Math.Round(a.val_plan_ut, 1));
+                    worksheet1["S" + (fuelrow + tmp)] = String.Format("=ROUND({0}, 3)", Math.Round(a.val_fact_ut, 1));
+                    //worksheet1["S" + (fuelrow + tmp)] = String.Format("{0}", Math.Round(float.Parse(worksheet1.Cells["R" + (fuelrow + tmp)].Data.ToString()) * Fuel.B_y, 1));
+                    worksheet1["E" + (fuelrow + tmp)] = String.Format("=E{0}", fuelrow - 1);
+                    worksheet1["T" + (fuelrow + tmp)] = String.Format("=ROUND(IF(P{0}>0, R{0}/P{0}, 0), 3)", fuelrow + tmp);
+                    worksheet1["U" + (fuelrow + tmp)] = String.Format("=ROUND(IF(N{0}>0, R{0}/N{0}, 0), 3)", fuelrow + tmp);
+                    var Normo = OldNormListSum.FirstOrDefault(x => x.Id == a.Id);
+                    worksheet1["N" + (fuelrow + tmp)] = Normo != null ? String.Format("=ROUND({0}, 3)", Math.Round(Normo.val_fact, 1)) : String.Format("=ROUND({0}, 3)", 0);
+                    worksheet1["O" + (fuelrow + tmp)] = Normo != null ? String.Format("=ROUND({0}, 3)", Math.Round(Normo.val_fact_ut, 1)) : String.Format("=ROUND({0}, 3)", 0);
+                    int oldreport = dbOps.GetReportId(CurrentData.UserData.Id_org, dateTimePicker1.Value.Year - 1, dateTimePicker1.Value.Month);
+                    var Norm = dbOps.GetOneNorm(CurrentData.UserData.Id_org, oldreport, a.Id);
+                    worksheet1["F" + (fuelrow + tmp)] = String.Format("=ROUND({0}, 3)", Math.Round(Norm.val_fact, 1));
+                    worksheet1["G" + (fuelrow + tmp)] = String.Format("{0}", Math.Round(Math.Round(Norm.val_fact, 1) * Fuel.B_y, 1));
+
+                    full1Ter1[tmp].val_fact_old = float.Parse(Math.Round(Norm.val_fact, 1).ToString());
+                    full1Ter1[tmp].sum_val_fact = float.Parse(Math.Round(a.val_fact, 1).ToString());
+                    full1Ter1[tmp].sum_val_fact_old = float.Parse(Normo != null ? Math.Round(Normo.val_fact, 1).ToString() : "0");
+                    full1Ter1[tmp].sum_val_fact_ut = float.Parse(Math.Round(a.val_fact_ut, 1).ToString());
+                    full1Ter1[tmp].sum_val_plan = float.Parse(Math.Round(a.val_plan, 1).ToString());
+                    full1Ter1[tmp].sum_val_plan_ut = float.Parse(Math.Round(a.val_plan_ut, 1).ToString());
+                    tmp++;
+                }
+            }
+            var cell = worksheet1.Cells["G" + fuelrow];
+            worksheet1["F" + (fuelrow - 1)] = cell.Data != null ? String.Format("=ROUND(SUM(F{0}:F{1}), 3)", fuelrow, fuelrow + counter - 1) : "0";
+            worksheet1["G" + (fuelrow - 1)] = cell.Data != null ? String.Format("=ROUND(SUM(G{0}:G{1}), 3)", fuelrow, fuelrow + counter - 1) : "0";
+            worksheet1["H" + (fuelrow - 1)] = cell.Data != null ? String.Format("=ROUND(SUM(H{0}:H{1}), 3)", fuelrow, fuelrow + counter - 1) : "0";
+            worksheet1["I" + (fuelrow - 1)] = cell.Data != null ? String.Format("=ROUND(SUM(I{0}:I{1}), 3)", fuelrow, fuelrow + counter - 1) : "0";
+            worksheet1["J" + (fuelrow - 1)] = cell.Data != null ? String.Format("=ROUND(SUM(J{0}:J{1}), 3)", fuelrow, fuelrow + counter - 1) : "0";
+            worksheet1["K" + (fuelrow - 1)] = cell.Data != null ? String.Format("=ROUND(SUM(K{0}:K{1}), 3)", fuelrow, fuelrow + counter - 1) : "0";
+            worksheet1["L" + (fuelrow - 1)] = String.Format("=ROUND(IF(I{0}>0, K{0}/I{0}, 0), 3)", fuelrow - 1);
+            worksheet1["M" + (fuelrow - 1)] = String.Format("=ROUND(IF(G{0}>0, K{0}/G{0}, 0), 3)", fuelrow - 1);
+            worksheet1["N" + (fuelrow - 1)] = cell.Data != null ? String.Format("=ROUND(SUM(N{0}:N{1}), 3)", fuelrow, fuelrow + counter - 1) : "0";
+            worksheet1["O" + (fuelrow - 1)] = cell.Data != null ? String.Format("=ROUND(SUM(O{0}:O{1}), 3)", fuelrow, fuelrow + counter - 1) : "0";
+            worksheet1["P" + (fuelrow - 1)] = cell.Data != null ? String.Format("=ROUND(SUM(P{0}:P{1}), 3)", fuelrow, fuelrow + counter - 1) : "0";
+            worksheet1["Q" + (fuelrow - 1)] = cell.Data != null ? String.Format("=ROUND(SUM(Q{0}:Q{1}), 3)", fuelrow, fuelrow + counter - 1) : "0";
+            worksheet1["R" + (fuelrow - 1)] = cell.Data != null ? String.Format("=ROUND(SUM(R{0}:R{1}), 3)", fuelrow, fuelrow + counter - 1) : "0";
+            worksheet1["S" + (fuelrow - 1)] = cell.Data != null ? String.Format("=ROUND(SUM(S{0}:S{1}), 3)", fuelrow, fuelrow + counter - 1) : "0";
+            worksheet1["T" + (fuelrow - 1)] = String.Format("=ROUND(IF(Q{0}>0, S{0}/Q{0}, 0), 3)", fuelrow - 1);
+            worksheet1["U" + (fuelrow - 1)] = String.Format("=ROUND(IF(O{0}>0, S{0}/O{0}, 0), 3)", fuelrow - 1);
+            #endregion
+            #region тепло
+            int heatrow = counter > 0 ? fuelrow + counter + 1 : fuelrow + counter + 2;
+            counter = 0;
+            foreach (var a in NormList)
+            {
+                if (a.type == 2)
+                    counter++;
+            }
+            if (counter > 1)
+                worksheet1.InsertRows(heatrow, counter - 1);
+            else
+            {
+                counter = 0;
+                foreach (var a in NormListSum)
+                {
+                    if (a.type == 2)
+                        counter++;
+                }
+                if (counter > 1)
+                    worksheet1.InsertRows(heatrow, counter - 1);
+            }
+            tmp = 0;
+            foreach (var a in NormList)
+            {
+                if (a.type == 2)
+                {
+                    worksheet1["C" + (heatrow + tmp)] = a.name;
+                    worksheet1["D" + (heatrow + tmp)] = a.Code;
+                    worksheet1["H" + (heatrow + tmp)] = String.Format("=ROUND({0}, 3)", Math.Round(a.val_plan, 1));
+                    worksheet1["J" + (heatrow + tmp)] = String.Format("=ROUND({0}, 3)", Math.Round(a.val_fact, 1));
+                    var Factor = dbOps.GetFactorData(a.type, dateTimePicker1.Value.Month, dateTimePicker1.Value.Year);
+                    worksheet1[heatrow - 1 + tmp, 8] = String.Format("{0}", Math.Round(float.Parse(worksheet1.Cells["H" + (heatrow + tmp)].Data.ToString()) * Factor.value, 1));
+                    //worksheet1[heatrow - 1 + tmp, 8] = String.Format("=ROUND(H{0} * {1}, 3)", heatrow + tmp, Factor.value);
+                    //worksheet1[heatrow - 1 + tmp, 10] = String.Format("=ROUND(J{0} * {1}, 3)", heatrow + tmp, Factor.value);
+                    worksheet1[heatrow - 1 + tmp, 10] = String.Format("{0}", Math.Round(float.Parse(worksheet1.Cells["J" + (heatrow + tmp)].Data.ToString()) * Factor.value, 1));
+                    worksheet1["E" + (heatrow + tmp)] = String.Format("=E{0}", heatrow - 1);
+                    worksheet1["L" + (heatrow + tmp)] = String.Format("=ROUND(IF(H{0}>0, J{0}/H{0}, 0), 3)", heatrow + tmp);
+                    worksheet1["M" + (heatrow + tmp)] = String.Format("=ROUND(IF(F{0}>0, J{0}/F{0}, 0), 3)", heatrow + tmp);
+
+                    full1Ter2.Add(new Full1terTable
+                    {
+                        Id = a.Id,
+                        Id_org = a.Id_org,
+                        Id_prod = a.Id_prod,
+                        Id_local = a.Id_local,
+                        Code = a.Code,
+                        name = a.name,
+                        Unit = a.Unit,
+                        nUnit = a.nUnit,
+                        fuel = a.fuel,
+                        type = a.type,
+                        id_rep = report_id,
+                        koeff = Factor.value,
+                        row_options = a.row_options,
+                        val_fact = a.val_fact,
+                        val_plan = a.val_plan,
+                        val_fact_ut = a.val_fact_ut,
+                        val_plan_ut = a.val_plan_ut,
+                        val_fact_old = 0,
+                        sum_val_fact = 0,
+                        sum_val_fact_old = 0,
+                        sum_val_fact_ut = 0,
+                        sum_val_plan = 0,
+                        sum_val_plan_ut = 0,
+                        editable = a.editable,
+                        id_obj = a.id_obj
+                    });
+                    tmp++;
+                }
+            }
+            tmp = 0;
+            foreach (var a in NormListSum)
+            {
+                if (a.type == 2)
+                {
+                    worksheet1[heatrow - 1 + tmp, 2] = a.name;
+                    worksheet1[heatrow - 1 + tmp, 3] = a.Code;
+                    worksheet1["P" + (heatrow + tmp)] = String.Format("=ROUND({0}, 3)", Math.Round(a.val_plan, 1));
+                    worksheet1["R" + (heatrow + tmp)] = String.Format("=ROUND({0}, 3)", Math.Round(a.val_fact, 1));
+                    var Factor = dbOps.GetFactorData(a.type, dateTimePicker1.Value.Month, dateTimePicker1.Value.Year);
+                    //worksheet1["Q" + (heatrow + tmp)] = String.Format("=ROUND(P{0} * {1}, 3)", heatrow + tmp, Factor.value);
+                    //worksheet1["Q" + (heatrow + tmp)] = String.Format("{0}", Math.Round(float.Parse(worksheet1.Cells["P" + (heatrow + tmp)].Data.ToString()) * Factor.value, 1));
+                    //worksheet1["S" + (heatrow + tmp)] = String.Format("=ROUND(R{0} * {1}, 3)", heatrow + tmp, Factor.value);
+                    //worksheet1["S" + (heatrow + tmp)] = String.Format("{0}", Math.Round(float.Parse(worksheet1.Cells["R" + (heatrow + tmp)].Data.ToString()) * Factor.value, 1));
+                    worksheet1["Q" + (heatrow + tmp)] = String.Format("=ROUND({0}, 3)", Math.Round(a.val_plan_ut, 1));
+                    worksheet1["S" + (heatrow + tmp)] = String.Format("=ROUND({0}, 3)", Math.Round(a.val_fact_ut, 1));
+                    worksheet1["E" + (heatrow + tmp)] = String.Format("=E{0}", heatrow - 1);
+                    worksheet1["T" + (heatrow + tmp)] = String.Format("=ROUND(IF(P{0}>0, R{0}/P{0}, 0), 3)", heatrow + tmp);
+                    worksheet1["U" + (heatrow + tmp)] = String.Format("=ROUND(IF(N{0}>0, R{0}/N{0}, 0), 3)", heatrow + tmp);
+                    var Normo = OldNormListSum.FirstOrDefault(x => x.Id == a.Id);
+                    worksheet1["N" + (heatrow + tmp)] = Normo != null ? String.Format("=ROUND({0}, 3)", Math.Round(Normo.val_fact, 1)) : String.Format("=ROUND({0}, 3)", 0);
+                    worksheet1["O" + (heatrow + tmp)] = Normo != null ? String.Format("=ROUND({0}, 3)", Math.Round(Normo.val_fact_ut, 1)) : String.Format("=ROUND({0}, 3)", 0);
+                    int oldreport = dbOps.GetReportId(CurrentData.UserData.Id_org, dateTimePicker1.Value.Year - 1, dateTimePicker1.Value.Month);
+                    var Norm = dbOps.GetOneNorm(CurrentData.UserData.Id_org, oldreport, a.Id);
+                    worksheet1["F" + (heatrow + tmp)] = String.Format("=ROUND({0}, 3)", Math.Round(Norm.val_fact, 1));
+                    worksheet1["G" + (heatrow + tmp)] = String.Format("{0}", Math.Round(Math.Round(Norm.val_fact, 1) * Factor.value, 1));
+
+                    full1Ter2[tmp].val_fact_old = float.Parse(Math.Round(Norm.val_fact, 1).ToString());
+                    full1Ter2[tmp].sum_val_fact = float.Parse(Math.Round(a.val_fact, 1).ToString());
+                    full1Ter2[tmp].sum_val_fact_old = float.Parse(Normo != null ? Math.Round(Normo.val_fact, 1).ToString() : "0");
+                    full1Ter2[tmp].sum_val_fact_ut = float.Parse(Math.Round(a.val_fact_ut, 1).ToString());
+                    full1Ter2[tmp].sum_val_plan = float.Parse(Math.Round(a.val_plan, 1).ToString());
+                    full1Ter2[tmp].sum_val_plan_ut = float.Parse(Math.Round(a.val_plan_ut, 1).ToString());
+                    tmp++;
+                }
+            }
+            worksheet1["G" + (heatrow - 1)] = String.Format("=ROUND(SUM(G{0}:G{1}), 3)", heatrow, heatrow + counter - 1);
+            worksheet1["F" + (heatrow - 1)] = String.Format("=ROUND(SUM(F{0}:F{1}), 3)", heatrow, heatrow + counter - 1);
+            worksheet1["H" + (heatrow - 1)] = String.Format("=ROUND(SUM(H{0}:H{1}), 3)", heatrow, heatrow + counter - 1);
+            worksheet1["I" + (heatrow - 1)] = String.Format("=ROUND(SUM(I{0}:I{1}), 3)", heatrow, heatrow + counter - 1);
+            worksheet1["J" + (heatrow - 1)] = String.Format("=ROUND(SUM(J{0}:J{1}), 3)", heatrow, heatrow + counter - 1);
+            worksheet1["K" + (heatrow - 1)] = String.Format("=ROUND(SUM(K{0}:K{1}), 3)", heatrow, heatrow + counter - 1);
+            worksheet1["L" + (heatrow - 1)] = String.Format("=ROUND(IF(H{0}>0, J{0}/H{0}, 0), 3)", heatrow - 1);
+            worksheet1["M" + (heatrow - 1)] = String.Format("=ROUND(IF(F{0}>0, J{0}/F{0}, 0), 3)", heatrow - 1);
+            worksheet1["N" + (heatrow - 1)] = String.Format("=ROUND(SUM(N{0}:N{1}), 3)", heatrow, heatrow + counter - 1);
+            worksheet1["O" + (heatrow - 1)] = String.Format("=ROUND(SUM(O{0}:O{1}), 3)", heatrow, heatrow + counter - 1);
+            worksheet1["P" + (heatrow - 1)] = String.Format("=ROUND(SUM(P{0}:P{1}), 3)", heatrow, heatrow + counter - 1);
+            worksheet1["Q" + (heatrow - 1)] = String.Format("=ROUND(SUM(Q{0}:Q{1}), 3)", heatrow, heatrow + counter - 1);
+            worksheet1["R" + (heatrow - 1)] = String.Format("=ROUND(SUM(R{0}:R{1}), 3)", heatrow, heatrow + counter - 1);
+            worksheet1["S" + (heatrow - 1)] = String.Format("=ROUND(SUM(S{0}:S{1}), 3)", heatrow, heatrow + counter - 1);
+            worksheet1["T" + (heatrow - 1)] = String.Format("=ROUND(IF(P{0}>0, R{0}/P{0}, 0), 3)", heatrow - 1);
+            worksheet1["U" + (heatrow - 1)] = String.Format("=ROUND(IF(N{0}>0, R{0}/N{0}, 0), 3)", heatrow - 1);
+            #endregion
+
+
+            #region электроэнергия
+            int elrow = counter > 0 ? heatrow + counter + 1 : heatrow + counter + 2;
+            counter = 0;
+            foreach (var a in NormList)
+            {
+                if (a.type == 3)
+                    counter++;
+            }
+            if (counter > 1)
+                worksheet1.InsertRows(elrow, counter - 1);
+            else
+            {
+                counter = 0;
+                foreach (var a in NormListSum)
+                {
+                    if (a.type == 3)
+                        counter++;
+                }
+                if (counter > 1)
+                    worksheet1.InsertRows(elrow, counter - 1);
+            }
+            tmp = 0;
+            foreach (var a in NormList)
+            {
+                if (a.type == 3)
+                {
+                    worksheet1["C" + (elrow + tmp)] = a.name;
+                    worksheet1["D" + (elrow + tmp)] = a.Code;
+                    worksheet1["H" + (elrow + tmp)] = String.Format("=ROUND({0}, 3)", Math.Round(a.val_plan, 1));
+                    worksheet1["J" + (elrow + tmp)] = String.Format("=ROUND({0}, 3)", Math.Round(a.val_fact, 1));
+                    var Factor = dbOps.GetFactorData(a.type, dateTimePicker1.Value.Month, dateTimePicker1.Value.Year);
+                    worksheet1[elrow - 1 + tmp, 8] = String.Format("{0}", Math.Round(float.Parse(worksheet1.Cells["H" + (elrow + tmp)].Data.ToString()) * Factor.value, 1));
+                    //worksheet1[elrow - 1 + tmp, 8] = String.Format("=ROUND(H{0} * {1}, 3)", elrow + tmp, Factor.value);
+                    //worksheet1[elrow - 1 + tmp, 10] = String.Format("=ROUND(J{0} * {1}, 3)", elrow + tmp, Factor.value);
+                    worksheet1[elrow - 1 + tmp, 10] = String.Format("{0}", Math.Round(float.Parse(worksheet1.Cells["J" + (elrow + tmp)].Data.ToString()) * Factor.value, 1));
+                    worksheet1["E" + (elrow + tmp)] = String.Format("=E{0}", elrow - 1);
+                    worksheet1["L" + (elrow + tmp)] = String.Format("=ROUND(IF(H{0}>0, J{0}/H{0}, 0), 3)", elrow + tmp);
+                    worksheet1["M" + (elrow + tmp)] = String.Format("=ROUND(IF(F{0}>0, J{0}/F{0}, 0), 3)", elrow + tmp);
+
+                    full1Ter3.Add(new Full1terTable
+                    {
+                        Id = a.Id,
+                        Id_org = a.Id_org,
+                        Id_prod = a.Id_prod,
+                        Id_local = a.Id_local,
+                        Code = a.Code,
+                        name = a.name,
+                        Unit = a.Unit,
+                        nUnit = a.nUnit,
+                        fuel = a.fuel,
+                        type = a.type,
+                        id_rep = report_id,
+                        koeff = Factor.value,
+                        row_options = a.row_options,
+                        val_fact = a.val_fact,
+                        val_plan = a.val_plan,
+                        val_fact_ut = a.val_fact_ut,
+                        val_plan_ut = a.val_plan_ut,
+                        val_fact_old = 0,
+                        sum_val_fact = 0,
+                        sum_val_fact_old = 0,
+                        sum_val_fact_ut = 0,
+                        sum_val_plan = 0,
+                        sum_val_plan_ut = 0,
+                        editable = a.editable,
+                        id_obj = a.id_obj
+                    });
+                    tmp++;
+                }
+            }
+            tmp = 0;
+            foreach (var a in NormListSum)
+            {
+                if (a.type == 3)
+                {
+                    worksheet1[elrow - 1 + tmp, 2] = a.name;
+                    worksheet1[elrow - 1 + tmp, 3] = a.Code;
+                    worksheet1["P" + (elrow + tmp)] = String.Format("=ROUND({0}, 3)", Math.Round(a.val_plan, 1));
+                    worksheet1["R" + (elrow + tmp)] = String.Format("=ROUND({0}, 3)", Math.Round(a.val_fact, 1));
+                    var Factor = dbOps.GetFactorData(a.type, dateTimePicker1.Value.Month, dateTimePicker1.Value.Year);
+                    //worksheet1["Q" + (elrow + tmp)] = String.Format("=ROUND(P{0} * {1}, 3)", elrow + tmp, Factor.value);
+                    //worksheet1["Q" + (elrow + tmp)] = String.Format("{0}", Math.Round(float.Parse(worksheet1.Cells["P" + (elrow + tmp)].Data.ToString()) * Factor.value, 1));
+                    //worksheet1["S" + (elrow + tmp)] = String.Format("=ROUND(R{0} * {1}, 3)", elrow + tmp, Factor.value);
+                    //worksheet1["S" + (elrow + tmp)] = String.Format("{0}", Math.Round(float.Parse(worksheet1.Cells["R" + (elrow + tmp)].Data.ToString()) * Factor.value, 1));
+                    worksheet1["Q" + (elrow + tmp)] = String.Format("=ROUND({0}, 3)", Math.Round(a.val_plan_ut, 1));
+                    worksheet1["S" + (elrow + tmp)] = String.Format("=ROUND({0}, 3)", Math.Round(a.val_fact_ut, 1));
+                    worksheet1["E" + (elrow + tmp)] = String.Format("=E{0}", elrow - 1);
+                    worksheet1["T" + (elrow + tmp)] = String.Format("=ROUND(IF(P{0}>0, R{0}/P{0}, 0), 3)", elrow + tmp);
+                    worksheet1["U" + (elrow + tmp)] = String.Format("=ROUND(IF(N{0}>0, R{0}/N{0}, 0), 3)", elrow + tmp);
+                    var Normo = OldNormListSum.FirstOrDefault(x => x.Id == a.Id);
+                    worksheet1["N" + (elrow + tmp)] = Normo != null ? String.Format("=ROUND({0}, 3)", Math.Round(Normo.val_fact, 1)) : String.Format("=ROUND({0}, 3)", 0);
+                    worksheet1["O" + (elrow + tmp)] = Normo != null ? String.Format("=ROUND({0}, 3)", Math.Round(Normo.val_fact_ut, 1)) : String.Format("=ROUND({0}, 3)", 0);
+                    int oldreport = dbOps.GetReportId(CurrentData.UserData.Id_org, dateTimePicker1.Value.Year - 1, dateTimePicker1.Value.Month);
+                    var Norm = dbOps.GetOneNorm(CurrentData.UserData.Id_org, oldreport, a.Id);
+                    worksheet1["F" + (elrow + tmp)] = String.Format("=ROUND({0}, 3)", Math.Round(Norm.val_fact, 1));
+                    worksheet1["G" + (elrow + tmp)] = String.Format("{0}", Math.Round(Math.Round(Norm.val_fact, 1) * Factor.value, 1));
+
+                    full1Ter3[tmp].val_fact_old = float.Parse(Math.Round(Norm.val_fact, 1).ToString());
+                    full1Ter3[tmp].sum_val_fact = float.Parse(Math.Round(a.val_fact, 1).ToString());
+                    full1Ter3[tmp].sum_val_fact_old = float.Parse(Normo != null ? Math.Round(Normo.val_fact, 1).ToString() : "0");
+                    full1Ter3[tmp].sum_val_fact_ut = float.Parse(Math.Round(a.val_fact_ut, 1).ToString());
+                    full1Ter3[tmp].sum_val_plan = float.Parse(Math.Round(a.val_plan, 1).ToString());
+                    full1Ter3[tmp].sum_val_plan_ut = float.Parse(Math.Round(a.val_plan_ut, 1).ToString());
+                    tmp++;
+                }
+            }
+
+            worksheet1["G" + (elrow - 1)] = String.Format("=ROUND(SUM(G{0}:G{1}), 3)", elrow, elrow + counter - 1);
+            worksheet1["F" + (elrow - 1)] = String.Format("=ROUND(SUM(F{0}:F{1}), 3)", elrow, elrow + counter - 1);
+            worksheet1["H" + (elrow - 1)] = String.Format("=ROUND(SUM(H{0}:H{1}), 3)", elrow, elrow + counter - 1);
+            worksheet1["I" + (elrow - 1)] = String.Format("=ROUND(SUM(I{0}:I{1}), 3)", elrow, elrow + counter - 1);
+            worksheet1["J" + (elrow - 1)] = String.Format("=ROUND(SUM(J{0}:J{1}), 3)", elrow, elrow + counter - 1);
+            worksheet1["K" + (elrow - 1)] = String.Format("=ROUND(SUM(K{0}:K{1}), 3)", elrow, elrow + counter - 1);
+            worksheet1["L" + (elrow - 1)] = String.Format("=ROUND(IF(H{0}>0, J{0}/H{0}, 0), 3)", elrow - 1);
+            worksheet1["M" + (elrow - 1)] = String.Format("=ROUND(IF(F{0}>0, J{0}/F{0}, 0), 3)", elrow - 1);
+            worksheet1["N" + (elrow - 1)] = String.Format("=ROUND(SUM(N{0}:N{1}), 3)", elrow, elrow + counter - 1);
+            worksheet1["O" + (elrow - 1)] = String.Format("=ROUND(SUM(O{0}:O{1}), 3)", elrow, elrow + counter - 1);
+            worksheet1["P" + (elrow - 1)] = String.Format("=ROUND(SUM(P{0}:P{1}), 3)", elrow, elrow + counter - 1);
+            worksheet1["Q" + (elrow - 1)] = String.Format("=ROUND(SUM(Q{0}:Q{1}), 3)", elrow, elrow + counter - 1);
+            worksheet1["R" + (elrow - 1)] = String.Format("=ROUND(SUM(R{0}:R{1}), 3)", elrow, elrow + counter - 1);
+            worksheet1["S" + (elrow - 1)] = String.Format("=ROUND(SUM(S{0}:S{1}), 3)", elrow, elrow + counter - 1);
+            worksheet1["T" + (elrow - 1)] = String.Format("=ROUND(IF(P{0}>0, R{0}/P{0}, 0), 3)", elrow - 1);
+            worksheet1["U" + (elrow - 1)] = String.Format("=ROUND(IF(N{0}>0, R{0}/N{0}, 0), 3)", elrow - 1);
+            #endregion
+
+            foreach (var a in full1Ter1)
+                full1Ter.Add(a);
+            foreach (var a in full1Ter2)
+                full1Ter.Add(a);
+            foreach (var a in full1Ter3)
+                full1Ter.Add(a);
+
+            #region суммы
+            worksheet1["F" + (elrow + counter)] = String.Format("=ROUND(SUM(F{0},F{1},F{2}), 3)", fuelrow - 1, heatrow - 1, elrow - 1);
+            worksheet1["F" + (elrow + counter + 1)] = String.Format("=F{0}", fuelrow - 1);
+            worksheet1["F" + (elrow + counter + 2)] = String.Format("=F{0}", heatrow - 1);
+            worksheet1["F" + (elrow + counter + 3)] = String.Format("=F{0}", elrow - 1);
+            worksheet1["G" + (elrow + counter)] = String.Format("=ROUND(SUM(G{0},G{1},G{2}), 3)", fuelrow - 1, heatrow - 1, elrow - 1);
+            worksheet1["G" + (elrow + counter + 1)] = String.Format("=G{0}", fuelrow - 1);
+            worksheet1["G" + (elrow + counter + 2)] = String.Format("=G{0}", heatrow - 1);
+            worksheet1["G" + (elrow + counter + 3)] = String.Format("=G{0}", elrow - 1);
+            worksheet1["H" + (elrow + counter)] = String.Format("=ROUND(SUM(H{0},H{1},H{2}), 3)", fuelrow - 1, heatrow - 1, elrow - 1);
+            worksheet1["H" + (elrow + counter + 1)] = String.Format("=H{0}", fuelrow - 1);
+            worksheet1["H" + (elrow + counter + 2)] = String.Format("=H{0}", heatrow - 1);
+            worksheet1["H" + (elrow + counter + 3)] = String.Format("=H{0}", elrow - 1);
+            worksheet1["I" + (elrow + counter)] = String.Format("=ROUND(SUM(I{0},I{1},I{2}), 3)", fuelrow - 1, heatrow - 1, elrow - 1);
+            worksheet1["I" + (elrow + counter + 1)] = String.Format("=I{0}", fuelrow - 1);
+            worksheet1["I" + (elrow + counter + 2)] = String.Format("=I{0}", heatrow - 1);
+            worksheet1["I" + (elrow + counter + 3)] = String.Format("=I{0}", elrow - 1);
+            worksheet1["J" + (elrow + counter)] = String.Format("=ROUND(SUM(J{0},J{1},J{2}), 3)", fuelrow - 1, heatrow - 1, elrow - 1);
+            worksheet1["J" + (elrow + counter + 1)] = String.Format("=J{0}", fuelrow - 1);
+            worksheet1["J" + (elrow + counter + 2)] = String.Format("=J{0}", heatrow - 1);
+            worksheet1["J" + (elrow + counter + 3)] = String.Format("=J{0}", elrow - 1);
+            worksheet1["K" + (elrow + counter)] = String.Format("=ROUND(SUM(K{0},K{1},K{2}), 3)", fuelrow - 1, heatrow - 1, elrow - 1);
+            worksheet1["K" + (elrow + counter + 1)] = String.Format("=K{0}", fuelrow - 1);
+            worksheet1["K" + (elrow + counter + 2)] = String.Format("=K{0}", heatrow - 1);
+            worksheet1["K" + (elrow + counter + 3)] = String.Format("=K{0}", elrow - 1);
+            worksheet1["N" + (elrow + counter)] = String.Format("=ROUND(SUM(N{0},N{1},N{2}), 3)", fuelrow - 1, heatrow - 1, elrow - 1);
+            worksheet1["N" + (elrow + counter + 1)] = String.Format("=N{0}", fuelrow - 1);
+            worksheet1["N" + (elrow + counter + 2)] = String.Format("=N{0}", heatrow - 1);
+            worksheet1["N" + (elrow + counter + 3)] = String.Format("=N{0}", elrow - 1);
+            worksheet1["O" + (elrow + counter)] = String.Format("=ROUND(SUM(O{0},O{1},O{2}), 3)", fuelrow - 1, heatrow - 1, elrow - 1);
+            worksheet1["O" + (elrow + counter + 1)] = String.Format("=O{0}", fuelrow - 1);
+            worksheet1["O" + (elrow + counter + 2)] = String.Format("=O{0}", heatrow - 1);
+            worksheet1["O" + (elrow + counter + 3)] = String.Format("=O{0}", elrow - 1);
+            worksheet1["P" + (elrow + counter)] = String.Format("=ROUND(SUM(P{0},P{1},P{2}), 3)", fuelrow - 1, heatrow - 1, elrow - 1);
+            worksheet1["P" + (elrow + counter + 1)] = String.Format("=P{0}", fuelrow - 1);
+            worksheet1["P" + (elrow + counter + 2)] = String.Format("=P{0}", heatrow - 1);
+            worksheet1["P" + (elrow + counter + 3)] = String.Format("=P{0}", elrow - 1);
+            worksheet1["Q" + (elrow + counter)] = String.Format("=ROUND(SUM(Q{0},Q{1},Q{2}), 3)", fuelrow - 1, heatrow - 1, elrow - 1);
+            worksheet1["Q" + (elrow + counter + 1)] = String.Format("=Q{0}", fuelrow - 1);
+            worksheet1["Q" + (elrow + counter + 2)] = String.Format("=Q{0}", heatrow - 1);
+            worksheet1["Q" + (elrow + counter + 3)] = String.Format("=Q{0}", elrow - 1);
+            worksheet1["R" + (elrow + counter)] = String.Format("=ROUND(SUM(R{0},R{1},R{2}), 3)", fuelrow - 1, heatrow - 1, elrow - 1);
+            worksheet1["R" + (elrow + counter + 1)] = String.Format("=R{0}", fuelrow - 1);
+            worksheet1["R" + (elrow + counter + 2)] = String.Format("=R{0}", heatrow - 1);
+            worksheet1["R" + (elrow + counter + 3)] = String.Format("=R{0}", elrow - 1);
+            worksheet1["S" + (elrow + counter)] = String.Format("=ROUND(SUM(S{0},S{1},S{2}), 3)", fuelrow - 1, heatrow - 1, elrow - 1);
+            worksheet1["S" + (elrow + counter + 1)] = String.Format("=S{0}", fuelrow - 1);
+            worksheet1["S" + (elrow + counter + 2)] = String.Format("=S{0}", heatrow - 1);
+            worksheet1["S" + (elrow + counter + 3)] = String.Format("=S{0}", elrow - 1);
+            worksheet1["L" + (elrow + counter)] = String.Format("=ROUND(IF(H{0}>0, J{0}/H{0}, 0), 3)", (elrow + counter));
+            worksheet1["L" + (elrow + counter + 1)] = String.Format("=ROUND(IF(H{0}>0, J{0}/H{0}, 0), 3)", (elrow + counter + 1));
+            worksheet1["L" + (elrow + counter + 2)] = String.Format("=ROUND(IF(H{0}>0, J{0}/H{0}, 0), 3)", (elrow + counter + 2));
+            worksheet1["L" + (elrow + counter + 3)] = String.Format("=ROUND(IF(H{0}>0, J{0}/H{0}, 0), 3)", (elrow + counter + 3));
+            worksheet1["M" + (elrow + counter)] = String.Format("=ROUND(IF(F{0}>0, J{0}/F{0}, 0), 3)", (elrow + counter));
+            worksheet1["M" + (elrow + counter + 1)] = String.Format("=ROUND(IF(F{0}>0, J{0}/F{0}, 0), 3)", (elrow + counter + 1));
+            worksheet1["M" + (elrow + counter + 2)] = String.Format("=ROUND(IF(F{0}>0, J{0}/F{0}, 0), 3)", (elrow + counter + 2));
+            worksheet1["M" + (elrow + counter + 3)] = String.Format("=ROUND(IF(F{0}>0, J{0}/F{0}, 0), 3)", (elrow + counter + 3));
+            worksheet1["T" + (elrow + counter)] = String.Format("=ROUND(IF(P{0}>0, R{0}/P{0}, 0), 3)", (elrow + counter));
+            worksheet1["T" + (elrow + counter + 1)] = String.Format("=ROUND(IF(P{0}>0, R{0}/P{0}, 0), 3)", (elrow + counter + 1));
+            worksheet1["T" + (elrow + counter + 2)] = String.Format("=ROUND(IF(P{0}>0, R{0}/P{0}, 0), 3)", (elrow + counter + 2));
+            worksheet1["T" + (elrow + counter + 3)] = String.Format("=ROUND(IF(P{0}>0, R{0}/P{0}, 0), 3)", (elrow + counter + 3));
+            worksheet1["U" + (elrow + counter)] = String.Format("=ROUND(IF(N{0}>0, R{0}/N{0}, 0), 3)", (elrow + counter));
+            worksheet1["U" + (elrow + counter + 1)] = String.Format("=ROUND(IF(N{0}>0, R{0}/N{0}, 0), 3)", (elrow + counter + 1));
+            worksheet1["U" + (elrow + counter + 2)] = String.Format("=ROUND(IF(N{0}>0, R{0}/N{0}, 0), 3)", (elrow + counter + 2));
+            worksheet1["U" + (elrow + counter + 3)] = String.Format("=ROUND(IF(N{0}>0, R{0}/N{0}, 0), 3)", (elrow + counter + 3));
+            #endregion
+
+            var a1 = worksheet1.Cells["U" + (elrow + counter + 3)].Data;
+            LoadAllNorms(full1Ter, kryptonOutlookGrid1);
+            LoadAllNorms(full1Ter1, kryptonOutlookGrid2);
+            LoadAllNorms(full1Ter2, kryptonOutlookGrid3);
+            LoadAllNorms(full1Ter3, kryptonOutlookGrid4);
+            #region style
+            var grid = this.reoGridControl1;
+            var sheet = grid.CurrentWorksheet;
+            sheet.SetRangeStyles("A" + fuelrow + ":U" + (elrow + counter), new WorksheetRangeStyle
+            {
+                Flag = PlainStyleFlag.FontSize | PlainStyleFlag.FontName,
+                FontSize = 8,
+                FontName = "Times New Roman",
+            });
+            sheet.SetRangeDataFormat("L" + (fuelrow - 1) + ":L" + (elrow + counter + 4), CellDataFormatFlag.Percent);
+            sheet.SetRangeDataFormat("M" + (fuelrow - 1) + ":M" + (elrow + counter + 4), CellDataFormatFlag.Percent);
+            sheet.SetRangeDataFormat("T" + (fuelrow - 1) + ":T" + (elrow + counter + 4), CellDataFormatFlag.Percent);
+            sheet.SetRangeDataFormat("U" + (fuelrow - 1) + ":U" + (elrow + counter + 4), CellDataFormatFlag.Percent);
+            sheet.SetRangeStyles("E" + (fuelrow - 1) + ":E" + (elrow + counter + 4), new WorksheetRangeStyle
+            {
+                Flag = PlainStyleFlag.HorizontalAlign,
+                HAlign = ReoGridHorAlign.Center,
+            });
+
+            worksheet1.SetRangeBorders(new RangePosition(fuelrow, 1, (elrow + counter - fuelrow - 1), 20), BorderPositions.All, new RangeBorderStyle
+            {
+                Color = System.Drawing.ColorTranslator.FromHtml("#000000"),
+                Style = BorderLineStyle.Solid,
+            });
+            worksheet1.SetRangeBorders(new RangePosition(fuelrow, 1, (elrow + counter - fuelrow - 1), 0), BorderPositions.Left, new RangeBorderStyle
+            {
+                Color = System.Drawing.ColorTranslator.FromHtml("#000000"),
+                Style = BorderLineStyle.BoldSolid,
+            });
+            worksheet1.SetRangeBorders(new RangePosition(fuelrow, 21, (elrow + counter - fuelrow - 1), 0), BorderPositions.Left, new RangeBorderStyle
+            {
+                Color = System.Drawing.ColorTranslator.FromHtml("#000000"),
+                Style = BorderLineStyle.BoldSolid,
+            });
+            worksheet1.SetRangeBorders(new RangePosition((elrow + counter - 1), 1, 0, 20), BorderPositions.Bottom, new RangeBorderStyle
+            {
+                Color = System.Drawing.ColorTranslator.FromHtml("#000000"),
+                Style = BorderLineStyle.BoldSolid,
+            });
+            for (int i = 0; i <= 66; i++)
+            {
+                worksheet1.AutoFitRowHeight(i, true);
+            }
+            #endregion
+        }
+
+
         private void LoadAllNorms(List<Full1terTable> full1Ter,  KryptonOutlookGrid.Classes.KryptonOutlookGrid grid)
         {
 
