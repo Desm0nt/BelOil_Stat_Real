@@ -102,6 +102,7 @@
             this.sumplanfact = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sumfact_fact = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.type = new KryptonOutlookGrid.CustomColumns.KryptonDataGridViewTextAndImageColumn();
+            this.Org = new KryptonOutlookGrid.CustomColumns.KryptonDataGridViewTextAndImageColumn();
             this.enabled = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.id_obj = new KryptonOutlookGrid.CustomColumns.KryptonDataGridViewTextAndImageColumn();
             this.panel5 = new System.Windows.Forms.Panel();
@@ -141,6 +142,7 @@
             this.fuel_sumplanfact = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fuel_sumfact_fact = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fuel_type = new KryptonOutlookGrid.CustomColumns.KryptonDataGridViewTextAndImageColumn();
+            this.fuel_org = new KryptonOutlookGrid.CustomColumns.KryptonDataGridViewTextAndImageColumn();
             this.fuel_enabled = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fuel_id_obj = new KryptonOutlookGrid.CustomColumns.KryptonDataGridViewTextAndImageColumn();
             this.kryptonOutlookGridGroupBox2 = new KryptonOutlookGrid.Controls.KryptonOutlookGridGroupBox();
@@ -179,6 +181,7 @@
             this.heat_sumplanfact = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.heat_sumfact_fact = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.heat_type = new KryptonOutlookGrid.CustomColumns.KryptonDataGridViewTextAndImageColumn();
+            this.heat_org = new KryptonOutlookGrid.CustomColumns.KryptonDataGridViewTextAndImageColumn();
             this.heat_enabled = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.heat_id_obj = new KryptonOutlookGrid.CustomColumns.KryptonDataGridViewTextAndImageColumn();
             this.kryptonOutlookGridGroupBox3 = new KryptonOutlookGrid.Controls.KryptonOutlookGridGroupBox();
@@ -217,6 +220,7 @@
             this.el_sumplanfact = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.el_sumfact_fact = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.el_type = new KryptonOutlookGrid.CustomColumns.KryptonDataGridViewTextAndImageColumn();
+            this.el_org = new KryptonOutlookGrid.CustomColumns.KryptonDataGridViewTextAndImageColumn();
             this.el_enabled = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.el_id_obj = new KryptonOutlookGrid.CustomColumns.KryptonDataGridViewTextAndImageColumn();
             this.kryptonOutlookGridGroupBox4 = new KryptonOutlookGrid.Controls.KryptonOutlookGridGroupBox();
@@ -259,6 +263,7 @@
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton11 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
             this.saveRapButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
@@ -414,21 +419,21 @@
             this.сменитьПользователяToolStripMenuItem.Image = global::WindowsFormsApp1.Properties.Resources.ChooseUser;
             this.сменитьПользователяToolStripMenuItem.Name = "сменитьПользователяToolStripMenuItem";
             this.сменитьПользователяToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.L)));
-            this.сменитьПользователяToolStripMenuItem.Size = new System.Drawing.Size(241, 22);
+            this.сменитьПользователяToolStripMenuItem.Size = new System.Drawing.Size(242, 22);
             this.сменитьПользователяToolStripMenuItem.Text = "Сменить пользователя";
             this.сменитьПользователяToolStripMenuItem.Click += new System.EventHandler(this.сменитьПользователяToolStripMenuItem_Click);
             // 
             // toolStripSeparator5
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(238, 6);
+            this.toolStripSeparator5.Size = new System.Drawing.Size(239, 6);
             // 
             // экспортироватьВExcelToolStripMenuItem
             // 
             this.экспортироватьВExcelToolStripMenuItem.Image = global::WindowsFormsApp1.Properties.Resources.excel;
             this.экспортироватьВExcelToolStripMenuItem.Name = "экспортироватьВExcelToolStripMenuItem";
             this.экспортироватьВExcelToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.E)));
-            this.экспортироватьВExcelToolStripMenuItem.Size = new System.Drawing.Size(241, 22);
+            this.экспортироватьВExcelToolStripMenuItem.Size = new System.Drawing.Size(242, 22);
             this.экспортироватьВExcelToolStripMenuItem.Text = "Экспортировать в Excel";
             this.экспортироватьВExcelToolStripMenuItem.Click += new System.EventHandler(this.экспортироватьВExcelToolStripMenuItem_Click);
             // 
@@ -437,19 +442,19 @@
             this.сохранитьToolStripMenuItem.Image = global::WindowsFormsApp1.Properties.Resources.save;
             this.сохранитьToolStripMenuItem.Name = "сохранитьToolStripMenuItem";
             this.сохранитьToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.сохранитьToolStripMenuItem.Size = new System.Drawing.Size(241, 22);
+            this.сохранитьToolStripMenuItem.Size = new System.Drawing.Size(242, 22);
             this.сохранитьToolStripMenuItem.Text = "Сохранить";
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(238, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(239, 6);
             // 
             // закрытьПрограммуToolStripMenuItem
             // 
             this.закрытьПрограммуToolStripMenuItem.Image = global::WindowsFormsApp1.Properties.Resources.Exit;
             this.закрытьПрограммуToolStripMenuItem.Name = "закрытьПрограммуToolStripMenuItem";
-            this.закрытьПрограммуToolStripMenuItem.Size = new System.Drawing.Size(241, 22);
+            this.закрытьПрограммуToolStripMenuItem.Size = new System.Drawing.Size(242, 22);
             this.закрытьПрограммуToolStripMenuItem.Text = "Закрыть";
             this.закрытьПрограммуToolStripMenuItem.Click += new System.EventHandler(this.закрытьПрограммуToolStripMenuItem_Click);
             // 
@@ -470,7 +475,7 @@
             // 
             this.сформировать1ПЭРToolStripMenuItem.Image = global::WindowsFormsApp1.Properties.Resources.startup_wizard;
             this.сформировать1ПЭРToolStripMenuItem.Name = "сформировать1ПЭРToolStripMenuItem";
-            this.сформировать1ПЭРToolStripMenuItem.Size = new System.Drawing.Size(248, 22);
+            this.сформировать1ПЭРToolStripMenuItem.Size = new System.Drawing.Size(249, 22);
             this.сформировать1ПЭРToolStripMenuItem.Text = "Мастер данных (12-тэк + 1-пэр)";
             this.сформировать1ПЭРToolStripMenuItem.Click += new System.EventHandler(this.сформировать1ПЭРToolStripMenuItem_Click);
             // 
@@ -478,7 +483,7 @@
             // 
             this.мастерВвода4Нормы1ТЭКToolStripMenuItem.Image = global::WindowsFormsApp1.Properties.Resources.startup_wizard;
             this.мастерВвода4Нормы1ТЭКToolStripMenuItem.Name = "мастерВвода4Нормы1ТЭКToolStripMenuItem";
-            this.мастерВвода4Нормы1ТЭКToolStripMenuItem.Size = new System.Drawing.Size(248, 22);
+            this.мастерВвода4Нормы1ТЭКToolStripMenuItem.Size = new System.Drawing.Size(249, 22);
             this.мастерВвода4Нормы1ТЭКToolStripMenuItem.Text = "Мастер ввода 4-Нормы/1-ТЭК";
             this.мастерВвода4Нормы1ТЭКToolStripMenuItem.Click += new System.EventHandler(this.мастерВвода4Нормы1ТЭКToolStripMenuItem_Click);
             // 
@@ -486,7 +491,7 @@
             // 
             this.сохранитьОтчет1ТЭКToolStripMenuItem.Image = global::WindowsFormsApp1.Properties.Resources.rep1;
             this.сохранитьОтчет1ТЭКToolStripMenuItem.Name = "сохранитьОтчет1ТЭКToolStripMenuItem";
-            this.сохранитьОтчет1ТЭКToolStripMenuItem.Size = new System.Drawing.Size(248, 22);
+            this.сохранитьОтчет1ТЭКToolStripMenuItem.Size = new System.Drawing.Size(249, 22);
             this.сохранитьОтчет1ТЭКToolStripMenuItem.Text = "Сохранить отчет 1-ТЭК";
             this.сохранитьОтчет1ТЭКToolStripMenuItem.Click += new System.EventHandler(this.сохранитьОтчет1ТЭКToolStripMenuItem_Click);
             // 
@@ -494,7 +499,7 @@
             // 
             this.сохранитьОтчетToolStripMenuItem.Image = global::WindowsFormsApp1.Properties.Resources.rep2;
             this.сохранитьОтчетToolStripMenuItem.Name = "сохранитьОтчетToolStripMenuItem";
-            this.сохранитьОтчетToolStripMenuItem.Size = new System.Drawing.Size(248, 22);
+            this.сохранитьОтчетToolStripMenuItem.Size = new System.Drawing.Size(249, 22);
             this.сохранитьОтчетToolStripMenuItem.Text = "Сохранить отчет 12-ТЭК";
             this.сохранитьОтчетToolStripMenuItem.Click += new System.EventHandler(this.сохранитьОтчетToolStripMenuItem_Click);
             // 
@@ -502,7 +507,7 @@
             // 
             this.профильToolStripMenuItem.Image = global::WindowsFormsApp1.Properties.Resources.rep3;
             this.профильToolStripMenuItem.Name = "профильToolStripMenuItem";
-            this.профильToolStripMenuItem.Size = new System.Drawing.Size(248, 22);
+            this.профильToolStripMenuItem.Size = new System.Drawing.Size(249, 22);
             this.профильToolStripMenuItem.Text = "Профиль";
             this.профильToolStripMenuItem.Click += new System.EventHandler(this.профильToolStripMenuItem_Click);
             // 
@@ -756,6 +761,7 @@
             this.sumplanfact,
             this.sumfact_fact,
             this.type,
+            this.Org,
             this.enabled,
             this.id_obj});
             this.kryptonOutlookGrid1.FillMode = KryptonOutlookGrid.Classes.FillMode.GROUPSONLY;
@@ -984,6 +990,13 @@
             this.type.Visible = false;
             this.type.Width = 5;
             // 
+            // Org
+            // 
+            this.Org.HeaderText = "org";
+            this.Org.Name = "Org";
+            this.Org.ReadOnly = true;
+            this.Org.Visible = false;
+            // 
             // enabled
             // 
             this.enabled.HeaderText = "enabled";
@@ -1169,6 +1182,7 @@
             this.fuel_sumplanfact,
             this.fuel_sumfact_fact,
             this.fuel_type,
+            this.fuel_org,
             this.fuel_enabled,
             this.fuel_id_obj});
             this.kryptonOutlookGrid2.FillMode = KryptonOutlookGrid.Classes.FillMode.GROUPSONLY;
@@ -1395,6 +1409,12 @@
             this.fuel_type.Visible = false;
             this.fuel_type.Width = 5;
             // 
+            // fuel_org
+            // 
+            this.fuel_org.HeaderText = "org";
+            this.fuel_org.Name = "fuel_org";
+            this.fuel_org.Visible = false;
+            // 
             // fuel_enabled
             // 
             this.fuel_enabled.HeaderText = "enabled";
@@ -1565,6 +1585,7 @@
             this.heat_sumplanfact,
             this.heat_sumfact_fact,
             this.heat_type,
+            this.heat_org,
             this.heat_enabled,
             this.heat_id_obj});
             this.kryptonOutlookGrid3.FillMode = KryptonOutlookGrid.Classes.FillMode.GROUPSONLY;
@@ -1791,6 +1812,12 @@
             this.heat_type.Visible = false;
             this.heat_type.Width = 5;
             // 
+            // heat_org
+            // 
+            this.heat_org.HeaderText = "org";
+            this.heat_org.Name = "heat_org";
+            this.heat_org.Visible = false;
+            // 
             // heat_enabled
             // 
             this.heat_enabled.HeaderText = "enabled";
@@ -1961,6 +1988,7 @@
             this.el_sumplanfact,
             this.el_sumfact_fact,
             this.el_type,
+            this.el_org,
             this.el_enabled,
             this.el_id_obj});
             this.kryptonOutlookGrid4.FillMode = KryptonOutlookGrid.Classes.FillMode.GROUPSONLY;
@@ -2186,6 +2214,12 @@
             this.el_type.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
             this.el_type.Visible = false;
             this.el_type.Width = 5;
+            // 
+            // el_org
+            // 
+            this.el_org.HeaderText = "org";
+            this.el_org.Name = "el_org";
+            this.el_org.Visible = false;
             // 
             // el_enabled
             // 
@@ -2651,7 +2685,8 @@
             this.toolStripButton10,
             this.toolStripSeparator6,
             this.toolStripButton11,
-            this.toolStripSeparator7});
+            this.toolStripSeparator7,
+            this.toolStripButton2});
             this.toolStrip5.Location = new System.Drawing.Point(0, 0);
             this.toolStrip5.Name = "toolStrip5";
             this.toolStrip5.Size = new System.Drawing.Size(267, 25);
@@ -2693,6 +2728,16 @@
             // 
             this.toolStripSeparator7.Name = "toolStripSeparator7";
             this.toolStripSeparator7.Size = new System.Drawing.Size(6, 25);
+            // 
+            // toolStripButton2
+            // 
+            this.toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton2.Image")));
+            this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton2.Name = "toolStripButton2";
+            this.toolStripButton2.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton2.Text = "toolStripButton2";
+            this.toolStripButton2.Click += new System.EventHandler(this.toolStripButton2_Click);
             // 
             // toolStrip2
             // 
@@ -3355,6 +3400,7 @@
         private ComponentFactory.Krypton.Navigator.KryptonPage Page12Tek;
         private unvell.ReoGrid.ReoGridControl reoGridControl2;
         private System.Windows.Forms.ToolStripMenuItem year0Button;
+        private System.Windows.Forms.ToolStripButton toolStripButton2;
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewMaskedTextBoxColumn id;
         private System.Windows.Forms.DataGridViewTextBoxColumn id_prod;
         private System.Windows.Forms.DataGridViewTextBoxColumn id_local;
@@ -3380,6 +3426,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn sumplanfact;
         private System.Windows.Forms.DataGridViewTextBoxColumn sumfact_fact;
         private KryptonOutlookGrid.CustomColumns.KryptonDataGridViewTextAndImageColumn type;
+        private KryptonOutlookGrid.CustomColumns.KryptonDataGridViewTextAndImageColumn Org;
         private System.Windows.Forms.DataGridViewCheckBoxColumn enabled;
         private KryptonOutlookGrid.CustomColumns.KryptonDataGridViewTextAndImageColumn id_obj;
         private System.Windows.Forms.DataGridViewTextBoxColumn fuel_id;
@@ -3407,6 +3454,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn fuel_sumplanfact;
         private System.Windows.Forms.DataGridViewTextBoxColumn fuel_sumfact_fact;
         private KryptonOutlookGrid.CustomColumns.KryptonDataGridViewTextAndImageColumn fuel_type;
+        private KryptonOutlookGrid.CustomColumns.KryptonDataGridViewTextAndImageColumn fuel_org;
         private System.Windows.Forms.DataGridViewTextBoxColumn fuel_enabled;
         private KryptonOutlookGrid.CustomColumns.KryptonDataGridViewTextAndImageColumn fuel_id_obj;
         private System.Windows.Forms.DataGridViewTextBoxColumn heat_id;
@@ -3434,6 +3482,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn heat_sumplanfact;
         private System.Windows.Forms.DataGridViewTextBoxColumn heat_sumfact_fact;
         private KryptonOutlookGrid.CustomColumns.KryptonDataGridViewTextAndImageColumn heat_type;
+        private KryptonOutlookGrid.CustomColumns.KryptonDataGridViewTextAndImageColumn heat_org;
         private System.Windows.Forms.DataGridViewTextBoxColumn heat_enabled;
         private KryptonOutlookGrid.CustomColumns.KryptonDataGridViewTextAndImageColumn heat_id_obj;
         private System.Windows.Forms.DataGridViewTextBoxColumn el_id;
@@ -3461,6 +3510,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn el_sumplanfact;
         private System.Windows.Forms.DataGridViewTextBoxColumn el_sumfact_fact;
         private KryptonOutlookGrid.CustomColumns.KryptonDataGridViewTextAndImageColumn el_type;
+        private KryptonOutlookGrid.CustomColumns.KryptonDataGridViewTextAndImageColumn el_org;
         private System.Windows.Forms.DataGridViewTextBoxColumn el_enabled;
         private KryptonOutlookGrid.CustomColumns.KryptonDataGridViewTextAndImageColumn el_id_obj;
     }

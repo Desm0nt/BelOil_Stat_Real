@@ -792,7 +792,33 @@ namespace WindowsFormsApp1.DBO
             }
             return CompanyIdList;
         }
+        public static List<ListElement> GetCompanyIdList2(int pid)
+        {
+            List<ListElement> CompanyIdList = new List<ListElement>();
+            try
+            {
+                SqlConnection myConnection = new SqlConnection(cnStr);
+                myConnection.Open();
 
+                string query = "SELECT * FROM [NewOrg] where pid = @pid";
+                SqlCommand command = new SqlCommand(query, myConnection);
+                command.Parameters.AddWithValue("@pid", pid);
+                using (SqlDataReader dr = command.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        CompanyIdList.Add(new ListElement {Id = Int32.Parse(dr["id"].ToString()), Name=dr["name"].ToString()});
+
+                    }
+                }
+                myConnection.Close();
+            }
+            catch (Exception Ex)
+            {
+                KryptonMessageBox.Show("Ошибка получения данных организации: " + Ex.Message);
+            }
+            return CompanyIdList;
+        }
         #region main
 
         /// <summary>

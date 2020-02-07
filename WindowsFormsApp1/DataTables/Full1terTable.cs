@@ -35,5 +35,6 @@ namespace WindowsFormsApp1.DataTables
         public int norm_code { get; set; }
         public bool editable { get; set; }
         public int id_obj { get; set; }
+        public int id_org { get; set; }
     }
 }

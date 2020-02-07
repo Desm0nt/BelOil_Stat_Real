@@ -240,6 +240,7 @@
     <Compile Include="AddOrgFuelForm.Designer.cs">
       <DependentUpon>AddOrgFuelForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="OutlookGridPersonGroup3.cs" />
     <Compile Include="OutlookGridUnitGroup.cs" />
     <Compile Include="SelectUnitListForm.cs">
       <SubType>Form</SubType>
